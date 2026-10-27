@@ -1,50 +1,53 @@
 # Getting started
 
-osbTK turns an **effect script** (`.cs`) into a
-native plug-in for one of three hosts:
-
-| Target          | Technology         | Artifact      |
-| --------------- | ------------------ | ------------- |
-| After Effects   | PF_ Effect SDK     | `.aex`        |
-| DaVinci Resolve | OpenFX 1.4         | `.ofx.bundle` |
-| Premiere Pro    | AE PF_ SDK + PrSDK | `.aex`        |
+osbTK is the shared engine and SDK family behind the osu! storyboard toolkit.
+The host plug-ins (After Effects, Premiere Pro, DaVinci Resolve) and the desktop
+app live in the sibling `osb-to-plugin` repo and consume this repo's runtime.
 
 ## Install
 
 ```bash
 corepack enable
 yarn install
-yarn build
+```
+
+## Verify
+
+```bash
+yarn typecheck
+yarn test
+```
+
+## Build
+
+```bash
+yarn build          # TypeScript packages
+yarn build:native   # the osb-native C ABI
+yarn openapi        # regenerate the contract and every SDK
 ```
 
 ## Convert a script
 
-The core package ships a CLI:
+The converter CLI lives in `@tochii/osb-toolkit-core`:
 
 ```bash
 yarn workspace @tochii/osb-toolkit-core cli path/to/Background.cs -t after-effects -o dist
 ```
 
-`-t` selects the target (`after-effects`, `davinci-resolve`, `premiere-pro`). The
-output directory receives a folder named after the effect containing the
-generated sources, build files and a README.
+`-t` selects the target (`after-effects`, `davinci-resolve`, `premiere-pro`). It
+emits the generated Rust crate and build files; the host adapters are built in
+`osb-to-plugin`.
 
-## Use the web UI
+## Use an SDK
 
-```bash
-yarn dev:web
+```ts
+import { Core, osb } from '@tochii/osb-sdk-js';
+
+const beatmap = await Core.parsing.parseOsu({ text });
+const report = await osb.diagnostics.diagnoseOsu({ text });
 ```
 
-Open the printed URL, drop a `.cs` file, pick a target and press **Convert**. All
-conversion happens in the browser â€” no upload.
-
-## Use the desktop app
-
-```bash
-yarn dev:client
-```
-
-The Tauri app embeds the same web UI and adds native file access.
+The same surface is generated for C#, Python, Go, Java, C++ and Rust.
 
 ## Next
 
