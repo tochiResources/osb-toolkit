@@ -1,6 +1,7 @@
 # How it works
 
-Conversion has three stages, all in `@tochii/osb-toolkit-core`.
+Conversion and rendering run on the Rust engine (`crates/osb-runtime`), driven by
+the converter in `@tochii/osb-toolkit-core`.
 
 ## 1. Parse
 
@@ -16,29 +17,30 @@ The result is an `EffectScript` object (see `src/types/ir.ts` in
 
 ## 2. Transpile
 
-`transpileCSharp(body)` rewrites the C# subset to JavaScript:
-
-- declarations → `let`/`const`;
-- `foreach` → an ES3-safe index loop;
-- casts → `Math.trunc(...)` / `Number(...)`;
-- the effect-script API (`GetLayer` → `getLayer`, `Beatmap` → `beatmap`,
-  LINQ helpers, `Math` mapping, string interpolation, …).
-
-Constructs it cannot translate are reported as diagnostics instead of failing
-silently. See [Supported C# subset](/reference/csharp-subset).
+The C# subset is transpiled to **Rust**, mapping the effect-script API onto the
+runtime: layer handles, `Beatmap`, FFT, LINQ helpers, math, string
+interpolation and so on. Constructs it cannot translate are reported as
+diagnostics instead of failing silently. See
+[Supported C# subset](/reference/csharp-subset).
 
 ## 3. Generate
 
-A target generator turns the parsed + transpiled script into a set of files
-(`GeneratedFile[]`): plug-in source, project/build files, a manifest and a README.
-Each program package owns its generator and its `src/build` tooling.
+A target generator turns the parsed and transpiled script into a Rust plug-in
+crate plus its build files. The host adapters (After Effects `PF_`, Premiere Pro,
+OpenFX) are built and packaged by the sibling `osb-to-plugin` repo from the
+generated crate.
 
-## The After Effects pipeline
+## 4. Run and bake
 
-The After Effects target also embeds a small **effect runtime** in the emitted
-ExtendScript. The script records the storyboard (layers, sprites, commands) and
-materialises it into a composition with keyframed layers. The native AEGP plug-in
-executes that same script from a menu command.
+The generated script implements the runtime `Effect` trait. `generate()` builds
+a `Storyboard` once; render time samples every sprite's command timelines at the
+host's current time and composites the visible sprites. 3D scenes are baked to
+2D command spans, and `.osb` import/export plus optimization are available as
+SDK operations.
 
-Because After Effects ExtendScript is ES3, the generated `.jsx` is down-levelled
-with Babel before it is written.
+## The SDK layer
+
+`crates/osb-api` declares the wire contract (one tag per class, one
+`operationId` per operation); `yarn openapi` emits the OpenAPI document and the
+per-language clients, and a small interceptor routes each client to the native
+JSON bridge (`osbtk_exec` / `osbtk_runtime_exec`).
