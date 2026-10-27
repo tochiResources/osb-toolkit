@@ -1,4 +1,4 @@
-"""The media library: probing, frame extraction/encoding and audio (M26)."""
+"""The media library: probing, frame extraction/encoding and audio."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ _api = MediaApi(STATELESS)
 
 
 class Media:
-    """The media library: probing, frame extraction/encoding and audio (M26)."""
+    """The media library: probing, frame extraction/encoding and audio."""
 
     @staticmethod
     def info(path: str) -> Any:

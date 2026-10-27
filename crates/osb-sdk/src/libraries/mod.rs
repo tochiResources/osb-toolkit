@@ -1,5 +1,5 @@
 //! The SDK organized into libraries, mirroring the contract's tags. Each library
-//! is its own module (M33) so the surface is navigable, e.g.
+//! is its own module so the surface is navigable, e.g.
 //! `osb_sdk::libraries::curve::length`.
 
 pub mod animations;

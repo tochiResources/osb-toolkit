@@ -4,7 +4,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Flushes the toolkit's build outputs so stale artifacts do not accumulate on
-// disk (M34 build-pipeline hygiene). By default it removes every generated build
+// disk. By default it removes every generated build
 // directory; pass `--rust` to flush only the Rust `target` caches (the largest
 // offenders), which is what a normal "reclaim space" pass needs.
 

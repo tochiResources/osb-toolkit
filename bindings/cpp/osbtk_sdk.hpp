@@ -1,6 +1,5 @@
 #pragma once
-// Typed, dependency-free C++ SDK over the osbTK native engine (section 5.13,
-// M21). It wraps the header-only `osbtk.hpp` binding: the transport talks to the
+// Typed, dependency-free C++ SDK over the osbTK native engine. It wraps the header-only `osbtk.hpp` binding: the transport talks to the
 // native JSON bridge, and the typed models mirror the OpenAPI contract in
 // `crates/osb-api`. There is no HTTP and no external JSON library.
 
@@ -455,7 +454,7 @@ public:
         return json.at("value").boolean();
     }
 
-    /// The 2D storyboard command utilities (M38): pure transforms over a
+    /// The 2D storyboard command utilities: pure transforms over a
     /// `StoryboardCommand[]`, canonical in `osb_runtime::storyboarding::helpers`.
     class Commands {
     public:
@@ -563,7 +562,7 @@ protected:
 };
 
 /// The 3D storyboard library: a sibling that reuses the `Storyboarding` surface
-/// (via inheritance) and adds the 3D -> 2D bake (M28).
+/// (via inheritance) and adds the 3D -> 2D bake.
 class Storyboarding3d : public Storyboarding {
 public:
     using Storyboarding::Storyboarding;
@@ -573,7 +572,7 @@ public:
         return call("Storyboarding3d.bake3d", "{\"input\":" + input_json + "}");
     }
 
-    /// The 3D motion-graphics keyframe helpers (M38): pure keyframe-channel
+    /// The 3D motion-graphics keyframe helpers: pure keyframe-channel
     /// utilities, canonical in `osb_runtime::storyboarding3d::helpers`.
     class Helpers {
     public:
@@ -762,7 +761,7 @@ public:
                 + ",\"width\":" + detail::number(width) + ",\"height\":" + detail::number(height) + "}");
         }
 
-        // -- timelines (M39/M40) --
+        // -- timelines --
 
         /// The timeline's total duration.
         double timeline_duration(const std::string& timeline_json) const {
@@ -792,7 +791,7 @@ public:
                 call("timeline.clipCount", "{\"timeline\":" + timeline_json + "}").number());
         }
 
-        // -- command easing (M39) --
+        // -- command easing --
 
         /// Sets an easing on every command (apply an easing to a whole group/scene).
         Json set_easing(const std::string& commands, const std::string& easing) const {
@@ -817,7 +816,7 @@ public:
                 + detail::number(y2) + ",\"samples\":" + std::to_string(samples) + "}");
         }
 
-        // -- colors (M40) --
+        // -- colors --
 
         /// Converts a color into its (x, y, z, w) components in `space` (raw Json).
         Json color_to_space(const std::string& color_json, const std::string& space = "rgb") const {
@@ -924,7 +923,7 @@ public:
                 + (repeat ? "true" : "false") + "}");
         }
 
-        // -- 2D scenes (M40) --
+        // -- 2D scenes --
 
         /// Resolves a 2D scene into per-sprite command sets.
         Json resolve_scene2d(const std::string& scene_json, const std::string& options = "{}") const {
@@ -982,7 +981,7 @@ public:
                 + detail::number(start) + ",\"end\":" + detail::number(end) + "}");
         }
 
-        // -- 3D worlds / storyboard bake (M40) --
+        // -- 3D worlds / storyboard bake --
 
         /// Bakes a 3D world (`{ nodes, camera, options }`) into a storyboard model.
         Json bake_world(const std::string& world_json, const std::string& options2d = "{}") const {
@@ -1081,7 +1080,7 @@ struct PointList {
 };
 
 /// The curve library: Bezier/Catmull-Rom curves, sampling, arc length, tangents,
-/// bounding boxes and Douglas-Peucker simplification (M24).
+/// bounding boxes and Douglas-Peucker simplification.
 class Curve {
 public:
     explicit Curve(const Library& library) : library_(&library) {}
@@ -1217,7 +1216,7 @@ private:
     }
 };
 
-/// The diagnostics library: storyboard and mapset analysis (M29).
+/// The diagnostics library: storyboard and mapset analysis.
 class Diagnostics {
 public:
     explicit Diagnostics(const Library& library) : library_(&library) {}
@@ -1244,7 +1243,7 @@ private:
     }
 };
 
-/// The optimization library: storyboard optimization and `.osb` round-trip (M30).
+/// The optimization library: storyboard optimization and `.osb` round-trip.
 class Optimize {
 public:
     explicit Optimize(const Library& library) : library_(&library) {}
@@ -1269,7 +1268,7 @@ private:
     }
 };
 
-/// The image library: decode/encode and processing (M23).
+/// The image library: decode/encode and processing.
 class Image {
 public:
     explicit Image(const Library& library) : library_(&library) {}
@@ -1297,7 +1296,7 @@ private:
     }
 };
 
-/// The image-generation library: draw primitive shapes (M25).
+/// The image-generation library: draw primitive shapes.
 class ImageGen {
 public:
     explicit ImageGen(const Library& library) : library_(&library) {}
@@ -1319,7 +1318,7 @@ private:
     }
 };
 
-/// The media library: probing, frame extraction/encoding and audio (M26).
+/// The media library: probing, frame extraction/encoding and audio.
 class Media {
 public:
     explicit Media(const Library& library) : library_(&library) {}

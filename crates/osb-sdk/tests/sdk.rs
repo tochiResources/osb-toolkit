@@ -35,7 +35,7 @@ fn nests_the_libraries() {
 
 #[test]
 fn storyboarding3d_reuses_the_storyboarding_surface() {
-    // M28: the 3D library is a sibling that reuses the storyboarding surface.
+    // the 3D library is a sibling that reuses the storyboarding surface.
     let beatmap = osb_sdk::storyboarding3d::parse_osu(OSU).unwrap();
     assert_eq!(beatmap.audio_filename, "song.mp3");
     let summary = osb_sdk::storyboarding3d::parse_osb("").unwrap();

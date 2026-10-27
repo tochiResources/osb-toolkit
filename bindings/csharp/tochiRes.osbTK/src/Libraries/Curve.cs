@@ -11,7 +11,7 @@ public static partial class osb
 {
     /// <summary>
     /// The curve library: Bezier/Catmull-Rom curves, sampling, arc length,
-    /// tangents, bounding boxes and Douglas-Peucker simplification (M24).
+    /// tangents, bounding boxes and Douglas-Peucker simplification.
     /// </summary>
     public static class Curve
     {

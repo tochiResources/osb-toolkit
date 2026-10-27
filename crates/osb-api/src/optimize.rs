@@ -1,4 +1,4 @@
-//! The optimization library wire types (M30): the knobs for an optimization
+//! The optimization library wire types: the knobs for an optimization
 //! pass, the resulting stats, and the optimized `.osb` text. `OptimizeStats`
 //! lives in `osb-runtime` (the source of truth) and is re-exported here.
 

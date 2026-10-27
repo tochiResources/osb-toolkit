@@ -7,7 +7,7 @@ namespace tochiRes.osbTK;
 
 public static partial class osb
 {
-    /// <summary>The optimization library: storyboard optimization and `.osb` round-trip (M30).</summary>
+    /// <summary>The optimization library: storyboard optimization and `.osb` round-trip.</summary>
     public static class Optimize
     {
         private static readonly OptimizeApi Api = new(

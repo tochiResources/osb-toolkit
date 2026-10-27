@@ -1,5 +1,5 @@
-﻿/*
- * osbTK C ABI - the surface every language binding drives (section 5.13, M14i).
+/*
+ * osbTK C ABI - the surface every language binding drives ().
  *
  * Generated with `cbindgen` from `crates/osb-native` (see `cbindgen.toml`); do
  * not edit by hand. Coverage: mapset (`.osu` parse), storyboard (`.osb` import),

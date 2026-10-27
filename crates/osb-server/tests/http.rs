@@ -1,4 +1,4 @@
-//! HTTP integration tests for the M15 surface (auth pipeline, rate limiting, the
+//! HTTP integration tests for the HTTP surface (auth pipeline, rate limiting, the
 //! job queue and backpressure, job/artifact endpoints).
 
 use std::path::PathBuf;

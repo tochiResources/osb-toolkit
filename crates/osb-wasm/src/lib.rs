@@ -1,5 +1,4 @@
-//! `wasm-bindgen` surface over the osbTK JSON runtime bridge (section 5.13,
-//! M14i). It mirrors `crates/osb-native` - `version`, `bake3d`, `exec` and a
+//! `wasm-bindgen` surface over the osbTK JSON runtime bridge. It mirrors `crates/osb-native` - `version`, `bake3d`, `exec` and a
 //! `Runtime` class - so the same engine drives JavaScript/TypeScript in the
 //! browser and Node.
 

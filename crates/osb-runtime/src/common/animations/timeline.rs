@@ -1,4 +1,4 @@
-//! A timeline sandbox (M39) with a parent/child hierarchy (M40).
+//! A timeline sandbox with a parent/child hierarchy.
 //!
 //! A [`Timeline`] is an ordered set of [`TimelineClip`]s, each a keyframe
 //! [`Channel`] placed at a start time, plus nested child timelines. Motion is

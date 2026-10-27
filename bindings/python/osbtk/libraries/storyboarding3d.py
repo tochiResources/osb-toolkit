@@ -1,5 +1,5 @@
 """The 3D storyboard library: reuses the storyboarding surface and adds the
-3D -> 2D bake (M28) and the motion-graphics keyframe helpers (M38)."""
+3D -> 2D bake and the motion-graphics keyframe helpers."""
 
 from __future__ import annotations
 
@@ -19,14 +19,14 @@ _helpers = HelpersApi(STATELESS)
 
 class Storyboarding3d(Storyboarding):
     """The 3D storyboard library: a sibling that reuses the storyboarding surface
-    and adds the 3D -> 2D bake (M28) and the keyframe helpers (M38)."""
+    and adds the 3D -> 2D bake and the keyframe helpers."""
 
     @staticmethod
     def bake3d(scene: Any) -> Any:
         return _api.bake3d(Bake3dRequest(input=scene))
 
     class Helpers:
-        """The 3D motion-graphics keyframe helpers (M38): pure keyframe-channel
+        """The 3D motion-graphics keyframe helpers: pure keyframe-channel
         utilities, canonical in ``osb_runtime::storyboarding3d::helpers``.
 
         A channel is ``{"keys": [{"time": <ms>, "value": [..components]}]}``."""

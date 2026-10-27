@@ -1,4 +1,4 @@
-// Shared helpers for the hand-written Go library facades (M33/M38). Every
+// Shared helpers for the hand-written Go library facades. Every
 // facade drives the native JSON bridge directly, so the typed models and the
 // generated clients stay an escape hatch.
 

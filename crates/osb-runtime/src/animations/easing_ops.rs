@@ -1,4 +1,4 @@
-//! Easing-curve manipulation (M39).
+//! Easing-curve manipulation.
 //!
 //! A canonical set of transforms over the named [`Easing`] functions and
 //! cubic-bezier curves. They are pure and shared by the wire bridge and every

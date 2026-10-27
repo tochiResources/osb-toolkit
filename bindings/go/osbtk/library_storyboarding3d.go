@@ -1,5 +1,5 @@
 // The 3D storyboard library facade: reuses the storyboarding surface and adds
-// the 3D -> 2D bake (M28) and the motion-graphics keyframe helpers (M38).
+// the 3D -> 2D bake and the motion-graphics keyframe helpers.
 
 package osbtk
 
@@ -14,7 +14,7 @@ type Channel struct {
 	Keys []ChannelKey `json:"keys"`
 }
 
-// helpersLib is the 3D motion-graphics keyframe helper facade (M38).
+// helpersLib is the 3D motion-graphics keyframe helper facade.
 type helpersLib struct{}
 
 // Call calls any helper by name with a raw input object.

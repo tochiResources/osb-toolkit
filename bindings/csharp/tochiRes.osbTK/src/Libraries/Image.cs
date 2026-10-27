@@ -7,7 +7,7 @@ namespace tochiRes.osbTK;
 
 public static partial class osb
 {
-    /// <summary>The image library: decode/encode and processing (M23).</summary>
+    /// <summary>The image library: decode/encode and processing.</summary>
     public static class Image
     {
         private static readonly ImageApi Api = new(

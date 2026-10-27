@@ -1,7 +1,7 @@
 namespace tochiRes.osbTK.Native;
 
 /// <summary>
-/// Thin C# facade over the osb native engine (section 5.13, M14i). One
+/// Thin C# facade over the osb native engine (). One
 /// implementation, shared with the Rust plug-ins, the TypeScript packages and the
 /// other language bindings via the golden corpus.
 /// </summary>

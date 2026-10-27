@@ -7,7 +7,7 @@ namespace tochiRes.osbTK;
 
 public static partial class osb
 {
-    /// <summary>The media library: probing, frame extraction/encoding and audio (M26).</summary>
+    /// <summary>The media library: probing, frame extraction/encoding and audio.</summary>
     public static class Media
     {
         private static readonly MediaApi Api = new(

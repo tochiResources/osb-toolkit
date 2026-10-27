@@ -1,4 +1,4 @@
-//! Per-key token-bucket rate limiting (section 5.6, M15).
+//! Per-key token-bucket rate limiting ().
 
 use std::collections::HashMap;
 use std::sync::Mutex;

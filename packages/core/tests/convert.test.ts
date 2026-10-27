@@ -17,7 +17,7 @@ function spectrumSource(): string {
     return readFileSync(join(examples, 'Spectrum.cs'), 'utf8');
 }
 
-/** The M14 reference corpus: every script must convert without diagnostics. */
+/** The reference corpus: every script must convert without diagnostics. */
 const REFERENCE_EFFECTS = [
     'Background.cs',
     'HitObjectHighlight.cs',

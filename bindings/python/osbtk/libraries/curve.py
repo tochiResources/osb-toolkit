@@ -1,5 +1,5 @@
 """The curve library: Bezier/Catmull-Rom curves, sampling, arc length, tangents,
-bounding boxes and Douglas-Peucker simplification (M24)."""
+bounding boxes and Douglas-Peucker simplification."""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ _api = CurveApi(STATELESS)
 
 class Curve:
     """The curve library: Bezier/Catmull-Rom curves, sampling, arc length,
-    tangents, bounding boxes and Douglas-Peucker simplification (M24)."""
+    tangents, bounding boxes and Douglas-Peucker simplification."""
 
     @staticmethod
     def length(curve: CurveSpec) -> float:

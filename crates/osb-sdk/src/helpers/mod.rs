@@ -1,4 +1,4 @@
-//! The shared motion-graphics helpers (M38/M40): one surface for 2D, 3D and color.
+//! The shared motion-graphics helpers: one surface for 2D, 3D and color.
 //!
 //! The canonical logic lives in Rust (`osb_runtime::animations::keyframes` and
 //! `osb_runtime::animations::color_ops` for keyframes/colors,

@@ -4,7 +4,7 @@
 //! and rotation keyframes) through a [`camera::PerspectiveCamera`] and
 //! simplifies the resulting per-sprite screenspace channels into `.osb`-compatible
 //! command spans. This is the canonical implementation, kept in parity across
-//! the SDKs by shared golden vectors (section 5.9 of the plan).
+//! the SDKs by shared golden vectors (of the plan).
 //!
 //! # Numerical conventions
 //!

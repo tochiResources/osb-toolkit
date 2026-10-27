@@ -1,4 +1,4 @@
-//! Color-space manipulation, CSS/Sass-style helpers and gradients (M40).
+//! Color-space manipulation, CSS/Sass-style helpers and gradients.
 //!
 //! A canonical set of pure transforms over [`Color4`] values and color keyframe
 //! [`Channel`]s. Because a command is a keyframe channel at heart, these helpers

@@ -1,4 +1,4 @@
-//! The image-generation library wire types (M25): drawing primitive shapes
+//! The image-generation library wire types: drawing primitive shapes
 //! (rect/rounded-rect/ellipse/circle/line/polygon) with fill and stroke onto a
 //! new raster image, written to a file.
 

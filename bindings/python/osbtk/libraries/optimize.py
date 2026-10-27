@@ -1,4 +1,4 @@
-"""The optimization library: storyboard optimization and `.osb` round-trip (M30)."""
+"""The optimization library: storyboard optimization and `.osb` round-trip."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ _api = OptimizeApi(STATELESS)
 
 
 class Optimize:
-    """The optimization library: storyboard optimization and `.osb` round-trip (M30)."""
+    """The optimization library: storyboard optimization and `.osb` round-trip."""
 
     @staticmethod
     def optimize_osb(text: str, options: OptimizeOptionsInput) -> Any:

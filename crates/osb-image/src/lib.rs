@@ -1,4 +1,4 @@
-//! Canonical image library (M23).
+//! Canonical image library.
 //!
 //! Decodes and encodes images (PNG/JPEG/BMP/GIF), and applies fine-grained
 //! processing - resize, crop, rotate/flip, grayscale/invert, brightness,

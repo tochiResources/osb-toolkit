@@ -1,4 +1,4 @@
-// The shared motion-graphics helpers (M38/M40): one `helper` op namespaced by
+// The shared motion-graphics helpers: one `helper` op namespaced by
 // library (`keyframe.*`, `scene3d.*`, `command.*`, `origin.*`, `easing.*`,
 // `timeline.*`, `color.*`, `scene2d.*`). The surface is code-split by namespace
 // across `library_helpers_*.go`; this file holds the entry point.

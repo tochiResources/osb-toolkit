@@ -1,4 +1,4 @@
-//! The diagnostics library: storyboard and mapset analysis (M29).
+//! The diagnostics library: storyboard and mapset analysis.
 
 use crate::error::Error;
 use crate::models::DiagnosticReport;

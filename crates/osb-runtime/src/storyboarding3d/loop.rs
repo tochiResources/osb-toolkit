@@ -1,4 +1,4 @@
-//! Loop detection and end solving for baked command spans (section 5.11).
+//! Loop detection and end solving for baked command spans ().
 //!
 //! A [`LoopItem`] describes a loopable command
 //! window, [`solve_loop_end`] resolves where a loop actually ends, and

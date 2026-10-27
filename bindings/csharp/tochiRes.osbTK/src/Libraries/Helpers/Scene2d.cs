@@ -7,7 +7,7 @@ namespace tochiRes.osbTK;
 public static partial class osb
 {
     /// <summary>
-    /// The 2D scene graph (M40): the 2D counterpart of the 3D scene tree. A node
+    /// The 2D scene graph: the 2D counterpart of the 3D scene tree. A node
     /// can be controlled from the top and the whole set cascades; <c>Resolve</c>
     /// samples the composed transforms into per-sprite command sets.
     /// </summary>

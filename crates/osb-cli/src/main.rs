@@ -1,4 +1,4 @@
-//! osb CLI (section 5.6, M16): `convert` / `build` / `bake3d` / `serve` over
+//! osb CLI (): `convert` / `build` / `bake3d` / `serve` over
 //! the shared service layer, so tools (e.g. AeToOsb) can shell out without HTTP.
 
 use std::net::SocketAddr;
@@ -64,14 +64,14 @@ enum Command {
         #[arg(short, long)]
         out: Option<PathBuf>,
     },
-    /// Assembles a plug-in installer (payload + manifest + NSIS script) from a config JSON (M17b).
+    /// Assembles a plug-in installer (payload + manifest + NSIS script) from a config JSON.
     Package {
         config: PathBuf,
         /// Where to write the installer (defaults to the artifact root).
         #[arg(short, long)]
         out: Option<PathBuf>,
     },
-    /// Starts the headless HTTP server (M15). For CI/devops and headless use;
+    /// Starts the headless HTTP server. For CI/devops and headless use;
     /// the desktop app and `osbtk build` call the service layer directly.
     Serve {
         #[arg(short, long, default_value_t = 8787)]

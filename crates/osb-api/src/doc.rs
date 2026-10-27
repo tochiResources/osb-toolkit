@@ -12,7 +12,7 @@ use crate::{curve, enums, mapset, math, model, request, response, storyboard};
     info(
         title = "osbTK Native Bridge",
         version = env!("CARGO_PKG_VERSION"),
-        description = "Typed wire contract for the osbTK native engine (section 5.13, M21/M22). \
+        description = "Typed wire contract for the osbTK native engine. \
                        Rust (`crates/osb-api`) is the source of truth; the C#, C++, Python, \
                        TypeScript, Go and Java SDK models and clients are generated from this \
                        document. Every `operationId` is the native bridge `op`."

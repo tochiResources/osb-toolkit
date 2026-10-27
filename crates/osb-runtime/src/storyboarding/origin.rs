@@ -1,4 +1,4 @@
-//! Shared sprite-origin helpers (M32/M38).
+//! Shared sprite-origin helpers.
 //!
 //! The anchor offset and the enum origin are one concept: a sprite's effective
 //! pivot is the enum origin vector **plus** an animatable anchor offset (in

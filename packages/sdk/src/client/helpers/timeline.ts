@@ -17,7 +17,7 @@ export interface Timeline {
 }
 
 /**
- * The timeline sandbox (M39/M40): author motion as a sequence of clips - grouped
+ * The timeline sandbox: author motion as a sequence of clips - grouped
  * into sub-timelines where useful - and `flush` it to resolved channels.
  */
 export interface TimelineHelpers {

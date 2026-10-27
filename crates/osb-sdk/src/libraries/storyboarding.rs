@@ -1,5 +1,5 @@
 //! The storyboarding library: `.osu`/`.osb` parsing, the stateless
-//! origin/screen-bound queries, and the 2D command utilities (M38).
+//! origin/screen-bound queries, and the 2D command utilities.
 
 use crate::error::Error;
 use crate::models::{Beatmap, OsbOrigin, ParseOsbResult, Vector2};
@@ -29,7 +29,7 @@ pub fn in_screen_bounds(
     crate::Client::in_screen_bounds(position, size, rotation, origin)
 }
 
-/// The 2D storyboard command utilities (M38): pure transforms over a
+/// The 2D storyboard command utilities: pure transforms over a
 /// `StoryboardCommand[]`, canonical in `osb_runtime::storyboarding::helpers`.
 pub mod commands {
     use serde_json::{json, Value};
@@ -42,7 +42,7 @@ pub mod commands {
         crate::helpers::call(&format!("command.{name}"), input)
     }
 
-    /// Bridges any keyframe transform onto a command channel (M38): extract the
+    /// Bridges any keyframe transform onto a command channel: extract the
     /// `kind` channel, apply the named `keyframe.*` helper with `options`, and
     /// write it back as commands. This is how a 2D command channel uses the same
     /// helpers as a 3D node channel.

@@ -1,6 +1,6 @@
 /**
  * `@tochii/osb-toolkit-native` - the `wasm-bindgen` binding of the osbTK runtime
- * (section 5.13, M14i). It drives the same engine as the Rust plug-ins and the
+ * (). It drives the same engine as the Rust plug-ins and the
  * C#/C++/Python bindings, so **Rust is the only source of truth**: the toolkit's
  * 3D/keyframe/math logic lives in Rust and TypeScript consumes it through this
  * binding (there is no TypeScript reimplementation).

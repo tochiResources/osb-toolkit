@@ -10,12 +10,12 @@ import {
     ParsingAPI,
 } from '../lib';
 
-// The `Core` subpath (§8 of `osbTK-ARCHITECTURE.md`): the non-runtime surface -
+// The `Core` subpath: the non-runtime surface -
 // math, curves, easing and the stateless parsers/converters - exposed as a
 // sibling of the runtime `client` entry. It mirrors the `client` folder's shape
 // but owns only the core OpenAPI groups, and is disjoint from the runtime by
 // construction (no handles, no storyboard state). When the contract folds the
-// raw math helpers into a single `Core` tag (M31.6), it lands here.
+// raw math helpers into a single `Core` tag, it lands here.
 
 // Re-export the core generated groups and every shared model/enum.
 export { AnimationsAPI, CommonAPI, CurveAPI, OriginAPI, ParsingAPI } from '../lib';
@@ -28,7 +28,7 @@ export interface Core {
     version(): string;
     /** The common surface (`Common.version`). */
     common: CommonAPI;
-    /** The curve library: Bezier/Catmull-Rom curves and simplification (M24). */
+    /** The curve library: Bezier/Catmull-Rom curves and simplification. */
     curve: CurveAPI;
     /** The animations library: easing evaluation. */
     animations: AnimationsAPI;

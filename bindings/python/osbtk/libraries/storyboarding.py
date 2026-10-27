@@ -1,5 +1,5 @@
 """The storyboarding library: `.osu`/`.osb` parsing and the 2D command
-utilities (M38)."""
+utilities."""
 
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ class Storyboarding:
         ).value
 
     class Commands:
-        """The 2D storyboard command utilities (M38): pure transforms over a
+        """The 2D storyboard command utilities: pure transforms over a
         ``StoryboardCommand[]``, canonical in
         ``osb_runtime::storyboarding::helpers``."""
 

@@ -7,7 +7,7 @@ namespace tochiRes.osbTK;
 
 public static partial class osb
 {
-    /// <summary>The diagnostics library: storyboard and mapset analysis (M29).</summary>
+    /// <summary>The diagnostics library: storyboard and mapset analysis.</summary>
     public static class Diagnostics
     {
         private static readonly DiagnosticsApi Api = new(

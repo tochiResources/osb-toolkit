@@ -1,4 +1,4 @@
-//! Storyboard optimization (M30).
+//! Storyboard optimization.
 //!
 //! Operates on the runtime storyboard model with fine-grained options:
 //! **redundant (no-op) command removal**, **de-duplication**, **adjacent

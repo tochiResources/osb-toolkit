@@ -1,4 +1,4 @@
-//! Procedural sprite generation service (section 5.12): given a source sprite and
+//! Procedural sprite generation service (): given a source sprite and
 //! its current projected state, compute the subdivision result and emit a
 //! content-addressed manifest (and, when a source bitmap is available, the sliced
 //! cell textures) to `outDir`. It regenerates on change / new input / cache-miss.

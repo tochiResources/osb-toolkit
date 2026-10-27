@@ -13,7 +13,7 @@ namespace tochiRes.osbTK;
 public static partial class osb
 {
     /// <summary>
-    /// The shared motion-graphics helpers (M38/M40): one <c>helper</c> op
+    /// The shared motion-graphics helpers: one <c>helper</c> op
     /// namespaced by library (<c>keyframe.*</c>, <c>scene3d.*</c>, <c>command.*</c>,
     /// <c>origin.*</c>, <c>easing.*</c>, <c>timeline.*</c>, <c>color.*</c>,
     /// <c>scene2d.*</c>). The surface is code-split by namespace into this folder.

@@ -1,4 +1,4 @@
-"""The diagnostics library: storyboard and mapset analysis (M29)."""
+"""The diagnostics library: storyboard and mapset analysis."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ _api = DiagnosticsApi(STATELESS)
 
 
 class Diagnostics:
-    """The diagnostics library: storyboard and mapset analysis (M29)."""
+    """The diagnostics library: storyboard and mapset analysis."""
 
     @staticmethod
     def diagnose_osb(text: str) -> Any:

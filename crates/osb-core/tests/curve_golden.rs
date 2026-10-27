@@ -1,6 +1,6 @@
 //! The shared curve golden corpus. The same vectors are exercised through the
 //! native bridge and every SDK, so Rust stays the source of truth for the shape
-//! of the math (section 5.9, M24).
+//! of the math ().
 
 use std::path::PathBuf;
 

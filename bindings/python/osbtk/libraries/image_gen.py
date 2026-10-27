@@ -1,4 +1,4 @@
-"""The image-generation library: draw primitive shapes (M25)."""
+"""The image-generation library: draw primitive shapes."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ _api = ImagegenApi(STATELESS)
 
 
 class ImageGen:
-    """The image-generation library: draw primitive shapes (M25)."""
+    """The image-generation library: draw primitive shapes."""
 
     @staticmethod
     def render_shapes(request: RenderShapesRequest) -> Any:

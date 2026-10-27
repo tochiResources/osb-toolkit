@@ -36,7 +36,7 @@ function parseLibraries(sources?: EffectSource[]): EffectScript[] {
 /**
  * Whether `script` is an `.osb` importer. Its hand-written parser is
  * replaced wholesale by the runtime's `.osb` helper (`Runtime::import_osb`),
- * the pragmatic path recorded in the M14 plan, rather than transpiling switch
+ * the pragmatic approach, rather than transpiling switch
  * statements, `using` declarations and `StreamReader` line by line.
  */
 function isOsbImportScript(script: EffectScript): boolean {

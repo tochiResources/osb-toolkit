@@ -1,4 +1,4 @@
-//! Mesh primitives (section 5.11): line, triangle, quad/plane and indexed mesh,
+//! Mesh primitives (): line, triangle, quad/plane and indexed mesh,
 //! projected to screenspace sprite states with near-plane clipping and backface
 //! culling. osu! can only draw textured sprites, so a triangle is filled by two
 //! affine sprites, and a mesh face is one affine sprite per

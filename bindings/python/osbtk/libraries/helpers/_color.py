@@ -1,4 +1,4 @@
-"""The color-space and CSS/Sass-style helpers (M40)."""
+"""The color-space and CSS/Sass-style helpers."""
 
 from __future__ import annotations
 

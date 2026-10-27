@@ -1,5 +1,5 @@
 //! Plain, serializable 3D input for the bake, shared by Rust, TypeScript and
-//! C# via the golden-vector corpus (section 5.9 of the plan). It is the same
+//! C# via the golden-vector corpus (of the plan). It is the same
 //! shape that the built-in 3D object parser (§5.12) and the procedural sprite
 //! service consume.
 

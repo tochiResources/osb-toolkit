@@ -1,4 +1,4 @@
-//! Sprite orientation & projection for the 3D -> 2D bake (section 5.10).
+//! Sprite orientation & projection for the 3D -> 2D bake ().
 //!
 //! Sprite 2D projection is split into two orthogonal knobs: [`SpriteOrientation`]
 //! (how the sprite is oriented in screenspace - six algorithms) and

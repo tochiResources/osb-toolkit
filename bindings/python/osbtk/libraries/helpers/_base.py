@@ -1,4 +1,4 @@
-"""The shared ``call`` entry point and command-channel bridging (M38/M40)."""
+"""The shared ``call`` entry point and command-channel bridging."""
 
 from __future__ import annotations
 

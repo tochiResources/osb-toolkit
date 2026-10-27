@@ -108,7 +108,7 @@ public final class osb {
     }
 
     /**
-     * The shared motion-graphics helpers (M38): one {@code helper} op namespaced
+     * The shared motion-graphics helpers: one {@code helper} op namespaced
      * by library ({@code keyframe.*}, {@code scene3d.*}, {@code command.*},
      * {@code origin.*}). The keyframe helpers work for 2D and 3D (the Z axis is
      * optional), and {@code transformCommands} applies any of them to a 2D
@@ -556,7 +556,7 @@ public final class osb {
         }
 
         /**
-         * The 2D storyboard command utilities (M38): pure transforms over a
+         * The 2D storyboard command utilities: pure transforms over a
          * {@code List<StoryboardCommand>}, canonical in
          * {@code osb_runtime::storyboarding::helpers}.
          */
@@ -783,7 +783,7 @@ public final class osb {
     /**
      * The 3D storyboard library: a sibling that reuses the whole
      * {@link Storyboarding} surface and adds the 3D -> 2D bake, so the 3D API is
-     * exposed alongside {@link Storyboarding} (M28).
+     * exposed alongside {@link Storyboarding}.
      */
     public static final class Storyboarding3d {
         private static final moe.tochi.osbtk.api.Storyboarding3dAPI API = new moe.tochi.osbtk.api.Storyboarding3dAPI(statelessClient());
@@ -807,7 +807,7 @@ public final class osb {
         }
 
         /**
-         * The 3D motion-graphics keyframe helpers (M38): pure keyframe-channel
+         * The 3D motion-graphics keyframe helpers: pure keyframe-channel
          * utilities, canonical in {@code osb_runtime::storyboarding3d::helpers}.
          */
         public static final class Helpers {
@@ -1088,7 +1088,7 @@ public final class osb {
 
     /**
      * The curve library: Bezier/Catmull-Rom curves, sampling, arc length, tangents,
-     * bounding boxes and Douglas-Peucker simplification (M24).
+     * bounding boxes and Douglas-Peucker simplification.
      */
     public static final class Curve {
         private static final moe.tochi.osbtk.api.CurveAPI API = new moe.tochi.osbtk.api.CurveAPI(statelessClient());
@@ -1182,7 +1182,7 @@ public final class osb {
         }
     }
 
-    /** The diagnostics library: storyboard and mapset analysis (M29). */
+    /** The diagnostics library: storyboard and mapset analysis. */
     public static final class Diagnostics {
         private static final moe.tochi.osbtk.api.DiagnosticsAPI API = new moe.tochi.osbtk.api.DiagnosticsAPI(statelessClient());
 
@@ -1199,7 +1199,7 @@ public final class osb {
         }
     }
 
-    /** The optimization library: storyboard optimization and `.osb` round-trip (M30). */
+    /** The optimization library: storyboard optimization and `.osb` round-trip. */
     public static final class Optimize {
         private static final moe.tochi.osbtk.api.OptimizeAPI API = new moe.tochi.osbtk.api.OptimizeAPI(statelessClient());
 
@@ -1212,7 +1212,7 @@ public final class osb {
         }
     }
 
-    /** The image library: decode/encode and processing (M23). */
+    /** The image library: decode/encode and processing. */
     public static final class Image {
         private static final moe.tochi.osbtk.api.ImageAPI API = new moe.tochi.osbtk.api.ImageAPI(statelessClient());
 
@@ -1231,7 +1231,7 @@ public final class osb {
         }
     }
 
-    /** The image-generation library: draw primitive shapes (M25). */
+    /** The image-generation library: draw primitive shapes. */
     public static final class ImageGen {
         private static final moe.tochi.osbtk.api.ImagegenAPI API = new moe.tochi.osbtk.api.ImagegenAPI(statelessClient());
 
@@ -1243,7 +1243,7 @@ public final class osb {
         }
     }
 
-    /** The media library: probing, frame extraction/encoding and audio (M26). */
+    /** The media library: probing, frame extraction/encoding and audio. */
     public static final class Media {
         private static final moe.tochi.osbtk.api.MediaAPI API = new moe.tochi.osbtk.api.MediaAPI(statelessClient());
 

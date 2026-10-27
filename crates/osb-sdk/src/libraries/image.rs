@@ -1,4 +1,4 @@
-//! The image library: decode/encode and processing (M23).
+//! The image library: decode/encode and processing.
 
 use crate::error::Error;
 use crate::models::{ImageInfo, ImageOptions};

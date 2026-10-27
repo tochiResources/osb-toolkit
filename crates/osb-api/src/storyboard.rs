@@ -1,4 +1,4 @@
-//! The full storyboard model, read back from a live runtime (M37).
+//! The full storyboard model, read back from a live runtime.
 //!
 //! The runtime `Effect::generate` returns a [`Storyboard`](osb_runtime) model;
 //! this module is the wire form of that model so the SDK `Generator` can return

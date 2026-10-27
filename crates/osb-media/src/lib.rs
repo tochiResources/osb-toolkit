@@ -1,4 +1,4 @@
-//! Media library (M26).
+//! Media library.
 //!
 //! Probes media, extracts frames (video -> image sequence), encodes frames
 //! (image sequence -> video) and extracts audio, by shelling out to the

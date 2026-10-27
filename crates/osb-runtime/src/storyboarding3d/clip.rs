@@ -1,4 +1,4 @@
-//! Near-plane clipping (section 5.11). Projecting points behind the
+//! Near-plane clipping (). Projecting points behind the
 //! camera with `|w|` produces garbage; this module clips a polygon in clip
 //! space against `w >= near` (Sutherland-Hodgman) so partially-behind quads and
 //! mesh faces are correct.

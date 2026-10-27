@@ -1,10 +1,10 @@
-//! Installer packaging (section 5.6, M16/M17b): turn built artifacts plus a
+//! Installer packaging (): turn built artifacts plus a
 //! config into a distributable installer layout - the payload, a `manifest.json`,
 //! the license text and an NSIS install script - that the installer app and the
 //! `osbtk package` CLI both produce.
 //!
 //! Producing the final signed `.exe` (NSIS/Inno/WiX compilation) is a build-time
-//! concern (M17c); this module assembles everything that compilation consumes.
+//! concern; this module assembles everything that compilation consumes.
 
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};

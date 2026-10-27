@@ -1,4 +1,4 @@
-//! The server auth pipeline (section 5.6, M15): salted Argon2id credential
+//! The server auth pipeline (): salted Argon2id credential
 //! hashing, a bootstrap **admin token**, and **JWT** access/refresh tokens with
 //! revocation.
 //!

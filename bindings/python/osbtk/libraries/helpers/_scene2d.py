@@ -1,4 +1,4 @@
-"""The 2D scene graph (M40)."""
+"""The 2D scene graph."""
 
 from __future__ import annotations
 

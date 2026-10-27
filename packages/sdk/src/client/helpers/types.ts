@@ -1,5 +1,5 @@
 /**
- * Shared types for the motion-graphics helper clients (M38/M40). The helper
+ * Shared types for the motion-graphics helper clients. The helper
  * surface is code-split by library (`keyframe`, `scene3d`, `command`, `origin`,
  * `easing`, `timeline`, `color`, `scene2d`); this module holds the types more than
  * one of them shares.

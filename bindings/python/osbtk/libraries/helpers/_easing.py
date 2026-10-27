@@ -1,4 +1,4 @@
-"""The easing-curve manipulation helpers (M39)."""
+"""The easing-curve manipulation helpers."""
 
 from __future__ import annotations
 

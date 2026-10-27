@@ -1,4 +1,4 @@
-//! Generated Rust SDK over the osbTK native bridge (section 5.13, M21).
+//! Generated Rust SDK over the osbTK native bridge ().
 //!
 //! The models in [`models`] are generated from the OpenAPI contract in
 //! `crates/osb-api`; [`Client`] and [`Runtime`] drive them through the one

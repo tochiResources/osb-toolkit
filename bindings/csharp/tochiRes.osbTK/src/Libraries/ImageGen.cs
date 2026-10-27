@@ -5,7 +5,7 @@ namespace tochiRes.osbTK;
 
 public static partial class osb
 {
-    /// <summary>The image-generation library: draw primitive shapes (M25).</summary>
+    /// <summary>The image-generation library: draw primitive shapes.</summary>
     public static class ImageGen
     {
         private static readonly ImagegenAPI Api = new(

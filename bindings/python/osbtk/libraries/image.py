@@ -1,4 +1,4 @@
-"""The image library: decode/encode and processing (M23)."""
+"""The image library: decode/encode and processing."""
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ _api = ImageApi(STATELESS)
 
 
 class Image:
-    """The image library: decode/encode and processing (M23)."""
+    """The image library: decode/encode and processing."""
 
     @staticmethod
     def info(path: str) -> Any:

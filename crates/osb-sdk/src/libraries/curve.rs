@@ -1,5 +1,5 @@
 //! The curve library: Bezier/Catmull-Rom curves, sampling, arc length, tangents,
-//! bounding boxes and Douglas-Peucker simplification (M24).
+//! bounding boxes and Douglas-Peucker simplification.
 
 use crate::error::Error;
 use crate::models::{Box2, CurveSpec, PointListResult, Vector2};

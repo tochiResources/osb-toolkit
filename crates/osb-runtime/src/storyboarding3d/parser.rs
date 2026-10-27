@@ -1,4 +1,4 @@
-//! Built-in 3D object parser (section 5.12): parses common mesh/scene formats
+//! Built-in 3D object parser (): parses common mesh/scene formats
 //! into the `storyboarding3d` mesh model, with fine-grained options.
 //!
 //! Supports Wavefront OBJ (`v`/`f` and `/`-separated index triples) and STL

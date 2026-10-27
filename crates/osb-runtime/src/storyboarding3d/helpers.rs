@@ -1,4 +1,4 @@
-//! The strictly 3D motion-graphics helpers (M38).
+//! The strictly 3D motion-graphics helpers.
 //!
 //! The shared, dimension-agnostic keyframe logic lives in
 //! [`crate::animations::keyframes`]; this module re-exports it and adds the

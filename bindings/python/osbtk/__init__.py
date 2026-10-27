@@ -3,7 +3,7 @@
 Rust (``crates/osb-api``) is the source of truth; the models in ``osbtk.models``
 and the clients in ``osbtk.api`` are generated from the OpenAPI contract and
 driven through :class:`osbtk.bridge.BridgeRestClient`. The SDK is organized into
-libraries (``osbtk.libraries``, M33): ``storyboarding``, ``storyboarding3d``,
+libraries (``osbtk.libraries``): ``storyboarding``, ``storyboarding3d``,
 ``animations``, ``audio``, ``curve``, ``diagnostics``, ``optimize``, ``image``,
 ``image_gen`` and ``media``.
 """

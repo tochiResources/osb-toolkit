@@ -1,4 +1,4 @@
-//! Sprite subdivision API (section 5.10): given a source sprite and its current
+//! Sprite subdivision API (): given a source sprite and its current
 //! projected state, return the individual sub-sprites of the subdivision (and
 //! their data), so external tools can generate procedural subdivided sprites.
 //!

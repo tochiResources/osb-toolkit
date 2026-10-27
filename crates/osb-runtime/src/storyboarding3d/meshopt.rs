@@ -1,4 +1,4 @@
-//! Mesh post-processing (section 5.12): merging coplanar triangle pairs that
+//! Mesh post-processing (): merging coplanar triangle pairs that
 //! share an edge into quads, so a parsed triangle soup renders as one affine
 //! sprite per quad instead of two per triangle.
 

@@ -1,4 +1,4 @@
-//! Canonical bezier / curve / points library (M24, section 5.13).
+//! Canonical bezier / curve / points library.
 //!
 //! One implementation of the path math effect-script consumers need -
 //! linear/quadratic/cubic/general Bezier and Catmull-Rom curves, uniform and

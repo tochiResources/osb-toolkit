@@ -1,4 +1,4 @@
-//! The generic motion-graphics helper operations (M38).
+//! The generic motion-graphics helper operations.
 //!
 //! Two bridge ops - `storyboarding3dHelper` and `storyboardHelper` - dispatch by
 //! `name` to the canonical Rust helper libraries

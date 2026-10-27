@@ -55,7 +55,7 @@ export interface ResolvedSprite2d {
 }
 
 /**
- * The 2D scene graph (M40): the 2D counterpart of the 3D scene tree. A node can
+ * The 2D scene graph: the 2D counterpart of the 3D scene tree. A node can
  * be controlled from the top (translate/scale/rotate/flatten/ease/retime) and the
  * whole set cascades; `resolve` samples the composed transforms into per-sprite
  * command sets.

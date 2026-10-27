@@ -1,4 +1,4 @@
-//! Storyboard and mapset diagnostics (M29).
+//! Storyboard and mapset diagnostics.
 //!
 //! Command diagnostics - per-sprite **command cost**,
 //! **overlapping**, **duplicated** and **redundant (no-op)** commands, invalid

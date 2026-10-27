@@ -1,4 +1,4 @@
-//! The optimization library: storyboard optimization and `.osb` round-trip (M30).
+//! The optimization library: storyboard optimization and `.osb` round-trip.
 
 use crate::error::Error;
 use crate::models::{OptimizeOptionsInput, OptimizeResult};

@@ -1,4 +1,4 @@
-//! The media library: probing, frame extraction/encoding and audio (M26).
+//! The media library: probing, frame extraction/encoding and audio.
 
 use crate::error::Error;
 use crate::models::{EncodeVideoRequest, ExtractFramesRequest, FrameResult, MediaInfo};

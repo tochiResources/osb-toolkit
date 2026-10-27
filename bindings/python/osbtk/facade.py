@@ -1,4 +1,4 @@
-"""Storyboard facades (M31).
+"""Storyboard facades.
 
 ``Layer`` and ``Sprite`` mirror the storyboard ``OsbLayer``/``OsbSprite`` API
 over the native JSON bridge (so scalar and object command values both work).

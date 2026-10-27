@@ -1,4 +1,4 @@
-//! glTF 2.0 / GLB mesh importer (section 5.12).
+//! glTF 2.0 / GLB mesh importer ().
 //!
 //! Reads the position stream of every `TRIANGLES` primitive in the default
 //! scene, applies the node hierarchy transforms, and welds the result into the

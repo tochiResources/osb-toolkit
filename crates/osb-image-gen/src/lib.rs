@@ -1,4 +1,4 @@
-//! Image generation (M25).
+//! Image generation.
 //!
 //! Renders primitive shapes - rectangle, rounded rectangle, ellipse, circle,
 //! line and polygon - with fill and stroke onto a new raster canvas, then writes

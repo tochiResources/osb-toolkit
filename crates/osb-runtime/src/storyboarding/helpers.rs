@@ -1,4 +1,4 @@
-//! Pure command-list utilities over the 2D storyboard model (M38).
+//! Pure command-list utilities over the 2D storyboard model.
 //!
 //! These are the canonical, state-free transforms an effect author reaches for
 //! when a command list needs selecting, retiming, reversing, merging, splitting,
@@ -365,7 +365,7 @@ pub fn transform_command_values(
         .collect()
 }
 
-// --- command <-> keyframe channel bridging (M38) --------------------------
+// --- command <-> keyframe channel bridging --------------------------
 //
 // The shared keyframe helpers in `crate::animations::keyframes` operate on a
 // dimension-agnostic `Channel`. These functions extract a command kind's values
@@ -486,7 +486,7 @@ pub fn timeline_commands(timeline: &Timeline, kind: CommandType) -> Vec<KindedCo
     out
 }
 
-// --- easing-aware bridging and group/scene easing (M39) -------------------
+// --- easing-aware bridging and group/scene easing -------------------
 
 /// The per-command easings of `kind`, in command order.
 pub fn command_easings(commands: &[KindedCommand], kind: CommandType) -> Vec<Easing> {

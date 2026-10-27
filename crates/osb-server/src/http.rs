@@ -1,4 +1,4 @@
-//! The headless HTTP API (section 5.6, M15): `GET /v1/health`, the auth pipeline
+//! The headless HTTP API (): `GET /v1/health`, the auth pipeline
 //! (`/v1/auth/*`), the converter/job endpoints (`POST /v1/convert`,
 //! `POST /v1/build`, `GET /v1/jobs/{id}`, `GET /v1/artifacts/{id}`), behind the
 //! auth pipeline, per-key **rate limiting** and a bounded **job queue**.

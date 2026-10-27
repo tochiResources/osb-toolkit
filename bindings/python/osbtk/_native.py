@@ -1,5 +1,5 @@
 """osb native bindings: a thin `ctypes` facade over the `crates/osb-native`
-C ABI (section 5.13, M14i).
+C ABI ().
 
 The shared library is located from ``OSBTK_NATIVE_LIB`` or by walking up to the
 cargo ``target/{release,debug}`` directory, so no install step is required in a

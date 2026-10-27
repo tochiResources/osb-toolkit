@@ -11,7 +11,7 @@ export interface ColorStop {
 export type ColorSpace = 'rgb' | 'hsl' | 'hsb' | 'hsv' | 'hwb';
 
 /**
- * The color-space manipulation and CSS/Sass-style helpers (M40): offset/scale/
+ * The color-space manipulation and CSS/Sass-style helpers: offset/scale/
  * randomize in any space (RGB/HSL/HSB/HWB), `lighten`/`darken`, `saturate`/
  * `desaturate`, `adjustHue`/`complement`, `grayscale`/`invert`, `mix`/`tint`/
  * `shade`, `opacify`/`transparentize`, and multi-stop gradients.

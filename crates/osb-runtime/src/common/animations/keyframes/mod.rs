@@ -1,4 +1,4 @@
-//! Pure motion-graphics helpers over keyframe channels (M38).
+//! Pure motion-graphics helpers over keyframe channels.
 //!
 //! Every helper here is a pure function over a [`Channel`] (a keyframed scalar,
 //! 2-vector or 3-vector) or a small constructor that produces one. They carry no

@@ -1,4 +1,4 @@
-//! A bounded job queue with workers, TTL and cancellation (section 5.6, M15).
+//! A bounded job queue with workers, TTL and cancellation ().
 //!
 //! Long operations (builds) run off the request thread. The queue is bounded:
 //! `submit` fails fast with [`QueueError::Full`] once the channel is saturated,

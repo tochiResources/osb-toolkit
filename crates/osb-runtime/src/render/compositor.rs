@@ -41,7 +41,7 @@ impl RenderOptions {
 /// Composites every visible sprite of `storyboard` into an RGBA8 frame at
 /// `options.time`, scaling from the storyboard `resolution`.
 ///
-/// The frame is split into horizontal bands that render concurrently (M13b); each
+/// The frame is split into horizontal bands that render concurrently; each
 /// band draws every sprite clipped to its rows, matching single-threaded output.
 pub fn render(
     storyboard: &Storyboard,

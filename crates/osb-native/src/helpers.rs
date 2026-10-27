@@ -1,4 +1,4 @@
-//! The shared motion-graphics `helper` bridge (M38).
+//! The shared motion-graphics `helper` bridge.
 //!
 //! One op, `helper`, dispatches by a namespaced `name` to the canonical Rust
 //! libraries:

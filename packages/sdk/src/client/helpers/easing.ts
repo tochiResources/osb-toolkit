@@ -2,7 +2,7 @@ import type { Easing } from '../../lib';
 import type { Call } from './types';
 
 /**
- * The easing-curve manipulation helpers (M39): stretch, amplify, reverse,
+ * The easing-curve manipulation helpers: stretch, amplify, reverse,
  * mirror, ping-pong, repeat, compose, blend and sample easings/beziers.
  */
 export interface EasingHelpers {

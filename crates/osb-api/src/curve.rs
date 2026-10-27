@@ -1,4 +1,4 @@
-//! The `curve` library wire types (M24): the curve families and their control
+//! The `curve` library wire types: the curve families and their control
 //! points. The math is canonical in `crates/osb-curve`; these types are the
 //! stable contract the SDKs are generated from.
 

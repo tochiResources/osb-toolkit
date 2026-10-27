@@ -1,4 +1,4 @@
-//! Shared golden-vector parity test for the 3D bake (section 5.9). The corpus is
+//! Shared golden-vector parity test for the 3D bake (). The corpus is
 //! consumed across the SDKs, so all implementations must agree on it.
 
 use osb_runtime::storyboarding3d::{bake_input, Bake3dInput, CommandKind};

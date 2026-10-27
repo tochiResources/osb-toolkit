@@ -1,9 +1,9 @@
 // The storyboarding library facade: `.osu`/`.osb` parsing, the stateless
-// origin/screen-bound queries and the 2D command utilities (M38).
+// origin/screen-bound queries and the 2D command utilities.
 
 package osbtk
 
-// commandsLib is the 2D storyboard command utility facade (M38): pure
+// commandsLib is the 2D storyboard command utility facade: pure
 // transforms over a `[]StoryboardCommand`, canonical in
 // `osb_runtime::storyboarding::helpers`.
 type commandsLib struct{}

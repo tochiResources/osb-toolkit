@@ -3,7 +3,7 @@ import * as native from '@tochii/osb-toolkit-native';
 import { Configuration, type FetchAPI } from './lib';
 
 /**
- * The SDK's single hand-written seam (§4.1 of `osbTK-ARCHITECTURE.md`): it
+ * The SDK's single hand-written seam: it
  * intercepts the generated OpenAPI clients' transport and routes it to the
  * native JSON bridge instead of the network. The generated client stays a
  * *normal* OpenAPI client - it can still run over real HTTP (against

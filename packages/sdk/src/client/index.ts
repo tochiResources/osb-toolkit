@@ -15,7 +15,7 @@ import {
 import { createHelpers, type Helpers } from './helpers';
 import { createIO, type IO } from './io';
 
-// The runtime client wrapper (§4.2 of `osbTK-ARCHITECTURE.md`): a single
+// The runtime client wrapper: a single
 // entrypoint that exposes every **non-core** generated OpenAPI group, sourced
 // from the generated output (`../lib`), plus the conveniences OpenAPI cannot
 // express (the fluent `Layer`/`Sprite` builders, the `Runtime`/`Generator`
@@ -52,21 +52,21 @@ export * from './io';
 export interface Client {
     /** The native runtime version string. */
     version(): string;
-    /** The shared motion-graphics helper namespaces (M38/M40). */
+    /** The shared motion-graphics helper namespaces. */
     helpers: Helpers;
     /** The audio library: FFT and the loaded audio. */
     audio: AudioAPI;
-    /** The diagnostics library: storyboard and mapset analysis (M29). */
+    /** The diagnostics library: storyboard and mapset analysis. */
     diagnostics: DiagnosticsAPI;
-    /** The optimization library: storyboard optimization and `.osb` round-trip (M30). */
+    /** The optimization library: storyboard optimization and `.osb` round-trip. */
     optimize: OptimizeAPI;
-    /** The image library: decode/encode and processing (M23). */
+    /** The image library: decode/encode and processing. */
     image: ImageAPI;
-    /** The image-generation library: draw primitive shapes (M25). */
+    /** The image-generation library: draw primitive shapes. */
     imageGen: ImagegenAPI;
-    /** The media library: probing, frame extraction/encoding and audio (M26). */
+    /** The media library: probing, frame extraction/encoding and audio. */
     media: MediaAPI;
-    /** The 3D storyboard library: the 3D -> 2D bake (M28). */
+    /** The 3D storyboard library: the 3D -> 2D bake. */
     storyboarding3d: Storyboarding3dAPI;
     /** The file-operations library (`osb-core`): the toolkit's filesystem API. */
     io: IO;

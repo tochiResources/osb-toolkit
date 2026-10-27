@@ -1,4 +1,4 @@
-//! C ABI for the whole `osb-runtime` public API (section 5.13, M14i).
+//! C ABI for the whole `osb-runtime` public API ().
 //!
 //! A small, stable C surface drives the same engine from C#, C++, Python and
 //! (via WASM) JavaScript/TypeScript. Stateful objects are opaque handles; rich

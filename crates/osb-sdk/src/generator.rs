@@ -1,4 +1,4 @@
-//! The effect-script generator facade (M31).
+//! The effect-script generator facade.
 //!
 //! A [`Generator`] exposes the
 //! API effect scripts use (`GetLayer`, `CreateSprite`, `CreateAnimation`,

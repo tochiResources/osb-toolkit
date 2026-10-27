@@ -7,7 +7,7 @@ namespace tochiRes.osbTK;
 public static partial class osb
 {
     /// <summary>
-    /// The color-space and CSS/Sass-style helpers (M40): offset/scale/randomize in
+    /// The color-space and CSS/Sass-style helpers: offset/scale/randomize in
     /// any space (RGB/HSL/HSB/HWB), <c>Lighten</c>/<c>Darken</c>, <c>Saturate</c>/
     /// <c>Desaturate</c>, <c>AdjustHue</c>/<c>Complement</c>, <c>Grayscale</c>/
     /// <c>Invert</c>, <c>Mix</c>/<c>Tint</c>/<c>Shade</c>, <c>Opacify</c>/

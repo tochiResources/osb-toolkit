@@ -1,4 +1,4 @@
-"""The shared stateless bridge client for the SDK libraries (M33).
+"""The shared stateless bridge client for the SDK libraries.
 
 Every library facade in :mod:`osbtk.libraries` drives the same stateless
 :class:`~osbtk.api_client.ApiClient`, wired to the native engine through

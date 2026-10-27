@@ -1,4 +1,4 @@
-// The 3D world and unified storyboard bake (M40).
+// The 3D world and unified storyboard bake.
 
 package osbtk
 

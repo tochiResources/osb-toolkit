@@ -1,5 +1,4 @@
-// Package osbtk is the typed Go SDK over the osbTK native engine (section 5.13,
-// M21/M22). The models and services in this package are generated from the
+// Package osbtk is the typed Go SDK over the osbTK native engine. The models and services in this package are generated from the
 // OpenAPI contract in `crates/osb-api`; this file wraps the native C ABI
 // (`osbtk_exec` / `osbtk_runtime_exec`) with `purego`, so no cgo is required.
 package osbtk

@@ -2,7 +2,7 @@ import type { StoryboardCommand, StoryboardCommandKind, Vector3 } from '../../li
 import type { Axis, Call, Channel, FlattenOptions } from './types';
 
 /**
- * The shared keyframe transforms (M38), canonical in
+ * The shared keyframe transforms, canonical in
  * `osb_runtime::animations::keyframes`. They accept a 2D, 3D or color channel,
  * and `transformCommands` applies any of them to a 2D command channel.
  */

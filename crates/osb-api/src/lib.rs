@@ -1,5 +1,5 @@
 //! The typed wire contract for the osbTK native bridge, and the OpenAPI schema
-//! generated from it (section 5.13, M21).
+//! generated from it ().
 //!
 //! Rust is the source of truth: these types mirror the `osb-runtime` public API
 //! and carry the doc comments that become OpenAPI `description`s, which the

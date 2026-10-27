@@ -1,4 +1,4 @@
-//! The image-generation library: draw primitive shapes (M25).
+//! The image-generation library: draw primitive shapes.
 
 use crate::error::Error;
 use crate::models::{ImageInfo, RenderShapesRequest};

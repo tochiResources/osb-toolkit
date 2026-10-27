@@ -1,4 +1,4 @@
-// The 2D scene graph (M40).
+// The 2D scene graph.
 
 package osbtk
 

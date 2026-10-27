@@ -1,4 +1,4 @@
-// `@tochii/osb-sdk-js` - the entry point (§4.2 of `osbTK-ARCHITECTURE.md`).
+// `@tochii/osb-sdk-js` - the package entry point.
 //
 // The runtime SDK is exported as `osb` from the `client` wrapper; the
 // non-runtime `Core` subpath is re-exported from `core` (and is also available

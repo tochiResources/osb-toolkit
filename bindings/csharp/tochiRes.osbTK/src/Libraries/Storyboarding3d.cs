@@ -17,7 +17,7 @@ public static partial class osb
     /// <summary>
     /// The 3D storyboard library: a sibling that reuses the whole
     /// <see cref="Storyboarding"/> surface and adds the 3D -> 2D bake, so the 3D
-    /// API is exposed alongside <see cref="Storyboarding"/> (M28).
+    /// API is exposed alongside <see cref="Storyboarding"/>.
     /// </summary>
     public static class Storyboarding3d
     {
@@ -57,7 +57,7 @@ public static partial class osb
         }
 
         /// <summary>
-        /// The 3D motion-graphics keyframe helpers (M38): pure keyframe-channel
+        /// The 3D motion-graphics keyframe helpers: pure keyframe-channel
         /// utilities, canonical in `osb_runtime::storyboarding3d::helpers`.
         /// </summary>
         public static class Helpers

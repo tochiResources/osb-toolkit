@@ -1,4 +1,4 @@
-"""The timeline sandbox (M39/M40), including the child-timeline hierarchy."""
+"""The timeline sandbox, including the child-timeline hierarchy."""
 
 from __future__ import annotations
 

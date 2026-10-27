@@ -7,7 +7,7 @@ namespace tochiRes.osbTK;
 public static partial class osb
 {
     /// <summary>
-    /// The 3D world and unified storyboard bake (M40): a world
+    /// The 3D world and unified storyboard bake: a world
     /// (<c>{ nodes, camera, options }</c>) or a set of 2D + 3D worlds bakes into a
     /// full <see cref="Storyboard"/> model.
     /// </summary>

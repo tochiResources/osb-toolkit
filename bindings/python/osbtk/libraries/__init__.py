@@ -1,4 +1,4 @@
-"""The SDK's hand-written library facades (M33), one module per library.
+"""The SDK's hand-written library facades, one module per library.
 
 `osbtk.osb` composes these into the entry point; consumers use
 ``osb.curve.length(...)`` etc. rather than the generated clients.

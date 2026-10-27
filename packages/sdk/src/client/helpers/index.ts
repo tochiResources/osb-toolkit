@@ -19,7 +19,7 @@ export * from './timeline';
 export * from './types';
 
 /**
- * The shared motion-graphics helper surface (M38/M40): one `helper` op namespaced
+ * The shared motion-graphics helper surface: one `helper` op namespaced
  * by library. 2D and 3D share the keyframe logic (Z is optional), `origin`
  * carries the shared anchor/origin resolution, and `color`/`scene2d` add the
  * color-space and 2D scene helpers.

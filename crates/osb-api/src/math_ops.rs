@@ -1,4 +1,4 @@
-//! The generic stateless math operation (M34): one op that dispatches to the full
+//! The generic stateless math operation: one op that dispatches to the full
 //! `osb-math`/`osb-curve` helper surface by name, so the math SDK can expose
 //! every vector/matrix/quaternion/box/color/curve helper without a wire op each.
 

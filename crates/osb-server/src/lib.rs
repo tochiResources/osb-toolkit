@@ -1,5 +1,5 @@
 //! The osbTK service layer: the single implementation behind the CLI and the
-//! headless HTTP API (section 5.6, M15/M16).
+//! headless HTTP API ().
 //!
 //! Conversion shells out to the bundled Node converter CLI (`osbtk-fx-convert`,
 //! `packages/core/dist/cli.js`) - the transpiler lives in TypeScript - while the
