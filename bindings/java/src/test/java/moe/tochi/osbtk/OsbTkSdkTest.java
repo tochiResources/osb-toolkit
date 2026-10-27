@@ -23,12 +23,9 @@ import moe.tochi.osbtk.model.Easing;
 import moe.tochi.osbtk.model.Handle;
 import moe.tochi.osbtk.model.HitObjectKind;
 import moe.tochi.osbtk.model.ImageInfo;
-import moe.tochi.osbtk.model.LayerHandle;
-import moe.tochi.osbtk.model.LayerHandleRequest;
 import moe.tochi.osbtk.model.OsbOrigin;
 import moe.tochi.osbtk.model.OptimizeOptionsInput;
 import moe.tochi.osbtk.model.OptimizeResult;
-import moe.tochi.osbtk.model.OptionalPointResult;
 import moe.tochi.osbtk.model.PointListResult;
 import moe.tochi.osbtk.model.RenderShapesRequest;
 import moe.tochi.osbtk.model.RgbaColor;
@@ -106,10 +103,8 @@ class OsbTkSdkTest {
     @Test
     void drivesTheHandleBoundCleanClient() throws Exception {
         try (Runtime runtime = new Runtime()) {
-            LayerHandle handle =
-                    runtime.generator()
-                            .layerHandle(new LayerHandleRequest().name("Foreground"));
-            Layer layer = new Layer(runtime.layer(), runtime.sprite(), handle.getLayer());
+            int handle = runtime.generator().layerHandle("Foreground");
+            Layer layer = new Layer(runtime.layer(), runtime.sprite(), handle);
             assertTrue(Layer.instanceOf(layer));
 
             Sprite sprite =
@@ -163,13 +158,13 @@ class OsbTkSdkTest {
         assertEquals(2, osb.Curve.offset(curve, 5.0).getPoints().size());
         assertEquals(3, osb.Curve.arc(new Vector2().x(0.0).y(0.0), 10.0, 0.0, 180.0, 3).getPoints().size());
         assertEquals(4, osb.Curve.ellipse(new Vector2().x(0.0).y(0.0), 4.0, 2.0, 4).getPoints().size());
-        OptionalPointResult hit =
+        Vector2 hit =
                 osb.Curve.lineIntersect(
                         new Vector2().x(0.0).y(0.0),
                         new Vector2().x(10.0).y(10.0),
                         new Vector2().x(0.0).y(10.0),
                         new Vector2().x(10.0).y(0.0));
-        assertEquals(5.0, hit.getPoint().getX(), 1e-6);
+        assertEquals(5.0, hit.getX(), 1e-6);
     }
 
     @Test

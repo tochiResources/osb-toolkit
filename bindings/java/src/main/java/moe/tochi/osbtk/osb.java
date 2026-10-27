@@ -519,40 +519,37 @@ public final class osb {
 
     /** The storyboarding library: `.osu`/`.osb` parsing. */
     public static final class Storyboarding {
-        private static final moe.tochi.osbtk.api.ParsingAPI Parsing = new moe.tochi.osbtk.api.ParsingAPI(statelessClient());
-        private static final moe.tochi.osbtk.api.OriginAPI Origin = new moe.tochi.osbtk.api.OriginAPI(statelessClient());
+        private static final moe.tochi.osbtk.client.core.Parsing Parsing =
+                new moe.tochi.osbtk.client.core.Parsing(
+                        new moe.tochi.osbtk.api.ParsingAPI(statelessClient()));
+        private static final moe.tochi.osbtk.client.core.Origin Origin =
+                new moe.tochi.osbtk.client.core.Origin(
+                        new moe.tochi.osbtk.api.OriginAPI(statelessClient()));
         private static final moe.tochi.osbtk.api.HelpersAPI Helpers = new moe.tochi.osbtk.api.HelpersAPI(statelessClient());
 
         private Storyboarding() {}
 
         /** Parses a `.osu` beatmap into the typed model. */
         public static Beatmap parseOsu(String text) throws ApiException {
-            return Parsing.parseOsu(new TextRequest().text(text));
+            return Parsing.parseOsu(text);
         }
 
         /** Parses a `.osb` storyboard into a summary. */
         public static ParseOsbResult parseOsb(String text) throws ApiException {
-            return Parsing.parseOsb(new TextRequest().text(text));
+            return Parsing.parseOsb(text);
         }
 
         /** {@code OsbSprite.GetOriginVector}. */
         public static Vector2 getOriginVector(OsbOrigin origin, double width, double height)
                 throws ApiException {
-            return Origin.getOriginVector(
-                    new GetOriginVectorRequest().origin(origin).width(width).height(height));
+            return Origin.getOriginVector(origin, width, height);
         }
 
         /** {@code OsbSprite.InScreenBounds}. */
         public static boolean inScreenBounds(
                 Vector2 position, Vector2 size, double rotation, Vector2 origin)
                 throws ApiException {
-            return Origin.inScreenBounds(
-                            new InScreenBoundsRequest()
-                                    .position(position)
-                                    .size(size)
-                                    .rotation(rotation)
-                                    .origin(origin))
-                    .getValue();
+            return Origin.inScreenBounds(position, size, rotation, origin);
         }
 
         /**
@@ -750,33 +747,35 @@ public final class osb {
 
     /** The animations library: easing evaluation. */
     public static final class Animations {
-        private static final moe.tochi.osbtk.api.AnimationsAPI API = new moe.tochi.osbtk.api.AnimationsAPI(statelessClient());
+        private static final moe.tochi.osbtk.client.core.Animations CLIENT =
+                new moe.tochi.osbtk.client.core.Animations(
+                        new moe.tochi.osbtk.api.AnimationsAPI(statelessClient()));
 
         private Animations() {}
 
         /** Applies a named easing to a normalized time in `0..1`. */
         public static double applyEasing(Easing easing, double t) throws ApiException {
-            return API.applyEasing(new ApplyEasingRequest().easing(easing).t(t)).getValue();
+            return CLIENT.applyEasing(easing, t);
         }
 
         /** Evaluates a CSS cubic-bezier easing ({@code CustomEasing}). */
         public static double applyCubicBezier(double x1, double y1, double x2, double y2, double t)
                 throws ApiException {
-            return API.easingValue(
-                            new EasingValueRequest().cubicBezier(List.of(x1, y1, x2, y2)).t(t))
-                    .getValue();
+            return CLIENT.easingValue(t, null, List.of(x1, y1, x2, y2));
         }
     }
 
     /** The audio library: FFT. */
     public static final class Audio {
-        private static final moe.tochi.osbtk.api.AudioAPI API = new moe.tochi.osbtk.api.AudioAPI(statelessClient());
+        private static final moe.tochi.osbtk.client.runtime.Audio CLIENT =
+                new moe.tochi.osbtk.client.runtime.Audio(
+                        new moe.tochi.osbtk.api.AudioAPI(statelessClient()));
 
         private Audio() {}
 
         /** Reads FFT magnitudes from a `.wav` file. */
         public static FftResult fft(FftRequest request) throws ApiException {
-            return API.fft(request);
+            return CLIENT.fft(request.getPath(), request.getMagnitudes(), request.getTime());
         }
     }
 
@@ -786,7 +785,9 @@ public final class osb {
      * exposed alongside {@link Storyboarding}.
      */
     public static final class Storyboarding3d {
-        private static final moe.tochi.osbtk.api.Storyboarding3dAPI API = new moe.tochi.osbtk.api.Storyboarding3dAPI(statelessClient());
+        private static final moe.tochi.osbtk.client.runtime.Storyboarding3d CLIENT =
+                new moe.tochi.osbtk.client.runtime.Storyboarding3d(
+                        new moe.tochi.osbtk.api.Storyboarding3dAPI(statelessClient()));
         private static final moe.tochi.osbtk.api.HelpersAPI HelpersClient = new moe.tochi.osbtk.api.HelpersAPI(statelessClient());
 
         private Storyboarding3d() {}
@@ -803,7 +804,7 @@ public final class osb {
 
         /** Bakes a 3D scene into a 2D storyboard. */
         public static BakedStoryboard bake3d(Scene3dInput scene) throws ApiException {
-            return API.bake3d(new Bake3dRequest().input(scene));
+            return CLIENT.bake3d(scene);
         }
 
         /**
@@ -1091,182 +1092,203 @@ public final class osb {
      * bounding boxes and Douglas-Peucker simplification.
      */
     public static final class Curve {
-        private static final moe.tochi.osbtk.api.CurveAPI API = new moe.tochi.osbtk.api.CurveAPI(statelessClient());
+        private static final moe.tochi.osbtk.client.core.Curve CLIENT =
+                new moe.tochi.osbtk.client.core.Curve(
+                        new moe.tochi.osbtk.api.CurveAPI(statelessClient()));
 
         private Curve() {}
 
         /** The arc length of a curve. */
         public static double length(CurveSpec curve) throws ApiException {
-            return API.length(new CurveRequest().curve(curve)).getValue();
+            return CLIENT.length(curve);
         }
 
         /** The axis-aligned bounding box of a curve. */
         public static Box2 boundingBox(CurveSpec curve) throws ApiException {
-            return API.boundingBox(new CurveRequest().curve(curve));
+            return CLIENT.boundingBox(curve);
         }
 
         /** The point at {@code t}, parametrically or by arc length. */
         public static Vector2 point(CurveSpec curve, double t, boolean byArcLength)
                 throws ApiException {
-            return API.point(
-                    new CurvePointRequest().curve(curve).t(t).byArcLength(byArcLength));
+            return CLIENT.point(curve, t, byArcLength);
         }
 
         /** The unit tangent at {@code t}. */
         public static Vector2 tangent(CurveSpec curve, double t) throws ApiException {
-            return API.tangent(new CurvePointRequest().curve(curve).t(t));
+            return CLIENT.tangent(curve, t);
         }
 
         /** {@code count} points along the curve, parametrically or by arc length. */
         public static PointListResult sample(CurveSpec curve, int count, boolean byArcLength)
                 throws ApiException {
-            return API.sample(
-                    new CurveSampleRequest().curve(curve).count(count).byArcLength(byArcLength));
+            return CLIENT.sample(count, curve, byArcLength);
         }
 
         /** Simplifies a polyline with the Douglas-Peucker algorithm. */
         public static PointListResult simplify(List<Vector2> points, double tolerance)
                 throws ApiException {
-            return API.simplify(new SimplifyRequest().points(points).tolerance(tolerance));
+            return CLIENT.simplify(points, tolerance);
         }
 
         /** The unit normal at {@code t}. */
         public static Vector2 normal(CurveSpec curve, double t) throws ApiException {
-            return API.normal(new CurvePointRequest().curve(curve).t(t));
+            return CLIENT.normal(curve, t);
         }
 
         /** The curvature at {@code t}. */
         public static double curvature(CurveSpec curve, double t) throws ApiException {
-            return API.curvature(new CurvePointRequest().curve(curve).t(t)).getValue();
+            return CLIENT.curvature(curve, t);
         }
 
         /** The distance from {@code point} to the curve. */
         public static double distanceTo(CurveSpec curve, Vector2 point) throws ApiException {
-            return API.distanceTo(new CurveDistanceRequest().curve(curve).point(point))
-                    .getValue();
+            return CLIENT.distanceTo(curve, point);
         }
 
         /** The polyline offset along the curve's local normal. */
         public static PointListResult offset(CurveSpec curve, double distance) throws ApiException {
-            return API.offset(new CurveOffsetRequest().curve(curve).distance(distance));
+            return CLIENT.offset(curve, distance);
         }
 
         /** Points along a circular arc. */
         public static PointListResult arc(
                 Vector2 center, double radius, double startAngle, double sweepAngle, int count)
                 throws ApiException {
-            return API.arc(
-                    new ArcRequest()
-                            .center(center)
-                            .radius(radius)
-                            .startAngle(startAngle)
-                            .sweepAngle(sweepAngle)
-                            .count(count));
+            return CLIENT.arc(center, radius, startAngle, sweepAngle, count);
         }
 
         /** Points around an ellipse. */
         public static PointListResult ellipse(
                 Vector2 center, double radiusX, double radiusY, int count) throws ApiException {
-            return API.ellipse(
-                    new EllipseRequest()
-                            .center(center)
-                            .radiusX(radiusX)
-                            .radiusY(radiusY)
-                            .count(count));
+            return CLIENT.ellipse(center, radiusX, radiusY, count);
         }
 
         /** The intersection of two line segments, if any. */
-        public static OptionalPointResult lineIntersect(
+        public static Vector2 lineIntersect(
                 Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2) throws ApiException {
-            return API.lineIntersect(new LineIntersectRequest().a1(a1).a2(a2).b1(b1).b2(b2));
+            return CLIENT.lineIntersect(a1, a2, b1, b2);
         }
     }
 
     /** The diagnostics library: storyboard and mapset analysis. */
     public static final class Diagnostics {
-        private static final moe.tochi.osbtk.api.DiagnosticsAPI API = new moe.tochi.osbtk.api.DiagnosticsAPI(statelessClient());
+        private static final moe.tochi.osbtk.client.libraries.Diagnostics CLIENT =
+                new moe.tochi.osbtk.client.libraries.Diagnostics(
+                        new moe.tochi.osbtk.api.DiagnosticsAPI(statelessClient()));
 
         private Diagnostics() {}
 
         /** Diagnoses an `.osb` storyboard. */
         public static DiagnosticReport diagnoseOsb(String text) throws ApiException {
-            return API.diagnoseOsb(new TextRequest().text(text));
+            return CLIENT.diagnoseOsb(text);
         }
 
         /** Diagnoses an `.osu` beatmap. */
         public static DiagnosticReport diagnoseOsu(String text) throws ApiException {
-            return API.diagnoseOsu(new TextRequest().text(text));
+            return CLIENT.diagnoseOsu(text);
         }
     }
 
     /** The optimization library: storyboard optimization and `.osb` round-trip. */
     public static final class Optimize {
-        private static final moe.tochi.osbtk.api.OptimizeAPI API = new moe.tochi.osbtk.api.OptimizeAPI(statelessClient());
+        private static final moe.tochi.osbtk.client.libraries.Optimize CLIENT =
+                new moe.tochi.osbtk.client.libraries.Optimize(
+                        new moe.tochi.osbtk.api.OptimizeAPI(statelessClient()));
 
         private Optimize() {}
 
         /** Optimizes an `.osb` storyboard, returning the text and stats. */
         public static OptimizeResult optimizeOsb(String text, OptimizeOptionsInput options)
                 throws ApiException {
-            return API.optimizeOsb(new OptimizeRequest().text(text).options(options));
+            return CLIENT.optimizeOsb(options, text);
         }
     }
 
     /** The image library: decode/encode and processing. */
     public static final class Image {
-        private static final moe.tochi.osbtk.api.ImageAPI API = new moe.tochi.osbtk.api.ImageAPI(statelessClient());
+        private static final moe.tochi.osbtk.client.libraries.Image CLIENT =
+                new moe.tochi.osbtk.client.libraries.Image(
+                        new moe.tochi.osbtk.api.ImageAPI(statelessClient()));
 
         private Image() {}
 
         /** Reads image metadata. */
         public static ImageInfo info(String path) throws ApiException {
-            return API.info(new PathRequest().path(path));
+            return CLIENT.info(path);
         }
 
         /** Processes an image (read, apply options, write). */
         public static ImageInfo process(String path, String output, ImageOptions options)
                 throws ApiException {
-            return API.process(
-                    new ImageProcessRequest().path(path).output(output).options(options));
+            return CLIENT.process(options, output, path);
         }
     }
 
     /** The image-generation library: draw primitive shapes. */
     public static final class ImageGen {
-        private static final moe.tochi.osbtk.api.ImagegenAPI API = new moe.tochi.osbtk.api.ImagegenAPI(statelessClient());
+        private static final moe.tochi.osbtk.client.libraries.Imagegen CLIENT =
+                new moe.tochi.osbtk.client.libraries.Imagegen(
+                        new moe.tochi.osbtk.api.ImagegenAPI(statelessClient()));
 
         private ImageGen() {}
 
         /** Renders primitive shapes to a new image. */
         public static ImageInfo renderShapes(RenderShapesRequest request) throws ApiException {
-            return API.renderShapes(request);
+            if (request.getBackground() == null) {
+                return CLIENT.renderShapes(
+                        request.getWidth(),
+                        request.getHeight(),
+                        request.getShapes(),
+                        request.getOutput());
+            }
+            return CLIENT.renderShapes(
+                    request.getWidth(),
+                    request.getHeight(),
+                    request.getShapes(),
+                    request.getOutput(),
+                    request.getBackground());
         }
     }
 
     /** The media library: probing, frame extraction/encoding and audio. */
     public static final class Media {
-        private static final moe.tochi.osbtk.api.MediaAPI API = new moe.tochi.osbtk.api.MediaAPI(statelessClient());
+        private static final moe.tochi.osbtk.client.libraries.Media CLIENT =
+                new moe.tochi.osbtk.client.libraries.Media(
+                        new moe.tochi.osbtk.api.MediaAPI(statelessClient()));
 
         private Media() {}
 
         /** Probes a media file. */
         public static MediaInfo info(String path) throws ApiException {
-            return API.info(new PathRequest().path(path));
+            return CLIENT.info(path);
         }
 
         /** Extracts frames from a video into a directory. */
         public static FrameResult extractFrames(ExtractFramesRequest request) throws ApiException {
-            return API.extractFrames(request);
+            return CLIENT.extractFrames(
+                    request.getInput(),
+                    request.getOutputDir(),
+                    request.getCount(),
+                    request.getFps(),
+                    request.getHeight(),
+                    request.getStart(),
+                    request.getWidth());
         }
 
         /** Encodes an image sequence into a video. */
         public static MediaInfo encodeVideo(EncodeVideoRequest request) throws ApiException {
-            return API.encodeVideo(request);
+            return CLIENT.encodeVideo(
+                    request.getInputPattern(),
+                    request.getOutput(),
+                    request.getFps(),
+                    request.getCodec(),
+                    request.getCrf());
         }
 
         /** Extracts the audio track of a media file. */
-        public static OkResult extractAudio(ExtractAudioRequest request) throws ApiException {
-            return API.extractAudio(request);
+        public static void extractAudio(ExtractAudioRequest request) throws ApiException {
+            CLIENT.extractAudio(request.getInput(), request.getOutput());
         }
     }
 
@@ -1307,18 +1329,17 @@ public final class osb {
 
         /** {@code GetFft}. */
         public FftResult getFft(double time, int magnitudes) throws ApiException {
-            return runtime.audio()
-                    .getFft(new GetFftRequest().time(time).magnitudes(magnitudes));
+            return runtime.audio().getFft(time, magnitudes);
         }
 
         /** {@code GetTimingPointAt}. */
         public ControlPoint getTimingPointAt(double time) throws ApiException {
-            return runtime.generator().timingPointAt(new TimeRequest().time(time));
+            return runtime.generator().timingPointAt(time);
         }
 
         /** The number of sprites on the storyboard. */
         public int spriteCount() throws ApiException {
-            return runtime.generator().spriteCount().getSpriteCount();
+            return runtime.generator().spriteCount();
         }
 
         /** The built storyboard model, so {@code generate()}'s result can be read back. */
@@ -1333,8 +1354,7 @@ public final class osb {
 
         /** {@code GetLayer}: a layer that creates sprites/animations/samples. */
         public Layer getLayer(String name) throws ApiException {
-            int handle =
-                    runtime.generator().layerHandle(new LayerHandleRequest().name(name)).getLayer();
+            int handle = runtime.generator().layerHandle(name);
             return new Layer(runtime.layer(), runtime.sprite(), name, handle);
         }
 

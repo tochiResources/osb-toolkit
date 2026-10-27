@@ -19,10 +19,10 @@ public final class Runtime implements AutoCloseable {
     private static final Cleaner CLEANER = Cleaner.create();
 
     private final Cleaner.Cleanable cleanable;
-    private final GeneratorAPI generator;
+    private final moe.tochi.osbtk.client.runtime.Generator generator;
     private final LayerAPI layer;
     private final SpriteAPI sprite;
-    private final AudioAPI audio;
+    private final moe.tochi.osbtk.client.runtime.Audio audio;
 
     public Runtime() {
         this(640, 480);
@@ -39,14 +39,14 @@ public final class Runtime implements AutoCloseable {
                         .build();
         ApiClient apiClient = new ApiClient(httpClient);
         apiClient.setBasePath("http://osbtk.invalid");
-        this.generator = new GeneratorAPI(apiClient);
+        this.generator = new moe.tochi.osbtk.client.runtime.Generator(new GeneratorAPI(apiClient));
         this.layer = new LayerAPI(apiClient);
         this.sprite = new SpriteAPI(apiClient);
-        this.audio = new AudioAPI(apiClient);
+        this.audio = new moe.tochi.osbtk.client.runtime.Audio(new AudioAPI(apiClient));
     }
 
-    /** The generated generator client bound to this runtime. */
-    public GeneratorAPI generator() {
+    /** The clean generator client bound to this runtime. */
+    public moe.tochi.osbtk.client.runtime.Generator generator() {
         return generator;
     }
 
@@ -60,8 +60,8 @@ public final class Runtime implements AutoCloseable {
         return sprite;
     }
 
-    /** The generated audio client bound to this runtime. */
-    public AudioAPI audio() {
+    /** The clean audio client bound to this runtime. */
+    public moe.tochi.osbtk.client.runtime.Audio audio() {
         return audio;
     }
 
