@@ -1,0 +1,22 @@
+# Bound the on-disk Rust build cache. This workspace has many crates compiled for
+# several targets (host debug/release + `wasm32-unknown-unknown`), and the
+# per-crate incremental cache (`target/debug/incremental`) grows unboundedly
+# across `cargo test`/`clippy`/`run` invocations - it can reach tens of gigabytes.
+# The verify suite does not need incremental compilation, so it is disabled here.
+#
+# For a fast local edit/build loop, override it for one command with:
+#   CARGO_INCREMENTAL=1 cargo test -p osb-runtime
+# or remove this file.
+#
+# This only bounds the `incremental` cache; the bulk of `target/` is the shared
+# artifact cache (`target/*/deps`), which accumulates per-fingerprint rlibs and
+# Windows `.pdb` files across build/test/clippy/run invocations. The Rust-building
+# scripts (`yarn build`/`test`/`lint:rust`/`build:native`/`openapi`/`test:bindings`)
+# run `yarn clean:rust:if-large` first, which flushes `target` when it exceeds
+# 12 GiB (override with `OSBTK_RUST_CACHE_MAX_MB` or `--max-mb`). To reclaim space
+# manually: `yarn clean:rust:if-large`, `yarn clean:rust`, or `yarn clean`.
+[profile.dev]
+incremental = false
+
+[profile.test]
+incremental = false
