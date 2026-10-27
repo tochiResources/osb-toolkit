@@ -1,0 +1,19 @@
+[package]
+name = "osb-wasm"
+description = "wasm-bindgen surface over the osbTK JSON runtime bridge (section 5.13, M14i)."
+version = "0.1.0"
+edition = "2021"
+license = "BSD-3-Clause"
+repository = "https://github.com/tochiResources/osb-toolkit"
+authors = ["T0chi"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+osb-core = { path = "../osb-core" }
+osb-native = { path = "../osb-native" }
+wasm-bindgen = "=0.2.129"
+
+[lints]
+workspace = true
