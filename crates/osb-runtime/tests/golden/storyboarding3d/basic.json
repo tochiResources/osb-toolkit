@@ -1,0 +1,71 @@
+{
+    "cases": [
+        {
+            "name": "origin-centre",
+            "input": {
+                "nodes": [{ "sprite": "sb/dot.png" }],
+                "camera": {
+                    "position": [{ "time": 0, "value": [0, 0, 5] }],
+                    "resolution": [1366, 768]
+                },
+                "options": {
+                    "startTime": 0,
+                    "endTime": 0,
+                    "timeStep": 16,
+                    "multithreaded": false
+                }
+            },
+            "expect": {
+                "spriteCount": 1,
+                "positionAt0": [427, 240],
+                "positionTolerance": 0.5,
+                "moveSpans": 1
+            }
+        },
+        {
+            "name": "rightward-motion",
+            "input": {
+                "nodes": [
+                    {
+                        "sprite": "sb/dot.png",
+                        "position": [
+                            { "time": 0, "value": [-1, 0, 0] },
+                            { "time": 1000, "value": [1, 0, 0] }
+                        ]
+                    }
+                ],
+                "camera": { "position": [{ "time": 0, "value": [0, 0, 5] }] },
+                "options": {
+                    "startTime": 0,
+                    "endTime": 1000,
+                    "timeStep": 16,
+                    "multithreaded": false
+                }
+            },
+            "expect": {
+                "spriteCount": 1,
+                "xIncreasing": true
+            }
+        },
+        {
+            "name": "depth-sort",
+            "input": {
+                "nodes": [
+                    { "sprite": "sb/near.png", "zDepth": [{ "time": 0, "value": 10 }] },
+                    { "sprite": "sb/far.png", "zDepth": [{ "time": 0, "value": -10 }] }
+                ],
+                "camera": { "position": [{ "time": 0, "value": [0, 0, 5] }] },
+                "options": {
+                    "startTime": 0,
+                    "endTime": 0,
+                    "timeStep": 16,
+                    "multithreaded": false
+                }
+            },
+            "expect": {
+                "spriteCount": 2,
+                "firstSpritePath": "sb/far.png"
+            }
+        }
+    ]
+}
