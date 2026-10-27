@@ -2,6 +2,76 @@ import { defineConfig } from '@deltabox/toolchain';
 
 export default defineConfig({
     toolchain: {
+        project: {
+            type: 'monorepo-root',
+            name: 'osb-toolkit',
+            scope: '@tochii',
+            license: 'BSD-3-Clause',
+            homepage: 'https://osb-toolkit.tochi.moe',
+            description:
+                'osu! Storyboarding Toolkit provides useful tools for your storyboarding pipeline as SDKs in C#, Java, JavaScript/TypeScript, Go, Rust, Python, and C++.',
+            repo: 'https://github.com/tochiResources/osb-toolkit',
+            nodeVersion: '22',
+            packageManager: 'yarn',
+            packageManagerVersion: '4.17.1',
+        },
+        changelog: {
+            branches: { main: 'dev', dev: 'dev' },
+            scopes: [
+                'shared',
+                'core',
+                'after-effects',
+                'davinci-resolve',
+                'premiere-pro',
+                'client',
+                'web',
+                'docs',
+                'csharp',
+                'codegen',
+                'ci',
+                'release',
+                'deps',
+            ],
+            workflows: {
+                changelog: true,
+                release: false,
+                issues: false,
+                ci: {
+                    steps: {
+                        before: [
+                            {
+                                uses: 'dtolnay/rust-toolchain@stable',
+                                with: { components: 'rustfmt, clippy' },
+                            },
+                            {
+                                uses: 'actions/setup-dotnet@v4',
+                                with: { 'dotnet-version': '10.0.x' },
+                            },
+                        ],
+                        after: [
+                            { run: 'dotnet tool restore' },
+                            { run: 'yarn typecheck' },
+                            { run: 'yarn lint' },
+                            { run: 'yarn test' },
+                            { run: 'yarn clean:rust:if-large' },
+                            { run: 'tsx scripts/cargo.ts test --workspace' },
+                            { run: 'rustup target add wasm32-unknown-unknown' },
+                            {
+                                run: 'cargo install wasm-bindgen-cli --version 0.2.129 --locked',
+                            },
+                            { run: 'yarn build:native' },
+                            { run: 'yarn test:csharp' },
+                            { run: 'yarn test:cpp' },
+                            { run: 'yarn test:python' },
+                            { run: 'yarn test:wasm' },
+                        ],
+                    },
+                },
+            },
+        },
+        tsconfig: {
+            indent: 4,
+        },
         vite: {
             fmt: {
                 useTabs: false,
@@ -95,76 +165,6 @@ export default defineConfig({
                     'typescript/no-explicit-any': 'off',
                 },
             },
-        },
-        project: {
-            type: 'monorepo-root',
-            name: 'osb-toolkit',
-            scope: '@tochii',
-            license: 'BSD-3-Clause',
-            homepage: 'https://osb-toolkit.tochi.moe',
-            description:
-                'osu! Storyboarding Toolkit provides useful tools for your storyboarding pipeline in C#, Java, JavaScript/TypeScript, Go, Rust, Python, and C++.',
-            repo: 'https://github.com/tochiResources/osb-toolkit',
-            nodeVersion: '22',
-            packageManager: 'yarn',
-            packageManagerVersion: '4.17.1',
-        },
-        changelog: {
-            branches: { main: 'dev', dev: 'dev' },
-            scopes: [
-                'shared',
-                'core',
-                'after-effects',
-                'davinci-resolve',
-                'premiere-pro',
-                'client',
-                'web',
-                'docs',
-                'csharp',
-                'codegen',
-                'ci',
-                'release',
-                'deps',
-            ],
-            workflows: {
-                changelog: true,
-                release: false,
-                issues: false,
-                ci: {
-                    steps: {
-                        before: [
-                            {
-                                uses: 'dtolnay/rust-toolchain@stable',
-                                with: { components: 'rustfmt, clippy' },
-                            },
-                            {
-                                uses: 'actions/setup-dotnet@v4',
-                                with: { 'dotnet-version': '10.0.x' },
-                            },
-                        ],
-                        after: [
-                            { run: 'dotnet tool restore' },
-                            { run: 'yarn typecheck' },
-                            { run: 'yarn lint' },
-                            { run: 'yarn test' },
-                            { run: 'yarn clean:rust:if-large' },
-                            { run: 'tsx scripts/cargo.ts test --workspace' },
-                            { run: 'rustup target add wasm32-unknown-unknown' },
-                            {
-                                run: 'cargo install wasm-bindgen-cli --version 0.2.129 --locked',
-                            },
-                            { run: 'yarn build:native' },
-                            { run: 'yarn test:csharp' },
-                            { run: 'yarn test:cpp' },
-                            { run: 'yarn test:python' },
-                            { run: 'yarn test:wasm' },
-                        ],
-                    },
-                },
-            },
-        },
-        tsconfig: {
-            indent: 4,
         },
     },
 });
