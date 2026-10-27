@@ -1,0 +1,18 @@
+{
+    "files": [
+        ".github/workflows/changelog.yml",
+        ".github/workflows/ci.yml",
+        ".github/workflows/sync.yml",
+        ".husky/commit-msg",
+        ".vscode/extensions.json",
+        ".vscode/settings.json",
+        "commitlint.config.mjs",
+        "package.json",
+        "packages/core/tsconfig.json",
+        "packages/native/tsconfig.json",
+        "packages/sdk/tsconfig.json",
+        "packages/shared/tsconfig.json",
+        "tsconfig.json",
+        "vite.config.ts"
+    ]
+}
