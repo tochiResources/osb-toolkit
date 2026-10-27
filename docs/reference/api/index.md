@@ -5,6 +5,12 @@ non-runtime `Core` classes have no handles or storyboard state; the
 runtime classes are bound to a live runtime; the libraries are the
 stateless media/image/etc. helpers.
 
+Every options-based method takes the individual values positionally
+(ordered by ascending arity), then the `<X>Options` form. TypeScript, C#,
+Java and Python emit real overloads; Go has no overloading and uses the
+options form only. Single-field results are unwrapped: `OkResult` is
+`void`, `BoolResult` a boolean, scalar wrappers a number, and so on.
+
 ## Runtime
 
 - [Audio](./runtime/Audio.md)

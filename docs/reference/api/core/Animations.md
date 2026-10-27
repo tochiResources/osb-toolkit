@@ -1,40 +1,42 @@
 # Animations
 
-| Method | Description |
-|------------- | -------------|
-| [**Animations.applyEasing**](Animations.md#Animations.applyEasing) |  |
-| [**Animations.easingValue**](Animations.md#Animations.easingValue) |  |
+The clean `Animations` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Animations.applyEasing"></a>
-# **Animations.applyEasing**
-> EasingResult Animations.applyEasing(ApplyEasingRequest)
+### `applyEasing`
 
+```ts
+applyEasing(easing: Easing, t: number): number
+applyEasing(options: ApplyEasingOptions): number
+```
 
+**Options — `ApplyEasingOptions`**
 
-### Parameters
+An easing evaluation request.
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **ApplyEasingRequest** | [**ApplyEasingRequest**](../models/ApplyEasingRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `easing` | `Easing` | yes | The easing function. |
+| `t` | `number` | yes | The normalized time in `0.0..=1.0`. |
 
-### Return type
+### `easingValue`
 
-[**EasingResult**](../models/EasingResult.md)
+```ts
+easingValue(t: number): number
+easingValue(t: number, easing: Easing | null): number
+easingValue(t: number, easing: Easing | null, cubicBezier: number[] | null): number
+easingValue(options: EasingValueOptions): number
+```
 
-<a name="Animations.easingValue"></a>
-# **Animations.easingValue**
-> EasingResult Animations.easingValue(EasingValueRequest)
+**Options — `EasingValueOptions`**
 
+A named-or-custom easing evaluation request.
 
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **EasingValueRequest** | [**EasingValueRequest**](../models/EasingValueRequest.md)|  | |
-
-### Return type
-
-[**EasingResult**](../models/EasingResult.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `t` | `number` | yes | The normalized time in `0.0..=1.0`. |
+| `easing` | `Easing | null` | no | A named easing (used when `cubicBezier` is absent). |
+| `cubicBezier` | `number[] | null` | no | A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`. |

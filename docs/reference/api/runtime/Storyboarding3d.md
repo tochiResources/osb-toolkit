@@ -1,23 +1,22 @@
 # Storyboarding3d
 
-| Method | Description |
-|------------- | -------------|
-| [**Storyboarding3d.bake3d**](Storyboarding3d.md#Storyboarding3d.bake3d) |  |
+The clean `Storyboarding3d` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Storyboarding3d.bake3d"></a>
-# **Storyboarding3d.bake3d**
-> BakedStoryboard Storyboarding3d.bake3d(Bake3dRequest)
+### `bake3d`
 
+```ts
+bake3d(input: Scene3dInput): BakedStoryboard
+bake3d(options: Bake3dOptions): BakedStoryboard
+```
 
+**Options — `Bake3dOptions`**
 
-### Parameters
+A `bake3d` request: a plain 3D scene.
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **Bake3dRequest** | [**Bake3dRequest**](../models/Bake3dRequest.md)|  | |
-
-### Return type
-
-[**BakedStoryboard**](../models/BakedStoryboard.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `input` | `Scene3dInput` | yes | The 3D scene. |

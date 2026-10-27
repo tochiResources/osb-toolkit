@@ -1,74 +1,85 @@
 # Media
 
-| Method | Description |
-|------------- | -------------|
-| [**Media.encodeVideo**](Media.md#Media.encodeVideo) |  |
-| [**Media.extractAudio**](Media.md#Media.extractAudio) |  |
-| [**Media.extractFrames**](Media.md#Media.extractFrames) |  |
-| [**Media.info**](Media.md#Media.info) |  |
+The clean `Media` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Media.encodeVideo"></a>
-# **Media.encodeVideo**
-> MediaInfo Media.encodeVideo(EncodeVideoRequest)
+### `encodeVideo`
 
+```ts
+encodeVideo(inputPattern: string, output: string, fps: number): MediaInfo
+encodeVideo(inputPattern: string, output: string, fps: number, codec: string | null): MediaInfo
+encodeVideo(inputPattern: string, output: string, fps: number, codec: string | null, crf: number | null): MediaInfo
+encodeVideo(options: EncodeVideoOptions): MediaInfo
+```
 
+**Options — `EncodeVideoOptions`**
 
-### Parameters
+An image-sequence encoding request (frames -> video).
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **EncodeVideoRequest** | [**EncodeVideoRequest**](../models/EncodeVideoRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `inputPattern` | `string` | yes | The input filename pattern (e.g. `frames/frame_%04d.png`). |
+| `output` | `string` | yes | The output video path. |
+| `fps` | `number` | yes | The frame rate. |
+| `codec` | `string | null` | no | The video codec (default `libx264`). |
+| `crf` | `number | null` | no | The constant-rate-factor quality (`0`-`51`; lower is better). |
 
-### Return type
+### `extractAudio`
 
-[**MediaInfo**](../models/MediaInfo.md)
+```ts
+extractAudio(input: string, output: string): void
+extractAudio(options: ExtractAudioOptions): void
+```
 
-<a name="Media.extractAudio"></a>
-# **Media.extractAudio**
-> OkResult Media.extractAudio(ExtractAudioRequest)
+**Options — `ExtractAudioOptions`**
 
+An audio-extraction request (media -> audio file).
 
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `input` | `string` | yes | The input media path. |
+| `output` | `string` | yes | The output audio path (its extension selects the format). |
 
-### Parameters
+### `extractFrames`
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **ExtractAudioRequest** | [**ExtractAudioRequest**](../models/ExtractAudioRequest.md)|  | |
+```ts
+extractFrames(input: string, outputDir: string): FrameResult
+extractFrames(input: string, outputDir: string, count: number | null): FrameResult
+extractFrames(input: string, outputDir: string, count: number | null, fps: number | null): FrameResult
+extractFrames(input: string, outputDir: string, count: number | null, fps: number | null, height: number | null): FrameResult
+extractFrames(input: string, outputDir: string, count: number | null, fps: number | null, height: number | null, start: number | null): FrameResult
+extractFrames(input: string, outputDir: string, count: number | null, fps: number | null, height: number | null, start: number | null, width: number | null): FrameResult
+extractFrames(options: ExtractFramesOptions): FrameResult
+```
 
-### Return type
+**Options — `ExtractFramesOptions`**
 
-[**OkResult**](../models/OkResult.md)
+A frame-extraction request (video -> image sequence).
 
-<a name="Media.extractFrames"></a>
-# **Media.extractFrames**
-> FrameResult Media.extractFrames(ExtractFramesRequest)
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `input` | `string` | yes | The input media path. |
+| `outputDir` | `string` | yes | The directory to write frames into. |
+| `count` | `number | null` | no | The maximum number of frames to extract. |
+| `fps` | `number | null` | no | The sampling rate (frames per second); defaults to the source rate. |
+| `height` | `number | null` | no | Scale frames to this height. |
+| `start` | `number | null` | no | The start time in seconds. |
+| `width` | `number | null` | no | Scale frames to this width. |
 
+### `info`
 
+```ts
+info(path: string): MediaInfo
+info(options: PathOptions): MediaInfo
+```
 
-### Parameters
+**Options — `PathOptions`**
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **ExtractFramesRequest** | [**ExtractFramesRequest**](../models/ExtractFramesRequest.md)|  | |
+A request carrying a single file path.
 
-### Return type
-
-[**FrameResult**](../models/FrameResult.md)
-
-<a name="Media.info"></a>
-# **Media.info**
-> MediaInfo Media.info(PathRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **PathRequest** | [**PathRequest**](../models/PathRequest.md)|  | |
-
-### Return type
-
-[**MediaInfo**](../models/MediaInfo.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `path` | `string` | yes | The input file path. |

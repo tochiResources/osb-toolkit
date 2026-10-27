@@ -1,165 +1,116 @@
 # Generator
 
-| Method | Description |
-|------------- | -------------|
-| [**Generator.beatmap**](Generator.md#Generator.beatmap) |  |
-| [**Generator.controlPointAt**](Generator.md#Generator.controlPointAt) |  |
-| [**Generator.importOsb**](Generator.md#Generator.importOsb) |  |
-| [**Generator.layerHandle**](Generator.md#Generator.layerHandle) |  |
-| [**Generator.loadBeatmap**](Generator.md#Generator.loadBeatmap) |  |
-| [**Generator.random**](Generator.md#Generator.random) |  |
-| [**Generator.spriteCount**](Generator.md#Generator.spriteCount) |  |
-| [**Generator.storyboard**](Generator.md#Generator.storyboard) |  |
-| [**Generator.timingPointAt**](Generator.md#Generator.timingPointAt) |  |
+The clean `Generator` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Generator.beatmap"></a>
-# **Generator.beatmap**
-> Beatmap Generator.beatmap()
+### `beatmap`
 
+```ts
+beatmap(): Beatmap
+```
 
+### `controlPointAt`
 
-### Parameters
-This endpoint does not need any parameter.
+```ts
+controlPointAt(time: number): ControlPoint
+controlPointAt(options: TimeOptions): ControlPoint
+```
 
-### Return type
+**Options — `TimeOptions`**
 
-[**Beatmap**](../models/Beatmap.md)
+A time query.
 
-### HTTP request headers
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `time` | `number` | yes | The time in milliseconds. |
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+### `importOsb`
 
-<a name="Generator.controlPointAt"></a>
-# **Generator.controlPointAt**
-> ControlPoint Generator.controlPointAt(TimeRequest)
+```ts
+importOsb(text: string): number
+importOsb(options: TextOptions): number
+```
 
+**Options — `TextOptions`**
 
+A request carrying a block of text (an effect script, `.osu` or `.osb`).
 
-### Parameters
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | yes | The text payload. |
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **TimeRequest** | [**TimeRequest**](../models/TimeRequest.md)|  | |
+### `layerHandle`
 
-### Return type
+```ts
+layerHandle(name: string): number
+layerHandle(options: LayerHandleOptions): number
+```
 
-[**ControlPoint**](../models/ControlPoint.md)
+**Options — `LayerHandleOptions`**
 
-<a name="Generator.importOsb"></a>
-# **Generator.importOsb**
-> ImportOsbResult Generator.importOsb(TextRequest)
+Resolve (or create) a layer by name.
 
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | `string` | yes | The layer name. |
 
+### `loadBeatmap`
 
-### Parameters
+```ts
+loadBeatmap(text: string): LoadBeatmapResult
+loadBeatmap(options: TextOptions): LoadBeatmapResult
+```
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **TextRequest** | [**TextRequest**](../models/TextRequest.md)|  | |
+**Options — `TextOptions`**
 
-### Return type
+A request carrying a block of text (an effect script, `.osu` or `.osb`).
 
-[**ImportOsbResult**](../models/ImportOsbResult.md)
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | yes | The text payload. |
 
-<a name="Generator.layerHandle"></a>
-# **Generator.layerHandle**
-> LayerHandle Generator.layerHandle(LayerHandleRequest)
+### `random`
 
+```ts
+random(max: number, min: number): number
+random(options: RandomOptions): number
+```
 
+**Options — `RandomOptions`**
 
-### Parameters
+A deterministic random request.
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **LayerHandleRequest** | [**LayerHandleRequest**](../models/LayerHandleRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `max` | `number` | yes | The exclusive upper bound. |
+| `min` | `number` | yes | The inclusive lower bound. |
 
-### Return type
+### `spriteCount`
 
-[**LayerHandle**](../models/LayerHandle.md)
+```ts
+spriteCount(): number
+```
 
-<a name="Generator.loadBeatmap"></a>
-# **Generator.loadBeatmap**
-> LoadBeatmapResult Generator.loadBeatmap(TextRequest)
+### `storyboard`
 
+```ts
+storyboard(): Storyboard
+```
 
+### `timingPointAt`
 
-### Parameters
+```ts
+timingPointAt(time: number): ControlPoint
+timingPointAt(options: TimeOptions): ControlPoint
+```
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **TextRequest** | [**TextRequest**](../models/TextRequest.md)|  | |
+**Options — `TimeOptions`**
 
-### Return type
+A time query.
 
-[**LoadBeatmapResult**](../models/LoadBeatmapResult.md)
-
-<a name="Generator.random"></a>
-# **Generator.random**
-> RandomResult Generator.random(RandomRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **RandomRequest** | [**RandomRequest**](../models/RandomRequest.md)|  | |
-
-### Return type
-
-[**RandomResult**](../models/RandomResult.md)
-
-<a name="Generator.spriteCount"></a>
-# **Generator.spriteCount**
-> SpriteCountResult Generator.spriteCount()
-
-
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-[**SpriteCountResult**](../models/SpriteCountResult.md)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="Generator.storyboard"></a>
-# **Generator.storyboard**
-> Storyboard Generator.storyboard()
-
-
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-[**Storyboard**](../models/Storyboard.md)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="Generator.timingPointAt"></a>
-# **Generator.timingPointAt**
-> ControlPoint Generator.timingPointAt(TimeRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **TimeRequest** | [**TimeRequest**](../models/TimeRequest.md)|  | |
-
-### Return type
-
-[**ControlPoint**](../models/ControlPoint.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `time` | `number` | yes | The time in milliseconds. |

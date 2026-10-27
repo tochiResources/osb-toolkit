@@ -1,40 +1,39 @@
 # Image
 
-| Method | Description |
-|------------- | -------------|
-| [**Image.info**](Image.md#Image.info) |  |
-| [**Image.process**](Image.md#Image.process) |  |
+The clean `Image` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Image.info"></a>
-# **Image.info**
-> ImageInfo Image.info(PathRequest)
+### `info`
 
+```ts
+info(path: string): ImageInfo
+info(options: PathOptions): ImageInfo
+```
 
+**Options — `PathOptions`**
 
-### Parameters
+A request carrying a single file path.
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **PathRequest** | [**PathRequest**](../models/PathRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `path` | `string` | yes | The input file path. |
 
-### Return type
+### `process`
 
-[**ImageInfo**](../models/ImageInfo.md)
+```ts
+process(options: ImageOptions, output: string, path: string): ImageInfo
+process(options: ImageProcessOptions): ImageInfo
+```
 
-<a name="Image.process"></a>
-# **Image.process**
-> ImageInfo Image.process(ImageProcessRequest)
+**Options — `ImageProcessOptions`**
 
+An image processing request: read `path`, apply `options`, write `output`.
 
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **ImageProcessRequest** | [**ImageProcessRequest**](../models/ImageProcessRequest.md)|  | |
-
-### Return type
-
-[**ImageInfo**](../models/ImageInfo.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `options` | `ImageOptions` | yes | The processing options. |
+| `output` | `string` | yes | The output file path (its extension selects the format). |
+| `path` | `string` | yes | The input file path. |

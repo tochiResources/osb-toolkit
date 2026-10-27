@@ -1,40 +1,37 @@
 # Diagnostics
 
-| Method | Description |
-|------------- | -------------|
-| [**Diagnostics.diagnoseOsb**](Diagnostics.md#Diagnostics.diagnoseOsb) |  |
-| [**Diagnostics.diagnoseOsu**](Diagnostics.md#Diagnostics.diagnoseOsu) |  |
+The clean `Diagnostics` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Diagnostics.diagnoseOsb"></a>
-# **Diagnostics.diagnoseOsb**
-> DiagnosticReport Diagnostics.diagnoseOsb(TextRequest)
+### `diagnoseOsb`
 
+```ts
+diagnoseOsb(text: string): DiagnosticReport
+diagnoseOsb(options: TextOptions): DiagnosticReport
+```
 
+**Options — `TextOptions`**
 
-### Parameters
+A request carrying a block of text (an effect script, `.osu` or `.osb`).
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **TextRequest** | [**TextRequest**](../models/TextRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | yes | The text payload. |
 
-### Return type
+### `diagnoseOsu`
 
-[**DiagnosticReport**](../models/DiagnosticReport.md)
+```ts
+diagnoseOsu(text: string): DiagnosticReport
+diagnoseOsu(options: TextOptions): DiagnosticReport
+```
 
-<a name="Diagnostics.diagnoseOsu"></a>
-# **Diagnostics.diagnoseOsu**
-> DiagnosticReport Diagnostics.diagnoseOsu(TextRequest)
+**Options — `TextOptions`**
 
+A request carrying a block of text (an effect script, `.osu` or `.osb`).
 
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **TextRequest** | [**TextRequest**](../models/TextRequest.md)|  | |
-
-### Return type
-
-[**DiagnosticReport**](../models/DiagnosticReport.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | yes | The text payload. |

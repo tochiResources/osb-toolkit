@@ -1,40 +1,37 @@
 # Parsing
 
-| Method | Description |
-|------------- | -------------|
-| [**Parsing.parseOsb**](Parsing.md#Parsing.parseOsb) |  |
-| [**Parsing.parseOsu**](Parsing.md#Parsing.parseOsu) |  |
+The clean `Parsing` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Parsing.parseOsb"></a>
-# **Parsing.parseOsb**
-> ParseOsbResult Parsing.parseOsb(TextRequest)
+### `parseOsb`
 
+```ts
+parseOsb(text: string): ParseOsbResult
+parseOsb(options: TextOptions): ParseOsbResult
+```
 
+**Options — `TextOptions`**
 
-### Parameters
+A request carrying a block of text (an effect script, `.osu` or `.osb`).
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **TextRequest** | [**TextRequest**](../models/TextRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | yes | The text payload. |
 
-### Return type
+### `parseOsu`
 
-[**ParseOsbResult**](../models/ParseOsbResult.md)
+```ts
+parseOsu(text: string): Beatmap
+parseOsu(options: TextOptions): Beatmap
+```
 
-<a name="Parsing.parseOsu"></a>
-# **Parsing.parseOsu**
-> Beatmap Parsing.parseOsu(TextRequest)
+**Options — `TextOptions`**
 
+A request carrying a block of text (an effect script, `.osu` or `.osb`).
 
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **TextRequest** | [**TextRequest**](../models/TextRequest.md)|  | |
-
-### Return type
-
-[**Beatmap**](../models/Beatmap.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | yes | The text payload. |

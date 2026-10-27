@@ -1,25 +1,13 @@
 # Common
 
-| Method | Description |
-|------------- | -------------|
-| [**Common.version**](Common.md#Common.version) |  |
+The clean `Common` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Common.version"></a>
-# **Common.version**
-> VersionResult Common.version()
+### `version`
 
-
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-[**VersionResult**](../models/VersionResult.md)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
+```ts
+version(): string
+```

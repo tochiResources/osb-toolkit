@@ -1,108 +1,95 @@
 # Sprite
 
-| Method | Description |
-|------------- | -------------|
-| [**Sprite.command**](Sprite.md#Sprite.command) |  |
-| [**Sprite.endGroup**](Sprite.md#Sprite.endGroup) |  |
-| [**Sprite.info**](Sprite.md#Sprite.info) |  |
-| [**Sprite.startLoopGroup**](Sprite.md#Sprite.startLoopGroup) |  |
-| [**Sprite.startTriggerGroup**](Sprite.md#Sprite.startTriggerGroup) |  |
-| [**Sprite.stateAt**](Sprite.md#Sprite.stateAt) |  |
+The clean `Sprite` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Sprite.command"></a>
-# **Sprite.command**
-> OkResult Sprite.command(CommandRequest)
+### `command`
 
+```ts
+command(kind: string, startTime: number, endTime: number, easing: Easing): void
+command(kind: string, startTime: number, endTime: number, easing: Easing, start: unknown): void
+command(kind: string, startTime: number, endTime: number, easing: Easing, start: unknown, end: unknown): void
+command(kind: string, startTime: number, endTime: number, easing: Easing, start: unknown, end: unknown, parameter: ParameterType | null): void
+command(options: CommandOptions): void
+```
 
+**Options — `CommandOptions`**
 
-### Parameters
+A sprite command. `start`/`end` are a scalar, a `Vector2`, or a `Color4`
+depending on `kind`.
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CommandRequest** | [**CommandRequest**](../models/CommandRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `kind` | `string` | yes | The command kind (`move`, `moveX`, `moveY`, `scale`, `scaleVec`,
+`rotate`, `fade`, `color`, `colorHsb`, `anchor`, `parameter`, `flipH`,
+`flipV`, `additive`). |
+| `startTime` | `number` | yes | The command start time in milliseconds. |
+| `endTime` | `number` | yes | The command end time in milliseconds. |
+| `easing` | `Easing` | yes | The easing function. |
+| `start` | `unknown` | no | The start value (scalar, point or color). |
+| `end` | `unknown` | no | The end value (scalar, point or color). |
+| `parameter` | `ParameterType | null` | no | The parameter kind for a `parameter` command. |
 
-### Return type
+### `endGroup`
 
-[**OkResult**](../models/OkResult.md)
+```ts
+endGroup(): void
+```
 
-<a name="Sprite.endGroup"></a>
-# **Sprite.endGroup**
-> OkResult Sprite.endGroup(HandleRequest)
+### `info`
 
+```ts
+info(): SpriteInfo
+```
 
+### `startLoopGroup`
 
-### Parameters
+```ts
+startLoopGroup(startTime: number, count: number): void
+startLoopGroup(options: StartLoopGroupOptions): void
+```
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **HandleRequest** | [**HandleRequest**](../models/HandleRequest.md)|  | |
+**Options — `StartLoopGroupOptions`**
 
-### Return type
+Start a loop group.
 
-[**OkResult**](../models/OkResult.md)
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `startTime` | `number` | yes | The loop start time in milliseconds. |
+| `count` | `number` | yes | The number of iterations. |
 
-<a name="Sprite.info"></a>
-# **Sprite.info**
-> SpriteInfo Sprite.info(HandleRequest)
+### `startTriggerGroup`
 
+```ts
+startTriggerGroup(name: string, startTime: number, endTime: number, group: number): void
+startTriggerGroup(options: StartTriggerGroupOptions): void
+```
 
+**Options — `StartTriggerGroupOptions`**
 
-### Parameters
+Start a trigger group.
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **HandleRequest** | [**HandleRequest**](../models/HandleRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | `string` | yes | The trigger name (matches a hit object). |
+| `startTime` | `number` | yes | The trigger start time in milliseconds. |
+| `endTime` | `number` | yes | The trigger end time in milliseconds. |
+| `group` | `number` | yes | The trigger group index. |
 
-### Return type
+### `stateAt`
 
-[**SpriteInfo**](../models/SpriteInfo.md)
+```ts
+stateAt(time: number): SpriteState
+stateAt(options: SpriteTimeOptions): SpriteState
+```
 
-<a name="Sprite.startLoopGroup"></a>
-# **Sprite.startLoopGroup**
-> OkResult Sprite.startLoopGroup(StartLoopGroupRequest)
+**Options — `SpriteTimeOptions`**
 
+A sprite handle pair plus a sample time.
 
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **StartLoopGroupRequest** | [**StartLoopGroupRequest**](../models/StartLoopGroupRequest.md)|  | |
-
-### Return type
-
-[**OkResult**](../models/OkResult.md)
-
-<a name="Sprite.startTriggerGroup"></a>
-# **Sprite.startTriggerGroup**
-> OkResult Sprite.startTriggerGroup(StartTriggerGroupRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **StartTriggerGroupRequest** | [**StartTriggerGroupRequest**](../models/StartTriggerGroupRequest.md)|  | |
-
-### Return type
-
-[**OkResult**](../models/OkResult.md)
-
-<a name="Sprite.stateAt"></a>
-# **Sprite.stateAt**
-> SpriteState Sprite.stateAt(SpriteTimeRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **SpriteTimeRequest** | [**SpriteTimeRequest**](../models/SpriteTimeRequest.md)|  | |
-
-### Return type
-
-[**SpriteState**](../models/SpriteState.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `time` | `number` | yes | The sample time in milliseconds. |

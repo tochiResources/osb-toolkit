@@ -1,57 +1,58 @@
 # Helpers
 
-| Method | Description |
-|------------- | -------------|
-| [**Helpers.call**](Helpers.md#Helpers.call) |  |
-| [**Helpers.commands**](Helpers.md#Helpers.commands) |  |
-| [**Helpers.keyframes**](Helpers.md#Helpers.keyframes) |  |
+The clean `Helpers` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Helpers.call"></a>
-# **Helpers.call**
-> HelperResult Helpers.call(HelperRequest)
+### `call`
 
+```ts
+call(name: string): unknown
+call(name: string, input: unknown): unknown
+call(options: HelperOptions): unknown
+```
 
+**Options — `HelperOptions`**
 
-### Parameters
+A motion-graphics helper call: a helper `name` plus its input.
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **HelperRequest** | [**HelperRequest**](../models/HelperRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | `string` | yes | The helper name, e.g. `flatten`, `orbit`, `selectCommands`. |
+| `input` | `unknown` | no | The helper's input (a keyframe channel, a command list, or its parameters). |
 
-### Return type
+### `commands`
 
-[**HelperResult**](../models/HelperResult.md)
+```ts
+commands(name: string): unknown
+commands(name: string, input: unknown): unknown
+commands(options: HelperOptions): unknown
+```
 
-<a name="Helpers.commands"></a>
-# **Helpers.commands**
-> HelperResult Helpers.commands(HelperRequest)
+**Options — `HelperOptions`**
 
+A motion-graphics helper call: a helper `name` plus its input.
 
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | `string` | yes | The helper name, e.g. `flatten`, `orbit`, `selectCommands`. |
+| `input` | `unknown` | no | The helper's input (a keyframe channel, a command list, or its parameters). |
 
-### Parameters
+### `keyframes`
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **HelperRequest** | [**HelperRequest**](../models/HelperRequest.md)|  | |
+```ts
+keyframes(name: string): unknown
+keyframes(name: string, input: unknown): unknown
+keyframes(options: HelperOptions): unknown
+```
 
-### Return type
+**Options — `HelperOptions`**
 
-[**HelperResult**](../models/HelperResult.md)
+A motion-graphics helper call: a helper `name` plus its input.
 
-<a name="Helpers.keyframes"></a>
-# **Helpers.keyframes**
-> HelperResult Helpers.keyframes(HelperRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **HelperRequest** | [**HelperRequest**](../models/HelperRequest.md)|  | |
-
-### Return type
-
-[**HelperResult**](../models/HelperResult.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | `string` | yes | The helper name, e.g. `flatten`, `orbit`, `selectCommands`. |
+| `input` | `unknown` | no | The helper's input (a keyframe channel, a command list, or its parameters). |

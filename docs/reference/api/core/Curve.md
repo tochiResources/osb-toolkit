@@ -1,227 +1,232 @@
 # Curve
 
-| Method | Description |
-|------------- | -------------|
-| [**Curve.arc**](Curve.md#Curve.arc) |  |
-| [**Curve.boundingBox**](Curve.md#Curve.boundingBox) |  |
-| [**Curve.curvature**](Curve.md#Curve.curvature) |  |
-| [**Curve.distanceTo**](Curve.md#Curve.distanceTo) |  |
-| [**Curve.ellipse**](Curve.md#Curve.ellipse) |  |
-| [**Curve.length**](Curve.md#Curve.length) |  |
-| [**Curve.lineIntersect**](Curve.md#Curve.lineIntersect) |  |
-| [**Curve.normal**](Curve.md#Curve.normal) |  |
-| [**Curve.offset**](Curve.md#Curve.offset) |  |
-| [**Curve.point**](Curve.md#Curve.point) |  |
-| [**Curve.sample**](Curve.md#Curve.sample) |  |
-| [**Curve.simplify**](Curve.md#Curve.simplify) |  |
-| [**Curve.tangent**](Curve.md#Curve.tangent) |  |
+The clean `Curve` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Curve.arc"></a>
-# **Curve.arc**
-> PointListResult Curve.arc(ArcRequest)
+### `arc`
 
+```ts
+arc(center: Vector2, radius: number, startAngle: number, sweepAngle: number): PointListResult
+arc(center: Vector2, radius: number, startAngle: number, sweepAngle: number, count: number | null): PointListResult
+arc(options: ArcOptions): PointListResult
+```
 
+**Options — `ArcOptions`**
 
-### Parameters
+A circular-arc sampling request.
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **ArcRequest** | [**ArcRequest**](../models/ArcRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `center` | `Vector2` | yes | The arc centre. |
+| `radius` | `number` | yes | The radius. |
+| `startAngle` | `number` | yes | The start angle in degrees. |
+| `sweepAngle` | `number` | yes | The sweep angle in degrees. |
+| `count` | `number | null` | no | The number of points (default `64`). |
 
-### Return type
+### `boundingBox`
 
-[**PointListResult**](../models/PointListResult.md)
+```ts
+boundingBox(curve: CurveSpec): Box2
+boundingBox(options: CurveOptions): Box2
+```
 
-<a name="Curve.boundingBox"></a>
-# **Curve.boundingBox**
-> Box2 Curve.boundingBox(CurveRequest)
+**Options — `CurveOptions`**
 
+A curve query.
 
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `curve` | `CurveSpec` | yes | The curve. |
 
-### Parameters
+### `curvature`
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CurveRequest** | [**CurveRequest**](../models/CurveRequest.md)|  | |
+```ts
+curvature(curve: CurveSpec, t: number): number
+curvature(curve: CurveSpec, t: number, byArcLength: boolean | null): number
+curvature(options: CurvePointOptions): number
+```
 
-### Return type
+**Options — `CurvePointOptions`**
 
-[**Box2**](../models/Box2.md)
+A curve query at a parametric or arc-length position.
 
-<a name="Curve.curvature"></a>
-# **Curve.curvature**
-> ScalarResult Curve.curvature(CurvePointRequest)
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `curve` | `CurveSpec` | yes | The curve. |
+| `t` | `number` | yes | The position in `0.0..=1.0`. |
+| `byArcLength` | `boolean | null` | no | Sample by arc length instead of the raw parameter (default `false`). |
 
+### `distanceTo`
 
+```ts
+distanceTo(curve: CurveSpec, point: Vector2): number
+distanceTo(options: CurveDistanceOptions): number
+```
 
-### Parameters
+**Options — `CurveDistanceOptions`**
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CurvePointRequest** | [**CurvePointRequest**](../models/CurvePointRequest.md)|  | |
+A curve hit-test request.
 
-### Return type
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `curve` | `CurveSpec` | yes | The curve. |
+| `point` | `Vector2` | yes | The query point. |
 
-[**ScalarResult**](../models/ScalarResult.md)
+### `ellipse`
 
-<a name="Curve.distanceTo"></a>
-# **Curve.distanceTo**
-> ScalarResult Curve.distanceTo(CurveDistanceRequest)
+```ts
+ellipse(center: Vector2, radiusX: number, radiusY: number): PointListResult
+ellipse(center: Vector2, radiusX: number, radiusY: number, count: number | null): PointListResult
+ellipse(options: EllipseOptions): PointListResult
+```
 
+**Options — `EllipseOptions`**
 
+An ellipse sampling request.
 
-### Parameters
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `center` | `Vector2` | yes | The ellipse centre. |
+| `radiusX` | `number` | yes | The horizontal radius. |
+| `radiusY` | `number` | yes | The vertical radius. |
+| `count` | `number | null` | no | The number of points (default `64`). |
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CurveDistanceRequest** | [**CurveDistanceRequest**](../models/CurveDistanceRequest.md)|  | |
+### `length`
 
-### Return type
+```ts
+length(curve: CurveSpec): number
+length(options: CurveOptions): number
+```
 
-[**ScalarResult**](../models/ScalarResult.md)
+**Options — `CurveOptions`**
 
-<a name="Curve.ellipse"></a>
-# **Curve.ellipse**
-> PointListResult Curve.ellipse(EllipseRequest)
+A curve query.
 
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `curve` | `CurveSpec` | yes | The curve. |
 
+### `lineIntersect`
 
-### Parameters
+```ts
+lineIntersect(a1: Vector2, a2: Vector2, b1: Vector2, b2: Vector2): Vector2 | null
+lineIntersect(options: LineIntersectOptions): Vector2 | null
+```
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **EllipseRequest** | [**EllipseRequest**](../models/EllipseRequest.md)|  | |
+**Options — `LineIntersectOptions`**
 
-### Return type
+A line-segment intersection request.
 
-[**PointListResult**](../models/PointListResult.md)
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `a1` | `Vector2` | yes | The first segment's start. |
+| `a2` | `Vector2` | yes | The first segment's end. |
+| `b1` | `Vector2` | yes | The second segment's start. |
+| `b2` | `Vector2` | yes | The second segment's end. |
 
-<a name="Curve.length"></a>
-# **Curve.length**
-> ScalarResult Curve.length(CurveRequest)
+### `normal`
 
+```ts
+normal(curve: CurveSpec, t: number): Vector2
+normal(curve: CurveSpec, t: number, byArcLength: boolean | null): Vector2
+normal(options: CurvePointOptions): Vector2
+```
 
+**Options — `CurvePointOptions`**
 
-### Parameters
+A curve query at a parametric or arc-length position.
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CurveRequest** | [**CurveRequest**](../models/CurveRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `curve` | `CurveSpec` | yes | The curve. |
+| `t` | `number` | yes | The position in `0.0..=1.0`. |
+| `byArcLength` | `boolean | null` | no | Sample by arc length instead of the raw parameter (default `false`). |
 
-### Return type
+### `offset`
 
-[**ScalarResult**](../models/ScalarResult.md)
+```ts
+offset(curve: CurveSpec, distance: number): PointListResult
+offset(options: CurveOffsetOptions): PointListResult
+```
 
-<a name="Curve.lineIntersect"></a>
-# **Curve.lineIntersect**
-> OptionalPointResult Curve.lineIntersect(LineIntersectRequest)
+**Options — `CurveOffsetOptions`**
 
+A curve offset request.
 
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `curve` | `CurveSpec` | yes | The curve. |
+| `distance` | `number` | yes | The signed offset along the curve's local normal. |
 
-### Parameters
+### `point`
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **LineIntersectRequest** | [**LineIntersectRequest**](../models/LineIntersectRequest.md)|  | |
+```ts
+point(curve: CurveSpec, t: number): Vector2
+point(curve: CurveSpec, t: number, byArcLength: boolean | null): Vector2
+point(options: CurvePointOptions): Vector2
+```
 
-### Return type
+**Options — `CurvePointOptions`**
 
-[**OptionalPointResult**](../models/OptionalPointResult.md)
+A curve query at a parametric or arc-length position.
 
-<a name="Curve.normal"></a>
-# **Curve.normal**
-> Vector2 Curve.normal(CurvePointRequest)
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `curve` | `CurveSpec` | yes | The curve. |
+| `t` | `number` | yes | The position in `0.0..=1.0`. |
+| `byArcLength` | `boolean | null` | no | Sample by arc length instead of the raw parameter (default `false`). |
 
+### `sample`
 
+```ts
+sample(count: number, curve: CurveSpec): PointListResult
+sample(count: number, curve: CurveSpec, byArcLength: boolean | null): PointListResult
+sample(options: CurveSampleOptions): PointListResult
+```
 
-### Parameters
+**Options — `CurveSampleOptions`**
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CurvePointRequest** | [**CurvePointRequest**](../models/CurvePointRequest.md)|  | |
+A curve sampling request.
 
-### Return type
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `count` | `number` | yes | The number of points to sample. |
+| `curve` | `CurveSpec` | yes | The curve. |
+| `byArcLength` | `boolean | null` | no | Sample by arc length instead of the raw parameter (default `false`). |
 
-[**Vector2**](../models/Vector2.md)
+### `simplify`
 
-<a name="Curve.offset"></a>
-# **Curve.offset**
-> PointListResult Curve.offset(CurveOffsetRequest)
+```ts
+simplify(points: Vector2[], tolerance: number): PointListResult
+simplify(options: SimplifyOptions): PointListResult
+```
 
+**Options — `SimplifyOptions`**
 
+A Douglas-Peucker simplification request.
 
-### Parameters
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `points` | `Vector2[]` | yes | The polyline to simplify. |
+| `tolerance` | `number` | yes | The maximum deviation to allow. |
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CurveOffsetRequest** | [**CurveOffsetRequest**](../models/CurveOffsetRequest.md)|  | |
+### `tangent`
 
-### Return type
+```ts
+tangent(curve: CurveSpec, t: number): Vector2
+tangent(curve: CurveSpec, t: number, byArcLength: boolean | null): Vector2
+tangent(options: CurvePointOptions): Vector2
+```
 
-[**PointListResult**](../models/PointListResult.md)
+**Options — `CurvePointOptions`**
 
-<a name="Curve.point"></a>
-# **Curve.point**
-> Vector2 Curve.point(CurvePointRequest)
+A curve query at a parametric or arc-length position.
 
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CurvePointRequest** | [**CurvePointRequest**](../models/CurvePointRequest.md)|  | |
-
-### Return type
-
-[**Vector2**](../models/Vector2.md)
-
-<a name="Curve.sample"></a>
-# **Curve.sample**
-> PointListResult Curve.sample(CurveSampleRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CurveSampleRequest** | [**CurveSampleRequest**](../models/CurveSampleRequest.md)|  | |
-
-### Return type
-
-[**PointListResult**](../models/PointListResult.md)
-
-<a name="Curve.simplify"></a>
-# **Curve.simplify**
-> PointListResult Curve.simplify(SimplifyRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **SimplifyRequest** | [**SimplifyRequest**](../models/SimplifyRequest.md)|  | |
-
-### Return type
-
-[**PointListResult**](../models/PointListResult.md)
-
-<a name="Curve.tangent"></a>
-# **Curve.tangent**
-> Vector2 Curve.tangent(CurvePointRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CurvePointRequest** | [**CurvePointRequest**](../models/CurvePointRequest.md)|  | |
-
-### Return type
-
-[**Vector2**](../models/Vector2.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `curve` | `CurveSpec` | yes | The curve. |
+| `t` | `number` | yes | The position in `0.0..=1.0`. |
+| `byArcLength` | `boolean | null` | no | Sample by arc length instead of the raw parameter (default `false`). |

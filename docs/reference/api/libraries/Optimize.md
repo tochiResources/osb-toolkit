@@ -1,23 +1,23 @@
 # Optimize
 
-| Method | Description |
-|------------- | -------------|
-| [**Optimize.optimizeOsb**](Optimize.md#Optimize.optimizeOsb) |  |
+The clean `Optimize` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Optimize.optimizeOsb"></a>
-# **Optimize.optimizeOsb**
-> OptimizeResult Optimize.optimizeOsb(OptimizeRequest)
+### `optimizeOsb`
 
+```ts
+optimizeOsb(options: OptimizeOptionsInput, text: string): OptimizeResult
+optimizeOsb(options: OptimizeOptions): OptimizeResult
+```
 
+**Options — `OptimizeOptions`**
 
-### Parameters
+An `.osb` optimization request.
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **OptimizeRequest** | [**OptimizeRequest**](../models/OptimizeRequest.md)|  | |
-
-### Return type
-
-[**OptimizeResult**](../models/OptimizeResult.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `options` | `OptimizeOptionsInput` | yes | The optimization options. |
+| `text` | `string` | yes | The `.osb` storyboard text. |

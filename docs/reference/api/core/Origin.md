@@ -1,40 +1,43 @@
 # Origin
 
-| Method | Description |
-|------------- | -------------|
-| [**Origin.getOriginVector**](Origin.md#Origin.getOriginVector) |  |
-| [**Origin.inScreenBounds**](Origin.md#Origin.inScreenBounds) |  |
+The clean `Origin` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Origin.getOriginVector"></a>
-# **Origin.getOriginVector**
-> Vector2 Origin.getOriginVector(GetOriginVectorRequest)
+### `getOriginVector`
 
+```ts
+getOriginVector(origin: OsbOrigin, width: number, height: number): Vector2
+getOriginVector(options: GetOriginVectorOptions): Vector2
+```
 
+**Options — `GetOriginVectorOptions`**
 
-### Parameters
+The anchor offset for an origin.
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **GetOriginVectorRequest** | [**GetOriginVectorRequest**](../models/GetOriginVectorRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `origin` | `OsbOrigin` | yes | The sprite anchor origin. |
+| `width` | `number` | yes | The sprite width. |
+| `height` | `number` | yes | The sprite height. |
 
-### Return type
+### `inScreenBounds`
 
-[**Vector2**](../models/Vector2.md)
+```ts
+inScreenBounds(position: Vector2, size: Vector2, rotation: number, origin: Vector2): boolean
+inScreenBounds(options: InScreenBoundsOptions): boolean
+```
 
-<a name="Origin.inScreenBounds"></a>
-# **Origin.inScreenBounds**
-> BoolResult Origin.inScreenBounds(InScreenBoundsRequest)
+**Options — `InScreenBoundsOptions`**
 
+Whether a rotated sprite's bounding box intersects the widescreen
+storyboard area.
 
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **InScreenBoundsRequest** | [**InScreenBoundsRequest**](../models/InScreenBoundsRequest.md)|  | |
-
-### Return type
-
-[**BoolResult**](../models/BoolResult.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `position` | `Vector2` | yes | The sprite centre position. |
+| `size` | `Vector2` | yes | The sprite size. |
+| `rotation` | `number` | yes | The rotation in radians. |
+| `origin` | `Vector2` | yes | The anchor offset (from `GetOriginVector`). |

@@ -1,59 +1,52 @@
 # Audio
 
-| Method | Description |
-|------------- | -------------|
-| [**Audio.audioDuration**](Audio.md#Audio.audioDuration) |  |
-| [**Audio.fft**](Audio.md#Audio.fft) |  |
-| [**Audio.getFft**](Audio.md#Audio.getFft) |  |
+The clean `Audio` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Audio.audioDuration"></a>
-# **Audio.audioDuration**
-> AudioDurationResult Audio.audioDuration()
+### `audioDuration`
 
+```ts
+audioDuration(): number
+```
 
+### `fft`
 
-### Parameters
-This endpoint does not need any parameter.
+```ts
+fft(path: string): FftResult
+fft(path: string, magnitudes: number | null): FftResult
+fft(path: string, magnitudes: number | null, time: number | null): FftResult
+fft(options: FftOptions): FftResult
+```
 
-### Return type
+**Options — `FftOptions`**
 
-[**AudioDurationResult**](../models/AudioDurationResult.md)
+An FFT request against a `.wav` file.
 
-### HTTP request headers
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `path` | `string` | yes | Path to the audio file. |
+| `magnitudes` | `number | null` | no | Number of frequency bins. |
+| `time` | `number | null` | no | Sample time in milliseconds. |
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+### `getFft`
 
-<a name="Audio.fft"></a>
-# **Audio.fft**
-> FftResult Audio.fft(FftRequest)
+```ts
+getFft(time: number, magnitudes: number): FftResult
+getFft(time: number, magnitudes: number, cutoff: number | null): FftResult
+getFft(time: number, magnitudes: number, cutoff: number | null, easing: Easing | null): FftResult
+getFft(options: GetFftOptions): FftResult
+```
 
+**Options — `GetFftOptions`**
 
+An FFT request against the runtime's loaded audio.
 
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **FftRequest** | [**FftRequest**](../models/FftRequest.md)|  | |
-
-### Return type
-
-[**FftResult**](../models/FftResult.md)
-
-<a name="Audio.getFft"></a>
-# **Audio.getFft**
-> FftResult Audio.getFft(GetFftRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **GetFftRequest** | [**GetFftRequest**](../models/GetFftRequest.md)|  | |
-
-### Return type
-
-[**FftResult**](../models/FftResult.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `time` | `number` | yes | Sample time in milliseconds. |
+| `magnitudes` | `number` | yes | Number of frequency bins. |
+| `cutoff` | `number | null` | no | A frequency cut-off. |
+| `easing` | `Easing | null` | no | The easing applied across the bins. |

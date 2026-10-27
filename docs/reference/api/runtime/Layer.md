@@ -1,227 +1,156 @@
 # Layer
 
-| Method | Description |
-|------------- | -------------|
-| [**Layer.addIndex**](Layer.md#Layer.addIndex) |  |
-| [**Layer.changePosition**](Layer.md#Layer.changePosition) |  |
-| [**Layer.clean**](Layer.md#Layer.clean) |  |
-| [**Layer.createAnimation**](Layer.md#Layer.createAnimation) |  |
-| [**Layer.createSample**](Layer.md#Layer.createSample) |  |
-| [**Layer.createSegment**](Layer.md#Layer.createSegment) |  |
-| [**Layer.createSprite**](Layer.md#Layer.createSprite) |  |
-| [**Layer.discard**](Layer.md#Layer.discard) |  |
-| [**Layer.discardSprite**](Layer.md#Layer.discardSprite) |  |
-| [**Layer.indexes**](Layer.md#Layer.indexes) |  |
-| [**Layer.moveToBottom**](Layer.md#Layer.moveToBottom) |  |
-| [**Layer.moveToTop**](Layer.md#Layer.moveToTop) |  |
-| [**Layer.reverseDepth**](Layer.md#Layer.reverseDepth) |  |
+The clean `Layer` client. Its overloads take positional values from the
+smallest required arity upward, then the `<X>Options` form; results are
+unwrapped into ordinary values.
 
+## Methods
 
-<a name="Layer.addIndex"></a>
-# **Layer.addIndex**
-> OkResult Layer.addIndex(SegmentAddIndexRequest)
+### `addIndex`
 
+```ts
+addIndex(index: number): void
+addIndex(options: SegmentAddIndexOptions): void
+```
 
+**Options — `SegmentAddIndexOptions`**
 
-### Parameters
+Record a depth index on a segment.
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **SegmentAddIndexRequest** | [**SegmentAddIndexRequest**](../models/SegmentAddIndexRequest.md)|  | |
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `index` | `number` | yes | The index to record. |
 
-### Return type
+### `changePosition`
 
-[**OkResult**](../models/OkResult.md)
+```ts
+changePosition(osbLayer: OsbLayer): void
+changePosition(options: SegmentChangePositionOptions): void
+```
 
-<a name="Layer.changePosition"></a>
-# **Layer.changePosition**
-> OkResult Layer.changePosition(SegmentChangePositionRequest)
+**Options — `SegmentChangePositionOptions`**
 
+Move a segment to another osu! layer (`ChangePosition`).
 
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `osbLayer` | `OsbLayer` | yes | The destination osu! layer. |
 
-### Parameters
+### `clean`
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **SegmentChangePositionRequest** | [**SegmentChangePositionRequest**](../models/SegmentChangePositionRequest.md)|  | |
+```ts
+clean(): number
+```
 
-### Return type
+### `createAnimation`
 
-[**OkResult**](../models/OkResult.md)
+```ts
+createAnimation(path: string, frames: number, frameDelay: number, loopType: OsbLoopType, origin: OsbOrigin, position: Vector2): Sprite
+createAnimation(path: string, frames: number, frameDelay: number, loopType: OsbLoopType, origin: OsbOrigin, position: Vector2, layer: string | null): Sprite
+createAnimation(options: CreateAnimationOptions): Sprite
+```
 
-<a name="Layer.clean"></a>
-# **Layer.clean**
-> SegmentCleanResult Layer.clean(SegmentRequest)
+**Options — `CreateAnimationOptions`**
 
+Create an animation sprite.
 
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `path` | `string` | yes | The texture path (relative to the mapset). |
+| `frames` | `number` | yes | The number of frames. |
+| `frameDelay` | `number` | yes | Delay between frames, in milliseconds. |
+| `loopType` | `OsbLoopType` | yes | How the animation loops. |
+| `origin` | `OsbOrigin` | yes | The sprite anchor origin. |
+| `position` | `Vector2` | yes | The initial position. |
+| `layer` | `string | null` | no | The target layer name (omitted when `layerHandle` is set). |
 
-### Parameters
+### `createSample`
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **SegmentRequest** | [**SegmentRequest**](../models/SegmentRequest.md)|  | |
+```ts
+createSample(path: string, time: number): void
+createSample(path: string, time: number, volume: number | null): void
+createSample(path: string, time: number, volume: number | null, layer: string | null): void
+createSample(options: CreateSampleOptions): void
+```
 
-### Return type
+**Options — `CreateSampleOptions`**
 
-[**SegmentCleanResult**](../models/SegmentCleanResult.md)
+Create a sound sample on a layer.
 
-<a name="Layer.createAnimation"></a>
-# **Layer.createAnimation**
-> Handle Layer.createAnimation(CreateAnimationRequest)
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `path` | `string` | yes | The sample path (relative to the mapset). |
+| `time` | `number` | yes | The sample time in milliseconds. |
+| `volume` | `number | null` | no | The sample volume (`0..=100`). |
+| `layer` | `string | null` | no | The target layer name (omitted when `layerHandle` is set). |
 
+### `createSegment`
 
+```ts
+createSegment(): Layer
+```
 
-### Parameters
+### `createSprite`
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CreateAnimationRequest** | [**CreateAnimationRequest**](../models/CreateAnimationRequest.md)|  | |
+```ts
+createSprite(path: string, origin: OsbOrigin): Sprite
+createSprite(path: string, origin: OsbOrigin, position: Vector2 | null): Sprite
+createSprite(path: string, origin: OsbOrigin, position: Vector2 | null, layer: string | null): Sprite
+createSprite(options: CreateSpriteOptions): Sprite
+```
 
-### Return type
+**Options — `CreateSpriteOptions`**
 
-[**Handle**](../models/Handle.md)
+Create a sprite.
 
-<a name="Layer.createSample"></a>
-# **Layer.createSample**
-> OkResult Layer.createSample(CreateSampleRequest)
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `path` | `string` | yes | The texture path (relative to the mapset). |
+| `origin` | `OsbOrigin` | yes | The sprite anchor origin. |
+| `position` | `Vector2 | null` | no | The initial position; omitted means the sprite's default. |
+| `layer` | `string | null` | no | The target layer name (omitted when `layerHandle` is set). |
 
+### `discard`
 
+```ts
+discard(): number
+```
 
-### Parameters
+### `discardSprite`
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CreateSampleRequest** | [**CreateSampleRequest**](../models/CreateSampleRequest.md)|  | |
+```ts
+discardSprite(sprite: number): boolean
+```
 
-### Return type
+### `indexes`
 
-[**OkResult**](../models/OkResult.md)
+```ts
+indexes(): SegmentIndexesResult
+```
 
-<a name="Layer.createSegment"></a>
-# **Layer.createSegment**
-> LayerHandle Layer.createSegment(SegmentRequest)
+### `moveToBottom`
 
+```ts
+moveToBottom(): void
+```
 
+### `moveToTop`
 
-### Parameters
+```ts
+moveToTop(): void
+```
 
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **SegmentRequest** | [**SegmentRequest**](../models/SegmentRequest.md)|  | |
+### `reverseDepth`
 
-### Return type
+```ts
+reverseDepth(value: boolean): void
+reverseDepth(options: SegmentReverseDepthOptions): void
+```
 
-[**LayerHandle**](../models/LayerHandle.md)
+**Options — `SegmentReverseDepthOptions`**
 
-<a name="Layer.createSprite"></a>
-# **Layer.createSprite**
-> Handle Layer.createSprite(CreateSpriteRequest)
+Set a segment's reverse-depth flag.
 
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **CreateSpriteRequest** | [**CreateSpriteRequest**](../models/CreateSpriteRequest.md)|  | |
-
-### Return type
-
-[**Handle**](../models/Handle.md)
-
-<a name="Layer.discard"></a>
-# **Layer.discard**
-> SegmentDiscardResult Layer.discard(SegmentRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **SegmentRequest** | [**SegmentRequest**](../models/SegmentRequest.md)|  | |
-
-### Return type
-
-[**SegmentDiscardResult**](../models/SegmentDiscardResult.md)
-
-<a name="Layer.discardSprite"></a>
-# **Layer.discardSprite**
-> BoolResult Layer.discardSprite(HandleRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **HandleRequest** | [**HandleRequest**](../models/HandleRequest.md)|  | |
-
-### Return type
-
-[**BoolResult**](../models/BoolResult.md)
-
-<a name="Layer.indexes"></a>
-# **Layer.indexes**
-> SegmentIndexesResult Layer.indexes(SegmentRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **SegmentRequest** | [**SegmentRequest**](../models/SegmentRequest.md)|  | |
-
-### Return type
-
-[**SegmentIndexesResult**](../models/SegmentIndexesResult.md)
-
-<a name="Layer.moveToBottom"></a>
-# **Layer.moveToBottom**
-> OkResult Layer.moveToBottom(SegmentRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **SegmentRequest** | [**SegmentRequest**](../models/SegmentRequest.md)|  | |
-
-### Return type
-
-[**OkResult**](../models/OkResult.md)
-
-<a name="Layer.moveToTop"></a>
-# **Layer.moveToTop**
-> OkResult Layer.moveToTop(SegmentRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **SegmentRequest** | [**SegmentRequest**](../models/SegmentRequest.md)|  | |
-
-### Return type
-
-[**OkResult**](../models/OkResult.md)
-
-<a name="Layer.reverseDepth"></a>
-# **Layer.reverseDepth**
-> OkResult Layer.reverseDepth(SegmentReverseDepthRequest)
-
-
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **SegmentReverseDepthRequest** | [**SegmentReverseDepthRequest**](../models/SegmentReverseDepthRequest.md)|  | |
-
-### Return type
-
-[**OkResult**](../models/OkResult.md)
-
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `value` | `boolean` | yes | Whether children are emitted in reverse order. |
