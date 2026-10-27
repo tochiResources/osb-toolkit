@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from ...api.audio_api import AudioAPI
-from ...models.audio_duration_result import AudioDurationResult
 from ...models.easing import Easing
 from ...models.fft_request import FftRequest
 from ...models.fft_result import FftResult
 from ...models.get_fft_request import GetFftRequest
 from ..options import FftOptions, GetFftOptions, to_kwargs
+from typing import Any, Optional
 from typing import overload
 
 
@@ -18,8 +18,8 @@ class Audio:
     def instance_of(value: object) -> bool:
         return isinstance(value, Audio)
 
-    def audio_duration(self) -> AudioDurationResult:
-        return self._api.audio_duration()
+    def audio_duration(self) -> float:
+        return self._api.audio_duration().audio_duration
 
     @overload
     def fft(self, options: FftOptions) -> FftResult: ...

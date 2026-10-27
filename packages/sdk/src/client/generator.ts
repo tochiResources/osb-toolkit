@@ -51,14 +51,14 @@ export class Runtime {
     }
 
     /** The loaded audio duration in milliseconds. */
-    async audioDuration(): Promise<number> {
-        return (await this.audio.audioDuration()).audioDuration;
+    audioDuration(): Promise<number> {
+        return this.audio.audioDuration();
     }
 
     /** Resolves (or creates) a layer by name and binds its handle. */
     async layer(name: string): Promise<Layer> {
         const handle = await this.generator.layerHandle(name);
-        return new Layer(this.layerApi, this.spriteApi, handle.layer);
+        return new Layer(this.layerApi, this.spriteApi, handle);
     }
 
     /** Binds an existing layer/sprite pair. */
@@ -126,8 +126,8 @@ export abstract class Generator {
     }
 
     /** The number of sprites on the storyboard. */
-    async spriteCount(): Promise<number> {
-        return (await this.runtime.generator.spriteCount()).spriteCount;
+    spriteCount(): Promise<number> {
+        return this.runtime.generator.spriteCount();
     }
 
     /**

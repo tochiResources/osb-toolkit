@@ -21,6 +21,10 @@ func IsCommon(value any) bool {
 	return ok
 }
 
-func (c *Common) Version(ctx context.Context) (*osbtk.VersionResult, *http.Response, error) {
-	return c.api.Version(ctx).Execute()
+func (c *Common) Version(ctx context.Context) (string, *http.Response, error) {
+	value, resp, err := c.api.Version(ctx).Execute()
+	if err != nil {
+		return "", resp, err
+	}
+	return value.Version, resp, nil
 }

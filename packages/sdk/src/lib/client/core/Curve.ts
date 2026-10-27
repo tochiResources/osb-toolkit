@@ -1,9 +1,7 @@
 import { CurveAPI } from '../../api/CurveAPI';
 import type { Box2 } from '../../models/Box2';
 import type { CurveSpec } from '../../models/CurveSpec';
-import type { OptionalPointResult } from '../../models/OptionalPointResult';
 import type { PointListResult } from '../../models/PointListResult';
-import type { ScalarResult } from '../../models/ScalarResult';
 import type { Vector2 } from '../../models/Vector2';
 import type { ArcOptions, CurveDistanceOptions, CurveOffsetOptions, CurveOptions, CurvePointOptions, CurveSampleOptions, EllipseOptions, LineIntersectOptions, SimplifyOptions } from '../options';
 import { isArcOptions, isCurveDistanceOptions, isCurveOffsetOptions, isCurveOptions, isCurvePointOptions, isCurveSampleOptions, isEllipseOptions, isLineIntersectOptions, isSimplifyOptions } from '../options';
@@ -33,22 +31,22 @@ export class Curve {
         return this.api.boundingBox(options);
     }
 
-    async curvature(options: CurvePointOptions): Promise<ScalarResult>;
-    async curvature(curve: CurveSpec, t: number, byArcLength?: boolean | null): Promise<ScalarResult>;
-    async curvature(optionsOrCurve?: CurvePointOptions | CurveSpec, t?: number, byArcLength?: boolean | null): Promise<ScalarResult> {
+    async curvature(options: CurvePointOptions): Promise<number>;
+    async curvature(curve: CurveSpec, t: number, byArcLength?: boolean | null): Promise<number>;
+    async curvature(optionsOrCurve?: CurvePointOptions | CurveSpec, t?: number, byArcLength?: boolean | null): Promise<number> {
         const options: CurvePointOptions = isCurvePointOptions(optionsOrCurve)
             ? optionsOrCurve
             : ({ curve: optionsOrCurve, t: t, byArcLength: byArcLength } as CurvePointOptions);
-        return this.api.curvature(options);
+        return (await this.api.curvature(options)).value;
     }
 
-    async distanceTo(options: CurveDistanceOptions): Promise<ScalarResult>;
-    async distanceTo(curve: CurveSpec, point: Vector2): Promise<ScalarResult>;
-    async distanceTo(optionsOrCurve?: CurveDistanceOptions | CurveSpec, point?: Vector2): Promise<ScalarResult> {
+    async distanceTo(options: CurveDistanceOptions): Promise<number>;
+    async distanceTo(curve: CurveSpec, point: Vector2): Promise<number>;
+    async distanceTo(optionsOrCurve?: CurveDistanceOptions | CurveSpec, point?: Vector2): Promise<number> {
         const options: CurveDistanceOptions = isCurveDistanceOptions(optionsOrCurve)
             ? optionsOrCurve
             : ({ curve: optionsOrCurve, point: point } as CurveDistanceOptions);
-        return this.api.distanceTo(options);
+        return (await this.api.distanceTo(options)).value;
     }
 
     async ellipse(options: EllipseOptions): Promise<PointListResult>;
@@ -60,22 +58,22 @@ export class Curve {
         return this.api.ellipse(options);
     }
 
-    async length(options: CurveOptions): Promise<ScalarResult>;
-    async length(curve: CurveSpec): Promise<ScalarResult>;
-    async length(optionsOrCurve?: CurveOptions | CurveSpec): Promise<ScalarResult> {
+    async length(options: CurveOptions): Promise<number>;
+    async length(curve: CurveSpec): Promise<number>;
+    async length(optionsOrCurve?: CurveOptions | CurveSpec): Promise<number> {
         const options: CurveOptions = isCurveOptions(optionsOrCurve)
             ? optionsOrCurve
             : ({ curve: optionsOrCurve } as CurveOptions);
-        return this.api.length(options);
+        return (await this.api.length(options)).value;
     }
 
-    async lineIntersect(options: LineIntersectOptions): Promise<OptionalPointResult>;
-    async lineIntersect(a1: Vector2, a2: Vector2, b1: Vector2, b2: Vector2): Promise<OptionalPointResult>;
-    async lineIntersect(optionsOrA1?: LineIntersectOptions | Vector2, a2?: Vector2, b1?: Vector2, b2?: Vector2): Promise<OptionalPointResult> {
+    async lineIntersect(options: LineIntersectOptions): Promise<Vector2 | null>;
+    async lineIntersect(a1: Vector2, a2: Vector2, b1: Vector2, b2: Vector2): Promise<Vector2 | null>;
+    async lineIntersect(optionsOrA1?: LineIntersectOptions | Vector2, a2?: Vector2, b1?: Vector2, b2?: Vector2): Promise<Vector2 | null> {
         const options: LineIntersectOptions = isLineIntersectOptions(optionsOrA1)
             ? optionsOrA1
             : ({ a1: optionsOrA1, a2: a2, b1: b1, b2: b2 } as LineIntersectOptions);
-        return this.api.lineIntersect(options);
+        return (await this.api.lineIntersect(options)).point ?? null;
     }
 
     async normal(options: CurvePointOptions): Promise<Vector2>;

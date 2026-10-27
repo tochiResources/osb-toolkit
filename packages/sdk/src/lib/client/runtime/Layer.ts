@@ -1,11 +1,7 @@
 import { LayerAPI } from '../../api/LayerAPI';
-import type { BoolResult } from '../../models/BoolResult';
-import type { OkResult } from '../../models/OkResult';
 import type { OsbLayer } from '../../models/OsbLayer';
 import type { OsbLoopType } from '../../models/OsbLoopType';
 import type { OsbOrigin } from '../../models/OsbOrigin';
-import type { SegmentCleanResult } from '../../models/SegmentCleanResult';
-import type { SegmentDiscardResult } from '../../models/SegmentDiscardResult';
 import type { SegmentIndexesResult } from '../../models/SegmentIndexesResult';
 import type { Vector2 } from '../../models/Vector2';
 import type { SpriteAPI } from '../../api/SpriteAPI';
@@ -24,26 +20,26 @@ export class Layer {
         return value instanceof Layer;
     }
 
-    async addIndex(options: SegmentAddIndexOptions): Promise<OkResult>;
-    async addIndex(index: number): Promise<OkResult>;
-    async addIndex(optionsOrIndex?: SegmentAddIndexOptions | number): Promise<OkResult> {
+    async addIndex(options: SegmentAddIndexOptions): Promise<void>;
+    async addIndex(index: number): Promise<void>;
+    async addIndex(optionsOrIndex?: SegmentAddIndexOptions | number): Promise<void> {
         const options: SegmentAddIndexOptions = isSegmentAddIndexOptions(optionsOrIndex)
             ? optionsOrIndex
             : ({ index: optionsOrIndex } as SegmentAddIndexOptions);
-        return this.api.addIndex({ layer: this.handle, ...options });
+        await this.api.addIndex({ layer: this.handle, ...options });
     }
 
-    async changePosition(options: SegmentChangePositionOptions): Promise<OkResult>;
-    async changePosition(osbLayer: OsbLayer): Promise<OkResult>;
-    async changePosition(optionsOrOsbLayer?: SegmentChangePositionOptions | OsbLayer): Promise<OkResult> {
+    async changePosition(options: SegmentChangePositionOptions): Promise<void>;
+    async changePosition(osbLayer: OsbLayer): Promise<void>;
+    async changePosition(optionsOrOsbLayer?: SegmentChangePositionOptions | OsbLayer): Promise<void> {
         const options: SegmentChangePositionOptions = isSegmentChangePositionOptions(optionsOrOsbLayer)
             ? optionsOrOsbLayer
             : ({ osbLayer: optionsOrOsbLayer } as SegmentChangePositionOptions);
-        return this.api.changePosition({ layer: this.handle, ...options });
+        await this.api.changePosition({ layer: this.handle, ...options });
     }
 
-    async clean(): Promise<SegmentCleanResult> {
-        return this.api.clean({ layer: this.handle });
+    async clean(): Promise<number> {
+        return (await this.api.clean({ layer: this.handle })).removed;
     }
 
     async createAnimation(options: CreateAnimationOptions): Promise<Sprite>;
@@ -56,13 +52,13 @@ export class Layer {
         return new Sprite(this.sprites, handle.layer ?? this.handle, handle.sprite ?? 0);
     }
 
-    async createSample(options: CreateSampleOptions): Promise<OkResult>;
-    async createSample(path: string, time: number, volume?: number | null, layer?: string | null): Promise<OkResult>;
-    async createSample(optionsOrPath?: CreateSampleOptions | string, time?: number, volume?: number | null, layer?: string | null): Promise<OkResult> {
+    async createSample(options: CreateSampleOptions): Promise<void>;
+    async createSample(path: string, time: number, volume?: number | null, layer?: string | null): Promise<void>;
+    async createSample(optionsOrPath?: CreateSampleOptions | string, time?: number, volume?: number | null, layer?: string | null): Promise<void> {
         const options: CreateSampleOptions = isCreateSampleOptions(optionsOrPath)
             ? optionsOrPath
             : ({ path: optionsOrPath, time: time, volume: volume, layer: layer } as CreateSampleOptions);
-        return this.api.createSample({ layerHandle: this.handle, ...options });
+        await this.api.createSample({ layerHandle: this.handle, ...options });
     }
 
     async createSegment(): Promise<Layer> {
@@ -80,32 +76,32 @@ export class Layer {
         return new Sprite(this.sprites, handle.layer ?? this.handle, handle.sprite ?? 0);
     }
 
-    async discard(): Promise<SegmentDiscardResult> {
-        return this.api.discard({ layer: this.handle });
+    async discard(): Promise<number> {
+        return (await this.api.discard({ layer: this.handle })).layerCount;
     }
 
-    async discardSprite(sprite: number): Promise<BoolResult> {
-        return this.api.discardSprite({ layer: this.handle, sprite });
+    async discardSprite(sprite: number): Promise<boolean> {
+        return (await this.api.discardSprite({ layer: this.handle, sprite })).value;
     }
 
     async indexes(): Promise<SegmentIndexesResult> {
         return this.api.indexes({ layer: this.handle });
     }
 
-    async moveToBottom(): Promise<OkResult> {
-        return this.api.moveToBottom({ layer: this.handle });
+    async moveToBottom(): Promise<void> {
+        await this.api.moveToBottom({ layer: this.handle });
     }
 
-    async moveToTop(): Promise<OkResult> {
-        return this.api.moveToTop({ layer: this.handle });
+    async moveToTop(): Promise<void> {
+        await this.api.moveToTop({ layer: this.handle });
     }
 
-    async reverseDepth(options: SegmentReverseDepthOptions): Promise<OkResult>;
-    async reverseDepth(value: boolean): Promise<OkResult>;
-    async reverseDepth(optionsOrValue?: SegmentReverseDepthOptions | boolean): Promise<OkResult> {
+    async reverseDepth(options: SegmentReverseDepthOptions): Promise<void>;
+    async reverseDepth(value: boolean): Promise<void>;
+    async reverseDepth(optionsOrValue?: SegmentReverseDepthOptions | boolean): Promise<void> {
         const options: SegmentReverseDepthOptions = isSegmentReverseDepthOptions(optionsOrValue)
             ? optionsOrValue
             : ({ value: optionsOrValue } as SegmentReverseDepthOptions);
-        return this.api.reverseDepth({ layer: this.handle, ...options });
+        await this.api.reverseDepth({ layer: this.handle, ...options });
     }
 }

@@ -27,7 +27,11 @@ func (c *Origin) GetOriginVector(ctx context.Context, options clean.GetOriginVec
 	return c.api.GetOriginVector(ctx).GetOriginVectorRequest(*body).Execute()
 }
 
-func (c *Origin) InScreenBounds(ctx context.Context, options clean.InScreenBoundsOptions) (*osbtk.BoolResult, *http.Response, error) {
+func (c *Origin) InScreenBounds(ctx context.Context, options clean.InScreenBoundsOptions) (bool, *http.Response, error) {
 	body := osbtk.NewInScreenBoundsRequest(options.Origin, options.Position, options.Rotation, options.Size)
-	return c.api.InScreenBounds(ctx).InScreenBoundsRequest(*body).Execute()
+	value, resp, err := c.api.InScreenBounds(ctx).InScreenBoundsRequest(*body).Execute()
+	if err != nil {
+		return false, resp, err
+	}
+	return value.Value, resp, nil
 }

@@ -5,6 +5,7 @@ from ...models.beatmap import Beatmap
 from ...models.parse_osb_result import ParseOsbResult
 from ...models.text_request import TextRequest
 from ..options import TextOptions, to_kwargs
+from typing import Any, Optional
 from typing import overload
 
 

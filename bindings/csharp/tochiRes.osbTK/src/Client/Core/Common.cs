@@ -16,5 +16,5 @@ public sealed class Common
 
     public static bool InstanceOf(object value) => value is Common;
 
-    public VersionResult Version() => api.Version();
+    public string Version() => api.Version().VarVersion;
 }

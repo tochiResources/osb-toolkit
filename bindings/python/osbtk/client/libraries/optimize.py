@@ -5,6 +5,7 @@ from ...models.optimize_options_input import OptimizeOptionsInput
 from ...models.optimize_request import OptimizeRequest
 from ...models.optimize_result import OptimizeResult
 from ..options import OptimizeOptions, to_kwargs
+from typing import Any, Optional
 from typing import overload
 
 

@@ -16,7 +16,7 @@ public sealed class Audio
 
     public static bool InstanceOf(object value) => value is Audio;
 
-    public AudioDurationResult AudioDuration() => api.AudioDuration();
+    public double AudioDuration() => api.AudioDuration().AudioDuration;
 
     public FftResult Fft(FftOptions options) => api.Fft(new FftRequest(options.Magnitudes, options.Path, options.Time));
 

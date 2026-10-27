@@ -23,14 +23,14 @@ public sealed class Generator
     public ControlPoint ControlPointAt(double Time) =>
         ControlPointAt(new TimeOptions { Time = Time });
 
-    public ImportOsbResult ImportOsb(TextOptions options) => api.ImportOsb(new TextRequest(options.Text));
+    public int ImportOsb(TextOptions options) => api.ImportOsb(new TextRequest(options.Text)).SpriteCount;
 
-    public ImportOsbResult ImportOsb(string Text) =>
+    public int ImportOsb(string Text) =>
         ImportOsb(new TextOptions { Text = Text });
 
-    public LayerHandle LayerHandle(LayerHandleOptions options) => api.LayerHandle(new LayerHandleRequest(options.Name));
+    public int LayerHandle(LayerHandleOptions options) => api.LayerHandle(new LayerHandleRequest(options.Name)).Layer;
 
-    public LayerHandle LayerHandle(string Name) =>
+    public int LayerHandle(string Name) =>
         LayerHandle(new LayerHandleOptions { Name = Name });
 
     public LoadBeatmapResult LoadBeatmap(TextOptions options) => api.LoadBeatmap(new TextRequest(options.Text));
@@ -38,12 +38,12 @@ public sealed class Generator
     public LoadBeatmapResult LoadBeatmap(string Text) =>
         LoadBeatmap(new TextOptions { Text = Text });
 
-    public RandomResult Random(RandomOptions options) => api.Random(new RandomRequest(options.Max, options.Min));
+    public double Random(RandomOptions options) => api.Random(new RandomRequest(options.Max, options.Min)).Value;
 
-    public RandomResult Random(double Max, double Min) =>
+    public double Random(double Max, double Min) =>
         Random(new RandomOptions { Max = Max, Min = Min });
 
-    public SpriteCountResult SpriteCount() => api.SpriteCount();
+    public int SpriteCount() => api.SpriteCount().SpriteCount;
 
     public Storyboard Storyboard() => api.Storyboard();
 

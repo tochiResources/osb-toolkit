@@ -20,17 +20,23 @@ public sealed class Layer
 
     public static bool InstanceOf(object value) => value is Layer;
 
-    public OkResult AddIndex(SegmentAddIndexOptions options) => api.AddIndex(new SegmentAddIndexRequest(options.Index, this.handle));
+    public void AddIndex(SegmentAddIndexOptions options)
+    {
+        api.AddIndex(new SegmentAddIndexRequest(options.Index, this.handle));
+    }
 
-    public OkResult AddIndex(double Index) =>
+    public void AddIndex(double Index) =>
         AddIndex(new SegmentAddIndexOptions { Index = Index });
 
-    public OkResult ChangePosition(SegmentChangePositionOptions options) => api.ChangePosition(new SegmentChangePositionRequest(this.handle, options.OsbLayer));
+    public void ChangePosition(SegmentChangePositionOptions options)
+    {
+        api.ChangePosition(new SegmentChangePositionRequest(this.handle, options.OsbLayer));
+    }
 
-    public OkResult ChangePosition(OsbLayer OsbLayer) =>
+    public void ChangePosition(OsbLayer OsbLayer) =>
         ChangePosition(new SegmentChangePositionOptions { OsbLayer = OsbLayer });
 
-    public SegmentCleanResult Clean() => api.Clean(new SegmentRequest(this.handle));
+    public int Clean() => api.Clean(new SegmentRequest(this.handle)).Removed;
 
     public Sprite CreateAnimation(CreateAnimationOptions options)
     {
@@ -41,9 +47,12 @@ public sealed class Layer
     public Sprite CreateAnimation(string Path, int Frames, double FrameDelay, OsbLoopType LoopType, OsbOrigin Origin, Vector2 Position, string Layer = default) =>
         CreateAnimation(new CreateAnimationOptions { Path = Path, Frames = Frames, FrameDelay = FrameDelay, LoopType = LoopType, Origin = Origin, Position = Position, Layer = Layer });
 
-    public OkResult CreateSample(CreateSampleOptions options) => api.CreateSample(new CreateSampleRequest(options.Layer, this.handle, options.Path, options.Time, options.Volume));
+    public void CreateSample(CreateSampleOptions options)
+    {
+        api.CreateSample(new CreateSampleRequest(options.Layer, this.handle, options.Path, options.Time, options.Volume));
+    }
 
-    public OkResult CreateSample(string Path, double Time, double? Volume = default, string Layer = default) =>
+    public void CreateSample(string Path, double Time, double? Volume = default, string Layer = default) =>
         CreateSample(new CreateSampleOptions { Path = Path, Time = Time, Volume = Volume, Layer = Layer });
 
     public Layer CreateSegment()
@@ -61,18 +70,27 @@ public sealed class Layer
     public Sprite CreateSprite(string Path, OsbOrigin Origin, Vector2 Position = default, string Layer = default) =>
         CreateSprite(new CreateSpriteOptions { Path = Path, Origin = Origin, Position = Position, Layer = Layer });
 
-    public SegmentDiscardResult Discard() => api.Discard(new SegmentRequest(this.handle));
+    public int Discard() => api.Discard(new SegmentRequest(this.handle)).LayerCount;
 
-    public BoolResult DiscardSprite(int sprite) => api.DiscardSprite(new HandleRequest(this.handle, sprite));
+    public bool DiscardSprite(int sprite) => api.DiscardSprite(new HandleRequest(this.handle, sprite)).Value;
 
     public SegmentIndexesResult Indexes() => api.Indexes(new SegmentRequest(this.handle));
 
-    public OkResult MoveToBottom() => api.MoveToBottom(new SegmentRequest(this.handle));
+    public void MoveToBottom()
+    {
+        api.MoveToBottom(new SegmentRequest(this.handle));
+    }
 
-    public OkResult MoveToTop() => api.MoveToTop(new SegmentRequest(this.handle));
+    public void MoveToTop()
+    {
+        api.MoveToTop(new SegmentRequest(this.handle));
+    }
 
-    public OkResult ReverseDepth(SegmentReverseDepthOptions options) => api.ReverseDepth(new SegmentReverseDepthRequest(this.handle, options.Value));
+    public void ReverseDepth(SegmentReverseDepthOptions options)
+    {
+        api.ReverseDepth(new SegmentReverseDepthRequest(this.handle, options.Value));
+    }
 
-    public OkResult ReverseDepth(bool Value) =>
+    public void ReverseDepth(bool Value) =>
         ReverseDepth(new SegmentReverseDepthOptions { Value = Value });
 }

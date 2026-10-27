@@ -26,14 +26,14 @@ public sealed class Curve
     public Box2 BoundingBox(CurveSpec Curve) =>
         BoundingBox(new CurveOptions { Curve = Curve });
 
-    public ScalarResult Curvature(CurvePointOptions options) => api.Curvature(new CurvePointRequest(options.ByArcLength, options.Curve, options.T));
+    public double Curvature(CurvePointOptions options) => api.Curvature(new CurvePointRequest(options.ByArcLength, options.Curve, options.T)).Value;
 
-    public ScalarResult Curvature(CurveSpec Curve, double T, bool? ByArcLength = default) =>
+    public double Curvature(CurveSpec Curve, double T, bool? ByArcLength = default) =>
         Curvature(new CurvePointOptions { Curve = Curve, T = T, ByArcLength = ByArcLength });
 
-    public ScalarResult DistanceTo(CurveDistanceOptions options) => api.DistanceTo(new CurveDistanceRequest(options.Curve, options.Point));
+    public double DistanceTo(CurveDistanceOptions options) => api.DistanceTo(new CurveDistanceRequest(options.Curve, options.Point)).Value;
 
-    public ScalarResult DistanceTo(CurveSpec Curve, Vector2 Point) =>
+    public double DistanceTo(CurveSpec Curve, Vector2 Point) =>
         DistanceTo(new CurveDistanceOptions { Curve = Curve, Point = Point });
 
     public PointListResult Ellipse(EllipseOptions options) => api.Ellipse(new EllipseRequest(options.Center, options.Count, options.RadiusX, options.RadiusY));
@@ -41,14 +41,14 @@ public sealed class Curve
     public PointListResult Ellipse(Vector2 Center, double RadiusX, double RadiusY, int? Count = default) =>
         Ellipse(new EllipseOptions { Center = Center, RadiusX = RadiusX, RadiusY = RadiusY, Count = Count });
 
-    public ScalarResult Length(CurveOptions options) => api.Length(new CurveRequest(options.Curve));
+    public double Length(CurveOptions options) => api.Length(new CurveRequest(options.Curve)).Value;
 
-    public ScalarResult Length(CurveSpec Curve) =>
+    public double Length(CurveSpec Curve) =>
         Length(new CurveOptions { Curve = Curve });
 
-    public OptionalPointResult LineIntersect(LineIntersectOptions options) => api.LineIntersect(new LineIntersectRequest(options.A1, options.A2, options.B1, options.B2));
+    public Vector2 LineIntersect(LineIntersectOptions options) => api.LineIntersect(new LineIntersectRequest(options.A1, options.A2, options.B1, options.B2)).Point;
 
-    public OptionalPointResult LineIntersect(Vector2 A1, Vector2 A2, Vector2 B1, Vector2 B2) =>
+    public Vector2 LineIntersect(Vector2 A1, Vector2 A2, Vector2 B1, Vector2 B2) =>
         LineIntersect(new LineIntersectOptions { A1 = A1, A2 = A2, B1 = B1, B2 = B2 });
 
     public Vector2 Normal(CurvePointOptions options) => api.Normal(new CurvePointRequest(options.ByArcLength, options.Curve, options.T));

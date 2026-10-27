@@ -3,17 +3,14 @@ from __future__ import annotations
 from ...api.generator_api import GeneratorAPI
 from ...models.beatmap import Beatmap
 from ...models.control_point import ControlPoint
-from ...models.import_osb_result import ImportOsbResult
-from ...models.layer_handle import LayerHandle
 from ...models.layer_handle_request import LayerHandleRequest
 from ...models.load_beatmap_result import LoadBeatmapResult
 from ...models.random_request import RandomRequest
-from ...models.random_result import RandomResult
-from ...models.sprite_count_result import SpriteCountResult
 from ...models.storyboard import Storyboard
 from ...models.text_request import TextRequest
 from ...models.time_request import TimeRequest
 from ..options import LayerHandleOptions, RandomOptions, TextOptions, TimeOptions, to_kwargs
+from typing import Any, Optional
 from typing import overload
 
 
@@ -39,24 +36,24 @@ class Generator:
         return self._api.control_point_at(TimeRequest(**to_kwargs(options)))
 
     @overload
-    def import_osb(self, options: TextOptions) -> ImportOsbResult: ...
+    def import_osb(self, options: TextOptions) -> int: ...
 
     @overload
-    def import_osb(self, text: str) -> ImportOsbResult: ...
+    def import_osb(self, text: str) -> int: ...
 
-    def import_osb(self, *args: object, **kwargs: object) -> ImportOsbResult:
+    def import_osb(self, *args: object, **kwargs: object) -> int:
         options = args[0] if args and isinstance(args[0], TextOptions) else TextOptions(*args, **kwargs)
-        return self._api.import_osb(TextRequest(**to_kwargs(options)))
+        return self._api.import_osb(TextRequest(**to_kwargs(options))).sprite_count
 
     @overload
-    def layer_handle(self, options: LayerHandleOptions) -> LayerHandle: ...
+    def layer_handle(self, options: LayerHandleOptions) -> int: ...
 
     @overload
-    def layer_handle(self, name: str) -> LayerHandle: ...
+    def layer_handle(self, name: str) -> int: ...
 
-    def layer_handle(self, *args: object, **kwargs: object) -> LayerHandle:
+    def layer_handle(self, *args: object, **kwargs: object) -> int:
         options = args[0] if args and isinstance(args[0], LayerHandleOptions) else LayerHandleOptions(*args, **kwargs)
-        return self._api.layer_handle(LayerHandleRequest(**to_kwargs(options)))
+        return self._api.layer_handle(LayerHandleRequest(**to_kwargs(options))).layer
 
     @overload
     def load_beatmap(self, options: TextOptions) -> LoadBeatmapResult: ...
@@ -69,17 +66,17 @@ class Generator:
         return self._api.load_beatmap(TextRequest(**to_kwargs(options)))
 
     @overload
-    def random(self, options: RandomOptions) -> RandomResult: ...
+    def random(self, options: RandomOptions) -> float: ...
 
     @overload
-    def random(self, max: float, min: float) -> RandomResult: ...
+    def random(self, max: float, min: float) -> float: ...
 
-    def random(self, *args: object, **kwargs: object) -> RandomResult:
+    def random(self, *args: object, **kwargs: object) -> float:
         options = args[0] if args and isinstance(args[0], RandomOptions) else RandomOptions(*args, **kwargs)
-        return self._api.random(RandomRequest(**to_kwargs(options)))
+        return self._api.random(RandomRequest(**to_kwargs(options))).value
 
-    def sprite_count(self) -> SpriteCountResult:
-        return self._api.sprite_count()
+    def sprite_count(self) -> int:
+        return self._api.sprite_count().sprite_count
 
     def storyboard(self) -> Storyboard:
         return self._api.storyboard()

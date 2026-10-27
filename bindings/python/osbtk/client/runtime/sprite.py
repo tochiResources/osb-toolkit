@@ -4,7 +4,6 @@ from ...api.sprite_api import SpriteAPI
 from ...models.command_request import CommandRequest
 from ...models.easing import Easing
 from ...models.handle_request import HandleRequest
-from ...models.ok_result import OkResult
 from ...models.parameter_type import ParameterType
 from ...models.sprite_info import SpriteInfo
 from ...models.sprite_state import SpriteState
@@ -12,6 +11,7 @@ from ...models.sprite_time_request import SpriteTimeRequest
 from ...models.start_loop_group_request import StartLoopGroupRequest
 from ...models.start_trigger_group_request import StartTriggerGroupRequest
 from ..options import CommandOptions, SpriteTimeOptions, StartLoopGroupOptions, StartTriggerGroupOptions, to_kwargs
+from typing import Any, Optional
 from typing import overload
 
 
@@ -26,40 +26,40 @@ class Sprite:
         return isinstance(value, Sprite)
 
     @overload
-    def command(self, options: CommandOptions) -> OkResult: ...
+    def command(self, options: CommandOptions) -> None: ...
 
     @overload
-    def command(self, kind: str, startTime: float, endTime: float, easing: Easing, start: Optional[Dict[str, Any]] = None, end: Optional[Dict[str, Any]] = None, parameter: Optional[ParameterType] = None) -> OkResult: ...
+    def command(self, kind: str, startTime: float, endTime: float, easing: Easing, start: Optional[Dict[str, Any]] = None, end: Optional[Dict[str, Any]] = None, parameter: Optional[ParameterType] = None) -> None: ...
 
-    def command(self, *args: object, **kwargs: object) -> OkResult:
+    def command(self, *args: object, **kwargs: object) -> None:
         options = args[0] if args and isinstance(args[0], CommandOptions) else CommandOptions(*args, **kwargs)
-        return self._api.command(CommandRequest(layer=self._layer, sprite=self._sprite, **to_kwargs(options)))
+        self._api.command(CommandRequest(layer=self._layer, sprite=self._sprite, **to_kwargs(options)))
 
-    def end_group(self) -> OkResult:
-        return self._api.end_group(HandleRequest(layer=self._layer, sprite=self._sprite))
+    def end_group(self) -> None:
+        self._api.end_group(HandleRequest(layer=self._layer, sprite=self._sprite))
 
     def info(self) -> SpriteInfo:
         return self._api.info(HandleRequest(layer=self._layer, sprite=self._sprite))
 
     @overload
-    def start_loop_group(self, options: StartLoopGroupOptions) -> OkResult: ...
+    def start_loop_group(self, options: StartLoopGroupOptions) -> None: ...
 
     @overload
-    def start_loop_group(self, startTime: float, count: float) -> OkResult: ...
+    def start_loop_group(self, startTime: float, count: float) -> None: ...
 
-    def start_loop_group(self, *args: object, **kwargs: object) -> OkResult:
+    def start_loop_group(self, *args: object, **kwargs: object) -> None:
         options = args[0] if args and isinstance(args[0], StartLoopGroupOptions) else StartLoopGroupOptions(*args, **kwargs)
-        return self._api.start_loop_group(StartLoopGroupRequest(layer=self._layer, sprite=self._sprite, **to_kwargs(options)))
+        self._api.start_loop_group(StartLoopGroupRequest(layer=self._layer, sprite=self._sprite, **to_kwargs(options)))
 
     @overload
-    def start_trigger_group(self, options: StartTriggerGroupOptions) -> OkResult: ...
+    def start_trigger_group(self, options: StartTriggerGroupOptions) -> None: ...
 
     @overload
-    def start_trigger_group(self, name: str, startTime: float, endTime: float, group: int) -> OkResult: ...
+    def start_trigger_group(self, name: str, startTime: float, endTime: float, group: int) -> None: ...
 
-    def start_trigger_group(self, *args: object, **kwargs: object) -> OkResult:
+    def start_trigger_group(self, *args: object, **kwargs: object) -> None:
         options = args[0] if args and isinstance(args[0], StartTriggerGroupOptions) else StartTriggerGroupOptions(*args, **kwargs)
-        return self._api.start_trigger_group(StartTriggerGroupRequest(layer=self._layer, sprite=self._sprite, **to_kwargs(options)))
+        self._api.start_trigger_group(StartTriggerGroupRequest(layer=self._layer, sprite=self._sprite, **to_kwargs(options)))
 
     @overload
     def state_at(self, options: SpriteTimeOptions) -> SpriteState: ...

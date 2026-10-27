@@ -50,20 +50,19 @@ describe('@tochii/osb-sdk-js', () => {
             rotation: 0,
             origin: { x: 50, y: 50 },
         });
-        expect(inBounds.value).toBe(true);
+        expect(inBounds).toBe(true);
     });
 
     it('applies easing', async () => {
+        expect(await Core.animations.applyEasing({ easing: Easing.InQuad, t: 0.5 })).toBeCloseTo(
+            0.25,
+            6
+        );
         expect(
-            (await Core.animations.applyEasing({ easing: Easing.InQuad, t: 0.5 })).value
-        ).toBeCloseTo(0.25, 6);
-        expect(
-            (
-                await Core.animations.easingValue({
-                    cubicBezier: [0.42, 0.0, 0.58, 1.0],
-                    t: 1.0,
-                })
-            ).value
+            await Core.animations.easingValue({
+                cubicBezier: [0.42, 0.0, 0.58, 1.0],
+                t: 1.0,
+            })
         ).toBeCloseTo(1.0, 6);
     });
 
@@ -119,7 +118,7 @@ describe('@tochii/osb-sdk-js', () => {
                 { x: 100, y: 0 },
             ],
         };
-        expect((await Core.curve.length({ curve })).value).toBeCloseTo(100, 6);
+        expect(await Core.curve.length({ curve })).toBeCloseTo(100, 6);
         expect((await Core.curve.point({ curve, t: 0.5 })).x).toBeCloseTo(50, 6);
         expect((await Core.curve.sample({ curve, count: 3 })).points).toHaveLength(3);
         expect((await Core.curve.boundingBox({ curve })).max.x).toBeCloseTo(100, 6);
@@ -134,11 +133,8 @@ describe('@tochii/osb-sdk-js', () => {
         });
         expect(simplified.points).toHaveLength(2);
         expect((await Core.curve.normal({ curve, t: 0.5 })).x).toBeCloseTo(0, 6);
-        expect((await Core.curve.curvature({ curve, t: 0.5 })).value).toBeCloseTo(0, 6);
-        expect((await Core.curve.distanceTo({ curve, point: { x: 50, y: 10 } })).value).toBeCloseTo(
-            10,
-            6
-        );
+        expect(await Core.curve.curvature({ curve, t: 0.5 })).toBeCloseTo(0, 6);
+        expect(await Core.curve.distanceTo({ curve, point: { x: 50, y: 10 } })).toBeCloseTo(10, 6);
         expect((await Core.curve.offset({ curve, distance: 5 })).points).toHaveLength(2);
         expect(
             (
@@ -161,7 +157,7 @@ describe('@tochii/osb-sdk-js', () => {
             b1: { x: 0, y: 10 },
             b2: { x: 10, y: 0 },
         });
-        expect(hit.point?.x).toBeCloseTo(5, 6);
+        expect(hit?.x).toBeCloseTo(5, 6);
     });
 
     it('diagnoses storyboards and mapsets', async () => {

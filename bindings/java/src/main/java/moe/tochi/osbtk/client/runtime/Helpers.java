@@ -3,7 +3,6 @@ package moe.tochi.osbtk.client.runtime;
 import moe.tochi.osbtk.ApiException;
 import moe.tochi.osbtk.api.HelpersAPI;
 import moe.tochi.osbtk.model.HelperRequest;
-import moe.tochi.osbtk.model.HelperResult;
 import moe.tochi.osbtk.client.HelperOptions;
 import java.util.List;
 
@@ -18,45 +17,45 @@ public final class Helpers {
         return value instanceof Helpers;
     }
 
-    public HelperResult call(HelperOptions options) throws ApiException {
+    public Object call(HelperOptions options) throws ApiException {
         return api.call(new HelperRequest()
             .input(options.input)
-            .name(options.name));
+            .name(options.name)).getValue();
     }
 
-    public HelperResult call(String name) throws ApiException {
+    public Object call(String name) throws ApiException {
         return call(HelperOptions.builder().name(name).build());
     }
 
-    public HelperResult call(String name, String input) throws ApiException {
+    public Object call(String name, String input) throws ApiException {
         return call(HelperOptions.builder().name(name).input(input).build());
     }
 
-    public HelperResult commands(HelperOptions options) throws ApiException {
+    public Object commands(HelperOptions options) throws ApiException {
         return api.commands(new HelperRequest()
             .input(options.input)
-            .name(options.name));
+            .name(options.name)).getValue();
     }
 
-    public HelperResult commands(String name) throws ApiException {
+    public Object commands(String name) throws ApiException {
         return commands(HelperOptions.builder().name(name).build());
     }
 
-    public HelperResult commands(String name, String input) throws ApiException {
+    public Object commands(String name, String input) throws ApiException {
         return commands(HelperOptions.builder().name(name).input(input).build());
     }
 
-    public HelperResult keyframes(HelperOptions options) throws ApiException {
+    public Object keyframes(HelperOptions options) throws ApiException {
         return api.keyframes(new HelperRequest()
             .input(options.input)
-            .name(options.name));
+            .name(options.name)).getValue();
     }
 
-    public HelperResult keyframes(String name) throws ApiException {
+    public Object keyframes(String name) throws ApiException {
         return keyframes(HelperOptions.builder().name(name).build());
     }
 
-    public HelperResult keyframes(String name, String input) throws ApiException {
+    public Object keyframes(String name, String input) throws ApiException {
         return keyframes(HelperOptions.builder().name(name).input(input).build());
     }
 }

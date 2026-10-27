@@ -4,7 +4,6 @@ import moe.tochi.osbtk.ApiException;
 import moe.tochi.osbtk.api.AnimationsAPI;
 import moe.tochi.osbtk.model.ApplyEasingRequest;
 import moe.tochi.osbtk.model.Easing;
-import moe.tochi.osbtk.model.EasingResult;
 import moe.tochi.osbtk.model.EasingValueRequest;
 import moe.tochi.osbtk.client.ApplyEasingOptions;
 import moe.tochi.osbtk.client.EasingValueOptions;
@@ -21,32 +20,32 @@ public final class Animations {
         return value instanceof Animations;
     }
 
-    public EasingResult applyEasing(ApplyEasingOptions options) throws ApiException {
+    public double applyEasing(ApplyEasingOptions options) throws ApiException {
         return api.applyEasing(new ApplyEasingRequest()
             .easing(options.easing)
-            .t(options.t));
+            .t(options.t)).getValue();
     }
 
-    public EasingResult applyEasing(Easing easing, Double t) throws ApiException {
+    public double applyEasing(Easing easing, Double t) throws ApiException {
         return applyEasing(ApplyEasingOptions.builder().easing(easing).t(t).build());
     }
 
-    public EasingResult easingValue(EasingValueOptions options) throws ApiException {
+    public double easingValue(EasingValueOptions options) throws ApiException {
         return api.easingValue(new EasingValueRequest()
             .cubicBezier(options.cubicBezier)
             .easing(options.easing)
-            .t(options.t));
+            .t(options.t)).getValue();
     }
 
-    public EasingResult easingValue(Double t) throws ApiException {
+    public double easingValue(Double t) throws ApiException {
         return easingValue(EasingValueOptions.builder().t(t).build());
     }
 
-    public EasingResult easingValue(Double t, Easing easing) throws ApiException {
+    public double easingValue(Double t, Easing easing) throws ApiException {
         return easingValue(EasingValueOptions.builder().t(t).easing(easing).build());
     }
 
-    public EasingResult easingValue(Double t, Easing easing, List<Double> cubicBezier) throws ApiException {
+    public double easingValue(Double t, Easing easing, List<Double> cubicBezier) throws ApiException {
         return easingValue(EasingValueOptions.builder().t(t).easing(easing).cubicBezier(cubicBezier).build());
     }
 }

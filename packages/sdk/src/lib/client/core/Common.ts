@@ -1,5 +1,4 @@
 import { CommonAPI } from '../../api/CommonAPI';
-import type { VersionResult } from '../../models/VersionResult';
 
 export class Common {
     constructor(private readonly api: CommonAPI) {}
@@ -8,7 +7,7 @@ export class Common {
         return value instanceof Common;
     }
 
-    async version(): Promise<VersionResult> {
-        return this.api.version();
+    async version(): Promise<string> {
+        return (await this.api.version()).version;
     }
 }

@@ -1,7 +1,6 @@
 import { MediaAPI } from '../../api/MediaAPI';
 import type { FrameResult } from '../../models/FrameResult';
 import type { MediaInfo } from '../../models/MediaInfo';
-import type { OkResult } from '../../models/OkResult';
 import type { EncodeVideoOptions, ExtractAudioOptions, ExtractFramesOptions, PathOptions } from '../options';
 import { isEncodeVideoOptions, isExtractAudioOptions, isExtractFramesOptions, isPathOptions } from '../options';
 
@@ -21,13 +20,13 @@ export class Media {
         return this.api.encodeVideo(options);
     }
 
-    async extractAudio(options: ExtractAudioOptions): Promise<OkResult>;
-    async extractAudio(input: string, output: string): Promise<OkResult>;
-    async extractAudio(optionsOrInput?: ExtractAudioOptions | string, output?: string): Promise<OkResult> {
+    async extractAudio(options: ExtractAudioOptions): Promise<void>;
+    async extractAudio(input: string, output: string): Promise<void>;
+    async extractAudio(optionsOrInput?: ExtractAudioOptions | string, output?: string): Promise<void> {
         const options: ExtractAudioOptions = isExtractAudioOptions(optionsOrInput)
             ? optionsOrInput
             : ({ input: optionsOrInput, output: output } as ExtractAudioOptions);
-        return this.api.extractAudio(options);
+        await this.api.extractAudio(options);
     }
 
     async extractFrames(options: ExtractFramesOptions): Promise<FrameResult>;

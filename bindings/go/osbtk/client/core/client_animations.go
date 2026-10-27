@@ -22,12 +22,16 @@ func IsAnimations(value any) bool {
 	return ok
 }
 
-func (c *Animations) ApplyEasing(ctx context.Context, options clean.ApplyEasingOptions) (*osbtk.EasingResult, *http.Response, error) {
+func (c *Animations) ApplyEasing(ctx context.Context, options clean.ApplyEasingOptions) (float64, *http.Response, error) {
 	body := osbtk.NewApplyEasingRequest(options.Easing, options.T)
-	return c.api.ApplyEasing(ctx).ApplyEasingRequest(*body).Execute()
+	value, resp, err := c.api.ApplyEasing(ctx).ApplyEasingRequest(*body).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.Value, resp, nil
 }
 
-func (c *Animations) EasingValue(ctx context.Context, options clean.EasingValueOptions) (*osbtk.EasingResult, *http.Response, error) {
+func (c *Animations) EasingValue(ctx context.Context, options clean.EasingValueOptions) (float64, *http.Response, error) {
 	body := osbtk.NewEasingValueRequest(options.T)
 	if options.CubicBezier != nil {
 		body.SetCubicBezier(options.CubicBezier)
@@ -35,5 +39,9 @@ func (c *Animations) EasingValue(ctx context.Context, options clean.EasingValueO
 	if options.Easing != nil {
 		body.SetEasing(*options.Easing)
 	}
-	return c.api.EasingValue(ctx).EasingValueRequest(*body).Execute()
+	value, resp, err := c.api.EasingValue(ctx).EasingValueRequest(*body).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.Value, resp, nil
 }

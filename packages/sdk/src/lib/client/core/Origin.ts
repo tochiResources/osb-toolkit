@@ -1,5 +1,4 @@
 import { OriginAPI } from '../../api/OriginAPI';
-import type { BoolResult } from '../../models/BoolResult';
 import type { OsbOrigin } from '../../models/OsbOrigin';
 import type { Vector2 } from '../../models/Vector2';
 import type { GetOriginVectorOptions, InScreenBoundsOptions } from '../options';
@@ -21,12 +20,12 @@ export class Origin {
         return this.api.getOriginVector(options);
     }
 
-    async inScreenBounds(options: InScreenBoundsOptions): Promise<BoolResult>;
-    async inScreenBounds(position: Vector2, size: Vector2, rotation: number, origin: Vector2): Promise<BoolResult>;
-    async inScreenBounds(optionsOrPosition?: InScreenBoundsOptions | Vector2, size?: Vector2, rotation?: number, origin?: Vector2): Promise<BoolResult> {
+    async inScreenBounds(options: InScreenBoundsOptions): Promise<boolean>;
+    async inScreenBounds(position: Vector2, size: Vector2, rotation: number, origin: Vector2): Promise<boolean>;
+    async inScreenBounds(optionsOrPosition?: InScreenBoundsOptions | Vector2, size?: Vector2, rotation?: number, origin?: Vector2): Promise<boolean> {
         const options: InScreenBoundsOptions = isInScreenBoundsOptions(optionsOrPosition)
             ? optionsOrPosition
             : ({ position: optionsOrPosition, size: size, rotation: rotation, origin: origin } as InScreenBoundsOptions);
-        return this.api.inScreenBounds(options);
+        return (await this.api.inScreenBounds(options)).value;
     }
 }

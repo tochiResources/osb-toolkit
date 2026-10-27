@@ -24,19 +24,25 @@ func IsLayer(value any) bool {
 	return ok
 }
 
-func (c *Layer) AddIndex(ctx context.Context, options clean.SegmentAddIndexOptions) (*osbtk.OkResult, *http.Response, error) {
+func (c *Layer) AddIndex(ctx context.Context, options clean.SegmentAddIndexOptions) (*http.Response, error) {
 	body := osbtk.NewSegmentAddIndexRequest(options.Index, c.handle)
-	return c.api.AddIndex(ctx).SegmentAddIndexRequest(*body).Execute()
+	_, resp, err := c.api.AddIndex(ctx).SegmentAddIndexRequest(*body).Execute()
+	return resp, err
 }
 
-func (c *Layer) ChangePosition(ctx context.Context, options clean.SegmentChangePositionOptions) (*osbtk.OkResult, *http.Response, error) {
+func (c *Layer) ChangePosition(ctx context.Context, options clean.SegmentChangePositionOptions) (*http.Response, error) {
 	body := osbtk.NewSegmentChangePositionRequest(c.handle, options.OsbLayer)
-	return c.api.ChangePosition(ctx).SegmentChangePositionRequest(*body).Execute()
+	_, resp, err := c.api.ChangePosition(ctx).SegmentChangePositionRequest(*body).Execute()
+	return resp, err
 }
 
-func (c *Layer) Clean(ctx context.Context) (*osbtk.SegmentCleanResult, *http.Response, error) {
+func (c *Layer) Clean(ctx context.Context) (int32, *http.Response, error) {
 	body := osbtk.NewSegmentRequest(c.handle)
-	return c.api.Clean(ctx).SegmentRequest(*body).Execute()
+	value, resp, err := c.api.Clean(ctx).SegmentRequest(*body).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.Removed, resp, nil
 }
 
 func (c *Layer) CreateAnimation(ctx context.Context, options clean.CreateAnimationOptions) (*Sprite, *http.Response, error) {
@@ -52,7 +58,7 @@ func (c *Layer) CreateAnimation(ctx context.Context, options clean.CreateAnimati
 	return NewSprite(c.sprites, handle.Layer, handle.Sprite), resp, nil
 }
 
-func (c *Layer) CreateSample(ctx context.Context, options clean.CreateSampleOptions) (*osbtk.OkResult, *http.Response, error) {
+func (c *Layer) CreateSample(ctx context.Context, options clean.CreateSampleOptions) (*http.Response, error) {
 	body := osbtk.NewCreateSampleRequest(options.Path, options.Time)
 	if options.Layer != nil {
 		body.SetLayer(*options.Layer)
@@ -61,7 +67,8 @@ func (c *Layer) CreateSample(ctx context.Context, options clean.CreateSampleOpti
 	if options.Volume != nil {
 		body.SetVolume(*options.Volume)
 	}
-	return c.api.CreateSample(ctx).CreateSampleRequest(*body).Execute()
+	_, resp, err := c.api.CreateSample(ctx).CreateSampleRequest(*body).Execute()
+	return resp, err
 }
 
 func (c *Layer) CreateSegment(ctx context.Context) (*Layer, *http.Response, error) {
@@ -89,14 +96,22 @@ func (c *Layer) CreateSprite(ctx context.Context, options clean.CreateSpriteOpti
 	return NewSprite(c.sprites, handle.Layer, handle.Sprite), resp, nil
 }
 
-func (c *Layer) Discard(ctx context.Context) (*osbtk.SegmentDiscardResult, *http.Response, error) {
+func (c *Layer) Discard(ctx context.Context) (int32, *http.Response, error) {
 	body := osbtk.NewSegmentRequest(c.handle)
-	return c.api.Discard(ctx).SegmentRequest(*body).Execute()
+	value, resp, err := c.api.Discard(ctx).SegmentRequest(*body).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.LayerCount, resp, nil
 }
 
-func (c *Layer) DiscardSprite(ctx context.Context, sprite int32) (*osbtk.BoolResult, *http.Response, error) {
+func (c *Layer) DiscardSprite(ctx context.Context, sprite int32) (bool, *http.Response, error) {
 	body := osbtk.NewHandleRequest(c.handle, sprite)
-	return c.api.DiscardSprite(ctx).HandleRequest(*body).Execute()
+	value, resp, err := c.api.DiscardSprite(ctx).HandleRequest(*body).Execute()
+	if err != nil {
+		return false, resp, err
+	}
+	return value.Value, resp, nil
 }
 
 func (c *Layer) Indexes(ctx context.Context) (*osbtk.SegmentIndexesResult, *http.Response, error) {
@@ -104,17 +119,20 @@ func (c *Layer) Indexes(ctx context.Context) (*osbtk.SegmentIndexesResult, *http
 	return c.api.Indexes(ctx).SegmentRequest(*body).Execute()
 }
 
-func (c *Layer) MoveToBottom(ctx context.Context) (*osbtk.OkResult, *http.Response, error) {
+func (c *Layer) MoveToBottom(ctx context.Context) (*http.Response, error) {
 	body := osbtk.NewSegmentRequest(c.handle)
-	return c.api.MoveToBottom(ctx).SegmentRequest(*body).Execute()
+	_, resp, err := c.api.MoveToBottom(ctx).SegmentRequest(*body).Execute()
+	return resp, err
 }
 
-func (c *Layer) MoveToTop(ctx context.Context) (*osbtk.OkResult, *http.Response, error) {
+func (c *Layer) MoveToTop(ctx context.Context) (*http.Response, error) {
 	body := osbtk.NewSegmentRequest(c.handle)
-	return c.api.MoveToTop(ctx).SegmentRequest(*body).Execute()
+	_, resp, err := c.api.MoveToTop(ctx).SegmentRequest(*body).Execute()
+	return resp, err
 }
 
-func (c *Layer) ReverseDepth(ctx context.Context, options clean.SegmentReverseDepthOptions) (*osbtk.OkResult, *http.Response, error) {
+func (c *Layer) ReverseDepth(ctx context.Context, options clean.SegmentReverseDepthOptions) (*http.Response, error) {
 	body := osbtk.NewSegmentReverseDepthRequest(c.handle, options.Value)
-	return c.api.ReverseDepth(ctx).SegmentReverseDepthRequest(*body).Execute()
+	_, resp, err := c.api.ReverseDepth(ctx).SegmentReverseDepthRequest(*body).Execute()
+	return resp, err
 }

@@ -22,8 +22,12 @@ func IsAudio(value any) bool {
 	return ok
 }
 
-func (c *Audio) AudioDuration(ctx context.Context) (*osbtk.AudioDurationResult, *http.Response, error) {
-	return c.api.AudioDuration(ctx).Execute()
+func (c *Audio) AudioDuration(ctx context.Context) (float64, *http.Response, error) {
+	value, resp, err := c.api.AudioDuration(ctx).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.AudioDuration, resp, nil
 }
 
 func (c *Audio) Fft(ctx context.Context, options clean.FftOptions) (*osbtk.FftResult, *http.Response, error) {

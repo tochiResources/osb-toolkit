@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from ...api.common_api import CommonAPI
-from ...models.version_result import VersionResult
+from typing import Any, Optional
 
 
 class Common:
@@ -12,5 +12,5 @@ class Common:
     def instance_of(value: object) -> bool:
         return isinstance(value, Common)
 
-    def version(self) -> VersionResult:
-        return self._api.version()
+    def version(self) -> str:
+        return self._api.version().version

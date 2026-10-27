@@ -4,6 +4,7 @@ from ...api.diagnostics_api import DiagnosticsAPI
 from ...models.diagnostic_report import DiagnosticReport
 from ...models.text_request import TextRequest
 from ..options import TextOptions, to_kwargs
+from typing import Any, Optional
 from typing import overload
 
 

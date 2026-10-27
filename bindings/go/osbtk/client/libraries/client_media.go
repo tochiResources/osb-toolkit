@@ -33,9 +33,10 @@ func (c *Media) EncodeVideo(ctx context.Context, options clean.EncodeVideoOption
 	return c.api.EncodeVideo(ctx).EncodeVideoRequest(*body).Execute()
 }
 
-func (c *Media) ExtractAudio(ctx context.Context, options clean.ExtractAudioOptions) (*osbtk.OkResult, *http.Response, error) {
+func (c *Media) ExtractAudio(ctx context.Context, options clean.ExtractAudioOptions) (*http.Response, error) {
 	body := osbtk.NewExtractAudioRequest(options.Input, options.Output)
-	return c.api.ExtractAudio(ctx).ExtractAudioRequest(*body).Execute()
+	_, resp, err := c.api.ExtractAudio(ctx).ExtractAudioRequest(*body).Execute()
+	return resp, err
 }
 
 func (c *Media) ExtractFrames(ctx context.Context, options clean.ExtractFramesOptions) (*osbtk.FrameResult, *http.Response, error) {

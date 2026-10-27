@@ -2,7 +2,6 @@ package moe.tochi.osbtk.client.runtime;
 
 import moe.tochi.osbtk.ApiException;
 import moe.tochi.osbtk.api.AudioAPI;
-import moe.tochi.osbtk.model.AudioDurationResult;
 import moe.tochi.osbtk.model.Easing;
 import moe.tochi.osbtk.model.FftRequest;
 import moe.tochi.osbtk.model.FftResult;
@@ -22,8 +21,8 @@ public final class Audio {
         return value instanceof Audio;
     }
 
-    public AudioDurationResult audioDuration() throws ApiException {
-        return api.audioDuration();
+    public double audioDuration() throws ApiException {
+        return api.audioDuration().getAudioDuration();
     }
 
     public FftResult fft(FftOptions options) throws ApiException {

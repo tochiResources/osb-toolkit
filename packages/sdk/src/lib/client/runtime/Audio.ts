@@ -1,5 +1,4 @@
 import { AudioAPI } from '../../api/AudioAPI';
-import type { AudioDurationResult } from '../../models/AudioDurationResult';
 import type { Easing } from '../../models/Easing';
 import type { FftResult } from '../../models/FftResult';
 import type { FftOptions, GetFftOptions } from '../options';
@@ -12,8 +11,8 @@ export class Audio {
         return value instanceof Audio;
     }
 
-    async audioDuration(): Promise<AudioDurationResult> {
-        return this.api.audioDuration();
+    async audioDuration(): Promise<number> {
+        return (await this.api.audioDuration()).audioDuration;
     }
 
     async fft(options: FftOptions): Promise<FftResult>;

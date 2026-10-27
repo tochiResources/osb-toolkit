@@ -35,17 +35,25 @@ func (c *Curve) BoundingBox(ctx context.Context, options clean.CurveOptions) (*o
 	return c.api.BoundingBox(ctx).CurveRequest(*body).Execute()
 }
 
-func (c *Curve) Curvature(ctx context.Context, options clean.CurvePointOptions) (*osbtk.ScalarResult, *http.Response, error) {
+func (c *Curve) Curvature(ctx context.Context, options clean.CurvePointOptions) (float64, *http.Response, error) {
 	body := osbtk.NewCurvePointRequest(options.Curve, options.T)
 	if options.ByArcLength != nil {
 		body.SetByArcLength(*options.ByArcLength)
 	}
-	return c.api.Curvature(ctx).CurvePointRequest(*body).Execute()
+	value, resp, err := c.api.Curvature(ctx).CurvePointRequest(*body).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.Value, resp, nil
 }
 
-func (c *Curve) DistanceTo(ctx context.Context, options clean.CurveDistanceOptions) (*osbtk.ScalarResult, *http.Response, error) {
+func (c *Curve) DistanceTo(ctx context.Context, options clean.CurveDistanceOptions) (float64, *http.Response, error) {
 	body := osbtk.NewCurveDistanceRequest(options.Curve, options.Point)
-	return c.api.DistanceTo(ctx).CurveDistanceRequest(*body).Execute()
+	value, resp, err := c.api.DistanceTo(ctx).CurveDistanceRequest(*body).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.Value, resp, nil
 }
 
 func (c *Curve) Ellipse(ctx context.Context, options clean.EllipseOptions) (*osbtk.PointListResult, *http.Response, error) {
@@ -56,14 +64,22 @@ func (c *Curve) Ellipse(ctx context.Context, options clean.EllipseOptions) (*osb
 	return c.api.Ellipse(ctx).EllipseRequest(*body).Execute()
 }
 
-func (c *Curve) Length(ctx context.Context, options clean.CurveOptions) (*osbtk.ScalarResult, *http.Response, error) {
+func (c *Curve) Length(ctx context.Context, options clean.CurveOptions) (float64, *http.Response, error) {
 	body := osbtk.NewCurveRequest(options.Curve)
-	return c.api.Length(ctx).CurveRequest(*body).Execute()
+	value, resp, err := c.api.Length(ctx).CurveRequest(*body).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.Value, resp, nil
 }
 
-func (c *Curve) LineIntersect(ctx context.Context, options clean.LineIntersectOptions) (*osbtk.OptionalPointResult, *http.Response, error) {
+func (c *Curve) LineIntersect(ctx context.Context, options clean.LineIntersectOptions) (*osbtk.Vector2, *http.Response, error) {
 	body := osbtk.NewLineIntersectRequest(options.A1, options.A2, options.B1, options.B2)
-	return c.api.LineIntersect(ctx).LineIntersectRequest(*body).Execute()
+	value, resp, err := c.api.LineIntersect(ctx).LineIntersectRequest(*body).Execute()
+	if err != nil {
+		return nil, resp, err
+	}
+	return value.Point.Get(), resp, nil
 }
 
 func (c *Curve) Normal(ctx context.Context, options clean.CurvePointOptions) (*osbtk.Vector2, *http.Response, error) {

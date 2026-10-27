@@ -31,14 +31,22 @@ func (c *Generator) ControlPointAt(ctx context.Context, options clean.TimeOption
 	return c.api.ControlPointAt(ctx).TimeRequest(*body).Execute()
 }
 
-func (c *Generator) ImportOsb(ctx context.Context, options clean.TextOptions) (*osbtk.ImportOsbResult, *http.Response, error) {
+func (c *Generator) ImportOsb(ctx context.Context, options clean.TextOptions) (int32, *http.Response, error) {
 	body := osbtk.NewTextRequest(options.Text)
-	return c.api.ImportOsb(ctx).TextRequest(*body).Execute()
+	value, resp, err := c.api.ImportOsb(ctx).TextRequest(*body).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.SpriteCount, resp, nil
 }
 
-func (c *Generator) LayerHandle(ctx context.Context, options clean.LayerHandleOptions) (*osbtk.LayerHandle, *http.Response, error) {
+func (c *Generator) LayerHandle(ctx context.Context, options clean.LayerHandleOptions) (int32, *http.Response, error) {
 	body := osbtk.NewLayerHandleRequest(options.Name)
-	return c.api.LayerHandle(ctx).LayerHandleRequest(*body).Execute()
+	value, resp, err := c.api.LayerHandle(ctx).LayerHandleRequest(*body).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.Layer, resp, nil
 }
 
 func (c *Generator) LoadBeatmap(ctx context.Context, options clean.TextOptions) (*osbtk.LoadBeatmapResult, *http.Response, error) {
@@ -46,13 +54,21 @@ func (c *Generator) LoadBeatmap(ctx context.Context, options clean.TextOptions) 
 	return c.api.LoadBeatmap(ctx).TextRequest(*body).Execute()
 }
 
-func (c *Generator) Random(ctx context.Context, options clean.RandomOptions) (*osbtk.RandomResult, *http.Response, error) {
+func (c *Generator) Random(ctx context.Context, options clean.RandomOptions) (float64, *http.Response, error) {
 	body := osbtk.NewRandomRequest(options.Max, options.Min)
-	return c.api.Random(ctx).RandomRequest(*body).Execute()
+	value, resp, err := c.api.Random(ctx).RandomRequest(*body).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.Value, resp, nil
 }
 
-func (c *Generator) SpriteCount(ctx context.Context) (*osbtk.SpriteCountResult, *http.Response, error) {
-	return c.api.SpriteCount(ctx).Execute()
+func (c *Generator) SpriteCount(ctx context.Context) (int32, *http.Response, error) {
+	value, resp, err := c.api.SpriteCount(ctx).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.SpriteCount, resp, nil
 }
 
 func (c *Generator) Storyboard(ctx context.Context) (*osbtk.Storyboard, *http.Response, error) {

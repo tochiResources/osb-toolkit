@@ -5,6 +5,7 @@ from ...models.bake3d_request import Bake3dRequest
 from ...models.baked_storyboard import BakedStoryboard
 from ...models.scene3d_input import Scene3dInput
 from ..options import Bake3dOptions, to_kwargs
+from typing import Any, Optional
 from typing import overload
 
 

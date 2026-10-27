@@ -6,9 +6,9 @@ from ...models.extract_audio_request import ExtractAudioRequest
 from ...models.extract_frames_request import ExtractFramesRequest
 from ...models.frame_result import FrameResult
 from ...models.media_info import MediaInfo
-from ...models.ok_result import OkResult
 from ...models.path_request import PathRequest
 from ..options import EncodeVideoOptions, ExtractAudioOptions, ExtractFramesOptions, PathOptions, to_kwargs
+from typing import Any, Optional
 from typing import overload
 
 
@@ -31,14 +31,14 @@ class Media:
         return self._api.encode_video(EncodeVideoRequest(**to_kwargs(options)))
 
     @overload
-    def extract_audio(self, options: ExtractAudioOptions) -> OkResult: ...
+    def extract_audio(self, options: ExtractAudioOptions) -> None: ...
 
     @overload
-    def extract_audio(self, input: str, output: str) -> OkResult: ...
+    def extract_audio(self, input: str, output: str) -> None: ...
 
-    def extract_audio(self, *args: object, **kwargs: object) -> OkResult:
+    def extract_audio(self, *args: object, **kwargs: object) -> None:
         options = args[0] if args and isinstance(args[0], ExtractAudioOptions) else ExtractAudioOptions(*args, **kwargs)
-        return self._api.extract_audio(ExtractAudioRequest(**to_kwargs(options)))
+        self._api.extract_audio(ExtractAudioRequest(**to_kwargs(options)))
 
     @overload
     def extract_frames(self, options: ExtractFramesOptions) -> FrameResult: ...

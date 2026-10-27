@@ -2,7 +2,6 @@ package moe.tochi.osbtk.client.core;
 
 import moe.tochi.osbtk.ApiException;
 import moe.tochi.osbtk.api.OriginAPI;
-import moe.tochi.osbtk.model.BoolResult;
 import moe.tochi.osbtk.model.GetOriginVectorRequest;
 import moe.tochi.osbtk.model.InScreenBoundsRequest;
 import moe.tochi.osbtk.model.OsbOrigin;
@@ -33,15 +32,15 @@ public final class Origin {
         return getOriginVector(GetOriginVectorOptions.builder().origin(origin).width(width).height(height).build());
     }
 
-    public BoolResult inScreenBounds(InScreenBoundsOptions options) throws ApiException {
+    public boolean inScreenBounds(InScreenBoundsOptions options) throws ApiException {
         return api.inScreenBounds(new InScreenBoundsRequest()
             .origin(options.origin)
             .position(options.position)
             .rotation(options.rotation)
-            .size(options.size));
+            .size(options.size)).getValue();
     }
 
-    public BoolResult inScreenBounds(Vector2 position, Vector2 size, Double rotation, Vector2 origin) throws ApiException {
+    public boolean inScreenBounds(Vector2 position, Vector2 size, Double rotation, Vector2 origin) throws ApiException {
         return inScreenBounds(InScreenBoundsOptions.builder().position(position).size(size).rotation(rotation).origin(origin).build());
     }
 }

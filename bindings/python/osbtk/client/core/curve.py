@@ -11,12 +11,11 @@ from ...models.curve_sample_request import CurveSampleRequest
 from ...models.curve_spec import CurveSpec
 from ...models.ellipse_request import EllipseRequest
 from ...models.line_intersect_request import LineIntersectRequest
-from ...models.optional_point_result import OptionalPointResult
 from ...models.point_list_result import PointListResult
-from ...models.scalar_result import ScalarResult
 from ...models.simplify_request import SimplifyRequest
 from ...models.vector2 import Vector2
 from ..options import ArcOptions, CurveDistanceOptions, CurveOffsetOptions, CurveOptions, CurvePointOptions, CurveSampleOptions, EllipseOptions, LineIntersectOptions, SimplifyOptions, to_kwargs
+from typing import Any, Optional
 from typing import overload
 
 
@@ -49,24 +48,24 @@ class Curve:
         return self._api.bounding_box(CurveRequest(**to_kwargs(options)))
 
     @overload
-    def curvature(self, options: CurvePointOptions) -> ScalarResult: ...
+    def curvature(self, options: CurvePointOptions) -> float: ...
 
     @overload
-    def curvature(self, curve: CurveSpec, t: float, byArcLength: Optional[bool] = None) -> ScalarResult: ...
+    def curvature(self, curve: CurveSpec, t: float, byArcLength: Optional[bool] = None) -> float: ...
 
-    def curvature(self, *args: object, **kwargs: object) -> ScalarResult:
+    def curvature(self, *args: object, **kwargs: object) -> float:
         options = args[0] if args and isinstance(args[0], CurvePointOptions) else CurvePointOptions(*args, **kwargs)
-        return self._api.curvature(CurvePointRequest(**to_kwargs(options)))
+        return self._api.curvature(CurvePointRequest(**to_kwargs(options))).value
 
     @overload
-    def distance_to(self, options: CurveDistanceOptions) -> ScalarResult: ...
+    def distance_to(self, options: CurveDistanceOptions) -> float: ...
 
     @overload
-    def distance_to(self, curve: CurveSpec, point: Vector2) -> ScalarResult: ...
+    def distance_to(self, curve: CurveSpec, point: Vector2) -> float: ...
 
-    def distance_to(self, *args: object, **kwargs: object) -> ScalarResult:
+    def distance_to(self, *args: object, **kwargs: object) -> float:
         options = args[0] if args and isinstance(args[0], CurveDistanceOptions) else CurveDistanceOptions(*args, **kwargs)
-        return self._api.distance_to(CurveDistanceRequest(**to_kwargs(options)))
+        return self._api.distance_to(CurveDistanceRequest(**to_kwargs(options))).value
 
     @overload
     def ellipse(self, options: EllipseOptions) -> PointListResult: ...
@@ -79,24 +78,24 @@ class Curve:
         return self._api.ellipse(EllipseRequest(**to_kwargs(options)))
 
     @overload
-    def length(self, options: CurveOptions) -> ScalarResult: ...
+    def length(self, options: CurveOptions) -> float: ...
 
     @overload
-    def length(self, curve: CurveSpec) -> ScalarResult: ...
+    def length(self, curve: CurveSpec) -> float: ...
 
-    def length(self, *args: object, **kwargs: object) -> ScalarResult:
+    def length(self, *args: object, **kwargs: object) -> float:
         options = args[0] if args and isinstance(args[0], CurveOptions) else CurveOptions(*args, **kwargs)
-        return self._api.length(CurveRequest(**to_kwargs(options)))
+        return self._api.length(CurveRequest(**to_kwargs(options))).value
 
     @overload
-    def line_intersect(self, options: LineIntersectOptions) -> OptionalPointResult: ...
+    def line_intersect(self, options: LineIntersectOptions) -> Optional[Vector2]: ...
 
     @overload
-    def line_intersect(self, a1: Vector2, a2: Vector2, b1: Vector2, b2: Vector2) -> OptionalPointResult: ...
+    def line_intersect(self, a1: Vector2, a2: Vector2, b1: Vector2, b2: Vector2) -> Optional[Vector2]: ...
 
-    def line_intersect(self, *args: object, **kwargs: object) -> OptionalPointResult:
+    def line_intersect(self, *args: object, **kwargs: object) -> Optional[Vector2]:
         options = args[0] if args and isinstance(args[0], LineIntersectOptions) else LineIntersectOptions(*args, **kwargs)
-        return self._api.line_intersect(LineIntersectRequest(**to_kwargs(options)))
+        return self._api.line_intersect(LineIntersectRequest(**to_kwargs(options))).point
 
     @overload
     def normal(self, options: CurvePointOptions) -> Vector2: ...

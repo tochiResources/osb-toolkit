@@ -24,7 +24,7 @@ func IsSprite(value any) bool {
 	return ok
 }
 
-func (c *Sprite) Command(ctx context.Context, options clean.CommandOptions) (*osbtk.OkResult, *http.Response, error) {
+func (c *Sprite) Command(ctx context.Context, options clean.CommandOptions) (*http.Response, error) {
 	body := osbtk.NewCommandRequest(options.Easing, options.EndTime, options.Kind, c.layer, c.sprite, options.StartTime)
 	if options.End != nil {
 		body.SetEnd(options.End)
@@ -35,12 +35,14 @@ func (c *Sprite) Command(ctx context.Context, options clean.CommandOptions) (*os
 	if options.Start != nil {
 		body.SetStart(options.Start)
 	}
-	return c.api.Command(ctx).CommandRequest(*body).Execute()
+	_, resp, err := c.api.Command(ctx).CommandRequest(*body).Execute()
+	return resp, err
 }
 
-func (c *Sprite) EndGroup(ctx context.Context) (*osbtk.OkResult, *http.Response, error) {
+func (c *Sprite) EndGroup(ctx context.Context) (*http.Response, error) {
 	body := osbtk.NewHandleRequest(c.layer, c.sprite)
-	return c.api.EndGroup(ctx).HandleRequest(*body).Execute()
+	_, resp, err := c.api.EndGroup(ctx).HandleRequest(*body).Execute()
+	return resp, err
 }
 
 func (c *Sprite) Info(ctx context.Context) (*osbtk.SpriteInfo, *http.Response, error) {
@@ -48,14 +50,16 @@ func (c *Sprite) Info(ctx context.Context) (*osbtk.SpriteInfo, *http.Response, e
 	return c.api.Info(ctx).HandleRequest(*body).Execute()
 }
 
-func (c *Sprite) StartLoopGroup(ctx context.Context, options clean.StartLoopGroupOptions) (*osbtk.OkResult, *http.Response, error) {
+func (c *Sprite) StartLoopGroup(ctx context.Context, options clean.StartLoopGroupOptions) (*http.Response, error) {
 	body := osbtk.NewStartLoopGroupRequest(options.Count, c.layer, c.sprite, options.StartTime)
-	return c.api.StartLoopGroup(ctx).StartLoopGroupRequest(*body).Execute()
+	_, resp, err := c.api.StartLoopGroup(ctx).StartLoopGroupRequest(*body).Execute()
+	return resp, err
 }
 
-func (c *Sprite) StartTriggerGroup(ctx context.Context, options clean.StartTriggerGroupOptions) (*osbtk.OkResult, *http.Response, error) {
+func (c *Sprite) StartTriggerGroup(ctx context.Context, options clean.StartTriggerGroupOptions) (*http.Response, error) {
 	body := osbtk.NewStartTriggerGroupRequest(options.EndTime, options.Group, c.layer, options.Name, c.sprite, options.StartTime)
-	return c.api.StartTriggerGroup(ctx).StartTriggerGroupRequest(*body).Execute()
+	_, resp, err := c.api.StartTriggerGroup(ctx).StartTriggerGroupRequest(*body).Execute()
+	return resp, err
 }
 
 func (c *Sprite) StateAt(ctx context.Context, options clean.SpriteTimeOptions) (*osbtk.SpriteState, *http.Response, error) {

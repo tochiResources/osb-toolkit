@@ -2,7 +2,6 @@ package moe.tochi.osbtk.client.core;
 
 import moe.tochi.osbtk.ApiException;
 import moe.tochi.osbtk.api.CommonAPI;
-import moe.tochi.osbtk.model.VersionResult;
 import java.util.List;
 
 public final class Common {
@@ -16,7 +15,7 @@ public final class Common {
         return value instanceof Common;
     }
 
-    public VersionResult version() throws ApiException {
-        return api.version();
+    public String version() throws ApiException {
+        return api.version().getVersion();
     }
 }

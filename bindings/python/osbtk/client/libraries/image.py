@@ -6,6 +6,7 @@ from ...models.image_options import ImageOptions
 from ...models.image_process_request import ImageProcessRequest
 from ...models.path_request import PathRequest
 from ..options import ImageProcessOptions, PathOptions, to_kwargs
+from typing import Any, Optional
 from typing import overload
 
 

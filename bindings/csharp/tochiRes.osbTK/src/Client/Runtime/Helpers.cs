@@ -16,18 +16,18 @@ public sealed class Helpers
 
     public static bool InstanceOf(object value) => value is Helpers;
 
-    public HelperResult Call(HelperOptions options) => api.Call(new HelperRequest(options.Input, options.Name));
+    public object Call(HelperOptions options) => api.Call(new HelperRequest(options.Input, options.Name)).Value;
 
-    public HelperResult Call(string Name, string Input = default) =>
+    public object Call(string Name, string Input = default) =>
         Call(new HelperOptions { Name = Name, Input = Input });
 
-    public HelperResult Commands(HelperOptions options) => api.Commands(new HelperRequest(options.Input, options.Name));
+    public object Commands(HelperOptions options) => api.Commands(new HelperRequest(options.Input, options.Name)).Value;
 
-    public HelperResult Commands(string Name, string Input = default) =>
+    public object Commands(string Name, string Input = default) =>
         Commands(new HelperOptions { Name = Name, Input = Input });
 
-    public HelperResult Keyframes(HelperOptions options) => api.Keyframes(new HelperRequest(options.Input, options.Name));
+    public object Keyframes(HelperOptions options) => api.Keyframes(new HelperRequest(options.Input, options.Name)).Value;
 
-    public HelperResult Keyframes(string Name, string Input = default) =>
+    public object Keyframes(string Name, string Input = default) =>
         Keyframes(new HelperOptions { Name = Name, Input = Input });
 }

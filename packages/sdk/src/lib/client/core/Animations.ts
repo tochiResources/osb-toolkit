@@ -1,6 +1,5 @@
 import { AnimationsAPI } from '../../api/AnimationsAPI';
 import type { Easing } from '../../models/Easing';
-import type { EasingResult } from '../../models/EasingResult';
 import type { ApplyEasingOptions, EasingValueOptions } from '../options';
 import { isApplyEasingOptions, isEasingValueOptions } from '../options';
 
@@ -11,21 +10,21 @@ export class Animations {
         return value instanceof Animations;
     }
 
-    async applyEasing(options: ApplyEasingOptions): Promise<EasingResult>;
-    async applyEasing(easing: Easing, t: number): Promise<EasingResult>;
-    async applyEasing(optionsOrEasing?: ApplyEasingOptions | Easing, t?: number): Promise<EasingResult> {
+    async applyEasing(options: ApplyEasingOptions): Promise<number>;
+    async applyEasing(easing: Easing, t: number): Promise<number>;
+    async applyEasing(optionsOrEasing?: ApplyEasingOptions | Easing, t?: number): Promise<number> {
         const options: ApplyEasingOptions = isApplyEasingOptions(optionsOrEasing)
             ? optionsOrEasing
             : ({ easing: optionsOrEasing, t: t } as ApplyEasingOptions);
-        return this.api.applyEasing(options);
+        return (await this.api.applyEasing(options)).value;
     }
 
-    async easingValue(options: EasingValueOptions): Promise<EasingResult>;
-    async easingValue(t: number, easing?: Easing | null, cubicBezier?: number[] | null): Promise<EasingResult>;
-    async easingValue(optionsOrT?: EasingValueOptions | number, easing?: Easing | null, cubicBezier?: number[] | null): Promise<EasingResult> {
+    async easingValue(options: EasingValueOptions): Promise<number>;
+    async easingValue(t: number, easing?: Easing | null, cubicBezier?: number[] | null): Promise<number>;
+    async easingValue(optionsOrT?: EasingValueOptions | number, easing?: Easing | null, cubicBezier?: number[] | null): Promise<number> {
         const options: EasingValueOptions = isEasingValueOptions(optionsOrT)
             ? optionsOrT
             : ({ t: optionsOrT, easing: easing, cubicBezier: cubicBezier } as EasingValueOptions);
-        return this.api.easingValue(options);
+        return (await this.api.easingValue(options)).value;
     }
 }

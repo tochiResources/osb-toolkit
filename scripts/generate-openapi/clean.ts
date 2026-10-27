@@ -205,6 +205,57 @@ function resultType(op: Operation, array: (t: string) => string, fallback: strin
     return op.resultArray ? array(base) : base;
 }
 
+type ResultKind =
+    | 'void'
+    | 'bool'
+    | 'int'
+    | 'float'
+    | 'string'
+    | 'point'
+    | 'unknown'
+    | 'layer'
+    | 'sprite'
+    | 'layerObject'
+    | 'raw';
+
+interface ResultInfo {
+    kind: ResultKind;
+    property?: string;
+    raw?: string;
+    array?: boolean;
+}
+
+/** Result wrappers the clean surface unwraps into ordinary values. */
+const resultAdapters: Record<string, { kind: ResultKind; property: string }> = {
+    OkResult: { kind: 'void', property: 'ok' },
+    BoolResult: { kind: 'bool', property: 'value' },
+    ScalarResult: { kind: 'float', property: 'value' },
+    EasingResult: { kind: 'float', property: 'value' },
+    AudioDurationResult: { kind: 'float', property: 'audioDuration' },
+    SpriteCountResult: { kind: 'int', property: 'spriteCount' },
+    VersionResult: { kind: 'string', property: 'version' },
+    RandomResult: { kind: 'float', property: 'value' },
+    OptionalPointResult: { kind: 'point', property: 'point' },
+    HelperResult: { kind: 'unknown', property: 'value' },
+    LayerHandle: { kind: 'layer', property: 'layer' },
+    SegmentCleanResult: { kind: 'int', property: 'removed' },
+    SegmentDiscardResult: { kind: 'int', property: 'layerCount' },
+    ImportOsbResult: { kind: 'int', property: 'spriteCount' },
+};
+
+function cleanResultInfo(tag: string, op: Operation): ResultInfo {
+    if (tag === 'Layer' && (op.name === 'createSprite' || op.name === 'createAnimation')) {
+        return { kind: 'sprite' };
+    }
+    if (tag === 'Layer' && op.name === 'createSegment') return { kind: 'layerObject' };
+    if (!op.result) return { kind: 'void' };
+    if (op.resultArray) return { kind: 'raw', raw: op.result, array: true };
+    const adapter = resultAdapters[op.result];
+    return adapter
+        ? { kind: adapter.kind, property: adapter.property }
+        : { kind: 'raw', raw: op.result };
+}
+
 function jsdoc(text: string | undefined, indent = ''): string {
     if (!text) return '';
     const lines = text.split('\n').map(line => `${indent} * ${line}`.trimEnd());
@@ -306,11 +357,29 @@ function emitTypeScriptOptions(dir: string, contract: Contract): void {
 }
 
 function tsResultType(tag: string, op: Operation): string {
-    if (tag === 'Layer') {
-        if (op.name === 'createSprite' || op.name === 'createAnimation') return 'Sprite';
-        if (op.name === 'createSegment') return 'Layer';
+    const info = cleanResultInfo(tag, op);
+    switch (info.kind) {
+        case 'sprite':
+            return 'Sprite';
+        case 'layerObject':
+            return 'Layer';
+        case 'void':
+            return 'void';
+        case 'bool':
+            return 'boolean';
+        case 'int':
+        case 'float':
+        case 'layer':
+            return 'number';
+        case 'string':
+            return 'string';
+        case 'point':
+            return 'Vector2 | null';
+        case 'unknown':
+            return 'unknown';
+        default:
+            return info.array ? `${info.raw}[]` : (info.raw ?? 'void');
     }
-    return resultType(op, type => `${type}[]`, 'void');
 }
 
 function tsMethod(tag: string, op: Operation, option: OptionModel | undefined): string {
@@ -347,10 +416,16 @@ function tsMethod(tag: string, op: Operation, option: OptionModel | undefined): 
         call = `${call} as Parameters<SpriteAPI['command']>[0]`;
     }
 
-    if (isLayer && (op.name === 'createSprite' || op.name === 'createAnimation')) {
+    const info = cleanResultInfo(tag, op);
+    if (info.kind === 'sprite') {
         statement = `        const handle = await this.api.${op.name}(${call});\n        return new Sprite(this.sprites, handle.layer ?? this.handle, handle.sprite ?? 0);`;
-    } else if (isLayer && op.name === 'createSegment') {
+    } else if (info.kind === 'layerObject') {
         statement = `        const handle = await this.api.createSegment(${call});\n        return new Layer(this.api, this.sprites, handle.layer ?? this.handle);`;
+    } else if (info.kind === 'void') {
+        statement = `        await this.api.${op.name}(${call});`;
+    } else if (info.property) {
+        const value = `(await this.api.${op.name}(${call})).${info.property}`;
+        statement = `        return ${info.kind === 'point' ? `${value} ?? null` : value};`;
     } else {
         statement = `        return this.api.${op.name}(${call});`;
     }
@@ -391,10 +466,9 @@ function emitTypeScript(contract: Contract): void {
         const bound = isLayer || tag === 'Sprite';
         const results = new Set<string>();
         for (const op of operations) {
-            const result = tsResultType(tag, op);
-            if (op.result && result === resultType(op, type => `${type}[]`, 'void')) {
-                results.add(op.result);
-            }
+            const info = cleanResultInfo(tag, op);
+            if (info.kind === 'raw' && info.raw) results.add(info.raw);
+            if (info.kind === 'point') results.add('Vector2');
             const option = optionFor(contract, op);
             if (option) {
                 for (const property of option.properties) {
@@ -539,9 +613,30 @@ function emitPythonOptions(dir: string, contract: Contract): void {
 }
 
 function pythonResult(tag: string, name: string, op: Operation): string {
-    if (tag === 'Layer' && (name === 'createSprite' || name === 'createAnimation')) return 'Sprite';
-    if (tag === 'Layer' && name === 'createSegment') return 'Layer';
-    return resultType(op, type => `List[${type}]`, 'None');
+    const info = cleanResultInfo(tag, op);
+    switch (info.kind) {
+        case 'sprite':
+            return 'Sprite';
+        case 'layerObject':
+            return 'Layer';
+        case 'void':
+            return 'None';
+        case 'bool':
+            return 'bool';
+        case 'int':
+        case 'layer':
+            return 'int';
+        case 'float':
+            return 'float';
+        case 'string':
+            return 'str';
+        case 'point':
+            return 'Optional[Vector2]';
+        case 'unknown':
+            return 'Any';
+        default:
+            return info.array ? `List[${info.raw}]` : (info.raw ?? 'None');
+    }
 }
 
 function pythonRequest(tag: string, source: string, options: boolean): string {
@@ -574,10 +669,9 @@ function emitPython(contract: Contract): void {
         let hasOverload = false;
         for (const op of operations) {
             if (op.body) models.add(op.body);
-            const result = pythonResult(tag, op.name, op);
-            if (op.result && result === resultType(op, type => `List<${type}>`, 'None')) {
-                models.add(op.result);
-            }
+            const info = cleanResultInfo(tag, op);
+            if (info.kind === 'raw' && info.raw) models.add(info.raw);
+            if (info.kind === 'point') models.add('Vector2');
             const option = optionFor(contract, op);
             if (option) {
                 if (option.properties.length > 0) optionNames.add(option.name);
@@ -600,6 +694,7 @@ function emitPython(contract: Contract): void {
             ...(optionNames.size
                 ? [`from ..options import ${[...optionNames].sort().join(', ')}, to_kwargs`]
                 : []),
+            'from typing import Any, Optional',
             ...(hasOverload ? ['from typing import overload'] : []),
         ];
         const methods = operations
@@ -623,7 +718,14 @@ function emitPython(contract: Contract): void {
                 } else if (isLayer && op.name === 'createSegment') {
                     body = `        handle = self._api.${name}(${call})\n        return Layer(self._api, self._sprites, handle.layer)`;
                 } else {
-                    body = `        return self._api.${name}(${call})`;
+                    const info = cleanResultInfo(tag, op);
+                    if (info.kind === 'void') {
+                        body = `        self._api.${name}(${call})`;
+                    } else if (info.property) {
+                        body = `        return self._api.${name}(${call}).${snake(info.property)}`;
+                    } else {
+                        body = `        return self._api.${name}(${call})`;
+                    }
                 }
                 const overload =
                     option && option.properties.length > 0 && option.properties.length < 8
@@ -780,11 +882,46 @@ function goRequest(tag: string, source: string, contract: Contract): string[] {
 }
 
 function goResult(tag: string, name: string, op: Operation): string {
-    if (tag === 'Layer' && (name === 'createSprite' || name === 'createAnimation'))
-        return '*Sprite';
-    if (tag === 'Layer' && name === 'createSegment') return '*Layer';
-    if (!op.result) return 'any';
-    return op.resultArray ? `[]osbtk.${op.result}` : `*osbtk.${op.result}`;
+    const info = cleanResultInfo(tag, op);
+    switch (info.kind) {
+        case 'sprite':
+            return '*Sprite';
+        case 'layerObject':
+            return '*Layer';
+        case 'void':
+            return '';
+        case 'bool':
+            return 'bool';
+        case 'int':
+        case 'layer':
+            return 'int32';
+        case 'float':
+            return 'float64';
+        case 'string':
+            return 'string';
+        case 'point':
+            return '*osbtk.Vector2';
+        case 'unknown':
+            return 'any';
+        default:
+            return info.array ? `[]osbtk.${info.raw}` : `*osbtk.${info.raw}`;
+    }
+}
+
+function goZero(kind: ResultKind): string {
+    switch (kind) {
+        case 'bool':
+            return 'false';
+        case 'int':
+        case 'layer':
+            return '0';
+        case 'float':
+            return '0';
+        case 'string':
+            return '""';
+        default:
+            return 'nil';
+    }
 }
 
 function emitGo(contract: Contract): void {
@@ -815,21 +952,33 @@ function emitGo(contract: Contract): void {
                     body = goRequest(tag, option.source, contract);
                 }
                 const result = goResult(tag, op.name, op);
+                const info = cleanResultInfo(tag, op);
+                const call = op.body
+                    ? `c.api.${name}(ctx).${op.body}(*body).Execute()`
+                    : `c.api.${name}(ctx).Execute()`;
                 const statements = [...body];
-                if (isLayer && (op.name === 'createSprite' || op.name === 'createAnimation')) {
+                if (info.kind === 'sprite') {
                     statements.push(
-                        `handle, resp, err := c.api.${name}(ctx).${op.body}(*body).Execute()\n\tif err != nil {\n\t\treturn nil, resp, err\n\t}\n\treturn NewSprite(c.sprites, handle.Layer, handle.Sprite), resp, nil`
+                        `handle, resp, err := ${call}\n\tif err != nil {\n\t\treturn nil, resp, err\n\t}\n\treturn NewSprite(c.sprites, handle.Layer, handle.Sprite), resp, nil`
                     );
-                } else if (isLayer && op.name === 'createSegment') {
+                } else if (info.kind === 'layerObject') {
                     statements.push(
-                        `handle, resp, err := c.api.${name}(ctx).${op.body}(*body).Execute()\n\tif err != nil {\n\t\treturn nil, resp, err\n\t}\n\treturn NewLayer(c.api, c.sprites, handle.Layer), resp, nil`
+                        `handle, resp, err := ${call}\n\tif err != nil {\n\t\treturn nil, resp, err\n\t}\n\treturn NewLayer(c.api, c.sprites, handle.Layer), resp, nil`
                     );
-                } else if (op.body) {
-                    statements.push(`return c.api.${name}(ctx).${op.body}(*body).Execute()`);
+                } else if (info.kind === 'void') {
+                    statements.push(`_, resp, err := ${call}\n\treturn resp, err`);
+                } else if (info.kind === 'raw') {
+                    statements.push(`return ${call}`);
                 } else {
-                    statements.push(`return c.api.${name}(ctx).Execute()`);
+                    const access = info.kind === 'point' ? 'Point.Get()' : pascal(info.property!);
+                    statements.push(
+                        `value, resp, err := ${call}\n\tif err != nil {\n\t\treturn ${goZero(info.kind)}, resp, err\n\t}\n\treturn value.${access}, resp, nil`
+                    );
                 }
-                return `func (c *${tag}) ${name}(${args}) (${result}, *http.Response, error) {\n\t${statements.join('\n\t')}\n}`;
+                const signature = result
+                    ? `(${result}, *http.Response, error)`
+                    : '(*http.Response, error)';
+                return `func (c *${tag}) ${name}(${args}) ${signature} {\n\t${statements.join('\n\t')}\n}`;
             })
             .join('\n\n');
         const member = isLayer
@@ -934,9 +1083,30 @@ function emitJavaOptions(dir: string, contract: Contract): void {
 }
 
 function javaResult(tag: string, name: string, op: Operation): string {
-    if (tag === 'Layer' && (name === 'createSprite' || name === 'createAnimation')) return 'Sprite';
-    if (tag === 'Layer' && name === 'createSegment') return 'Layer';
-    return resultType(op, type => `List<${type}>`, 'void');
+    const info = cleanResultInfo(tag, op);
+    switch (info.kind) {
+        case 'sprite':
+            return 'Sprite';
+        case 'layerObject':
+            return 'Layer';
+        case 'void':
+            return 'void';
+        case 'bool':
+            return 'boolean';
+        case 'int':
+        case 'layer':
+            return 'int';
+        case 'float':
+            return 'double';
+        case 'string':
+            return 'String';
+        case 'point':
+            return 'Vector2';
+        case 'unknown':
+            return 'Object';
+        default:
+            return info.array ? `List<${info.raw}>` : (info.raw ?? 'void');
+    }
 }
 
 function javaRequest(tag: string, source: string, contract: Contract): string {
@@ -972,10 +1142,9 @@ function emitJava(contract: Contract): void {
         const optionNames = new Set<string>();
         for (const op of operations) {
             if (op.body) models.add(op.body);
-            const result = javaResult(tag, op.name, op);
-            if (op.result && result === resultType(op, type => `List<${type}>`, 'void')) {
-                models.add(op.result);
-            }
+            const info = cleanResultInfo(tag, op);
+            if (info.kind === 'raw' && info.raw) models.add(info.raw);
+            if (info.kind === 'point') models.add('Vector2');
             if (isLayer && (op.name === 'createSprite' || op.name === 'createAnimation')) {
                 models.add('Handle');
             }
@@ -1015,7 +1184,13 @@ function emitJava(contract: Contract): void {
                 } else if (isLayer && op.name === 'createSegment') {
                     text = `    public ${result} ${op.name}(${args}) throws ApiException {\n        LayerHandle handle = api.${op.name}(${call});\n        return new Layer(this.api, this.sprites, handle.getLayer());\n    }`;
                 } else {
-                    text = `    public ${result} ${op.name}(${args}) throws ApiException {\n        return api.${op.name}(${call});\n    }`;
+                    const info = cleanResultInfo(tag, op);
+                    if (info.kind === 'void') {
+                        text = `    public void ${op.name}(${args}) throws ApiException {\n        api.${op.name}(${call});\n    }`;
+                    } else {
+                        const access = info.property ? `.get${pascal(info.property)}()` : '';
+                        text = `    public ${result} ${op.name}(${args}) throws ApiException {\n        return api.${op.name}(${call})${access};\n    }`;
+                    }
                 }
                 if (option && option.properties.length > 0 && option.properties.length < 8) {
                     const order = orderedProperties(option);
@@ -1182,7 +1357,15 @@ function emitCSharp(contract: Contract): void {
                 } else if (isLayer && op.name === 'createSegment') {
                     text = `    public ${result} ${method}(${args})\n    {\n        var handle = api.${method}(${call});\n        return new Layer(this.api, this.sprites, handle.Layer);\n    }`;
                 } else {
-                    text = `    public ${result} ${method}(${args}) => api.${method}(${call});`;
+                    const info = cleanResultInfo(tag, op);
+                    if (info.kind === 'void') {
+                        text = `    public void ${method}(${args})\n    {\n        api.${method}(${call});\n    }`;
+                    } else {
+                        const access = info.property
+                            ? `.${info.property === 'version' ? 'VarVersion' : pascal(info.property)}`
+                            : '';
+                        text = `    public ${result} ${method}(${args}) => api.${method}(${call})${access};`;
+                    }
                 }
                 const overload =
                     option && option.properties.length > 0 && option.properties.length < 8
@@ -1221,9 +1404,31 @@ function emitCSharp(contract: Contract): void {
 }
 
 function csharpResult(tag: string, name: string, op: Operation): string {
-    if (tag === 'Layer' && (name === 'createSprite' || name === 'createAnimation')) return 'Sprite';
-    if (tag === 'Layer' && name === 'createSegment') return 'Layer';
-    return resultType(op, type => `List<${type}>`, 'void');
+    const info = cleanResultInfo(tag, op);
+    switch (info.kind) {
+        case 'sprite':
+            return 'Sprite';
+        case 'layerObject':
+            return 'Layer';
+        case 'void':
+            return 'void';
+        case 'bool':
+            return 'bool';
+        case 'int':
+            return 'int';
+        case 'float':
+            return 'double';
+        case 'string':
+            return 'string';
+        case 'point':
+            return 'Vector2';
+        case 'unknown':
+            return 'object';
+        case 'layer':
+            return 'int';
+        default:
+            return info.array ? `List<${info.raw}>` : (info.raw ?? 'void');
+    }
 }
 
 /**

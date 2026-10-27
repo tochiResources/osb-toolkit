@@ -1,11 +1,7 @@
 import { GeneratorAPI } from '../../api/GeneratorAPI';
 import type { Beatmap } from '../../models/Beatmap';
 import type { ControlPoint } from '../../models/ControlPoint';
-import type { ImportOsbResult } from '../../models/ImportOsbResult';
-import type { LayerHandle } from '../../models/LayerHandle';
 import type { LoadBeatmapResult } from '../../models/LoadBeatmapResult';
-import type { RandomResult } from '../../models/RandomResult';
-import type { SpriteCountResult } from '../../models/SpriteCountResult';
 import type { Storyboard } from '../../models/Storyboard';
 import type { LayerHandleOptions, RandomOptions, TextOptions, TimeOptions } from '../options';
 import { isLayerHandleOptions, isRandomOptions, isTextOptions, isTimeOptions } from '../options';
@@ -30,22 +26,22 @@ export class Generator {
         return this.api.controlPointAt(options);
     }
 
-    async importOsb(options: TextOptions): Promise<ImportOsbResult>;
-    async importOsb(text: string): Promise<ImportOsbResult>;
-    async importOsb(optionsOrText?: TextOptions | string): Promise<ImportOsbResult> {
+    async importOsb(options: TextOptions): Promise<number>;
+    async importOsb(text: string): Promise<number>;
+    async importOsb(optionsOrText?: TextOptions | string): Promise<number> {
         const options: TextOptions = isTextOptions(optionsOrText)
             ? optionsOrText
             : ({ text: optionsOrText } as TextOptions);
-        return this.api.importOsb(options);
+        return (await this.api.importOsb(options)).spriteCount;
     }
 
-    async layerHandle(options: LayerHandleOptions): Promise<LayerHandle>;
-    async layerHandle(name: string): Promise<LayerHandle>;
-    async layerHandle(optionsOrName?: LayerHandleOptions | string): Promise<LayerHandle> {
+    async layerHandle(options: LayerHandleOptions): Promise<number>;
+    async layerHandle(name: string): Promise<number>;
+    async layerHandle(optionsOrName?: LayerHandleOptions | string): Promise<number> {
         const options: LayerHandleOptions = isLayerHandleOptions(optionsOrName)
             ? optionsOrName
             : ({ name: optionsOrName } as LayerHandleOptions);
-        return this.api.layerHandle(options);
+        return (await this.api.layerHandle(options)).layer;
     }
 
     async loadBeatmap(options: TextOptions): Promise<LoadBeatmapResult>;
@@ -57,17 +53,17 @@ export class Generator {
         return this.api.loadBeatmap(options);
     }
 
-    async random(options: RandomOptions): Promise<RandomResult>;
-    async random(max: number, min: number): Promise<RandomResult>;
-    async random(optionsOrMax?: RandomOptions | number, min?: number): Promise<RandomResult> {
+    async random(options: RandomOptions): Promise<number>;
+    async random(max: number, min: number): Promise<number>;
+    async random(optionsOrMax?: RandomOptions | number, min?: number): Promise<number> {
         const options: RandomOptions = isRandomOptions(optionsOrMax)
             ? optionsOrMax
             : ({ max: optionsOrMax, min: min } as RandomOptions);
-        return this.api.random(options);
+        return (await this.api.random(options)).value;
     }
 
-    async spriteCount(): Promise<SpriteCountResult> {
-        return this.api.spriteCount();
+    async spriteCount(): Promise<number> {
+        return (await this.api.spriteCount()).spriteCount;
     }
 
     async storyboard(): Promise<Storyboard> {

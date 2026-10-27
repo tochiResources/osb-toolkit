@@ -6,6 +6,7 @@ from ...models.render_shapes_request import RenderShapesRequest
 from ...models.rgba_color import RgbaColor
 from ...models.shape import Shape
 from ..options import RenderShapesOptions, to_kwargs
+from typing import Any, Optional
 from typing import overload
 
 

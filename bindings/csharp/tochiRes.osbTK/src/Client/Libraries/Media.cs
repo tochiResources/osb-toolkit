@@ -21,9 +21,12 @@ public sealed class Media
     public MediaInfo EncodeVideo(string InputPattern, string Output, double Fps, string Codec = default, int? Crf = default) =>
         EncodeVideo(new EncodeVideoOptions { InputPattern = InputPattern, Output = Output, Fps = Fps, Codec = Codec, Crf = Crf });
 
-    public OkResult ExtractAudio(ExtractAudioOptions options) => api.ExtractAudio(new ExtractAudioRequest(options.Input, options.Output));
+    public void ExtractAudio(ExtractAudioOptions options)
+    {
+        api.ExtractAudio(new ExtractAudioRequest(options.Input, options.Output));
+    }
 
-    public OkResult ExtractAudio(string Input, string Output) =>
+    public void ExtractAudio(string Input, string Output) =>
         ExtractAudio(new ExtractAudioOptions { Input = Input, Output = Output });
 
     public FrameResult ExtractFrames(ExtractFramesOptions options) => api.ExtractFrames(new ExtractFramesRequest(options.Count, options.Fps, options.Height, options.Input, options.OutputDir, options.Start, options.Width));

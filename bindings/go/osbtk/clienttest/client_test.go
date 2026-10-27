@@ -40,7 +40,7 @@ func TestHandleBoundCleanClient(t *testing.T) {
 		t.Fatal("not a sprite")
 	}
 
-	_, _, err = sprite.Command(
+	_, err = sprite.Command(
 		context.Background(),
 		options.CommandOptions{
 			Kind:      "move",

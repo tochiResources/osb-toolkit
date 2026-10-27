@@ -7,7 +7,6 @@ import moe.tochi.osbtk.model.ExtractAudioRequest;
 import moe.tochi.osbtk.model.ExtractFramesRequest;
 import moe.tochi.osbtk.model.FrameResult;
 import moe.tochi.osbtk.model.MediaInfo;
-import moe.tochi.osbtk.model.OkResult;
 import moe.tochi.osbtk.model.PathRequest;
 import moe.tochi.osbtk.client.EncodeVideoOptions;
 import moe.tochi.osbtk.client.ExtractAudioOptions;
@@ -47,14 +46,14 @@ public final class Media {
         return encodeVideo(EncodeVideoOptions.builder().inputPattern(inputPattern).output(output).fps(fps).codec(codec).crf(crf).build());
     }
 
-    public OkResult extractAudio(ExtractAudioOptions options) throws ApiException {
-        return api.extractAudio(new ExtractAudioRequest()
+    public void extractAudio(ExtractAudioOptions options) throws ApiException {
+        api.extractAudio(new ExtractAudioRequest()
             .input(options.input)
             .output(options.output));
     }
 
-    public OkResult extractAudio(String input, String output) throws ApiException {
-        return extractAudio(ExtractAudioOptions.builder().input(input).output(output).build());
+    public void extractAudio(String input, String output) throws ApiException {
+        extractAudio(ExtractAudioOptions.builder().input(input).output(output).build());
     }
 
     public FrameResult extractFrames(ExtractFramesOptions options) throws ApiException {

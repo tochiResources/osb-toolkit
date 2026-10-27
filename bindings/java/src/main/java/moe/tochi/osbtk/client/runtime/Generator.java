@@ -4,13 +4,9 @@ import moe.tochi.osbtk.ApiException;
 import moe.tochi.osbtk.api.GeneratorAPI;
 import moe.tochi.osbtk.model.Beatmap;
 import moe.tochi.osbtk.model.ControlPoint;
-import moe.tochi.osbtk.model.ImportOsbResult;
-import moe.tochi.osbtk.model.LayerHandle;
 import moe.tochi.osbtk.model.LayerHandleRequest;
 import moe.tochi.osbtk.model.LoadBeatmapResult;
 import moe.tochi.osbtk.model.RandomRequest;
-import moe.tochi.osbtk.model.RandomResult;
-import moe.tochi.osbtk.model.SpriteCountResult;
 import moe.tochi.osbtk.model.Storyboard;
 import moe.tochi.osbtk.model.TextRequest;
 import moe.tochi.osbtk.model.TimeRequest;
@@ -44,21 +40,21 @@ public final class Generator {
         return controlPointAt(TimeOptions.builder().time(time).build());
     }
 
-    public ImportOsbResult importOsb(TextOptions options) throws ApiException {
+    public int importOsb(TextOptions options) throws ApiException {
         return api.importOsb(new TextRequest()
-            .text(options.text));
+            .text(options.text)).getSpriteCount();
     }
 
-    public ImportOsbResult importOsb(String text) throws ApiException {
+    public int importOsb(String text) throws ApiException {
         return importOsb(TextOptions.builder().text(text).build());
     }
 
-    public LayerHandle layerHandle(LayerHandleOptions options) throws ApiException {
+    public int layerHandle(LayerHandleOptions options) throws ApiException {
         return api.layerHandle(new LayerHandleRequest()
-            .name(options.name));
+            .name(options.name)).getLayer();
     }
 
-    public LayerHandle layerHandle(String name) throws ApiException {
+    public int layerHandle(String name) throws ApiException {
         return layerHandle(LayerHandleOptions.builder().name(name).build());
     }
 
@@ -71,18 +67,18 @@ public final class Generator {
         return loadBeatmap(TextOptions.builder().text(text).build());
     }
 
-    public RandomResult random(RandomOptions options) throws ApiException {
+    public double random(RandomOptions options) throws ApiException {
         return api.random(new RandomRequest()
             .max(options.max)
-            .min(options.min));
+            .min(options.min)).getValue();
     }
 
-    public RandomResult random(Double max, Double min) throws ApiException {
+    public double random(Double max, Double min) throws ApiException {
         return random(RandomOptions.builder().max(max).min(min).build());
     }
 
-    public SpriteCountResult spriteCount() throws ApiException {
-        return api.spriteCount();
+    public int spriteCount() throws ApiException {
+        return api.spriteCount().getSpriteCount();
     }
 
     public Storyboard storyboard() throws ApiException {
