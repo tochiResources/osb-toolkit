@@ -27,7 +27,7 @@ export class CommonAPI extends runtime.BaseAPI {
     /**
      * Creates request options for version without sending the request
      */
-    async versionRequestOpts(): Promise<runtime.RequestOpts> {
+    protected async _versionRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -45,9 +45,9 @@ export class CommonAPI extends runtime.BaseAPI {
 
     /**
      */
-    async versionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<VersionResult>> {
-        const requestOptions = await this.versionRequestOpts();
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _versionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<VersionResult>> {
+        const requestOptions = await this._versionRequestOpts();
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VersionResultFromJSON(jsonValue));
     }
@@ -55,7 +55,7 @@ export class CommonAPI extends runtime.BaseAPI {
     /**
      */
     async version(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<VersionResult> {
-        const response = await this.versionRaw(initOverrides);
+        const response = await this._versionRaw(initOverrides);
         return await response.value();
     }
 

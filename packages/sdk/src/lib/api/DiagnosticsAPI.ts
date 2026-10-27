@@ -46,7 +46,7 @@ export class DiagnosticsAPI extends runtime.BaseAPI {
     /**
      * Creates request options for diagnoseOsb without sending the request
      */
-    async diagnoseOsbRequestOpts(requestParameters: ApiDiagnosticsAPIDiagnoseOsbRequest): Promise<runtime.RequestOpts> {
+    protected async _diagnoseOsbRequestOpts(requestParameters: ApiDiagnosticsAPIDiagnoseOsbRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['textRequest'] == null) {
             throw new runtime.RequiredError(
                 'textRequest',
@@ -74,9 +74,9 @@ export class DiagnosticsAPI extends runtime.BaseAPI {
 
     /**
      */
-    async diagnoseOsbRaw(requestParameters: ApiDiagnosticsAPIDiagnoseOsbRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DiagnosticReport>> {
-        const requestOptions = await this.diagnoseOsbRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _diagnoseOsbRaw(requestParameters: ApiDiagnosticsAPIDiagnoseOsbRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DiagnosticReport>> {
+        const requestOptions = await this._diagnoseOsbRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => DiagnosticReportFromJSON(jsonValue));
     }
@@ -84,14 +84,14 @@ export class DiagnosticsAPI extends runtime.BaseAPI {
     /**
      */
     async diagnoseOsb(textRequest: TextRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DiagnosticReport> {
-        const response = await this.diagnoseOsbRaw({ textRequest: textRequest }, initOverrides);
+        const response = await this._diagnoseOsbRaw({ textRequest: textRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for diagnoseOsu without sending the request
      */
-    async diagnoseOsuRequestOpts(requestParameters: ApiDiagnosticsAPIDiagnoseOsuRequest): Promise<runtime.RequestOpts> {
+    protected async _diagnoseOsuRequestOpts(requestParameters: ApiDiagnosticsAPIDiagnoseOsuRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['textRequest'] == null) {
             throw new runtime.RequiredError(
                 'textRequest',
@@ -119,9 +119,9 @@ export class DiagnosticsAPI extends runtime.BaseAPI {
 
     /**
      */
-    async diagnoseOsuRaw(requestParameters: ApiDiagnosticsAPIDiagnoseOsuRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DiagnosticReport>> {
-        const requestOptions = await this.diagnoseOsuRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _diagnoseOsuRaw(requestParameters: ApiDiagnosticsAPIDiagnoseOsuRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DiagnosticReport>> {
+        const requestOptions = await this._diagnoseOsuRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => DiagnosticReportFromJSON(jsonValue));
     }
@@ -129,7 +129,7 @@ export class DiagnosticsAPI extends runtime.BaseAPI {
     /**
      */
     async diagnoseOsu(textRequest: TextRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DiagnosticReport> {
-        const response = await this.diagnoseOsuRaw({ textRequest: textRequest }, initOverrides);
+        const response = await this._diagnoseOsuRaw({ textRequest: textRequest }, initOverrides);
         return await response.value();
     }
 

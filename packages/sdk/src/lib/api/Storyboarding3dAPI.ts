@@ -39,7 +39,7 @@ export class Storyboarding3dAPI extends runtime.BaseAPI {
     /**
      * Creates request options for bake3d without sending the request
      */
-    async bake3dRequestOpts(requestParameters: ApiStoryboarding3dAPIBake3dOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _bake3dRequestOpts(requestParameters: ApiStoryboarding3dAPIBake3dOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['bake3dRequest'] == null) {
             throw new runtime.RequiredError(
                 'bake3dRequest',
@@ -67,9 +67,9 @@ export class Storyboarding3dAPI extends runtime.BaseAPI {
 
     /**
      */
-    async bake3dRaw(requestParameters: ApiStoryboarding3dAPIBake3dOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BakedStoryboard>> {
-        const requestOptions = await this.bake3dRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _bake3dRaw(requestParameters: ApiStoryboarding3dAPIBake3dOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BakedStoryboard>> {
+        const requestOptions = await this._bake3dRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BakedStoryboardFromJSON(jsonValue));
     }
@@ -77,7 +77,7 @@ export class Storyboarding3dAPI extends runtime.BaseAPI {
     /**
      */
     async bake3d(bake3dRequest: Bake3dRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BakedStoryboard> {
-        const response = await this.bake3dRaw({ bake3dRequest: bake3dRequest }, initOverrides);
+        const response = await this._bake3dRaw({ bake3dRequest: bake3dRequest }, initOverrides);
         return await response.value();
     }
 

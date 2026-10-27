@@ -56,7 +56,7 @@ export class OriginAPI extends runtime.BaseAPI {
     /**
      * Creates request options for getOriginVector without sending the request
      */
-    async getOriginVectorRequestOpts(requestParameters: ApiOriginAPIGetOriginVectorOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _getOriginVectorRequestOpts(requestParameters: ApiOriginAPIGetOriginVectorOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['getOriginVectorRequest'] == null) {
             throw new runtime.RequiredError(
                 'getOriginVectorRequest',
@@ -84,9 +84,9 @@ export class OriginAPI extends runtime.BaseAPI {
 
     /**
      */
-    async getOriginVectorRaw(requestParameters: ApiOriginAPIGetOriginVectorOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Vector2>> {
-        const requestOptions = await this.getOriginVectorRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _getOriginVectorRaw(requestParameters: ApiOriginAPIGetOriginVectorOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Vector2>> {
+        const requestOptions = await this._getOriginVectorRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => Vector2FromJSON(jsonValue));
     }
@@ -94,14 +94,14 @@ export class OriginAPI extends runtime.BaseAPI {
     /**
      */
     async getOriginVector(getOriginVectorRequest: GetOriginVectorRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Vector2> {
-        const response = await this.getOriginVectorRaw({ getOriginVectorRequest: getOriginVectorRequest }, initOverrides);
+        const response = await this._getOriginVectorRaw({ getOriginVectorRequest: getOriginVectorRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for inScreenBounds without sending the request
      */
-    async inScreenBoundsRequestOpts(requestParameters: ApiOriginAPIInScreenBoundsOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _inScreenBoundsRequestOpts(requestParameters: ApiOriginAPIInScreenBoundsOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['inScreenBoundsRequest'] == null) {
             throw new runtime.RequiredError(
                 'inScreenBoundsRequest',
@@ -129,9 +129,9 @@ export class OriginAPI extends runtime.BaseAPI {
 
     /**
      */
-    async inScreenBoundsRaw(requestParameters: ApiOriginAPIInScreenBoundsOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BoolResult>> {
-        const requestOptions = await this.inScreenBoundsRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _inScreenBoundsRaw(requestParameters: ApiOriginAPIInScreenBoundsOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BoolResult>> {
+        const requestOptions = await this._inScreenBoundsRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BoolResultFromJSON(jsonValue));
     }
@@ -139,7 +139,7 @@ export class OriginAPI extends runtime.BaseAPI {
     /**
      */
     async inScreenBounds(inScreenBoundsRequest: InScreenBoundsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BoolResult> {
-        const response = await this.inScreenBoundsRaw({ inScreenBoundsRequest: inScreenBoundsRequest }, initOverrides);
+        const response = await this._inScreenBoundsRaw({ inScreenBoundsRequest: inScreenBoundsRequest }, initOverrides);
         return await response.value();
     }
 

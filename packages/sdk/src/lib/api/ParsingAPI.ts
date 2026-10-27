@@ -51,7 +51,7 @@ export class ParsingAPI extends runtime.BaseAPI {
     /**
      * Creates request options for parseOsb without sending the request
      */
-    async parseOsbRequestOpts(requestParameters: ApiParsingAPIParseOsbRequest): Promise<runtime.RequestOpts> {
+    protected async _parseOsbRequestOpts(requestParameters: ApiParsingAPIParseOsbRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['textRequest'] == null) {
             throw new runtime.RequiredError(
                 'textRequest',
@@ -79,9 +79,9 @@ export class ParsingAPI extends runtime.BaseAPI {
 
     /**
      */
-    async parseOsbRaw(requestParameters: ApiParsingAPIParseOsbRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ParseOsbResult>> {
-        const requestOptions = await this.parseOsbRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _parseOsbRaw(requestParameters: ApiParsingAPIParseOsbRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ParseOsbResult>> {
+        const requestOptions = await this._parseOsbRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ParseOsbResultFromJSON(jsonValue));
     }
@@ -89,14 +89,14 @@ export class ParsingAPI extends runtime.BaseAPI {
     /**
      */
     async parseOsb(textRequest: TextRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ParseOsbResult> {
-        const response = await this.parseOsbRaw({ textRequest: textRequest }, initOverrides);
+        const response = await this._parseOsbRaw({ textRequest: textRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for parseOsu without sending the request
      */
-    async parseOsuRequestOpts(requestParameters: ApiParsingAPIParseOsuRequest): Promise<runtime.RequestOpts> {
+    protected async _parseOsuRequestOpts(requestParameters: ApiParsingAPIParseOsuRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['textRequest'] == null) {
             throw new runtime.RequiredError(
                 'textRequest',
@@ -124,9 +124,9 @@ export class ParsingAPI extends runtime.BaseAPI {
 
     /**
      */
-    async parseOsuRaw(requestParameters: ApiParsingAPIParseOsuRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Beatmap>> {
-        const requestOptions = await this.parseOsuRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _parseOsuRaw(requestParameters: ApiParsingAPIParseOsuRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Beatmap>> {
+        const requestOptions = await this._parseOsuRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BeatmapFromJSON(jsonValue));
     }
@@ -134,7 +134,7 @@ export class ParsingAPI extends runtime.BaseAPI {
     /**
      */
     async parseOsu(textRequest: TextRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Beatmap> {
-        const response = await this.parseOsuRaw({ textRequest: textRequest }, initOverrides);
+        const response = await this._parseOsuRaw({ textRequest: textRequest }, initOverrides);
         return await response.value();
     }
 

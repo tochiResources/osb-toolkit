@@ -51,7 +51,7 @@ export class AnimationsAPI extends runtime.BaseAPI {
     /**
      * Creates request options for applyEasing without sending the request
      */
-    async applyEasingRequestOpts(requestParameters: ApiAnimationsAPIApplyEasingOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _applyEasingRequestOpts(requestParameters: ApiAnimationsAPIApplyEasingOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['applyEasingRequest'] == null) {
             throw new runtime.RequiredError(
                 'applyEasingRequest',
@@ -79,9 +79,9 @@ export class AnimationsAPI extends runtime.BaseAPI {
 
     /**
      */
-    async applyEasingRaw(requestParameters: ApiAnimationsAPIApplyEasingOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EasingResult>> {
-        const requestOptions = await this.applyEasingRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _applyEasingRaw(requestParameters: ApiAnimationsAPIApplyEasingOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EasingResult>> {
+        const requestOptions = await this._applyEasingRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => EasingResultFromJSON(jsonValue));
     }
@@ -89,14 +89,14 @@ export class AnimationsAPI extends runtime.BaseAPI {
     /**
      */
     async applyEasing(applyEasingRequest: ApplyEasingRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EasingResult> {
-        const response = await this.applyEasingRaw({ applyEasingRequest: applyEasingRequest }, initOverrides);
+        const response = await this._applyEasingRaw({ applyEasingRequest: applyEasingRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for easingValue without sending the request
      */
-    async easingValueRequestOpts(requestParameters: ApiAnimationsAPIEasingValueOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _easingValueRequestOpts(requestParameters: ApiAnimationsAPIEasingValueOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['easingValueRequest'] == null) {
             throw new runtime.RequiredError(
                 'easingValueRequest',
@@ -124,9 +124,9 @@ export class AnimationsAPI extends runtime.BaseAPI {
 
     /**
      */
-    async easingValueRaw(requestParameters: ApiAnimationsAPIEasingValueOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EasingResult>> {
-        const requestOptions = await this.easingValueRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _easingValueRaw(requestParameters: ApiAnimationsAPIEasingValueOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EasingResult>> {
+        const requestOptions = await this._easingValueRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => EasingResultFromJSON(jsonValue));
     }
@@ -134,7 +134,7 @@ export class AnimationsAPI extends runtime.BaseAPI {
     /**
      */
     async easingValue(easingValueRequest: EasingValueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EasingResult> {
-        const response = await this.easingValueRaw({ easingValueRequest: easingValueRequest }, initOverrides);
+        const response = await this._easingValueRaw({ easingValueRequest: easingValueRequest }, initOverrides);
         return await response.value();
     }
 

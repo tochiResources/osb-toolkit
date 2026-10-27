@@ -51,7 +51,7 @@ export class ImageAPI extends runtime.BaseAPI {
     /**
      * Creates request options for info without sending the request
      */
-    async infoRequestOpts(requestParameters: ApiImageAPIInfoRequest): Promise<runtime.RequestOpts> {
+    protected async _infoRequestOpts(requestParameters: ApiImageAPIInfoRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['pathRequest'] == null) {
             throw new runtime.RequiredError(
                 'pathRequest',
@@ -79,9 +79,9 @@ export class ImageAPI extends runtime.BaseAPI {
 
     /**
      */
-    async infoRaw(requestParameters: ApiImageAPIInfoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImageInfo>> {
-        const requestOptions = await this.infoRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _infoRaw(requestParameters: ApiImageAPIInfoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImageInfo>> {
+        const requestOptions = await this._infoRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ImageInfoFromJSON(jsonValue));
     }
@@ -89,14 +89,14 @@ export class ImageAPI extends runtime.BaseAPI {
     /**
      */
     async info(pathRequest: PathRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImageInfo> {
-        const response = await this.infoRaw({ pathRequest: pathRequest }, initOverrides);
+        const response = await this._infoRaw({ pathRequest: pathRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for process without sending the request
      */
-    async processRequestOpts(requestParameters: ApiImageAPIProcessRequest): Promise<runtime.RequestOpts> {
+    protected async _processRequestOpts(requestParameters: ApiImageAPIProcessRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['imageProcessRequest'] == null) {
             throw new runtime.RequiredError(
                 'imageProcessRequest',
@@ -124,9 +124,9 @@ export class ImageAPI extends runtime.BaseAPI {
 
     /**
      */
-    async processRaw(requestParameters: ApiImageAPIProcessRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImageInfo>> {
-        const requestOptions = await this.processRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _processRaw(requestParameters: ApiImageAPIProcessRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImageInfo>> {
+        const requestOptions = await this._processRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ImageInfoFromJSON(jsonValue));
     }
@@ -134,7 +134,7 @@ export class ImageAPI extends runtime.BaseAPI {
     /**
      */
     async process(imageProcessRequest: ImageProcessRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImageInfo> {
-        const response = await this.processRaw({ imageProcessRequest: imageProcessRequest }, initOverrides);
+        const response = await this._processRaw({ imageProcessRequest: imageProcessRequest }, initOverrides);
         return await response.value();
     }
 

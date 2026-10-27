@@ -188,7 +188,7 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      * Creates request options for addIndex without sending the request
      */
-    async addIndexRequestOpts(requestParameters: ApiLayerAPIAddIndexRequest): Promise<runtime.RequestOpts> {
+    protected async _addIndexRequestOpts(requestParameters: ApiLayerAPIAddIndexRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['segmentAddIndexRequest'] == null) {
             throw new runtime.RequiredError(
                 'segmentAddIndexRequest',
@@ -216,9 +216,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async addIndexRaw(requestParameters: ApiLayerAPIAddIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
-        const requestOptions = await this.addIndexRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _addIndexRaw(requestParameters: ApiLayerAPIAddIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
+        const requestOptions = await this._addIndexRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => OkResultFromJSON(jsonValue));
     }
@@ -226,14 +226,14 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async addIndex(segmentAddIndexRequest: SegmentAddIndexRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<OkResult> {
-        const response = await this.addIndexRaw({ segmentAddIndexRequest: segmentAddIndexRequest }, initOverrides);
+        const response = await this._addIndexRaw({ segmentAddIndexRequest: segmentAddIndexRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for changePosition without sending the request
      */
-    async changePositionRequestOpts(requestParameters: ApiLayerAPIChangePositionRequest): Promise<runtime.RequestOpts> {
+    protected async _changePositionRequestOpts(requestParameters: ApiLayerAPIChangePositionRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['segmentChangePositionRequest'] == null) {
             throw new runtime.RequiredError(
                 'segmentChangePositionRequest',
@@ -261,9 +261,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async changePositionRaw(requestParameters: ApiLayerAPIChangePositionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
-        const requestOptions = await this.changePositionRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _changePositionRaw(requestParameters: ApiLayerAPIChangePositionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
+        const requestOptions = await this._changePositionRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => OkResultFromJSON(jsonValue));
     }
@@ -271,14 +271,14 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async changePosition(segmentChangePositionRequest: SegmentChangePositionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<OkResult> {
-        const response = await this.changePositionRaw({ segmentChangePositionRequest: segmentChangePositionRequest }, initOverrides);
+        const response = await this._changePositionRaw({ segmentChangePositionRequest: segmentChangePositionRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for clean without sending the request
      */
-    async cleanRequestOpts(requestParameters: ApiLayerAPICleanRequest): Promise<runtime.RequestOpts> {
+    protected async _cleanRequestOpts(requestParameters: ApiLayerAPICleanRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['segmentRequest'] == null) {
             throw new runtime.RequiredError(
                 'segmentRequest',
@@ -306,9 +306,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async cleanRaw(requestParameters: ApiLayerAPICleanRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SegmentCleanResult>> {
-        const requestOptions = await this.cleanRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _cleanRaw(requestParameters: ApiLayerAPICleanRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SegmentCleanResult>> {
+        const requestOptions = await this._cleanRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SegmentCleanResultFromJSON(jsonValue));
     }
@@ -316,14 +316,14 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async clean(segmentRequest: SegmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SegmentCleanResult> {
-        const response = await this.cleanRaw({ segmentRequest: segmentRequest }, initOverrides);
+        const response = await this._cleanRaw({ segmentRequest: segmentRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for createAnimation without sending the request
      */
-    async createAnimationRequestOpts(requestParameters: ApiLayerAPICreateAnimationOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _createAnimationRequestOpts(requestParameters: ApiLayerAPICreateAnimationOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['createAnimationRequest'] == null) {
             throw new runtime.RequiredError(
                 'createAnimationRequest',
@@ -351,9 +351,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async createAnimationRaw(requestParameters: ApiLayerAPICreateAnimationOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Handle>> {
-        const requestOptions = await this.createAnimationRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _createAnimationRaw(requestParameters: ApiLayerAPICreateAnimationOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Handle>> {
+        const requestOptions = await this._createAnimationRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => HandleFromJSON(jsonValue));
     }
@@ -361,14 +361,14 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async createAnimation(createAnimationRequest: CreateAnimationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Handle> {
-        const response = await this.createAnimationRaw({ createAnimationRequest: createAnimationRequest }, initOverrides);
+        const response = await this._createAnimationRaw({ createAnimationRequest: createAnimationRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for createSample without sending the request
      */
-    async createSampleRequestOpts(requestParameters: ApiLayerAPICreateSampleOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _createSampleRequestOpts(requestParameters: ApiLayerAPICreateSampleOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['createSampleRequest'] == null) {
             throw new runtime.RequiredError(
                 'createSampleRequest',
@@ -396,9 +396,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async createSampleRaw(requestParameters: ApiLayerAPICreateSampleOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
-        const requestOptions = await this.createSampleRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _createSampleRaw(requestParameters: ApiLayerAPICreateSampleOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
+        const requestOptions = await this._createSampleRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => OkResultFromJSON(jsonValue));
     }
@@ -406,14 +406,14 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async createSample(createSampleRequest: CreateSampleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<OkResult> {
-        const response = await this.createSampleRaw({ createSampleRequest: createSampleRequest }, initOverrides);
+        const response = await this._createSampleRaw({ createSampleRequest: createSampleRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for createSegment without sending the request
      */
-    async createSegmentRequestOpts(requestParameters: ApiLayerAPICreateSegmentRequest): Promise<runtime.RequestOpts> {
+    protected async _createSegmentRequestOpts(requestParameters: ApiLayerAPICreateSegmentRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['segmentRequest'] == null) {
             throw new runtime.RequiredError(
                 'segmentRequest',
@@ -441,9 +441,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async createSegmentRaw(requestParameters: ApiLayerAPICreateSegmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LayerHandle>> {
-        const requestOptions = await this.createSegmentRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _createSegmentRaw(requestParameters: ApiLayerAPICreateSegmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LayerHandle>> {
+        const requestOptions = await this._createSegmentRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LayerHandleFromJSON(jsonValue));
     }
@@ -451,14 +451,14 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async createSegment(segmentRequest: SegmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LayerHandle> {
-        const response = await this.createSegmentRaw({ segmentRequest: segmentRequest }, initOverrides);
+        const response = await this._createSegmentRaw({ segmentRequest: segmentRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for createSprite without sending the request
      */
-    async createSpriteRequestOpts(requestParameters: ApiLayerAPICreateSpriteOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _createSpriteRequestOpts(requestParameters: ApiLayerAPICreateSpriteOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['createSpriteRequest'] == null) {
             throw new runtime.RequiredError(
                 'createSpriteRequest',
@@ -486,9 +486,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async createSpriteRaw(requestParameters: ApiLayerAPICreateSpriteOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Handle>> {
-        const requestOptions = await this.createSpriteRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _createSpriteRaw(requestParameters: ApiLayerAPICreateSpriteOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Handle>> {
+        const requestOptions = await this._createSpriteRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => HandleFromJSON(jsonValue));
     }
@@ -496,14 +496,14 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async createSprite(createSpriteRequest: CreateSpriteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Handle> {
-        const response = await this.createSpriteRaw({ createSpriteRequest: createSpriteRequest }, initOverrides);
+        const response = await this._createSpriteRaw({ createSpriteRequest: createSpriteRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for discard without sending the request
      */
-    async discardRequestOpts(requestParameters: ApiLayerAPIDiscardRequest): Promise<runtime.RequestOpts> {
+    protected async _discardRequestOpts(requestParameters: ApiLayerAPIDiscardRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['segmentRequest'] == null) {
             throw new runtime.RequiredError(
                 'segmentRequest',
@@ -531,9 +531,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async discardRaw(requestParameters: ApiLayerAPIDiscardRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SegmentDiscardResult>> {
-        const requestOptions = await this.discardRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _discardRaw(requestParameters: ApiLayerAPIDiscardRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SegmentDiscardResult>> {
+        const requestOptions = await this._discardRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SegmentDiscardResultFromJSON(jsonValue));
     }
@@ -541,14 +541,14 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async discard(segmentRequest: SegmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SegmentDiscardResult> {
-        const response = await this.discardRaw({ segmentRequest: segmentRequest }, initOverrides);
+        const response = await this._discardRaw({ segmentRequest: segmentRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for discardSprite without sending the request
      */
-    async discardSpriteRequestOpts(requestParameters: ApiLayerAPIDiscardSpriteRequest): Promise<runtime.RequestOpts> {
+    protected async _discardSpriteRequestOpts(requestParameters: ApiLayerAPIDiscardSpriteRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['handleRequest'] == null) {
             throw new runtime.RequiredError(
                 'handleRequest',
@@ -576,9 +576,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async discardSpriteRaw(requestParameters: ApiLayerAPIDiscardSpriteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BoolResult>> {
-        const requestOptions = await this.discardSpriteRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _discardSpriteRaw(requestParameters: ApiLayerAPIDiscardSpriteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BoolResult>> {
+        const requestOptions = await this._discardSpriteRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BoolResultFromJSON(jsonValue));
     }
@@ -586,14 +586,14 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async discardSprite(handleRequest: HandleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BoolResult> {
-        const response = await this.discardSpriteRaw({ handleRequest: handleRequest }, initOverrides);
+        const response = await this._discardSpriteRaw({ handleRequest: handleRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for indexes without sending the request
      */
-    async indexesRequestOpts(requestParameters: ApiLayerAPIIndexesRequest): Promise<runtime.RequestOpts> {
+    protected async _indexesRequestOpts(requestParameters: ApiLayerAPIIndexesRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['segmentRequest'] == null) {
             throw new runtime.RequiredError(
                 'segmentRequest',
@@ -621,9 +621,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async indexesRaw(requestParameters: ApiLayerAPIIndexesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SegmentIndexesResult>> {
-        const requestOptions = await this.indexesRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _indexesRaw(requestParameters: ApiLayerAPIIndexesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SegmentIndexesResult>> {
+        const requestOptions = await this._indexesRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SegmentIndexesResultFromJSON(jsonValue));
     }
@@ -631,14 +631,14 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async indexes(segmentRequest: SegmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SegmentIndexesResult> {
-        const response = await this.indexesRaw({ segmentRequest: segmentRequest }, initOverrides);
+        const response = await this._indexesRaw({ segmentRequest: segmentRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for moveToBottom without sending the request
      */
-    async moveToBottomRequestOpts(requestParameters: ApiLayerAPIMoveToBottomRequest): Promise<runtime.RequestOpts> {
+    protected async _moveToBottomRequestOpts(requestParameters: ApiLayerAPIMoveToBottomRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['segmentRequest'] == null) {
             throw new runtime.RequiredError(
                 'segmentRequest',
@@ -666,9 +666,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async moveToBottomRaw(requestParameters: ApiLayerAPIMoveToBottomRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
-        const requestOptions = await this.moveToBottomRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _moveToBottomRaw(requestParameters: ApiLayerAPIMoveToBottomRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
+        const requestOptions = await this._moveToBottomRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => OkResultFromJSON(jsonValue));
     }
@@ -676,14 +676,14 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async moveToBottom(segmentRequest: SegmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<OkResult> {
-        const response = await this.moveToBottomRaw({ segmentRequest: segmentRequest }, initOverrides);
+        const response = await this._moveToBottomRaw({ segmentRequest: segmentRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for moveToTop without sending the request
      */
-    async moveToTopRequestOpts(requestParameters: ApiLayerAPIMoveToTopRequest): Promise<runtime.RequestOpts> {
+    protected async _moveToTopRequestOpts(requestParameters: ApiLayerAPIMoveToTopRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['segmentRequest'] == null) {
             throw new runtime.RequiredError(
                 'segmentRequest',
@@ -711,9 +711,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async moveToTopRaw(requestParameters: ApiLayerAPIMoveToTopRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
-        const requestOptions = await this.moveToTopRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _moveToTopRaw(requestParameters: ApiLayerAPIMoveToTopRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
+        const requestOptions = await this._moveToTopRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => OkResultFromJSON(jsonValue));
     }
@@ -721,14 +721,14 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async moveToTop(segmentRequest: SegmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<OkResult> {
-        const response = await this.moveToTopRaw({ segmentRequest: segmentRequest }, initOverrides);
+        const response = await this._moveToTopRaw({ segmentRequest: segmentRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for reverseDepth without sending the request
      */
-    async reverseDepthRequestOpts(requestParameters: ApiLayerAPIReverseDepthRequest): Promise<runtime.RequestOpts> {
+    protected async _reverseDepthRequestOpts(requestParameters: ApiLayerAPIReverseDepthRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['segmentReverseDepthRequest'] == null) {
             throw new runtime.RequiredError(
                 'segmentReverseDepthRequest',
@@ -756,9 +756,9 @@ export class LayerAPI extends runtime.BaseAPI {
 
     /**
      */
-    async reverseDepthRaw(requestParameters: ApiLayerAPIReverseDepthRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
-        const requestOptions = await this.reverseDepthRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _reverseDepthRaw(requestParameters: ApiLayerAPIReverseDepthRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
+        const requestOptions = await this._reverseDepthRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => OkResultFromJSON(jsonValue));
     }
@@ -766,7 +766,7 @@ export class LayerAPI extends runtime.BaseAPI {
     /**
      */
     async reverseDepth(segmentReverseDepthRequest: SegmentReverseDepthRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<OkResult> {
-        const response = await this.reverseDepthRaw({ segmentReverseDepthRequest: segmentReverseDepthRequest }, initOverrides);
+        const response = await this._reverseDepthRaw({ segmentReverseDepthRequest: segmentReverseDepthRequest }, initOverrides);
         return await response.value();
     }
 

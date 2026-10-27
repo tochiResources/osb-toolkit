@@ -85,7 +85,7 @@ export class MediaAPI extends runtime.BaseAPI {
     /**
      * Creates request options for encodeVideo without sending the request
      */
-    async encodeVideoRequestOpts(requestParameters: ApiMediaAPIEncodeVideoOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _encodeVideoRequestOpts(requestParameters: ApiMediaAPIEncodeVideoOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['encodeVideoRequest'] == null) {
             throw new runtime.RequiredError(
                 'encodeVideoRequest',
@@ -113,9 +113,9 @@ export class MediaAPI extends runtime.BaseAPI {
 
     /**
      */
-    async encodeVideoRaw(requestParameters: ApiMediaAPIEncodeVideoOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MediaInfo>> {
-        const requestOptions = await this.encodeVideoRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _encodeVideoRaw(requestParameters: ApiMediaAPIEncodeVideoOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MediaInfo>> {
+        const requestOptions = await this._encodeVideoRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => MediaInfoFromJSON(jsonValue));
     }
@@ -123,14 +123,14 @@ export class MediaAPI extends runtime.BaseAPI {
     /**
      */
     async encodeVideo(encodeVideoRequest: EncodeVideoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MediaInfo> {
-        const response = await this.encodeVideoRaw({ encodeVideoRequest: encodeVideoRequest }, initOverrides);
+        const response = await this._encodeVideoRaw({ encodeVideoRequest: encodeVideoRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for extractAudio without sending the request
      */
-    async extractAudioRequestOpts(requestParameters: ApiMediaAPIExtractAudioOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _extractAudioRequestOpts(requestParameters: ApiMediaAPIExtractAudioOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['extractAudioRequest'] == null) {
             throw new runtime.RequiredError(
                 'extractAudioRequest',
@@ -158,9 +158,9 @@ export class MediaAPI extends runtime.BaseAPI {
 
     /**
      */
-    async extractAudioRaw(requestParameters: ApiMediaAPIExtractAudioOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
-        const requestOptions = await this.extractAudioRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _extractAudioRaw(requestParameters: ApiMediaAPIExtractAudioOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
+        const requestOptions = await this._extractAudioRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => OkResultFromJSON(jsonValue));
     }
@@ -168,14 +168,14 @@ export class MediaAPI extends runtime.BaseAPI {
     /**
      */
     async extractAudio(extractAudioRequest: ExtractAudioRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<OkResult> {
-        const response = await this.extractAudioRaw({ extractAudioRequest: extractAudioRequest }, initOverrides);
+        const response = await this._extractAudioRaw({ extractAudioRequest: extractAudioRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for extractFrames without sending the request
      */
-    async extractFramesRequestOpts(requestParameters: ApiMediaAPIExtractFramesOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _extractFramesRequestOpts(requestParameters: ApiMediaAPIExtractFramesOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['extractFramesRequest'] == null) {
             throw new runtime.RequiredError(
                 'extractFramesRequest',
@@ -203,9 +203,9 @@ export class MediaAPI extends runtime.BaseAPI {
 
     /**
      */
-    async extractFramesRaw(requestParameters: ApiMediaAPIExtractFramesOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FrameResult>> {
-        const requestOptions = await this.extractFramesRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _extractFramesRaw(requestParameters: ApiMediaAPIExtractFramesOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FrameResult>> {
+        const requestOptions = await this._extractFramesRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FrameResultFromJSON(jsonValue));
     }
@@ -213,14 +213,14 @@ export class MediaAPI extends runtime.BaseAPI {
     /**
      */
     async extractFrames(extractFramesRequest: ExtractFramesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FrameResult> {
-        const response = await this.extractFramesRaw({ extractFramesRequest: extractFramesRequest }, initOverrides);
+        const response = await this._extractFramesRaw({ extractFramesRequest: extractFramesRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for info without sending the request
      */
-    async infoRequestOpts(requestParameters: ApiMediaAPIInfoRequest): Promise<runtime.RequestOpts> {
+    protected async _infoRequestOpts(requestParameters: ApiMediaAPIInfoRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['pathRequest'] == null) {
             throw new runtime.RequiredError(
                 'pathRequest',
@@ -248,9 +248,9 @@ export class MediaAPI extends runtime.BaseAPI {
 
     /**
      */
-    async infoRaw(requestParameters: ApiMediaAPIInfoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MediaInfo>> {
-        const requestOptions = await this.infoRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _infoRaw(requestParameters: ApiMediaAPIInfoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MediaInfo>> {
+        const requestOptions = await this._infoRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => MediaInfoFromJSON(jsonValue));
     }
@@ -258,7 +258,7 @@ export class MediaAPI extends runtime.BaseAPI {
     /**
      */
     async info(pathRequest: PathRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MediaInfo> {
-        const response = await this.infoRaw({ pathRequest: pathRequest }, initOverrides);
+        const response = await this._infoRaw({ pathRequest: pathRequest }, initOverrides);
         return await response.value();
     }
 

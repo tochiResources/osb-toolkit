@@ -124,7 +124,7 @@ export class GeneratorAPI extends runtime.BaseAPI {
     /**
      * Creates request options for beatmap without sending the request
      */
-    async beatmapRequestOpts(): Promise<runtime.RequestOpts> {
+    protected async _beatmapRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -142,9 +142,9 @@ export class GeneratorAPI extends runtime.BaseAPI {
 
     /**
      */
-    async beatmapRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Beatmap>> {
-        const requestOptions = await this.beatmapRequestOpts();
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _beatmapRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Beatmap>> {
+        const requestOptions = await this._beatmapRequestOpts();
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BeatmapFromJSON(jsonValue));
     }
@@ -152,14 +152,14 @@ export class GeneratorAPI extends runtime.BaseAPI {
     /**
      */
     async beatmap(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Beatmap> {
-        const response = await this.beatmapRaw(initOverrides);
+        const response = await this._beatmapRaw(initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for controlPointAt without sending the request
      */
-    async controlPointAtRequestOpts(requestParameters: ApiGeneratorAPIControlPointAtRequest): Promise<runtime.RequestOpts> {
+    protected async _controlPointAtRequestOpts(requestParameters: ApiGeneratorAPIControlPointAtRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['timeRequest'] == null) {
             throw new runtime.RequiredError(
                 'timeRequest',
@@ -187,9 +187,9 @@ export class GeneratorAPI extends runtime.BaseAPI {
 
     /**
      */
-    async controlPointAtRaw(requestParameters: ApiGeneratorAPIControlPointAtRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ControlPoint>> {
-        const requestOptions = await this.controlPointAtRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _controlPointAtRaw(requestParameters: ApiGeneratorAPIControlPointAtRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ControlPoint>> {
+        const requestOptions = await this._controlPointAtRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ControlPointFromJSON(jsonValue));
     }
@@ -197,14 +197,14 @@ export class GeneratorAPI extends runtime.BaseAPI {
     /**
      */
     async controlPointAt(timeRequest: TimeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ControlPoint> {
-        const response = await this.controlPointAtRaw({ timeRequest: timeRequest }, initOverrides);
+        const response = await this._controlPointAtRaw({ timeRequest: timeRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for importOsb without sending the request
      */
-    async importOsbRequestOpts(requestParameters: ApiGeneratorAPIImportOsbRequest): Promise<runtime.RequestOpts> {
+    protected async _importOsbRequestOpts(requestParameters: ApiGeneratorAPIImportOsbRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['textRequest'] == null) {
             throw new runtime.RequiredError(
                 'textRequest',
@@ -232,9 +232,9 @@ export class GeneratorAPI extends runtime.BaseAPI {
 
     /**
      */
-    async importOsbRaw(requestParameters: ApiGeneratorAPIImportOsbRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportOsbResult>> {
-        const requestOptions = await this.importOsbRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _importOsbRaw(requestParameters: ApiGeneratorAPIImportOsbRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportOsbResult>> {
+        const requestOptions = await this._importOsbRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ImportOsbResultFromJSON(jsonValue));
     }
@@ -242,14 +242,14 @@ export class GeneratorAPI extends runtime.BaseAPI {
     /**
      */
     async importOsb(textRequest: TextRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportOsbResult> {
-        const response = await this.importOsbRaw({ textRequest: textRequest }, initOverrides);
+        const response = await this._importOsbRaw({ textRequest: textRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for layerHandle without sending the request
      */
-    async layerHandleRequestOpts(requestParameters: ApiGeneratorAPILayerHandleOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _layerHandleRequestOpts(requestParameters: ApiGeneratorAPILayerHandleOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['layerHandleRequest'] == null) {
             throw new runtime.RequiredError(
                 'layerHandleRequest',
@@ -277,9 +277,9 @@ export class GeneratorAPI extends runtime.BaseAPI {
 
     /**
      */
-    async layerHandleRaw(requestParameters: ApiGeneratorAPILayerHandleOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LayerHandle>> {
-        const requestOptions = await this.layerHandleRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _layerHandleRaw(requestParameters: ApiGeneratorAPILayerHandleOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LayerHandle>> {
+        const requestOptions = await this._layerHandleRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LayerHandleFromJSON(jsonValue));
     }
@@ -287,14 +287,14 @@ export class GeneratorAPI extends runtime.BaseAPI {
     /**
      */
     async layerHandle(layerHandleRequest: LayerHandleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LayerHandle> {
-        const response = await this.layerHandleRaw({ layerHandleRequest: layerHandleRequest }, initOverrides);
+        const response = await this._layerHandleRaw({ layerHandleRequest: layerHandleRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for loadBeatmap without sending the request
      */
-    async loadBeatmapRequestOpts(requestParameters: ApiGeneratorAPILoadBeatmapRequest): Promise<runtime.RequestOpts> {
+    protected async _loadBeatmapRequestOpts(requestParameters: ApiGeneratorAPILoadBeatmapRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['textRequest'] == null) {
             throw new runtime.RequiredError(
                 'textRequest',
@@ -322,9 +322,9 @@ export class GeneratorAPI extends runtime.BaseAPI {
 
     /**
      */
-    async loadBeatmapRaw(requestParameters: ApiGeneratorAPILoadBeatmapRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LoadBeatmapResult>> {
-        const requestOptions = await this.loadBeatmapRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _loadBeatmapRaw(requestParameters: ApiGeneratorAPILoadBeatmapRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LoadBeatmapResult>> {
+        const requestOptions = await this._loadBeatmapRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LoadBeatmapResultFromJSON(jsonValue));
     }
@@ -332,14 +332,14 @@ export class GeneratorAPI extends runtime.BaseAPI {
     /**
      */
     async loadBeatmap(textRequest: TextRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LoadBeatmapResult> {
-        const response = await this.loadBeatmapRaw({ textRequest: textRequest }, initOverrides);
+        const response = await this._loadBeatmapRaw({ textRequest: textRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for random without sending the request
      */
-    async randomRequestOpts(requestParameters: ApiGeneratorAPIRandomOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _randomRequestOpts(requestParameters: ApiGeneratorAPIRandomOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['randomRequest'] == null) {
             throw new runtime.RequiredError(
                 'randomRequest',
@@ -367,9 +367,9 @@ export class GeneratorAPI extends runtime.BaseAPI {
 
     /**
      */
-    async randomRaw(requestParameters: ApiGeneratorAPIRandomOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RandomResult>> {
-        const requestOptions = await this.randomRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _randomRaw(requestParameters: ApiGeneratorAPIRandomOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RandomResult>> {
+        const requestOptions = await this._randomRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RandomResultFromJSON(jsonValue));
     }
@@ -377,14 +377,14 @@ export class GeneratorAPI extends runtime.BaseAPI {
     /**
      */
     async random(randomRequest: RandomRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RandomResult> {
-        const response = await this.randomRaw({ randomRequest: randomRequest }, initOverrides);
+        const response = await this._randomRaw({ randomRequest: randomRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for spriteCount without sending the request
      */
-    async spriteCountRequestOpts(): Promise<runtime.RequestOpts> {
+    protected async _spriteCountRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -402,9 +402,9 @@ export class GeneratorAPI extends runtime.BaseAPI {
 
     /**
      */
-    async spriteCountRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SpriteCountResult>> {
-        const requestOptions = await this.spriteCountRequestOpts();
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _spriteCountRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SpriteCountResult>> {
+        const requestOptions = await this._spriteCountRequestOpts();
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SpriteCountResultFromJSON(jsonValue));
     }
@@ -412,14 +412,14 @@ export class GeneratorAPI extends runtime.BaseAPI {
     /**
      */
     async spriteCount(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SpriteCountResult> {
-        const response = await this.spriteCountRaw(initOverrides);
+        const response = await this._spriteCountRaw(initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for storyboard without sending the request
      */
-    async storyboardRequestOpts(): Promise<runtime.RequestOpts> {
+    protected async _storyboardRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -437,9 +437,9 @@ export class GeneratorAPI extends runtime.BaseAPI {
 
     /**
      */
-    async storyboardRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Storyboard>> {
-        const requestOptions = await this.storyboardRequestOpts();
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _storyboardRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Storyboard>> {
+        const requestOptions = await this._storyboardRequestOpts();
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoryboardFromJSON(jsonValue));
     }
@@ -447,14 +447,14 @@ export class GeneratorAPI extends runtime.BaseAPI {
     /**
      */
     async storyboard(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Storyboard> {
-        const response = await this.storyboardRaw(initOverrides);
+        const response = await this._storyboardRaw(initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for timingPointAt without sending the request
      */
-    async timingPointAtRequestOpts(requestParameters: ApiGeneratorAPITimingPointAtRequest): Promise<runtime.RequestOpts> {
+    protected async _timingPointAtRequestOpts(requestParameters: ApiGeneratorAPITimingPointAtRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['timeRequest'] == null) {
             throw new runtime.RequiredError(
                 'timeRequest',
@@ -482,9 +482,9 @@ export class GeneratorAPI extends runtime.BaseAPI {
 
     /**
      */
-    async timingPointAtRaw(requestParameters: ApiGeneratorAPITimingPointAtRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ControlPoint>> {
-        const requestOptions = await this.timingPointAtRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _timingPointAtRaw(requestParameters: ApiGeneratorAPITimingPointAtRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ControlPoint>> {
+        const requestOptions = await this._timingPointAtRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ControlPointFromJSON(jsonValue));
     }
@@ -492,7 +492,7 @@ export class GeneratorAPI extends runtime.BaseAPI {
     /**
      */
     async timingPointAt(timeRequest: TimeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ControlPoint> {
-        const response = await this.timingPointAtRaw({ timeRequest: timeRequest }, initOverrides);
+        const response = await this._timingPointAtRaw({ timeRequest: timeRequest }, initOverrides);
         return await response.value();
     }
 

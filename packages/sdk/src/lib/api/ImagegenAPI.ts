@@ -39,7 +39,7 @@ export class ImagegenAPI extends runtime.BaseAPI {
     /**
      * Creates request options for renderShapes without sending the request
      */
-    async renderShapesRequestOpts(requestParameters: ApiImagegenAPIRenderShapesOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _renderShapesRequestOpts(requestParameters: ApiImagegenAPIRenderShapesOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['renderShapesRequest'] == null) {
             throw new runtime.RequiredError(
                 'renderShapesRequest',
@@ -67,9 +67,9 @@ export class ImagegenAPI extends runtime.BaseAPI {
 
     /**
      */
-    async renderShapesRaw(requestParameters: ApiImagegenAPIRenderShapesOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImageInfo>> {
-        const requestOptions = await this.renderShapesRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _renderShapesRaw(requestParameters: ApiImagegenAPIRenderShapesOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImageInfo>> {
+        const requestOptions = await this._renderShapesRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ImageInfoFromJSON(jsonValue));
     }
@@ -77,7 +77,7 @@ export class ImagegenAPI extends runtime.BaseAPI {
     /**
      */
     async renderShapes(renderShapesRequest: RenderShapesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImageInfo> {
-        const response = await this.renderShapesRaw({ renderShapesRequest: renderShapesRequest }, initOverrides);
+        const response = await this._renderShapesRaw({ renderShapesRequest: renderShapesRequest }, initOverrides);
         return await response.value();
     }
 

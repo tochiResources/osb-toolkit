@@ -123,14 +123,14 @@ export class BaseAPI {
      * @param mime - MIME (Multipurpose Internet Mail Extensions)
      * @return True if the given MIME is JSON, false otherwise.
      */
-    protected isJsonMime(mime: string | null | undefined): boolean {
+    protected _isJsonMime(mime: string | null | undefined): boolean {
         if (!mime) {
             return false;
         }
         return BaseAPI.jsonRegex.test(mime);
     }
 
-    protected async request(context: RequestOpts, initOverrides?: RequestInit | InitOverrideFunction): Promise<Response> {
+    protected async _request(context: RequestOpts, initOverrides?: RequestInit | InitOverrideFunction): Promise<Response> {
         const { url, init } = await this.createFetchParams(context, initOverrides);
         const response = await this.fetchApi(url, init);
         if (response && (response.status >= 200 && response.status < 300)) {
@@ -176,7 +176,7 @@ export class BaseAPI {
             || (overriddenInit.body instanceof URLSearchParams)
             || isBlob(overriddenInit.body)) {
           body = overriddenInit.body;
-        } else if (this.isJsonMime(headers['Content-Type'])) {
+        } else if (this._isJsonMime(headers['Content-Type'])) {
           body = JSON.stringify(overriddenInit.body);
         } else {
           body = overriddenInit.body;

@@ -53,7 +53,7 @@ export class HelpersAPI extends runtime.BaseAPI {
     /**
      * Creates request options for call without sending the request
      */
-    async callRequestOpts(requestParameters: ApiHelpersAPICallRequest): Promise<runtime.RequestOpts> {
+    protected async _callRequestOpts(requestParameters: ApiHelpersAPICallRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['helperRequest'] == null) {
             throw new runtime.RequiredError(
                 'helperRequest',
@@ -81,9 +81,9 @@ export class HelpersAPI extends runtime.BaseAPI {
 
     /**
      */
-    async callRaw(requestParameters: ApiHelpersAPICallRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HelperResult>> {
-        const requestOptions = await this.callRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _callRaw(requestParameters: ApiHelpersAPICallRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HelperResult>> {
+        const requestOptions = await this._callRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => HelperResultFromJSON(jsonValue));
     }
@@ -91,14 +91,14 @@ export class HelpersAPI extends runtime.BaseAPI {
     /**
      */
     async call(helperRequest: HelperRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<HelperResult> {
-        const response = await this.callRaw({ helperRequest: helperRequest }, initOverrides);
+        const response = await this._callRaw({ helperRequest: helperRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for commands without sending the request
      */
-    async commandsRequestOpts(requestParameters: ApiHelpersAPICommandsRequest): Promise<runtime.RequestOpts> {
+    protected async _commandsRequestOpts(requestParameters: ApiHelpersAPICommandsRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['helperRequest'] == null) {
             throw new runtime.RequiredError(
                 'helperRequest',
@@ -126,9 +126,9 @@ export class HelpersAPI extends runtime.BaseAPI {
 
     /**
      */
-    async commandsRaw(requestParameters: ApiHelpersAPICommandsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HelperResult>> {
-        const requestOptions = await this.commandsRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _commandsRaw(requestParameters: ApiHelpersAPICommandsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HelperResult>> {
+        const requestOptions = await this._commandsRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => HelperResultFromJSON(jsonValue));
     }
@@ -136,14 +136,14 @@ export class HelpersAPI extends runtime.BaseAPI {
     /**
      */
     async commands(helperRequest: HelperRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<HelperResult> {
-        const response = await this.commandsRaw({ helperRequest: helperRequest }, initOverrides);
+        const response = await this._commandsRaw({ helperRequest: helperRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for keyframes without sending the request
      */
-    async keyframesRequestOpts(requestParameters: ApiHelpersAPIKeyframesRequest): Promise<runtime.RequestOpts> {
+    protected async _keyframesRequestOpts(requestParameters: ApiHelpersAPIKeyframesRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['helperRequest'] == null) {
             throw new runtime.RequiredError(
                 'helperRequest',
@@ -171,9 +171,9 @@ export class HelpersAPI extends runtime.BaseAPI {
 
     /**
      */
-    async keyframesRaw(requestParameters: ApiHelpersAPIKeyframesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HelperResult>> {
-        const requestOptions = await this.keyframesRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _keyframesRaw(requestParameters: ApiHelpersAPIKeyframesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HelperResult>> {
+        const requestOptions = await this._keyframesRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => HelperResultFromJSON(jsonValue));
     }
@@ -181,7 +181,7 @@ export class HelpersAPI extends runtime.BaseAPI {
     /**
      */
     async keyframes(helperRequest: HelperRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<HelperResult> {
-        const response = await this.keyframesRaw({ helperRequest: helperRequest }, initOverrides);
+        const response = await this._keyframesRaw({ helperRequest: helperRequest }, initOverrides);
         return await response.value();
     }
 

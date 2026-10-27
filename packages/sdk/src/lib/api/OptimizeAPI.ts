@@ -39,7 +39,7 @@ export class OptimizeAPI extends runtime.BaseAPI {
     /**
      * Creates request options for optimizeOsb without sending the request
      */
-    async optimizeOsbRequestOpts(requestParameters: ApiOptimizeAPIOptimizeOsbRequest): Promise<runtime.RequestOpts> {
+    protected async _optimizeOsbRequestOpts(requestParameters: ApiOptimizeAPIOptimizeOsbRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['optimizeRequest'] == null) {
             throw new runtime.RequiredError(
                 'optimizeRequest',
@@ -67,9 +67,9 @@ export class OptimizeAPI extends runtime.BaseAPI {
 
     /**
      */
-    async optimizeOsbRaw(requestParameters: ApiOptimizeAPIOptimizeOsbRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OptimizeResult>> {
-        const requestOptions = await this.optimizeOsbRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _optimizeOsbRaw(requestParameters: ApiOptimizeAPIOptimizeOsbRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OptimizeResult>> {
+        const requestOptions = await this._optimizeOsbRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => OptimizeResultFromJSON(jsonValue));
     }
@@ -77,7 +77,7 @@ export class OptimizeAPI extends runtime.BaseAPI {
     /**
      */
     async optimizeOsb(optimizeRequest: OptimizeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<OptimizeResult> {
-        const response = await this.optimizeOsbRaw({ optimizeRequest: optimizeRequest }, initOverrides);
+        const response = await this._optimizeOsbRaw({ optimizeRequest: optimizeRequest }, initOverrides);
         return await response.value();
     }
 

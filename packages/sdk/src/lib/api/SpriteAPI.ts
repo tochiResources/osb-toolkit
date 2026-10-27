@@ -104,7 +104,7 @@ export class SpriteAPI extends runtime.BaseAPI {
     /**
      * Creates request options for command without sending the request
      */
-    async commandRequestOpts(requestParameters: ApiSpriteAPICommandOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _commandRequestOpts(requestParameters: ApiSpriteAPICommandOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['commandRequest'] == null) {
             throw new runtime.RequiredError(
                 'commandRequest',
@@ -132,9 +132,9 @@ export class SpriteAPI extends runtime.BaseAPI {
 
     /**
      */
-    async commandRaw(requestParameters: ApiSpriteAPICommandOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
-        const requestOptions = await this.commandRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _commandRaw(requestParameters: ApiSpriteAPICommandOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
+        const requestOptions = await this._commandRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => OkResultFromJSON(jsonValue));
     }
@@ -142,14 +142,14 @@ export class SpriteAPI extends runtime.BaseAPI {
     /**
      */
     async command(commandRequest: CommandRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<OkResult> {
-        const response = await this.commandRaw({ commandRequest: commandRequest }, initOverrides);
+        const response = await this._commandRaw({ commandRequest: commandRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for endGroup without sending the request
      */
-    async endGroupRequestOpts(requestParameters: ApiSpriteAPIEndGroupRequest): Promise<runtime.RequestOpts> {
+    protected async _endGroupRequestOpts(requestParameters: ApiSpriteAPIEndGroupRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['handleRequest'] == null) {
             throw new runtime.RequiredError(
                 'handleRequest',
@@ -177,9 +177,9 @@ export class SpriteAPI extends runtime.BaseAPI {
 
     /**
      */
-    async endGroupRaw(requestParameters: ApiSpriteAPIEndGroupRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
-        const requestOptions = await this.endGroupRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _endGroupRaw(requestParameters: ApiSpriteAPIEndGroupRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
+        const requestOptions = await this._endGroupRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => OkResultFromJSON(jsonValue));
     }
@@ -187,14 +187,14 @@ export class SpriteAPI extends runtime.BaseAPI {
     /**
      */
     async endGroup(handleRequest: HandleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<OkResult> {
-        const response = await this.endGroupRaw({ handleRequest: handleRequest }, initOverrides);
+        const response = await this._endGroupRaw({ handleRequest: handleRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for info without sending the request
      */
-    async infoRequestOpts(requestParameters: ApiSpriteAPIInfoRequest): Promise<runtime.RequestOpts> {
+    protected async _infoRequestOpts(requestParameters: ApiSpriteAPIInfoRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['handleRequest'] == null) {
             throw new runtime.RequiredError(
                 'handleRequest',
@@ -222,9 +222,9 @@ export class SpriteAPI extends runtime.BaseAPI {
 
     /**
      */
-    async infoRaw(requestParameters: ApiSpriteAPIInfoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SpriteInfo>> {
-        const requestOptions = await this.infoRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _infoRaw(requestParameters: ApiSpriteAPIInfoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SpriteInfo>> {
+        const requestOptions = await this._infoRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SpriteInfoFromJSON(jsonValue));
     }
@@ -232,14 +232,14 @@ export class SpriteAPI extends runtime.BaseAPI {
     /**
      */
     async info(handleRequest: HandleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SpriteInfo> {
-        const response = await this.infoRaw({ handleRequest: handleRequest }, initOverrides);
+        const response = await this._infoRaw({ handleRequest: handleRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for startLoopGroup without sending the request
      */
-    async startLoopGroupRequestOpts(requestParameters: ApiSpriteAPIStartLoopGroupOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _startLoopGroupRequestOpts(requestParameters: ApiSpriteAPIStartLoopGroupOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['startLoopGroupRequest'] == null) {
             throw new runtime.RequiredError(
                 'startLoopGroupRequest',
@@ -267,9 +267,9 @@ export class SpriteAPI extends runtime.BaseAPI {
 
     /**
      */
-    async startLoopGroupRaw(requestParameters: ApiSpriteAPIStartLoopGroupOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
-        const requestOptions = await this.startLoopGroupRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _startLoopGroupRaw(requestParameters: ApiSpriteAPIStartLoopGroupOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
+        const requestOptions = await this._startLoopGroupRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => OkResultFromJSON(jsonValue));
     }
@@ -277,14 +277,14 @@ export class SpriteAPI extends runtime.BaseAPI {
     /**
      */
     async startLoopGroup(startLoopGroupRequest: StartLoopGroupRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<OkResult> {
-        const response = await this.startLoopGroupRaw({ startLoopGroupRequest: startLoopGroupRequest }, initOverrides);
+        const response = await this._startLoopGroupRaw({ startLoopGroupRequest: startLoopGroupRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for startTriggerGroup without sending the request
      */
-    async startTriggerGroupRequestOpts(requestParameters: ApiSpriteAPIStartTriggerGroupOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _startTriggerGroupRequestOpts(requestParameters: ApiSpriteAPIStartTriggerGroupOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['startTriggerGroupRequest'] == null) {
             throw new runtime.RequiredError(
                 'startTriggerGroupRequest',
@@ -312,9 +312,9 @@ export class SpriteAPI extends runtime.BaseAPI {
 
     /**
      */
-    async startTriggerGroupRaw(requestParameters: ApiSpriteAPIStartTriggerGroupOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
-        const requestOptions = await this.startTriggerGroupRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _startTriggerGroupRaw(requestParameters: ApiSpriteAPIStartTriggerGroupOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OkResult>> {
+        const requestOptions = await this._startTriggerGroupRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => OkResultFromJSON(jsonValue));
     }
@@ -322,14 +322,14 @@ export class SpriteAPI extends runtime.BaseAPI {
     /**
      */
     async startTriggerGroup(startTriggerGroupRequest: StartTriggerGroupRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<OkResult> {
-        const response = await this.startTriggerGroupRaw({ startTriggerGroupRequest: startTriggerGroupRequest }, initOverrides);
+        const response = await this._startTriggerGroupRaw({ startTriggerGroupRequest: startTriggerGroupRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for stateAt without sending the request
      */
-    async stateAtRequestOpts(requestParameters: ApiSpriteAPIStateAtRequest): Promise<runtime.RequestOpts> {
+    protected async _stateAtRequestOpts(requestParameters: ApiSpriteAPIStateAtRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['spriteTimeRequest'] == null) {
             throw new runtime.RequiredError(
                 'spriteTimeRequest',
@@ -357,9 +357,9 @@ export class SpriteAPI extends runtime.BaseAPI {
 
     /**
      */
-    async stateAtRaw(requestParameters: ApiSpriteAPIStateAtRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SpriteState>> {
-        const requestOptions = await this.stateAtRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _stateAtRaw(requestParameters: ApiSpriteAPIStateAtRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SpriteState>> {
+        const requestOptions = await this._stateAtRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SpriteStateFromJSON(jsonValue));
     }
@@ -367,7 +367,7 @@ export class SpriteAPI extends runtime.BaseAPI {
     /**
      */
     async stateAt(spriteTimeRequest: SpriteTimeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SpriteState> {
-        const response = await this.stateAtRaw({ spriteTimeRequest: spriteTimeRequest }, initOverrides);
+        const response = await this._stateAtRaw({ spriteTimeRequest: spriteTimeRequest }, initOverrides);
         return await response.value();
     }
 

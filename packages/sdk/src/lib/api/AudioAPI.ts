@@ -56,7 +56,7 @@ export class AudioAPI extends runtime.BaseAPI {
     /**
      * Creates request options for audioDuration without sending the request
      */
-    async audioDurationRequestOpts(): Promise<runtime.RequestOpts> {
+    protected async _audioDurationRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -74,9 +74,9 @@ export class AudioAPI extends runtime.BaseAPI {
 
     /**
      */
-    async audioDurationRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AudioDurationResult>> {
-        const requestOptions = await this.audioDurationRequestOpts();
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _audioDurationRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AudioDurationResult>> {
+        const requestOptions = await this._audioDurationRequestOpts();
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => AudioDurationResultFromJSON(jsonValue));
     }
@@ -84,14 +84,14 @@ export class AudioAPI extends runtime.BaseAPI {
     /**
      */
     async audioDuration(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AudioDurationResult> {
-        const response = await this.audioDurationRaw(initOverrides);
+        const response = await this._audioDurationRaw(initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for fft without sending the request
      */
-    async fftRequestOpts(requestParameters: ApiAudioAPIFftOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _fftRequestOpts(requestParameters: ApiAudioAPIFftOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['fftRequest'] == null) {
             throw new runtime.RequiredError(
                 'fftRequest',
@@ -119,9 +119,9 @@ export class AudioAPI extends runtime.BaseAPI {
 
     /**
      */
-    async fftRaw(requestParameters: ApiAudioAPIFftOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FftResult>> {
-        const requestOptions = await this.fftRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _fftRaw(requestParameters: ApiAudioAPIFftOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FftResult>> {
+        const requestOptions = await this._fftRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FftResultFromJSON(jsonValue));
     }
@@ -129,14 +129,14 @@ export class AudioAPI extends runtime.BaseAPI {
     /**
      */
     async fft(fftRequest: FftRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FftResult> {
-        const response = await this.fftRaw({ fftRequest: fftRequest }, initOverrides);
+        const response = await this._fftRaw({ fftRequest: fftRequest }, initOverrides);
         return await response.value();
     }
 
     /**
      * Creates request options for getFft without sending the request
      */
-    async getFftRequestOpts(requestParameters: ApiAudioAPIGetFftOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _getFftRequestOpts(requestParameters: ApiAudioAPIGetFftOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['getFftRequest'] == null) {
             throw new runtime.RequiredError(
                 'getFftRequest',
@@ -164,9 +164,9 @@ export class AudioAPI extends runtime.BaseAPI {
 
     /**
      */
-    async getFftRaw(requestParameters: ApiAudioAPIGetFftOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FftResult>> {
-        const requestOptions = await this.getFftRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
+    protected async _getFftRaw(requestParameters: ApiAudioAPIGetFftOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FftResult>> {
+        const requestOptions = await this._getFftRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FftResultFromJSON(jsonValue));
     }
@@ -174,7 +174,7 @@ export class AudioAPI extends runtime.BaseAPI {
     /**
      */
     async getFft(getFftRequest: GetFftRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FftResult> {
-        const response = await this.getFftRaw({ getFftRequest: getFftRequest }, initOverrides);
+        const response = await this._getFftRaw({ getFftRequest: getFftRequest }, initOverrides);
         return await response.value();
     }
 
