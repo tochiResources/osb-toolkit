@@ -1,11 +1,9 @@
 """osb SDK: typed, OpenAPI-generated models and clients over the native engine.
 
-Rust (``crates/osb-api``) is the source of truth; the models in ``osbtk.models``
-and the clients in ``osbtk.api`` are generated from the OpenAPI contract and
-driven through :class:`osbtk.bridge.BridgeRestClient`. The SDK is organized into
-libraries (``osbtk.libraries``): ``storyboarding``, ``storyboarding3d``,
-``animations``, ``audio``, ``curve``, ``diagnostics``, ``optimize``, ``image``,
-``image_gen`` and ``media``.
+Rust (``crates/osb-api``) is the source of truth. The generated clean clients in
+``osbtk.client`` are the primary surface; ``osb`` composes them with the handful
+of domain conveniences the contract cannot express - the effect runtime, the
+parsers/command helpers, the 3D bake and the shared motion-graphics helpers.
 """
 
 from __future__ import annotations
@@ -15,30 +13,40 @@ from typing import Any
 
 from osbtk import models  # noqa: F401  (re-export the generated models)
 from osbtk._native import bake3d, exec, fft, parse_osb, parse_osu, version
-from osbtk.api.audio_api import AudioAPI as AudioApi
-from osbtk.api.generator_api import GeneratorAPI as GeneratorApi
-from osbtk.api.layer_api import LayerAPI as LayerApi
-from osbtk.api.sprite_api import SpriteAPI as SpriteApi
+from osbtk.api.animations_api import AnimationsAPI
+from osbtk.api.audio_api import AudioAPI
+from osbtk.api.common_api import CommonAPI
+from osbtk.api.curve_api import CurveAPI
+from osbtk.api.diagnostics_api import DiagnosticsAPI
+from osbtk.api.generator_api import GeneratorAPI
+from osbtk.api.image_api import ImageAPI
+from osbtk.api.imagegen_api import ImagegenAPI
+from osbtk.api.layer_api import LayerAPI
+from osbtk.api.media_api import MediaAPI
+from osbtk.api.optimize_api import OptimizeAPI
+from osbtk.api.origin_api import OriginAPI
+from osbtk.api.parsing_api import ParsingAPI
+from osbtk.api.sprite_api import SpriteAPI
 from osbtk.api_client import ApiClient
 from osbtk.bridge import BridgeRestClient
-from osbtk.libraries import (
+from osbtk.client import (
     Animations,
-    Audio,
+    Audio as AudioClient,
+    Common,
     Curve,
     Diagnostics,
-    Helpers,
+    Generator as GeneratorClient,
     Image,
-    ImageGen,
+    Imagegen,
     Media,
     Optimize,
-    Storyboarding,
-    Storyboarding3d,
+    Origin,
+    Parsing,
 )
+from osbtk.libraries import Helpers, Storyboarding, Storyboarding3d
+from osbtk.libraries._client import STATELESS
 from osbtk.models.create_sample_request import CreateSampleRequest
 from osbtk.models.create_sprite_request import CreateSpriteRequest
-from osbtk.models.get_fft_request import GetFftRequest
-from osbtk.models.layer_handle_request import LayerHandleRequest
-from osbtk.models.time_request import TimeRequest
 from osbtk.facade import Layer, Sprite
 
 __all__ = [
@@ -59,19 +67,23 @@ __all__ = [
 
 
 class _Osb:
-    """The SDK entry point, organized into libraries."""
+    """The SDK entry point: the generated clean clients plus the domain surfaces."""
 
     storyboarding = Storyboarding
     storyboarding3d = Storyboarding3d
     helpers = Helpers
-    animations = Animations
-    audio = Audio
-    curve = Curve
-    diagnostics = Diagnostics
-    optimize = Optimize
-    image = Image
-    image_gen = ImageGen
-    media = Media
+
+    common = Common(CommonAPI(STATELESS))
+    curve = Curve(CurveAPI(STATELESS))
+    animations = Animations(AnimationsAPI(STATELESS))
+    parsing = Parsing(ParsingAPI(STATELESS))
+    origin = Origin(OriginAPI(STATELESS))
+    audio = AudioClient(AudioAPI(STATELESS))
+    diagnostics = Diagnostics(DiagnosticsAPI(STATELESS))
+    optimize = Optimize(OptimizeAPI(STATELESS))
+    image = Image(ImageAPI(STATELESS))
+    image_gen = Imagegen(ImagegenAPI(STATELESS))
+    media = Media(MediaAPI(STATELESS))
 
     def version(self) -> str:
         return version()
@@ -90,10 +102,10 @@ class Runtime:
         self.bridge = lambda request: self._native.exec(json.dumps(request))
         client = ApiClient()
         client.rest_client = BridgeRestClient(self._native.exec)
-        self.generator = GeneratorApi(client)
-        self.layer = LayerApi(client)
-        self.sprite = SpriteApi(client)
-        self.audio = AudioApi(client)
+        self.generator = GeneratorClient(GeneratorAPI(client))
+        self.layer = LayerAPI(client)
+        self.sprite = SpriteAPI(client)
+        self.audio = AudioClient(AudioAPI(client))
 
     def close(self) -> None:
         self._native.close()
@@ -122,8 +134,8 @@ class Generator:
 
     def get_layer(self, name: str) -> Layer:
         """Returns a layer that creates sprites/animations/samples."""
-        handle = self.runtime.generator.layer_handle(LayerHandleRequest(name=name))
-        return Layer(self.runtime.bridge, name, handle.layer)
+        handle = self.runtime.generator.layer_handle(name)
+        return Layer(self.runtime.bridge, name, handle)
 
     def create_animation(self, request: Any) -> Any:
         return self.runtime.layer.create_animation(request)
@@ -137,13 +149,13 @@ class Generator:
         return self.runtime.generator.beatmap()
 
     def get_fft(self, time: float, magnitudes: int) -> Any:
-        return self.runtime.audio.get_fft(GetFftRequest(time=time, magnitudes=magnitudes))
+        return self.runtime.audio.get_fft(time, magnitudes)
 
     def get_timing_point_at(self, time: float) -> Any:
-        return self.runtime.generator.timing_point_at(TimeRequest(time=time))
+        return self.runtime.generator.timing_point_at(time)
 
     def sprite_count(self) -> int:
-        return self.runtime.generator.sprite_count().sprite_count
+        return self.runtime.generator.sprite_count()
 
     def storyboard(self) -> Any:
         """The built storyboard model, so ``generate()``'s result can be read back."""

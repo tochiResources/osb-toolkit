@@ -14,10 +14,7 @@ from osbtk.models import (
     CreateSpriteRequest,
     CurveKind,
     CurveSpec,
-    FftRequest,
-    LayerHandleRequest,
     OptimizeOptionsInput,
-    RenderShapesRequest,
     RgbaColor,
     Shape,
     ShapeKind,
@@ -88,8 +85,8 @@ class SdkTests(unittest.TestCase):
     def test_drives_the_handle_bound_clean_client(self) -> None:
         runtime = Runtime()
         try:
-            handle = runtime.generator.layer_handle(LayerHandleRequest(name="Foreground"))
-            layer = CleanLayer(runtime.layer, runtime.sprite, handle.layer)
+            handle = runtime.generator.layer_handle("Foreground")
+            layer = CleanLayer(runtime.layer, runtime.sprite, handle)
             self.assertTrue(CleanLayer.instance_of(layer))
 
             sprite = layer.create_sprite(
@@ -114,7 +111,7 @@ class SdkTests(unittest.TestCase):
 
     def test_surfaces_native_errors(self) -> None:
         with self.assertRaises(ApiException):
-            osb.audio.fft(FftRequest(path="does-not-exist.wav"))
+            osb.audio.fft("does-not-exist.wav")
 
     def test_drives_the_curve_library(self) -> None:
         curve = CurveSpec(
@@ -123,7 +120,7 @@ class SdkTests(unittest.TestCase):
         )
         self.assertAlmostEqual(osb.curve.length(curve), 100.0, places=6)
         self.assertAlmostEqual(osb.curve.point(curve, 0.5).x, 50.0, places=6)
-        self.assertEqual(len(osb.curve.sample(curve, 3).points), 3)
+        self.assertEqual(len(osb.curve.sample(3, curve).points), 3)
         self.assertAlmostEqual(osb.curve.bounding_box(curve).max.x, 100.0, places=6)
         simplified = osb.curve.simplify(
             [
@@ -149,7 +146,8 @@ class SdkTests(unittest.TestCase):
             Vector2(x=0.0, y=10.0),
             Vector2(x=10.0, y=0.0),
         )
-        self.assertAlmostEqual(hit.point.x, 5.0, places=6)
+        self.assertIsNotNone(hit)
+        self.assertAlmostEqual(hit.x, 5.0, places=6)
 
     def test_diagnoses_storyboards_and_mapsets(self) -> None:
         report = osb.diagnostics.diagnose_osu(
@@ -163,9 +161,9 @@ class SdkTests(unittest.TestCase):
 
     def test_optimizes_storyboards(self) -> None:
         result = osb.optimize.optimize_osb(
+            OptimizeOptionsInput(deduplicate=True),
             '[Events]\nSprite,Foreground,Centre,"sb/dot.png",320,240\n'
             " F,0,0,100,0,1\n F,0,0,100,0,1\n",
-            OptimizeOptionsInput(deduplicate=True),
         )
         self.assertEqual(result.stats.deduplicated, 1)
         self.assertIn("Sprite", result.osb)
@@ -400,19 +398,17 @@ class SdkTests(unittest.TestCase):
 
     def test_renders_shapes(self) -> None:
         info = osb.image_gen.render_shapes(
-            RenderShapesRequest(
-                width=32,
-                height=32,
-                shapes=[
-                    Shape(
-                        kind=ShapeKind("Rect"),
-                        center=Vector2(x=16.0, y=16.0),
-                        size=Vector2(x=20.0, y=20.0),
-                        fill=RgbaColor(r=10, g=20, b=30, a=255),
-                    )
-                ],
-                output="osbtk-python-render.png",
-            )
+            32,
+            32,
+            [
+                Shape(
+                    kind=ShapeKind("Rect"),
+                    center=Vector2(x=16.0, y=16.0),
+                    size=Vector2(x=20.0, y=20.0),
+                    fill=RgbaColor(r=10, g=20, b=30, a=255),
+                )
+            ],
+            "osbtk-python-render.png",
         )
         self.assertEqual(info.width, 32)
 

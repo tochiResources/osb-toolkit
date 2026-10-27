@@ -7,13 +7,13 @@ import math
 from typing import Any, Dict, List, Optional
 
 from osbtk.api.helpers_api import HelpersAPI as HelpersApi
-from osbtk.api.storyboarding3d_api import Storyboarding3dAPI as Storyboarding3dApi
+from osbtk.api.storyboarding3d_api import Storyboarding3dAPI
+from osbtk.client.runtime.storyboarding3d import Storyboarding3d as Storyboarding3dClient
 from osbtk.libraries._client import STATELESS
 from osbtk.libraries.storyboarding import Storyboarding
-from osbtk.models.bake3d_request import Bake3dRequest
 from osbtk.models.helper_request import HelperRequest
 
-_api = Storyboarding3dApi(STATELESS)
+_client = Storyboarding3dClient(Storyboarding3dAPI(STATELESS))
 _helpers = HelpersApi(STATELESS)
 
 
@@ -23,7 +23,7 @@ class Storyboarding3d(Storyboarding):
 
     @staticmethod
     def bake3d(scene: Any) -> Any:
-        return _api.bake3d(Bake3dRequest(input=scene))
+        return _client.bake3d(scene)
 
     class Helpers:
         """The 3D motion-graphics keyframe helpers: pure keyframe-channel

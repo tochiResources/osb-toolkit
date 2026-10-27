@@ -6,16 +6,15 @@ from __future__ import annotations
 from typing import Any, Dict, List, Optional
 
 from osbtk.api.helpers_api import HelpersAPI as HelpersApi
-from osbtk.api.origin_api import OriginAPI as OriginApi
-from osbtk.api.parsing_api import ParsingAPI as ParsingApi
+from osbtk.api.origin_api import OriginAPI
+from osbtk.api.parsing_api import ParsingAPI
+from osbtk.client.core.origin import Origin
+from osbtk.client.core.parsing import Parsing
 from osbtk.libraries._client import STATELESS
-from osbtk.models.get_origin_vector_request import GetOriginVectorRequest
 from osbtk.models.helper_request import HelperRequest
-from osbtk.models.in_screen_bounds_request import InScreenBoundsRequest
-from osbtk.models.text_request import TextRequest
 
-_parsing = ParsingApi(STATELESS)
-_origin = OriginApi(STATELESS)
+_parsing = Parsing(ParsingAPI(STATELESS))
+_origin = Origin(OriginAPI(STATELESS))
 _helpers = HelpersApi(STATELESS)
 
 
@@ -24,23 +23,19 @@ class Storyboarding:
 
     @staticmethod
     def parse_osu(text: str) -> Any:
-        return _parsing.parse_osu(TextRequest(text=text))
+        return _parsing.parse_osu(text)
 
     @staticmethod
     def parse_osb(text: str) -> Any:
-        return _parsing.parse_osb(TextRequest(text=text))
+        return _parsing.parse_osb(text)
 
     @staticmethod
     def get_origin_vector(origin: str, width: float, height: float) -> Any:
-        return _origin.get_origin_vector(
-            GetOriginVectorRequest(origin=origin, width=width, height=height)
-        )
+        return _origin.get_origin_vector(origin, width, height)
 
     @staticmethod
     def in_screen_bounds(position: Any, size: Any, rotation: float, origin: Any) -> bool:
-        return _origin.in_screen_bounds(
-            InScreenBoundsRequest(position=position, size=size, rotation=rotation, origin=origin)
-        ).value
+        return _origin.in_screen_bounds(position, size, rotation, origin)
 
     class Commands:
         """The 2D storyboard command utilities: pure transforms over a
