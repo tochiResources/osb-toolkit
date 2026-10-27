@@ -12,6 +12,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 import { runGenerator, targets } from '../shared';
+import { protectTransport } from './post-process';
 
 /** Generates the TypeScript SDK and normalizes its folder/barrel names. */
 export function generateTypeScript(): void {
@@ -61,6 +62,7 @@ export function generateTypeScript(): void {
                 .replaceAll("'./apis'", "'./api'"),
             'utf8'
         );
+        protectTransport(join(targets.typescript, 'api'));
         console.log(`openapi: generated TypeScript SDK into ${targets.typescript}`);
     } finally {
         rmSync(out, { recursive: true, force: true });
