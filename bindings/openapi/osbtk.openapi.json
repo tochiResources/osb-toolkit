@@ -1,0 +1,5577 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "osbTK Native Bridge",
+    "description": "Typed wire contract for the osbTK native engine (section 5.13, M21/M22). Rust (`crates/osb-api`) is the source of truth; the C#, C++, Python, TypeScript, Go and Java SDK models and clients are generated from this document. Every `operationId` is the native bridge `op`.",
+    "contact": {
+      "name": "T0chi"
+    },
+    "license": {
+      "name": "BSD-3-Clause",
+      "identifier": "BSD-3-Clause"
+    },
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/bridge/Animations.applyEasing": {
+      "post": {
+        "tags": [
+          "Animations"
+        ],
+        "operationId": "Animations.applyEasing",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyEasingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The eased value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EasingResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Animations.easingValue": {
+      "post": {
+        "tags": [
+          "Animations"
+        ],
+        "operationId": "Animations.easingValue",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EasingValueRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The eased value (named easing or cubic-bezier)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EasingResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Audio.audioDuration": {
+      "post": {
+        "tags": [
+          "Audio"
+        ],
+        "operationId": "Audio.audioDuration",
+        "responses": {
+          "200": {
+            "description": "The loaded audio duration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudioDurationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Audio.fft": {
+      "post": {
+        "tags": [
+          "Audio"
+        ],
+        "operationId": "Audio.fft",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FftRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The FFT magnitudes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FftResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Audio.getFft": {
+      "post": {
+        "tags": [
+          "Audio"
+        ],
+        "operationId": "Audio.getFft",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetFftRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The FFT magnitudes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FftResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Common.version": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "operationId": "Common.version",
+        "responses": {
+          "200": {
+            "description": "The runtime version",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.arc": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.arc",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArcRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Points along a circular arc",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PointListResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.boundingBox": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.boundingBox",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurveRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The curve's axis-aligned bounding box",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Box2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.curvature": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.curvature",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurvePointRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The curvature at `t`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScalarResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.distanceTo": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.distanceTo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurveDistanceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The distance from a point to the curve",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScalarResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.ellipse": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.ellipse",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EllipseRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Points around an ellipse",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PointListResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.length": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.length",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurveRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The curve's arc length",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScalarResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.lineIntersect": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.lineIntersect",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LineIntersectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The intersection point, or null",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptionalPointResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.normal": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.normal",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurvePointRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The unit normal at `t`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vector2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.offset": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.offset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurveOffsetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The polyline offset along the curve's normal",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PointListResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.point": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.point",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurvePointRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The point at `t`, parametrically or by arc length",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vector2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.sample": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.sample",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurveSampleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "`count` points along the curve",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PointListResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.simplify": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.simplify",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimplifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The simplified polyline",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PointListResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Curve.tangent": {
+      "post": {
+        "tags": [
+          "Curve"
+        ],
+        "operationId": "Curve.tangent",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurvePointRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The unit tangent at `t`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vector2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Diagnostics.diagnoseOsb": {
+      "post": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "operationId": "Diagnostics.diagnoseOsb",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Diagnostics for an `.osb` storyboard",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiagnosticReport"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Diagnostics.diagnoseOsu": {
+      "post": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "operationId": "Diagnostics.diagnoseOsu",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Diagnostics for an `.osu` beatmap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiagnosticReport"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Helpers.call": {
+      "post": {
+        "tags": [
+          "Helpers"
+        ],
+        "operationId": "Helpers.call",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HelperRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The shared motion-graphics helper's result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HelperResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Helpers.commands": {
+      "post": {
+        "tags": [
+          "Helpers"
+        ],
+        "operationId": "Helpers.commands",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HelperRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The helper's result (a command list or scalar)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HelperResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Helpers.keyframes": {
+      "post": {
+        "tags": [
+          "Helpers"
+        ],
+        "operationId": "Helpers.keyframes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HelperRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The helper's result (a keyframe channel or vectors)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HelperResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Image.info": {
+      "post": {
+        "tags": [
+          "Image"
+        ],
+        "operationId": "Image.info",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PathRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The image's metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Image.process": {
+      "post": {
+        "tags": [
+          "Image"
+        ],
+        "operationId": "Image.process",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageProcessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The processed image's metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Imagegen.renderShapes": {
+      "post": {
+        "tags": [
+          "Imagegen"
+        ],
+        "operationId": "Imagegen.renderShapes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RenderShapesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The rendered image's metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Media.encodeVideo": {
+      "post": {
+        "tags": [
+          "Media"
+        ],
+        "operationId": "Media.encodeVideo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncodeVideoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The encoded video's metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Media.extractAudio": {
+      "post": {
+        "tags": [
+          "Media"
+        ],
+        "operationId": "Media.extractAudio",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExtractAudioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Media.extractFrames": {
+      "post": {
+        "tags": [
+          "Media"
+        ],
+        "operationId": "Media.extractFrames",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExtractFramesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The extracted frame count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FrameResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Media.info": {
+      "post": {
+        "tags": [
+          "Media"
+        ],
+        "operationId": "Media.info",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PathRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The media metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Optimize.optimizeOsb": {
+      "post": {
+        "tags": [
+          "Optimize"
+        ],
+        "operationId": "Optimize.optimizeOsb",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimizeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The optimized `.osb` text and stats",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptimizeResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Origin.getOriginVector": {
+      "post": {
+        "tags": [
+          "Origin"
+        ],
+        "operationId": "Origin.getOriginVector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOriginVectorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The anchor offset for the origin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vector2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Origin.inScreenBounds": {
+      "post": {
+        "tags": [
+          "Origin"
+        ],
+        "operationId": "Origin.inScreenBounds",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InScreenBoundsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Whether the sprite's bounds intersect the screen",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoolResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Parsing.parseOsb": {
+      "post": {
+        "tags": [
+          "Parsing"
+        ],
+        "operationId": "Parsing.parseOsb",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The storyboard summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParseOsbResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Parsing.parseOsu": {
+      "post": {
+        "tags": [
+          "Parsing"
+        ],
+        "operationId": "Parsing.parseOsu",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The parsed beatmap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Beatmap"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Storyboarding3d.bake3d": {
+      "post": {
+        "tags": [
+          "Storyboarding3d"
+        ],
+        "operationId": "Storyboarding3d.bake3d",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Bake3dRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Baked command spans",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BakedStoryboard"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Generator.beatmap": {
+      "post": {
+        "tags": [
+          "Generator"
+        ],
+        "operationId": "Generator.beatmap",
+        "responses": {
+          "200": {
+            "description": "The loaded beatmap, or null",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Beatmap"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Generator.controlPointAt": {
+      "post": {
+        "tags": [
+          "Generator"
+        ],
+        "operationId": "Generator.controlPointAt",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TimeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The active control point, or null",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControlPoint"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Generator.importOsb": {
+      "post": {
+        "tags": [
+          "Generator"
+        ],
+        "operationId": "Generator.importOsb",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The sprite count after import",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportOsbResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Generator.layerHandle": {
+      "post": {
+        "tags": [
+          "Generator"
+        ],
+        "operationId": "Generator.layerHandle",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LayerHandleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The layer handle",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LayerHandle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Generator.loadBeatmap": {
+      "post": {
+        "tags": [
+          "Generator"
+        ],
+        "operationId": "Generator.loadBeatmap",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A summary of the loaded beatmap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadBeatmapResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Generator.random": {
+      "post": {
+        "tags": [
+          "Generator"
+        ],
+        "operationId": "Generator.random",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RandomRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A deterministic random value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RandomResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Generator.spriteCount": {
+      "post": {
+        "tags": [
+          "Generator"
+        ],
+        "operationId": "Generator.spriteCount",
+        "responses": {
+          "200": {
+            "description": "The storyboard sprite count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpriteCountResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Generator.storyboard": {
+      "post": {
+        "tags": [
+          "Generator"
+        ],
+        "operationId": "Generator.storyboard",
+        "responses": {
+          "200": {
+            "description": "The built storyboard model",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Storyboard"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Generator.timingPointAt": {
+      "post": {
+        "tags": [
+          "Generator"
+        ],
+        "operationId": "Generator.timingPointAt",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TimeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The active red timing point",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControlPoint"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.addIndex": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.addIndex",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentAddIndexRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.changePosition": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.changePosition",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentChangePositionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.clean": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.clean",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The number of sprites removed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SegmentCleanResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.createAnimation": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.createAnimation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAnimationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The new animation handle",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Handle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.createSample": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.createSample",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSampleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.createSegment": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.createSegment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The new segment handle",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LayerHandle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.createSprite": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.createSprite",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSpriteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The new sprite handle",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Handle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.discard": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.discard",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The remaining top-level layer count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SegmentDiscardResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.discardSprite": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.discardSprite",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HandleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Whether the sprite was discarded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoolResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.indexes": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.indexes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The segment's indexes and bounds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SegmentIndexesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.moveToBottom": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.moveToBottom",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.moveToTop": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.moveToTop",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Layer.reverseDepth": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "operationId": "Layer.reverseDepth",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentReverseDepthRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Sprite.command": {
+      "post": {
+        "tags": [
+          "Sprite"
+        ],
+        "operationId": "Sprite.command",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Sprite.endGroup": {
+      "post": {
+        "tags": [
+          "Sprite"
+        ],
+        "operationId": "Sprite.endGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HandleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Sprite.info": {
+      "post": {
+        "tags": [
+          "Sprite"
+        ],
+        "operationId": "Sprite.info",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HandleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The sprite's initial state",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpriteInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Sprite.startLoopGroup": {
+      "post": {
+        "tags": [
+          "Sprite"
+        ],
+        "operationId": "Sprite.startLoopGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartLoopGroupRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Sprite.startTriggerGroup": {
+      "post": {
+        "tags": [
+          "Sprite"
+        ],
+        "operationId": "Sprite.startTriggerGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartTriggerGroupRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runtime/Sprite.stateAt": {
+      "post": {
+        "tags": [
+          "Sprite"
+        ],
+        "operationId": "Sprite.stateAt",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpriteTimeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The sampled sprite state",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpriteState"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnimationMeta": {
+        "type": "object",
+        "description": "Frame-cycling metadata for an animation sprite.",
+        "required": [
+          "frames",
+          "frameDelay",
+          "loopType"
+        ],
+        "properties": {
+          "frameDelay": {
+            "type": "number",
+            "format": "double",
+            "description": "Delay between frames, in milliseconds."
+          },
+          "frames": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of frames in the animation."
+          },
+          "loopType": {
+            "$ref": "#/components/schemas/OsbLoopType",
+            "description": "How the animation loops."
+          }
+        }
+      },
+      "ApplyEasingRequest": {
+        "type": "object",
+        "description": "An easing evaluation request.",
+        "required": [
+          "easing",
+          "t"
+        ],
+        "properties": {
+          "easing": {
+            "$ref": "#/components/schemas/Easing",
+            "description": "The easing function."
+          },
+          "t": {
+            "type": "number",
+            "format": "double",
+            "description": "The normalized time in `0.0..=1.0`."
+          }
+        }
+      },
+      "ArcRequest": {
+        "type": "object",
+        "description": "A circular-arc sampling request.",
+        "required": [
+          "center",
+          "radius",
+          "startAngle",
+          "sweepAngle"
+        ],
+        "properties": {
+          "center": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The arc centre."
+          },
+          "count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "The number of points (default `64`).",
+            "minimum": 0
+          },
+          "radius": {
+            "type": "number",
+            "format": "double",
+            "description": "The radius."
+          },
+          "startAngle": {
+            "type": "number",
+            "format": "double",
+            "description": "The start angle in degrees."
+          },
+          "sweepAngle": {
+            "type": "number",
+            "format": "double",
+            "description": "The sweep angle in degrees."
+          }
+        }
+      },
+      "AudioDurationResult": {
+        "type": "object",
+        "description": "The loaded audio duration.",
+        "required": [
+          "audioDuration"
+        ],
+        "properties": {
+          "audioDuration": {
+            "type": "number",
+            "format": "double",
+            "description": "The audio duration in milliseconds (`0` when no audio is loaded)."
+          }
+        }
+      },
+      "Bake3dRequest": {
+        "type": "object",
+        "description": "A `bake3d` request: a plain 3D scene.",
+        "required": [
+          "input"
+        ],
+        "properties": {
+          "input": {
+            "$ref": "#/components/schemas/Scene3dInput",
+            "description": "The 3D scene."
+          }
+        }
+      },
+      "BakeOptionsInput": {
+        "type": "object",
+        "description": "Bake options.",
+        "properties": {
+          "adaptiveSampling": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Use adaptive time sampling (default)."
+          },
+          "adaptiveTolerancePx": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Adaptive-sampling pixel tolerance."
+          },
+          "decimals": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "Decimal places in the output.",
+            "minimum": 0
+          },
+          "depthBuckets": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "Number of depth buckets.",
+            "minimum": 0
+          },
+          "depthSort": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Sort sprites by depth."
+          },
+          "endTime": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Bake end time."
+          },
+          "multithreaded": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Bake with multiple threads."
+          },
+          "startTime": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Bake start time."
+          },
+          "timeStep": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Fixed time step (when adaptive sampling is off)."
+          },
+          "tolerance1d": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "1D simplification tolerance."
+          },
+          "tolerance2d": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "2D simplification tolerance."
+          }
+        }
+      },
+      "BakedCommand": {
+        "type": "object",
+        "description": "A linear command span produced by the bake.",
+        "required": [
+          "kind",
+          "startTime",
+          "endTime",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "end": {
+            "$ref": "#/components/schemas/BakedValue",
+            "description": "The end value."
+          },
+          "endTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The span end time."
+          },
+          "kind": {
+            "$ref": "#/components/schemas/CommandKind",
+            "description": "The command kind."
+          },
+          "start": {
+            "$ref": "#/components/schemas/BakedValue",
+            "description": "The start value."
+          },
+          "startTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The span start time."
+          }
+        }
+      },
+      "BakedSprite": {
+        "type": "object",
+        "description": "A baked sprite: a texture plus its `.osb`-compatible command spans.",
+        "required": [
+          "spritePath",
+          "origin",
+          "additive",
+          "depth",
+          "zDepth",
+          "layer",
+          "commands"
+        ],
+        "properties": {
+          "additive": {
+            "type": "boolean",
+            "description": "Whether the sprite is additive."
+          },
+          "commands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BakedCommand"
+            },
+            "description": "The command spans."
+          },
+          "depth": {
+            "type": "number",
+            "format": "double",
+            "description": "The sprite's depth."
+          },
+          "layer": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The osu! layer bucket (`0..4`).",
+            "minimum": 0
+          },
+          "origin": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The sprite anchor origin id (`0..8`).",
+            "minimum": 0
+          },
+          "spritePath": {
+            "type": "string",
+            "description": "The sprite texture path."
+          },
+          "zDepth": {
+            "type": "number",
+            "format": "double",
+            "description": "The sprite's painter's-algorithm depth."
+          }
+        }
+      },
+      "BakedStoryboard": {
+        "type": "object",
+        "description": "A baked storyboard: the 2D result of a 3D bake.",
+        "required": [
+          "sprites"
+        ],
+        "properties": {
+          "sprites": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BakedSprite"
+            },
+            "description": "The baked sprites."
+          }
+        }
+      },
+      "BakedValue": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "A scalar value.",
+            "required": [
+              "value",
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "scalar"
+                ]
+              },
+              "value": {
+                "type": "number",
+                "format": "double",
+                "description": "A scalar value."
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "A 2D value.",
+            "required": [
+              "value",
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "vector2"
+                ]
+              },
+              "value": {
+                "$ref": "#/components/schemas/Vector2",
+                "description": "A 2D value."
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "A color.",
+            "required": [
+              "value",
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "color"
+                ]
+              },
+              "value": {
+                "$ref": "#/components/schemas/Color4",
+                "description": "A color."
+              }
+            }
+          }
+        ],
+        "description": "A baked command's endpoint value."
+      },
+      "Beatmap": {
+        "type": "object",
+        "description": "A parsed beatmap: metadata, difficulty, control points and hit objects.",
+        "required": [
+          "formatVersion",
+          "audioFilename",
+          "title",
+          "artist",
+          "creator",
+          "version",
+          "mode",
+          "approachRate",
+          "circleSize",
+          "overallDifficulty",
+          "sliderMultiplier",
+          "sliderTickRate",
+          "stackLeniency",
+          "comboColors",
+          "timingPoints",
+          "hitObjects"
+        ],
+        "properties": {
+          "approachRate": {
+            "type": "number",
+            "format": "double",
+            "description": "Approach rate."
+          },
+          "artist": {
+            "type": "string",
+            "description": "The map artist."
+          },
+          "audioFilename": {
+            "type": "string",
+            "description": "The audio filename referenced by the map."
+          },
+          "backgroundPath": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The map's background filename from `[Events]`, if any."
+          },
+          "circleSize": {
+            "type": "number",
+            "format": "double",
+            "description": "Circle size."
+          },
+          "comboColors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Color4"
+            },
+            "description": "Combo colors from `[Colours]` (empty when the map has none)."
+          },
+          "creator": {
+            "type": "string",
+            "description": "The map creator."
+          },
+          "formatVersion": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The `.osu` format version.",
+            "minimum": 0
+          },
+          "hitObjects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HitObject"
+            },
+            "description": "The map's hit objects."
+          },
+          "mode": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The ruleset mode (`0` = osu!standard, `1` = taiko, `2` = catch, `3` = mania).",
+            "minimum": 0
+          },
+          "overallDifficulty": {
+            "type": "number",
+            "format": "double",
+            "description": "Overall difficulty."
+          },
+          "sliderMultiplier": {
+            "type": "number",
+            "format": "double",
+            "description": "Slider velocity multiplier."
+          },
+          "sliderTickRate": {
+            "type": "number",
+            "format": "double",
+            "description": "Slider tick rate."
+          },
+          "stackLeniency": {
+            "type": "number",
+            "format": "double",
+            "description": "Stack leniency."
+          },
+          "timingPoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ControlPoint"
+            },
+            "description": "The map's control points."
+          },
+          "title": {
+            "type": "string",
+            "description": "The map title."
+          },
+          "version": {
+            "type": "string",
+            "description": "The difficulty name."
+          }
+        }
+      },
+      "BoolResult": {
+        "type": "object",
+        "description": "A single boolean value.",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "boolean",
+            "description": "The value."
+          }
+        }
+      },
+      "Box2": {
+        "type": "object",
+        "description": "An axis-aligned 2D bounding box.",
+        "required": [
+          "min",
+          "max"
+        ],
+        "properties": {
+          "max": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The maximum corner."
+          },
+          "min": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The minimum corner."
+          }
+        }
+      },
+      "Camera3dInput": {
+        "type": "object",
+        "description": "A keyframed perspective camera.",
+        "properties": {
+          "dofFocus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe1"
+            },
+            "description": "Depth-of-field focus keyframes."
+          },
+          "dofMaxBlur": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe1"
+            },
+            "description": "Depth-of-field max-blur keyframes."
+          },
+          "dofRange": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe1"
+            },
+            "description": "Depth-of-field range keyframes."
+          },
+          "farClip": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe1"
+            },
+            "description": "Far-clip keyframes."
+          },
+          "horizontalFov": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe1"
+            },
+            "description": "Horizontal FOV keyframes (radians)."
+          },
+          "nearClip": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe1"
+            },
+            "description": "Near-clip keyframes."
+          },
+          "position": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe3"
+            },
+            "description": "Camera position keyframes."
+          },
+          "resolution": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "The output resolution `[width, height]`."
+          },
+          "roll": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe1"
+            },
+            "description": "Camera roll keyframes (radians)."
+          },
+          "target": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe3"
+            },
+            "description": "Camera target keyframes."
+          },
+          "up": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe3"
+            },
+            "description": "Camera up-vector keyframes."
+          },
+          "verticalFov": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe1"
+            },
+            "description": "Vertical FOV keyframes (radians)."
+          }
+        }
+      },
+      "Color4": {
+        "type": "object",
+        "description": "A linear RGBA color with channels in `0.0..=1.0`.",
+        "required": [
+          "r",
+          "g",
+          "b",
+          "a"
+        ],
+        "properties": {
+          "a": {
+            "type": "number",
+            "format": "double",
+            "description": "Alpha channel."
+          },
+          "b": {
+            "type": "number",
+            "format": "double",
+            "description": "Blue channel."
+          },
+          "g": {
+            "type": "number",
+            "format": "double",
+            "description": "Green channel."
+          },
+          "r": {
+            "type": "number",
+            "format": "double",
+            "description": "Red channel."
+          }
+        }
+      },
+      "CommandKind": {
+        "type": "string",
+        "description": "The kind of a baked 2D command.",
+        "enum": [
+          "move",
+          "scaleVec",
+          "rotate",
+          "fade",
+          "color",
+          "additive"
+        ]
+      },
+      "CommandRequest": {
+        "type": "object",
+        "description": "A sprite command. `start`/`end` are a scalar, a `Vector2`, or a `Color4`\ndepending on `kind`.",
+        "required": [
+          "kind",
+          "layer",
+          "sprite",
+          "startTime",
+          "endTime",
+          "easing"
+        ],
+        "properties": {
+          "easing": {
+            "$ref": "#/components/schemas/Easing",
+            "description": "The easing function."
+          },
+          "end": {
+            "type": "object",
+            "description": "The end value (scalar, point or color)."
+          },
+          "endTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The command end time in milliseconds."
+          },
+          "kind": {
+            "type": "string",
+            "description": "The command kind (`move`, `moveX`, `moveY`, `scale`, `scaleVec`,\n`rotate`, `fade`, `color`, `colorHsb`, `anchor`, `parameter`, `flipH`,\n`flipV`, `additive`)."
+          },
+          "layer": {
+            "type": "integer",
+            "description": "The layer handle.",
+            "minimum": 0
+          },
+          "parameter": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ParameterType",
+                "description": "The parameter kind for a `parameter` command."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sprite": {
+            "type": "integer",
+            "description": "The sprite handle.",
+            "minimum": 0
+          },
+          "start": {
+            "type": "object",
+            "description": "The start value (scalar, point or color)."
+          },
+          "startTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The command start time in milliseconds."
+          }
+        }
+      },
+      "CommandValue": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "A scalar value.",
+            "required": [
+              "value",
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "scalar"
+                ]
+              },
+              "value": {
+                "type": "number",
+                "format": "double",
+                "description": "A scalar value."
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "A 2D value.",
+            "required": [
+              "value",
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "vector2"
+                ]
+              },
+              "value": {
+                "$ref": "#/components/schemas/Vector2",
+                "description": "A 2D value."
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "A color value.",
+            "required": [
+              "value",
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "color"
+                ]
+              },
+              "value": {
+                "$ref": "#/components/schemas/Color4",
+                "description": "A color value."
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "A parameter value.",
+            "required": [
+              "value",
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "parameter"
+                ]
+              },
+              "value": {
+                "$ref": "#/components/schemas/ParameterValue",
+                "description": "A parameter value."
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "An absent value.",
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "none"
+                ]
+              }
+            }
+          }
+        ],
+        "description": "A command's endpoint value."
+      },
+      "ControlPoint": {
+        "type": "object",
+        "description": "A timing or difficulty control point.",
+        "required": [
+          "time",
+          "beatDuration",
+          "speedMultiplier",
+          "bpm",
+          "timingChange",
+          "omitFirstBarLine",
+          "effectFlags"
+        ],
+        "properties": {
+          "beatDuration": {
+            "type": "number",
+            "format": "double",
+            "description": "Beat duration in milliseconds (only meaningful on red lines)."
+          },
+          "bpm": {
+            "type": "number",
+            "format": "double",
+            "description": "Tempo in beats per minute derived from the beat duration."
+          },
+          "effectFlags": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The osu! effect flags bitfield."
+          },
+          "omitFirstBarLine": {
+            "type": "boolean",
+            "description": "Whether the first bar line is omitted."
+          },
+          "speedMultiplier": {
+            "type": "number",
+            "format": "double",
+            "description": "Slider velocity multiplier (`1.0` on red lines)."
+          },
+          "time": {
+            "type": "number",
+            "format": "double",
+            "description": "The point's start time in milliseconds."
+          },
+          "timingChange": {
+            "type": "boolean",
+            "description": "Whether this is a red (uninherited) line."
+          }
+        }
+      },
+      "CreateAnimationRequest": {
+        "type": "object",
+        "description": "Create an animation sprite.",
+        "required": [
+          "path",
+          "frames",
+          "frameDelay",
+          "loopType",
+          "origin",
+          "position"
+        ],
+        "properties": {
+          "frameDelay": {
+            "type": "number",
+            "format": "double",
+            "description": "Delay between frames, in milliseconds."
+          },
+          "frames": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of frames."
+          },
+          "layer": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The target layer name (omitted when `layerHandle` is set)."
+          },
+          "layerHandle": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "The target segment handle (takes precedence over `layer`).",
+            "minimum": 0
+          },
+          "loopType": {
+            "$ref": "#/components/schemas/OsbLoopType",
+            "description": "How the animation loops."
+          },
+          "origin": {
+            "$ref": "#/components/schemas/OsbOrigin",
+            "description": "The sprite anchor origin."
+          },
+          "path": {
+            "type": "string",
+            "description": "The texture path (relative to the mapset)."
+          },
+          "position": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The initial position."
+          }
+        }
+      },
+      "CreateSampleRequest": {
+        "type": "object",
+        "description": "Create a sound sample on a layer.",
+        "required": [
+          "path",
+          "time"
+        ],
+        "properties": {
+          "layer": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The target layer name (omitted when `layerHandle` is set)."
+          },
+          "layerHandle": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "The target segment handle (takes precedence over `layer`).",
+            "minimum": 0
+          },
+          "path": {
+            "type": "string",
+            "description": "The sample path (relative to the mapset)."
+          },
+          "time": {
+            "type": "number",
+            "format": "double",
+            "description": "The sample time in milliseconds."
+          },
+          "volume": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "The sample volume (`0..=100`)."
+          }
+        }
+      },
+      "CreateSpriteRequest": {
+        "type": "object",
+        "description": "Create a sprite.",
+        "required": [
+          "path",
+          "origin"
+        ],
+        "properties": {
+          "layer": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The target layer name (omitted when `layerHandle` is set)."
+          },
+          "layerHandle": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "The target segment handle (takes precedence over `layer`).",
+            "minimum": 0
+          },
+          "origin": {
+            "$ref": "#/components/schemas/OsbOrigin",
+            "description": "The sprite anchor origin."
+          },
+          "path": {
+            "type": "string",
+            "description": "The texture path (relative to the mapset)."
+          },
+          "position": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Vector2",
+                "description": "The initial position; omitted means the sprite's default."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "CurveDistanceRequest": {
+        "type": "object",
+        "description": "A curve hit-test request.",
+        "required": [
+          "curve",
+          "point"
+        ],
+        "properties": {
+          "curve": {
+            "$ref": "#/components/schemas/CurveSpec",
+            "description": "The curve."
+          },
+          "point": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The query point."
+          }
+        }
+      },
+      "CurveKind": {
+        "type": "string",
+        "description": "The interpolation a control-point list is interpreted as.",
+        "enum": [
+          "Linear",
+          "Quadratic",
+          "Cubic",
+          "Bezier",
+          "CatmullRom"
+        ]
+      },
+      "CurveOffsetRequest": {
+        "type": "object",
+        "description": "A curve offset request.",
+        "required": [
+          "curve",
+          "distance"
+        ],
+        "properties": {
+          "curve": {
+            "$ref": "#/components/schemas/CurveSpec",
+            "description": "The curve."
+          },
+          "distance": {
+            "type": "number",
+            "format": "double",
+            "description": "The signed offset along the curve's local normal."
+          }
+        }
+      },
+      "CurvePointRequest": {
+        "type": "object",
+        "description": "A curve query at a parametric or arc-length position.",
+        "required": [
+          "curve",
+          "t"
+        ],
+        "properties": {
+          "byArcLength": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Sample by arc length instead of the raw parameter (default `false`)."
+          },
+          "curve": {
+            "$ref": "#/components/schemas/CurveSpec",
+            "description": "The curve."
+          },
+          "t": {
+            "type": "number",
+            "format": "double",
+            "description": "The position in `0.0..=1.0`."
+          }
+        }
+      },
+      "CurveRequest": {
+        "type": "object",
+        "description": "A curve query.",
+        "required": [
+          "curve"
+        ],
+        "properties": {
+          "curve": {
+            "$ref": "#/components/schemas/CurveSpec",
+            "description": "The curve."
+          }
+        }
+      },
+      "CurveSampleRequest": {
+        "type": "object",
+        "description": "A curve sampling request.",
+        "required": [
+          "curve",
+          "count"
+        ],
+        "properties": {
+          "byArcLength": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Sample by arc length instead of the raw parameter (default `false`)."
+          },
+          "count": {
+            "type": "integer",
+            "description": "The number of points to sample.",
+            "minimum": 0
+          },
+          "curve": {
+            "$ref": "#/components/schemas/CurveSpec",
+            "description": "The curve."
+          }
+        }
+      },
+      "CurveSpec": {
+        "type": "object",
+        "description": "A curve: the interpolation plus its control points.",
+        "required": [
+          "kind",
+          "points"
+        ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/CurveKind",
+            "description": "The curve family."
+          },
+          "points": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Vector2"
+            },
+            "description": "The control points."
+          }
+        }
+      },
+      "Diagnostic": {
+        "type": "object",
+        "description": "A single diagnostic finding.",
+        "required": [
+          "code",
+          "severity",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/DiagnosticCode",
+            "description": "The diagnostic code."
+          },
+          "layer": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "The layer index, when the finding is layer-scoped.",
+            "minimum": 0
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable description."
+          },
+          "severity": {
+            "$ref": "#/components/schemas/DiagnosticSeverity",
+            "description": "The severity."
+          },
+          "sprite": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "The sprite index, when the finding is sprite-scoped.",
+            "minimum": 0
+          },
+          "time": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "The time in milliseconds, when the finding is time-scoped."
+          }
+        }
+      },
+      "DiagnosticCode": {
+        "type": "string",
+        "description": "A stable, machine-readable diagnostic code.\n\nThe code is the source of truth: it is the enum, and its wire value is the\ndotted code string (e.g. `osb.command.overlap`).",
+        "enum": [
+          "osb.sprite.empty_texture",
+          "osb.sprite.high_command_cost",
+          "osb.command.invalid_range",
+          "osb.command.noop",
+          "osb.command.duplicate",
+          "osb.command.overlap",
+          "osu.audio.missing",
+          "osu.timing.none",
+          "osu.hitobjects.none",
+          "osu.timing.invalid"
+        ]
+      },
+      "DiagnosticReport": {
+        "type": "object",
+        "description": "A report: the findings plus per-severity counts.",
+        "required": [
+          "diagnostics",
+          "errorCount",
+          "warningCount",
+          "infoCount"
+        ],
+        "properties": {
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Diagnostic"
+            },
+            "description": "The findings, in analysis order."
+          },
+          "errorCount": {
+            "type": "integer",
+            "description": "The number of `Error` findings.",
+            "minimum": 0
+          },
+          "infoCount": {
+            "type": "integer",
+            "description": "The number of `Info` findings.",
+            "minimum": 0
+          },
+          "warningCount": {
+            "type": "integer",
+            "description": "The number of `Warning` findings.",
+            "minimum": 0
+          }
+        }
+      },
+      "DiagnosticSeverity": {
+        "type": "string",
+        "description": "The severity of a diagnostic.",
+        "enum": [
+          "Info",
+          "Warning",
+          "Error"
+        ]
+      },
+      "Easing": {
+        "type": "string",
+        "description": "The 35 osu! storyboard easing functions.",
+        "enum": [
+          "None",
+          "Out",
+          "In",
+          "InQuad",
+          "OutQuad",
+          "InOutQuad",
+          "InCubic",
+          "OutCubic",
+          "InOutCubic",
+          "InQuart",
+          "OutQuart",
+          "InOutQuart",
+          "InQuint",
+          "OutQuint",
+          "InOutQuint",
+          "InSine",
+          "OutSine",
+          "InOutSine",
+          "InExpo",
+          "OutExpo",
+          "InOutExpo",
+          "InCirc",
+          "OutCirc",
+          "InOutCirc",
+          "InElastic",
+          "OutElastic",
+          "OutElasticHalf",
+          "OutElasticQuarter",
+          "InOutElastic",
+          "InBack",
+          "OutBack",
+          "InOutBack",
+          "InBounce",
+          "OutBounce",
+          "InOutBounce"
+        ]
+      },
+      "EasingResult": {
+        "type": "object",
+        "description": "An easing function applied to a normalized time.",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "double",
+            "description": "The eased value."
+          }
+        }
+      },
+      "EasingValueRequest": {
+        "type": "object",
+        "description": "A named-or-custom easing evaluation request.",
+        "required": [
+          "t"
+        ],
+        "properties": {
+          "cubicBezier": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`."
+          },
+          "easing": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Easing",
+                "description": "A named easing (used when `cubicBezier` is absent)."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "t": {
+            "type": "number",
+            "format": "double",
+            "description": "The normalized time in `0.0..=1.0`."
+          }
+        }
+      },
+      "EllipseRequest": {
+        "type": "object",
+        "description": "An ellipse sampling request.",
+        "required": [
+          "center",
+          "radiusX",
+          "radiusY"
+        ],
+        "properties": {
+          "center": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The ellipse centre."
+          },
+          "count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "The number of points (default `64`).",
+            "minimum": 0
+          },
+          "radiusX": {
+            "type": "number",
+            "format": "double",
+            "description": "The horizontal radius."
+          },
+          "radiusY": {
+            "type": "number",
+            "format": "double",
+            "description": "The vertical radius."
+          }
+        }
+      },
+      "EncodeVideoRequest": {
+        "type": "object",
+        "description": "An image-sequence encoding request (frames -> video).",
+        "required": [
+          "inputPattern",
+          "output",
+          "fps"
+        ],
+        "properties": {
+          "codec": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The video codec (default `libx264`)."
+          },
+          "crf": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "The constant-rate-factor quality (`0`-`51`; lower is better).",
+            "minimum": 0
+          },
+          "fps": {
+            "type": "number",
+            "format": "double",
+            "description": "The frame rate."
+          },
+          "inputPattern": {
+            "type": "string",
+            "description": "The input filename pattern (e.g. `frames/frame_%04d.png`)."
+          },
+          "output": {
+            "type": "string",
+            "description": "The output video path."
+          }
+        }
+      },
+      "ErrorResult": {
+        "type": "object",
+        "description": "The error envelope returned when an operation fails.",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "A human-readable error message."
+          }
+        }
+      },
+      "ExtractAudioRequest": {
+        "type": "object",
+        "description": "An audio-extraction request (media -> audio file).",
+        "required": [
+          "input",
+          "output"
+        ],
+        "properties": {
+          "input": {
+            "type": "string",
+            "description": "The input media path."
+          },
+          "output": {
+            "type": "string",
+            "description": "The output audio path (its extension selects the format)."
+          }
+        }
+      },
+      "ExtractFramesRequest": {
+        "type": "object",
+        "description": "A frame-extraction request (video -> image sequence).",
+        "required": [
+          "input",
+          "outputDir"
+        ],
+        "properties": {
+          "count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "The maximum number of frames to extract.",
+            "minimum": 0
+          },
+          "fps": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "The sampling rate (frames per second); defaults to the source rate."
+          },
+          "height": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "Scale frames to this height.",
+            "minimum": 0
+          },
+          "input": {
+            "type": "string",
+            "description": "The input media path."
+          },
+          "outputDir": {
+            "type": "string",
+            "description": "The directory to write frames into."
+          },
+          "start": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "The start time in seconds."
+          },
+          "width": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "Scale frames to this width.",
+            "minimum": 0
+          }
+        }
+      },
+      "FftRequest": {
+        "type": "object",
+        "description": "An FFT request against a `.wav` file.",
+        "required": [
+          "path"
+        ],
+        "properties": {
+          "magnitudes": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Number of frequency bins.",
+            "minimum": 0
+          },
+          "path": {
+            "type": "string",
+            "description": "Path to the audio file."
+          },
+          "time": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Sample time in milliseconds."
+          }
+        }
+      },
+      "FftResult": {
+        "type": "object",
+        "description": "FFT magnitudes.",
+        "required": [
+          "magnitudes"
+        ],
+        "properties": {
+          "magnitudes": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "The magnitude of each frequency bin."
+          }
+        }
+      },
+      "FrameResult": {
+        "type": "object",
+        "description": "The result of a frame extraction.",
+        "required": [
+          "count",
+          "outputDir",
+          "pattern"
+        ],
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of frames written.",
+            "minimum": 0
+          },
+          "outputDir": {
+            "type": "string",
+            "description": "The directory the frames were written into."
+          },
+          "pattern": {
+            "type": "string",
+            "description": "The frame filename pattern (`frame_%04d.png`)."
+          }
+        }
+      },
+      "GetFftRequest": {
+        "type": "object",
+        "description": "An FFT request against the runtime's loaded audio.",
+        "required": [
+          "time",
+          "magnitudes"
+        ],
+        "properties": {
+          "cutoff": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "A frequency cut-off."
+          },
+          "easing": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Easing",
+                "description": "The easing applied across the bins."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "magnitudes": {
+            "type": "integer",
+            "description": "Number of frequency bins.",
+            "minimum": 0
+          },
+          "time": {
+            "type": "number",
+            "format": "double",
+            "description": "Sample time in milliseconds."
+          }
+        }
+      },
+      "GetOriginVectorRequest": {
+        "type": "object",
+        "description": "The anchor offset for an origin.",
+        "required": [
+          "origin",
+          "width",
+          "height"
+        ],
+        "properties": {
+          "height": {
+            "type": "number",
+            "format": "double",
+            "description": "The sprite height."
+          },
+          "origin": {
+            "$ref": "#/components/schemas/OsbOrigin",
+            "description": "The sprite anchor origin."
+          },
+          "width": {
+            "type": "number",
+            "format": "double",
+            "description": "The sprite width."
+          }
+        }
+      },
+      "Handle": {
+        "type": "object",
+        "description": "A stable handle to a sprite in a runtime's storyboard.",
+        "required": [
+          "layer",
+          "sprite"
+        ],
+        "properties": {
+          "layer": {
+            "type": "integer",
+            "description": "The layer index the sprite lives on.",
+            "minimum": 0
+          },
+          "sprite": {
+            "type": "integer",
+            "description": "The sprite index within its layer.",
+            "minimum": 0
+          }
+        }
+      },
+      "HandleRequest": {
+        "type": "object",
+        "description": "A sprite handle pair.",
+        "required": [
+          "layer",
+          "sprite"
+        ],
+        "properties": {
+          "layer": {
+            "type": "integer",
+            "description": "The layer handle.",
+            "minimum": 0
+          },
+          "sprite": {
+            "type": "integer",
+            "description": "The sprite handle.",
+            "minimum": 0
+          }
+        }
+      },
+      "HelperRequest": {
+        "type": "object",
+        "description": "A motion-graphics helper call: a helper `name` plus its input.",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "input": {
+            "description": "The helper's input (a keyframe channel, a command list, or its parameters)."
+          },
+          "name": {
+            "type": "string",
+            "description": "The helper name, e.g. `flatten`, `orbit`, `selectCommands`."
+          }
+        }
+      },
+      "HelperResult": {
+        "type": "object",
+        "description": "The result of a motion-graphics helper (a keyframe channel, a command list,\na list of vectors, or a scalar).",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "description": "The result value."
+          }
+        }
+      },
+      "HitObject": {
+        "type": "object",
+        "description": "A single beatmap hit object.",
+        "required": [
+          "startTime",
+          "endTime",
+          "x",
+          "y",
+          "kind",
+          "newCombo",
+          "stackHeight",
+          "color"
+        ],
+        "properties": {
+          "color": {
+            "$ref": "#/components/schemas/Color4",
+            "description": "The combo color assigned to the object."
+          },
+          "endTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The object's end time in milliseconds (equal to `start_time` for circles)."
+          },
+          "kind": {
+            "$ref": "#/components/schemas/HitObjectKind",
+            "description": "The object kind."
+          },
+          "newCombo": {
+            "type": "boolean",
+            "description": "Whether the object starts a new combo."
+          },
+          "stackHeight": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The stacking height used for visual offsets."
+          },
+          "startTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The object's start time in milliseconds."
+          },
+          "x": {
+            "type": "number",
+            "format": "double",
+            "description": "Horizontal position in osu! pixels."
+          },
+          "y": {
+            "type": "number",
+            "format": "double",
+            "description": "Vertical position in osu! pixels."
+          }
+        }
+      },
+      "HitObjectKind": {
+        "type": "string",
+        "description": "A beatmap hit object kind.",
+        "enum": [
+          "Circle",
+          "Slider",
+          "Spinner",
+          "Hold"
+        ]
+      },
+      "ImageCrop": {
+        "type": "object",
+        "description": "A crop rectangle.",
+        "required": [
+          "x",
+          "y",
+          "width",
+          "height"
+        ],
+        "properties": {
+          "height": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The height.",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The width.",
+            "minimum": 0
+          },
+          "x": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The left edge.",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The top edge.",
+            "minimum": 0
+          }
+        }
+      },
+      "ImageInfo": {
+        "type": "object",
+        "description": "Image metadata.",
+        "required": [
+          "width",
+          "height",
+          "format"
+        ],
+        "properties": {
+          "format": {
+            "type": "string",
+            "description": "The format (e.g. `PNG`), inferred from the path."
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The image height in pixels.",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The image width in pixels.",
+            "minimum": 0
+          }
+        }
+      },
+      "ImageOptions": {
+        "type": "object",
+        "description": "Fine-grained image processing options (all optional; applied in order).",
+        "properties": {
+          "blur": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Gaussian blur sigma."
+          },
+          "brightness": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Brightness in `-1.0..=1.0`."
+          },
+          "contrast": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Contrast in `-1.0..=1.0`."
+          },
+          "crop": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ImageCrop",
+                "description": "Crop to a rectangle."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "flipHorizontal": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Mirror horizontally."
+          },
+          "flipVertical": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Mirror vertically."
+          },
+          "grayscale": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Convert to grayscale."
+          },
+          "invert": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Invert the colours."
+          },
+          "resizeHeight": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "Resize to this height (the width is derived when omitted).",
+            "minimum": 0
+          },
+          "resizeWidth": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "Resize to this width (the height is derived when omitted).",
+            "minimum": 0
+          },
+          "rotate": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Rotate by degrees (rounded to a multiple of 90)."
+          }
+        }
+      },
+      "ImageProcessRequest": {
+        "type": "object",
+        "description": "An image processing request: read `path`, apply `options`, write `output`.",
+        "required": [
+          "path",
+          "output",
+          "options"
+        ],
+        "properties": {
+          "options": {
+            "$ref": "#/components/schemas/ImageOptions",
+            "description": "The processing options."
+          },
+          "output": {
+            "type": "string",
+            "description": "The output file path (its extension selects the format)."
+          },
+          "path": {
+            "type": "string",
+            "description": "The input file path."
+          }
+        }
+      },
+      "ImportOsbResult": {
+        "type": "object",
+        "description": "The result of importing a `.osb` storyboard.",
+        "required": [
+          "spriteCount"
+        ],
+        "properties": {
+          "spriteCount": {
+            "type": "integer",
+            "description": "The sprite count after import.",
+            "minimum": 0
+          }
+        }
+      },
+      "InScreenBoundsRequest": {
+        "type": "object",
+        "description": "Whether a rotated sprite's bounding box intersects the widescreen\nstoryboard area.",
+        "required": [
+          "position",
+          "size",
+          "rotation",
+          "origin"
+        ],
+        "properties": {
+          "origin": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The anchor offset (from `GetOriginVector`)."
+          },
+          "position": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The sprite centre position."
+          },
+          "rotation": {
+            "type": "number",
+            "format": "double",
+            "description": "The rotation in radians."
+          },
+          "size": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The sprite size."
+          }
+        }
+      },
+      "Keyframe1": {
+        "type": "object",
+        "description": "A keyframed scalar.",
+        "required": [
+          "time",
+          "value"
+        ],
+        "properties": {
+          "time": {
+            "type": "number",
+            "format": "double",
+            "description": "The keyframe time in milliseconds."
+          },
+          "value": {
+            "type": "number",
+            "format": "double",
+            "description": "The value."
+          }
+        }
+      },
+      "Keyframe2": {
+        "type": "object",
+        "description": "A keyframed 2D value.",
+        "required": [
+          "time",
+          "value"
+        ],
+        "properties": {
+          "time": {
+            "type": "number",
+            "format": "double",
+            "description": "The keyframe time in milliseconds."
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "The value `[x, y]`."
+          }
+        }
+      },
+      "Keyframe3": {
+        "type": "object",
+        "description": "A keyframed 3D value.",
+        "required": [
+          "time",
+          "value"
+        ],
+        "properties": {
+          "time": {
+            "type": "number",
+            "format": "double",
+            "description": "The keyframe time in milliseconds."
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "The value `[x, y, z]`."
+          }
+        }
+      },
+      "LayerHandle": {
+        "type": "object",
+        "description": "A stable handle to a layer in a runtime's storyboard.",
+        "required": [
+          "layer"
+        ],
+        "properties": {
+          "layer": {
+            "type": "integer",
+            "description": "The layer index.",
+            "minimum": 0
+          }
+        }
+      },
+      "LayerHandleRequest": {
+        "type": "object",
+        "description": "Resolve (or create) a layer by name.",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The layer name."
+          }
+        }
+      },
+      "LineIntersectRequest": {
+        "type": "object",
+        "description": "A line-segment intersection request.",
+        "required": [
+          "a1",
+          "a2",
+          "b1",
+          "b2"
+        ],
+        "properties": {
+          "a1": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The first segment's start."
+          },
+          "a2": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The first segment's end."
+          },
+          "b1": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The second segment's start."
+          },
+          "b2": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The second segment's end."
+          }
+        }
+      },
+      "LoadBeatmapResult": {
+        "type": "object",
+        "description": "A summary of a loaded beatmap.",
+        "required": [
+          "hitObjects",
+          "timingPoints"
+        ],
+        "properties": {
+          "hitObjects": {
+            "type": "integer",
+            "description": "The number of hit objects.",
+            "minimum": 0
+          },
+          "timingPoints": {
+            "type": "integer",
+            "description": "The number of control points.",
+            "minimum": 0
+          }
+        }
+      },
+      "MediaInfo": {
+        "type": "object",
+        "description": "Media metadata.",
+        "required": [
+          "duration",
+          "width",
+          "height",
+          "format"
+        ],
+        "properties": {
+          "audioCodec": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The audio codec name, when present."
+          },
+          "duration": {
+            "type": "number",
+            "format": "double",
+            "description": "The duration in seconds (`0` when unknown)."
+          },
+          "format": {
+            "type": "string",
+            "description": "The container/format name."
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The video height in pixels (`0` for audio-only).",
+            "minimum": 0
+          },
+          "videoCodec": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The video codec name, when present."
+          },
+          "width": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The video width in pixels (`0` for audio-only).",
+            "minimum": 0
+          }
+        }
+      },
+      "Node3dInput": {
+        "type": "object",
+        "description": "A node in a plain 3D scene tree.",
+        "required": [
+          "sprite"
+        ],
+        "properties": {
+          "additive": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether the sprite composites additively."
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Node3dInput"
+            },
+            "description": "Child nodes."
+          },
+          "frameDelay": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Delay between animation frames, in milliseconds."
+          },
+          "frames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Animation frame paths (empty = a still sprite)."
+          },
+          "inheritsRotation": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether the node inherits its parent's rotation."
+          },
+          "inheritsZDepth": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether the node inherits its parent's depth."
+          },
+          "origin": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "The sprite anchor origin id (`0..8`).",
+            "minimum": 0
+          },
+          "pivot": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe3"
+            },
+            "description": "The local pivot rotation/scale act about."
+          },
+          "position": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe3"
+            },
+            "description": "World position keyframes."
+          },
+          "rotation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe3"
+            },
+            "description": "Euler rotation keyframes in radians."
+          },
+          "rotationMode": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The legacy orientation axis (`fixed`, `unitX`, `unitY`)."
+          },
+          "scale": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe3"
+            },
+            "description": "World scale keyframes."
+          },
+          "sprite": {
+            "type": "string",
+            "description": "The sprite texture path."
+          },
+          "spriteRotation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe1"
+            },
+            "description": "Per-sprite rotation keyframes (radians)."
+          },
+          "spriteScale": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe2"
+            },
+            "description": "Per-sprite scale keyframes."
+          },
+          "zDepth": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Keyframe1"
+            },
+            "description": "Painter's-algorithm depth keyframes."
+          }
+        }
+      },
+      "OkResult": {
+        "type": "object",
+        "description": "A generic acknowledgement.",
+        "required": [
+          "ok"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "description": "Always `true` on success."
+          }
+        }
+      },
+      "OptimizeOptionsInput": {
+        "type": "object",
+        "description": "The knobs controlling an optimization pass (all default to `false`/none).",
+        "properties": {
+          "deduplicate": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Remove commands identical to an earlier command of the same type."
+          },
+          "mergeAdjacent": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Merge a command with the next when they are continuous."
+          },
+          "removeRedundant": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Remove zero-duration commands whose value does not change."
+          },
+          "splitThreshold": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Split commands longer than this many milliseconds (into linear pieces)."
+          }
+        }
+      },
+      "OptimizeRequest": {
+        "type": "object",
+        "description": "An `.osb` optimization request.",
+        "required": [
+          "text",
+          "options"
+        ],
+        "properties": {
+          "options": {
+            "$ref": "#/components/schemas/OptimizeOptionsInput",
+            "description": "The optimization options."
+          },
+          "text": {
+            "type": "string",
+            "description": "The `.osb` storyboard text."
+          }
+        }
+      },
+      "OptimizeResult": {
+        "type": "object",
+        "description": "The optimized `.osb` text plus the stats.",
+        "required": [
+          "osb",
+          "stats"
+        ],
+        "properties": {
+          "osb": {
+            "type": "string",
+            "description": "The optimized `.osb` storyboard text."
+          },
+          "stats": {
+            "$ref": "#/components/schemas/OptimizeStats",
+            "description": "The effect of the pass."
+          }
+        }
+      },
+      "OptimizeStats": {
+        "type": "object",
+        "description": "The effect of an optimization pass.",
+        "required": [
+          "commandsBefore",
+          "commandsAfter",
+          "removed",
+          "deduplicated",
+          "merged",
+          "split"
+        ],
+        "properties": {
+          "commandsAfter": {
+            "type": "integer",
+            "description": "The command count after optimizing.",
+            "minimum": 0
+          },
+          "commandsBefore": {
+            "type": "integer",
+            "description": "The command count before optimizing.",
+            "minimum": 0
+          },
+          "deduplicated": {
+            "type": "integer",
+            "description": "Commands removed as duplicates.",
+            "minimum": 0
+          },
+          "merged": {
+            "type": "integer",
+            "description": "Commands merged into a neighbour.",
+            "minimum": 0
+          },
+          "removed": {
+            "type": "integer",
+            "description": "Commands removed as redundant.",
+            "minimum": 0
+          },
+          "split": {
+            "type": "integer",
+            "description": "Extra commands introduced by splitting.",
+            "minimum": 0
+          }
+        }
+      },
+      "OptionalPointResult": {
+        "type": "object",
+        "description": "An optional point result.",
+        "properties": {
+          "point": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Vector2",
+                "description": "The point, or `null` when there is none."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "OsbLayer": {
+        "type": "string",
+        "description": "A standard osu! storyboard layer.",
+        "enum": [
+          "Background",
+          "Fail",
+          "Pass",
+          "Foreground",
+          "Overlay"
+        ]
+      },
+      "OsbLoopType": {
+        "type": "string",
+        "description": "How an animation advances after its final frame.",
+        "enum": [
+          "LoopOnce",
+          "LoopForever"
+        ]
+      },
+      "OsbOrigin": {
+        "type": "string",
+        "description": "Sprite anchor origin (osu! `.osb` origin ids 0..8).",
+        "enum": [
+          "TopLeft",
+          "TopCentre",
+          "TopRight",
+          "CentreLeft",
+          "Centre",
+          "CentreRight",
+          "BottomLeft",
+          "BottomCentre",
+          "BottomRight"
+        ]
+      },
+      "ParameterType": {
+        "type": "string",
+        "description": "A sprite parameter command kind (`P` in `.osb`).",
+        "enum": [
+          "FlipHorizontal",
+          "FlipVertical",
+          "Additive"
+        ]
+      },
+      "ParameterValue": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "Horizontal-flip amount.",
+            "required": [
+              "flipHorizontal"
+            ],
+            "properties": {
+              "flipHorizontal": {
+                "type": "number",
+                "format": "double",
+                "description": "Horizontal-flip amount."
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "Vertical-flip amount.",
+            "required": [
+              "flipVertical"
+            ],
+            "properties": {
+              "flipVertical": {
+                "type": "number",
+                "format": "double",
+                "description": "Vertical-flip amount."
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "Additive-blend amount.",
+            "required": [
+              "additive"
+            ],
+            "properties": {
+              "additive": {
+                "type": "number",
+                "format": "double",
+                "description": "Additive-blend amount."
+              }
+            }
+          }
+        ],
+        "description": "A parameter command's numeric payload."
+      },
+      "ParseOsbResult": {
+        "type": "object",
+        "description": "A summary of a parsed `.osb` storyboard.",
+        "required": [
+          "layerCount",
+          "spriteCount"
+        ],
+        "properties": {
+          "layerCount": {
+            "type": "integer",
+            "description": "The number of layers.",
+            "minimum": 0
+          },
+          "spriteCount": {
+            "type": "integer",
+            "description": "The number of sprites.",
+            "minimum": 0
+          }
+        }
+      },
+      "PathRequest": {
+        "type": "object",
+        "description": "A request carrying a single file path.",
+        "required": [
+          "path"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The input file path."
+          }
+        }
+      },
+      "PointListResult": {
+        "type": "object",
+        "description": "A list of points.",
+        "required": [
+          "points"
+        ],
+        "properties": {
+          "points": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Vector2"
+            },
+            "description": "The points."
+          }
+        }
+      },
+      "RandomRequest": {
+        "type": "object",
+        "description": "A deterministic random request.",
+        "required": [
+          "min",
+          "max"
+        ],
+        "properties": {
+          "max": {
+            "type": "number",
+            "format": "double",
+            "description": "The exclusive upper bound."
+          },
+          "min": {
+            "type": "number",
+            "format": "double",
+            "description": "The inclusive lower bound."
+          }
+        }
+      },
+      "RandomResult": {
+        "type": "object",
+        "description": "A deterministic random value.",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "double",
+            "description": "The sampled value in `[min, max)`."
+          }
+        }
+      },
+      "RenderShapesRequest": {
+        "type": "object",
+        "description": "A shape-rendering request: a canvas, a background and a shape list.",
+        "required": [
+          "width",
+          "height",
+          "shapes",
+          "output"
+        ],
+        "properties": {
+          "background": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/RgbaColor",
+                "description": "The background colour (default transparent)."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The canvas height in pixels.",
+            "minimum": 0
+          },
+          "output": {
+            "type": "string",
+            "description": "The output file path (its extension selects the format)."
+          },
+          "shapes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Shape"
+            },
+            "description": "The shapes to draw, in order."
+          },
+          "width": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The canvas width in pixels.",
+            "minimum": 0
+          }
+        }
+      },
+      "RgbaColor": {
+        "type": "object",
+        "description": "An 8-bit RGBA colour.",
+        "required": [
+          "r",
+          "g",
+          "b",
+          "a"
+        ],
+        "properties": {
+          "a": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Alpha channel.",
+            "minimum": 0
+          },
+          "b": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Blue channel.",
+            "minimum": 0
+          },
+          "g": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Green channel.",
+            "minimum": 0
+          },
+          "r": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Red channel.",
+            "minimum": 0
+          }
+        }
+      },
+      "ScalarResult": {
+        "type": "object",
+        "description": "A single scalar value.",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "double",
+            "description": "The value."
+          }
+        }
+      },
+      "Scene3dInput": {
+        "type": "object",
+        "description": "A plain 3D scene: nodes, a camera and bake options.",
+        "required": [
+          "nodes"
+        ],
+        "properties": {
+          "camera": {
+            "$ref": "#/components/schemas/Camera3dInput",
+            "description": "The camera."
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Node3dInput"
+            },
+            "description": "The root nodes."
+          },
+          "options": {
+            "$ref": "#/components/schemas/BakeOptionsInput",
+            "description": "The bake options."
+          }
+        }
+      },
+      "SegmentAddIndexRequest": {
+        "type": "object",
+        "description": "Record a depth index on a segment.",
+        "required": [
+          "layer",
+          "index"
+        ],
+        "properties": {
+          "index": {
+            "type": "number",
+            "format": "double",
+            "description": "The index to record."
+          },
+          "layer": {
+            "type": "integer",
+            "description": "The segment handle.",
+            "minimum": 0
+          }
+        }
+      },
+      "SegmentChangePositionRequest": {
+        "type": "object",
+        "description": "Move a segment to another osu! layer (`ChangePosition`).",
+        "required": [
+          "layer",
+          "osbLayer"
+        ],
+        "properties": {
+          "layer": {
+            "type": "integer",
+            "description": "The segment handle.",
+            "minimum": 0
+          },
+          "osbLayer": {
+            "$ref": "#/components/schemas/OsbLayer",
+            "description": "The destination osu! layer."
+          }
+        }
+      },
+      "SegmentCleanResult": {
+        "type": "object",
+        "description": "The result of cleaning a segment.",
+        "required": [
+          "removed"
+        ],
+        "properties": {
+          "removed": {
+            "type": "integer",
+            "description": "The number of zero-duration sprites removed.",
+            "minimum": 0
+          }
+        }
+      },
+      "SegmentDiscardResult": {
+        "type": "object",
+        "description": "The result of discarding a segment.",
+        "required": [
+          "layerCount"
+        ],
+        "properties": {
+          "layerCount": {
+            "type": "integer",
+            "description": "The number of remaining top-level layers.",
+            "minimum": 0
+          }
+        }
+      },
+      "SegmentIndexesResult": {
+        "type": "object",
+        "description": "A segment's depth indexes and bounds.",
+        "required": [
+          "indexes",
+          "lowest",
+          "highest"
+        ],
+        "properties": {
+          "highest": {
+            "type": "number",
+            "format": "double",
+            "description": "The highest recorded index."
+          },
+          "indexes": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "The recorded indexes, in insertion order."
+          },
+          "lowest": {
+            "type": "number",
+            "format": "double",
+            "description": "The lowest recorded index."
+          }
+        }
+      },
+      "SegmentRequest": {
+        "type": "object",
+        "description": "A segment handle request.",
+        "required": [
+          "layer"
+        ],
+        "properties": {
+          "layer": {
+            "type": "integer",
+            "description": "The segment handle.",
+            "minimum": 0
+          }
+        }
+      },
+      "SegmentReverseDepthRequest": {
+        "type": "object",
+        "description": "Set a segment's reverse-depth flag.",
+        "required": [
+          "layer",
+          "value"
+        ],
+        "properties": {
+          "layer": {
+            "type": "integer",
+            "description": "The segment handle.",
+            "minimum": 0
+          },
+          "value": {
+            "type": "boolean",
+            "description": "Whether children are emitted in reverse order."
+          }
+        }
+      },
+      "Shape": {
+        "type": "object",
+        "description": "A shape to draw.",
+        "required": [
+          "kind",
+          "center",
+          "size"
+        ],
+        "properties": {
+          "center": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The centre (rect/rounded-rect/ellipse/circle)."
+          },
+          "cornerRadius": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "The corner radius for a rounded rectangle."
+          },
+          "fill": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/RgbaColor",
+                "description": "The fill colour."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "kind": {
+            "$ref": "#/components/schemas/ShapeKind",
+            "description": "The shape kind."
+          },
+          "points": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/Vector2"
+            },
+            "description": "Explicit points (line endpoints, polygon vertices)."
+          },
+          "size": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The size (width and height; a circle's diameter is `size.x`)."
+          },
+          "stroke": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/RgbaColor",
+                "description": "The stroke colour."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "strokeWidth": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "The stroke width in pixels (default `1`)."
+          }
+        }
+      },
+      "ShapeKind": {
+        "type": "string",
+        "description": "A primitive shape kind.",
+        "enum": [
+          "Rect",
+          "RoundedRect",
+          "Ellipse",
+          "Circle",
+          "Line",
+          "Polygon"
+        ]
+      },
+      "SimplifyRequest": {
+        "type": "object",
+        "description": "A Douglas-Peucker simplification request.",
+        "required": [
+          "points",
+          "tolerance"
+        ],
+        "properties": {
+          "points": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Vector2"
+            },
+            "description": "The polyline to simplify."
+          },
+          "tolerance": {
+            "type": "number",
+            "format": "double",
+            "description": "The maximum deviation to allow."
+          }
+        }
+      },
+      "SpriteCountResult": {
+        "type": "object",
+        "description": "The storyboard sprite count.",
+        "required": [
+          "spriteCount"
+        ],
+        "properties": {
+          "spriteCount": {
+            "type": "integer",
+            "description": "The number of sprites.",
+            "minimum": 0
+          }
+        }
+      },
+      "SpriteInfo": {
+        "type": "object",
+        "description": "A sprite's initial state and metadata.",
+        "required": [
+          "texturePath",
+          "origin",
+          "position",
+          "scale",
+          "rotation",
+          "opacity",
+          "color",
+          "additive",
+          "flipH",
+          "flipV",
+          "loopCount",
+          "triggerCount"
+        ],
+        "properties": {
+          "additive": {
+            "type": "boolean",
+            "description": "Whether the sprite starts additive."
+          },
+          "animation": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AnimationMeta",
+                "description": "Animation metadata, or `null` for a plain sprite."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "color": {
+            "$ref": "#/components/schemas/Color4",
+            "description": "The sprite's initial color."
+          },
+          "flipH": {
+            "type": "boolean",
+            "description": "Whether the sprite starts horizontally flipped."
+          },
+          "flipV": {
+            "type": "boolean",
+            "description": "Whether the sprite starts vertically flipped."
+          },
+          "loopCount": {
+            "type": "integer",
+            "description": "The number of loop groups on the sprite.",
+            "minimum": 0
+          },
+          "opacity": {
+            "type": "number",
+            "format": "double",
+            "description": "The sprite's initial opacity."
+          },
+          "origin": {
+            "$ref": "#/components/schemas/OsbOrigin",
+            "description": "The sprite anchor origin."
+          },
+          "position": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The sprite's initial position."
+          },
+          "rotation": {
+            "type": "number",
+            "format": "double",
+            "description": "The sprite's initial rotation in radians."
+          },
+          "scale": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The sprite's initial scale."
+          },
+          "texturePath": {
+            "type": "string",
+            "description": "The sprite's texture path (relative to the mapset)."
+          },
+          "triggerCount": {
+            "type": "integer",
+            "description": "The number of trigger groups on the sprite.",
+            "minimum": 0
+          }
+        }
+      },
+      "SpriteState": {
+        "type": "object",
+        "description": "A sprite's sampled state at a point in time.",
+        "required": [
+          "position",
+          "scale",
+          "rotation",
+          "opacity",
+          "additive",
+          "color",
+          "anchor"
+        ],
+        "properties": {
+          "additive": {
+            "type": "boolean",
+            "description": "Whether the sprite is composited additively at this time."
+          },
+          "anchor": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "Sampled origin offset in texture pixels, added to the enum anchor.\nZero when the origin is not animated."
+          },
+          "color": {
+            "$ref": "#/components/schemas/Color4",
+            "description": "Sampled color."
+          },
+          "opacity": {
+            "type": "number",
+            "format": "double",
+            "description": "Sampled opacity in `0.0..=1.0`."
+          },
+          "position": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "Sampled position."
+          },
+          "rotation": {
+            "type": "number",
+            "format": "double",
+            "description": "Sampled rotation in radians."
+          },
+          "scale": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "Sampled scale (per axis)."
+          }
+        }
+      },
+      "SpriteTimeRequest": {
+        "type": "object",
+        "description": "A sprite handle pair plus a sample time.",
+        "required": [
+          "layer",
+          "sprite",
+          "time"
+        ],
+        "properties": {
+          "layer": {
+            "type": "integer",
+            "description": "The layer handle.",
+            "minimum": 0
+          },
+          "sprite": {
+            "type": "integer",
+            "description": "The sprite handle.",
+            "minimum": 0
+          },
+          "time": {
+            "type": "number",
+            "format": "double",
+            "description": "The sample time in milliseconds."
+          }
+        }
+      },
+      "StartLoopGroupRequest": {
+        "type": "object",
+        "description": "Start a loop group.",
+        "required": [
+          "layer",
+          "sprite",
+          "startTime",
+          "count"
+        ],
+        "properties": {
+          "count": {
+            "type": "number",
+            "format": "double",
+            "description": "The number of iterations."
+          },
+          "layer": {
+            "type": "integer",
+            "description": "The layer handle.",
+            "minimum": 0
+          },
+          "sprite": {
+            "type": "integer",
+            "description": "The sprite handle.",
+            "minimum": 0
+          },
+          "startTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The loop start time in milliseconds."
+          }
+        }
+      },
+      "StartTriggerGroupRequest": {
+        "type": "object",
+        "description": "Start a trigger group.",
+        "required": [
+          "layer",
+          "sprite",
+          "name",
+          "startTime",
+          "endTime",
+          "group"
+        ],
+        "properties": {
+          "endTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The trigger end time in milliseconds."
+          },
+          "group": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The trigger group index."
+          },
+          "layer": {
+            "type": "integer",
+            "description": "The layer handle.",
+            "minimum": 0
+          },
+          "name": {
+            "type": "string",
+            "description": "The trigger name (matches a hit object)."
+          },
+          "sprite": {
+            "type": "integer",
+            "description": "The sprite handle.",
+            "minimum": 0
+          },
+          "startTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The trigger start time in milliseconds."
+          }
+        }
+      },
+      "Storyboard": {
+        "type": "object",
+        "description": "The whole storyboard, in draw order.",
+        "required": [
+          "layers"
+        ],
+        "properties": {
+          "layers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StoryboardLayer"
+            },
+            "description": "The layers/segments in draw order."
+          }
+        }
+      },
+      "StoryboardCommand": {
+        "type": "object",
+        "description": "A single time-based command on a sprite timeline.",
+        "required": [
+          "kind",
+          "startTime",
+          "endTime",
+          "easing",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "easing": {
+            "$ref": "#/components/schemas/Easing",
+            "description": "The easing function."
+          },
+          "end": {
+            "$ref": "#/components/schemas/CommandValue",
+            "description": "The end value."
+          },
+          "endTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The end time in milliseconds."
+          },
+          "kind": {
+            "$ref": "#/components/schemas/StoryboardCommandKind",
+            "description": "The command kind."
+          },
+          "start": {
+            "$ref": "#/components/schemas/CommandValue",
+            "description": "The start value."
+          },
+          "startTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The start time in milliseconds."
+          }
+        }
+      },
+      "StoryboardCommandKind": {
+        "type": "string",
+        "description": "The kind of a storyboard command.",
+        "enum": [
+          "move",
+          "moveX",
+          "moveY",
+          "scale",
+          "scaleVec",
+          "rotate",
+          "fade",
+          "color",
+          "colorHsb",
+          "parameter",
+          "anchor"
+        ]
+      },
+      "StoryboardLayer": {
+        "type": "object",
+        "description": "A layer/segment with its sprites and samples.",
+        "required": [
+          "identifier",
+          "osbLayer",
+          "reverseDepth",
+          "sprites",
+          "samples"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "The layer/segment identifier (`\"\"` for an anonymous segment)."
+          },
+          "osbLayer": {
+            "$ref": "#/components/schemas/OsbLayer",
+            "description": "The osu! layer this segment belongs to."
+          },
+          "reverseDepth": {
+            "type": "boolean",
+            "description": "Whether the segment's children are emitted in reverse order."
+          },
+          "samples": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StoryboardSample"
+            },
+            "description": "The layer's sound samples."
+          },
+          "sprites": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StoryboardSprite"
+            },
+            "description": "The layer's sprites, in creation order."
+          }
+        }
+      },
+      "StoryboardLoop": {
+        "type": "object",
+        "description": "A loop group on a sprite.",
+        "required": [
+          "startTime",
+          "endTime",
+          "loopType",
+          "count",
+          "commands"
+        ],
+        "properties": {
+          "commands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StoryboardCommand"
+            },
+            "description": "The commands inside the loop."
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of iterations."
+          },
+          "endTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The loop end time in milliseconds."
+          },
+          "loopType": {
+            "$ref": "#/components/schemas/OsbLoopType",
+            "description": "How the loop repeats."
+          },
+          "startTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The loop start time in milliseconds."
+          }
+        }
+      },
+      "StoryboardSample": {
+        "type": "object",
+        "description": "A sound sample on a layer.",
+        "required": [
+          "path",
+          "time",
+          "volume"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The sample path (relative to the mapset)."
+          },
+          "time": {
+            "type": "number",
+            "format": "double",
+            "description": "The sample time in milliseconds."
+          },
+          "volume": {
+            "type": "number",
+            "format": "double",
+            "description": "The sample volume (`0..=100`)."
+          }
+        }
+      },
+      "StoryboardSprite": {
+        "type": "object",
+        "description": "A sprite with its full command surface.",
+        "required": [
+          "texturePath",
+          "origin",
+          "anchor",
+          "position",
+          "scale",
+          "rotation",
+          "opacity",
+          "color",
+          "additive",
+          "flipH",
+          "flipV",
+          "exclude",
+          "commands",
+          "loops",
+          "triggers"
+        ],
+        "properties": {
+          "additive": {
+            "type": "boolean",
+            "description": "Whether the sprite starts additive."
+          },
+          "anchor": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The initial origin offset in texture pixels."
+          },
+          "animation": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AnimationMeta",
+                "description": "Animation metadata, or `null` for a plain sprite."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "color": {
+            "$ref": "#/components/schemas/Color4",
+            "description": "The initial color."
+          },
+          "commands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StoryboardCommand"
+            },
+            "description": "The sprite's top-level commands."
+          },
+          "exclude": {
+            "type": "boolean",
+            "description": "Whether the sprite is excluded from output (`DiscardSprite`)."
+          },
+          "flipH": {
+            "type": "boolean",
+            "description": "Whether the sprite starts horizontally flipped."
+          },
+          "flipV": {
+            "type": "boolean",
+            "description": "Whether the sprite starts vertically flipped."
+          },
+          "loops": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StoryboardLoop"
+            },
+            "description": "The sprite's loop groups."
+          },
+          "opacity": {
+            "type": "number",
+            "format": "double",
+            "description": "The initial opacity."
+          },
+          "origin": {
+            "$ref": "#/components/schemas/OsbOrigin",
+            "description": "The sprite anchor origin."
+          },
+          "position": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The initial position."
+          },
+          "rotation": {
+            "type": "number",
+            "format": "double",
+            "description": "The initial rotation in radians."
+          },
+          "scale": {
+            "$ref": "#/components/schemas/Vector2",
+            "description": "The initial scale."
+          },
+          "texturePath": {
+            "type": "string",
+            "description": "The sprite's texture path (relative to the mapset)."
+          },
+          "triggers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StoryboardTrigger"
+            },
+            "description": "The sprite's trigger groups."
+          }
+        }
+      },
+      "StoryboardTrigger": {
+        "type": "object",
+        "description": "A trigger group on a sprite.",
+        "required": [
+          "name",
+          "startTime",
+          "endTime",
+          "group",
+          "commands"
+        ],
+        "properties": {
+          "commands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StoryboardCommand"
+            },
+            "description": "The commands inside the trigger."
+          },
+          "endTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The trigger end time in milliseconds."
+          },
+          "group": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The trigger group index."
+          },
+          "name": {
+            "type": "string",
+            "description": "The trigger name (matches a hit object)."
+          },
+          "startTime": {
+            "type": "number",
+            "format": "double",
+            "description": "The trigger start time in milliseconds."
+          }
+        }
+      },
+      "TextRequest": {
+        "type": "object",
+        "description": "A request carrying a block of text (an effect script, `.osu` or `.osb`).",
+        "required": [
+          "text"
+        ],
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text payload."
+          }
+        }
+      },
+      "TimeRequest": {
+        "type": "object",
+        "description": "A time query.",
+        "required": [
+          "time"
+        ],
+        "properties": {
+          "time": {
+            "type": "number",
+            "format": "double",
+            "description": "The time in milliseconds."
+          }
+        }
+      },
+      "Vector2": {
+        "type": "object",
+        "description": "A 2D point or vector in osu! storyboard pixels.",
+        "required": [
+          "x",
+          "y"
+        ],
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "double",
+            "description": "Horizontal coordinate."
+          },
+          "y": {
+            "type": "number",
+            "format": "double",
+            "description": "Vertical coordinate."
+          }
+        }
+      },
+      "Vector3": {
+        "type": "object",
+        "description": "A 3D point or vector.",
+        "required": [
+          "x",
+          "y",
+          "z"
+        ],
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "double",
+            "description": "X coordinate."
+          },
+          "y": {
+            "type": "number",
+            "format": "double",
+            "description": "Y coordinate."
+          },
+          "z": {
+            "type": "number",
+            "format": "double",
+            "description": "Z coordinate."
+          }
+        }
+      },
+      "Vector4": {
+        "type": "object",
+        "description": "A 4D vector.",
+        "required": [
+          "x",
+          "y",
+          "z",
+          "w"
+        ],
+        "properties": {
+          "w": {
+            "type": "number",
+            "format": "double",
+            "description": "W coordinate."
+          },
+          "x": {
+            "type": "number",
+            "format": "double",
+            "description": "X coordinate."
+          },
+          "y": {
+            "type": "number",
+            "format": "double",
+            "description": "Y coordinate."
+          },
+          "z": {
+            "type": "number",
+            "format": "double",
+            "description": "Z coordinate."
+          }
+        }
+      },
+      "VersionResult": {
+        "type": "object",
+        "description": "The native runtime version.",
+        "required": [
+          "version"
+        ],
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "The runtime version string."
+          }
+        }
+      }
+    }
+  }
+}
