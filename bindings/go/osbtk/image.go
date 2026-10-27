@@ -19,59 +19,59 @@ import (
 )
 
 
-// DiagnosticsAPIService DiagnosticsAPI service
-type DiagnosticsAPIService service
+// ImageAPIService ImageAPI service
+type ImageAPIService service
 
-type ApiDiagnosticsAPIDiagnoseOsbRequest struct {
+type ImageAPIInfoRequest struct {
 	ctx context.Context
-	ApiService *DiagnosticsAPIService
-	textRequest *TextRequest
+	ApiService *ImageAPIService
+	pathRequest *PathRequest
 }
 
-func (r ApiDiagnosticsAPIDiagnoseOsbRequest) TextRequest(textRequest TextRequest) ApiDiagnosticsAPIDiagnoseOsbRequest {
-	r.textRequest = &textRequest
+func (r ImageAPIInfoRequest) PathRequest(pathRequest PathRequest) ImageAPIInfoRequest {
+	r.pathRequest = &pathRequest
 	return r
 }
 
-func (r ApiDiagnosticsAPIDiagnoseOsbRequest) Execute() (*DiagnosticReport, *http.Response, error) {
-	return r.ApiService.DiagnoseOsbExecute(r)
+func (r ImageAPIInfoRequest) Execute() (*ImageInfo, *http.Response, error) {
+	return r.ApiService.infoExecute(r)
 }
 
 /*
-DiagnoseOsb Method for DiagnoseOsb
+Info Method for Info
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDiagnosticsAPIDiagnoseOsbRequest
+ @return ImageAPIInfoRequest
 */
-func (a *DiagnosticsAPIService) DiagnoseOsb(ctx context.Context) ApiDiagnosticsAPIDiagnoseOsbRequest {
-	return ApiDiagnosticsAPIDiagnoseOsbRequest{
+func (a *ImageAPIService) Info(ctx context.Context) ImageAPIInfoRequest {
+	return ImageAPIInfoRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DiagnosticReport
-func (a *DiagnosticsAPIService) DiagnoseOsbExecute(r ApiDiagnosticsAPIDiagnoseOsbRequest) (*DiagnosticReport, *http.Response, error) {
+//  @return ImageInfo
+func (a *ImageAPIService) infoExecute(r ImageAPIInfoRequest) (*ImageInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DiagnosticReport
+		localVarReturnValue  *ImageInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DiagnosticsAPIService.DiagnoseOsb")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImageAPIService.Info")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Diagnostics.diagnoseOsb"
+	localVarPath := localBasePath + "/bridge/Image.info"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.textRequest == nil {
-		return localVarReturnValue, nil, reportError("textRequest is required and must be specified")
+	if r.pathRequest == nil {
+		return localVarReturnValue, nil, reportError("pathRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -92,7 +92,7 @@ func (a *DiagnosticsAPIService) DiagnoseOsbExecute(r ApiDiagnosticsAPIDiagnoseOs
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.textRequest
+	localVarPostBody = r.pathRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -130,56 +130,56 @@ func (a *DiagnosticsAPIService) DiagnoseOsbExecute(r ApiDiagnosticsAPIDiagnoseOs
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDiagnosticsAPIDiagnoseOsuRequest struct {
+type ImageAPIProcessRequest struct {
 	ctx context.Context
-	ApiService *DiagnosticsAPIService
-	textRequest *TextRequest
+	ApiService *ImageAPIService
+	imageProcessRequest *ImageProcessRequest
 }
 
-func (r ApiDiagnosticsAPIDiagnoseOsuRequest) TextRequest(textRequest TextRequest) ApiDiagnosticsAPIDiagnoseOsuRequest {
-	r.textRequest = &textRequest
+func (r ImageAPIProcessRequest) ImageProcessRequest(imageProcessRequest ImageProcessRequest) ImageAPIProcessRequest {
+	r.imageProcessRequest = &imageProcessRequest
 	return r
 }
 
-func (r ApiDiagnosticsAPIDiagnoseOsuRequest) Execute() (*DiagnosticReport, *http.Response, error) {
-	return r.ApiService.DiagnoseOsuExecute(r)
+func (r ImageAPIProcessRequest) Execute() (*ImageInfo, *http.Response, error) {
+	return r.ApiService.processExecute(r)
 }
 
 /*
-DiagnoseOsu Method for DiagnoseOsu
+Process Method for Process
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDiagnosticsAPIDiagnoseOsuRequest
+ @return ImageAPIProcessRequest
 */
-func (a *DiagnosticsAPIService) DiagnoseOsu(ctx context.Context) ApiDiagnosticsAPIDiagnoseOsuRequest {
-	return ApiDiagnosticsAPIDiagnoseOsuRequest{
+func (a *ImageAPIService) Process(ctx context.Context) ImageAPIProcessRequest {
+	return ImageAPIProcessRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DiagnosticReport
-func (a *DiagnosticsAPIService) DiagnoseOsuExecute(r ApiDiagnosticsAPIDiagnoseOsuRequest) (*DiagnosticReport, *http.Response, error) {
+//  @return ImageInfo
+func (a *ImageAPIService) processExecute(r ImageAPIProcessRequest) (*ImageInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DiagnosticReport
+		localVarReturnValue  *ImageInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DiagnosticsAPIService.DiagnoseOsu")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImageAPIService.Process")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Diagnostics.diagnoseOsu"
+	localVarPath := localBasePath + "/bridge/Image.process"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.textRequest == nil {
-		return localVarReturnValue, nil, reportError("textRequest is required and must be specified")
+	if r.imageProcessRequest == nil {
+		return localVarReturnValue, nil, reportError("imageProcessRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -200,7 +200,7 @@ func (a *DiagnosticsAPIService) DiagnoseOsuExecute(r ApiDiagnosticsAPIDiagnoseOs
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.textRequest
+	localVarPostBody = r.imageProcessRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

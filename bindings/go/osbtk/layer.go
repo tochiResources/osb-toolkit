@@ -22,29 +22,29 @@ import (
 // LayerAPIService LayerAPI service
 type LayerAPIService service
 
-type ApiLayerAPIAddIndexRequest struct {
+type LayerAPIAddIndexRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	segmentAddIndexRequest *SegmentAddIndexRequest
 }
 
-func (r ApiLayerAPIAddIndexRequest) SegmentAddIndexRequest(segmentAddIndexRequest SegmentAddIndexRequest) ApiLayerAPIAddIndexRequest {
+func (r LayerAPIAddIndexRequest) SegmentAddIndexRequest(segmentAddIndexRequest SegmentAddIndexRequest) LayerAPIAddIndexRequest {
 	r.segmentAddIndexRequest = &segmentAddIndexRequest
 	return r
 }
 
-func (r ApiLayerAPIAddIndexRequest) Execute() (*OkResult, *http.Response, error) {
-	return r.ApiService.AddIndexExecute(r)
+func (r LayerAPIAddIndexRequest) Execute() (*OkResult, *http.Response, error) {
+	return r.ApiService.addIndexExecute(r)
 }
 
 /*
 AddIndex Method for AddIndex
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPIAddIndexRequest
+ @return LayerAPIAddIndexRequest
 */
-func (a *LayerAPIService) AddIndex(ctx context.Context) ApiLayerAPIAddIndexRequest {
-	return ApiLayerAPIAddIndexRequest{
+func (a *LayerAPIService) AddIndex(ctx context.Context) LayerAPIAddIndexRequest {
+	return LayerAPIAddIndexRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -52,7 +52,7 @@ func (a *LayerAPIService) AddIndex(ctx context.Context) ApiLayerAPIAddIndexReque
 
 // Execute executes the request
 //  @return OkResult
-func (a *LayerAPIService) AddIndexExecute(r ApiLayerAPIAddIndexRequest) (*OkResult, *http.Response, error) {
+func (a *LayerAPIService) addIndexExecute(r LayerAPIAddIndexRequest) (*OkResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -130,29 +130,29 @@ func (a *LayerAPIService) AddIndexExecute(r ApiLayerAPIAddIndexRequest) (*OkResu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiLayerAPIChangePositionRequest struct {
+type LayerAPIChangePositionRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	segmentChangePositionRequest *SegmentChangePositionRequest
 }
 
-func (r ApiLayerAPIChangePositionRequest) SegmentChangePositionRequest(segmentChangePositionRequest SegmentChangePositionRequest) ApiLayerAPIChangePositionRequest {
+func (r LayerAPIChangePositionRequest) SegmentChangePositionRequest(segmentChangePositionRequest SegmentChangePositionRequest) LayerAPIChangePositionRequest {
 	r.segmentChangePositionRequest = &segmentChangePositionRequest
 	return r
 }
 
-func (r ApiLayerAPIChangePositionRequest) Execute() (*OkResult, *http.Response, error) {
-	return r.ApiService.ChangePositionExecute(r)
+func (r LayerAPIChangePositionRequest) Execute() (*OkResult, *http.Response, error) {
+	return r.ApiService.changePositionExecute(r)
 }
 
 /*
 ChangePosition Method for ChangePosition
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPIChangePositionRequest
+ @return LayerAPIChangePositionRequest
 */
-func (a *LayerAPIService) ChangePosition(ctx context.Context) ApiLayerAPIChangePositionRequest {
-	return ApiLayerAPIChangePositionRequest{
+func (a *LayerAPIService) ChangePosition(ctx context.Context) LayerAPIChangePositionRequest {
+	return LayerAPIChangePositionRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -160,7 +160,7 @@ func (a *LayerAPIService) ChangePosition(ctx context.Context) ApiLayerAPIChangeP
 
 // Execute executes the request
 //  @return OkResult
-func (a *LayerAPIService) ChangePositionExecute(r ApiLayerAPIChangePositionRequest) (*OkResult, *http.Response, error) {
+func (a *LayerAPIService) changePositionExecute(r LayerAPIChangePositionRequest) (*OkResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -238,29 +238,29 @@ func (a *LayerAPIService) ChangePositionExecute(r ApiLayerAPIChangePositionReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiLayerAPICleanRequest struct {
+type LayerAPICleanRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	segmentRequest *SegmentRequest
 }
 
-func (r ApiLayerAPICleanRequest) SegmentRequest(segmentRequest SegmentRequest) ApiLayerAPICleanRequest {
+func (r LayerAPICleanRequest) SegmentRequest(segmentRequest SegmentRequest) LayerAPICleanRequest {
 	r.segmentRequest = &segmentRequest
 	return r
 }
 
-func (r ApiLayerAPICleanRequest) Execute() (*SegmentCleanResult, *http.Response, error) {
-	return r.ApiService.CleanExecute(r)
+func (r LayerAPICleanRequest) Execute() (*SegmentCleanResult, *http.Response, error) {
+	return r.ApiService.cleanExecute(r)
 }
 
 /*
 Clean Method for Clean
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPICleanRequest
+ @return LayerAPICleanRequest
 */
-func (a *LayerAPIService) Clean(ctx context.Context) ApiLayerAPICleanRequest {
-	return ApiLayerAPICleanRequest{
+func (a *LayerAPIService) Clean(ctx context.Context) LayerAPICleanRequest {
+	return LayerAPICleanRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -268,7 +268,7 @@ func (a *LayerAPIService) Clean(ctx context.Context) ApiLayerAPICleanRequest {
 
 // Execute executes the request
 //  @return SegmentCleanResult
-func (a *LayerAPIService) CleanExecute(r ApiLayerAPICleanRequest) (*SegmentCleanResult, *http.Response, error) {
+func (a *LayerAPIService) cleanExecute(r LayerAPICleanRequest) (*SegmentCleanResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -346,29 +346,29 @@ func (a *LayerAPIService) CleanExecute(r ApiLayerAPICleanRequest) (*SegmentClean
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiLayerAPICreateAnimationRequest struct {
+type LayerAPICreateAnimationRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	createAnimationRequest *CreateAnimationRequest
 }
 
-func (r ApiLayerAPICreateAnimationRequest) CreateAnimationRequest(createAnimationRequest CreateAnimationRequest) ApiLayerAPICreateAnimationRequest {
+func (r LayerAPICreateAnimationRequest) CreateAnimationRequest(createAnimationRequest CreateAnimationRequest) LayerAPICreateAnimationRequest {
 	r.createAnimationRequest = &createAnimationRequest
 	return r
 }
 
-func (r ApiLayerAPICreateAnimationRequest) Execute() (*Handle, *http.Response, error) {
-	return r.ApiService.CreateAnimationExecute(r)
+func (r LayerAPICreateAnimationRequest) Execute() (*Handle, *http.Response, error) {
+	return r.ApiService.createAnimationExecute(r)
 }
 
 /*
 CreateAnimation Method for CreateAnimation
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPICreateAnimationRequest
+ @return LayerAPICreateAnimationRequest
 */
-func (a *LayerAPIService) CreateAnimation(ctx context.Context) ApiLayerAPICreateAnimationRequest {
-	return ApiLayerAPICreateAnimationRequest{
+func (a *LayerAPIService) CreateAnimation(ctx context.Context) LayerAPICreateAnimationRequest {
+	return LayerAPICreateAnimationRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -376,7 +376,7 @@ func (a *LayerAPIService) CreateAnimation(ctx context.Context) ApiLayerAPICreate
 
 // Execute executes the request
 //  @return Handle
-func (a *LayerAPIService) CreateAnimationExecute(r ApiLayerAPICreateAnimationRequest) (*Handle, *http.Response, error) {
+func (a *LayerAPIService) createAnimationExecute(r LayerAPICreateAnimationRequest) (*Handle, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -454,29 +454,29 @@ func (a *LayerAPIService) CreateAnimationExecute(r ApiLayerAPICreateAnimationReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiLayerAPICreateSampleRequest struct {
+type LayerAPICreateSampleRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	createSampleRequest *CreateSampleRequest
 }
 
-func (r ApiLayerAPICreateSampleRequest) CreateSampleRequest(createSampleRequest CreateSampleRequest) ApiLayerAPICreateSampleRequest {
+func (r LayerAPICreateSampleRequest) CreateSampleRequest(createSampleRequest CreateSampleRequest) LayerAPICreateSampleRequest {
 	r.createSampleRequest = &createSampleRequest
 	return r
 }
 
-func (r ApiLayerAPICreateSampleRequest) Execute() (*OkResult, *http.Response, error) {
-	return r.ApiService.CreateSampleExecute(r)
+func (r LayerAPICreateSampleRequest) Execute() (*OkResult, *http.Response, error) {
+	return r.ApiService.createSampleExecute(r)
 }
 
 /*
 CreateSample Method for CreateSample
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPICreateSampleRequest
+ @return LayerAPICreateSampleRequest
 */
-func (a *LayerAPIService) CreateSample(ctx context.Context) ApiLayerAPICreateSampleRequest {
-	return ApiLayerAPICreateSampleRequest{
+func (a *LayerAPIService) CreateSample(ctx context.Context) LayerAPICreateSampleRequest {
+	return LayerAPICreateSampleRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -484,7 +484,7 @@ func (a *LayerAPIService) CreateSample(ctx context.Context) ApiLayerAPICreateSam
 
 // Execute executes the request
 //  @return OkResult
-func (a *LayerAPIService) CreateSampleExecute(r ApiLayerAPICreateSampleRequest) (*OkResult, *http.Response, error) {
+func (a *LayerAPIService) createSampleExecute(r LayerAPICreateSampleRequest) (*OkResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -562,29 +562,29 @@ func (a *LayerAPIService) CreateSampleExecute(r ApiLayerAPICreateSampleRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiLayerAPICreateSegmentRequest struct {
+type LayerAPICreateSegmentRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	segmentRequest *SegmentRequest
 }
 
-func (r ApiLayerAPICreateSegmentRequest) SegmentRequest(segmentRequest SegmentRequest) ApiLayerAPICreateSegmentRequest {
+func (r LayerAPICreateSegmentRequest) SegmentRequest(segmentRequest SegmentRequest) LayerAPICreateSegmentRequest {
 	r.segmentRequest = &segmentRequest
 	return r
 }
 
-func (r ApiLayerAPICreateSegmentRequest) Execute() (*LayerHandle, *http.Response, error) {
-	return r.ApiService.CreateSegmentExecute(r)
+func (r LayerAPICreateSegmentRequest) Execute() (*LayerHandle, *http.Response, error) {
+	return r.ApiService.createSegmentExecute(r)
 }
 
 /*
 CreateSegment Method for CreateSegment
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPICreateSegmentRequest
+ @return LayerAPICreateSegmentRequest
 */
-func (a *LayerAPIService) CreateSegment(ctx context.Context) ApiLayerAPICreateSegmentRequest {
-	return ApiLayerAPICreateSegmentRequest{
+func (a *LayerAPIService) CreateSegment(ctx context.Context) LayerAPICreateSegmentRequest {
+	return LayerAPICreateSegmentRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -592,7 +592,7 @@ func (a *LayerAPIService) CreateSegment(ctx context.Context) ApiLayerAPICreateSe
 
 // Execute executes the request
 //  @return LayerHandle
-func (a *LayerAPIService) CreateSegmentExecute(r ApiLayerAPICreateSegmentRequest) (*LayerHandle, *http.Response, error) {
+func (a *LayerAPIService) createSegmentExecute(r LayerAPICreateSegmentRequest) (*LayerHandle, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -670,29 +670,29 @@ func (a *LayerAPIService) CreateSegmentExecute(r ApiLayerAPICreateSegmentRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiLayerAPICreateSpriteRequest struct {
+type LayerAPICreateSpriteRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	createSpriteRequest *CreateSpriteRequest
 }
 
-func (r ApiLayerAPICreateSpriteRequest) CreateSpriteRequest(createSpriteRequest CreateSpriteRequest) ApiLayerAPICreateSpriteRequest {
+func (r LayerAPICreateSpriteRequest) CreateSpriteRequest(createSpriteRequest CreateSpriteRequest) LayerAPICreateSpriteRequest {
 	r.createSpriteRequest = &createSpriteRequest
 	return r
 }
 
-func (r ApiLayerAPICreateSpriteRequest) Execute() (*Handle, *http.Response, error) {
-	return r.ApiService.CreateSpriteExecute(r)
+func (r LayerAPICreateSpriteRequest) Execute() (*Handle, *http.Response, error) {
+	return r.ApiService.createSpriteExecute(r)
 }
 
 /*
 CreateSprite Method for CreateSprite
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPICreateSpriteRequest
+ @return LayerAPICreateSpriteRequest
 */
-func (a *LayerAPIService) CreateSprite(ctx context.Context) ApiLayerAPICreateSpriteRequest {
-	return ApiLayerAPICreateSpriteRequest{
+func (a *LayerAPIService) CreateSprite(ctx context.Context) LayerAPICreateSpriteRequest {
+	return LayerAPICreateSpriteRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -700,7 +700,7 @@ func (a *LayerAPIService) CreateSprite(ctx context.Context) ApiLayerAPICreateSpr
 
 // Execute executes the request
 //  @return Handle
-func (a *LayerAPIService) CreateSpriteExecute(r ApiLayerAPICreateSpriteRequest) (*Handle, *http.Response, error) {
+func (a *LayerAPIService) createSpriteExecute(r LayerAPICreateSpriteRequest) (*Handle, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -778,29 +778,29 @@ func (a *LayerAPIService) CreateSpriteExecute(r ApiLayerAPICreateSpriteRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiLayerAPIDiscardRequest struct {
+type LayerAPIDiscardRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	segmentRequest *SegmentRequest
 }
 
-func (r ApiLayerAPIDiscardRequest) SegmentRequest(segmentRequest SegmentRequest) ApiLayerAPIDiscardRequest {
+func (r LayerAPIDiscardRequest) SegmentRequest(segmentRequest SegmentRequest) LayerAPIDiscardRequest {
 	r.segmentRequest = &segmentRequest
 	return r
 }
 
-func (r ApiLayerAPIDiscardRequest) Execute() (*SegmentDiscardResult, *http.Response, error) {
-	return r.ApiService.DiscardExecute(r)
+func (r LayerAPIDiscardRequest) Execute() (*SegmentDiscardResult, *http.Response, error) {
+	return r.ApiService.discardExecute(r)
 }
 
 /*
 Discard Method for Discard
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPIDiscardRequest
+ @return LayerAPIDiscardRequest
 */
-func (a *LayerAPIService) Discard(ctx context.Context) ApiLayerAPIDiscardRequest {
-	return ApiLayerAPIDiscardRequest{
+func (a *LayerAPIService) Discard(ctx context.Context) LayerAPIDiscardRequest {
+	return LayerAPIDiscardRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -808,7 +808,7 @@ func (a *LayerAPIService) Discard(ctx context.Context) ApiLayerAPIDiscardRequest
 
 // Execute executes the request
 //  @return SegmentDiscardResult
-func (a *LayerAPIService) DiscardExecute(r ApiLayerAPIDiscardRequest) (*SegmentDiscardResult, *http.Response, error) {
+func (a *LayerAPIService) discardExecute(r LayerAPIDiscardRequest) (*SegmentDiscardResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -886,29 +886,29 @@ func (a *LayerAPIService) DiscardExecute(r ApiLayerAPIDiscardRequest) (*SegmentD
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiLayerAPIDiscardSpriteRequest struct {
+type LayerAPIDiscardSpriteRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	handleRequest *HandleRequest
 }
 
-func (r ApiLayerAPIDiscardSpriteRequest) HandleRequest(handleRequest HandleRequest) ApiLayerAPIDiscardSpriteRequest {
+func (r LayerAPIDiscardSpriteRequest) HandleRequest(handleRequest HandleRequest) LayerAPIDiscardSpriteRequest {
 	r.handleRequest = &handleRequest
 	return r
 }
 
-func (r ApiLayerAPIDiscardSpriteRequest) Execute() (*BoolResult, *http.Response, error) {
-	return r.ApiService.DiscardSpriteExecute(r)
+func (r LayerAPIDiscardSpriteRequest) Execute() (*BoolResult, *http.Response, error) {
+	return r.ApiService.discardSpriteExecute(r)
 }
 
 /*
 DiscardSprite Method for DiscardSprite
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPIDiscardSpriteRequest
+ @return LayerAPIDiscardSpriteRequest
 */
-func (a *LayerAPIService) DiscardSprite(ctx context.Context) ApiLayerAPIDiscardSpriteRequest {
-	return ApiLayerAPIDiscardSpriteRequest{
+func (a *LayerAPIService) DiscardSprite(ctx context.Context) LayerAPIDiscardSpriteRequest {
+	return LayerAPIDiscardSpriteRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -916,7 +916,7 @@ func (a *LayerAPIService) DiscardSprite(ctx context.Context) ApiLayerAPIDiscardS
 
 // Execute executes the request
 //  @return BoolResult
-func (a *LayerAPIService) DiscardSpriteExecute(r ApiLayerAPIDiscardSpriteRequest) (*BoolResult, *http.Response, error) {
+func (a *LayerAPIService) discardSpriteExecute(r LayerAPIDiscardSpriteRequest) (*BoolResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -994,29 +994,29 @@ func (a *LayerAPIService) DiscardSpriteExecute(r ApiLayerAPIDiscardSpriteRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiLayerAPIIndexesRequest struct {
+type LayerAPIIndexesRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	segmentRequest *SegmentRequest
 }
 
-func (r ApiLayerAPIIndexesRequest) SegmentRequest(segmentRequest SegmentRequest) ApiLayerAPIIndexesRequest {
+func (r LayerAPIIndexesRequest) SegmentRequest(segmentRequest SegmentRequest) LayerAPIIndexesRequest {
 	r.segmentRequest = &segmentRequest
 	return r
 }
 
-func (r ApiLayerAPIIndexesRequest) Execute() (*SegmentIndexesResult, *http.Response, error) {
-	return r.ApiService.IndexesExecute(r)
+func (r LayerAPIIndexesRequest) Execute() (*SegmentIndexesResult, *http.Response, error) {
+	return r.ApiService.indexesExecute(r)
 }
 
 /*
 Indexes Method for Indexes
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPIIndexesRequest
+ @return LayerAPIIndexesRequest
 */
-func (a *LayerAPIService) Indexes(ctx context.Context) ApiLayerAPIIndexesRequest {
-	return ApiLayerAPIIndexesRequest{
+func (a *LayerAPIService) Indexes(ctx context.Context) LayerAPIIndexesRequest {
+	return LayerAPIIndexesRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1024,7 +1024,7 @@ func (a *LayerAPIService) Indexes(ctx context.Context) ApiLayerAPIIndexesRequest
 
 // Execute executes the request
 //  @return SegmentIndexesResult
-func (a *LayerAPIService) IndexesExecute(r ApiLayerAPIIndexesRequest) (*SegmentIndexesResult, *http.Response, error) {
+func (a *LayerAPIService) indexesExecute(r LayerAPIIndexesRequest) (*SegmentIndexesResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1102,29 +1102,29 @@ func (a *LayerAPIService) IndexesExecute(r ApiLayerAPIIndexesRequest) (*SegmentI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiLayerAPIMoveToBottomRequest struct {
+type LayerAPIMoveToBottomRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	segmentRequest *SegmentRequest
 }
 
-func (r ApiLayerAPIMoveToBottomRequest) SegmentRequest(segmentRequest SegmentRequest) ApiLayerAPIMoveToBottomRequest {
+func (r LayerAPIMoveToBottomRequest) SegmentRequest(segmentRequest SegmentRequest) LayerAPIMoveToBottomRequest {
 	r.segmentRequest = &segmentRequest
 	return r
 }
 
-func (r ApiLayerAPIMoveToBottomRequest) Execute() (*OkResult, *http.Response, error) {
-	return r.ApiService.MoveToBottomExecute(r)
+func (r LayerAPIMoveToBottomRequest) Execute() (*OkResult, *http.Response, error) {
+	return r.ApiService.moveToBottomExecute(r)
 }
 
 /*
 MoveToBottom Method for MoveToBottom
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPIMoveToBottomRequest
+ @return LayerAPIMoveToBottomRequest
 */
-func (a *LayerAPIService) MoveToBottom(ctx context.Context) ApiLayerAPIMoveToBottomRequest {
-	return ApiLayerAPIMoveToBottomRequest{
+func (a *LayerAPIService) MoveToBottom(ctx context.Context) LayerAPIMoveToBottomRequest {
+	return LayerAPIMoveToBottomRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1132,7 +1132,7 @@ func (a *LayerAPIService) MoveToBottom(ctx context.Context) ApiLayerAPIMoveToBot
 
 // Execute executes the request
 //  @return OkResult
-func (a *LayerAPIService) MoveToBottomExecute(r ApiLayerAPIMoveToBottomRequest) (*OkResult, *http.Response, error) {
+func (a *LayerAPIService) moveToBottomExecute(r LayerAPIMoveToBottomRequest) (*OkResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1210,29 +1210,29 @@ func (a *LayerAPIService) MoveToBottomExecute(r ApiLayerAPIMoveToBottomRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiLayerAPIMoveToTopRequest struct {
+type LayerAPIMoveToTopRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	segmentRequest *SegmentRequest
 }
 
-func (r ApiLayerAPIMoveToTopRequest) SegmentRequest(segmentRequest SegmentRequest) ApiLayerAPIMoveToTopRequest {
+func (r LayerAPIMoveToTopRequest) SegmentRequest(segmentRequest SegmentRequest) LayerAPIMoveToTopRequest {
 	r.segmentRequest = &segmentRequest
 	return r
 }
 
-func (r ApiLayerAPIMoveToTopRequest) Execute() (*OkResult, *http.Response, error) {
-	return r.ApiService.MoveToTopExecute(r)
+func (r LayerAPIMoveToTopRequest) Execute() (*OkResult, *http.Response, error) {
+	return r.ApiService.moveToTopExecute(r)
 }
 
 /*
 MoveToTop Method for MoveToTop
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPIMoveToTopRequest
+ @return LayerAPIMoveToTopRequest
 */
-func (a *LayerAPIService) MoveToTop(ctx context.Context) ApiLayerAPIMoveToTopRequest {
-	return ApiLayerAPIMoveToTopRequest{
+func (a *LayerAPIService) MoveToTop(ctx context.Context) LayerAPIMoveToTopRequest {
+	return LayerAPIMoveToTopRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1240,7 +1240,7 @@ func (a *LayerAPIService) MoveToTop(ctx context.Context) ApiLayerAPIMoveToTopReq
 
 // Execute executes the request
 //  @return OkResult
-func (a *LayerAPIService) MoveToTopExecute(r ApiLayerAPIMoveToTopRequest) (*OkResult, *http.Response, error) {
+func (a *LayerAPIService) moveToTopExecute(r LayerAPIMoveToTopRequest) (*OkResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1318,29 +1318,29 @@ func (a *LayerAPIService) MoveToTopExecute(r ApiLayerAPIMoveToTopRequest) (*OkRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiLayerAPIReverseDepthRequest struct {
+type LayerAPIReverseDepthRequest struct {
 	ctx context.Context
 	ApiService *LayerAPIService
 	segmentReverseDepthRequest *SegmentReverseDepthRequest
 }
 
-func (r ApiLayerAPIReverseDepthRequest) SegmentReverseDepthRequest(segmentReverseDepthRequest SegmentReverseDepthRequest) ApiLayerAPIReverseDepthRequest {
+func (r LayerAPIReverseDepthRequest) SegmentReverseDepthRequest(segmentReverseDepthRequest SegmentReverseDepthRequest) LayerAPIReverseDepthRequest {
 	r.segmentReverseDepthRequest = &segmentReverseDepthRequest
 	return r
 }
 
-func (r ApiLayerAPIReverseDepthRequest) Execute() (*OkResult, *http.Response, error) {
-	return r.ApiService.ReverseDepthExecute(r)
+func (r LayerAPIReverseDepthRequest) Execute() (*OkResult, *http.Response, error) {
+	return r.ApiService.reverseDepthExecute(r)
 }
 
 /*
 ReverseDepth Method for ReverseDepth
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiLayerAPIReverseDepthRequest
+ @return LayerAPIReverseDepthRequest
 */
-func (a *LayerAPIService) ReverseDepth(ctx context.Context) ApiLayerAPIReverseDepthRequest {
-	return ApiLayerAPIReverseDepthRequest{
+func (a *LayerAPIService) ReverseDepth(ctx context.Context) LayerAPIReverseDepthRequest {
+	return LayerAPIReverseDepthRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1348,7 +1348,7 @@ func (a *LayerAPIService) ReverseDepth(ctx context.Context) ApiLayerAPIReverseDe
 
 // Execute executes the request
 //  @return OkResult
-func (a *LayerAPIService) ReverseDepthExecute(r ApiLayerAPIReverseDepthRequest) (*OkResult, *http.Response, error) {
+func (a *LayerAPIService) reverseDepthExecute(r LayerAPIReverseDepthRequest) (*OkResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

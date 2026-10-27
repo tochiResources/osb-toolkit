@@ -19,59 +19,59 @@ import (
 )
 
 
-// ImagegenAPIService ImagegenAPI service
-type ImagegenAPIService service
+// Storyboarding3dAPIService Storyboarding3dAPI service
+type Storyboarding3dAPIService service
 
-type ApiImagegenAPIRenderShapesRequest struct {
+type Storyboarding3dAPIBake3dRequest struct {
 	ctx context.Context
-	ApiService *ImagegenAPIService
-	renderShapesRequest *RenderShapesRequest
+	ApiService *Storyboarding3dAPIService
+	bake3dRequest *Bake3dRequest
 }
 
-func (r ApiImagegenAPIRenderShapesRequest) RenderShapesRequest(renderShapesRequest RenderShapesRequest) ApiImagegenAPIRenderShapesRequest {
-	r.renderShapesRequest = &renderShapesRequest
+func (r Storyboarding3dAPIBake3dRequest) Bake3dRequest(bake3dRequest Bake3dRequest) Storyboarding3dAPIBake3dRequest {
+	r.bake3dRequest = &bake3dRequest
 	return r
 }
 
-func (r ApiImagegenAPIRenderShapesRequest) Execute() (*ImageInfo, *http.Response, error) {
-	return r.ApiService.RenderShapesExecute(r)
+func (r Storyboarding3dAPIBake3dRequest) Execute() (*BakedStoryboard, *http.Response, error) {
+	return r.ApiService.bake3dExecute(r)
 }
 
 /*
-RenderShapes Method for RenderShapes
+Bake3d Method for Bake3d
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiImagegenAPIRenderShapesRequest
+ @return Storyboarding3dAPIBake3dRequest
 */
-func (a *ImagegenAPIService) RenderShapes(ctx context.Context) ApiImagegenAPIRenderShapesRequest {
-	return ApiImagegenAPIRenderShapesRequest{
+func (a *Storyboarding3dAPIService) Bake3d(ctx context.Context) Storyboarding3dAPIBake3dRequest {
+	return Storyboarding3dAPIBake3dRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ImageInfo
-func (a *ImagegenAPIService) RenderShapesExecute(r ApiImagegenAPIRenderShapesRequest) (*ImageInfo, *http.Response, error) {
+//  @return BakedStoryboard
+func (a *Storyboarding3dAPIService) bake3dExecute(r Storyboarding3dAPIBake3dRequest) (*BakedStoryboard, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ImageInfo
+		localVarReturnValue  *BakedStoryboard
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImagegenAPIService.RenderShapes")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Storyboarding3dAPIService.Bake3d")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Imagegen.renderShapes"
+	localVarPath := localBasePath + "/bridge/Storyboarding3d.bake3d"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.renderShapesRequest == nil {
-		return localVarReturnValue, nil, reportError("renderShapesRequest is required and must be specified")
+	if r.bake3dRequest == nil {
+		return localVarReturnValue, nil, reportError("bake3dRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -92,7 +92,7 @@ func (a *ImagegenAPIService) RenderShapesExecute(r ApiImagegenAPIRenderShapesReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.renderShapesRequest
+	localVarPostBody = r.bake3dRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

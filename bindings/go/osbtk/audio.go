@@ -19,63 +19,54 @@ import (
 )
 
 
-// ImageAPIService ImageAPI service
-type ImageAPIService service
+// AudioAPIService AudioAPI service
+type AudioAPIService service
 
-type ApiImageAPIInfoRequest struct {
+type AudioAPIAudioDurationRequest struct {
 	ctx context.Context
-	ApiService *ImageAPIService
-	pathRequest *PathRequest
+	ApiService *AudioAPIService
 }
 
-func (r ApiImageAPIInfoRequest) PathRequest(pathRequest PathRequest) ApiImageAPIInfoRequest {
-	r.pathRequest = &pathRequest
-	return r
-}
-
-func (r ApiImageAPIInfoRequest) Execute() (*ImageInfo, *http.Response, error) {
-	return r.ApiService.InfoExecute(r)
+func (r AudioAPIAudioDurationRequest) Execute() (*AudioDurationResult, *http.Response, error) {
+	return r.ApiService.audioDurationExecute(r)
 }
 
 /*
-Info Method for Info
+AudioDuration Method for AudioDuration
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiImageAPIInfoRequest
+ @return AudioAPIAudioDurationRequest
 */
-func (a *ImageAPIService) Info(ctx context.Context) ApiImageAPIInfoRequest {
-	return ApiImageAPIInfoRequest{
+func (a *AudioAPIService) AudioDuration(ctx context.Context) AudioAPIAudioDurationRequest {
+	return AudioAPIAudioDurationRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ImageInfo
-func (a *ImageAPIService) InfoExecute(r ApiImageAPIInfoRequest) (*ImageInfo, *http.Response, error) {
+//  @return AudioDurationResult
+func (a *AudioAPIService) audioDurationExecute(r AudioAPIAudioDurationRequest) (*AudioDurationResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ImageInfo
+		localVarReturnValue  *AudioDurationResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImageAPIService.Info")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AudioAPIService.AudioDuration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Image.info"
+	localVarPath := localBasePath + "/bridge/Audio.audioDuration"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pathRequest == nil {
-		return localVarReturnValue, nil, reportError("pathRequest is required and must be specified")
-	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -91,8 +82,6 @@ func (a *ImageAPIService) InfoExecute(r ApiImageAPIInfoRequest) (*ImageInfo, *ht
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.pathRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -130,56 +119,56 @@ func (a *ImageAPIService) InfoExecute(r ApiImageAPIInfoRequest) (*ImageInfo, *ht
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiImageAPIProcessRequest struct {
+type AudioAPIFftRequest struct {
 	ctx context.Context
-	ApiService *ImageAPIService
-	imageProcessRequest *ImageProcessRequest
+	ApiService *AudioAPIService
+	fftRequest *FftRequest
 }
 
-func (r ApiImageAPIProcessRequest) ImageProcessRequest(imageProcessRequest ImageProcessRequest) ApiImageAPIProcessRequest {
-	r.imageProcessRequest = &imageProcessRequest
+func (r AudioAPIFftRequest) FftRequest(fftRequest FftRequest) AudioAPIFftRequest {
+	r.fftRequest = &fftRequest
 	return r
 }
 
-func (r ApiImageAPIProcessRequest) Execute() (*ImageInfo, *http.Response, error) {
-	return r.ApiService.ProcessExecute(r)
+func (r AudioAPIFftRequest) Execute() (*FftResult, *http.Response, error) {
+	return r.ApiService.fftExecute(r)
 }
 
 /*
-Process Method for Process
+Fft Method for Fft
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiImageAPIProcessRequest
+ @return AudioAPIFftRequest
 */
-func (a *ImageAPIService) Process(ctx context.Context) ApiImageAPIProcessRequest {
-	return ApiImageAPIProcessRequest{
+func (a *AudioAPIService) Fft(ctx context.Context) AudioAPIFftRequest {
+	return AudioAPIFftRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ImageInfo
-func (a *ImageAPIService) ProcessExecute(r ApiImageAPIProcessRequest) (*ImageInfo, *http.Response, error) {
+//  @return FftResult
+func (a *AudioAPIService) fftExecute(r AudioAPIFftRequest) (*FftResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ImageInfo
+		localVarReturnValue  *FftResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImageAPIService.Process")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AudioAPIService.Fft")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Image.process"
+	localVarPath := localBasePath + "/bridge/Audio.fft"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.imageProcessRequest == nil {
-		return localVarReturnValue, nil, reportError("imageProcessRequest is required and must be specified")
+	if r.fftRequest == nil {
+		return localVarReturnValue, nil, reportError("fftRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -200,7 +189,115 @@ func (a *ImageAPIService) ProcessExecute(r ApiImageAPIProcessRequest) (*ImageInf
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.imageProcessRequest
+	localVarPostBody = r.fftRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type AudioAPIGetFftRequest struct {
+	ctx context.Context
+	ApiService *AudioAPIService
+	getFftRequest *GetFftRequest
+}
+
+func (r AudioAPIGetFftRequest) GetFftRequest(getFftRequest GetFftRequest) AudioAPIGetFftRequest {
+	r.getFftRequest = &getFftRequest
+	return r
+}
+
+func (r AudioAPIGetFftRequest) Execute() (*FftResult, *http.Response, error) {
+	return r.ApiService.getFftExecute(r)
+}
+
+/*
+GetFft Method for GetFft
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return AudioAPIGetFftRequest
+*/
+func (a *AudioAPIService) GetFft(ctx context.Context) AudioAPIGetFftRequest {
+	return AudioAPIGetFftRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return FftResult
+func (a *AudioAPIService) getFftExecute(r AudioAPIGetFftRequest) (*FftResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *FftResult
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AudioAPIService.GetFft")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/bridge/Audio.getFft"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.getFftRequest == nil {
+		return localVarReturnValue, nil, reportError("getFftRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.getFftRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

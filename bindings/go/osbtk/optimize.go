@@ -19,59 +19,59 @@ import (
 )
 
 
-// Storyboarding3dAPIService Storyboarding3dAPI service
-type Storyboarding3dAPIService service
+// OptimizeAPIService OptimizeAPI service
+type OptimizeAPIService service
 
-type ApiStoryboarding3dAPIBake3dRequest struct {
+type OptimizeAPIOptimizeOsbRequest struct {
 	ctx context.Context
-	ApiService *Storyboarding3dAPIService
-	bake3dRequest *Bake3dRequest
+	ApiService *OptimizeAPIService
+	optimizeRequest *OptimizeRequest
 }
 
-func (r ApiStoryboarding3dAPIBake3dRequest) Bake3dRequest(bake3dRequest Bake3dRequest) ApiStoryboarding3dAPIBake3dRequest {
-	r.bake3dRequest = &bake3dRequest
+func (r OptimizeAPIOptimizeOsbRequest) OptimizeRequest(optimizeRequest OptimizeRequest) OptimizeAPIOptimizeOsbRequest {
+	r.optimizeRequest = &optimizeRequest
 	return r
 }
 
-func (r ApiStoryboarding3dAPIBake3dRequest) Execute() (*BakedStoryboard, *http.Response, error) {
-	return r.ApiService.Bake3dExecute(r)
+func (r OptimizeAPIOptimizeOsbRequest) Execute() (*OptimizeResult, *http.Response, error) {
+	return r.ApiService.optimizeOsbExecute(r)
 }
 
 /*
-Bake3d Method for Bake3d
+OptimizeOsb Method for OptimizeOsb
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiStoryboarding3dAPIBake3dRequest
+ @return OptimizeAPIOptimizeOsbRequest
 */
-func (a *Storyboarding3dAPIService) Bake3d(ctx context.Context) ApiStoryboarding3dAPIBake3dRequest {
-	return ApiStoryboarding3dAPIBake3dRequest{
+func (a *OptimizeAPIService) OptimizeOsb(ctx context.Context) OptimizeAPIOptimizeOsbRequest {
+	return OptimizeAPIOptimizeOsbRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BakedStoryboard
-func (a *Storyboarding3dAPIService) Bake3dExecute(r ApiStoryboarding3dAPIBake3dRequest) (*BakedStoryboard, *http.Response, error) {
+//  @return OptimizeResult
+func (a *OptimizeAPIService) optimizeOsbExecute(r OptimizeAPIOptimizeOsbRequest) (*OptimizeResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *BakedStoryboard
+		localVarReturnValue  *OptimizeResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Storyboarding3dAPIService.Bake3d")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OptimizeAPIService.OptimizeOsb")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Storyboarding3d.bake3d"
+	localVarPath := localBasePath + "/bridge/Optimize.optimizeOsb"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bake3dRequest == nil {
-		return localVarReturnValue, nil, reportError("bake3dRequest is required and must be specified")
+	if r.optimizeRequest == nil {
+		return localVarReturnValue, nil, reportError("optimizeRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -92,7 +92,7 @@ func (a *Storyboarding3dAPIService) Bake3dExecute(r ApiStoryboarding3dAPIBake3dR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bake3dRequest
+	localVarPostBody = r.optimizeRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

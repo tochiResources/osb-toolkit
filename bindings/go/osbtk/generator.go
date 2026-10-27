@@ -22,23 +22,23 @@ import (
 // GeneratorAPIService GeneratorAPI service
 type GeneratorAPIService service
 
-type ApiGeneratorAPIBeatmapRequest struct {
+type GeneratorAPIBeatmapRequest struct {
 	ctx context.Context
 	ApiService *GeneratorAPIService
 }
 
-func (r ApiGeneratorAPIBeatmapRequest) Execute() (*Beatmap, *http.Response, error) {
-	return r.ApiService.BeatmapExecute(r)
+func (r GeneratorAPIBeatmapRequest) Execute() (*Beatmap, *http.Response, error) {
+	return r.ApiService.beatmapExecute(r)
 }
 
 /*
 Beatmap Method for Beatmap
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratorAPIBeatmapRequest
+ @return GeneratorAPIBeatmapRequest
 */
-func (a *GeneratorAPIService) Beatmap(ctx context.Context) ApiGeneratorAPIBeatmapRequest {
-	return ApiGeneratorAPIBeatmapRequest{
+func (a *GeneratorAPIService) Beatmap(ctx context.Context) GeneratorAPIBeatmapRequest {
+	return GeneratorAPIBeatmapRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -46,7 +46,7 @@ func (a *GeneratorAPIService) Beatmap(ctx context.Context) ApiGeneratorAPIBeatma
 
 // Execute executes the request
 //  @return Beatmap
-func (a *GeneratorAPIService) BeatmapExecute(r ApiGeneratorAPIBeatmapRequest) (*Beatmap, *http.Response, error) {
+func (a *GeneratorAPIService) beatmapExecute(r GeneratorAPIBeatmapRequest) (*Beatmap, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -119,29 +119,29 @@ func (a *GeneratorAPIService) BeatmapExecute(r ApiGeneratorAPIBeatmapRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeneratorAPIControlPointAtRequest struct {
+type GeneratorAPIControlPointAtRequest struct {
 	ctx context.Context
 	ApiService *GeneratorAPIService
 	timeRequest *TimeRequest
 }
 
-func (r ApiGeneratorAPIControlPointAtRequest) TimeRequest(timeRequest TimeRequest) ApiGeneratorAPIControlPointAtRequest {
+func (r GeneratorAPIControlPointAtRequest) TimeRequest(timeRequest TimeRequest) GeneratorAPIControlPointAtRequest {
 	r.timeRequest = &timeRequest
 	return r
 }
 
-func (r ApiGeneratorAPIControlPointAtRequest) Execute() (*ControlPoint, *http.Response, error) {
-	return r.ApiService.ControlPointAtExecute(r)
+func (r GeneratorAPIControlPointAtRequest) Execute() (*ControlPoint, *http.Response, error) {
+	return r.ApiService.controlPointAtExecute(r)
 }
 
 /*
 ControlPointAt Method for ControlPointAt
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratorAPIControlPointAtRequest
+ @return GeneratorAPIControlPointAtRequest
 */
-func (a *GeneratorAPIService) ControlPointAt(ctx context.Context) ApiGeneratorAPIControlPointAtRequest {
-	return ApiGeneratorAPIControlPointAtRequest{
+func (a *GeneratorAPIService) ControlPointAt(ctx context.Context) GeneratorAPIControlPointAtRequest {
+	return GeneratorAPIControlPointAtRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -149,7 +149,7 @@ func (a *GeneratorAPIService) ControlPointAt(ctx context.Context) ApiGeneratorAP
 
 // Execute executes the request
 //  @return ControlPoint
-func (a *GeneratorAPIService) ControlPointAtExecute(r ApiGeneratorAPIControlPointAtRequest) (*ControlPoint, *http.Response, error) {
+func (a *GeneratorAPIService) controlPointAtExecute(r GeneratorAPIControlPointAtRequest) (*ControlPoint, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -227,29 +227,29 @@ func (a *GeneratorAPIService) ControlPointAtExecute(r ApiGeneratorAPIControlPoin
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeneratorAPIImportOsbRequest struct {
+type GeneratorAPIImportOsbRequest struct {
 	ctx context.Context
 	ApiService *GeneratorAPIService
 	textRequest *TextRequest
 }
 
-func (r ApiGeneratorAPIImportOsbRequest) TextRequest(textRequest TextRequest) ApiGeneratorAPIImportOsbRequest {
+func (r GeneratorAPIImportOsbRequest) TextRequest(textRequest TextRequest) GeneratorAPIImportOsbRequest {
 	r.textRequest = &textRequest
 	return r
 }
 
-func (r ApiGeneratorAPIImportOsbRequest) Execute() (*ImportOsbResult, *http.Response, error) {
-	return r.ApiService.ImportOsbExecute(r)
+func (r GeneratorAPIImportOsbRequest) Execute() (*ImportOsbResult, *http.Response, error) {
+	return r.ApiService.importOsbExecute(r)
 }
 
 /*
 ImportOsb Method for ImportOsb
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratorAPIImportOsbRequest
+ @return GeneratorAPIImportOsbRequest
 */
-func (a *GeneratorAPIService) ImportOsb(ctx context.Context) ApiGeneratorAPIImportOsbRequest {
-	return ApiGeneratorAPIImportOsbRequest{
+func (a *GeneratorAPIService) ImportOsb(ctx context.Context) GeneratorAPIImportOsbRequest {
+	return GeneratorAPIImportOsbRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -257,7 +257,7 @@ func (a *GeneratorAPIService) ImportOsb(ctx context.Context) ApiGeneratorAPIImpo
 
 // Execute executes the request
 //  @return ImportOsbResult
-func (a *GeneratorAPIService) ImportOsbExecute(r ApiGeneratorAPIImportOsbRequest) (*ImportOsbResult, *http.Response, error) {
+func (a *GeneratorAPIService) importOsbExecute(r GeneratorAPIImportOsbRequest) (*ImportOsbResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -335,29 +335,29 @@ func (a *GeneratorAPIService) ImportOsbExecute(r ApiGeneratorAPIImportOsbRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeneratorAPILayerHandleRequest struct {
+type GeneratorAPILayerHandleRequest struct {
 	ctx context.Context
 	ApiService *GeneratorAPIService
 	layerHandleRequest *LayerHandleRequest
 }
 
-func (r ApiGeneratorAPILayerHandleRequest) LayerHandleRequest(layerHandleRequest LayerHandleRequest) ApiGeneratorAPILayerHandleRequest {
+func (r GeneratorAPILayerHandleRequest) LayerHandleRequest(layerHandleRequest LayerHandleRequest) GeneratorAPILayerHandleRequest {
 	r.layerHandleRequest = &layerHandleRequest
 	return r
 }
 
-func (r ApiGeneratorAPILayerHandleRequest) Execute() (*LayerHandle, *http.Response, error) {
-	return r.ApiService.LayerHandleExecute(r)
+func (r GeneratorAPILayerHandleRequest) Execute() (*LayerHandle, *http.Response, error) {
+	return r.ApiService.layerHandleExecute(r)
 }
 
 /*
 LayerHandle Method for LayerHandle
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratorAPILayerHandleRequest
+ @return GeneratorAPILayerHandleRequest
 */
-func (a *GeneratorAPIService) LayerHandle(ctx context.Context) ApiGeneratorAPILayerHandleRequest {
-	return ApiGeneratorAPILayerHandleRequest{
+func (a *GeneratorAPIService) LayerHandle(ctx context.Context) GeneratorAPILayerHandleRequest {
+	return GeneratorAPILayerHandleRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -365,7 +365,7 @@ func (a *GeneratorAPIService) LayerHandle(ctx context.Context) ApiGeneratorAPILa
 
 // Execute executes the request
 //  @return LayerHandle
-func (a *GeneratorAPIService) LayerHandleExecute(r ApiGeneratorAPILayerHandleRequest) (*LayerHandle, *http.Response, error) {
+func (a *GeneratorAPIService) layerHandleExecute(r GeneratorAPILayerHandleRequest) (*LayerHandle, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -443,29 +443,29 @@ func (a *GeneratorAPIService) LayerHandleExecute(r ApiGeneratorAPILayerHandleReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeneratorAPILoadBeatmapRequest struct {
+type GeneratorAPILoadBeatmapRequest struct {
 	ctx context.Context
 	ApiService *GeneratorAPIService
 	textRequest *TextRequest
 }
 
-func (r ApiGeneratorAPILoadBeatmapRequest) TextRequest(textRequest TextRequest) ApiGeneratorAPILoadBeatmapRequest {
+func (r GeneratorAPILoadBeatmapRequest) TextRequest(textRequest TextRequest) GeneratorAPILoadBeatmapRequest {
 	r.textRequest = &textRequest
 	return r
 }
 
-func (r ApiGeneratorAPILoadBeatmapRequest) Execute() (*LoadBeatmapResult, *http.Response, error) {
-	return r.ApiService.LoadBeatmapExecute(r)
+func (r GeneratorAPILoadBeatmapRequest) Execute() (*LoadBeatmapResult, *http.Response, error) {
+	return r.ApiService.loadBeatmapExecute(r)
 }
 
 /*
 LoadBeatmap Method for LoadBeatmap
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratorAPILoadBeatmapRequest
+ @return GeneratorAPILoadBeatmapRequest
 */
-func (a *GeneratorAPIService) LoadBeatmap(ctx context.Context) ApiGeneratorAPILoadBeatmapRequest {
-	return ApiGeneratorAPILoadBeatmapRequest{
+func (a *GeneratorAPIService) LoadBeatmap(ctx context.Context) GeneratorAPILoadBeatmapRequest {
+	return GeneratorAPILoadBeatmapRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -473,7 +473,7 @@ func (a *GeneratorAPIService) LoadBeatmap(ctx context.Context) ApiGeneratorAPILo
 
 // Execute executes the request
 //  @return LoadBeatmapResult
-func (a *GeneratorAPIService) LoadBeatmapExecute(r ApiGeneratorAPILoadBeatmapRequest) (*LoadBeatmapResult, *http.Response, error) {
+func (a *GeneratorAPIService) loadBeatmapExecute(r GeneratorAPILoadBeatmapRequest) (*LoadBeatmapResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -551,29 +551,29 @@ func (a *GeneratorAPIService) LoadBeatmapExecute(r ApiGeneratorAPILoadBeatmapReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeneratorAPIRandomRequest struct {
+type GeneratorAPIRandomRequest struct {
 	ctx context.Context
 	ApiService *GeneratorAPIService
 	randomRequest *RandomRequest
 }
 
-func (r ApiGeneratorAPIRandomRequest) RandomRequest(randomRequest RandomRequest) ApiGeneratorAPIRandomRequest {
+func (r GeneratorAPIRandomRequest) RandomRequest(randomRequest RandomRequest) GeneratorAPIRandomRequest {
 	r.randomRequest = &randomRequest
 	return r
 }
 
-func (r ApiGeneratorAPIRandomRequest) Execute() (*RandomResult, *http.Response, error) {
-	return r.ApiService.RandomExecute(r)
+func (r GeneratorAPIRandomRequest) Execute() (*RandomResult, *http.Response, error) {
+	return r.ApiService.randomExecute(r)
 }
 
 /*
 Random Method for Random
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratorAPIRandomRequest
+ @return GeneratorAPIRandomRequest
 */
-func (a *GeneratorAPIService) Random(ctx context.Context) ApiGeneratorAPIRandomRequest {
-	return ApiGeneratorAPIRandomRequest{
+func (a *GeneratorAPIService) Random(ctx context.Context) GeneratorAPIRandomRequest {
+	return GeneratorAPIRandomRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -581,7 +581,7 @@ func (a *GeneratorAPIService) Random(ctx context.Context) ApiGeneratorAPIRandomR
 
 // Execute executes the request
 //  @return RandomResult
-func (a *GeneratorAPIService) RandomExecute(r ApiGeneratorAPIRandomRequest) (*RandomResult, *http.Response, error) {
+func (a *GeneratorAPIService) randomExecute(r GeneratorAPIRandomRequest) (*RandomResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -659,23 +659,23 @@ func (a *GeneratorAPIService) RandomExecute(r ApiGeneratorAPIRandomRequest) (*Ra
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeneratorAPISpriteCountRequest struct {
+type GeneratorAPISpriteCountRequest struct {
 	ctx context.Context
 	ApiService *GeneratorAPIService
 }
 
-func (r ApiGeneratorAPISpriteCountRequest) Execute() (*SpriteCountResult, *http.Response, error) {
-	return r.ApiService.SpriteCountExecute(r)
+func (r GeneratorAPISpriteCountRequest) Execute() (*SpriteCountResult, *http.Response, error) {
+	return r.ApiService.spriteCountExecute(r)
 }
 
 /*
 SpriteCount Method for SpriteCount
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratorAPISpriteCountRequest
+ @return GeneratorAPISpriteCountRequest
 */
-func (a *GeneratorAPIService) SpriteCount(ctx context.Context) ApiGeneratorAPISpriteCountRequest {
-	return ApiGeneratorAPISpriteCountRequest{
+func (a *GeneratorAPIService) SpriteCount(ctx context.Context) GeneratorAPISpriteCountRequest {
+	return GeneratorAPISpriteCountRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -683,7 +683,7 @@ func (a *GeneratorAPIService) SpriteCount(ctx context.Context) ApiGeneratorAPISp
 
 // Execute executes the request
 //  @return SpriteCountResult
-func (a *GeneratorAPIService) SpriteCountExecute(r ApiGeneratorAPISpriteCountRequest) (*SpriteCountResult, *http.Response, error) {
+func (a *GeneratorAPIService) spriteCountExecute(r GeneratorAPISpriteCountRequest) (*SpriteCountResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -756,23 +756,23 @@ func (a *GeneratorAPIService) SpriteCountExecute(r ApiGeneratorAPISpriteCountReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeneratorAPIStoryboardRequest struct {
+type GeneratorAPIStoryboardRequest struct {
 	ctx context.Context
 	ApiService *GeneratorAPIService
 }
 
-func (r ApiGeneratorAPIStoryboardRequest) Execute() (*Storyboard, *http.Response, error) {
-	return r.ApiService.StoryboardExecute(r)
+func (r GeneratorAPIStoryboardRequest) Execute() (*Storyboard, *http.Response, error) {
+	return r.ApiService.storyboardExecute(r)
 }
 
 /*
 Storyboard Method for Storyboard
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratorAPIStoryboardRequest
+ @return GeneratorAPIStoryboardRequest
 */
-func (a *GeneratorAPIService) Storyboard(ctx context.Context) ApiGeneratorAPIStoryboardRequest {
-	return ApiGeneratorAPIStoryboardRequest{
+func (a *GeneratorAPIService) Storyboard(ctx context.Context) GeneratorAPIStoryboardRequest {
+	return GeneratorAPIStoryboardRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -780,7 +780,7 @@ func (a *GeneratorAPIService) Storyboard(ctx context.Context) ApiGeneratorAPISto
 
 // Execute executes the request
 //  @return Storyboard
-func (a *GeneratorAPIService) StoryboardExecute(r ApiGeneratorAPIStoryboardRequest) (*Storyboard, *http.Response, error) {
+func (a *GeneratorAPIService) storyboardExecute(r GeneratorAPIStoryboardRequest) (*Storyboard, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -853,29 +853,29 @@ func (a *GeneratorAPIService) StoryboardExecute(r ApiGeneratorAPIStoryboardReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeneratorAPITimingPointAtRequest struct {
+type GeneratorAPITimingPointAtRequest struct {
 	ctx context.Context
 	ApiService *GeneratorAPIService
 	timeRequest *TimeRequest
 }
 
-func (r ApiGeneratorAPITimingPointAtRequest) TimeRequest(timeRequest TimeRequest) ApiGeneratorAPITimingPointAtRequest {
+func (r GeneratorAPITimingPointAtRequest) TimeRequest(timeRequest TimeRequest) GeneratorAPITimingPointAtRequest {
 	r.timeRequest = &timeRequest
 	return r
 }
 
-func (r ApiGeneratorAPITimingPointAtRequest) Execute() (*ControlPoint, *http.Response, error) {
-	return r.ApiService.TimingPointAtExecute(r)
+func (r GeneratorAPITimingPointAtRequest) Execute() (*ControlPoint, *http.Response, error) {
+	return r.ApiService.timingPointAtExecute(r)
 }
 
 /*
 TimingPointAt Method for TimingPointAt
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratorAPITimingPointAtRequest
+ @return GeneratorAPITimingPointAtRequest
 */
-func (a *GeneratorAPIService) TimingPointAt(ctx context.Context) ApiGeneratorAPITimingPointAtRequest {
-	return ApiGeneratorAPITimingPointAtRequest{
+func (a *GeneratorAPIService) TimingPointAt(ctx context.Context) GeneratorAPITimingPointAtRequest {
+	return GeneratorAPITimingPointAtRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -883,7 +883,7 @@ func (a *GeneratorAPIService) TimingPointAt(ctx context.Context) ApiGeneratorAPI
 
 // Execute executes the request
 //  @return ControlPoint
-func (a *GeneratorAPIService) TimingPointAtExecute(r ApiGeneratorAPITimingPointAtRequest) (*ControlPoint, *http.Response, error) {
+func (a *GeneratorAPIService) timingPointAtExecute(r GeneratorAPITimingPointAtRequest) (*ControlPoint, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

@@ -22,29 +22,29 @@ import (
 // HelpersAPIService HelpersAPI service
 type HelpersAPIService service
 
-type ApiHelpersAPICallRequest struct {
+type HelpersAPICallRequest struct {
 	ctx context.Context
 	ApiService *HelpersAPIService
 	helperRequest *HelperRequest
 }
 
-func (r ApiHelpersAPICallRequest) HelperRequest(helperRequest HelperRequest) ApiHelpersAPICallRequest {
+func (r HelpersAPICallRequest) HelperRequest(helperRequest HelperRequest) HelpersAPICallRequest {
 	r.helperRequest = &helperRequest
 	return r
 }
 
-func (r ApiHelpersAPICallRequest) Execute() (*HelperResult, *http.Response, error) {
-	return r.ApiService.CallExecute(r)
+func (r HelpersAPICallRequest) Execute() (*HelperResult, *http.Response, error) {
+	return r.ApiService.callExecute(r)
 }
 
 /*
 Call Method for Call
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiHelpersAPICallRequest
+ @return HelpersAPICallRequest
 */
-func (a *HelpersAPIService) Call(ctx context.Context) ApiHelpersAPICallRequest {
-	return ApiHelpersAPICallRequest{
+func (a *HelpersAPIService) Call(ctx context.Context) HelpersAPICallRequest {
+	return HelpersAPICallRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -52,7 +52,7 @@ func (a *HelpersAPIService) Call(ctx context.Context) ApiHelpersAPICallRequest {
 
 // Execute executes the request
 //  @return HelperResult
-func (a *HelpersAPIService) CallExecute(r ApiHelpersAPICallRequest) (*HelperResult, *http.Response, error) {
+func (a *HelpersAPIService) callExecute(r HelpersAPICallRequest) (*HelperResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -130,29 +130,29 @@ func (a *HelpersAPIService) CallExecute(r ApiHelpersAPICallRequest) (*HelperResu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiHelpersAPICommandsRequest struct {
+type HelpersAPICommandsRequest struct {
 	ctx context.Context
 	ApiService *HelpersAPIService
 	helperRequest *HelperRequest
 }
 
-func (r ApiHelpersAPICommandsRequest) HelperRequest(helperRequest HelperRequest) ApiHelpersAPICommandsRequest {
+func (r HelpersAPICommandsRequest) HelperRequest(helperRequest HelperRequest) HelpersAPICommandsRequest {
 	r.helperRequest = &helperRequest
 	return r
 }
 
-func (r ApiHelpersAPICommandsRequest) Execute() (*HelperResult, *http.Response, error) {
-	return r.ApiService.CommandsExecute(r)
+func (r HelpersAPICommandsRequest) Execute() (*HelperResult, *http.Response, error) {
+	return r.ApiService.commandsExecute(r)
 }
 
 /*
 Commands Method for Commands
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiHelpersAPICommandsRequest
+ @return HelpersAPICommandsRequest
 */
-func (a *HelpersAPIService) Commands(ctx context.Context) ApiHelpersAPICommandsRequest {
-	return ApiHelpersAPICommandsRequest{
+func (a *HelpersAPIService) Commands(ctx context.Context) HelpersAPICommandsRequest {
+	return HelpersAPICommandsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -160,7 +160,7 @@ func (a *HelpersAPIService) Commands(ctx context.Context) ApiHelpersAPICommandsR
 
 // Execute executes the request
 //  @return HelperResult
-func (a *HelpersAPIService) CommandsExecute(r ApiHelpersAPICommandsRequest) (*HelperResult, *http.Response, error) {
+func (a *HelpersAPIService) commandsExecute(r HelpersAPICommandsRequest) (*HelperResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -238,29 +238,29 @@ func (a *HelpersAPIService) CommandsExecute(r ApiHelpersAPICommandsRequest) (*He
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiHelpersAPIKeyframesRequest struct {
+type HelpersAPIKeyframesRequest struct {
 	ctx context.Context
 	ApiService *HelpersAPIService
 	helperRequest *HelperRequest
 }
 
-func (r ApiHelpersAPIKeyframesRequest) HelperRequest(helperRequest HelperRequest) ApiHelpersAPIKeyframesRequest {
+func (r HelpersAPIKeyframesRequest) HelperRequest(helperRequest HelperRequest) HelpersAPIKeyframesRequest {
 	r.helperRequest = &helperRequest
 	return r
 }
 
-func (r ApiHelpersAPIKeyframesRequest) Execute() (*HelperResult, *http.Response, error) {
-	return r.ApiService.KeyframesExecute(r)
+func (r HelpersAPIKeyframesRequest) Execute() (*HelperResult, *http.Response, error) {
+	return r.ApiService.keyframesExecute(r)
 }
 
 /*
 Keyframes Method for Keyframes
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiHelpersAPIKeyframesRequest
+ @return HelpersAPIKeyframesRequest
 */
-func (a *HelpersAPIService) Keyframes(ctx context.Context) ApiHelpersAPIKeyframesRequest {
-	return ApiHelpersAPIKeyframesRequest{
+func (a *HelpersAPIService) Keyframes(ctx context.Context) HelpersAPIKeyframesRequest {
+	return HelpersAPIKeyframesRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -268,7 +268,7 @@ func (a *HelpersAPIService) Keyframes(ctx context.Context) ApiHelpersAPIKeyframe
 
 // Execute executes the request
 //  @return HelperResult
-func (a *HelpersAPIService) KeyframesExecute(r ApiHelpersAPIKeyframesRequest) (*HelperResult, *http.Response, error) {
+func (a *HelpersAPIService) keyframesExecute(r HelpersAPIKeyframesRequest) (*HelperResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

@@ -19,63 +19,54 @@ import (
 )
 
 
-// OptimizeAPIService OptimizeAPI service
-type OptimizeAPIService service
+// CommonAPIService CommonAPI service
+type CommonAPIService service
 
-type ApiOptimizeAPIOptimizeOsbRequest struct {
+type CommonAPIVersionRequest struct {
 	ctx context.Context
-	ApiService *OptimizeAPIService
-	optimizeRequest *OptimizeRequest
+	ApiService *CommonAPIService
 }
 
-func (r ApiOptimizeAPIOptimizeOsbRequest) OptimizeRequest(optimizeRequest OptimizeRequest) ApiOptimizeAPIOptimizeOsbRequest {
-	r.optimizeRequest = &optimizeRequest
-	return r
-}
-
-func (r ApiOptimizeAPIOptimizeOsbRequest) Execute() (*OptimizeResult, *http.Response, error) {
-	return r.ApiService.OptimizeOsbExecute(r)
+func (r CommonAPIVersionRequest) Execute() (*VersionResult, *http.Response, error) {
+	return r.ApiService.versionExecute(r)
 }
 
 /*
-OptimizeOsb Method for OptimizeOsb
+Version Method for Version
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiOptimizeAPIOptimizeOsbRequest
+ @return CommonAPIVersionRequest
 */
-func (a *OptimizeAPIService) OptimizeOsb(ctx context.Context) ApiOptimizeAPIOptimizeOsbRequest {
-	return ApiOptimizeAPIOptimizeOsbRequest{
+func (a *CommonAPIService) Version(ctx context.Context) CommonAPIVersionRequest {
+	return CommonAPIVersionRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return OptimizeResult
-func (a *OptimizeAPIService) OptimizeOsbExecute(r ApiOptimizeAPIOptimizeOsbRequest) (*OptimizeResult, *http.Response, error) {
+//  @return VersionResult
+func (a *CommonAPIService) versionExecute(r CommonAPIVersionRequest) (*VersionResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OptimizeResult
+		localVarReturnValue  *VersionResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OptimizeAPIService.OptimizeOsb")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CommonAPIService.Version")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Optimize.optimizeOsb"
+	localVarPath := localBasePath + "/bridge/Common.version"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.optimizeRequest == nil {
-		return localVarReturnValue, nil, reportError("optimizeRequest is required and must be specified")
-	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -91,8 +82,6 @@ func (a *OptimizeAPIService) OptimizeOsbExecute(r ApiOptimizeAPIOptimizeOsbReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.optimizeRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

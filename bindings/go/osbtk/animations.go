@@ -19,59 +19,59 @@ import (
 )
 
 
-// ParsingAPIService ParsingAPI service
-type ParsingAPIService service
+// AnimationsAPIService AnimationsAPI service
+type AnimationsAPIService service
 
-type ApiParsingAPIParseOsbRequest struct {
+type AnimationsAPIApplyEasingRequest struct {
 	ctx context.Context
-	ApiService *ParsingAPIService
-	textRequest *TextRequest
+	ApiService *AnimationsAPIService
+	applyEasingRequest *ApplyEasingRequest
 }
 
-func (r ApiParsingAPIParseOsbRequest) TextRequest(textRequest TextRequest) ApiParsingAPIParseOsbRequest {
-	r.textRequest = &textRequest
+func (r AnimationsAPIApplyEasingRequest) ApplyEasingRequest(applyEasingRequest ApplyEasingRequest) AnimationsAPIApplyEasingRequest {
+	r.applyEasingRequest = &applyEasingRequest
 	return r
 }
 
-func (r ApiParsingAPIParseOsbRequest) Execute() (*ParseOsbResult, *http.Response, error) {
-	return r.ApiService.ParseOsbExecute(r)
+func (r AnimationsAPIApplyEasingRequest) Execute() (*EasingResult, *http.Response, error) {
+	return r.ApiService.applyEasingExecute(r)
 }
 
 /*
-ParseOsb Method for ParseOsb
+ApplyEasing Method for ApplyEasing
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiParsingAPIParseOsbRequest
+ @return AnimationsAPIApplyEasingRequest
 */
-func (a *ParsingAPIService) ParseOsb(ctx context.Context) ApiParsingAPIParseOsbRequest {
-	return ApiParsingAPIParseOsbRequest{
+func (a *AnimationsAPIService) ApplyEasing(ctx context.Context) AnimationsAPIApplyEasingRequest {
+	return AnimationsAPIApplyEasingRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ParseOsbResult
-func (a *ParsingAPIService) ParseOsbExecute(r ApiParsingAPIParseOsbRequest) (*ParseOsbResult, *http.Response, error) {
+//  @return EasingResult
+func (a *AnimationsAPIService) applyEasingExecute(r AnimationsAPIApplyEasingRequest) (*EasingResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ParseOsbResult
+		localVarReturnValue  *EasingResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParsingAPIService.ParseOsb")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnimationsAPIService.ApplyEasing")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Parsing.parseOsb"
+	localVarPath := localBasePath + "/bridge/Animations.applyEasing"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.textRequest == nil {
-		return localVarReturnValue, nil, reportError("textRequest is required and must be specified")
+	if r.applyEasingRequest == nil {
+		return localVarReturnValue, nil, reportError("applyEasingRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -92,7 +92,7 @@ func (a *ParsingAPIService) ParseOsbExecute(r ApiParsingAPIParseOsbRequest) (*Pa
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.textRequest
+	localVarPostBody = r.applyEasingRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -130,56 +130,56 @@ func (a *ParsingAPIService) ParseOsbExecute(r ApiParsingAPIParseOsbRequest) (*Pa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiParsingAPIParseOsuRequest struct {
+type AnimationsAPIEasingValueRequest struct {
 	ctx context.Context
-	ApiService *ParsingAPIService
-	textRequest *TextRequest
+	ApiService *AnimationsAPIService
+	easingValueRequest *EasingValueRequest
 }
 
-func (r ApiParsingAPIParseOsuRequest) TextRequest(textRequest TextRequest) ApiParsingAPIParseOsuRequest {
-	r.textRequest = &textRequest
+func (r AnimationsAPIEasingValueRequest) EasingValueRequest(easingValueRequest EasingValueRequest) AnimationsAPIEasingValueRequest {
+	r.easingValueRequest = &easingValueRequest
 	return r
 }
 
-func (r ApiParsingAPIParseOsuRequest) Execute() (*Beatmap, *http.Response, error) {
-	return r.ApiService.ParseOsuExecute(r)
+func (r AnimationsAPIEasingValueRequest) Execute() (*EasingResult, *http.Response, error) {
+	return r.ApiService.easingValueExecute(r)
 }
 
 /*
-ParseOsu Method for ParseOsu
+EasingValue Method for EasingValue
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiParsingAPIParseOsuRequest
+ @return AnimationsAPIEasingValueRequest
 */
-func (a *ParsingAPIService) ParseOsu(ctx context.Context) ApiParsingAPIParseOsuRequest {
-	return ApiParsingAPIParseOsuRequest{
+func (a *AnimationsAPIService) EasingValue(ctx context.Context) AnimationsAPIEasingValueRequest {
+	return AnimationsAPIEasingValueRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return Beatmap
-func (a *ParsingAPIService) ParseOsuExecute(r ApiParsingAPIParseOsuRequest) (*Beatmap, *http.Response, error) {
+//  @return EasingResult
+func (a *AnimationsAPIService) easingValueExecute(r AnimationsAPIEasingValueRequest) (*EasingResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Beatmap
+		localVarReturnValue  *EasingResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ParsingAPIService.ParseOsu")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnimationsAPIService.EasingValue")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Parsing.parseOsu"
+	localVarPath := localBasePath + "/bridge/Animations.easingValue"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.textRequest == nil {
-		return localVarReturnValue, nil, reportError("textRequest is required and must be specified")
+	if r.easingValueRequest == nil {
+		return localVarReturnValue, nil, reportError("easingValueRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -200,7 +200,7 @@ func (a *ParsingAPIService) ParseOsuExecute(r ApiParsingAPIParseOsuRequest) (*Be
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.textRequest
+	localVarPostBody = r.easingValueRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

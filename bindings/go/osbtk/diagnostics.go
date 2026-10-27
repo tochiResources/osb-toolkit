@@ -19,59 +19,59 @@ import (
 )
 
 
-// OriginAPIService OriginAPI service
-type OriginAPIService service
+// DiagnosticsAPIService DiagnosticsAPI service
+type DiagnosticsAPIService service
 
-type ApiOriginAPIGetOriginVectorRequest struct {
+type DiagnosticsAPIDiagnoseOsbRequest struct {
 	ctx context.Context
-	ApiService *OriginAPIService
-	getOriginVectorRequest *GetOriginVectorRequest
+	ApiService *DiagnosticsAPIService
+	textRequest *TextRequest
 }
 
-func (r ApiOriginAPIGetOriginVectorRequest) GetOriginVectorRequest(getOriginVectorRequest GetOriginVectorRequest) ApiOriginAPIGetOriginVectorRequest {
-	r.getOriginVectorRequest = &getOriginVectorRequest
+func (r DiagnosticsAPIDiagnoseOsbRequest) TextRequest(textRequest TextRequest) DiagnosticsAPIDiagnoseOsbRequest {
+	r.textRequest = &textRequest
 	return r
 }
 
-func (r ApiOriginAPIGetOriginVectorRequest) Execute() (*Vector2, *http.Response, error) {
-	return r.ApiService.GetOriginVectorExecute(r)
+func (r DiagnosticsAPIDiagnoseOsbRequest) Execute() (*DiagnosticReport, *http.Response, error) {
+	return r.ApiService.diagnoseOsbExecute(r)
 }
 
 /*
-GetOriginVector Method for GetOriginVector
+DiagnoseOsb Method for DiagnoseOsb
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiOriginAPIGetOriginVectorRequest
+ @return DiagnosticsAPIDiagnoseOsbRequest
 */
-func (a *OriginAPIService) GetOriginVector(ctx context.Context) ApiOriginAPIGetOriginVectorRequest {
-	return ApiOriginAPIGetOriginVectorRequest{
+func (a *DiagnosticsAPIService) DiagnoseOsb(ctx context.Context) DiagnosticsAPIDiagnoseOsbRequest {
+	return DiagnosticsAPIDiagnoseOsbRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return Vector2
-func (a *OriginAPIService) GetOriginVectorExecute(r ApiOriginAPIGetOriginVectorRequest) (*Vector2, *http.Response, error) {
+//  @return DiagnosticReport
+func (a *DiagnosticsAPIService) diagnoseOsbExecute(r DiagnosticsAPIDiagnoseOsbRequest) (*DiagnosticReport, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Vector2
+		localVarReturnValue  *DiagnosticReport
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OriginAPIService.GetOriginVector")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DiagnosticsAPIService.DiagnoseOsb")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Origin.getOriginVector"
+	localVarPath := localBasePath + "/bridge/Diagnostics.diagnoseOsb"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.getOriginVectorRequest == nil {
-		return localVarReturnValue, nil, reportError("getOriginVectorRequest is required and must be specified")
+	if r.textRequest == nil {
+		return localVarReturnValue, nil, reportError("textRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -92,7 +92,7 @@ func (a *OriginAPIService) GetOriginVectorExecute(r ApiOriginAPIGetOriginVectorR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.getOriginVectorRequest
+	localVarPostBody = r.textRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -130,56 +130,56 @@ func (a *OriginAPIService) GetOriginVectorExecute(r ApiOriginAPIGetOriginVectorR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOriginAPIInScreenBoundsRequest struct {
+type DiagnosticsAPIDiagnoseOsuRequest struct {
 	ctx context.Context
-	ApiService *OriginAPIService
-	inScreenBoundsRequest *InScreenBoundsRequest
+	ApiService *DiagnosticsAPIService
+	textRequest *TextRequest
 }
 
-func (r ApiOriginAPIInScreenBoundsRequest) InScreenBoundsRequest(inScreenBoundsRequest InScreenBoundsRequest) ApiOriginAPIInScreenBoundsRequest {
-	r.inScreenBoundsRequest = &inScreenBoundsRequest
+func (r DiagnosticsAPIDiagnoseOsuRequest) TextRequest(textRequest TextRequest) DiagnosticsAPIDiagnoseOsuRequest {
+	r.textRequest = &textRequest
 	return r
 }
 
-func (r ApiOriginAPIInScreenBoundsRequest) Execute() (*BoolResult, *http.Response, error) {
-	return r.ApiService.InScreenBoundsExecute(r)
+func (r DiagnosticsAPIDiagnoseOsuRequest) Execute() (*DiagnosticReport, *http.Response, error) {
+	return r.ApiService.diagnoseOsuExecute(r)
 }
 
 /*
-InScreenBounds Method for InScreenBounds
+DiagnoseOsu Method for DiagnoseOsu
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiOriginAPIInScreenBoundsRequest
+ @return DiagnosticsAPIDiagnoseOsuRequest
 */
-func (a *OriginAPIService) InScreenBounds(ctx context.Context) ApiOriginAPIInScreenBoundsRequest {
-	return ApiOriginAPIInScreenBoundsRequest{
+func (a *DiagnosticsAPIService) DiagnoseOsu(ctx context.Context) DiagnosticsAPIDiagnoseOsuRequest {
+	return DiagnosticsAPIDiagnoseOsuRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BoolResult
-func (a *OriginAPIService) InScreenBoundsExecute(r ApiOriginAPIInScreenBoundsRequest) (*BoolResult, *http.Response, error) {
+//  @return DiagnosticReport
+func (a *DiagnosticsAPIService) diagnoseOsuExecute(r DiagnosticsAPIDiagnoseOsuRequest) (*DiagnosticReport, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *BoolResult
+		localVarReturnValue  *DiagnosticReport
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OriginAPIService.InScreenBounds")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DiagnosticsAPIService.DiagnoseOsu")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Origin.inScreenBounds"
+	localVarPath := localBasePath + "/bridge/Diagnostics.diagnoseOsu"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.inScreenBoundsRequest == nil {
-		return localVarReturnValue, nil, reportError("inScreenBoundsRequest is required and must be specified")
+	if r.textRequest == nil {
+		return localVarReturnValue, nil, reportError("textRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -200,7 +200,7 @@ func (a *OriginAPIService) InScreenBoundsExecute(r ApiOriginAPIInScreenBoundsReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.inScreenBoundsRequest
+	localVarPostBody = r.textRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -19,59 +19,59 @@ import (
 )
 
 
-// AnimationsAPIService AnimationsAPI service
-type AnimationsAPIService service
+// OriginAPIService OriginAPI service
+type OriginAPIService service
 
-type ApiAnimationsAPIApplyEasingRequest struct {
+type OriginAPIGetOriginVectorRequest struct {
 	ctx context.Context
-	ApiService *AnimationsAPIService
-	applyEasingRequest *ApplyEasingRequest
+	ApiService *OriginAPIService
+	getOriginVectorRequest *GetOriginVectorRequest
 }
 
-func (r ApiAnimationsAPIApplyEasingRequest) ApplyEasingRequest(applyEasingRequest ApplyEasingRequest) ApiAnimationsAPIApplyEasingRequest {
-	r.applyEasingRequest = &applyEasingRequest
+func (r OriginAPIGetOriginVectorRequest) GetOriginVectorRequest(getOriginVectorRequest GetOriginVectorRequest) OriginAPIGetOriginVectorRequest {
+	r.getOriginVectorRequest = &getOriginVectorRequest
 	return r
 }
 
-func (r ApiAnimationsAPIApplyEasingRequest) Execute() (*EasingResult, *http.Response, error) {
-	return r.ApiService.ApplyEasingExecute(r)
+func (r OriginAPIGetOriginVectorRequest) Execute() (*Vector2, *http.Response, error) {
+	return r.ApiService.getOriginVectorExecute(r)
 }
 
 /*
-ApplyEasing Method for ApplyEasing
+GetOriginVector Method for GetOriginVector
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAnimationsAPIApplyEasingRequest
+ @return OriginAPIGetOriginVectorRequest
 */
-func (a *AnimationsAPIService) ApplyEasing(ctx context.Context) ApiAnimationsAPIApplyEasingRequest {
-	return ApiAnimationsAPIApplyEasingRequest{
+func (a *OriginAPIService) GetOriginVector(ctx context.Context) OriginAPIGetOriginVectorRequest {
+	return OriginAPIGetOriginVectorRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return EasingResult
-func (a *AnimationsAPIService) ApplyEasingExecute(r ApiAnimationsAPIApplyEasingRequest) (*EasingResult, *http.Response, error) {
+//  @return Vector2
+func (a *OriginAPIService) getOriginVectorExecute(r OriginAPIGetOriginVectorRequest) (*Vector2, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *EasingResult
+		localVarReturnValue  *Vector2
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnimationsAPIService.ApplyEasing")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OriginAPIService.GetOriginVector")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Animations.applyEasing"
+	localVarPath := localBasePath + "/bridge/Origin.getOriginVector"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.applyEasingRequest == nil {
-		return localVarReturnValue, nil, reportError("applyEasingRequest is required and must be specified")
+	if r.getOriginVectorRequest == nil {
+		return localVarReturnValue, nil, reportError("getOriginVectorRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -92,7 +92,7 @@ func (a *AnimationsAPIService) ApplyEasingExecute(r ApiAnimationsAPIApplyEasingR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.applyEasingRequest
+	localVarPostBody = r.getOriginVectorRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -130,56 +130,56 @@ func (a *AnimationsAPIService) ApplyEasingExecute(r ApiAnimationsAPIApplyEasingR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAnimationsAPIEasingValueRequest struct {
+type OriginAPIInScreenBoundsRequest struct {
 	ctx context.Context
-	ApiService *AnimationsAPIService
-	easingValueRequest *EasingValueRequest
+	ApiService *OriginAPIService
+	inScreenBoundsRequest *InScreenBoundsRequest
 }
 
-func (r ApiAnimationsAPIEasingValueRequest) EasingValueRequest(easingValueRequest EasingValueRequest) ApiAnimationsAPIEasingValueRequest {
-	r.easingValueRequest = &easingValueRequest
+func (r OriginAPIInScreenBoundsRequest) InScreenBoundsRequest(inScreenBoundsRequest InScreenBoundsRequest) OriginAPIInScreenBoundsRequest {
+	r.inScreenBoundsRequest = &inScreenBoundsRequest
 	return r
 }
 
-func (r ApiAnimationsAPIEasingValueRequest) Execute() (*EasingResult, *http.Response, error) {
-	return r.ApiService.EasingValueExecute(r)
+func (r OriginAPIInScreenBoundsRequest) Execute() (*BoolResult, *http.Response, error) {
+	return r.ApiService.inScreenBoundsExecute(r)
 }
 
 /*
-EasingValue Method for EasingValue
+InScreenBounds Method for InScreenBounds
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAnimationsAPIEasingValueRequest
+ @return OriginAPIInScreenBoundsRequest
 */
-func (a *AnimationsAPIService) EasingValue(ctx context.Context) ApiAnimationsAPIEasingValueRequest {
-	return ApiAnimationsAPIEasingValueRequest{
+func (a *OriginAPIService) InScreenBounds(ctx context.Context) OriginAPIInScreenBoundsRequest {
+	return OriginAPIInScreenBoundsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return EasingResult
-func (a *AnimationsAPIService) EasingValueExecute(r ApiAnimationsAPIEasingValueRequest) (*EasingResult, *http.Response, error) {
+//  @return BoolResult
+func (a *OriginAPIService) inScreenBoundsExecute(r OriginAPIInScreenBoundsRequest) (*BoolResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *EasingResult
+		localVarReturnValue  *BoolResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AnimationsAPIService.EasingValue")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OriginAPIService.InScreenBounds")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Animations.easingValue"
+	localVarPath := localBasePath + "/bridge/Origin.inScreenBounds"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.easingValueRequest == nil {
-		return localVarReturnValue, nil, reportError("easingValueRequest is required and must be specified")
+	if r.inScreenBoundsRequest == nil {
+		return localVarReturnValue, nil, reportError("inScreenBoundsRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -200,7 +200,7 @@ func (a *AnimationsAPIService) EasingValueExecute(r ApiAnimationsAPIEasingValueR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.easingValueRequest
+	localVarPostBody = r.inScreenBoundsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

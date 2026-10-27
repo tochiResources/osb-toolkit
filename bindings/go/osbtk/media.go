@@ -19,54 +19,63 @@ import (
 )
 
 
-// AudioAPIService AudioAPI service
-type AudioAPIService service
+// MediaAPIService MediaAPI service
+type MediaAPIService service
 
-type ApiAudioAPIAudioDurationRequest struct {
+type MediaAPIEncodeVideoRequest struct {
 	ctx context.Context
-	ApiService *AudioAPIService
+	ApiService *MediaAPIService
+	encodeVideoRequest *EncodeVideoRequest
 }
 
-func (r ApiAudioAPIAudioDurationRequest) Execute() (*AudioDurationResult, *http.Response, error) {
-	return r.ApiService.AudioDurationExecute(r)
+func (r MediaAPIEncodeVideoRequest) EncodeVideoRequest(encodeVideoRequest EncodeVideoRequest) MediaAPIEncodeVideoRequest {
+	r.encodeVideoRequest = &encodeVideoRequest
+	return r
+}
+
+func (r MediaAPIEncodeVideoRequest) Execute() (*MediaInfo, *http.Response, error) {
+	return r.ApiService.encodeVideoExecute(r)
 }
 
 /*
-AudioDuration Method for AudioDuration
+EncodeVideo Method for EncodeVideo
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAudioAPIAudioDurationRequest
+ @return MediaAPIEncodeVideoRequest
 */
-func (a *AudioAPIService) AudioDuration(ctx context.Context) ApiAudioAPIAudioDurationRequest {
-	return ApiAudioAPIAudioDurationRequest{
+func (a *MediaAPIService) EncodeVideo(ctx context.Context) MediaAPIEncodeVideoRequest {
+	return MediaAPIEncodeVideoRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AudioDurationResult
-func (a *AudioAPIService) AudioDurationExecute(r ApiAudioAPIAudioDurationRequest) (*AudioDurationResult, *http.Response, error) {
+//  @return MediaInfo
+func (a *MediaAPIService) encodeVideoExecute(r MediaAPIEncodeVideoRequest) (*MediaInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AudioDurationResult
+		localVarReturnValue  *MediaInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AudioAPIService.AudioDuration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.EncodeVideo")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Audio.audioDuration"
+	localVarPath := localBasePath + "/bridge/Media.encodeVideo"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.encodeVideoRequest == nil {
+		return localVarReturnValue, nil, reportError("encodeVideoRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -82,6 +91,8 @@ func (a *AudioAPIService) AudioDurationExecute(r ApiAudioAPIAudioDurationRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.encodeVideoRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -119,56 +130,56 @@ func (a *AudioAPIService) AudioDurationExecute(r ApiAudioAPIAudioDurationRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAudioAPIFftRequest struct {
+type MediaAPIExtractAudioRequest struct {
 	ctx context.Context
-	ApiService *AudioAPIService
-	fftRequest *FftRequest
+	ApiService *MediaAPIService
+	extractAudioRequest *ExtractAudioRequest
 }
 
-func (r ApiAudioAPIFftRequest) FftRequest(fftRequest FftRequest) ApiAudioAPIFftRequest {
-	r.fftRequest = &fftRequest
+func (r MediaAPIExtractAudioRequest) ExtractAudioRequest(extractAudioRequest ExtractAudioRequest) MediaAPIExtractAudioRequest {
+	r.extractAudioRequest = &extractAudioRequest
 	return r
 }
 
-func (r ApiAudioAPIFftRequest) Execute() (*FftResult, *http.Response, error) {
-	return r.ApiService.FftExecute(r)
+func (r MediaAPIExtractAudioRequest) Execute() (*OkResult, *http.Response, error) {
+	return r.ApiService.extractAudioExecute(r)
 }
 
 /*
-Fft Method for Fft
+ExtractAudio Method for ExtractAudio
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAudioAPIFftRequest
+ @return MediaAPIExtractAudioRequest
 */
-func (a *AudioAPIService) Fft(ctx context.Context) ApiAudioAPIFftRequest {
-	return ApiAudioAPIFftRequest{
+func (a *MediaAPIService) ExtractAudio(ctx context.Context) MediaAPIExtractAudioRequest {
+	return MediaAPIExtractAudioRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FftResult
-func (a *AudioAPIService) FftExecute(r ApiAudioAPIFftRequest) (*FftResult, *http.Response, error) {
+//  @return OkResult
+func (a *MediaAPIService) extractAudioExecute(r MediaAPIExtractAudioRequest) (*OkResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *FftResult
+		localVarReturnValue  *OkResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AudioAPIService.Fft")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.ExtractAudio")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Audio.fft"
+	localVarPath := localBasePath + "/bridge/Media.extractAudio"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.fftRequest == nil {
-		return localVarReturnValue, nil, reportError("fftRequest is required and must be specified")
+	if r.extractAudioRequest == nil {
+		return localVarReturnValue, nil, reportError("extractAudioRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -189,7 +200,7 @@ func (a *AudioAPIService) FftExecute(r ApiAudioAPIFftRequest) (*FftResult, *http
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.fftRequest
+	localVarPostBody = r.extractAudioRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -227,56 +238,56 @@ func (a *AudioAPIService) FftExecute(r ApiAudioAPIFftRequest) (*FftResult, *http
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAudioAPIGetFftRequest struct {
+type MediaAPIExtractFramesRequest struct {
 	ctx context.Context
-	ApiService *AudioAPIService
-	getFftRequest *GetFftRequest
+	ApiService *MediaAPIService
+	extractFramesRequest *ExtractFramesRequest
 }
 
-func (r ApiAudioAPIGetFftRequest) GetFftRequest(getFftRequest GetFftRequest) ApiAudioAPIGetFftRequest {
-	r.getFftRequest = &getFftRequest
+func (r MediaAPIExtractFramesRequest) ExtractFramesRequest(extractFramesRequest ExtractFramesRequest) MediaAPIExtractFramesRequest {
+	r.extractFramesRequest = &extractFramesRequest
 	return r
 }
 
-func (r ApiAudioAPIGetFftRequest) Execute() (*FftResult, *http.Response, error) {
-	return r.ApiService.GetFftExecute(r)
+func (r MediaAPIExtractFramesRequest) Execute() (*FrameResult, *http.Response, error) {
+	return r.ApiService.extractFramesExecute(r)
 }
 
 /*
-GetFft Method for GetFft
+ExtractFrames Method for ExtractFrames
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAudioAPIGetFftRequest
+ @return MediaAPIExtractFramesRequest
 */
-func (a *AudioAPIService) GetFft(ctx context.Context) ApiAudioAPIGetFftRequest {
-	return ApiAudioAPIGetFftRequest{
+func (a *MediaAPIService) ExtractFrames(ctx context.Context) MediaAPIExtractFramesRequest {
+	return MediaAPIExtractFramesRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FftResult
-func (a *AudioAPIService) GetFftExecute(r ApiAudioAPIGetFftRequest) (*FftResult, *http.Response, error) {
+//  @return FrameResult
+func (a *MediaAPIService) extractFramesExecute(r MediaAPIExtractFramesRequest) (*FrameResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *FftResult
+		localVarReturnValue  *FrameResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AudioAPIService.GetFft")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.ExtractFrames")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Audio.getFft"
+	localVarPath := localBasePath + "/bridge/Media.extractFrames"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.getFftRequest == nil {
-		return localVarReturnValue, nil, reportError("getFftRequest is required and must be specified")
+	if r.extractFramesRequest == nil {
+		return localVarReturnValue, nil, reportError("extractFramesRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -297,7 +308,115 @@ func (a *AudioAPIService) GetFftExecute(r ApiAudioAPIGetFftRequest) (*FftResult,
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.getFftRequest
+	localVarPostBody = r.extractFramesRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type MediaAPIInfoRequest struct {
+	ctx context.Context
+	ApiService *MediaAPIService
+	pathRequest *PathRequest
+}
+
+func (r MediaAPIInfoRequest) PathRequest(pathRequest PathRequest) MediaAPIInfoRequest {
+	r.pathRequest = &pathRequest
+	return r
+}
+
+func (r MediaAPIInfoRequest) Execute() (*MediaInfo, *http.Response, error) {
+	return r.ApiService.infoExecute(r)
+}
+
+/*
+Info Method for Info
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return MediaAPIInfoRequest
+*/
+func (a *MediaAPIService) Info(ctx context.Context) MediaAPIInfoRequest {
+	return MediaAPIInfoRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return MediaInfo
+func (a *MediaAPIService) infoExecute(r MediaAPIInfoRequest) (*MediaInfo, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *MediaInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MediaAPIService.Info")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/bridge/Media.info"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.pathRequest == nil {
+		return localVarReturnValue, nil, reportError("pathRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.pathRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

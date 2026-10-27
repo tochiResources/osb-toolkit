@@ -22,29 +22,29 @@ import (
 // SpriteAPIService SpriteAPI service
 type SpriteAPIService service
 
-type ApiSpriteAPICommandRequest struct {
+type SpriteAPICommandRequest struct {
 	ctx context.Context
 	ApiService *SpriteAPIService
 	commandRequest *CommandRequest
 }
 
-func (r ApiSpriteAPICommandRequest) CommandRequest(commandRequest CommandRequest) ApiSpriteAPICommandRequest {
+func (r SpriteAPICommandRequest) CommandRequest(commandRequest CommandRequest) SpriteAPICommandRequest {
 	r.commandRequest = &commandRequest
 	return r
 }
 
-func (r ApiSpriteAPICommandRequest) Execute() (*OkResult, *http.Response, error) {
-	return r.ApiService.CommandExecute(r)
+func (r SpriteAPICommandRequest) Execute() (*OkResult, *http.Response, error) {
+	return r.ApiService.commandExecute(r)
 }
 
 /*
 Command Method for Command
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSpriteAPICommandRequest
+ @return SpriteAPICommandRequest
 */
-func (a *SpriteAPIService) Command(ctx context.Context) ApiSpriteAPICommandRequest {
-	return ApiSpriteAPICommandRequest{
+func (a *SpriteAPIService) Command(ctx context.Context) SpriteAPICommandRequest {
+	return SpriteAPICommandRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -52,7 +52,7 @@ func (a *SpriteAPIService) Command(ctx context.Context) ApiSpriteAPICommandReque
 
 // Execute executes the request
 //  @return OkResult
-func (a *SpriteAPIService) CommandExecute(r ApiSpriteAPICommandRequest) (*OkResult, *http.Response, error) {
+func (a *SpriteAPIService) commandExecute(r SpriteAPICommandRequest) (*OkResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -130,29 +130,29 @@ func (a *SpriteAPIService) CommandExecute(r ApiSpriteAPICommandRequest) (*OkResu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSpriteAPIEndGroupRequest struct {
+type SpriteAPIEndGroupRequest struct {
 	ctx context.Context
 	ApiService *SpriteAPIService
 	handleRequest *HandleRequest
 }
 
-func (r ApiSpriteAPIEndGroupRequest) HandleRequest(handleRequest HandleRequest) ApiSpriteAPIEndGroupRequest {
+func (r SpriteAPIEndGroupRequest) HandleRequest(handleRequest HandleRequest) SpriteAPIEndGroupRequest {
 	r.handleRequest = &handleRequest
 	return r
 }
 
-func (r ApiSpriteAPIEndGroupRequest) Execute() (*OkResult, *http.Response, error) {
-	return r.ApiService.EndGroupExecute(r)
+func (r SpriteAPIEndGroupRequest) Execute() (*OkResult, *http.Response, error) {
+	return r.ApiService.endGroupExecute(r)
 }
 
 /*
 EndGroup Method for EndGroup
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSpriteAPIEndGroupRequest
+ @return SpriteAPIEndGroupRequest
 */
-func (a *SpriteAPIService) EndGroup(ctx context.Context) ApiSpriteAPIEndGroupRequest {
-	return ApiSpriteAPIEndGroupRequest{
+func (a *SpriteAPIService) EndGroup(ctx context.Context) SpriteAPIEndGroupRequest {
+	return SpriteAPIEndGroupRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -160,7 +160,7 @@ func (a *SpriteAPIService) EndGroup(ctx context.Context) ApiSpriteAPIEndGroupReq
 
 // Execute executes the request
 //  @return OkResult
-func (a *SpriteAPIService) EndGroupExecute(r ApiSpriteAPIEndGroupRequest) (*OkResult, *http.Response, error) {
+func (a *SpriteAPIService) endGroupExecute(r SpriteAPIEndGroupRequest) (*OkResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -238,29 +238,29 @@ func (a *SpriteAPIService) EndGroupExecute(r ApiSpriteAPIEndGroupRequest) (*OkRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSpriteAPIInfoRequest struct {
+type SpriteAPIInfoRequest struct {
 	ctx context.Context
 	ApiService *SpriteAPIService
 	handleRequest *HandleRequest
 }
 
-func (r ApiSpriteAPIInfoRequest) HandleRequest(handleRequest HandleRequest) ApiSpriteAPIInfoRequest {
+func (r SpriteAPIInfoRequest) HandleRequest(handleRequest HandleRequest) SpriteAPIInfoRequest {
 	r.handleRequest = &handleRequest
 	return r
 }
 
-func (r ApiSpriteAPIInfoRequest) Execute() (*SpriteInfo, *http.Response, error) {
-	return r.ApiService.InfoExecute(r)
+func (r SpriteAPIInfoRequest) Execute() (*SpriteInfo, *http.Response, error) {
+	return r.ApiService.infoExecute(r)
 }
 
 /*
 Info Method for Info
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSpriteAPIInfoRequest
+ @return SpriteAPIInfoRequest
 */
-func (a *SpriteAPIService) Info(ctx context.Context) ApiSpriteAPIInfoRequest {
-	return ApiSpriteAPIInfoRequest{
+func (a *SpriteAPIService) Info(ctx context.Context) SpriteAPIInfoRequest {
+	return SpriteAPIInfoRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -268,7 +268,7 @@ func (a *SpriteAPIService) Info(ctx context.Context) ApiSpriteAPIInfoRequest {
 
 // Execute executes the request
 //  @return SpriteInfo
-func (a *SpriteAPIService) InfoExecute(r ApiSpriteAPIInfoRequest) (*SpriteInfo, *http.Response, error) {
+func (a *SpriteAPIService) infoExecute(r SpriteAPIInfoRequest) (*SpriteInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -346,29 +346,29 @@ func (a *SpriteAPIService) InfoExecute(r ApiSpriteAPIInfoRequest) (*SpriteInfo, 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSpriteAPIStartLoopGroupRequest struct {
+type SpriteAPIStartLoopGroupRequest struct {
 	ctx context.Context
 	ApiService *SpriteAPIService
 	startLoopGroupRequest *StartLoopGroupRequest
 }
 
-func (r ApiSpriteAPIStartLoopGroupRequest) StartLoopGroupRequest(startLoopGroupRequest StartLoopGroupRequest) ApiSpriteAPIStartLoopGroupRequest {
+func (r SpriteAPIStartLoopGroupRequest) StartLoopGroupRequest(startLoopGroupRequest StartLoopGroupRequest) SpriteAPIStartLoopGroupRequest {
 	r.startLoopGroupRequest = &startLoopGroupRequest
 	return r
 }
 
-func (r ApiSpriteAPIStartLoopGroupRequest) Execute() (*OkResult, *http.Response, error) {
-	return r.ApiService.StartLoopGroupExecute(r)
+func (r SpriteAPIStartLoopGroupRequest) Execute() (*OkResult, *http.Response, error) {
+	return r.ApiService.startLoopGroupExecute(r)
 }
 
 /*
 StartLoopGroup Method for StartLoopGroup
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSpriteAPIStartLoopGroupRequest
+ @return SpriteAPIStartLoopGroupRequest
 */
-func (a *SpriteAPIService) StartLoopGroup(ctx context.Context) ApiSpriteAPIStartLoopGroupRequest {
-	return ApiSpriteAPIStartLoopGroupRequest{
+func (a *SpriteAPIService) StartLoopGroup(ctx context.Context) SpriteAPIStartLoopGroupRequest {
+	return SpriteAPIStartLoopGroupRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -376,7 +376,7 @@ func (a *SpriteAPIService) StartLoopGroup(ctx context.Context) ApiSpriteAPIStart
 
 // Execute executes the request
 //  @return OkResult
-func (a *SpriteAPIService) StartLoopGroupExecute(r ApiSpriteAPIStartLoopGroupRequest) (*OkResult, *http.Response, error) {
+func (a *SpriteAPIService) startLoopGroupExecute(r SpriteAPIStartLoopGroupRequest) (*OkResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -454,29 +454,29 @@ func (a *SpriteAPIService) StartLoopGroupExecute(r ApiSpriteAPIStartLoopGroupReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSpriteAPIStartTriggerGroupRequest struct {
+type SpriteAPIStartTriggerGroupRequest struct {
 	ctx context.Context
 	ApiService *SpriteAPIService
 	startTriggerGroupRequest *StartTriggerGroupRequest
 }
 
-func (r ApiSpriteAPIStartTriggerGroupRequest) StartTriggerGroupRequest(startTriggerGroupRequest StartTriggerGroupRequest) ApiSpriteAPIStartTriggerGroupRequest {
+func (r SpriteAPIStartTriggerGroupRequest) StartTriggerGroupRequest(startTriggerGroupRequest StartTriggerGroupRequest) SpriteAPIStartTriggerGroupRequest {
 	r.startTriggerGroupRequest = &startTriggerGroupRequest
 	return r
 }
 
-func (r ApiSpriteAPIStartTriggerGroupRequest) Execute() (*OkResult, *http.Response, error) {
-	return r.ApiService.StartTriggerGroupExecute(r)
+func (r SpriteAPIStartTriggerGroupRequest) Execute() (*OkResult, *http.Response, error) {
+	return r.ApiService.startTriggerGroupExecute(r)
 }
 
 /*
 StartTriggerGroup Method for StartTriggerGroup
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSpriteAPIStartTriggerGroupRequest
+ @return SpriteAPIStartTriggerGroupRequest
 */
-func (a *SpriteAPIService) StartTriggerGroup(ctx context.Context) ApiSpriteAPIStartTriggerGroupRequest {
-	return ApiSpriteAPIStartTriggerGroupRequest{
+func (a *SpriteAPIService) StartTriggerGroup(ctx context.Context) SpriteAPIStartTriggerGroupRequest {
+	return SpriteAPIStartTriggerGroupRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -484,7 +484,7 @@ func (a *SpriteAPIService) StartTriggerGroup(ctx context.Context) ApiSpriteAPISt
 
 // Execute executes the request
 //  @return OkResult
-func (a *SpriteAPIService) StartTriggerGroupExecute(r ApiSpriteAPIStartTriggerGroupRequest) (*OkResult, *http.Response, error) {
+func (a *SpriteAPIService) startTriggerGroupExecute(r SpriteAPIStartTriggerGroupRequest) (*OkResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -562,29 +562,29 @@ func (a *SpriteAPIService) StartTriggerGroupExecute(r ApiSpriteAPIStartTriggerGr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSpriteAPIStateAtRequest struct {
+type SpriteAPIStateAtRequest struct {
 	ctx context.Context
 	ApiService *SpriteAPIService
 	spriteTimeRequest *SpriteTimeRequest
 }
 
-func (r ApiSpriteAPIStateAtRequest) SpriteTimeRequest(spriteTimeRequest SpriteTimeRequest) ApiSpriteAPIStateAtRequest {
+func (r SpriteAPIStateAtRequest) SpriteTimeRequest(spriteTimeRequest SpriteTimeRequest) SpriteAPIStateAtRequest {
 	r.spriteTimeRequest = &spriteTimeRequest
 	return r
 }
 
-func (r ApiSpriteAPIStateAtRequest) Execute() (*SpriteState, *http.Response, error) {
-	return r.ApiService.StateAtExecute(r)
+func (r SpriteAPIStateAtRequest) Execute() (*SpriteState, *http.Response, error) {
+	return r.ApiService.stateAtExecute(r)
 }
 
 /*
 StateAt Method for StateAt
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSpriteAPIStateAtRequest
+ @return SpriteAPIStateAtRequest
 */
-func (a *SpriteAPIService) StateAt(ctx context.Context) ApiSpriteAPIStateAtRequest {
-	return ApiSpriteAPIStateAtRequest{
+func (a *SpriteAPIService) StateAt(ctx context.Context) SpriteAPIStateAtRequest {
+	return SpriteAPIStateAtRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -592,7 +592,7 @@ func (a *SpriteAPIService) StateAt(ctx context.Context) ApiSpriteAPIStateAtReque
 
 // Execute executes the request
 //  @return SpriteState
-func (a *SpriteAPIService) StateAtExecute(r ApiSpriteAPIStateAtRequest) (*SpriteState, *http.Response, error) {
+func (a *SpriteAPIService) stateAtExecute(r SpriteAPIStateAtRequest) (*SpriteState, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

@@ -19,54 +19,63 @@ import (
 )
 
 
-// CommonAPIService CommonAPI service
-type CommonAPIService service
+// ImagegenAPIService ImagegenAPI service
+type ImagegenAPIService service
 
-type ApiCommonAPIVersionRequest struct {
+type ImagegenAPIRenderShapesRequest struct {
 	ctx context.Context
-	ApiService *CommonAPIService
+	ApiService *ImagegenAPIService
+	renderShapesRequest *RenderShapesRequest
 }
 
-func (r ApiCommonAPIVersionRequest) Execute() (*VersionResult, *http.Response, error) {
-	return r.ApiService.VersionExecute(r)
+func (r ImagegenAPIRenderShapesRequest) RenderShapesRequest(renderShapesRequest RenderShapesRequest) ImagegenAPIRenderShapesRequest {
+	r.renderShapesRequest = &renderShapesRequest
+	return r
+}
+
+func (r ImagegenAPIRenderShapesRequest) Execute() (*ImageInfo, *http.Response, error) {
+	return r.ApiService.renderShapesExecute(r)
 }
 
 /*
-Version Method for Version
+RenderShapes Method for RenderShapes
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCommonAPIVersionRequest
+ @return ImagegenAPIRenderShapesRequest
 */
-func (a *CommonAPIService) Version(ctx context.Context) ApiCommonAPIVersionRequest {
-	return ApiCommonAPIVersionRequest{
+func (a *ImagegenAPIService) RenderShapes(ctx context.Context) ImagegenAPIRenderShapesRequest {
+	return ImagegenAPIRenderShapesRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return VersionResult
-func (a *CommonAPIService) VersionExecute(r ApiCommonAPIVersionRequest) (*VersionResult, *http.Response, error) {
+//  @return ImageInfo
+func (a *ImagegenAPIService) renderShapesExecute(r ImagegenAPIRenderShapesRequest) (*ImageInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *VersionResult
+		localVarReturnValue  *ImageInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CommonAPIService.Version")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImagegenAPIService.RenderShapes")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Common.version"
+	localVarPath := localBasePath + "/bridge/Imagegen.renderShapes"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.renderShapesRequest == nil {
+		return localVarReturnValue, nil, reportError("renderShapesRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -82,6 +91,8 @@ func (a *CommonAPIService) VersionExecute(r ApiCommonAPIVersionRequest) (*Versio
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.renderShapesRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

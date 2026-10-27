@@ -22,29 +22,29 @@ import (
 // CurveAPIService CurveAPI service
 type CurveAPIService service
 
-type ApiCurveAPIArcRequest struct {
+type CurveAPIArcRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	arcRequest *ArcRequest
 }
 
-func (r ApiCurveAPIArcRequest) ArcRequest(arcRequest ArcRequest) ApiCurveAPIArcRequest {
+func (r CurveAPIArcRequest) ArcRequest(arcRequest ArcRequest) CurveAPIArcRequest {
 	r.arcRequest = &arcRequest
 	return r
 }
 
-func (r ApiCurveAPIArcRequest) Execute() (*PointListResult, *http.Response, error) {
-	return r.ApiService.ArcExecute(r)
+func (r CurveAPIArcRequest) Execute() (*PointListResult, *http.Response, error) {
+	return r.ApiService.arcExecute(r)
 }
 
 /*
 Arc Method for Arc
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPIArcRequest
+ @return CurveAPIArcRequest
 */
-func (a *CurveAPIService) Arc(ctx context.Context) ApiCurveAPIArcRequest {
-	return ApiCurveAPIArcRequest{
+func (a *CurveAPIService) Arc(ctx context.Context) CurveAPIArcRequest {
+	return CurveAPIArcRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -52,7 +52,7 @@ func (a *CurveAPIService) Arc(ctx context.Context) ApiCurveAPIArcRequest {
 
 // Execute executes the request
 //  @return PointListResult
-func (a *CurveAPIService) ArcExecute(r ApiCurveAPIArcRequest) (*PointListResult, *http.Response, error) {
+func (a *CurveAPIService) arcExecute(r CurveAPIArcRequest) (*PointListResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -130,29 +130,29 @@ func (a *CurveAPIService) ArcExecute(r ApiCurveAPIArcRequest) (*PointListResult,
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCurveAPIBoundingBoxRequest struct {
+type CurveAPIBoundingBoxRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	curveRequest *CurveRequest
 }
 
-func (r ApiCurveAPIBoundingBoxRequest) CurveRequest(curveRequest CurveRequest) ApiCurveAPIBoundingBoxRequest {
+func (r CurveAPIBoundingBoxRequest) CurveRequest(curveRequest CurveRequest) CurveAPIBoundingBoxRequest {
 	r.curveRequest = &curveRequest
 	return r
 }
 
-func (r ApiCurveAPIBoundingBoxRequest) Execute() (*Box2, *http.Response, error) {
-	return r.ApiService.BoundingBoxExecute(r)
+func (r CurveAPIBoundingBoxRequest) Execute() (*Box2, *http.Response, error) {
+	return r.ApiService.boundingBoxExecute(r)
 }
 
 /*
 BoundingBox Method for BoundingBox
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPIBoundingBoxRequest
+ @return CurveAPIBoundingBoxRequest
 */
-func (a *CurveAPIService) BoundingBox(ctx context.Context) ApiCurveAPIBoundingBoxRequest {
-	return ApiCurveAPIBoundingBoxRequest{
+func (a *CurveAPIService) BoundingBox(ctx context.Context) CurveAPIBoundingBoxRequest {
+	return CurveAPIBoundingBoxRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -160,7 +160,7 @@ func (a *CurveAPIService) BoundingBox(ctx context.Context) ApiCurveAPIBoundingBo
 
 // Execute executes the request
 //  @return Box2
-func (a *CurveAPIService) BoundingBoxExecute(r ApiCurveAPIBoundingBoxRequest) (*Box2, *http.Response, error) {
+func (a *CurveAPIService) boundingBoxExecute(r CurveAPIBoundingBoxRequest) (*Box2, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -238,29 +238,29 @@ func (a *CurveAPIService) BoundingBoxExecute(r ApiCurveAPIBoundingBoxRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCurveAPICurvatureRequest struct {
+type CurveAPICurvatureRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	curvePointRequest *CurvePointRequest
 }
 
-func (r ApiCurveAPICurvatureRequest) CurvePointRequest(curvePointRequest CurvePointRequest) ApiCurveAPICurvatureRequest {
+func (r CurveAPICurvatureRequest) CurvePointRequest(curvePointRequest CurvePointRequest) CurveAPICurvatureRequest {
 	r.curvePointRequest = &curvePointRequest
 	return r
 }
 
-func (r ApiCurveAPICurvatureRequest) Execute() (*ScalarResult, *http.Response, error) {
-	return r.ApiService.CurvatureExecute(r)
+func (r CurveAPICurvatureRequest) Execute() (*ScalarResult, *http.Response, error) {
+	return r.ApiService.curvatureExecute(r)
 }
 
 /*
 Curvature Method for Curvature
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPICurvatureRequest
+ @return CurveAPICurvatureRequest
 */
-func (a *CurveAPIService) Curvature(ctx context.Context) ApiCurveAPICurvatureRequest {
-	return ApiCurveAPICurvatureRequest{
+func (a *CurveAPIService) Curvature(ctx context.Context) CurveAPICurvatureRequest {
+	return CurveAPICurvatureRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -268,7 +268,7 @@ func (a *CurveAPIService) Curvature(ctx context.Context) ApiCurveAPICurvatureReq
 
 // Execute executes the request
 //  @return ScalarResult
-func (a *CurveAPIService) CurvatureExecute(r ApiCurveAPICurvatureRequest) (*ScalarResult, *http.Response, error) {
+func (a *CurveAPIService) curvatureExecute(r CurveAPICurvatureRequest) (*ScalarResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -346,29 +346,29 @@ func (a *CurveAPIService) CurvatureExecute(r ApiCurveAPICurvatureRequest) (*Scal
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCurveAPIDistanceToRequest struct {
+type CurveAPIDistanceToRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	curveDistanceRequest *CurveDistanceRequest
 }
 
-func (r ApiCurveAPIDistanceToRequest) CurveDistanceRequest(curveDistanceRequest CurveDistanceRequest) ApiCurveAPIDistanceToRequest {
+func (r CurveAPIDistanceToRequest) CurveDistanceRequest(curveDistanceRequest CurveDistanceRequest) CurveAPIDistanceToRequest {
 	r.curveDistanceRequest = &curveDistanceRequest
 	return r
 }
 
-func (r ApiCurveAPIDistanceToRequest) Execute() (*ScalarResult, *http.Response, error) {
-	return r.ApiService.DistanceToExecute(r)
+func (r CurveAPIDistanceToRequest) Execute() (*ScalarResult, *http.Response, error) {
+	return r.ApiService.distanceToExecute(r)
 }
 
 /*
 DistanceTo Method for DistanceTo
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPIDistanceToRequest
+ @return CurveAPIDistanceToRequest
 */
-func (a *CurveAPIService) DistanceTo(ctx context.Context) ApiCurveAPIDistanceToRequest {
-	return ApiCurveAPIDistanceToRequest{
+func (a *CurveAPIService) DistanceTo(ctx context.Context) CurveAPIDistanceToRequest {
+	return CurveAPIDistanceToRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -376,7 +376,7 @@ func (a *CurveAPIService) DistanceTo(ctx context.Context) ApiCurveAPIDistanceToR
 
 // Execute executes the request
 //  @return ScalarResult
-func (a *CurveAPIService) DistanceToExecute(r ApiCurveAPIDistanceToRequest) (*ScalarResult, *http.Response, error) {
+func (a *CurveAPIService) distanceToExecute(r CurveAPIDistanceToRequest) (*ScalarResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -454,29 +454,29 @@ func (a *CurveAPIService) DistanceToExecute(r ApiCurveAPIDistanceToRequest) (*Sc
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCurveAPIEllipseRequest struct {
+type CurveAPIEllipseRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	ellipseRequest *EllipseRequest
 }
 
-func (r ApiCurveAPIEllipseRequest) EllipseRequest(ellipseRequest EllipseRequest) ApiCurveAPIEllipseRequest {
+func (r CurveAPIEllipseRequest) EllipseRequest(ellipseRequest EllipseRequest) CurveAPIEllipseRequest {
 	r.ellipseRequest = &ellipseRequest
 	return r
 }
 
-func (r ApiCurveAPIEllipseRequest) Execute() (*PointListResult, *http.Response, error) {
-	return r.ApiService.EllipseExecute(r)
+func (r CurveAPIEllipseRequest) Execute() (*PointListResult, *http.Response, error) {
+	return r.ApiService.ellipseExecute(r)
 }
 
 /*
 Ellipse Method for Ellipse
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPIEllipseRequest
+ @return CurveAPIEllipseRequest
 */
-func (a *CurveAPIService) Ellipse(ctx context.Context) ApiCurveAPIEllipseRequest {
-	return ApiCurveAPIEllipseRequest{
+func (a *CurveAPIService) Ellipse(ctx context.Context) CurveAPIEllipseRequest {
+	return CurveAPIEllipseRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -484,7 +484,7 @@ func (a *CurveAPIService) Ellipse(ctx context.Context) ApiCurveAPIEllipseRequest
 
 // Execute executes the request
 //  @return PointListResult
-func (a *CurveAPIService) EllipseExecute(r ApiCurveAPIEllipseRequest) (*PointListResult, *http.Response, error) {
+func (a *CurveAPIService) ellipseExecute(r CurveAPIEllipseRequest) (*PointListResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -562,29 +562,29 @@ func (a *CurveAPIService) EllipseExecute(r ApiCurveAPIEllipseRequest) (*PointLis
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCurveAPILengthRequest struct {
+type CurveAPILengthRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	curveRequest *CurveRequest
 }
 
-func (r ApiCurveAPILengthRequest) CurveRequest(curveRequest CurveRequest) ApiCurveAPILengthRequest {
+func (r CurveAPILengthRequest) CurveRequest(curveRequest CurveRequest) CurveAPILengthRequest {
 	r.curveRequest = &curveRequest
 	return r
 }
 
-func (r ApiCurveAPILengthRequest) Execute() (*ScalarResult, *http.Response, error) {
-	return r.ApiService.LengthExecute(r)
+func (r CurveAPILengthRequest) Execute() (*ScalarResult, *http.Response, error) {
+	return r.ApiService.lengthExecute(r)
 }
 
 /*
 Length Method for Length
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPILengthRequest
+ @return CurveAPILengthRequest
 */
-func (a *CurveAPIService) Length(ctx context.Context) ApiCurveAPILengthRequest {
-	return ApiCurveAPILengthRequest{
+func (a *CurveAPIService) Length(ctx context.Context) CurveAPILengthRequest {
+	return CurveAPILengthRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -592,7 +592,7 @@ func (a *CurveAPIService) Length(ctx context.Context) ApiCurveAPILengthRequest {
 
 // Execute executes the request
 //  @return ScalarResult
-func (a *CurveAPIService) LengthExecute(r ApiCurveAPILengthRequest) (*ScalarResult, *http.Response, error) {
+func (a *CurveAPIService) lengthExecute(r CurveAPILengthRequest) (*ScalarResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -670,29 +670,29 @@ func (a *CurveAPIService) LengthExecute(r ApiCurveAPILengthRequest) (*ScalarResu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCurveAPILineIntersectRequest struct {
+type CurveAPILineIntersectRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	lineIntersectRequest *LineIntersectRequest
 }
 
-func (r ApiCurveAPILineIntersectRequest) LineIntersectRequest(lineIntersectRequest LineIntersectRequest) ApiCurveAPILineIntersectRequest {
+func (r CurveAPILineIntersectRequest) LineIntersectRequest(lineIntersectRequest LineIntersectRequest) CurveAPILineIntersectRequest {
 	r.lineIntersectRequest = &lineIntersectRequest
 	return r
 }
 
-func (r ApiCurveAPILineIntersectRequest) Execute() (*OptionalPointResult, *http.Response, error) {
-	return r.ApiService.LineIntersectExecute(r)
+func (r CurveAPILineIntersectRequest) Execute() (*OptionalPointResult, *http.Response, error) {
+	return r.ApiService.lineIntersectExecute(r)
 }
 
 /*
 LineIntersect Method for LineIntersect
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPILineIntersectRequest
+ @return CurveAPILineIntersectRequest
 */
-func (a *CurveAPIService) LineIntersect(ctx context.Context) ApiCurveAPILineIntersectRequest {
-	return ApiCurveAPILineIntersectRequest{
+func (a *CurveAPIService) LineIntersect(ctx context.Context) CurveAPILineIntersectRequest {
+	return CurveAPILineIntersectRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -700,7 +700,7 @@ func (a *CurveAPIService) LineIntersect(ctx context.Context) ApiCurveAPILineInte
 
 // Execute executes the request
 //  @return OptionalPointResult
-func (a *CurveAPIService) LineIntersectExecute(r ApiCurveAPILineIntersectRequest) (*OptionalPointResult, *http.Response, error) {
+func (a *CurveAPIService) lineIntersectExecute(r CurveAPILineIntersectRequest) (*OptionalPointResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -778,29 +778,29 @@ func (a *CurveAPIService) LineIntersectExecute(r ApiCurveAPILineIntersectRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCurveAPINormalRequest struct {
+type CurveAPINormalRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	curvePointRequest *CurvePointRequest
 }
 
-func (r ApiCurveAPINormalRequest) CurvePointRequest(curvePointRequest CurvePointRequest) ApiCurveAPINormalRequest {
+func (r CurveAPINormalRequest) CurvePointRequest(curvePointRequest CurvePointRequest) CurveAPINormalRequest {
 	r.curvePointRequest = &curvePointRequest
 	return r
 }
 
-func (r ApiCurveAPINormalRequest) Execute() (*Vector2, *http.Response, error) {
-	return r.ApiService.NormalExecute(r)
+func (r CurveAPINormalRequest) Execute() (*Vector2, *http.Response, error) {
+	return r.ApiService.normalExecute(r)
 }
 
 /*
 Normal Method for Normal
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPINormalRequest
+ @return CurveAPINormalRequest
 */
-func (a *CurveAPIService) Normal(ctx context.Context) ApiCurveAPINormalRequest {
-	return ApiCurveAPINormalRequest{
+func (a *CurveAPIService) Normal(ctx context.Context) CurveAPINormalRequest {
+	return CurveAPINormalRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -808,7 +808,7 @@ func (a *CurveAPIService) Normal(ctx context.Context) ApiCurveAPINormalRequest {
 
 // Execute executes the request
 //  @return Vector2
-func (a *CurveAPIService) NormalExecute(r ApiCurveAPINormalRequest) (*Vector2, *http.Response, error) {
+func (a *CurveAPIService) normalExecute(r CurveAPINormalRequest) (*Vector2, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -886,29 +886,29 @@ func (a *CurveAPIService) NormalExecute(r ApiCurveAPINormalRequest) (*Vector2, *
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCurveAPIOffsetRequest struct {
+type CurveAPIOffsetRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	curveOffsetRequest *CurveOffsetRequest
 }
 
-func (r ApiCurveAPIOffsetRequest) CurveOffsetRequest(curveOffsetRequest CurveOffsetRequest) ApiCurveAPIOffsetRequest {
+func (r CurveAPIOffsetRequest) CurveOffsetRequest(curveOffsetRequest CurveOffsetRequest) CurveAPIOffsetRequest {
 	r.curveOffsetRequest = &curveOffsetRequest
 	return r
 }
 
-func (r ApiCurveAPIOffsetRequest) Execute() (*PointListResult, *http.Response, error) {
-	return r.ApiService.OffsetExecute(r)
+func (r CurveAPIOffsetRequest) Execute() (*PointListResult, *http.Response, error) {
+	return r.ApiService.offsetExecute(r)
 }
 
 /*
 Offset Method for Offset
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPIOffsetRequest
+ @return CurveAPIOffsetRequest
 */
-func (a *CurveAPIService) Offset(ctx context.Context) ApiCurveAPIOffsetRequest {
-	return ApiCurveAPIOffsetRequest{
+func (a *CurveAPIService) Offset(ctx context.Context) CurveAPIOffsetRequest {
+	return CurveAPIOffsetRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -916,7 +916,7 @@ func (a *CurveAPIService) Offset(ctx context.Context) ApiCurveAPIOffsetRequest {
 
 // Execute executes the request
 //  @return PointListResult
-func (a *CurveAPIService) OffsetExecute(r ApiCurveAPIOffsetRequest) (*PointListResult, *http.Response, error) {
+func (a *CurveAPIService) offsetExecute(r CurveAPIOffsetRequest) (*PointListResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -994,29 +994,29 @@ func (a *CurveAPIService) OffsetExecute(r ApiCurveAPIOffsetRequest) (*PointListR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCurveAPIPointRequest struct {
+type CurveAPIPointRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	curvePointRequest *CurvePointRequest
 }
 
-func (r ApiCurveAPIPointRequest) CurvePointRequest(curvePointRequest CurvePointRequest) ApiCurveAPIPointRequest {
+func (r CurveAPIPointRequest) CurvePointRequest(curvePointRequest CurvePointRequest) CurveAPIPointRequest {
 	r.curvePointRequest = &curvePointRequest
 	return r
 }
 
-func (r ApiCurveAPIPointRequest) Execute() (*Vector2, *http.Response, error) {
-	return r.ApiService.PointExecute(r)
+func (r CurveAPIPointRequest) Execute() (*Vector2, *http.Response, error) {
+	return r.ApiService.pointExecute(r)
 }
 
 /*
 Point Method for Point
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPIPointRequest
+ @return CurveAPIPointRequest
 */
-func (a *CurveAPIService) Point(ctx context.Context) ApiCurveAPIPointRequest {
-	return ApiCurveAPIPointRequest{
+func (a *CurveAPIService) Point(ctx context.Context) CurveAPIPointRequest {
+	return CurveAPIPointRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1024,7 +1024,7 @@ func (a *CurveAPIService) Point(ctx context.Context) ApiCurveAPIPointRequest {
 
 // Execute executes the request
 //  @return Vector2
-func (a *CurveAPIService) PointExecute(r ApiCurveAPIPointRequest) (*Vector2, *http.Response, error) {
+func (a *CurveAPIService) pointExecute(r CurveAPIPointRequest) (*Vector2, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1102,29 +1102,29 @@ func (a *CurveAPIService) PointExecute(r ApiCurveAPIPointRequest) (*Vector2, *ht
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCurveAPISampleRequest struct {
+type CurveAPISampleRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	curveSampleRequest *CurveSampleRequest
 }
 
-func (r ApiCurveAPISampleRequest) CurveSampleRequest(curveSampleRequest CurveSampleRequest) ApiCurveAPISampleRequest {
+func (r CurveAPISampleRequest) CurveSampleRequest(curveSampleRequest CurveSampleRequest) CurveAPISampleRequest {
 	r.curveSampleRequest = &curveSampleRequest
 	return r
 }
 
-func (r ApiCurveAPISampleRequest) Execute() (*PointListResult, *http.Response, error) {
-	return r.ApiService.SampleExecute(r)
+func (r CurveAPISampleRequest) Execute() (*PointListResult, *http.Response, error) {
+	return r.ApiService.sampleExecute(r)
 }
 
 /*
 Sample Method for Sample
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPISampleRequest
+ @return CurveAPISampleRequest
 */
-func (a *CurveAPIService) Sample(ctx context.Context) ApiCurveAPISampleRequest {
-	return ApiCurveAPISampleRequest{
+func (a *CurveAPIService) Sample(ctx context.Context) CurveAPISampleRequest {
+	return CurveAPISampleRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1132,7 +1132,7 @@ func (a *CurveAPIService) Sample(ctx context.Context) ApiCurveAPISampleRequest {
 
 // Execute executes the request
 //  @return PointListResult
-func (a *CurveAPIService) SampleExecute(r ApiCurveAPISampleRequest) (*PointListResult, *http.Response, error) {
+func (a *CurveAPIService) sampleExecute(r CurveAPISampleRequest) (*PointListResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1210,29 +1210,29 @@ func (a *CurveAPIService) SampleExecute(r ApiCurveAPISampleRequest) (*PointListR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCurveAPISimplifyRequest struct {
+type CurveAPISimplifyRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	simplifyRequest *SimplifyRequest
 }
 
-func (r ApiCurveAPISimplifyRequest) SimplifyRequest(simplifyRequest SimplifyRequest) ApiCurveAPISimplifyRequest {
+func (r CurveAPISimplifyRequest) SimplifyRequest(simplifyRequest SimplifyRequest) CurveAPISimplifyRequest {
 	r.simplifyRequest = &simplifyRequest
 	return r
 }
 
-func (r ApiCurveAPISimplifyRequest) Execute() (*PointListResult, *http.Response, error) {
-	return r.ApiService.SimplifyExecute(r)
+func (r CurveAPISimplifyRequest) Execute() (*PointListResult, *http.Response, error) {
+	return r.ApiService.simplifyExecute(r)
 }
 
 /*
 Simplify Method for Simplify
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPISimplifyRequest
+ @return CurveAPISimplifyRequest
 */
-func (a *CurveAPIService) Simplify(ctx context.Context) ApiCurveAPISimplifyRequest {
-	return ApiCurveAPISimplifyRequest{
+func (a *CurveAPIService) Simplify(ctx context.Context) CurveAPISimplifyRequest {
+	return CurveAPISimplifyRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1240,7 +1240,7 @@ func (a *CurveAPIService) Simplify(ctx context.Context) ApiCurveAPISimplifyReque
 
 // Execute executes the request
 //  @return PointListResult
-func (a *CurveAPIService) SimplifyExecute(r ApiCurveAPISimplifyRequest) (*PointListResult, *http.Response, error) {
+func (a *CurveAPIService) simplifyExecute(r CurveAPISimplifyRequest) (*PointListResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1318,29 +1318,29 @@ func (a *CurveAPIService) SimplifyExecute(r ApiCurveAPISimplifyRequest) (*PointL
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCurveAPITangentRequest struct {
+type CurveAPITangentRequest struct {
 	ctx context.Context
 	ApiService *CurveAPIService
 	curvePointRequest *CurvePointRequest
 }
 
-func (r ApiCurveAPITangentRequest) CurvePointRequest(curvePointRequest CurvePointRequest) ApiCurveAPITangentRequest {
+func (r CurveAPITangentRequest) CurvePointRequest(curvePointRequest CurvePointRequest) CurveAPITangentRequest {
 	r.curvePointRequest = &curvePointRequest
 	return r
 }
 
-func (r ApiCurveAPITangentRequest) Execute() (*Vector2, *http.Response, error) {
-	return r.ApiService.TangentExecute(r)
+func (r CurveAPITangentRequest) Execute() (*Vector2, *http.Response, error) {
+	return r.ApiService.tangentExecute(r)
 }
 
 /*
 Tangent Method for Tangent
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCurveAPITangentRequest
+ @return CurveAPITangentRequest
 */
-func (a *CurveAPIService) Tangent(ctx context.Context) ApiCurveAPITangentRequest {
-	return ApiCurveAPITangentRequest{
+func (a *CurveAPIService) Tangent(ctx context.Context) CurveAPITangentRequest {
+	return CurveAPITangentRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -1348,7 +1348,7 @@ func (a *CurveAPIService) Tangent(ctx context.Context) ApiCurveAPITangentRequest
 
 // Execute executes the request
 //  @return Vector2
-func (a *CurveAPIService) TangentExecute(r ApiCurveAPITangentRequest) (*Vector2, *http.Response, error) {
+func (a *CurveAPIService) tangentExecute(r CurveAPITangentRequest) (*Vector2, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
