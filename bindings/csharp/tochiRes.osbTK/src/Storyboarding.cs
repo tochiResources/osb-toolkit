@@ -9,8 +9,6 @@ using AudioApi = tochiRes.osbTK.Api.AudioAPI;
 using GeneratorApi = tochiRes.osbTK.Api.GeneratorAPI;
 using HelpersApi = tochiRes.osbTK.Api.HelpersAPI;
 using LayerApi = tochiRes.osbTK.Api.LayerAPI;
-using OriginApi = tochiRes.osbTK.Api.OriginAPI;
-using ParsingApi = tochiRes.osbTK.Api.ParsingAPI;
 using SpriteApi = tochiRes.osbTK.Api.SpriteAPI;
 
 using NativeRuntime = global::tochiRes.osbTK.Native.Runtime;
@@ -25,17 +23,7 @@ public static partial class osb
     /// </summary>
     public static class Storyboarding
     {
-        private static readonly ParsingApi Parsing = new(
-            StatelessTransport,
-            StatelessTransport,
-            DefaultConfiguration
-        );
-        private static readonly OriginApi Origin = new(
-            StatelessTransport,
-            StatelessTransport,
-            DefaultConfiguration
-        );
-        private static readonly HelpersApi Helpers = new(
+        private static readonly HelpersApi CommandsClient = new(
             StatelessTransport,
             StatelessTransport,
             DefaultConfiguration
@@ -45,21 +33,19 @@ public static partial class osb
         public static Beatmap ParseOsu(string text)
         {
             ArgumentException.ThrowIfNullOrEmpty(text);
-            return Parsing.ParseOsu(new TextRequest(text));
+            return osb.Parsing.ParseOsu(text);
         }
 
         /// <summary>Parses a `.osb` storyboard into a summary.</summary>
         public static ParseOsbResult ParseOsb(string text)
         {
             ArgumentException.ThrowIfNullOrEmpty(text);
-            return Parsing.ParseOsb(new TextRequest(text));
+            return osb.Parsing.ParseOsb(text);
         }
 
         /// <summary>The anchor offset for an origin.</summary>
         public static Vector2 GetOriginVector(OsbOrigin origin, double width, double height) =>
-            Origin.GetOriginVector(
-                new GetOriginVectorRequest(origin: origin, width: width, height: height)
-            );
+            osb.Origin.GetOriginVector(origin, width, height);
 
         /// <summary>Whether a rotated sprite's bounds intersect the screen.</summary>
         public static bool InScreenBounds(
@@ -67,17 +53,7 @@ public static partial class osb
             Vector2 size,
             double rotation,
             Vector2 origin
-        ) =>
-            Origin
-                .InScreenBounds(
-                    new InScreenBoundsRequest(
-                        origin: origin,
-                        position: position,
-                        rotation: rotation,
-                        size: size
-                    )
-                )
-                .Value;
+        ) => osb.Origin.InScreenBounds(position, size, rotation, origin);
 
         /// <summary>
         /// A live storyboard runtime: the effect context (beatmap, audio,
@@ -88,10 +64,10 @@ public static partial class osb
         public class Runtime : IDisposable
         {
             private readonly NativeRuntime _native;
-            private readonly GeneratorApi _generator;
+            private readonly Client.Runtime.Generator _generator;
+            private readonly Client.Runtime.Audio _audio;
             private readonly LayerApi _layer;
             private readonly SpriteApi _sprite;
-            private readonly AudioApi _audio;
             private bool _disposed;
 
             /// <summary>Creates a runtime of the given storyboard resolution.</summary>
@@ -99,26 +75,27 @@ public static partial class osb
             {
                 _native = new NativeRuntime(width, height);
                 var transport = new OsbtkTransport(_native);
-                _generator = new GeneratorApi(transport, transport, DefaultConfiguration);
+                _generator = new Client.Runtime.Generator(
+                    new GeneratorApi(transport, transport, DefaultConfiguration)
+                );
+                _audio = new Client.Runtime.Audio(
+                    new AudioApi(transport, transport, DefaultConfiguration)
+                );
                 _layer = new LayerApi(transport, transport, DefaultConfiguration);
                 _sprite = new SpriteApi(transport, transport, DefaultConfiguration);
-                _audio = new AudioApi(transport, transport, DefaultConfiguration);
             }
 
-            /// <summary>The generated generator client (advanced/escape hatch).</summary>
-            public GeneratorApi Api => _generator;
-
-            /// <summary>The generated audio client bound to this runtime.</summary>
-            public AudioApi Audio => _audio;
+            /// <summary>The clean audio client bound to this runtime.</summary>
+            public Client.Runtime.Audio Audio => _audio;
 
             /// <summary>The number of sprites on the storyboard.</summary>
-            public int SpriteCount => _generator.SpriteCount().SpriteCount;
+            public int SpriteCount => _generator.SpriteCount();
 
             /// <summary>The built storyboard model.</summary>
             public Storyboard Storyboard => _generator.Storyboard();
 
             /// <summary>The loaded audio duration in milliseconds.</summary>
-            public double AudioDuration => _audio.AudioDuration().AudioDuration;
+            public double AudioDuration => _audio.AudioDuration();
 
             /// <summary>The loaded beatmap, or <c>null</c>.</summary>
             public Beatmap? Beatmap => _generator.Beatmap();
@@ -127,37 +104,31 @@ public static partial class osb
             public void ImportOsb(string textOrPath)
             {
                 ArgumentException.ThrowIfNullOrEmpty(textOrPath);
-                _generator.ImportOsb(new TextRequest(textOrPath));
+                _generator.ImportOsb(textOrPath);
             }
 
             /// <summary>Loads a `.osu` beatmap into the runtime.</summary>
             public void LoadBeatmap(string osuText)
             {
                 ArgumentException.ThrowIfNullOrEmpty(osuText);
-                _generator.LoadBeatmap(new TextRequest(osuText));
+                _generator.LoadBeatmap(osuText);
             }
 
             /// <summary>The active red timing point at a time.</summary>
-            public ControlPoint TimingPointAt(double time) => _generator.TimingPointAt(new TimeRequest(time));
+            public ControlPoint TimingPointAt(double time) => _generator.TimingPointAt(time);
 
             /// <summary>The active control point at a time, or <c>null</c>.</summary>
-            public ControlPoint? ControlPointAt(double time) =>
-                _generator.ControlPointAt(new TimeRequest(time));
+            public ControlPoint? ControlPointAt(double time) => _generator.ControlPointAt(time);
 
             /// <summary>A deterministic random value in <c>[min, max)</c>.</summary>
-            public double Random(double min, double max) =>
-                _generator.Random(new RandomRequest(max: max, min: min)).Value;
+            public double Random(double min, double max) => _generator.Random(max, min);
 
             /// <summary>Returns (creating on first use) a layer by name.</summary>
             public Layer Layer(string name)
             {
                 ArgumentException.ThrowIfNullOrEmpty(name);
-                return new Layer(
-                    _layer,
-                    _sprite,
-                    name,
-                    _generator.LayerHandle(new LayerHandleRequest(name)).Layer
-                );
+                int handle = _generator.LayerHandle(name);
+                return new Layer(_layer, _sprite, name, handle);
             }
 
             /// <summary>Returns a standard osu! layer.</summary>
@@ -171,7 +142,7 @@ public static partial class osb
 
             /// <summary>Reads FFT magnitudes from the runtime's loaded audio.</summary>
             public FftResult GetFft(double time, int magnitudes = 64, Easing easing = Easing.None, double cutoff = 0) =>
-                _audio.GetFft(new GetFftRequest(cutoff: cutoff, easing: easing, magnitudes: magnitudes, time: time));
+                _audio.GetFft(time, magnitudes, cutoff, easing);
 
             /// <summary>Releases the native runtime.</summary>
             public void Dispose()
@@ -199,7 +170,7 @@ public static partial class osb
             public static JToken Call(string name, JObject? input = null)
             {
                 ArgumentNullException.ThrowIfNull(name);
-                HelperResult result = Helpers.Commands(new HelperRequest(input ?? new JObject(), name));
+                HelperResult result = CommandsClient.Commands(new HelperRequest(input ?? new JObject(), name));
                 return result.Value is JToken token ? token : JToken.FromObject(result.Value);
             }
 

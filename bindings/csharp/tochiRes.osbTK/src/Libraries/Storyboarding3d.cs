@@ -9,6 +9,7 @@ using tochiRes.osbTK.Model;
 
 using HelpersApi = tochiRes.osbTK.Api.HelpersAPI;
 using Storyboarding3dApi = tochiRes.osbTK.Api.Storyboarding3dAPI;
+using CleanStoryboarding3d = tochiRes.osbTK.Client.Runtime.Storyboarding3d;
 
 namespace tochiRes.osbTK;
 
@@ -21,10 +22,8 @@ public static partial class osb
     /// </summary>
     public static class Storyboarding3d
     {
-        private static readonly Storyboarding3dApi Api = new(
-            StatelessTransport,
-            StatelessTransport,
-            DefaultConfiguration
+        private static readonly CleanStoryboarding3d Client = new(
+            new Storyboarding3dApi(StatelessTransport, StatelessTransport, DefaultConfiguration)
         );
         private static readonly HelpersApi HelpersClient = new(
             StatelessTransport,
@@ -53,7 +52,7 @@ public static partial class osb
         public static BakedStoryboard Bake3d(Scene3dInput scene)
         {
             ArgumentNullException.ThrowIfNull(scene);
-            return Api.Bake3d(new Bake3dRequest(scene));
+            return Client.Bake3d(scene);
         }
 
         /// <summary>

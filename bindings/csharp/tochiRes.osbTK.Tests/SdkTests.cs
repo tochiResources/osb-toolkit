@@ -117,7 +117,7 @@ public class SdkTests
 
     [Fact]
     public void SurfacesNativeErrorsAsSdkExceptions() =>
-        Assert.Throws<OsbTkException>(() => Entry.Audio.Fft(new FftRequest(path: "does-not-exist.wav")));
+        Assert.Throws<OsbTkException>(() => Entry.Audio.Fft("does-not-exist.wav"));
 
     [Fact]
     public void ExposesTheStoryboardFacade()
@@ -214,8 +214,8 @@ public class SdkTests
         Assert.Equal("sb/dot.png", baked.Sprites[0].SpritePath);
         Assert.NotEmpty(baked.Sprites[0].Commands);
 
-        Assert.Equal(0.0, Entry.Animations.ApplyCubicBezier(0.42, 0.0, 0.58, 1.0, 0.0), 6);
-        Assert.Equal(1.0, Entry.Animations.ApplyCubicBezier(0.42, 0.0, 0.58, 1.0, 1.0), 6);
+        Assert.Equal(0.0, Entry.Animations.EasingValue(0.0, null, [0.42, 0.0, 0.58, 1.0]), 6);
+        Assert.Equal(1.0, Entry.Animations.EasingValue(1.0, null, [0.42, 0.0, 0.58, 1.0]), 6);
     }
 
     [Fact]
@@ -227,7 +227,7 @@ public class SdkTests
         );
         Assert.Equal(100.0, Entry.Curve.Length(curve), 6);
         Assert.Equal(50.0, Entry.Curve.Point(curve, 0.5).X, 6);
-        Assert.Equal(3, Entry.Curve.Sample(curve, 3).Points.Count);
+        Assert.Equal(3, Entry.Curve.Sample(3, curve).Points.Count);
         Assert.Equal(100.0, Entry.Curve.BoundingBox(curve).Max.X, 6);
         Assert.Equal(0.0, Entry.Curve.Normal(curve, 0.5).X, 6);
         Assert.Equal(0.0, Entry.Curve.Curvature(curve, 0.5), 6);
@@ -247,13 +247,13 @@ public class SdkTests
 
         Assert.Equal(3, Entry.Curve.Arc(new Vector2 { X = 0, Y = 0 }, 10, 0, 180, 3).Points.Count);
         Assert.Equal(4, Entry.Curve.Ellipse(new Vector2 { X = 0, Y = 0 }, 4, 2, 4).Points.Count);
-        OptionalPointResult hit = Entry.Curve.LineIntersect(
+        Vector2 hit = Entry.Curve.LineIntersect(
             new Vector2 { X = 0, Y = 0 },
             new Vector2 { X = 10, Y = 10 },
             new Vector2 { X = 0, Y = 10 },
             new Vector2 { X = 10, Y = 0 }
         );
-        Assert.Equal(5.0, hit.Point!.X, 6);
+        Assert.Equal(5.0, hit.X, 6);
     }
 
     [Fact]
@@ -274,8 +274,8 @@ public class SdkTests
     public void OptimizesStoryboards()
     {
         OptimizeResult result = Entry.Optimize.OptimizeOsb(
-            "[Events]\nSprite,Foreground,Centre,\"sb/dot.png\",320,240\n F,0,0,100,0,1\n F,0,0,100,0,1\n",
-            new OptimizeOptionsInput(deduplicate: true)
+            new OptimizeOptionsInput(deduplicate: true),
+            "[Events]\nSprite,Foreground,Centre,\"sb/dot.png\",320,240\n F,0,0,100,0,1\n F,0,0,100,0,1\n"
         );
         Assert.Equal(1, result.Stats.Deduplicated);
         Assert.Contains("Sprite", result.Osb);
@@ -290,20 +290,17 @@ public class SdkTests
     {
         string output = Path.Combine(Path.GetTempPath(), "osbtk-csharp-render.png");
         ImageInfo info = Entry.ImageGen.RenderShapes(
-            new RenderShapesRequest(
-                width: 32,
-                height: 32,
-                shapes:
-                [
-                    new Shape(
-                        kind: ShapeKind.Rect,
-                        center: new Vector2 { X = 16, Y = 16 },
-                        size: new Vector2 { X = 20, Y = 20 },
-                        fill: new RgbaColor { R = 10, G = 20, B = 30, A = 255 }
-                    ),
-                ],
-                output: output
-            )
+            32,
+            32,
+            [
+                new Shape(
+                    kind: ShapeKind.Rect,
+                    center: new Vector2 { X = 16, Y = 16 },
+                    size: new Vector2 { X = 20, Y = 20 },
+                    fill: new RgbaColor { R = 10, G = 20, B = 30, A = 255 }
+                ),
+            ],
+            output
         );
         Assert.Equal(32, info.Width);
         Assert.True(File.Exists(output));
