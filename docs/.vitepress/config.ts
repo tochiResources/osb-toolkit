@@ -3,13 +3,12 @@ import { defineConfig } from 'vitepress';
 /** osbTK documentation site. */
 export default defineConfig({
     title: 'osbTK',
-    description:
-        'Convert effect scripts to After Effects, DaVinci Resolve and Premiere Pro plug-ins.',
+    description: 'SDKs and tools for osu! storyboard development.',
     cleanUrls: true,
     themeConfig: {
         nav: [
             { text: 'Guide', link: '/getting-started' },
-            { text: 'Reference', link: '/reference/compatibility' },
+            { text: 'Reference', link: '/reference/cli' },
         ],
         sidebar: [
             {
@@ -18,14 +17,12 @@ export default defineConfig({
                     { text: 'Introduction', link: '/' },
                     { text: 'Getting started', link: '/getting-started' },
                     { text: 'How it works', link: '/how-it-works' },
-                    { text: 'Web UI', link: '/web-ui' },
                 ],
             },
             {
                 text: 'Reference',
                 items: [
                     { text: 'CLI', link: '/reference/cli' },
-                    { text: 'Compatibility', link: '/reference/compatibility' },
                     { text: 'Error codes', link: '/reference/errors' },
                     { text: 'Supported C# subset', link: '/reference/csharp-subset' },
                 ],

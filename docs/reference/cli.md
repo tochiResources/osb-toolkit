@@ -1,8 +1,6 @@
 # CLI
 
-## Core CLI — `osbtk-fx-convert`
-
-`@tochii/osb-toolkit-core` ships the generic converter.
+`@tochii/osb-toolkit-core` ships the converter as `osbtk-fx-convert`.
 
 ```bash
 yarn workspace @tochii/osb-toolkit-core cli <Effect.cs...> [options]
@@ -12,23 +10,15 @@ yarn workspace @tochii/osb-toolkit-core cli <Effect.cs...> [options]
 | -------------------------------- | -------------------------------------------------------------------------------- |
 | `-t, --target <target>`          | `after-effects` \| `davinci-resolve` \| `premiere-pro` (default `after-effects`) |
 | `-o, --out <dir>`                | Output directory (default `dist`)                                                |
-| `--name <name>`                  | Override the plug-in name                                                        |
-| `--id <id>`                      | Override the reverse-DNS plug-in id                                              |
+| `--name <name>`                  | Override the effect name                                                         |
+| `--id <id>`                      | Override the reverse-DNS id                                                      |
 | `--category <name>`              | Override the category                                                            |
 | `--width <px>` / `--height <px>` | Composition size                                                                 |
+| `--lib <path...>`                | External library file(s) or library folder(s)                                    |
+| `--bundle` / `--separate`        | Bundle all effects into one crate, or one crate per effect                       |
+| `--combine-parameters`           | Merge bundled parameters by `[Group]`                                            |
 | `--json`                         | Machine-readable output                                                          |
 | `-q, --quiet`                    | Only warnings and errors                                                         |
-
-## Per-target CLIs
-
-Each program package adds a thin CLI that writes the output and can build the
-native plug-in:
-
-```bash
-yarn workspace @tochii/osb-toolkit-to-after-effects cli <Effect.cs> --build --sdk <AE SDK Examples>
-yarn workspace @tochii/osb-toolkit-to-davinci-resolve cli <Effect.cs> --build --ofx-sdk <openfx>
-yarn workspace @tochii/osb-toolkit-to-premiere-pro cli <Effect.cs> --artifact aex
-```
 
 ## Programmatic use
 
@@ -43,13 +33,4 @@ const result = convertEffectScript(source, {
 for (const file of result.files) {
     console.log(file.path);
 }
-```
-
-The After Effects package exposes an async variant that also writes the files to
-disk:
-
-```ts
-import { convertToAfterEffects } from '@tochii/osb-toolkit-to-after-effects';
-
-const result = await convertToAfterEffects(source, { sourceFile: 'Background.cs' });
 ```
