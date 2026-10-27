@@ -1,9 +1,9 @@
 //! Static parser for Adobe After Effects `*.aep` project files.
 //!
 //! After Effects projects are RIFF containers written big-endian (`RIFX`). This
-//! crate reads the chunk tree and exposes the useful structure — project bit
+//! crate reads the chunk tree and exposes the useful structure - project bit
 //! depth and expression engine, the item tree, compositions (dimensions,
-//! framerate, duration), layers (source, flags, effects) and their properties —
+//! framerate, duration), layers (source, flags, effects) and their properties -
 //! **without a running After Effects**, so tools can inspect a project
 //! statically and cheaply.
 //!

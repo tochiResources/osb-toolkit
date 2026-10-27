@@ -539,7 +539,7 @@ fn parse_keyframe(
             keyframe.out_tangent = read_doubles(item, 0x38 + 2 * dims * 8, dims);
         }
     } else if !valueless {
-        // value, in speed, in influence, out speed, out influence — `dims` each.
+        // value, in speed, in influence, out speed, out influence - `dims` each.
         keyframe.value = read_doubles(item, 0x08, dims);
         keyframe.in_speed = read_doubles(item, 0x08 + dims * 8, dims);
         keyframe.in_influence = read_doubles(item, 0x08 + 2 * dims * 8, dims);
