@@ -199,12 +199,6 @@ function clear(dir: string, keep?: (file: string) => boolean): void {
     }
 }
 
-function resultType(op: Operation, array: (t: string) => string, fallback: string): string {
-    if (!op.result) return fallback;
-    const base = op.result;
-    return op.resultArray ? array(base) : base;
-}
-
 type ResultKind =
     | 'void'
     | 'bool'
