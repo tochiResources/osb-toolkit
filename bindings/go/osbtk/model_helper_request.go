@@ -1,7 +1,7 @@
 /*
 osbTK Native Bridge
 
-Typed wire contract for the osbTK native engine (section 5.13, M21/M22). Rust (`crates/osb-api`) is the source of truth; the C#, C++, Python, TypeScript, Go and Java SDK models and clients are generated from this document. Every `operationId` is the native bridge `op`.
+Typed wire contract for the osbTK native engine. Rust (`crates/osb-api`) is the source of truth; the C#, C++, Python, TypeScript, Go and Java SDK models and clients are generated from this document. Every `operationId` is the native bridge `op`.
 
 API version: 0.1.0
 */
