@@ -1,6 +1,6 @@
-﻿# osbTK
+﻿# osu! Storyboarding Toolkit
 
-**osu! Storyboarding Toolkit** - SDKs that provides usefull tools for osu! storyboarding development as SDKs in C#, Java, JavaScript/TypeScript, Go, Rust, Python, and C++.
+SDKs that provides useful tools for osu! storyboarding development in C#, Java, JavaScript/TypeScript, Go, Rust, Python, and C++.
 
 See the full docs at [osb-toolkit.tochi.moe/docs](https://osb-toolkit.tochi.moe/docs).
 
