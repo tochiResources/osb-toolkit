@@ -1,0 +1,30 @@
+{
+    "name": "@tochii/osb-toolkit-docs",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "osbTK documentation (VitePress).",
+    "scripts": {
+        "dev": "vitepress dev",
+        "build": "vitepress build --outDir dist",
+        "preview": "vitepress preview --outDir dist",
+        "test": "vitest run --passWithNoTests",
+        "typecheck": "tsc -p tsconfig.json --noEmit"
+    },
+    "dependencies": {
+        "@tochii/osb-toolkit-core": "workspace:*",
+        "@tochii/osb-toolkit-shared": "workspace:*"
+    },
+    "devDependencies": {
+        "@types/node": "catalog:",
+        "tsx": "catalog:",
+        "typescript": "catalog:",
+        "vite": "catalog:",
+        "vitepress": "^1.6.3",
+        "vitest": "catalog:"
+    },
+    "packageManager": "yarn@4.17.1",
+    "engines": {
+        "node": ">=22.5.0"
+    }
+}
