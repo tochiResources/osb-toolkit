@@ -21,7 +21,7 @@ fn main() {
 
     for comp in project.compositions() {
         println!(
-            "\n• {} — {}x{} @ {:.3} fps, {:.3}s, {} layer(s), bg #{:02x}{:02x}{:02x}",
+            "\n• {} - {}x{} @ {:.3} fps, {:.3}s, {} layer(s), bg #{:02x}{:02x}{:02x}",
             comp.name,
             comp.footage_dimensions[0],
             comp.footage_dimensions[1],
