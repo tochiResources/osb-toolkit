@@ -3,6 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 import { runGenerator, targets } from '../shared';
+import { emitJavaClient } from './post-process';
 
 /** Generates the Java SDK (models + one API class per tag + supporting files). */
 export function generateJava(): void {
@@ -36,6 +37,7 @@ export function generateJava(): void {
                 cpSync(from, to, { force: true });
             }
         }
+        emitJavaClient();
         console.log(`openapi: generated Java SDK into ${targets.java}`);
     } finally {
         rmSync(out, { recursive: true, force: true });

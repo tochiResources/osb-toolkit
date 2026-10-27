@@ -3,6 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 import { runGenerator, targets } from '../shared';
+import { emitPythonClient } from './post-process';
 
 /** Generates the Python SDK (models + `*_api` modules + supporting files). */
 export function generatePython(): void {
@@ -33,6 +34,7 @@ export function generatePython(): void {
         ]) {
             cpSync(join(source, file), join(targets.python, file));
         }
+        emitPythonClient();
         console.log(`openapi: generated Python SDK into ${targets.python}`);
     } finally {
         rmSync(out, { recursive: true, force: true });

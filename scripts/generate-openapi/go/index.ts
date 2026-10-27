@@ -3,6 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 import { runGenerator, targets } from '../shared';
+import { emitGoClient } from './post-process';
 
 /** Generates the Go SDK (models + one service per tag + the client). */
 export function generateGo(): void {
@@ -57,6 +58,7 @@ export function generateGo(): void {
                 );
             }
         }
+        emitGoClient();
         console.log(`openapi: generated Go SDK into ${targets.go}`);
     } finally {
         rmSync(out, { recursive: true, force: true });
