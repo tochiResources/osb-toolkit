@@ -1,0 +1,17 @@
+[package]
+name = "osb-media"
+description = "Media library: video/audio probing, frame extraction and image-sequence encoding, over the ffmpeg/ffprobe binaries (M26)."
+version = "0.1.0"
+edition = "2021"
+license = "BSD-3-Clause"
+repository = "https://github.com/tochiResources/osb-toolkit"
+authors = ["T0chi"]
+
+[dependencies]
+osb-core = { path = "../osb-core" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+utoipa = { version = "6" }
+
+[lints]
+workspace = true
