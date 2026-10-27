@@ -1,0 +1,17 @@
+# cbindgen configuration for the osbTK C ABI (crates/osb-native).
+# Regenerate the checked-in header with:
+#   cbindgen --config crates/osb-native/cbindgen.toml --output crates/osb-native/include/osbtk.h
+language = "C"
+include_guard = "OSBTK_H"
+pragma_once = false
+cpp_compat = true
+documentation = true
+documentation_style = "doxy"
+header = """/*
+ * osbTK C ABI - the surface every language binding drives (section 5.13, M14i).
+ *
+ * Generated with `cbindgen` from `crates/osb-native`; do not edit by hand.
+ * Coverage: mapset (`.osu` parse), storyboard (`.osb` import), audio (FFT) and
+ * storyboarding3d (scene bake); new operations are added to the JSON bridge
+ * (`osbtk_exec`) alone. Release every returned `char *` with `osbtk_string_free`.
+ */"""

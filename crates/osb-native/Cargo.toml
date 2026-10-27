@@ -1,0 +1,24 @@
+[package]
+name = "osb-native"
+description = "C ABI (cdylib) exposing the osbTK 3D bake for C# P/Invoke and other native consumers (M14i)."
+version = "0.1.0"
+edition = "2021"
+license = "BSD-3-Clause"
+repository = "https://github.com/tochiResources/osb-toolkit"
+authors = ["T0chi"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+osb-core = { path = "../osb-core" }
+osb-api = { path = "../osb-api" }
+osb-image = { path = "../osb-image" }
+osb-image-gen = { path = "../osb-image-gen" }
+osb-media = { path = "../osb-media" }
+osb-runtime = { path = "../osb-runtime" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[lints]
+workspace = true
