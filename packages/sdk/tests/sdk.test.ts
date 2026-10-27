@@ -160,6 +160,29 @@ describe('@tochii/osb-sdk-js', () => {
         expect(hit?.x).toBeCloseTo(5, 6);
     });
 
+    it('unwraps clean single-field results', async () => {
+        expect(typeof (await Core.common.version())).toBe('string');
+        expect(
+            typeof (await Core.animations.applyEasing({ easing: Easing.None, t: 0.5 }))
+        ).toBe('number');
+        expect(
+            typeof (await Core.origin.inScreenBounds({
+                position: { x: 427, y: 240 },
+                size: { x: 100, y: 100 },
+                rotation: 0,
+                origin: { x: 50, y: 50 },
+            }))
+        ).toBe('boolean');
+        expect(
+            await Core.curve.lineIntersect({
+                a1: { x: 0, y: 0 },
+                a2: { x: 10, y: 0 },
+                b1: { x: 0, y: 10 },
+                b2: { x: 10, y: 10 },
+            })
+        ).toBeNull();
+    });
+
     it('diagnoses storyboards and mapsets', async () => {
         const report = await osb.diagnostics.diagnoseOsu({
             text: 'osu file format v14\n\n[General]\nAudioFilename: song.mp3\nMode: 0\n',
