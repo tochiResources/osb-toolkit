@@ -9,7 +9,7 @@ export default defineConfig({
             license: 'BSD-3-Clause',
             homepage: 'https://osb-toolkit.tochi.moe',
             description:
-                'osu! Storyboarding Toolkit provides useful tools for your storyboarding pipeline as SDKs in C#, Java, JavaScript/TypeScript, Go, Rust, Python, and C++.',
+                'osu! Storyboarding Toolkit provides useful tools for storyboarding development as SDKs in C#, Java, JavaScript/TypeScript, Go, Rust, Python, and C++.',
             repo: 'https://github.com/tochiResources/osb-toolkit',
             nodeVersion: '22',
             packageManager: 'yarn',
@@ -88,6 +88,7 @@ export default defineConfig({
                 arrowParens: 'avoid',
                 ignorePatterns: [
                     '/vite.config.ts',
+                    'docs/reference/api/**',
                     '**/node_modules/**',
                     '**/dist/**',
                     '**/.turbo/**',
@@ -123,8 +124,8 @@ export default defineConfig({
                 },
             },
             lint: {
-                $schema: './node_modules/oxlint/configuration_schema.json',
                 ignorePatterns: [
+                    'docs/reference/api/**',
                     '**/node_modules/**',
                     '**/dist/**',
                     '**/.turbo/**',
