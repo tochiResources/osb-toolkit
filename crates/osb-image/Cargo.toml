@@ -1,0 +1,17 @@
+[package]
+name = "osb-image"
+description = "Canonical image library: decode/encode, resize, crop, rotate/flip, colour ops and filters, shared by every language (M23)."
+version = "0.1.0"
+edition = "2021"
+license = "BSD-3-Clause"
+repository = "https://github.com/tochiResources/osb-toolkit"
+authors = ["T0chi"]
+
+[dependencies]
+osb-core = { path = "../osb-core" }
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "bmp", "gif"] }
+serde = { version = "1", features = ["derive"] }
+utoipa = { version = "6" }
+
+[lints]
+workspace = true
