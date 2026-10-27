@@ -1,9 +1,9 @@
-import { cpSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdtempSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 import { runGenerator, targets } from '../shared';
-import { emitGoClient } from './post-process';
+import { cleanGoNames, emitGoClient } from './post-process';
 
 /** Generates the Go SDK (models + one service per tag + the client). */
 export function generateGo(): void {
@@ -39,25 +39,7 @@ export function generateGo(): void {
                 cpSync(join(out, file), join(targets.go, file), { force: true });
             }
         }
-        // Go names each operation's request wrapper `Api<Op>Request`, which
-        // collides when two classes share a method name (e.g. `Image.info` and
-        // `Media.info`). Qualify it with the class so the names stay unique,
-        // keeping the `Api` prefix so it never collides with a model.
-        for (const file of readdirSync(targets.go)) {
-            if (!file.startsWith('api_') || !file.endsWith('.go')) {
-                continue;
-            }
-            const path = join(targets.go, file);
-            const text = readFileSync(path, 'utf8');
-            const cls = text.match(/^type (\w+)Service service$/m)?.[1];
-            if (cls) {
-                writeFileSync(
-                    path,
-                    text.replace(/\bApi(\w+?)Request\b/g, `Api${cls}$1Request`),
-                    'utf8'
-                );
-            }
-        }
+        cleanGoNames(targets.go);
         emitGoClient();
         console.log(`openapi: generated Go SDK into ${targets.go}`);
     } finally {

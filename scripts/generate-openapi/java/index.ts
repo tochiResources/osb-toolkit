@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 import { runGenerator, targets } from '../shared';
-import { emitJavaClient } from './post-process';
+import { emitJavaClient, protectJavaTransport } from './post-process';
 
 /** Generates the Java SDK (models + one API class per tag + supporting files). */
 export function generateJava(): void {
@@ -37,6 +37,7 @@ export function generateJava(): void {
                 cpSync(from, to, { force: true });
             }
         }
+        protectJavaTransport(join(targets.java, 'moe', 'tochi', 'osbtk', 'api'));
         emitJavaClient();
         console.log(`openapi: generated Java SDK into ${targets.java}`);
     } finally {
