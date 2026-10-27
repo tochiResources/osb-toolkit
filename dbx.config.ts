@@ -110,6 +110,7 @@ export default defineConfig({
             packageManagerVersion: '4.17.1',
         },
         changelog: {
+            branches: { main: 'dev', dev: 'dev' },
             scopes: [
                 'shared',
                 'core',
