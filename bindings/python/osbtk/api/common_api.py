@@ -98,7 +98,7 @@ class CommonAPI:
 
 
     @validate_call
-    def version_with_http_info(
+    def _version_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -160,7 +160,7 @@ class CommonAPI:
 
 
     @validate_call
-    def version_without_preload_content(
+    def _version_without_preload_content(
         self,
         _request_timeout: Union[
             None,

@@ -109,7 +109,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def beatmap_with_http_info(
+    def _beatmap_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -171,7 +171,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def beatmap_without_preload_content(
+    def _beatmap_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -355,7 +355,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def control_point_at_with_http_info(
+    def _control_point_at_with_http_info(
         self,
         time_request: TimeRequest,
         _request_timeout: Union[
@@ -421,7 +421,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def control_point_at_without_preload_content(
+    def _control_point_at_without_preload_content(
         self,
         time_request: TimeRequest,
         _request_timeout: Union[
@@ -625,7 +625,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def import_osb_with_http_info(
+    def _import_osb_with_http_info(
         self,
         text_request: TextRequest,
         _request_timeout: Union[
@@ -691,7 +691,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def import_osb_without_preload_content(
+    def _import_osb_without_preload_content(
         self,
         text_request: TextRequest,
         _request_timeout: Union[
@@ -895,7 +895,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def layer_handle_with_http_info(
+    def _layer_handle_with_http_info(
         self,
         layer_handle_request: LayerHandleRequest,
         _request_timeout: Union[
@@ -961,7 +961,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def layer_handle_without_preload_content(
+    def _layer_handle_without_preload_content(
         self,
         layer_handle_request: LayerHandleRequest,
         _request_timeout: Union[
@@ -1165,7 +1165,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def load_beatmap_with_http_info(
+    def _load_beatmap_with_http_info(
         self,
         text_request: TextRequest,
         _request_timeout: Union[
@@ -1231,7 +1231,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def load_beatmap_without_preload_content(
+    def _load_beatmap_without_preload_content(
         self,
         text_request: TextRequest,
         _request_timeout: Union[
@@ -1435,7 +1435,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def random_with_http_info(
+    def _random_with_http_info(
         self,
         random_request: RandomRequest,
         _request_timeout: Union[
@@ -1501,7 +1501,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def random_without_preload_content(
+    def _random_without_preload_content(
         self,
         random_request: RandomRequest,
         _request_timeout: Union[
@@ -1701,7 +1701,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def sprite_count_with_http_info(
+    def _sprite_count_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -1763,7 +1763,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def sprite_count_without_preload_content(
+    def _sprite_count_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -1943,7 +1943,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def storyboard_with_http_info(
+    def _storyboard_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -2005,7 +2005,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def storyboard_without_preload_content(
+    def _storyboard_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -2189,7 +2189,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def timing_point_at_with_http_info(
+    def _timing_point_at_with_http_info(
         self,
         time_request: TimeRequest,
         _request_timeout: Union[
@@ -2255,7 +2255,7 @@ class GeneratorAPI:
 
 
     @validate_call
-    def timing_point_at_without_preload_content(
+    def _timing_point_at_without_preload_content(
         self,
         time_request: TimeRequest,
         _request_timeout: Union[

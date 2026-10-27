@@ -105,7 +105,7 @@ class OriginAPI:
 
 
     @validate_call
-    def get_origin_vector_with_http_info(
+    def _get_origin_vector_with_http_info(
         self,
         get_origin_vector_request: GetOriginVectorRequest,
         _request_timeout: Union[
@@ -171,7 +171,7 @@ class OriginAPI:
 
 
     @validate_call
-    def get_origin_vector_without_preload_content(
+    def _get_origin_vector_without_preload_content(
         self,
         get_origin_vector_request: GetOriginVectorRequest,
         _request_timeout: Union[
@@ -375,7 +375,7 @@ class OriginAPI:
 
 
     @validate_call
-    def in_screen_bounds_with_http_info(
+    def _in_screen_bounds_with_http_info(
         self,
         in_screen_bounds_request: InScreenBoundsRequest,
         _request_timeout: Union[
@@ -441,7 +441,7 @@ class OriginAPI:
 
 
     @validate_call
-    def in_screen_bounds_without_preload_content(
+    def _in_screen_bounds_without_preload_content(
         self,
         in_screen_bounds_request: InScreenBoundsRequest,
         _request_timeout: Union[

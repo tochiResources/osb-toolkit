@@ -101,7 +101,7 @@ class AudioAPI:
 
 
     @validate_call
-    def audio_duration_with_http_info(
+    def _audio_duration_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -163,7 +163,7 @@ class AudioAPI:
 
 
     @validate_call
-    def audio_duration_without_preload_content(
+    def _audio_duration_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -347,7 +347,7 @@ class AudioAPI:
 
 
     @validate_call
-    def fft_with_http_info(
+    def _fft_with_http_info(
         self,
         fft_request: FftRequest,
         _request_timeout: Union[
@@ -413,7 +413,7 @@ class AudioAPI:
 
 
     @validate_call
-    def fft_without_preload_content(
+    def _fft_without_preload_content(
         self,
         fft_request: FftRequest,
         _request_timeout: Union[
@@ -617,7 +617,7 @@ class AudioAPI:
 
 
     @validate_call
-    def get_fft_with_http_info(
+    def _get_fft_with_http_info(
         self,
         get_fft_request: GetFftRequest,
         _request_timeout: Union[
@@ -683,7 +683,7 @@ class AudioAPI:
 
 
     @validate_call
-    def get_fft_without_preload_content(
+    def _get_fft_without_preload_content(
         self,
         get_fft_request: GetFftRequest,
         _request_timeout: Union[

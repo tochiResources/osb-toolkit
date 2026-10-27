@@ -103,7 +103,7 @@ class ImagegenAPI:
 
 
     @validate_call
-    def render_shapes_with_http_info(
+    def _render_shapes_with_http_info(
         self,
         render_shapes_request: RenderShapesRequest,
         _request_timeout: Union[
@@ -169,7 +169,7 @@ class ImagegenAPI:
 
 
     @validate_call
-    def render_shapes_without_preload_content(
+    def _render_shapes_without_preload_content(
         self,
         render_shapes_request: RenderShapesRequest,
         _request_timeout: Union[

@@ -109,7 +109,7 @@ class SpriteAPI:
 
 
     @validate_call
-    def command_with_http_info(
+    def _command_with_http_info(
         self,
         command_request: CommandRequest,
         _request_timeout: Union[
@@ -175,7 +175,7 @@ class SpriteAPI:
 
 
     @validate_call
-    def command_without_preload_content(
+    def _command_without_preload_content(
         self,
         command_request: CommandRequest,
         _request_timeout: Union[
@@ -379,7 +379,7 @@ class SpriteAPI:
 
 
     @validate_call
-    def end_group_with_http_info(
+    def _end_group_with_http_info(
         self,
         handle_request: HandleRequest,
         _request_timeout: Union[
@@ -445,7 +445,7 @@ class SpriteAPI:
 
 
     @validate_call
-    def end_group_without_preload_content(
+    def _end_group_without_preload_content(
         self,
         handle_request: HandleRequest,
         _request_timeout: Union[
@@ -649,7 +649,7 @@ class SpriteAPI:
 
 
     @validate_call
-    def info_with_http_info(
+    def _info_with_http_info(
         self,
         handle_request: HandleRequest,
         _request_timeout: Union[
@@ -715,7 +715,7 @@ class SpriteAPI:
 
 
     @validate_call
-    def info_without_preload_content(
+    def _info_without_preload_content(
         self,
         handle_request: HandleRequest,
         _request_timeout: Union[
@@ -919,7 +919,7 @@ class SpriteAPI:
 
 
     @validate_call
-    def start_loop_group_with_http_info(
+    def _start_loop_group_with_http_info(
         self,
         start_loop_group_request: StartLoopGroupRequest,
         _request_timeout: Union[
@@ -985,7 +985,7 @@ class SpriteAPI:
 
 
     @validate_call
-    def start_loop_group_without_preload_content(
+    def _start_loop_group_without_preload_content(
         self,
         start_loop_group_request: StartLoopGroupRequest,
         _request_timeout: Union[
@@ -1189,7 +1189,7 @@ class SpriteAPI:
 
 
     @validate_call
-    def start_trigger_group_with_http_info(
+    def _start_trigger_group_with_http_info(
         self,
         start_trigger_group_request: StartTriggerGroupRequest,
         _request_timeout: Union[
@@ -1255,7 +1255,7 @@ class SpriteAPI:
 
 
     @validate_call
-    def start_trigger_group_without_preload_content(
+    def _start_trigger_group_without_preload_content(
         self,
         start_trigger_group_request: StartTriggerGroupRequest,
         _request_timeout: Union[
@@ -1459,7 +1459,7 @@ class SpriteAPI:
 
 
     @validate_call
-    def state_at_with_http_info(
+    def _state_at_with_http_info(
         self,
         sprite_time_request: SpriteTimeRequest,
         _request_timeout: Union[
@@ -1525,7 +1525,7 @@ class SpriteAPI:
 
 
     @validate_call
-    def state_at_without_preload_content(
+    def _state_at_without_preload_content(
         self,
         sprite_time_request: SpriteTimeRequest,
         _request_timeout: Union[

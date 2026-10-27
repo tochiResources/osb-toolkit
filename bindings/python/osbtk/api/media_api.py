@@ -108,7 +108,7 @@ class MediaAPI:
 
 
     @validate_call
-    def encode_video_with_http_info(
+    def _encode_video_with_http_info(
         self,
         encode_video_request: EncodeVideoRequest,
         _request_timeout: Union[
@@ -174,7 +174,7 @@ class MediaAPI:
 
 
     @validate_call
-    def encode_video_without_preload_content(
+    def _encode_video_without_preload_content(
         self,
         encode_video_request: EncodeVideoRequest,
         _request_timeout: Union[
@@ -378,7 +378,7 @@ class MediaAPI:
 
 
     @validate_call
-    def extract_audio_with_http_info(
+    def _extract_audio_with_http_info(
         self,
         extract_audio_request: ExtractAudioRequest,
         _request_timeout: Union[
@@ -444,7 +444,7 @@ class MediaAPI:
 
 
     @validate_call
-    def extract_audio_without_preload_content(
+    def _extract_audio_without_preload_content(
         self,
         extract_audio_request: ExtractAudioRequest,
         _request_timeout: Union[
@@ -648,7 +648,7 @@ class MediaAPI:
 
 
     @validate_call
-    def extract_frames_with_http_info(
+    def _extract_frames_with_http_info(
         self,
         extract_frames_request: ExtractFramesRequest,
         _request_timeout: Union[
@@ -714,7 +714,7 @@ class MediaAPI:
 
 
     @validate_call
-    def extract_frames_without_preload_content(
+    def _extract_frames_without_preload_content(
         self,
         extract_frames_request: ExtractFramesRequest,
         _request_timeout: Union[
@@ -918,7 +918,7 @@ class MediaAPI:
 
 
     @validate_call
-    def info_with_http_info(
+    def _info_with_http_info(
         self,
         path_request: PathRequest,
         _request_timeout: Union[
@@ -984,7 +984,7 @@ class MediaAPI:
 
 
     @validate_call
-    def info_without_preload_content(
+    def _info_without_preload_content(
         self,
         path_request: PathRequest,
         _request_timeout: Union[

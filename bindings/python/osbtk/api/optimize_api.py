@@ -103,7 +103,7 @@ class OptimizeAPI:
 
 
     @validate_call
-    def optimize_osb_with_http_info(
+    def _optimize_osb_with_http_info(
         self,
         optimize_request: OptimizeRequest,
         _request_timeout: Union[
@@ -169,7 +169,7 @@ class OptimizeAPI:
 
 
     @validate_call
-    def optimize_osb_without_preload_content(
+    def _optimize_osb_without_preload_content(
         self,
         optimize_request: OptimizeRequest,
         _request_timeout: Union[

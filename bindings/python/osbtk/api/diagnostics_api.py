@@ -103,7 +103,7 @@ class DiagnosticsAPI:
 
 
     @validate_call
-    def diagnose_osb_with_http_info(
+    def _diagnose_osb_with_http_info(
         self,
         text_request: TextRequest,
         _request_timeout: Union[
@@ -169,7 +169,7 @@ class DiagnosticsAPI:
 
 
     @validate_call
-    def diagnose_osb_without_preload_content(
+    def _diagnose_osb_without_preload_content(
         self,
         text_request: TextRequest,
         _request_timeout: Union[
@@ -373,7 +373,7 @@ class DiagnosticsAPI:
 
 
     @validate_call
-    def diagnose_osu_with_http_info(
+    def _diagnose_osu_with_http_info(
         self,
         text_request: TextRequest,
         _request_timeout: Union[
@@ -439,7 +439,7 @@ class DiagnosticsAPI:
 
 
     @validate_call
-    def diagnose_osu_without_preload_content(
+    def _diagnose_osu_without_preload_content(
         self,
         text_request: TextRequest,
         _request_timeout: Union[

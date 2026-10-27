@@ -116,7 +116,7 @@ class LayerAPI:
 
 
     @validate_call
-    def add_index_with_http_info(
+    def _add_index_with_http_info(
         self,
         segment_add_index_request: SegmentAddIndexRequest,
         _request_timeout: Union[
@@ -182,7 +182,7 @@ class LayerAPI:
 
 
     @validate_call
-    def add_index_without_preload_content(
+    def _add_index_without_preload_content(
         self,
         segment_add_index_request: SegmentAddIndexRequest,
         _request_timeout: Union[
@@ -386,7 +386,7 @@ class LayerAPI:
 
 
     @validate_call
-    def change_position_with_http_info(
+    def _change_position_with_http_info(
         self,
         segment_change_position_request: SegmentChangePositionRequest,
         _request_timeout: Union[
@@ -452,7 +452,7 @@ class LayerAPI:
 
 
     @validate_call
-    def change_position_without_preload_content(
+    def _change_position_without_preload_content(
         self,
         segment_change_position_request: SegmentChangePositionRequest,
         _request_timeout: Union[
@@ -656,7 +656,7 @@ class LayerAPI:
 
 
     @validate_call
-    def clean_with_http_info(
+    def _clean_with_http_info(
         self,
         segment_request: SegmentRequest,
         _request_timeout: Union[
@@ -722,7 +722,7 @@ class LayerAPI:
 
 
     @validate_call
-    def clean_without_preload_content(
+    def _clean_without_preload_content(
         self,
         segment_request: SegmentRequest,
         _request_timeout: Union[
@@ -926,7 +926,7 @@ class LayerAPI:
 
 
     @validate_call
-    def create_animation_with_http_info(
+    def _create_animation_with_http_info(
         self,
         create_animation_request: CreateAnimationRequest,
         _request_timeout: Union[
@@ -992,7 +992,7 @@ class LayerAPI:
 
 
     @validate_call
-    def create_animation_without_preload_content(
+    def _create_animation_without_preload_content(
         self,
         create_animation_request: CreateAnimationRequest,
         _request_timeout: Union[
@@ -1196,7 +1196,7 @@ class LayerAPI:
 
 
     @validate_call
-    def create_sample_with_http_info(
+    def _create_sample_with_http_info(
         self,
         create_sample_request: CreateSampleRequest,
         _request_timeout: Union[
@@ -1262,7 +1262,7 @@ class LayerAPI:
 
 
     @validate_call
-    def create_sample_without_preload_content(
+    def _create_sample_without_preload_content(
         self,
         create_sample_request: CreateSampleRequest,
         _request_timeout: Union[
@@ -1466,7 +1466,7 @@ class LayerAPI:
 
 
     @validate_call
-    def create_segment_with_http_info(
+    def _create_segment_with_http_info(
         self,
         segment_request: SegmentRequest,
         _request_timeout: Union[
@@ -1532,7 +1532,7 @@ class LayerAPI:
 
 
     @validate_call
-    def create_segment_without_preload_content(
+    def _create_segment_without_preload_content(
         self,
         segment_request: SegmentRequest,
         _request_timeout: Union[
@@ -1736,7 +1736,7 @@ class LayerAPI:
 
 
     @validate_call
-    def create_sprite_with_http_info(
+    def _create_sprite_with_http_info(
         self,
         create_sprite_request: CreateSpriteRequest,
         _request_timeout: Union[
@@ -1802,7 +1802,7 @@ class LayerAPI:
 
 
     @validate_call
-    def create_sprite_without_preload_content(
+    def _create_sprite_without_preload_content(
         self,
         create_sprite_request: CreateSpriteRequest,
         _request_timeout: Union[
@@ -2006,7 +2006,7 @@ class LayerAPI:
 
 
     @validate_call
-    def discard_with_http_info(
+    def _discard_with_http_info(
         self,
         segment_request: SegmentRequest,
         _request_timeout: Union[
@@ -2072,7 +2072,7 @@ class LayerAPI:
 
 
     @validate_call
-    def discard_without_preload_content(
+    def _discard_without_preload_content(
         self,
         segment_request: SegmentRequest,
         _request_timeout: Union[
@@ -2276,7 +2276,7 @@ class LayerAPI:
 
 
     @validate_call
-    def discard_sprite_with_http_info(
+    def _discard_sprite_with_http_info(
         self,
         handle_request: HandleRequest,
         _request_timeout: Union[
@@ -2342,7 +2342,7 @@ class LayerAPI:
 
 
     @validate_call
-    def discard_sprite_without_preload_content(
+    def _discard_sprite_without_preload_content(
         self,
         handle_request: HandleRequest,
         _request_timeout: Union[
@@ -2546,7 +2546,7 @@ class LayerAPI:
 
 
     @validate_call
-    def indexes_with_http_info(
+    def _indexes_with_http_info(
         self,
         segment_request: SegmentRequest,
         _request_timeout: Union[
@@ -2612,7 +2612,7 @@ class LayerAPI:
 
 
     @validate_call
-    def indexes_without_preload_content(
+    def _indexes_without_preload_content(
         self,
         segment_request: SegmentRequest,
         _request_timeout: Union[
@@ -2816,7 +2816,7 @@ class LayerAPI:
 
 
     @validate_call
-    def move_to_bottom_with_http_info(
+    def _move_to_bottom_with_http_info(
         self,
         segment_request: SegmentRequest,
         _request_timeout: Union[
@@ -2882,7 +2882,7 @@ class LayerAPI:
 
 
     @validate_call
-    def move_to_bottom_without_preload_content(
+    def _move_to_bottom_without_preload_content(
         self,
         segment_request: SegmentRequest,
         _request_timeout: Union[
@@ -3086,7 +3086,7 @@ class LayerAPI:
 
 
     @validate_call
-    def move_to_top_with_http_info(
+    def _move_to_top_with_http_info(
         self,
         segment_request: SegmentRequest,
         _request_timeout: Union[
@@ -3152,7 +3152,7 @@ class LayerAPI:
 
 
     @validate_call
-    def move_to_top_without_preload_content(
+    def _move_to_top_without_preload_content(
         self,
         segment_request: SegmentRequest,
         _request_timeout: Union[
@@ -3356,7 +3356,7 @@ class LayerAPI:
 
 
     @validate_call
-    def reverse_depth_with_http_info(
+    def _reverse_depth_with_http_info(
         self,
         segment_reverse_depth_request: SegmentReverseDepthRequest,
         _request_timeout: Union[
@@ -3422,7 +3422,7 @@ class LayerAPI:
 
 
     @validate_call
-    def reverse_depth_without_preload_content(
+    def _reverse_depth_without_preload_content(
         self,
         segment_reverse_depth_request: SegmentReverseDepthRequest,
         _request_timeout: Union[

@@ -103,7 +103,7 @@ class HelpersAPI:
 
 
     @validate_call
-    def call_with_http_info(
+    def _call_with_http_info(
         self,
         helper_request: HelperRequest,
         _request_timeout: Union[
@@ -169,7 +169,7 @@ class HelpersAPI:
 
 
     @validate_call
-    def call_without_preload_content(
+    def _call_without_preload_content(
         self,
         helper_request: HelperRequest,
         _request_timeout: Union[
@@ -373,7 +373,7 @@ class HelpersAPI:
 
 
     @validate_call
-    def commands_with_http_info(
+    def _commands_with_http_info(
         self,
         helper_request: HelperRequest,
         _request_timeout: Union[
@@ -439,7 +439,7 @@ class HelpersAPI:
 
 
     @validate_call
-    def commands_without_preload_content(
+    def _commands_without_preload_content(
         self,
         helper_request: HelperRequest,
         _request_timeout: Union[
@@ -643,7 +643,7 @@ class HelpersAPI:
 
 
     @validate_call
-    def keyframes_with_http_info(
+    def _keyframes_with_http_info(
         self,
         helper_request: HelperRequest,
         _request_timeout: Union[
@@ -709,7 +709,7 @@ class HelpersAPI:
 
 
     @validate_call
-    def keyframes_without_preload_content(
+    def _keyframes_without_preload_content(
         self,
         helper_request: HelperRequest,
         _request_timeout: Union[

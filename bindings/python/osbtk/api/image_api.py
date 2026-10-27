@@ -104,7 +104,7 @@ class ImageAPI:
 
 
     @validate_call
-    def info_with_http_info(
+    def _info_with_http_info(
         self,
         path_request: PathRequest,
         _request_timeout: Union[
@@ -170,7 +170,7 @@ class ImageAPI:
 
 
     @validate_call
-    def info_without_preload_content(
+    def _info_without_preload_content(
         self,
         path_request: PathRequest,
         _request_timeout: Union[
@@ -374,7 +374,7 @@ class ImageAPI:
 
 
     @validate_call
-    def process_with_http_info(
+    def _process_with_http_info(
         self,
         image_process_request: ImageProcessRequest,
         _request_timeout: Union[
@@ -440,7 +440,7 @@ class ImageAPI:
 
 
     @validate_call
-    def process_without_preload_content(
+    def _process_without_preload_content(
         self,
         image_process_request: ImageProcessRequest,
         _request_timeout: Union[

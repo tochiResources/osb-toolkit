@@ -115,7 +115,7 @@ class CurveAPI:
 
 
     @validate_call
-    def arc_with_http_info(
+    def _arc_with_http_info(
         self,
         arc_request: ArcRequest,
         _request_timeout: Union[
@@ -181,7 +181,7 @@ class CurveAPI:
 
 
     @validate_call
-    def arc_without_preload_content(
+    def _arc_without_preload_content(
         self,
         arc_request: ArcRequest,
         _request_timeout: Union[
@@ -385,7 +385,7 @@ class CurveAPI:
 
 
     @validate_call
-    def bounding_box_with_http_info(
+    def _bounding_box_with_http_info(
         self,
         curve_request: CurveRequest,
         _request_timeout: Union[
@@ -451,7 +451,7 @@ class CurveAPI:
 
 
     @validate_call
-    def bounding_box_without_preload_content(
+    def _bounding_box_without_preload_content(
         self,
         curve_request: CurveRequest,
         _request_timeout: Union[
@@ -655,7 +655,7 @@ class CurveAPI:
 
 
     @validate_call
-    def curvature_with_http_info(
+    def _curvature_with_http_info(
         self,
         curve_point_request: CurvePointRequest,
         _request_timeout: Union[
@@ -721,7 +721,7 @@ class CurveAPI:
 
 
     @validate_call
-    def curvature_without_preload_content(
+    def _curvature_without_preload_content(
         self,
         curve_point_request: CurvePointRequest,
         _request_timeout: Union[
@@ -925,7 +925,7 @@ class CurveAPI:
 
 
     @validate_call
-    def distance_to_with_http_info(
+    def _distance_to_with_http_info(
         self,
         curve_distance_request: CurveDistanceRequest,
         _request_timeout: Union[
@@ -991,7 +991,7 @@ class CurveAPI:
 
 
     @validate_call
-    def distance_to_without_preload_content(
+    def _distance_to_without_preload_content(
         self,
         curve_distance_request: CurveDistanceRequest,
         _request_timeout: Union[
@@ -1195,7 +1195,7 @@ class CurveAPI:
 
 
     @validate_call
-    def ellipse_with_http_info(
+    def _ellipse_with_http_info(
         self,
         ellipse_request: EllipseRequest,
         _request_timeout: Union[
@@ -1261,7 +1261,7 @@ class CurveAPI:
 
 
     @validate_call
-    def ellipse_without_preload_content(
+    def _ellipse_without_preload_content(
         self,
         ellipse_request: EllipseRequest,
         _request_timeout: Union[
@@ -1465,7 +1465,7 @@ class CurveAPI:
 
 
     @validate_call
-    def length_with_http_info(
+    def _length_with_http_info(
         self,
         curve_request: CurveRequest,
         _request_timeout: Union[
@@ -1531,7 +1531,7 @@ class CurveAPI:
 
 
     @validate_call
-    def length_without_preload_content(
+    def _length_without_preload_content(
         self,
         curve_request: CurveRequest,
         _request_timeout: Union[
@@ -1735,7 +1735,7 @@ class CurveAPI:
 
 
     @validate_call
-    def line_intersect_with_http_info(
+    def _line_intersect_with_http_info(
         self,
         line_intersect_request: LineIntersectRequest,
         _request_timeout: Union[
@@ -1801,7 +1801,7 @@ class CurveAPI:
 
 
     @validate_call
-    def line_intersect_without_preload_content(
+    def _line_intersect_without_preload_content(
         self,
         line_intersect_request: LineIntersectRequest,
         _request_timeout: Union[
@@ -2005,7 +2005,7 @@ class CurveAPI:
 
 
     @validate_call
-    def normal_with_http_info(
+    def _normal_with_http_info(
         self,
         curve_point_request: CurvePointRequest,
         _request_timeout: Union[
@@ -2071,7 +2071,7 @@ class CurveAPI:
 
 
     @validate_call
-    def normal_without_preload_content(
+    def _normal_without_preload_content(
         self,
         curve_point_request: CurvePointRequest,
         _request_timeout: Union[
@@ -2275,7 +2275,7 @@ class CurveAPI:
 
 
     @validate_call
-    def offset_with_http_info(
+    def _offset_with_http_info(
         self,
         curve_offset_request: CurveOffsetRequest,
         _request_timeout: Union[
@@ -2341,7 +2341,7 @@ class CurveAPI:
 
 
     @validate_call
-    def offset_without_preload_content(
+    def _offset_without_preload_content(
         self,
         curve_offset_request: CurveOffsetRequest,
         _request_timeout: Union[
@@ -2545,7 +2545,7 @@ class CurveAPI:
 
 
     @validate_call
-    def point_with_http_info(
+    def _point_with_http_info(
         self,
         curve_point_request: CurvePointRequest,
         _request_timeout: Union[
@@ -2611,7 +2611,7 @@ class CurveAPI:
 
 
     @validate_call
-    def point_without_preload_content(
+    def _point_without_preload_content(
         self,
         curve_point_request: CurvePointRequest,
         _request_timeout: Union[
@@ -2815,7 +2815,7 @@ class CurveAPI:
 
 
     @validate_call
-    def sample_with_http_info(
+    def _sample_with_http_info(
         self,
         curve_sample_request: CurveSampleRequest,
         _request_timeout: Union[
@@ -2881,7 +2881,7 @@ class CurveAPI:
 
 
     @validate_call
-    def sample_without_preload_content(
+    def _sample_without_preload_content(
         self,
         curve_sample_request: CurveSampleRequest,
         _request_timeout: Union[
@@ -3085,7 +3085,7 @@ class CurveAPI:
 
 
     @validate_call
-    def simplify_with_http_info(
+    def _simplify_with_http_info(
         self,
         simplify_request: SimplifyRequest,
         _request_timeout: Union[
@@ -3151,7 +3151,7 @@ class CurveAPI:
 
 
     @validate_call
-    def simplify_without_preload_content(
+    def _simplify_without_preload_content(
         self,
         simplify_request: SimplifyRequest,
         _request_timeout: Union[
@@ -3355,7 +3355,7 @@ class CurveAPI:
 
 
     @validate_call
-    def tangent_with_http_info(
+    def _tangent_with_http_info(
         self,
         curve_point_request: CurvePointRequest,
         _request_timeout: Union[
@@ -3421,7 +3421,7 @@ class CurveAPI:
 
 
     @validate_call
-    def tangent_without_preload_content(
+    def _tangent_without_preload_content(
         self,
         curve_point_request: CurvePointRequest,
         _request_timeout: Union[

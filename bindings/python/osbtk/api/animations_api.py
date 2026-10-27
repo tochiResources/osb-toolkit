@@ -104,7 +104,7 @@ class AnimationsAPI:
 
 
     @validate_call
-    def apply_easing_with_http_info(
+    def _apply_easing_with_http_info(
         self,
         apply_easing_request: ApplyEasingRequest,
         _request_timeout: Union[
@@ -170,7 +170,7 @@ class AnimationsAPI:
 
 
     @validate_call
-    def apply_easing_without_preload_content(
+    def _apply_easing_without_preload_content(
         self,
         apply_easing_request: ApplyEasingRequest,
         _request_timeout: Union[
@@ -374,7 +374,7 @@ class AnimationsAPI:
 
 
     @validate_call
-    def easing_value_with_http_info(
+    def _easing_value_with_http_info(
         self,
         easing_value_request: EasingValueRequest,
         _request_timeout: Union[
@@ -440,7 +440,7 @@ class AnimationsAPI:
 
 
     @validate_call
-    def easing_value_without_preload_content(
+    def _easing_value_without_preload_content(
         self,
         easing_value_request: EasingValueRequest,
         _request_timeout: Union[

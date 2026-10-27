@@ -103,7 +103,7 @@ class Storyboarding3dAPI:
 
 
     @validate_call
-    def bake3d_with_http_info(
+    def _bake3d_with_http_info(
         self,
         bake3d_request: Bake3dRequest,
         _request_timeout: Union[
@@ -169,7 +169,7 @@ class Storyboarding3dAPI:
 
 
     @validate_call
-    def bake3d_without_preload_content(
+    def _bake3d_without_preload_content(
         self,
         bake3d_request: Bake3dRequest,
         _request_timeout: Union[

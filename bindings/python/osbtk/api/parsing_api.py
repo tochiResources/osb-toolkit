@@ -104,7 +104,7 @@ class ParsingAPI:
 
 
     @validate_call
-    def parse_osb_with_http_info(
+    def _parse_osb_with_http_info(
         self,
         text_request: TextRequest,
         _request_timeout: Union[
@@ -170,7 +170,7 @@ class ParsingAPI:
 
 
     @validate_call
-    def parse_osb_without_preload_content(
+    def _parse_osb_without_preload_content(
         self,
         text_request: TextRequest,
         _request_timeout: Union[
@@ -374,7 +374,7 @@ class ParsingAPI:
 
 
     @validate_call
-    def parse_osu_with_http_info(
+    def _parse_osu_with_http_info(
         self,
         text_request: TextRequest,
         _request_timeout: Union[
@@ -440,7 +440,7 @@ class ParsingAPI:
 
 
     @validate_call
-    def parse_osu_without_preload_content(
+    def _parse_osu_without_preload_content(
         self,
         text_request: TextRequest,
         _request_timeout: Union[
