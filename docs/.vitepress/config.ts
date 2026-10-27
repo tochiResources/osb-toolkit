@@ -22,6 +22,7 @@ export default defineConfig({
             {
                 text: 'Reference',
                 items: [
+                    { text: 'SDK reference', link: '/reference/api/' },
                     { text: 'CLI', link: '/reference/cli' },
                     { text: 'Error codes', link: '/reference/errors' },
                     { text: 'Supported C# subset', link: '/reference/csharp-subset' },

@@ -1,0 +1,36 @@
+# SDK reference
+
+The typed SDK surface, generated from the native bridge contract. The
+non-runtime `Core` classes have no handles or storyboard state; the
+runtime classes are bound to a live runtime; the libraries are the
+stateless media/image/etc. helpers.
+
+## Runtime
+
+- [Audio](./runtime/Audio.md)
+- [Generator](./runtime/Generator.md)
+- [Helpers](./runtime/Helpers.md)
+- [Layer](./runtime/Layer.md)
+- [Sprite](./runtime/Sprite.md)
+- [Storyboarding3d](./runtime/Storyboarding3d.md)
+
+## Core
+
+- [Animations](./core/Animations.md)
+- [Common](./core/Common.md)
+- [Curve](./core/Curve.md)
+- [Origin](./core/Origin.md)
+- [Parsing](./core/Parsing.md)
+
+## Libraries
+
+- [Diagnostics](./libraries/Diagnostics.md)
+- [Image](./libraries/Image.md)
+- [Imagegen](./libraries/Imagegen.md)
+- [Media](./libraries/Media.md)
+- [Optimize](./libraries/Optimize.md)
+
+## Models
+
+The shared request/response models are documented in the
+[models index](./models/index.md).
