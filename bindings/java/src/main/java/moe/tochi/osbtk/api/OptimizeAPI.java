@@ -156,7 +156,7 @@ public class OptimizeAPI {
      </table>
      */
     public OptimizeResult optimizeOsb(@javax.annotation.Nonnull OptimizeRequest optimizeRequest) throws ApiException {
-        ApiResponse<OptimizeResult> localVarResp = optimizeOsbWithHttpInfo(optimizeRequest);
+        ApiResponse<OptimizeResult> localVarResp = _optimizeOsbWithHttpInfo(optimizeRequest);
         return localVarResp.getData();
     }
 
@@ -173,7 +173,7 @@ public class OptimizeAPI {
         <tr><td> 200 </td><td> The optimized &#x60;.osb&#x60; text and stats </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OptimizeResult> optimizeOsbWithHttpInfo(@javax.annotation.Nonnull OptimizeRequest optimizeRequest) throws ApiException {
+    protected ApiResponse<OptimizeResult> _optimizeOsbWithHttpInfo(@javax.annotation.Nonnull OptimizeRequest optimizeRequest) throws ApiException {
         okhttp3.Call localVarCall = optimizeOsbValidateBeforeCall(optimizeRequest, null);
         Type localVarReturnType = new TypeToken<OptimizeResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

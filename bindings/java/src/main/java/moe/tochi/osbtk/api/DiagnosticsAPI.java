@@ -156,7 +156,7 @@ public class DiagnosticsAPI {
      </table>
      */
     public DiagnosticReport diagnoseOsb(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
-        ApiResponse<DiagnosticReport> localVarResp = diagnoseOsbWithHttpInfo(textRequest);
+        ApiResponse<DiagnosticReport> localVarResp = _diagnoseOsbWithHttpInfo(textRequest);
         return localVarResp.getData();
     }
 
@@ -173,7 +173,7 @@ public class DiagnosticsAPI {
         <tr><td> 200 </td><td> Diagnostics for an &#x60;.osb&#x60; storyboard </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<DiagnosticReport> diagnoseOsbWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
+    protected ApiResponse<DiagnosticReport> _diagnoseOsbWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
         okhttp3.Call localVarCall = diagnoseOsbValidateBeforeCall(textRequest, null);
         Type localVarReturnType = new TypeToken<DiagnosticReport>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -283,7 +283,7 @@ public class DiagnosticsAPI {
      </table>
      */
     public DiagnosticReport diagnoseOsu(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
-        ApiResponse<DiagnosticReport> localVarResp = diagnoseOsuWithHttpInfo(textRequest);
+        ApiResponse<DiagnosticReport> localVarResp = _diagnoseOsuWithHttpInfo(textRequest);
         return localVarResp.getData();
     }
 
@@ -300,7 +300,7 @@ public class DiagnosticsAPI {
         <tr><td> 200 </td><td> Diagnostics for an &#x60;.osu&#x60; beatmap </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<DiagnosticReport> diagnoseOsuWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
+    protected ApiResponse<DiagnosticReport> _diagnoseOsuWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
         okhttp3.Call localVarCall = diagnoseOsuValidateBeforeCall(textRequest, null);
         Type localVarReturnType = new TypeToken<DiagnosticReport>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

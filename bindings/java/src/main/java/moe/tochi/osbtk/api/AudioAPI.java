@@ -150,7 +150,7 @@ public class AudioAPI {
      </table>
      */
     public AudioDurationResult audioDuration() throws ApiException {
-        ApiResponse<AudioDurationResult> localVarResp = audioDurationWithHttpInfo();
+        ApiResponse<AudioDurationResult> localVarResp = _audioDurationWithHttpInfo();
         return localVarResp.getData();
     }
 
@@ -166,7 +166,7 @@ public class AudioAPI {
         <tr><td> 200 </td><td> The loaded audio duration </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<AudioDurationResult> audioDurationWithHttpInfo() throws ApiException {
+    protected ApiResponse<AudioDurationResult> _audioDurationWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = audioDurationValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<AudioDurationResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -275,7 +275,7 @@ public class AudioAPI {
      </table>
      */
     public FftResult fft(@javax.annotation.Nonnull FftRequest fftRequest) throws ApiException {
-        ApiResponse<FftResult> localVarResp = fftWithHttpInfo(fftRequest);
+        ApiResponse<FftResult> localVarResp = _fftWithHttpInfo(fftRequest);
         return localVarResp.getData();
     }
 
@@ -292,7 +292,7 @@ public class AudioAPI {
         <tr><td> 200 </td><td> The FFT magnitudes </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<FftResult> fftWithHttpInfo(@javax.annotation.Nonnull FftRequest fftRequest) throws ApiException {
+    protected ApiResponse<FftResult> _fftWithHttpInfo(@javax.annotation.Nonnull FftRequest fftRequest) throws ApiException {
         okhttp3.Call localVarCall = fftValidateBeforeCall(fftRequest, null);
         Type localVarReturnType = new TypeToken<FftResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -402,7 +402,7 @@ public class AudioAPI {
      </table>
      */
     public FftResult getFft(@javax.annotation.Nonnull GetFftRequest getFftRequest) throws ApiException {
-        ApiResponse<FftResult> localVarResp = getFftWithHttpInfo(getFftRequest);
+        ApiResponse<FftResult> localVarResp = _getFftWithHttpInfo(getFftRequest);
         return localVarResp.getData();
     }
 
@@ -419,7 +419,7 @@ public class AudioAPI {
         <tr><td> 200 </td><td> The FFT magnitudes </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<FftResult> getFftWithHttpInfo(@javax.annotation.Nonnull GetFftRequest getFftRequest) throws ApiException {
+    protected ApiResponse<FftResult> _getFftWithHttpInfo(@javax.annotation.Nonnull GetFftRequest getFftRequest) throws ApiException {
         okhttp3.Call localVarCall = getFftValidateBeforeCall(getFftRequest, null);
         Type localVarReturnType = new TypeToken<FftResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

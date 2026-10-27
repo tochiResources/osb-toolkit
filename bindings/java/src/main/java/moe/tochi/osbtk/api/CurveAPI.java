@@ -168,7 +168,7 @@ public class CurveAPI {
      </table>
      */
     public PointListResult arc(@javax.annotation.Nonnull ArcRequest arcRequest) throws ApiException {
-        ApiResponse<PointListResult> localVarResp = arcWithHttpInfo(arcRequest);
+        ApiResponse<PointListResult> localVarResp = _arcWithHttpInfo(arcRequest);
         return localVarResp.getData();
     }
 
@@ -185,7 +185,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> Points along a circular arc </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PointListResult> arcWithHttpInfo(@javax.annotation.Nonnull ArcRequest arcRequest) throws ApiException {
+    protected ApiResponse<PointListResult> _arcWithHttpInfo(@javax.annotation.Nonnull ArcRequest arcRequest) throws ApiException {
         okhttp3.Call localVarCall = arcValidateBeforeCall(arcRequest, null);
         Type localVarReturnType = new TypeToken<PointListResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -295,7 +295,7 @@ public class CurveAPI {
      </table>
      */
     public Box2 boundingBox(@javax.annotation.Nonnull CurveRequest curveRequest) throws ApiException {
-        ApiResponse<Box2> localVarResp = boundingBoxWithHttpInfo(curveRequest);
+        ApiResponse<Box2> localVarResp = _boundingBoxWithHttpInfo(curveRequest);
         return localVarResp.getData();
     }
 
@@ -312,7 +312,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> The curve&#39;s axis-aligned bounding box </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Box2> boundingBoxWithHttpInfo(@javax.annotation.Nonnull CurveRequest curveRequest) throws ApiException {
+    protected ApiResponse<Box2> _boundingBoxWithHttpInfo(@javax.annotation.Nonnull CurveRequest curveRequest) throws ApiException {
         okhttp3.Call localVarCall = boundingBoxValidateBeforeCall(curveRequest, null);
         Type localVarReturnType = new TypeToken<Box2>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -422,7 +422,7 @@ public class CurveAPI {
      </table>
      */
     public ScalarResult curvature(@javax.annotation.Nonnull CurvePointRequest curvePointRequest) throws ApiException {
-        ApiResponse<ScalarResult> localVarResp = curvatureWithHttpInfo(curvePointRequest);
+        ApiResponse<ScalarResult> localVarResp = _curvatureWithHttpInfo(curvePointRequest);
         return localVarResp.getData();
     }
 
@@ -439,7 +439,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> The curvature at &#x60;t&#x60; </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ScalarResult> curvatureWithHttpInfo(@javax.annotation.Nonnull CurvePointRequest curvePointRequest) throws ApiException {
+    protected ApiResponse<ScalarResult> _curvatureWithHttpInfo(@javax.annotation.Nonnull CurvePointRequest curvePointRequest) throws ApiException {
         okhttp3.Call localVarCall = curvatureValidateBeforeCall(curvePointRequest, null);
         Type localVarReturnType = new TypeToken<ScalarResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -549,7 +549,7 @@ public class CurveAPI {
      </table>
      */
     public ScalarResult distanceTo(@javax.annotation.Nonnull CurveDistanceRequest curveDistanceRequest) throws ApiException {
-        ApiResponse<ScalarResult> localVarResp = distanceToWithHttpInfo(curveDistanceRequest);
+        ApiResponse<ScalarResult> localVarResp = _distanceToWithHttpInfo(curveDistanceRequest);
         return localVarResp.getData();
     }
 
@@ -566,7 +566,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> The distance from a point to the curve </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ScalarResult> distanceToWithHttpInfo(@javax.annotation.Nonnull CurveDistanceRequest curveDistanceRequest) throws ApiException {
+    protected ApiResponse<ScalarResult> _distanceToWithHttpInfo(@javax.annotation.Nonnull CurveDistanceRequest curveDistanceRequest) throws ApiException {
         okhttp3.Call localVarCall = distanceToValidateBeforeCall(curveDistanceRequest, null);
         Type localVarReturnType = new TypeToken<ScalarResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -676,7 +676,7 @@ public class CurveAPI {
      </table>
      */
     public PointListResult ellipse(@javax.annotation.Nonnull EllipseRequest ellipseRequest) throws ApiException {
-        ApiResponse<PointListResult> localVarResp = ellipseWithHttpInfo(ellipseRequest);
+        ApiResponse<PointListResult> localVarResp = _ellipseWithHttpInfo(ellipseRequest);
         return localVarResp.getData();
     }
 
@@ -693,7 +693,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> Points around an ellipse </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PointListResult> ellipseWithHttpInfo(@javax.annotation.Nonnull EllipseRequest ellipseRequest) throws ApiException {
+    protected ApiResponse<PointListResult> _ellipseWithHttpInfo(@javax.annotation.Nonnull EllipseRequest ellipseRequest) throws ApiException {
         okhttp3.Call localVarCall = ellipseValidateBeforeCall(ellipseRequest, null);
         Type localVarReturnType = new TypeToken<PointListResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -803,7 +803,7 @@ public class CurveAPI {
      </table>
      */
     public ScalarResult length(@javax.annotation.Nonnull CurveRequest curveRequest) throws ApiException {
-        ApiResponse<ScalarResult> localVarResp = lengthWithHttpInfo(curveRequest);
+        ApiResponse<ScalarResult> localVarResp = _lengthWithHttpInfo(curveRequest);
         return localVarResp.getData();
     }
 
@@ -820,7 +820,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> The curve&#39;s arc length </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ScalarResult> lengthWithHttpInfo(@javax.annotation.Nonnull CurveRequest curveRequest) throws ApiException {
+    protected ApiResponse<ScalarResult> _lengthWithHttpInfo(@javax.annotation.Nonnull CurveRequest curveRequest) throws ApiException {
         okhttp3.Call localVarCall = lengthValidateBeforeCall(curveRequest, null);
         Type localVarReturnType = new TypeToken<ScalarResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -930,7 +930,7 @@ public class CurveAPI {
      </table>
      */
     public OptionalPointResult lineIntersect(@javax.annotation.Nonnull LineIntersectRequest lineIntersectRequest) throws ApiException {
-        ApiResponse<OptionalPointResult> localVarResp = lineIntersectWithHttpInfo(lineIntersectRequest);
+        ApiResponse<OptionalPointResult> localVarResp = _lineIntersectWithHttpInfo(lineIntersectRequest);
         return localVarResp.getData();
     }
 
@@ -947,7 +947,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> The intersection point, or null </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OptionalPointResult> lineIntersectWithHttpInfo(@javax.annotation.Nonnull LineIntersectRequest lineIntersectRequest) throws ApiException {
+    protected ApiResponse<OptionalPointResult> _lineIntersectWithHttpInfo(@javax.annotation.Nonnull LineIntersectRequest lineIntersectRequest) throws ApiException {
         okhttp3.Call localVarCall = lineIntersectValidateBeforeCall(lineIntersectRequest, null);
         Type localVarReturnType = new TypeToken<OptionalPointResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1057,7 +1057,7 @@ public class CurveAPI {
      </table>
      */
     public Vector2 normal(@javax.annotation.Nonnull CurvePointRequest curvePointRequest) throws ApiException {
-        ApiResponse<Vector2> localVarResp = normalWithHttpInfo(curvePointRequest);
+        ApiResponse<Vector2> localVarResp = _normalWithHttpInfo(curvePointRequest);
         return localVarResp.getData();
     }
 
@@ -1074,7 +1074,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> The unit normal at &#x60;t&#x60; </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Vector2> normalWithHttpInfo(@javax.annotation.Nonnull CurvePointRequest curvePointRequest) throws ApiException {
+    protected ApiResponse<Vector2> _normalWithHttpInfo(@javax.annotation.Nonnull CurvePointRequest curvePointRequest) throws ApiException {
         okhttp3.Call localVarCall = normalValidateBeforeCall(curvePointRequest, null);
         Type localVarReturnType = new TypeToken<Vector2>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1184,7 +1184,7 @@ public class CurveAPI {
      </table>
      */
     public PointListResult offset(@javax.annotation.Nonnull CurveOffsetRequest curveOffsetRequest) throws ApiException {
-        ApiResponse<PointListResult> localVarResp = offsetWithHttpInfo(curveOffsetRequest);
+        ApiResponse<PointListResult> localVarResp = _offsetWithHttpInfo(curveOffsetRequest);
         return localVarResp.getData();
     }
 
@@ -1201,7 +1201,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> The polyline offset along the curve&#39;s normal </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PointListResult> offsetWithHttpInfo(@javax.annotation.Nonnull CurveOffsetRequest curveOffsetRequest) throws ApiException {
+    protected ApiResponse<PointListResult> _offsetWithHttpInfo(@javax.annotation.Nonnull CurveOffsetRequest curveOffsetRequest) throws ApiException {
         okhttp3.Call localVarCall = offsetValidateBeforeCall(curveOffsetRequest, null);
         Type localVarReturnType = new TypeToken<PointListResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1311,7 +1311,7 @@ public class CurveAPI {
      </table>
      */
     public Vector2 point(@javax.annotation.Nonnull CurvePointRequest curvePointRequest) throws ApiException {
-        ApiResponse<Vector2> localVarResp = pointWithHttpInfo(curvePointRequest);
+        ApiResponse<Vector2> localVarResp = _pointWithHttpInfo(curvePointRequest);
         return localVarResp.getData();
     }
 
@@ -1328,7 +1328,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> The point at &#x60;t&#x60;, parametrically or by arc length </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Vector2> pointWithHttpInfo(@javax.annotation.Nonnull CurvePointRequest curvePointRequest) throws ApiException {
+    protected ApiResponse<Vector2> _pointWithHttpInfo(@javax.annotation.Nonnull CurvePointRequest curvePointRequest) throws ApiException {
         okhttp3.Call localVarCall = pointValidateBeforeCall(curvePointRequest, null);
         Type localVarReturnType = new TypeToken<Vector2>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1438,7 +1438,7 @@ public class CurveAPI {
      </table>
      */
     public PointListResult sample(@javax.annotation.Nonnull CurveSampleRequest curveSampleRequest) throws ApiException {
-        ApiResponse<PointListResult> localVarResp = sampleWithHttpInfo(curveSampleRequest);
+        ApiResponse<PointListResult> localVarResp = _sampleWithHttpInfo(curveSampleRequest);
         return localVarResp.getData();
     }
 
@@ -1455,7 +1455,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> &#x60;count&#x60; points along the curve </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PointListResult> sampleWithHttpInfo(@javax.annotation.Nonnull CurveSampleRequest curveSampleRequest) throws ApiException {
+    protected ApiResponse<PointListResult> _sampleWithHttpInfo(@javax.annotation.Nonnull CurveSampleRequest curveSampleRequest) throws ApiException {
         okhttp3.Call localVarCall = sampleValidateBeforeCall(curveSampleRequest, null);
         Type localVarReturnType = new TypeToken<PointListResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1565,7 +1565,7 @@ public class CurveAPI {
      </table>
      */
     public PointListResult simplify(@javax.annotation.Nonnull SimplifyRequest simplifyRequest) throws ApiException {
-        ApiResponse<PointListResult> localVarResp = simplifyWithHttpInfo(simplifyRequest);
+        ApiResponse<PointListResult> localVarResp = _simplifyWithHttpInfo(simplifyRequest);
         return localVarResp.getData();
     }
 
@@ -1582,7 +1582,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> The simplified polyline </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PointListResult> simplifyWithHttpInfo(@javax.annotation.Nonnull SimplifyRequest simplifyRequest) throws ApiException {
+    protected ApiResponse<PointListResult> _simplifyWithHttpInfo(@javax.annotation.Nonnull SimplifyRequest simplifyRequest) throws ApiException {
         okhttp3.Call localVarCall = simplifyValidateBeforeCall(simplifyRequest, null);
         Type localVarReturnType = new TypeToken<PointListResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1692,7 +1692,7 @@ public class CurveAPI {
      </table>
      */
     public Vector2 tangent(@javax.annotation.Nonnull CurvePointRequest curvePointRequest) throws ApiException {
-        ApiResponse<Vector2> localVarResp = tangentWithHttpInfo(curvePointRequest);
+        ApiResponse<Vector2> localVarResp = _tangentWithHttpInfo(curvePointRequest);
         return localVarResp.getData();
     }
 
@@ -1709,7 +1709,7 @@ public class CurveAPI {
         <tr><td> 200 </td><td> The unit tangent at &#x60;t&#x60; </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Vector2> tangentWithHttpInfo(@javax.annotation.Nonnull CurvePointRequest curvePointRequest) throws ApiException {
+    protected ApiResponse<Vector2> _tangentWithHttpInfo(@javax.annotation.Nonnull CurvePointRequest curvePointRequest) throws ApiException {
         okhttp3.Call localVarCall = tangentValidateBeforeCall(curvePointRequest, null);
         Type localVarReturnType = new TypeToken<Vector2>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

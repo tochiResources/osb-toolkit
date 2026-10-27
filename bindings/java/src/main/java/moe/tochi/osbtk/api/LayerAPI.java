@@ -169,7 +169,7 @@ public class LayerAPI {
      </table>
      */
     public OkResult addIndex(@javax.annotation.Nonnull SegmentAddIndexRequest segmentAddIndexRequest) throws ApiException {
-        ApiResponse<OkResult> localVarResp = addIndexWithHttpInfo(segmentAddIndexRequest);
+        ApiResponse<OkResult> localVarResp = _addIndexWithHttpInfo(segmentAddIndexRequest);
         return localVarResp.getData();
     }
 
@@ -186,7 +186,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> Acknowledged </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OkResult> addIndexWithHttpInfo(@javax.annotation.Nonnull SegmentAddIndexRequest segmentAddIndexRequest) throws ApiException {
+    protected ApiResponse<OkResult> _addIndexWithHttpInfo(@javax.annotation.Nonnull SegmentAddIndexRequest segmentAddIndexRequest) throws ApiException {
         okhttp3.Call localVarCall = addIndexValidateBeforeCall(segmentAddIndexRequest, null);
         Type localVarReturnType = new TypeToken<OkResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -296,7 +296,7 @@ public class LayerAPI {
      </table>
      */
     public OkResult changePosition(@javax.annotation.Nonnull SegmentChangePositionRequest segmentChangePositionRequest) throws ApiException {
-        ApiResponse<OkResult> localVarResp = changePositionWithHttpInfo(segmentChangePositionRequest);
+        ApiResponse<OkResult> localVarResp = _changePositionWithHttpInfo(segmentChangePositionRequest);
         return localVarResp.getData();
     }
 
@@ -313,7 +313,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> Acknowledged </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OkResult> changePositionWithHttpInfo(@javax.annotation.Nonnull SegmentChangePositionRequest segmentChangePositionRequest) throws ApiException {
+    protected ApiResponse<OkResult> _changePositionWithHttpInfo(@javax.annotation.Nonnull SegmentChangePositionRequest segmentChangePositionRequest) throws ApiException {
         okhttp3.Call localVarCall = changePositionValidateBeforeCall(segmentChangePositionRequest, null);
         Type localVarReturnType = new TypeToken<OkResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -423,7 +423,7 @@ public class LayerAPI {
      </table>
      */
     public SegmentCleanResult clean(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
-        ApiResponse<SegmentCleanResult> localVarResp = cleanWithHttpInfo(segmentRequest);
+        ApiResponse<SegmentCleanResult> localVarResp = _cleanWithHttpInfo(segmentRequest);
         return localVarResp.getData();
     }
 
@@ -440,7 +440,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> The number of sprites removed </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SegmentCleanResult> cleanWithHttpInfo(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
+    protected ApiResponse<SegmentCleanResult> _cleanWithHttpInfo(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
         okhttp3.Call localVarCall = cleanValidateBeforeCall(segmentRequest, null);
         Type localVarReturnType = new TypeToken<SegmentCleanResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -550,7 +550,7 @@ public class LayerAPI {
      </table>
      */
     public Handle createAnimation(@javax.annotation.Nonnull CreateAnimationRequest createAnimationRequest) throws ApiException {
-        ApiResponse<Handle> localVarResp = createAnimationWithHttpInfo(createAnimationRequest);
+        ApiResponse<Handle> localVarResp = _createAnimationWithHttpInfo(createAnimationRequest);
         return localVarResp.getData();
     }
 
@@ -567,7 +567,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> The new animation handle </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Handle> createAnimationWithHttpInfo(@javax.annotation.Nonnull CreateAnimationRequest createAnimationRequest) throws ApiException {
+    protected ApiResponse<Handle> _createAnimationWithHttpInfo(@javax.annotation.Nonnull CreateAnimationRequest createAnimationRequest) throws ApiException {
         okhttp3.Call localVarCall = createAnimationValidateBeforeCall(createAnimationRequest, null);
         Type localVarReturnType = new TypeToken<Handle>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -677,7 +677,7 @@ public class LayerAPI {
      </table>
      */
     public OkResult createSample(@javax.annotation.Nonnull CreateSampleRequest createSampleRequest) throws ApiException {
-        ApiResponse<OkResult> localVarResp = createSampleWithHttpInfo(createSampleRequest);
+        ApiResponse<OkResult> localVarResp = _createSampleWithHttpInfo(createSampleRequest);
         return localVarResp.getData();
     }
 
@@ -694,7 +694,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> Acknowledged </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OkResult> createSampleWithHttpInfo(@javax.annotation.Nonnull CreateSampleRequest createSampleRequest) throws ApiException {
+    protected ApiResponse<OkResult> _createSampleWithHttpInfo(@javax.annotation.Nonnull CreateSampleRequest createSampleRequest) throws ApiException {
         okhttp3.Call localVarCall = createSampleValidateBeforeCall(createSampleRequest, null);
         Type localVarReturnType = new TypeToken<OkResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -804,7 +804,7 @@ public class LayerAPI {
      </table>
      */
     public LayerHandle createSegment(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
-        ApiResponse<LayerHandle> localVarResp = createSegmentWithHttpInfo(segmentRequest);
+        ApiResponse<LayerHandle> localVarResp = _createSegmentWithHttpInfo(segmentRequest);
         return localVarResp.getData();
     }
 
@@ -821,7 +821,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> The new segment handle </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<LayerHandle> createSegmentWithHttpInfo(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
+    protected ApiResponse<LayerHandle> _createSegmentWithHttpInfo(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
         okhttp3.Call localVarCall = createSegmentValidateBeforeCall(segmentRequest, null);
         Type localVarReturnType = new TypeToken<LayerHandle>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -931,7 +931,7 @@ public class LayerAPI {
      </table>
      */
     public Handle createSprite(@javax.annotation.Nonnull CreateSpriteRequest createSpriteRequest) throws ApiException {
-        ApiResponse<Handle> localVarResp = createSpriteWithHttpInfo(createSpriteRequest);
+        ApiResponse<Handle> localVarResp = _createSpriteWithHttpInfo(createSpriteRequest);
         return localVarResp.getData();
     }
 
@@ -948,7 +948,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> The new sprite handle </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Handle> createSpriteWithHttpInfo(@javax.annotation.Nonnull CreateSpriteRequest createSpriteRequest) throws ApiException {
+    protected ApiResponse<Handle> _createSpriteWithHttpInfo(@javax.annotation.Nonnull CreateSpriteRequest createSpriteRequest) throws ApiException {
         okhttp3.Call localVarCall = createSpriteValidateBeforeCall(createSpriteRequest, null);
         Type localVarReturnType = new TypeToken<Handle>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1058,7 +1058,7 @@ public class LayerAPI {
      </table>
      */
     public SegmentDiscardResult discard(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
-        ApiResponse<SegmentDiscardResult> localVarResp = discardWithHttpInfo(segmentRequest);
+        ApiResponse<SegmentDiscardResult> localVarResp = _discardWithHttpInfo(segmentRequest);
         return localVarResp.getData();
     }
 
@@ -1075,7 +1075,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> The remaining top-level layer count </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SegmentDiscardResult> discardWithHttpInfo(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
+    protected ApiResponse<SegmentDiscardResult> _discardWithHttpInfo(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
         okhttp3.Call localVarCall = discardValidateBeforeCall(segmentRequest, null);
         Type localVarReturnType = new TypeToken<SegmentDiscardResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1185,7 +1185,7 @@ public class LayerAPI {
      </table>
      */
     public BoolResult discardSprite(@javax.annotation.Nonnull HandleRequest handleRequest) throws ApiException {
-        ApiResponse<BoolResult> localVarResp = discardSpriteWithHttpInfo(handleRequest);
+        ApiResponse<BoolResult> localVarResp = _discardSpriteWithHttpInfo(handleRequest);
         return localVarResp.getData();
     }
 
@@ -1202,7 +1202,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> Whether the sprite was discarded </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<BoolResult> discardSpriteWithHttpInfo(@javax.annotation.Nonnull HandleRequest handleRequest) throws ApiException {
+    protected ApiResponse<BoolResult> _discardSpriteWithHttpInfo(@javax.annotation.Nonnull HandleRequest handleRequest) throws ApiException {
         okhttp3.Call localVarCall = discardSpriteValidateBeforeCall(handleRequest, null);
         Type localVarReturnType = new TypeToken<BoolResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1312,7 +1312,7 @@ public class LayerAPI {
      </table>
      */
     public SegmentIndexesResult indexes(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
-        ApiResponse<SegmentIndexesResult> localVarResp = indexesWithHttpInfo(segmentRequest);
+        ApiResponse<SegmentIndexesResult> localVarResp = _indexesWithHttpInfo(segmentRequest);
         return localVarResp.getData();
     }
 
@@ -1329,7 +1329,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> The segment&#39;s indexes and bounds </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SegmentIndexesResult> indexesWithHttpInfo(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
+    protected ApiResponse<SegmentIndexesResult> _indexesWithHttpInfo(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
         okhttp3.Call localVarCall = indexesValidateBeforeCall(segmentRequest, null);
         Type localVarReturnType = new TypeToken<SegmentIndexesResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1439,7 +1439,7 @@ public class LayerAPI {
      </table>
      */
     public OkResult moveToBottom(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
-        ApiResponse<OkResult> localVarResp = moveToBottomWithHttpInfo(segmentRequest);
+        ApiResponse<OkResult> localVarResp = _moveToBottomWithHttpInfo(segmentRequest);
         return localVarResp.getData();
     }
 
@@ -1456,7 +1456,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> Acknowledged </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OkResult> moveToBottomWithHttpInfo(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
+    protected ApiResponse<OkResult> _moveToBottomWithHttpInfo(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
         okhttp3.Call localVarCall = moveToBottomValidateBeforeCall(segmentRequest, null);
         Type localVarReturnType = new TypeToken<OkResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1566,7 +1566,7 @@ public class LayerAPI {
      </table>
      */
     public OkResult moveToTop(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
-        ApiResponse<OkResult> localVarResp = moveToTopWithHttpInfo(segmentRequest);
+        ApiResponse<OkResult> localVarResp = _moveToTopWithHttpInfo(segmentRequest);
         return localVarResp.getData();
     }
 
@@ -1583,7 +1583,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> Acknowledged </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OkResult> moveToTopWithHttpInfo(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
+    protected ApiResponse<OkResult> _moveToTopWithHttpInfo(@javax.annotation.Nonnull SegmentRequest segmentRequest) throws ApiException {
         okhttp3.Call localVarCall = moveToTopValidateBeforeCall(segmentRequest, null);
         Type localVarReturnType = new TypeToken<OkResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1693,7 +1693,7 @@ public class LayerAPI {
      </table>
      */
     public OkResult reverseDepth(@javax.annotation.Nonnull SegmentReverseDepthRequest segmentReverseDepthRequest) throws ApiException {
-        ApiResponse<OkResult> localVarResp = reverseDepthWithHttpInfo(segmentReverseDepthRequest);
+        ApiResponse<OkResult> localVarResp = _reverseDepthWithHttpInfo(segmentReverseDepthRequest);
         return localVarResp.getData();
     }
 
@@ -1710,7 +1710,7 @@ public class LayerAPI {
         <tr><td> 200 </td><td> Acknowledged </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OkResult> reverseDepthWithHttpInfo(@javax.annotation.Nonnull SegmentReverseDepthRequest segmentReverseDepthRequest) throws ApiException {
+    protected ApiResponse<OkResult> _reverseDepthWithHttpInfo(@javax.annotation.Nonnull SegmentReverseDepthRequest segmentReverseDepthRequest) throws ApiException {
         okhttp3.Call localVarCall = reverseDepthValidateBeforeCall(segmentReverseDepthRequest, null);
         Type localVarReturnType = new TypeToken<OkResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

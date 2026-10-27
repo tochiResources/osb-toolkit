@@ -147,7 +147,7 @@ public class CommonAPI {
      </table>
      */
     public VersionResult version() throws ApiException {
-        ApiResponse<VersionResult> localVarResp = versionWithHttpInfo();
+        ApiResponse<VersionResult> localVarResp = _versionWithHttpInfo();
         return localVarResp.getData();
     }
 
@@ -163,7 +163,7 @@ public class CommonAPI {
         <tr><td> 200 </td><td> The runtime version </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<VersionResult> versionWithHttpInfo() throws ApiException {
+    protected ApiResponse<VersionResult> _versionWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = versionValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<VersionResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

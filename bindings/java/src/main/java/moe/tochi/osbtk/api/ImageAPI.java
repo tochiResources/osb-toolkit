@@ -157,7 +157,7 @@ public class ImageAPI {
      </table>
      */
     public ImageInfo info(@javax.annotation.Nonnull PathRequest pathRequest) throws ApiException {
-        ApiResponse<ImageInfo> localVarResp = infoWithHttpInfo(pathRequest);
+        ApiResponse<ImageInfo> localVarResp = _infoWithHttpInfo(pathRequest);
         return localVarResp.getData();
     }
 
@@ -174,7 +174,7 @@ public class ImageAPI {
         <tr><td> 200 </td><td> The image&#39;s metadata </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ImageInfo> infoWithHttpInfo(@javax.annotation.Nonnull PathRequest pathRequest) throws ApiException {
+    protected ApiResponse<ImageInfo> _infoWithHttpInfo(@javax.annotation.Nonnull PathRequest pathRequest) throws ApiException {
         okhttp3.Call localVarCall = infoValidateBeforeCall(pathRequest, null);
         Type localVarReturnType = new TypeToken<ImageInfo>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -284,7 +284,7 @@ public class ImageAPI {
      </table>
      */
     public ImageInfo process(@javax.annotation.Nonnull ImageProcessRequest imageProcessRequest) throws ApiException {
-        ApiResponse<ImageInfo> localVarResp = processWithHttpInfo(imageProcessRequest);
+        ApiResponse<ImageInfo> localVarResp = _processWithHttpInfo(imageProcessRequest);
         return localVarResp.getData();
     }
 
@@ -301,7 +301,7 @@ public class ImageAPI {
         <tr><td> 200 </td><td> The processed image&#39;s metadata </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ImageInfo> processWithHttpInfo(@javax.annotation.Nonnull ImageProcessRequest imageProcessRequest) throws ApiException {
+    protected ApiResponse<ImageInfo> _processWithHttpInfo(@javax.annotation.Nonnull ImageProcessRequest imageProcessRequest) throws ApiException {
         okhttp3.Call localVarCall = processValidateBeforeCall(imageProcessRequest, null);
         Type localVarReturnType = new TypeToken<ImageInfo>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

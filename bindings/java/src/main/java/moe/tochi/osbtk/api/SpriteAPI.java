@@ -162,7 +162,7 @@ public class SpriteAPI {
      </table>
      */
     public OkResult command(@javax.annotation.Nonnull CommandRequest commandRequest) throws ApiException {
-        ApiResponse<OkResult> localVarResp = commandWithHttpInfo(commandRequest);
+        ApiResponse<OkResult> localVarResp = _commandWithHttpInfo(commandRequest);
         return localVarResp.getData();
     }
 
@@ -179,7 +179,7 @@ public class SpriteAPI {
         <tr><td> 200 </td><td> Acknowledged </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OkResult> commandWithHttpInfo(@javax.annotation.Nonnull CommandRequest commandRequest) throws ApiException {
+    protected ApiResponse<OkResult> _commandWithHttpInfo(@javax.annotation.Nonnull CommandRequest commandRequest) throws ApiException {
         okhttp3.Call localVarCall = commandValidateBeforeCall(commandRequest, null);
         Type localVarReturnType = new TypeToken<OkResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -289,7 +289,7 @@ public class SpriteAPI {
      </table>
      */
     public OkResult endGroup(@javax.annotation.Nonnull HandleRequest handleRequest) throws ApiException {
-        ApiResponse<OkResult> localVarResp = endGroupWithHttpInfo(handleRequest);
+        ApiResponse<OkResult> localVarResp = _endGroupWithHttpInfo(handleRequest);
         return localVarResp.getData();
     }
 
@@ -306,7 +306,7 @@ public class SpriteAPI {
         <tr><td> 200 </td><td> Acknowledged </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OkResult> endGroupWithHttpInfo(@javax.annotation.Nonnull HandleRequest handleRequest) throws ApiException {
+    protected ApiResponse<OkResult> _endGroupWithHttpInfo(@javax.annotation.Nonnull HandleRequest handleRequest) throws ApiException {
         okhttp3.Call localVarCall = endGroupValidateBeforeCall(handleRequest, null);
         Type localVarReturnType = new TypeToken<OkResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -416,7 +416,7 @@ public class SpriteAPI {
      </table>
      */
     public SpriteInfo info(@javax.annotation.Nonnull HandleRequest handleRequest) throws ApiException {
-        ApiResponse<SpriteInfo> localVarResp = infoWithHttpInfo(handleRequest);
+        ApiResponse<SpriteInfo> localVarResp = _infoWithHttpInfo(handleRequest);
         return localVarResp.getData();
     }
 
@@ -433,7 +433,7 @@ public class SpriteAPI {
         <tr><td> 200 </td><td> The sprite&#39;s initial state </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SpriteInfo> infoWithHttpInfo(@javax.annotation.Nonnull HandleRequest handleRequest) throws ApiException {
+    protected ApiResponse<SpriteInfo> _infoWithHttpInfo(@javax.annotation.Nonnull HandleRequest handleRequest) throws ApiException {
         okhttp3.Call localVarCall = infoValidateBeforeCall(handleRequest, null);
         Type localVarReturnType = new TypeToken<SpriteInfo>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -543,7 +543,7 @@ public class SpriteAPI {
      </table>
      */
     public OkResult startLoopGroup(@javax.annotation.Nonnull StartLoopGroupRequest startLoopGroupRequest) throws ApiException {
-        ApiResponse<OkResult> localVarResp = startLoopGroupWithHttpInfo(startLoopGroupRequest);
+        ApiResponse<OkResult> localVarResp = _startLoopGroupWithHttpInfo(startLoopGroupRequest);
         return localVarResp.getData();
     }
 
@@ -560,7 +560,7 @@ public class SpriteAPI {
         <tr><td> 200 </td><td> Acknowledged </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OkResult> startLoopGroupWithHttpInfo(@javax.annotation.Nonnull StartLoopGroupRequest startLoopGroupRequest) throws ApiException {
+    protected ApiResponse<OkResult> _startLoopGroupWithHttpInfo(@javax.annotation.Nonnull StartLoopGroupRequest startLoopGroupRequest) throws ApiException {
         okhttp3.Call localVarCall = startLoopGroupValidateBeforeCall(startLoopGroupRequest, null);
         Type localVarReturnType = new TypeToken<OkResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -670,7 +670,7 @@ public class SpriteAPI {
      </table>
      */
     public OkResult startTriggerGroup(@javax.annotation.Nonnull StartTriggerGroupRequest startTriggerGroupRequest) throws ApiException {
-        ApiResponse<OkResult> localVarResp = startTriggerGroupWithHttpInfo(startTriggerGroupRequest);
+        ApiResponse<OkResult> localVarResp = _startTriggerGroupWithHttpInfo(startTriggerGroupRequest);
         return localVarResp.getData();
     }
 
@@ -687,7 +687,7 @@ public class SpriteAPI {
         <tr><td> 200 </td><td> Acknowledged </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OkResult> startTriggerGroupWithHttpInfo(@javax.annotation.Nonnull StartTriggerGroupRequest startTriggerGroupRequest) throws ApiException {
+    protected ApiResponse<OkResult> _startTriggerGroupWithHttpInfo(@javax.annotation.Nonnull StartTriggerGroupRequest startTriggerGroupRequest) throws ApiException {
         okhttp3.Call localVarCall = startTriggerGroupValidateBeforeCall(startTriggerGroupRequest, null);
         Type localVarReturnType = new TypeToken<OkResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -797,7 +797,7 @@ public class SpriteAPI {
      </table>
      */
     public SpriteState stateAt(@javax.annotation.Nonnull SpriteTimeRequest spriteTimeRequest) throws ApiException {
-        ApiResponse<SpriteState> localVarResp = stateAtWithHttpInfo(spriteTimeRequest);
+        ApiResponse<SpriteState> localVarResp = _stateAtWithHttpInfo(spriteTimeRequest);
         return localVarResp.getData();
     }
 
@@ -814,7 +814,7 @@ public class SpriteAPI {
         <tr><td> 200 </td><td> The sampled sprite state </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SpriteState> stateAtWithHttpInfo(@javax.annotation.Nonnull SpriteTimeRequest spriteTimeRequest) throws ApiException {
+    protected ApiResponse<SpriteState> _stateAtWithHttpInfo(@javax.annotation.Nonnull SpriteTimeRequest spriteTimeRequest) throws ApiException {
         okhttp3.Call localVarCall = stateAtValidateBeforeCall(spriteTimeRequest, null);
         Type localVarReturnType = new TypeToken<SpriteState>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

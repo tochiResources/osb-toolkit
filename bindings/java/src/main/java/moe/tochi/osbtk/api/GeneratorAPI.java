@@ -158,7 +158,7 @@ public class GeneratorAPI {
      </table>
      */
     public Beatmap beatmap() throws ApiException {
-        ApiResponse<Beatmap> localVarResp = beatmapWithHttpInfo();
+        ApiResponse<Beatmap> localVarResp = _beatmapWithHttpInfo();
         return localVarResp.getData();
     }
 
@@ -174,7 +174,7 @@ public class GeneratorAPI {
         <tr><td> 200 </td><td> The loaded beatmap, or null </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Beatmap> beatmapWithHttpInfo() throws ApiException {
+    protected ApiResponse<Beatmap> _beatmapWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = beatmapValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<Beatmap>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -283,7 +283,7 @@ public class GeneratorAPI {
      </table>
      */
     public ControlPoint controlPointAt(@javax.annotation.Nonnull TimeRequest timeRequest) throws ApiException {
-        ApiResponse<ControlPoint> localVarResp = controlPointAtWithHttpInfo(timeRequest);
+        ApiResponse<ControlPoint> localVarResp = _controlPointAtWithHttpInfo(timeRequest);
         return localVarResp.getData();
     }
 
@@ -300,7 +300,7 @@ public class GeneratorAPI {
         <tr><td> 200 </td><td> The active control point, or null </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ControlPoint> controlPointAtWithHttpInfo(@javax.annotation.Nonnull TimeRequest timeRequest) throws ApiException {
+    protected ApiResponse<ControlPoint> _controlPointAtWithHttpInfo(@javax.annotation.Nonnull TimeRequest timeRequest) throws ApiException {
         okhttp3.Call localVarCall = controlPointAtValidateBeforeCall(timeRequest, null);
         Type localVarReturnType = new TypeToken<ControlPoint>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -410,7 +410,7 @@ public class GeneratorAPI {
      </table>
      */
     public ImportOsbResult importOsb(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
-        ApiResponse<ImportOsbResult> localVarResp = importOsbWithHttpInfo(textRequest);
+        ApiResponse<ImportOsbResult> localVarResp = _importOsbWithHttpInfo(textRequest);
         return localVarResp.getData();
     }
 
@@ -427,7 +427,7 @@ public class GeneratorAPI {
         <tr><td> 200 </td><td> The sprite count after import </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ImportOsbResult> importOsbWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
+    protected ApiResponse<ImportOsbResult> _importOsbWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
         okhttp3.Call localVarCall = importOsbValidateBeforeCall(textRequest, null);
         Type localVarReturnType = new TypeToken<ImportOsbResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -537,7 +537,7 @@ public class GeneratorAPI {
      </table>
      */
     public LayerHandle layerHandle(@javax.annotation.Nonnull LayerHandleRequest layerHandleRequest) throws ApiException {
-        ApiResponse<LayerHandle> localVarResp = layerHandleWithHttpInfo(layerHandleRequest);
+        ApiResponse<LayerHandle> localVarResp = _layerHandleWithHttpInfo(layerHandleRequest);
         return localVarResp.getData();
     }
 
@@ -554,7 +554,7 @@ public class GeneratorAPI {
         <tr><td> 200 </td><td> The layer handle </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<LayerHandle> layerHandleWithHttpInfo(@javax.annotation.Nonnull LayerHandleRequest layerHandleRequest) throws ApiException {
+    protected ApiResponse<LayerHandle> _layerHandleWithHttpInfo(@javax.annotation.Nonnull LayerHandleRequest layerHandleRequest) throws ApiException {
         okhttp3.Call localVarCall = layerHandleValidateBeforeCall(layerHandleRequest, null);
         Type localVarReturnType = new TypeToken<LayerHandle>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -664,7 +664,7 @@ public class GeneratorAPI {
      </table>
      */
     public LoadBeatmapResult loadBeatmap(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
-        ApiResponse<LoadBeatmapResult> localVarResp = loadBeatmapWithHttpInfo(textRequest);
+        ApiResponse<LoadBeatmapResult> localVarResp = _loadBeatmapWithHttpInfo(textRequest);
         return localVarResp.getData();
     }
 
@@ -681,7 +681,7 @@ public class GeneratorAPI {
         <tr><td> 200 </td><td> A summary of the loaded beatmap </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<LoadBeatmapResult> loadBeatmapWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
+    protected ApiResponse<LoadBeatmapResult> _loadBeatmapWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
         okhttp3.Call localVarCall = loadBeatmapValidateBeforeCall(textRequest, null);
         Type localVarReturnType = new TypeToken<LoadBeatmapResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -791,7 +791,7 @@ public class GeneratorAPI {
      </table>
      */
     public RandomResult random(@javax.annotation.Nonnull RandomRequest randomRequest) throws ApiException {
-        ApiResponse<RandomResult> localVarResp = randomWithHttpInfo(randomRequest);
+        ApiResponse<RandomResult> localVarResp = _randomWithHttpInfo(randomRequest);
         return localVarResp.getData();
     }
 
@@ -808,7 +808,7 @@ public class GeneratorAPI {
         <tr><td> 200 </td><td> A deterministic random value </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<RandomResult> randomWithHttpInfo(@javax.annotation.Nonnull RandomRequest randomRequest) throws ApiException {
+    protected ApiResponse<RandomResult> _randomWithHttpInfo(@javax.annotation.Nonnull RandomRequest randomRequest) throws ApiException {
         okhttp3.Call localVarCall = randomValidateBeforeCall(randomRequest, null);
         Type localVarReturnType = new TypeToken<RandomResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -910,7 +910,7 @@ public class GeneratorAPI {
      </table>
      */
     public SpriteCountResult spriteCount() throws ApiException {
-        ApiResponse<SpriteCountResult> localVarResp = spriteCountWithHttpInfo();
+        ApiResponse<SpriteCountResult> localVarResp = _spriteCountWithHttpInfo();
         return localVarResp.getData();
     }
 
@@ -926,7 +926,7 @@ public class GeneratorAPI {
         <tr><td> 200 </td><td> The storyboard sprite count </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SpriteCountResult> spriteCountWithHttpInfo() throws ApiException {
+    protected ApiResponse<SpriteCountResult> _spriteCountWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = spriteCountValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<SpriteCountResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1027,7 +1027,7 @@ public class GeneratorAPI {
      </table>
      */
     public Storyboard storyboard() throws ApiException {
-        ApiResponse<Storyboard> localVarResp = storyboardWithHttpInfo();
+        ApiResponse<Storyboard> localVarResp = _storyboardWithHttpInfo();
         return localVarResp.getData();
     }
 
@@ -1043,7 +1043,7 @@ public class GeneratorAPI {
         <tr><td> 200 </td><td> The built storyboard model </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Storyboard> storyboardWithHttpInfo() throws ApiException {
+    protected ApiResponse<Storyboard> _storyboardWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = storyboardValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<Storyboard>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -1152,7 +1152,7 @@ public class GeneratorAPI {
      </table>
      */
     public ControlPoint timingPointAt(@javax.annotation.Nonnull TimeRequest timeRequest) throws ApiException {
-        ApiResponse<ControlPoint> localVarResp = timingPointAtWithHttpInfo(timeRequest);
+        ApiResponse<ControlPoint> localVarResp = _timingPointAtWithHttpInfo(timeRequest);
         return localVarResp.getData();
     }
 
@@ -1169,7 +1169,7 @@ public class GeneratorAPI {
         <tr><td> 200 </td><td> The active red timing point </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ControlPoint> timingPointAtWithHttpInfo(@javax.annotation.Nonnull TimeRequest timeRequest) throws ApiException {
+    protected ApiResponse<ControlPoint> _timingPointAtWithHttpInfo(@javax.annotation.Nonnull TimeRequest timeRequest) throws ApiException {
         okhttp3.Call localVarCall = timingPointAtValidateBeforeCall(timeRequest, null);
         Type localVarReturnType = new TypeToken<ControlPoint>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

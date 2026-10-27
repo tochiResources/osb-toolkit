@@ -156,7 +156,7 @@ public class HelpersAPI {
      </table>
      */
     public HelperResult call(@javax.annotation.Nonnull HelperRequest helperRequest) throws ApiException {
-        ApiResponse<HelperResult> localVarResp = callWithHttpInfo(helperRequest);
+        ApiResponse<HelperResult> localVarResp = _callWithHttpInfo(helperRequest);
         return localVarResp.getData();
     }
 
@@ -173,7 +173,7 @@ public class HelpersAPI {
         <tr><td> 200 </td><td> The shared motion-graphics helper&#39;s result </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<HelperResult> callWithHttpInfo(@javax.annotation.Nonnull HelperRequest helperRequest) throws ApiException {
+    protected ApiResponse<HelperResult> _callWithHttpInfo(@javax.annotation.Nonnull HelperRequest helperRequest) throws ApiException {
         okhttp3.Call localVarCall = callValidateBeforeCall(helperRequest, null);
         Type localVarReturnType = new TypeToken<HelperResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -283,7 +283,7 @@ public class HelpersAPI {
      </table>
      */
     public HelperResult commands(@javax.annotation.Nonnull HelperRequest helperRequest) throws ApiException {
-        ApiResponse<HelperResult> localVarResp = commandsWithHttpInfo(helperRequest);
+        ApiResponse<HelperResult> localVarResp = _commandsWithHttpInfo(helperRequest);
         return localVarResp.getData();
     }
 
@@ -300,7 +300,7 @@ public class HelpersAPI {
         <tr><td> 200 </td><td> The helper&#39;s result (a command list or scalar) </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<HelperResult> commandsWithHttpInfo(@javax.annotation.Nonnull HelperRequest helperRequest) throws ApiException {
+    protected ApiResponse<HelperResult> _commandsWithHttpInfo(@javax.annotation.Nonnull HelperRequest helperRequest) throws ApiException {
         okhttp3.Call localVarCall = commandsValidateBeforeCall(helperRequest, null);
         Type localVarReturnType = new TypeToken<HelperResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -410,7 +410,7 @@ public class HelpersAPI {
      </table>
      */
     public HelperResult keyframes(@javax.annotation.Nonnull HelperRequest helperRequest) throws ApiException {
-        ApiResponse<HelperResult> localVarResp = keyframesWithHttpInfo(helperRequest);
+        ApiResponse<HelperResult> localVarResp = _keyframesWithHttpInfo(helperRequest);
         return localVarResp.getData();
     }
 
@@ -427,7 +427,7 @@ public class HelpersAPI {
         <tr><td> 200 </td><td> The helper&#39;s result (a keyframe channel or vectors) </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<HelperResult> keyframesWithHttpInfo(@javax.annotation.Nonnull HelperRequest helperRequest) throws ApiException {
+    protected ApiResponse<HelperResult> _keyframesWithHttpInfo(@javax.annotation.Nonnull HelperRequest helperRequest) throws ApiException {
         okhttp3.Call localVarCall = keyframesValidateBeforeCall(helperRequest, null);
         Type localVarReturnType = new TypeToken<HelperResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

@@ -156,7 +156,7 @@ public class ImagegenAPI {
      </table>
      */
     public ImageInfo renderShapes(@javax.annotation.Nonnull RenderShapesRequest renderShapesRequest) throws ApiException {
-        ApiResponse<ImageInfo> localVarResp = renderShapesWithHttpInfo(renderShapesRequest);
+        ApiResponse<ImageInfo> localVarResp = _renderShapesWithHttpInfo(renderShapesRequest);
         return localVarResp.getData();
     }
 
@@ -173,7 +173,7 @@ public class ImagegenAPI {
         <tr><td> 200 </td><td> The rendered image&#39;s metadata </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ImageInfo> renderShapesWithHttpInfo(@javax.annotation.Nonnull RenderShapesRequest renderShapesRequest) throws ApiException {
+    protected ApiResponse<ImageInfo> _renderShapesWithHttpInfo(@javax.annotation.Nonnull RenderShapesRequest renderShapesRequest) throws ApiException {
         okhttp3.Call localVarCall = renderShapesValidateBeforeCall(renderShapesRequest, null);
         Type localVarReturnType = new TypeToken<ImageInfo>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

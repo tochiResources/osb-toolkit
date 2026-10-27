@@ -156,7 +156,7 @@ public class Storyboarding3dAPI {
      </table>
      */
     public BakedStoryboard bake3d(@javax.annotation.Nonnull Bake3dRequest bake3dRequest) throws ApiException {
-        ApiResponse<BakedStoryboard> localVarResp = bake3dWithHttpInfo(bake3dRequest);
+        ApiResponse<BakedStoryboard> localVarResp = _bake3dWithHttpInfo(bake3dRequest);
         return localVarResp.getData();
     }
 
@@ -173,7 +173,7 @@ public class Storyboarding3dAPI {
         <tr><td> 200 </td><td> Baked command spans </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<BakedStoryboard> bake3dWithHttpInfo(@javax.annotation.Nonnull Bake3dRequest bake3dRequest) throws ApiException {
+    protected ApiResponse<BakedStoryboard> _bake3dWithHttpInfo(@javax.annotation.Nonnull Bake3dRequest bake3dRequest) throws ApiException {
         okhttp3.Call localVarCall = bake3dValidateBeforeCall(bake3dRequest, null);
         Type localVarReturnType = new TypeToken<BakedStoryboard>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

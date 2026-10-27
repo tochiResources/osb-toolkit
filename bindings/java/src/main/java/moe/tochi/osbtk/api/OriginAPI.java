@@ -158,7 +158,7 @@ public class OriginAPI {
      </table>
      */
     public Vector2 getOriginVector(@javax.annotation.Nonnull GetOriginVectorRequest getOriginVectorRequest) throws ApiException {
-        ApiResponse<Vector2> localVarResp = getOriginVectorWithHttpInfo(getOriginVectorRequest);
+        ApiResponse<Vector2> localVarResp = _getOriginVectorWithHttpInfo(getOriginVectorRequest);
         return localVarResp.getData();
     }
 
@@ -175,7 +175,7 @@ public class OriginAPI {
         <tr><td> 200 </td><td> The anchor offset for the origin </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Vector2> getOriginVectorWithHttpInfo(@javax.annotation.Nonnull GetOriginVectorRequest getOriginVectorRequest) throws ApiException {
+    protected ApiResponse<Vector2> _getOriginVectorWithHttpInfo(@javax.annotation.Nonnull GetOriginVectorRequest getOriginVectorRequest) throws ApiException {
         okhttp3.Call localVarCall = getOriginVectorValidateBeforeCall(getOriginVectorRequest, null);
         Type localVarReturnType = new TypeToken<Vector2>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -285,7 +285,7 @@ public class OriginAPI {
      </table>
      */
     public BoolResult inScreenBounds(@javax.annotation.Nonnull InScreenBoundsRequest inScreenBoundsRequest) throws ApiException {
-        ApiResponse<BoolResult> localVarResp = inScreenBoundsWithHttpInfo(inScreenBoundsRequest);
+        ApiResponse<BoolResult> localVarResp = _inScreenBoundsWithHttpInfo(inScreenBoundsRequest);
         return localVarResp.getData();
     }
 
@@ -302,7 +302,7 @@ public class OriginAPI {
         <tr><td> 200 </td><td> Whether the sprite&#39;s bounds intersect the screen </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<BoolResult> inScreenBoundsWithHttpInfo(@javax.annotation.Nonnull InScreenBoundsRequest inScreenBoundsRequest) throws ApiException {
+    protected ApiResponse<BoolResult> _inScreenBoundsWithHttpInfo(@javax.annotation.Nonnull InScreenBoundsRequest inScreenBoundsRequest) throws ApiException {
         okhttp3.Call localVarCall = inScreenBoundsValidateBeforeCall(inScreenBoundsRequest, null);
         Type localVarReturnType = new TypeToken<BoolResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

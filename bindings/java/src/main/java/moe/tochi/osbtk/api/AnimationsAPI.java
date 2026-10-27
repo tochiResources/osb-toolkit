@@ -157,7 +157,7 @@ public class AnimationsAPI {
      </table>
      */
     public EasingResult applyEasing(@javax.annotation.Nonnull ApplyEasingRequest applyEasingRequest) throws ApiException {
-        ApiResponse<EasingResult> localVarResp = applyEasingWithHttpInfo(applyEasingRequest);
+        ApiResponse<EasingResult> localVarResp = _applyEasingWithHttpInfo(applyEasingRequest);
         return localVarResp.getData();
     }
 
@@ -174,7 +174,7 @@ public class AnimationsAPI {
         <tr><td> 200 </td><td> The eased value </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EasingResult> applyEasingWithHttpInfo(@javax.annotation.Nonnull ApplyEasingRequest applyEasingRequest) throws ApiException {
+    protected ApiResponse<EasingResult> _applyEasingWithHttpInfo(@javax.annotation.Nonnull ApplyEasingRequest applyEasingRequest) throws ApiException {
         okhttp3.Call localVarCall = applyEasingValidateBeforeCall(applyEasingRequest, null);
         Type localVarReturnType = new TypeToken<EasingResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -284,7 +284,7 @@ public class AnimationsAPI {
      </table>
      */
     public EasingResult easingValue(@javax.annotation.Nonnull EasingValueRequest easingValueRequest) throws ApiException {
-        ApiResponse<EasingResult> localVarResp = easingValueWithHttpInfo(easingValueRequest);
+        ApiResponse<EasingResult> localVarResp = _easingValueWithHttpInfo(easingValueRequest);
         return localVarResp.getData();
     }
 
@@ -301,7 +301,7 @@ public class AnimationsAPI {
         <tr><td> 200 </td><td> The eased value (named easing or cubic-bezier) </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EasingResult> easingValueWithHttpInfo(@javax.annotation.Nonnull EasingValueRequest easingValueRequest) throws ApiException {
+    protected ApiResponse<EasingResult> _easingValueWithHttpInfo(@javax.annotation.Nonnull EasingValueRequest easingValueRequest) throws ApiException {
         okhttp3.Call localVarCall = easingValueValidateBeforeCall(easingValueRequest, null);
         Type localVarReturnType = new TypeToken<EasingResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

@@ -157,7 +157,7 @@ public class ParsingAPI {
      </table>
      */
     public ParseOsbResult parseOsb(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
-        ApiResponse<ParseOsbResult> localVarResp = parseOsbWithHttpInfo(textRequest);
+        ApiResponse<ParseOsbResult> localVarResp = _parseOsbWithHttpInfo(textRequest);
         return localVarResp.getData();
     }
 
@@ -174,7 +174,7 @@ public class ParsingAPI {
         <tr><td> 200 </td><td> The storyboard summary </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ParseOsbResult> parseOsbWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
+    protected ApiResponse<ParseOsbResult> _parseOsbWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
         okhttp3.Call localVarCall = parseOsbValidateBeforeCall(textRequest, null);
         Type localVarReturnType = new TypeToken<ParseOsbResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -284,7 +284,7 @@ public class ParsingAPI {
      </table>
      */
     public Beatmap parseOsu(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
-        ApiResponse<Beatmap> localVarResp = parseOsuWithHttpInfo(textRequest);
+        ApiResponse<Beatmap> localVarResp = _parseOsuWithHttpInfo(textRequest);
         return localVarResp.getData();
     }
 
@@ -301,7 +301,7 @@ public class ParsingAPI {
         <tr><td> 200 </td><td> The parsed beatmap </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Beatmap> parseOsuWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
+    protected ApiResponse<Beatmap> _parseOsuWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
         okhttp3.Call localVarCall = parseOsuValidateBeforeCall(textRequest, null);
         Type localVarReturnType = new TypeToken<Beatmap>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);

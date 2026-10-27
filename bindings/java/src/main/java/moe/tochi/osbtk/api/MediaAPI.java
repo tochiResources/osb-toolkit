@@ -161,7 +161,7 @@ public class MediaAPI {
      </table>
      */
     public MediaInfo encodeVideo(@javax.annotation.Nonnull EncodeVideoRequest encodeVideoRequest) throws ApiException {
-        ApiResponse<MediaInfo> localVarResp = encodeVideoWithHttpInfo(encodeVideoRequest);
+        ApiResponse<MediaInfo> localVarResp = _encodeVideoWithHttpInfo(encodeVideoRequest);
         return localVarResp.getData();
     }
 
@@ -178,7 +178,7 @@ public class MediaAPI {
         <tr><td> 200 </td><td> The encoded video&#39;s metadata </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<MediaInfo> encodeVideoWithHttpInfo(@javax.annotation.Nonnull EncodeVideoRequest encodeVideoRequest) throws ApiException {
+    protected ApiResponse<MediaInfo> _encodeVideoWithHttpInfo(@javax.annotation.Nonnull EncodeVideoRequest encodeVideoRequest) throws ApiException {
         okhttp3.Call localVarCall = encodeVideoValidateBeforeCall(encodeVideoRequest, null);
         Type localVarReturnType = new TypeToken<MediaInfo>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -288,7 +288,7 @@ public class MediaAPI {
      </table>
      */
     public OkResult extractAudio(@javax.annotation.Nonnull ExtractAudioRequest extractAudioRequest) throws ApiException {
-        ApiResponse<OkResult> localVarResp = extractAudioWithHttpInfo(extractAudioRequest);
+        ApiResponse<OkResult> localVarResp = _extractAudioWithHttpInfo(extractAudioRequest);
         return localVarResp.getData();
     }
 
@@ -305,7 +305,7 @@ public class MediaAPI {
         <tr><td> 200 </td><td> Acknowledged </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<OkResult> extractAudioWithHttpInfo(@javax.annotation.Nonnull ExtractAudioRequest extractAudioRequest) throws ApiException {
+    protected ApiResponse<OkResult> _extractAudioWithHttpInfo(@javax.annotation.Nonnull ExtractAudioRequest extractAudioRequest) throws ApiException {
         okhttp3.Call localVarCall = extractAudioValidateBeforeCall(extractAudioRequest, null);
         Type localVarReturnType = new TypeToken<OkResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -415,7 +415,7 @@ public class MediaAPI {
      </table>
      */
     public FrameResult extractFrames(@javax.annotation.Nonnull ExtractFramesRequest extractFramesRequest) throws ApiException {
-        ApiResponse<FrameResult> localVarResp = extractFramesWithHttpInfo(extractFramesRequest);
+        ApiResponse<FrameResult> localVarResp = _extractFramesWithHttpInfo(extractFramesRequest);
         return localVarResp.getData();
     }
 
@@ -432,7 +432,7 @@ public class MediaAPI {
         <tr><td> 200 </td><td> The extracted frame count </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<FrameResult> extractFramesWithHttpInfo(@javax.annotation.Nonnull ExtractFramesRequest extractFramesRequest) throws ApiException {
+    protected ApiResponse<FrameResult> _extractFramesWithHttpInfo(@javax.annotation.Nonnull ExtractFramesRequest extractFramesRequest) throws ApiException {
         okhttp3.Call localVarCall = extractFramesValidateBeforeCall(extractFramesRequest, null);
         Type localVarReturnType = new TypeToken<FrameResult>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -542,7 +542,7 @@ public class MediaAPI {
      </table>
      */
     public MediaInfo info(@javax.annotation.Nonnull PathRequest pathRequest) throws ApiException {
-        ApiResponse<MediaInfo> localVarResp = infoWithHttpInfo(pathRequest);
+        ApiResponse<MediaInfo> localVarResp = _infoWithHttpInfo(pathRequest);
         return localVarResp.getData();
     }
 
@@ -559,7 +559,7 @@ public class MediaAPI {
         <tr><td> 200 </td><td> The media metadata </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<MediaInfo> infoWithHttpInfo(@javax.annotation.Nonnull PathRequest pathRequest) throws ApiException {
+    protected ApiResponse<MediaInfo> _infoWithHttpInfo(@javax.annotation.Nonnull PathRequest pathRequest) throws ApiException {
         okhttp3.Call localVarCall = infoValidateBeforeCall(pathRequest, null);
         Type localVarReturnType = new TypeToken<MediaInfo>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
