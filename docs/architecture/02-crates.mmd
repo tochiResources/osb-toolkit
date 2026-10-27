@@ -1,0 +1,49 @@
+flowchart BT
+    classDef base fill:#eef7ee,stroke:#4a8f4a,color:#123
+    classDef core fill:#e8f0ff,stroke:#3b6fb6,color:#123
+    classDef lib fill:#fff8e1,stroke:#c9a227,color:#123
+    classDef surf fill:#e0f7f7,stroke:#2a9d8f,color:#123
+    classDef entry fill:#f3e8ff,stroke:#8b5cf6,color:#123
+
+    core["osb-core<br/>math · io · io-wasm · curve"]:::base
+
+    runtime["osb-runtime<br/>common · animations · storyboarding · storyboarding3d · render<br/>diagnostics · optimize"]:::core
+    api["osb-api"]:::core
+    image["osb-image"]:::lib
+    imagegen["osb-image-gen"]:::lib
+    media["osb-media"]:::lib
+    parser["osb-parser-ae"]:::lib
+
+    native["osb-native<br/>C ABI + JSON bridge"]:::entry
+    server["osb-server"]:::surf
+    cli["osb-cli"]:::surf
+    sdk["osb-sdk"]:::surf
+    wasm["osb-wasm"]:::surf
+
+    core --> runtime
+    runtime --> api
+    api --> imagegen
+    core --> image
+    core --> media
+    core --> parser
+    core --> imagegen
+    image --> api
+    media --> api
+
+    core --> native
+    runtime --> native
+    api --> native
+    image --> native
+    imagegen --> native
+    media --> native
+
+    native --> server
+    core --> server
+    runtime --> server
+    native --> cli
+    core --> cli
+    server --> cli
+    native --> sdk
+    core --> sdk
+    native --> wasm
+    core --> wasm

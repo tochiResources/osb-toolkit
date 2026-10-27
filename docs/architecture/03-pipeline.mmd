@@ -1,0 +1,31 @@
+flowchart LR
+    classDef src fill:#e8f0ff,stroke:#3b6fb6,color:#123
+    classDef gen fill:#fff8e1,stroke:#c9a227,color:#123
+    classDef bind fill:#fff4e6,stroke:#c98a3b,color:#123
+    classDef sdk fill:#f3e8ff,stroke:#8b5cf6,color:#123
+    classDef seam fill:#ffe8e8,stroke:#d64545,color:#123
+
+    api["crates/osb-api<br/>Rust types + doc comments<br/>(tags = classes, operationIds = methods)"]:::src
+    spec["bindings/openapi/osbtk.openapi.json<br/>OpenAPI 3.1"]:::gen
+
+    subgraph gen["openapi-generator (independent targets)"]
+        sdkgen["SDK clients<br/>generated as NORMAL OpenAPI clients<br/>(standard HTTP transport, nothing custom)"]:::gen
+        bindgen["Native bindings<br/>osb-native C ABI + include/osbtk.h<br/>+ per-language wrappers"]:::bind
+    end
+
+    lib["SDK lib<br/>generated client (models + API classes)"]:::sdk
+    interceptor["SDK interceptor<br/>the ONLY hand-written file<br/>install fetch -> binding.exec"]:::seam
+    entrypoint["SDK entrypoint<br/>export osb + types/models"]:::sdk
+    core["SDK core<br/>export Core + types/models"]:::sdk
+
+    exec["binding exec(request) -> response<br/>(JSON bridge)"]:::bind
+
+    api --> spec
+    spec --> sdkgen
+    spec --> bindgen
+    sdkgen --> lib
+    bindgen --> exec
+    lib --> interceptor
+    interceptor -->|intercepts fetch| exec
+    interceptor --> entrypoint
+    interceptor --> core
