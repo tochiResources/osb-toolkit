@@ -15,6 +15,7 @@ from ..models.point_list_result import PointListResult
 from ..models.scalar_result import ScalarResult
 from ..models.simplify_request import SimplifyRequest
 from ..models.vector2 import Vector2
+from .options import ArcOptions, CurveDistanceOptions, CurveOffsetOptions, CurveOptions, CurvePointOptions, CurveSampleOptions, EllipseOptions, LineIntersectOptions, SimplifyOptions, to_kwargs
 
 
 class Curve:
@@ -25,41 +26,41 @@ class Curve:
     def instance_of(value: object) -> bool:
         return isinstance(value, Curve)
 
-    def arc(self, body: ArcRequest) -> PointListResult:
-        return self._api.arc(body)
+    def arc(self, options: ArcOptions) -> PointListResult:
+        return self._api.arc(ArcRequest(**to_kwargs(options)))
 
-    def bounding_box(self, body: CurveRequest) -> Box2:
-        return self._api.bounding_box(body)
+    def bounding_box(self, options: CurveOptions) -> Box2:
+        return self._api.bounding_box(CurveRequest(**to_kwargs(options)))
 
-    def curvature(self, body: CurvePointRequest) -> ScalarResult:
-        return self._api.curvature(body)
+    def curvature(self, options: CurvePointOptions) -> ScalarResult:
+        return self._api.curvature(CurvePointRequest(**to_kwargs(options)))
 
-    def distance_to(self, body: CurveDistanceRequest) -> ScalarResult:
-        return self._api.distance_to(body)
+    def distance_to(self, options: CurveDistanceOptions) -> ScalarResult:
+        return self._api.distance_to(CurveDistanceRequest(**to_kwargs(options)))
 
-    def ellipse(self, body: EllipseRequest) -> PointListResult:
-        return self._api.ellipse(body)
+    def ellipse(self, options: EllipseOptions) -> PointListResult:
+        return self._api.ellipse(EllipseRequest(**to_kwargs(options)))
 
-    def length(self, body: CurveRequest) -> ScalarResult:
-        return self._api.length(body)
+    def length(self, options: CurveOptions) -> ScalarResult:
+        return self._api.length(CurveRequest(**to_kwargs(options)))
 
-    def line_intersect(self, body: LineIntersectRequest) -> OptionalPointResult:
-        return self._api.line_intersect(body)
+    def line_intersect(self, options: LineIntersectOptions) -> OptionalPointResult:
+        return self._api.line_intersect(LineIntersectRequest(**to_kwargs(options)))
 
-    def normal(self, body: CurvePointRequest) -> Vector2:
-        return self._api.normal(body)
+    def normal(self, options: CurvePointOptions) -> Vector2:
+        return self._api.normal(CurvePointRequest(**to_kwargs(options)))
 
-    def offset(self, body: CurveOffsetRequest) -> PointListResult:
-        return self._api.offset(body)
+    def offset(self, options: CurveOffsetOptions) -> PointListResult:
+        return self._api.offset(CurveOffsetRequest(**to_kwargs(options)))
 
-    def point(self, body: CurvePointRequest) -> Vector2:
-        return self._api.point(body)
+    def point(self, options: CurvePointOptions) -> Vector2:
+        return self._api.point(CurvePointRequest(**to_kwargs(options)))
 
-    def sample(self, body: CurveSampleRequest) -> PointListResult:
-        return self._api.sample(body)
+    def sample(self, options: CurveSampleOptions) -> PointListResult:
+        return self._api.sample(CurveSampleRequest(**to_kwargs(options)))
 
-    def simplify(self, body: SimplifyRequest) -> PointListResult:
-        return self._api.simplify(body)
+    def simplify(self, options: SimplifyOptions) -> PointListResult:
+        return self._api.simplify(SimplifyRequest(**to_kwargs(options)))
 
-    def tangent(self, body: CurvePointRequest) -> Vector2:
-        return self._api.tangent(body)
+    def tangent(self, options: CurvePointOptions) -> Vector2:
+        return self._api.tangent(CurvePointRequest(**to_kwargs(options)))

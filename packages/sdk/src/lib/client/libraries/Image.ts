@@ -1,7 +1,6 @@
 import { ImageAPI } from '../../api/ImageAPI';
 import type { ImageInfo } from '../../models/ImageInfo';
-import type { ImageProcessRequest } from '../../models/ImageProcessRequest';
-import type { PathRequest } from '../../models/PathRequest';
+import type { ImageProcessOptions, PathOptions } from '../options';
 
 export class Image {
     constructor(private readonly api: ImageAPI) {}
@@ -10,11 +9,11 @@ export class Image {
         return value instanceof Image;
     }
 
-    async info(body: PathRequest): Promise<ImageInfo> {
-        return this.api.info(body);
+    async info(options: PathOptions): Promise<ImageInfo> {
+        return this.api.info(options);
     }
 
-    async process(body: ImageProcessRequest): Promise<ImageInfo> {
-        return this.api.process(body);
+    async process(options: ImageProcessOptions): Promise<ImageInfo> {
+        return this.api.process(options);
     }
 }

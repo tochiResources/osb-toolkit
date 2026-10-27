@@ -3,6 +3,7 @@ from __future__ import annotations
 from ..api.imagegen_api import ImagegenAPI
 from ..models.image_info import ImageInfo
 from ..models.render_shapes_request import RenderShapesRequest
+from .options import RenderShapesOptions, to_kwargs
 
 
 class Imagegen:
@@ -13,5 +14,5 @@ class Imagegen:
     def instance_of(value: object) -> bool:
         return isinstance(value, Imagegen)
 
-    def render_shapes(self, body: RenderShapesRequest) -> ImageInfo:
-        return self._api.render_shapes(body)
+    def render_shapes(self, options: RenderShapesOptions) -> ImageInfo:
+        return self._api.render_shapes(RenderShapesRequest(**to_kwargs(options)))

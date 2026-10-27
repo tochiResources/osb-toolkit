@@ -23,11 +23,18 @@ public final class Audio {
         return api.audioDuration();
     }
 
-    public FftResult fft(FftRequest body) throws ApiException {
-        return api.fft(body);
+    public FftResult fft(FftOptions options) throws ApiException {
+        return api.fft(new FftRequest()
+            .magnitudes(options.magnitudes)
+            .path(options.path)
+            .time(options.time));
     }
 
-    public FftResult getFft(GetFftRequest body) throws ApiException {
-        return api.getFft(body);
+    public FftResult getFft(GetFftOptions options) throws ApiException {
+        return api.getFft(new GetFftRequest()
+            .cutoff(options.cutoff)
+            .easing(options.easing)
+            .magnitudes(options.magnitudes)
+            .time(options.time));
     }
 }

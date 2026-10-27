@@ -18,11 +18,15 @@ public final class Image {
         return value instanceof Image;
     }
 
-    public ImageInfo info(PathRequest body) throws ApiException {
-        return api.info(body);
+    public ImageInfo info(PathOptions options) throws ApiException {
+        return api.info(new PathRequest()
+            .path(options.path));
     }
 
-    public ImageInfo process(ImageProcessRequest body) throws ApiException {
-        return api.process(body);
+    public ImageInfo process(ImageProcessOptions options) throws ApiException {
+        return api.process(new ImageProcessRequest()
+            .options(options.options)
+            .output(options.output)
+            .path(options.path));
     }
 }

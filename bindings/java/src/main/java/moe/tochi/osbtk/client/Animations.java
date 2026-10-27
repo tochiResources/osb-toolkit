@@ -18,11 +18,16 @@ public final class Animations {
         return value instanceof Animations;
     }
 
-    public EasingResult applyEasing(ApplyEasingRequest body) throws ApiException {
-        return api.applyEasing(body);
+    public EasingResult applyEasing(ApplyEasingOptions options) throws ApiException {
+        return api.applyEasing(new ApplyEasingRequest()
+            .easing(options.easing)
+            .t(options.t));
     }
 
-    public EasingResult easingValue(EasingValueRequest body) throws ApiException {
-        return api.easingValue(body);
+    public EasingResult easingValue(EasingValueOptions options) throws ApiException {
+        return api.easingValue(new EasingValueRequest()
+            .cubicBezier(options.cubicBezier)
+            .easing(options.easing)
+            .t(options.t));
     }
 }

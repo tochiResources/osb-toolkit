@@ -14,5 +14,5 @@ public sealed class Imagegen
 
     public static bool InstanceOf(object value) => value is Imagegen;
 
-    public ImageInfo RenderShapes(RenderShapesRequest body) => api.RenderShapes(body);
+    public ImageInfo RenderShapes(RenderShapesOptions options) => api.RenderShapes(new RenderShapesRequest(options.Background, options.Height, options.Output, options.Shapes, options.Width));
 }

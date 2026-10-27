@@ -14,5 +14,5 @@ public sealed class Storyboarding3d
 
     public static bool InstanceOf(object value) => value is Storyboarding3d;
 
-    public BakedStoryboard Bake3d(Bake3dRequest body) => api.Bake3d(body);
+    public BakedStoryboard Bake3d(Bake3dOptions options) => api.Bake3d(new Bake3dRequest(options.Input));
 }

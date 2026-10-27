@@ -1,6 +1,6 @@
 import { OptimizeAPI } from '../../api/OptimizeAPI';
-import type { OptimizeRequest } from '../../models/OptimizeRequest';
 import type { OptimizeResult } from '../../models/OptimizeResult';
+import type { OptimizeOptions } from '../options';
 
 export class Optimize {
     constructor(private readonly api: OptimizeAPI) {}
@@ -9,7 +9,7 @@ export class Optimize {
         return value instanceof Optimize;
     }
 
-    async optimizeOsb(body: OptimizeRequest): Promise<OptimizeResult> {
-        return this.api.optimizeOsb(body);
+    async optimizeOsb(options: OptimizeOptions): Promise<OptimizeResult> {
+        return this.api.optimizeOsb(options);
     }
 }

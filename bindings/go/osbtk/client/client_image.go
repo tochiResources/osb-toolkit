@@ -21,10 +21,12 @@ func IsImage(value any) bool {
 	return ok
 }
 
-func (c *Image) Info(ctx context.Context, body osbtk.PathRequest) (*osbtk.ImageInfo, *http.Response, error) {
-	return c.api.Info(ctx).PathRequest(body).Execute()
+func (c *Image) Info(ctx context.Context, options PathOptions) (*osbtk.ImageInfo, *http.Response, error) {
+	body := osbtk.NewPathRequest(options.Path)
+	return c.api.Info(ctx).PathRequest(*body).Execute()
 }
 
-func (c *Image) Process(ctx context.Context, body osbtk.ImageProcessRequest) (*osbtk.ImageInfo, *http.Response, error) {
-	return c.api.Process(ctx).ImageProcessRequest(body).Execute()
+func (c *Image) Process(ctx context.Context, options ImageProcessOptions) (*osbtk.ImageInfo, *http.Response, error) {
+	body := osbtk.NewImageProcessRequest(options.Options, options.Output, options.Path)
+	return c.api.Process(ctx).ImageProcessRequest(*body).Execute()
 }

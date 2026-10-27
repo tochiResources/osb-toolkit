@@ -1,76 +1,76 @@
 import { LayerAPI } from '../../api/LayerAPI';
 import type { BoolResult } from '../../models/BoolResult';
-import type { CreateAnimationRequest } from '../../models/CreateAnimationRequest';
-import type { CreateSampleRequest } from '../../models/CreateSampleRequest';
-import type { CreateSpriteRequest } from '../../models/CreateSpriteRequest';
-import type { Handle } from '../../models/Handle';
-import type { HandleRequest } from '../../models/HandleRequest';
-import type { LayerHandle } from '../../models/LayerHandle';
 import type { OkResult } from '../../models/OkResult';
-import type { SegmentAddIndexRequest } from '../../models/SegmentAddIndexRequest';
-import type { SegmentChangePositionRequest } from '../../models/SegmentChangePositionRequest';
 import type { SegmentCleanResult } from '../../models/SegmentCleanResult';
 import type { SegmentDiscardResult } from '../../models/SegmentDiscardResult';
 import type { SegmentIndexesResult } from '../../models/SegmentIndexesResult';
-import type { SegmentRequest } from '../../models/SegmentRequest';
-import type { SegmentReverseDepthRequest } from '../../models/SegmentReverseDepthRequest';
+import type { SpriteAPI } from '../../api/SpriteAPI';
+import { Sprite } from './Sprite';
+import type { CreateAnimationOptions, CreateSampleOptions, CreateSpriteOptions, SegmentAddIndexOptions, SegmentChangePositionOptions, SegmentReverseDepthOptions } from '../options';
 
 export class Layer {
-    constructor(private readonly api: LayerAPI) {}
+    constructor(
+        private readonly api: LayerAPI,
+        private readonly sprites: SpriteAPI,
+        private readonly handle: number
+    ) {}
 
     static instanceOf(value: unknown): value is Layer {
         return value instanceof Layer;
     }
 
-    async addIndex(body: SegmentAddIndexRequest): Promise<OkResult> {
-        return this.api.addIndex(body);
+    async addIndex(options: SegmentAddIndexOptions): Promise<OkResult> {
+        return this.api.addIndex({ layer: this.handle, ...options });
     }
 
-    async changePosition(body: SegmentChangePositionRequest): Promise<OkResult> {
-        return this.api.changePosition(body);
+    async changePosition(options: SegmentChangePositionOptions): Promise<OkResult> {
+        return this.api.changePosition({ layer: this.handle, ...options });
     }
 
-    async clean(body: SegmentRequest): Promise<SegmentCleanResult> {
-        return this.api.clean(body);
+    async clean(): Promise<SegmentCleanResult> {
+        return this.api.clean({ layer: this.handle });
     }
 
-    async createAnimation(body: CreateAnimationRequest): Promise<Handle> {
-        return this.api.createAnimation(body);
+    async createAnimation(options: CreateAnimationOptions): Promise<Sprite> {
+        const handle = await this.api.createAnimation({ layerHandle: this.handle, ...options });
+        return new Sprite(this.sprites, handle.layer ?? this.handle, handle.sprite ?? 0);
     }
 
-    async createSample(body: CreateSampleRequest): Promise<OkResult> {
-        return this.api.createSample(body);
+    async createSample(options: CreateSampleOptions): Promise<OkResult> {
+        return this.api.createSample({ layerHandle: this.handle, ...options });
     }
 
-    async createSegment(body: SegmentRequest): Promise<LayerHandle> {
-        return this.api.createSegment(body);
+    async createSegment(): Promise<Layer> {
+        const handle = await this.api.createSegment({ layer: this.handle });
+        return new Layer(this.api, this.sprites, handle.layer ?? this.handle);
     }
 
-    async createSprite(body: CreateSpriteRequest): Promise<Handle> {
-        return this.api.createSprite(body);
+    async createSprite(options: CreateSpriteOptions): Promise<Sprite> {
+        const handle = await this.api.createSprite({ layerHandle: this.handle, ...options });
+        return new Sprite(this.sprites, handle.layer ?? this.handle, handle.sprite ?? 0);
     }
 
-    async discard(body: SegmentRequest): Promise<SegmentDiscardResult> {
-        return this.api.discard(body);
+    async discard(): Promise<SegmentDiscardResult> {
+        return this.api.discard({ layer: this.handle });
     }
 
-    async discardSprite(body: HandleRequest): Promise<BoolResult> {
-        return this.api.discardSprite(body);
+    async discardSprite(sprite: number): Promise<BoolResult> {
+        return this.api.discardSprite({ layer: this.handle, sprite });
     }
 
-    async indexes(body: SegmentRequest): Promise<SegmentIndexesResult> {
-        return this.api.indexes(body);
+    async indexes(): Promise<SegmentIndexesResult> {
+        return this.api.indexes({ layer: this.handle });
     }
 
-    async moveToBottom(body: SegmentRequest): Promise<OkResult> {
-        return this.api.moveToBottom(body);
+    async moveToBottom(): Promise<OkResult> {
+        return this.api.moveToBottom({ layer: this.handle });
     }
 
-    async moveToTop(body: SegmentRequest): Promise<OkResult> {
-        return this.api.moveToTop(body);
+    async moveToTop(): Promise<OkResult> {
+        return this.api.moveToTop({ layer: this.handle });
     }
 
-    async reverseDepth(body: SegmentReverseDepthRequest): Promise<OkResult> {
-        return this.api.reverseDepth(body);
+    async reverseDepth(options: SegmentReverseDepthOptions): Promise<OkResult> {
+        return this.api.reverseDepth({ layer: this.handle, ...options });
     }
 }

@@ -31,24 +31,30 @@ public final class Generator {
         return api.beatmap();
     }
 
-    public ControlPoint controlPointAt(TimeRequest body) throws ApiException {
-        return api.controlPointAt(body);
+    public ControlPoint controlPointAt(TimeOptions options) throws ApiException {
+        return api.controlPointAt(new TimeRequest()
+            .time(options.time));
     }
 
-    public ImportOsbResult importOsb(TextRequest body) throws ApiException {
-        return api.importOsb(body);
+    public ImportOsbResult importOsb(TextOptions options) throws ApiException {
+        return api.importOsb(new TextRequest()
+            .text(options.text));
     }
 
-    public LayerHandle layerHandle(LayerHandleRequest body) throws ApiException {
-        return api.layerHandle(body);
+    public LayerHandle layerHandle(LayerHandleOptions options) throws ApiException {
+        return api.layerHandle(new LayerHandleRequest()
+            .name(options.name));
     }
 
-    public LoadBeatmapResult loadBeatmap(TextRequest body) throws ApiException {
-        return api.loadBeatmap(body);
+    public LoadBeatmapResult loadBeatmap(TextOptions options) throws ApiException {
+        return api.loadBeatmap(new TextRequest()
+            .text(options.text));
     }
 
-    public RandomResult random(RandomRequest body) throws ApiException {
-        return api.random(body);
+    public RandomResult random(RandomOptions options) throws ApiException {
+        return api.random(new RandomRequest()
+            .max(options.max)
+            .min(options.min));
     }
 
     public SpriteCountResult spriteCount() throws ApiException {
@@ -59,7 +65,8 @@ public final class Generator {
         return api.storyboard();
     }
 
-    public ControlPoint timingPointAt(TimeRequest body) throws ApiException {
-        return api.timingPointAt(body);
+    public ControlPoint timingPointAt(TimeOptions options) throws ApiException {
+        return api.timingPointAt(new TimeRequest()
+            .time(options.time));
     }
 }

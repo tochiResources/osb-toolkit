@@ -18,11 +18,13 @@ public final class Parsing {
         return value instanceof Parsing;
     }
 
-    public ParseOsbResult parseOsb(TextRequest body) throws ApiException {
-        return api.parseOsb(body);
+    public ParseOsbResult parseOsb(TextOptions options) throws ApiException {
+        return api.parseOsb(new TextRequest()
+            .text(options.text));
     }
 
-    public Beatmap parseOsu(TextRequest body) throws ApiException {
-        return api.parseOsu(body);
+    public Beatmap parseOsu(TextOptions options) throws ApiException {
+        return api.parseOsu(new TextRequest()
+            .text(options.text));
     }
 }

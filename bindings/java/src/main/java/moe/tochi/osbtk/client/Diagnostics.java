@@ -17,11 +17,13 @@ public final class Diagnostics {
         return value instanceof Diagnostics;
     }
 
-    public DiagnosticReport diagnoseOsb(TextRequest body) throws ApiException {
-        return api.diagnoseOsb(body);
+    public DiagnosticReport diagnoseOsb(TextOptions options) throws ApiException {
+        return api.diagnoseOsb(new TextRequest()
+            .text(options.text));
     }
 
-    public DiagnosticReport diagnoseOsu(TextRequest body) throws ApiException {
-        return api.diagnoseOsu(body);
+    public DiagnosticReport diagnoseOsu(TextOptions options) throws ApiException {
+        return api.diagnoseOsu(new TextRequest()
+            .text(options.text));
     }
 }

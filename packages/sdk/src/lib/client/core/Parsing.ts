@@ -1,7 +1,7 @@
 import { ParsingAPI } from '../../api/ParsingAPI';
 import type { Beatmap } from '../../models/Beatmap';
 import type { ParseOsbResult } from '../../models/ParseOsbResult';
-import type { TextRequest } from '../../models/TextRequest';
+import type { TextOptions } from '../options';
 
 export class Parsing {
     constructor(private readonly api: ParsingAPI) {}
@@ -10,11 +10,11 @@ export class Parsing {
         return value instanceof Parsing;
     }
 
-    async parseOsb(body: TextRequest): Promise<ParseOsbResult> {
-        return this.api.parseOsb(body);
+    async parseOsb(options: TextOptions): Promise<ParseOsbResult> {
+        return this.api.parseOsb(options);
     }
 
-    async parseOsu(body: TextRequest): Promise<Beatmap> {
-        return this.api.parseOsu(body);
+    async parseOsu(options: TextOptions): Promise<Beatmap> {
+        return this.api.parseOsu(options);
     }
 }

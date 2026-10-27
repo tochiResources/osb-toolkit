@@ -25,10 +25,24 @@ func (c *Audio) AudioDuration(ctx context.Context) (*osbtk.AudioDurationResult, 
 	return c.api.AudioDuration(ctx).Execute()
 }
 
-func (c *Audio) Fft(ctx context.Context, body osbtk.FftRequest) (*osbtk.FftResult, *http.Response, error) {
-	return c.api.Fft(ctx).FftRequest(body).Execute()
+func (c *Audio) Fft(ctx context.Context, options FftOptions) (*osbtk.FftResult, *http.Response, error) {
+	body := osbtk.NewFftRequest(options.Path)
+	if options.Magnitudes != nil {
+		body.SetMagnitudes(*options.Magnitudes)
+	}
+	if options.Time != nil {
+		body.SetTime(*options.Time)
+	}
+	return c.api.Fft(ctx).FftRequest(*body).Execute()
 }
 
-func (c *Audio) GetFft(ctx context.Context, body osbtk.GetFftRequest) (*osbtk.FftResult, *http.Response, error) {
-	return c.api.GetFft(ctx).GetFftRequest(body).Execute()
+func (c *Audio) GetFft(ctx context.Context, options GetFftOptions) (*osbtk.FftResult, *http.Response, error) {
+	body := osbtk.NewGetFftRequest(options.Magnitudes, options.Time)
+	if options.Cutoff != nil {
+		body.SetCutoff(*options.Cutoff)
+	}
+	if options.Easing != nil {
+		body.SetEasing(*options.Easing)
+	}
+	return c.api.GetFft(ctx).GetFftRequest(*body).Execute()
 }

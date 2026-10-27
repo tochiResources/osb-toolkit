@@ -13,6 +13,7 @@ from ..models.sprite_count_result import SpriteCountResult
 from ..models.storyboard import Storyboard
 from ..models.text_request import TextRequest
 from ..models.time_request import TimeRequest
+from .options import LayerHandleOptions, RandomOptions, TextOptions, TimeOptions, to_kwargs
 
 
 class Generator:
@@ -26,20 +27,20 @@ class Generator:
     def beatmap(self) -> Beatmap:
         return self._api.beatmap()
 
-    def control_point_at(self, body: TimeRequest) -> ControlPoint:
-        return self._api.control_point_at(body)
+    def control_point_at(self, options: TimeOptions) -> ControlPoint:
+        return self._api.control_point_at(TimeRequest(**to_kwargs(options)))
 
-    def import_osb(self, body: TextRequest) -> ImportOsbResult:
-        return self._api.import_osb(body)
+    def import_osb(self, options: TextOptions) -> ImportOsbResult:
+        return self._api.import_osb(TextRequest(**to_kwargs(options)))
 
-    def layer_handle(self, body: LayerHandleRequest) -> LayerHandle:
-        return self._api.layer_handle(body)
+    def layer_handle(self, options: LayerHandleOptions) -> LayerHandle:
+        return self._api.layer_handle(LayerHandleRequest(**to_kwargs(options)))
 
-    def load_beatmap(self, body: TextRequest) -> LoadBeatmapResult:
-        return self._api.load_beatmap(body)
+    def load_beatmap(self, options: TextOptions) -> LoadBeatmapResult:
+        return self._api.load_beatmap(TextRequest(**to_kwargs(options)))
 
-    def random(self, body: RandomRequest) -> RandomResult:
-        return self._api.random(body)
+    def random(self, options: RandomOptions) -> RandomResult:
+        return self._api.random(RandomRequest(**to_kwargs(options)))
 
     def sprite_count(self) -> SpriteCountResult:
         return self._api.sprite_count()
@@ -47,5 +48,5 @@ class Generator:
     def storyboard(self) -> Storyboard:
         return self._api.storyboard()
 
-    def timing_point_at(self, body: TimeRequest) -> ControlPoint:
-        return self._api.timing_point_at(body)
+    def timing_point_at(self, options: TimeOptions) -> ControlPoint:
+        return self._api.timing_point_at(TimeRequest(**to_kwargs(options)))

@@ -14,5 +14,5 @@ public sealed class Optimize
 
     public static bool InstanceOf(object value) => value is Optimize;
 
-    public OptimizeResult OptimizeOsb(OptimizeRequest body) => api.OptimizeOsb(body);
+    public OptimizeResult OptimizeOsb(OptimizeOptions options) => api.OptimizeOsb(new OptimizeRequest(options.Options, options.Text));
 }

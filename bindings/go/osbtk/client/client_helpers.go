@@ -21,14 +21,26 @@ func IsHelpers(value any) bool {
 	return ok
 }
 
-func (c *Helpers) Call(ctx context.Context, body osbtk.HelperRequest) (*osbtk.HelperResult, *http.Response, error) {
-	return c.api.Call(ctx).HelperRequest(body).Execute()
+func (c *Helpers) Call(ctx context.Context, options HelperOptions) (*osbtk.HelperResult, *http.Response, error) {
+	body := osbtk.NewHelperRequest(options.Name)
+	if options.Input != nil {
+		body.SetInput(*options.Input)
+	}
+	return c.api.Call(ctx).HelperRequest(*body).Execute()
 }
 
-func (c *Helpers) Commands(ctx context.Context, body osbtk.HelperRequest) (*osbtk.HelperResult, *http.Response, error) {
-	return c.api.Commands(ctx).HelperRequest(body).Execute()
+func (c *Helpers) Commands(ctx context.Context, options HelperOptions) (*osbtk.HelperResult, *http.Response, error) {
+	body := osbtk.NewHelperRequest(options.Name)
+	if options.Input != nil {
+		body.SetInput(*options.Input)
+	}
+	return c.api.Commands(ctx).HelperRequest(*body).Execute()
 }
 
-func (c *Helpers) Keyframes(ctx context.Context, body osbtk.HelperRequest) (*osbtk.HelperResult, *http.Response, error) {
-	return c.api.Keyframes(ctx).HelperRequest(body).Execute()
+func (c *Helpers) Keyframes(ctx context.Context, options HelperOptions) (*osbtk.HelperResult, *http.Response, error) {
+	body := osbtk.NewHelperRequest(options.Name)
+	if options.Input != nil {
+		body.SetInput(*options.Input)
+	}
+	return c.api.Keyframes(ctx).HelperRequest(*body).Execute()
 }

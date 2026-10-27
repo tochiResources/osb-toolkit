@@ -14,7 +14,7 @@ public sealed class Diagnostics
 
     public static bool InstanceOf(object value) => value is Diagnostics;
 
-    public DiagnosticReport DiagnoseOsb(TextRequest body) => api.DiagnoseOsb(body);
+    public DiagnosticReport DiagnoseOsb(TextOptions options) => api.DiagnoseOsb(new TextRequest(options.Text));
 
-    public DiagnosticReport DiagnoseOsu(TextRequest body) => api.DiagnoseOsu(body);
+    public DiagnosticReport DiagnoseOsu(TextOptions options) => api.DiagnoseOsu(new TextRequest(options.Text));
 }

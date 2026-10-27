@@ -3,14 +3,11 @@ import type { Beatmap } from '../../models/Beatmap';
 import type { ControlPoint } from '../../models/ControlPoint';
 import type { ImportOsbResult } from '../../models/ImportOsbResult';
 import type { LayerHandle } from '../../models/LayerHandle';
-import type { LayerHandleRequest } from '../../models/LayerHandleRequest';
 import type { LoadBeatmapResult } from '../../models/LoadBeatmapResult';
-import type { RandomRequest } from '../../models/RandomRequest';
 import type { RandomResult } from '../../models/RandomResult';
 import type { SpriteCountResult } from '../../models/SpriteCountResult';
 import type { Storyboard } from '../../models/Storyboard';
-import type { TextRequest } from '../../models/TextRequest';
-import type { TimeRequest } from '../../models/TimeRequest';
+import type { LayerHandleOptions, RandomOptions, TextOptions, TimeOptions } from '../options';
 
 export class Generator {
     constructor(private readonly api: GeneratorAPI) {}
@@ -23,24 +20,24 @@ export class Generator {
         return this.api.beatmap();
     }
 
-    async controlPointAt(body: TimeRequest): Promise<ControlPoint> {
-        return this.api.controlPointAt(body);
+    async controlPointAt(options: TimeOptions): Promise<ControlPoint> {
+        return this.api.controlPointAt(options);
     }
 
-    async importOsb(body: TextRequest): Promise<ImportOsbResult> {
-        return this.api.importOsb(body);
+    async importOsb(options: TextOptions): Promise<ImportOsbResult> {
+        return this.api.importOsb(options);
     }
 
-    async layerHandle(body: LayerHandleRequest): Promise<LayerHandle> {
-        return this.api.layerHandle(body);
+    async layerHandle(options: LayerHandleOptions): Promise<LayerHandle> {
+        return this.api.layerHandle(options);
     }
 
-    async loadBeatmap(body: TextRequest): Promise<LoadBeatmapResult> {
-        return this.api.loadBeatmap(body);
+    async loadBeatmap(options: TextOptions): Promise<LoadBeatmapResult> {
+        return this.api.loadBeatmap(options);
     }
 
-    async random(body: RandomRequest): Promise<RandomResult> {
-        return this.api.random(body);
+    async random(options: RandomOptions): Promise<RandomResult> {
+        return this.api.random(options);
     }
 
     async spriteCount(): Promise<SpriteCountResult> {
@@ -51,7 +48,7 @@ export class Generator {
         return this.api.storyboard();
     }
 
-    async timingPointAt(body: TimeRequest): Promise<ControlPoint> {
-        return this.api.timingPointAt(body);
+    async timingPointAt(options: TimeOptions): Promise<ControlPoint> {
+        return this.api.timingPointAt(options);
     }
 }

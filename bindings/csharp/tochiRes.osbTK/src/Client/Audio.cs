@@ -16,7 +16,7 @@ public sealed class Audio
 
     public AudioDurationResult AudioDuration() => api.AudioDuration();
 
-    public FftResult Fft(FftRequest body) => api.Fft(body);
+    public FftResult Fft(FftOptions options) => api.Fft(new FftRequest(options.Magnitudes, options.Path, options.Time));
 
-    public FftResult GetFft(GetFftRequest body) => api.GetFft(body);
+    public FftResult GetFft(GetFftOptions options) => api.GetFft(new GetFftRequest(options.Cutoff, options.Easing, options.Magnitudes, options.Time));
 }

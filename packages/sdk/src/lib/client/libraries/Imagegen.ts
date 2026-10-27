@@ -1,6 +1,6 @@
 import { ImagegenAPI } from '../../api/ImagegenAPI';
 import type { ImageInfo } from '../../models/ImageInfo';
-import type { RenderShapesRequest } from '../../models/RenderShapesRequest';
+import type { RenderShapesOptions } from '../options';
 
 export class Imagegen {
     constructor(private readonly api: ImagegenAPI) {}
@@ -9,7 +9,7 @@ export class Imagegen {
         return value instanceof Imagegen;
     }
 
-    async renderShapes(body: RenderShapesRequest): Promise<ImageInfo> {
-        return this.api.renderShapes(body);
+    async renderShapes(options: RenderShapesOptions): Promise<ImageInfo> {
+        return this.api.renderShapes(options);
     }
 }

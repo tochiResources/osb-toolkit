@@ -29,55 +29,91 @@ public final class Curve {
         return value instanceof Curve;
     }
 
-    public PointListResult arc(ArcRequest body) throws ApiException {
-        return api.arc(body);
+    public PointListResult arc(ArcOptions options) throws ApiException {
+        return api.arc(new ArcRequest()
+            .center(options.center)
+            .count(options.count)
+            .radius(options.radius)
+            .startAngle(options.startAngle)
+            .sweepAngle(options.sweepAngle));
     }
 
-    public Box2 boundingBox(CurveRequest body) throws ApiException {
-        return api.boundingBox(body);
+    public Box2 boundingBox(CurveOptions options) throws ApiException {
+        return api.boundingBox(new CurveRequest()
+            .curve(options.curve));
     }
 
-    public ScalarResult curvature(CurvePointRequest body) throws ApiException {
-        return api.curvature(body);
+    public ScalarResult curvature(CurvePointOptions options) throws ApiException {
+        return api.curvature(new CurvePointRequest()
+            .byArcLength(options.byArcLength)
+            .curve(options.curve)
+            .t(options.t));
     }
 
-    public ScalarResult distanceTo(CurveDistanceRequest body) throws ApiException {
-        return api.distanceTo(body);
+    public ScalarResult distanceTo(CurveDistanceOptions options) throws ApiException {
+        return api.distanceTo(new CurveDistanceRequest()
+            .curve(options.curve)
+            .point(options.point));
     }
 
-    public PointListResult ellipse(EllipseRequest body) throws ApiException {
-        return api.ellipse(body);
+    public PointListResult ellipse(EllipseOptions options) throws ApiException {
+        return api.ellipse(new EllipseRequest()
+            .center(options.center)
+            .count(options.count)
+            .radiusX(options.radiusX)
+            .radiusY(options.radiusY));
     }
 
-    public ScalarResult length(CurveRequest body) throws ApiException {
-        return api.length(body);
+    public ScalarResult length(CurveOptions options) throws ApiException {
+        return api.length(new CurveRequest()
+            .curve(options.curve));
     }
 
-    public OptionalPointResult lineIntersect(LineIntersectRequest body) throws ApiException {
-        return api.lineIntersect(body);
+    public OptionalPointResult lineIntersect(LineIntersectOptions options) throws ApiException {
+        return api.lineIntersect(new LineIntersectRequest()
+            .a1(options.a1)
+            .a2(options.a2)
+            .b1(options.b1)
+            .b2(options.b2));
     }
 
-    public Vector2 normal(CurvePointRequest body) throws ApiException {
-        return api.normal(body);
+    public Vector2 normal(CurvePointOptions options) throws ApiException {
+        return api.normal(new CurvePointRequest()
+            .byArcLength(options.byArcLength)
+            .curve(options.curve)
+            .t(options.t));
     }
 
-    public PointListResult offset(CurveOffsetRequest body) throws ApiException {
-        return api.offset(body);
+    public PointListResult offset(CurveOffsetOptions options) throws ApiException {
+        return api.offset(new CurveOffsetRequest()
+            .curve(options.curve)
+            .distance(options.distance));
     }
 
-    public Vector2 point(CurvePointRequest body) throws ApiException {
-        return api.point(body);
+    public Vector2 point(CurvePointOptions options) throws ApiException {
+        return api.point(new CurvePointRequest()
+            .byArcLength(options.byArcLength)
+            .curve(options.curve)
+            .t(options.t));
     }
 
-    public PointListResult sample(CurveSampleRequest body) throws ApiException {
-        return api.sample(body);
+    public PointListResult sample(CurveSampleOptions options) throws ApiException {
+        return api.sample(new CurveSampleRequest()
+            .byArcLength(options.byArcLength)
+            .count(options.count)
+            .curve(options.curve));
     }
 
-    public PointListResult simplify(SimplifyRequest body) throws ApiException {
-        return api.simplify(body);
+    public PointListResult simplify(SimplifyOptions options) throws ApiException {
+        return api.simplify(new SimplifyRequest()
+            .points(options.points)
+            .tolerance(options.tolerance));
     }
 
-    public Vector2 tangent(CurvePointRequest body) throws ApiException {
-        return api.tangent(body);
+    public Vector2 tangent(CurvePointOptions options) throws ApiException {
+        return api.tangent(new CurvePointRequest()
+            .byArcLength(options.byArcLength)
+            .curve(options.curve)
+            .t(options.t));
     }
 }

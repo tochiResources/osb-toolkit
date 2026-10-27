@@ -14,9 +14,9 @@ public sealed class Helpers
 
     public static bool InstanceOf(object value) => value is Helpers;
 
-    public HelperResult Call(HelperRequest body) => api.Call(body);
+    public HelperResult Call(HelperOptions options) => api.Call(new HelperRequest(options.Input, options.Name));
 
-    public HelperResult Commands(HelperRequest body) => api.Commands(body);
+    public HelperResult Commands(HelperOptions options) => api.Commands(new HelperRequest(options.Input, options.Name));
 
-    public HelperResult Keyframes(HelperRequest body) => api.Keyframes(body);
+    public HelperResult Keyframes(HelperOptions options) => api.Keyframes(new HelperRequest(options.Input, options.Name));
 }

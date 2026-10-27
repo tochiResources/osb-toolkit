@@ -21,10 +21,18 @@ func IsAnimations(value any) bool {
 	return ok
 }
 
-func (c *Animations) ApplyEasing(ctx context.Context, body osbtk.ApplyEasingRequest) (*osbtk.EasingResult, *http.Response, error) {
-	return c.api.ApplyEasing(ctx).ApplyEasingRequest(body).Execute()
+func (c *Animations) ApplyEasing(ctx context.Context, options ApplyEasingOptions) (*osbtk.EasingResult, *http.Response, error) {
+	body := osbtk.NewApplyEasingRequest(options.Easing, options.T)
+	return c.api.ApplyEasing(ctx).ApplyEasingRequest(*body).Execute()
 }
 
-func (c *Animations) EasingValue(ctx context.Context, body osbtk.EasingValueRequest) (*osbtk.EasingResult, *http.Response, error) {
-	return c.api.EasingValue(ctx).EasingValueRequest(body).Execute()
+func (c *Animations) EasingValue(ctx context.Context, options EasingValueOptions) (*osbtk.EasingResult, *http.Response, error) {
+	body := osbtk.NewEasingValueRequest(options.T)
+	if options.CubicBezier != nil {
+		body.SetCubicBezier(options.CubicBezier)
+	}
+	if options.Easing != nil {
+		body.SetEasing(*options.Easing)
+	}
+	return c.api.EasingValue(ctx).EasingValueRequest(*body).Execute()
 }

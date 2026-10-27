@@ -21,10 +21,12 @@ func IsOrigin(value any) bool {
 	return ok
 }
 
-func (c *Origin) GetOriginVector(ctx context.Context, body osbtk.GetOriginVectorRequest) (*osbtk.Vector2, *http.Response, error) {
-	return c.api.GetOriginVector(ctx).GetOriginVectorRequest(body).Execute()
+func (c *Origin) GetOriginVector(ctx context.Context, options GetOriginVectorOptions) (*osbtk.Vector2, *http.Response, error) {
+	body := osbtk.NewGetOriginVectorRequest(options.Height, options.Origin, options.Width)
+	return c.api.GetOriginVector(ctx).GetOriginVectorRequest(*body).Execute()
 }
 
-func (c *Origin) InScreenBounds(ctx context.Context, body osbtk.InScreenBoundsRequest) (*osbtk.BoolResult, *http.Response, error) {
-	return c.api.InScreenBounds(ctx).InScreenBoundsRequest(body).Execute()
+func (c *Origin) InScreenBounds(ctx context.Context, options InScreenBoundsOptions) (*osbtk.BoolResult, *http.Response, error) {
+	body := osbtk.NewInScreenBoundsRequest(options.Origin, options.Position, options.Rotation, options.Size)
+	return c.api.InScreenBounds(ctx).InScreenBoundsRequest(*body).Execute()
 }

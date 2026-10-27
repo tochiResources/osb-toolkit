@@ -17,68 +17,108 @@ import moe.tochi.osbtk.model.SegmentDiscardResult;
 import moe.tochi.osbtk.model.SegmentIndexesResult;
 import moe.tochi.osbtk.model.SegmentRequest;
 import moe.tochi.osbtk.model.SegmentReverseDepthRequest;
+import moe.tochi.osbtk.api.SpriteAPI;
 import java.util.List;
 
 public final class Layer {
     private final LayerAPI api;
+    private final SpriteAPI sprites;
+    private final int handle;
 
-    public Layer(LayerAPI api) {
+    public Layer(LayerAPI api, SpriteAPI sprites, int handle) {
         this.api = api;
+        this.sprites = sprites;
+        this.handle = handle;
     }
 
     public static boolean instanceOf(Object value) {
         return value instanceof Layer;
     }
 
-    public OkResult addIndex(SegmentAddIndexRequest body) throws ApiException {
-        return api.addIndex(body);
+    public OkResult addIndex(SegmentAddIndexOptions options) throws ApiException {
+        return api.addIndex(new SegmentAddIndexRequest()
+            .index(options.index)
+            .layer(this.handle));
     }
 
-    public OkResult changePosition(SegmentChangePositionRequest body) throws ApiException {
-        return api.changePosition(body);
+    public OkResult changePosition(SegmentChangePositionOptions options) throws ApiException {
+        return api.changePosition(new SegmentChangePositionRequest()
+            .layer(this.handle)
+            .osbLayer(options.osbLayer));
     }
 
-    public SegmentCleanResult clean(SegmentRequest body) throws ApiException {
-        return api.clean(body);
+    public SegmentCleanResult clean() throws ApiException {
+        return api.clean(new SegmentRequest()
+            .layer(this.handle));
     }
 
-    public Handle createAnimation(CreateAnimationRequest body) throws ApiException {
-        return api.createAnimation(body);
+    public Sprite createAnimation(CreateAnimationOptions options) throws ApiException {
+        Handle handle = api.createAnimation(new CreateAnimationRequest()
+            .frameDelay(options.frameDelay)
+            .frames(options.frames)
+            .layer(options.layer)
+            .layerHandle(this.handle)
+            .loopType(options.loopType)
+            .origin(options.origin)
+            .path(options.path)
+            .position(options.position));
+        return new Sprite(this.sprites, handle.getLayer(), handle.getSprite());
     }
 
-    public OkResult createSample(CreateSampleRequest body) throws ApiException {
-        return api.createSample(body);
+    public OkResult createSample(CreateSampleOptions options) throws ApiException {
+        return api.createSample(new CreateSampleRequest()
+            .layer(options.layer)
+            .layerHandle(this.handle)
+            .path(options.path)
+            .time(options.time)
+            .volume(options.volume));
     }
 
-    public LayerHandle createSegment(SegmentRequest body) throws ApiException {
-        return api.createSegment(body);
+    public Layer createSegment() throws ApiException {
+        LayerHandle handle = api.createSegment(new SegmentRequest()
+            .layer(this.handle));
+        return new Layer(this.api, this.sprites, handle.getLayer());
     }
 
-    public Handle createSprite(CreateSpriteRequest body) throws ApiException {
-        return api.createSprite(body);
+    public Sprite createSprite(CreateSpriteOptions options) throws ApiException {
+        Handle handle = api.createSprite(new CreateSpriteRequest()
+            .layer(options.layer)
+            .layerHandle(this.handle)
+            .origin(options.origin)
+            .path(options.path)
+            .position(options.position));
+        return new Sprite(this.sprites, handle.getLayer(), handle.getSprite());
     }
 
-    public SegmentDiscardResult discard(SegmentRequest body) throws ApiException {
-        return api.discard(body);
+    public SegmentDiscardResult discard() throws ApiException {
+        return api.discard(new SegmentRequest()
+            .layer(this.handle));
     }
 
-    public BoolResult discardSprite(HandleRequest body) throws ApiException {
-        return api.discardSprite(body);
+    public BoolResult discardSprite(int sprite) throws ApiException {
+        return api.discardSprite(new HandleRequest()
+            .layer(this.handle)
+            .sprite(sprite));
     }
 
-    public SegmentIndexesResult indexes(SegmentRequest body) throws ApiException {
-        return api.indexes(body);
+    public SegmentIndexesResult indexes() throws ApiException {
+        return api.indexes(new SegmentRequest()
+            .layer(this.handle));
     }
 
-    public OkResult moveToBottom(SegmentRequest body) throws ApiException {
-        return api.moveToBottom(body);
+    public OkResult moveToBottom() throws ApiException {
+        return api.moveToBottom(new SegmentRequest()
+            .layer(this.handle));
     }
 
-    public OkResult moveToTop(SegmentRequest body) throws ApiException {
-        return api.moveToTop(body);
+    public OkResult moveToTop() throws ApiException {
+        return api.moveToTop(new SegmentRequest()
+            .layer(this.handle));
     }
 
-    public OkResult reverseDepth(SegmentReverseDepthRequest body) throws ApiException {
-        return api.reverseDepth(body);
+    public OkResult reverseDepth(SegmentReverseDepthOptions options) throws ApiException {
+        return api.reverseDepth(new SegmentReverseDepthRequest()
+            .layer(this.handle)
+            .value(options.value));
     }
 }

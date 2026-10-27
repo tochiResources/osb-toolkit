@@ -10,9 +10,7 @@ export function protectTransport(apiDir: string): void {
         if (!file.endsWith('.java')) continue;
         const path = join(apiDir, file);
         let text = readFileSync(path, 'utf8');
-        for (const match of text.matchAll(
-            /public ApiResponse<([^>]+)> (\w+)WithHttpInfo\(/g
-        )) {
+        for (const match of text.matchAll(/public ApiResponse<([^>]+)> (\w+)WithHttpInfo\(/g)) {
             const [, type, name] = match;
             text = text
                 .replaceAll(

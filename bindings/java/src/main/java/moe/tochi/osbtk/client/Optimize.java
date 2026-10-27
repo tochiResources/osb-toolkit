@@ -17,7 +17,9 @@ public final class Optimize {
         return value instanceof Optimize;
     }
 
-    public OptimizeResult optimizeOsb(OptimizeRequest body) throws ApiException {
-        return api.optimizeOsb(body);
+    public OptimizeResult optimizeOsb(OptimizeOptions options) throws ApiException {
+        return api.optimizeOsb(new OptimizeRequest()
+            .options(options.options)
+            .text(options.text));
     }
 }

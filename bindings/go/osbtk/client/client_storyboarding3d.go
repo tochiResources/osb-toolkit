@@ -21,6 +21,7 @@ func IsStoryboarding3d(value any) bool {
 	return ok
 }
 
-func (c *Storyboarding3d) Bake3d(ctx context.Context, body osbtk.Bake3dRequest) (*osbtk.BakedStoryboard, *http.Response, error) {
-	return c.api.Bake3d(ctx).Bake3dRequest(body).Execute()
+func (c *Storyboarding3d) Bake3d(ctx context.Context, options Bake3dOptions) (*osbtk.BakedStoryboard, *http.Response, error) {
+	body := osbtk.NewBake3dRequest(options.Input)
+	return c.api.Bake3d(ctx).Bake3dRequest(*body).Execute()
 }

@@ -9,30 +9,33 @@ from ..models.sprite_state import SpriteState
 from ..models.sprite_time_request import SpriteTimeRequest
 from ..models.start_loop_group_request import StartLoopGroupRequest
 from ..models.start_trigger_group_request import StartTriggerGroupRequest
+from .options import CommandOptions, SpriteTimeOptions, StartLoopGroupOptions, StartTriggerGroupOptions, to_kwargs
 
 
 class Sprite:
-    def __init__(self, api: SpriteAPI) -> None:
+    def __init__(self, api: SpriteAPI, layer: int, sprite: int) -> None:
         self._api = api
+        self._layer = layer
+        self._sprite = sprite
 
     @staticmethod
     def instance_of(value: object) -> bool:
         return isinstance(value, Sprite)
 
-    def command(self, body: CommandRequest) -> OkResult:
-        return self._api.command(body)
+    def command(self, options: CommandOptions) -> OkResult:
+        return self._api.command(CommandRequest(layer=self._layer, sprite=self._sprite, **to_kwargs(options)))
 
-    def end_group(self, body: HandleRequest) -> OkResult:
-        return self._api.end_group(body)
+    def end_group(self) -> OkResult:
+        return self._api.end_group(HandleRequest(layer=self._layer, sprite=self._sprite))
 
-    def info(self, body: HandleRequest) -> SpriteInfo:
-        return self._api.info(body)
+    def info(self) -> SpriteInfo:
+        return self._api.info(HandleRequest(layer=self._layer, sprite=self._sprite))
 
-    def start_loop_group(self, body: StartLoopGroupRequest) -> OkResult:
-        return self._api.start_loop_group(body)
+    def start_loop_group(self, options: StartLoopGroupOptions) -> OkResult:
+        return self._api.start_loop_group(StartLoopGroupRequest(layer=self._layer, sprite=self._sprite, **to_kwargs(options)))
 
-    def start_trigger_group(self, body: StartTriggerGroupRequest) -> OkResult:
-        return self._api.start_trigger_group(body)
+    def start_trigger_group(self, options: StartTriggerGroupOptions) -> OkResult:
+        return self._api.start_trigger_group(StartTriggerGroupRequest(layer=self._layer, sprite=self._sprite, **to_kwargs(options)))
 
-    def state_at(self, body: SpriteTimeRequest) -> SpriteState:
-        return self._api.state_at(body)
+    def state_at(self, options: SpriteTimeOptions) -> SpriteState:
+        return self._api.state_at(SpriteTimeRequest(layer=self._layer, sprite=self._sprite, **to_kwargs(options)))

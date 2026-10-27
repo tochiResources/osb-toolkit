@@ -14,7 +14,7 @@ public sealed class Origin
 
     public static bool InstanceOf(object value) => value is Origin;
 
-    public Vector2 GetOriginVector(GetOriginVectorRequest body) => api.GetOriginVector(body);
+    public Vector2 GetOriginVector(GetOriginVectorOptions options) => api.GetOriginVector(new GetOriginVectorRequest(options.Height, options.Origin, options.Width));
 
-    public BoolResult InScreenBounds(InScreenBoundsRequest body) => api.InScreenBounds(body);
+    public BoolResult InScreenBounds(InScreenBoundsOptions options) => api.InScreenBounds(new InScreenBoundsRequest(options.Origin, options.Position, options.Rotation, options.Size));
 }

@@ -21,6 +21,7 @@ func IsOptimize(value any) bool {
 	return ok
 }
 
-func (c *Optimize) OptimizeOsb(ctx context.Context, body osbtk.OptimizeRequest) (*osbtk.OptimizeResult, *http.Response, error) {
-	return c.api.OptimizeOsb(ctx).OptimizeRequest(body).Execute()
+func (c *Optimize) OptimizeOsb(ctx context.Context, options OptimizeOptions) (*osbtk.OptimizeResult, *http.Response, error) {
+	body := osbtk.NewOptimizeRequest(options.Options, options.Text)
+	return c.api.OptimizeOsb(ctx).OptimizeRequest(*body).Execute()
 }

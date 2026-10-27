@@ -19,11 +19,18 @@ public final class Origin {
         return value instanceof Origin;
     }
 
-    public Vector2 getOriginVector(GetOriginVectorRequest body) throws ApiException {
-        return api.getOriginVector(body);
+    public Vector2 getOriginVector(GetOriginVectorOptions options) throws ApiException {
+        return api.getOriginVector(new GetOriginVectorRequest()
+            .height(options.height)
+            .origin(options.origin)
+            .width(options.width));
     }
 
-    public BoolResult inScreenBounds(InScreenBoundsRequest body) throws ApiException {
-        return api.inScreenBounds(body);
+    public BoolResult inScreenBounds(InScreenBoundsOptions options) throws ApiException {
+        return api.inScreenBounds(new InScreenBoundsRequest()
+            .origin(options.origin)
+            .position(options.position)
+            .rotation(options.rotation)
+            .size(options.size));
     }
 }

@@ -14,36 +14,66 @@ import java.util.List;
 
 public final class Sprite {
     private final SpriteAPI api;
+    private final int layer;
+    private final int sprite;
 
-    public Sprite(SpriteAPI api) {
+    public Sprite(SpriteAPI api, int layer, int sprite) {
         this.api = api;
+        this.layer = layer;
+        this.sprite = sprite;
     }
 
     public static boolean instanceOf(Object value) {
         return value instanceof Sprite;
     }
 
-    public OkResult command(CommandRequest body) throws ApiException {
-        return api.command(body);
+    public OkResult command(CommandOptions options) throws ApiException {
+        return api.command(new CommandRequest()
+            .easing(options.easing)
+            .end(options.end)
+            .endTime(options.endTime)
+            .kind(options.kind)
+            .layer(this.layer)
+            .parameter(options.parameter)
+            .sprite(this.sprite)
+            .start(options.start)
+            .startTime(options.startTime));
     }
 
-    public OkResult endGroup(HandleRequest body) throws ApiException {
-        return api.endGroup(body);
+    public OkResult endGroup() throws ApiException {
+        return api.endGroup(new HandleRequest()
+            .layer(this.layer)
+            .sprite(this.sprite));
     }
 
-    public SpriteInfo info(HandleRequest body) throws ApiException {
-        return api.info(body);
+    public SpriteInfo info() throws ApiException {
+        return api.info(new HandleRequest()
+            .layer(this.layer)
+            .sprite(this.sprite));
     }
 
-    public OkResult startLoopGroup(StartLoopGroupRequest body) throws ApiException {
-        return api.startLoopGroup(body);
+    public OkResult startLoopGroup(StartLoopGroupOptions options) throws ApiException {
+        return api.startLoopGroup(new StartLoopGroupRequest()
+            .count(options.count)
+            .layer(this.layer)
+            .sprite(this.sprite)
+            .startTime(options.startTime));
     }
 
-    public OkResult startTriggerGroup(StartTriggerGroupRequest body) throws ApiException {
-        return api.startTriggerGroup(body);
+    public OkResult startTriggerGroup(StartTriggerGroupOptions options) throws ApiException {
+        return api.startTriggerGroup(new StartTriggerGroupRequest()
+            .endTime(options.endTime)
+            .group(options.group)
+            .layer(this.layer)
+            .name(options.name)
+            .sprite(this.sprite)
+            .startTime(options.startTime));
     }
 
-    public SpriteState stateAt(SpriteTimeRequest body) throws ApiException {
-        return api.stateAt(body);
+    public SpriteState stateAt(SpriteTimeOptions options) throws ApiException {
+        return api.stateAt(new SpriteTimeRequest()
+            .layer(this.layer)
+            .sprite(this.sprite)
+            .time(options.time));
     }
 }

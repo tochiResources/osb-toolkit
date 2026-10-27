@@ -1,8 +1,7 @@
 import { AudioAPI } from '../../api/AudioAPI';
 import type { AudioDurationResult } from '../../models/AudioDurationResult';
-import type { FftRequest } from '../../models/FftRequest';
 import type { FftResult } from '../../models/FftResult';
-import type { GetFftRequest } from '../../models/GetFftRequest';
+import type { FftOptions, GetFftOptions } from '../options';
 
 export class Audio {
     constructor(private readonly api: AudioAPI) {}
@@ -15,11 +14,11 @@ export class Audio {
         return this.api.audioDuration();
     }
 
-    async fft(body: FftRequest): Promise<FftResult> {
-        return this.api.fft(body);
+    async fft(options: FftOptions): Promise<FftResult> {
+        return this.api.fft(options);
     }
 
-    async getFft(body: GetFftRequest): Promise<FftResult> {
-        return this.api.getFft(body);
+    async getFft(options: GetFftOptions): Promise<FftResult> {
+        return this.api.getFft(options);
     }
 }

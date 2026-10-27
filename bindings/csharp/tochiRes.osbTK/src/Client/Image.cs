@@ -14,7 +14,7 @@ public sealed class Image
 
     public static bool InstanceOf(object value) => value is Image;
 
-    public ImageInfo Info(PathRequest body) => api.Info(body);
+    public ImageInfo Info(PathOptions options) => api.Info(new PathRequest(options.Path));
 
-    public ImageInfo Process(ImageProcessRequest body) => api.Process(body);
+    public ImageInfo Process(ImageProcessOptions options) => api.Process(new ImageProcessRequest(options.Options, options.Output, options.Path));
 }

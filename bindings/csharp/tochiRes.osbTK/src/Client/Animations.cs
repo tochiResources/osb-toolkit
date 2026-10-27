@@ -14,7 +14,7 @@ public sealed class Animations
 
     public static bool InstanceOf(object value) => value is Animations;
 
-    public EasingResult ApplyEasing(ApplyEasingRequest body) => api.ApplyEasing(body);
+    public EasingResult ApplyEasing(ApplyEasingOptions options) => api.ApplyEasing(new ApplyEasingRequest(options.Easing, options.T));
 
-    public EasingResult EasingValue(EasingValueRequest body) => api.EasingValue(body);
+    public EasingResult EasingValue(EasingValueOptions options) => api.EasingValue(new EasingValueRequest(options.CubicBezier, options.Easing, options.T));
 }

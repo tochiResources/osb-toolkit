@@ -14,7 +14,7 @@ public sealed class Parsing
 
     public static bool InstanceOf(object value) => value is Parsing;
 
-    public ParseOsbResult ParseOsb(TextRequest body) => api.ParseOsb(body);
+    public ParseOsbResult ParseOsb(TextOptions options) => api.ParseOsb(new TextRequest(options.Text));
 
-    public Beatmap ParseOsu(TextRequest body) => api.ParseOsu(body);
+    public Beatmap ParseOsu(TextOptions options) => api.ParseOsu(new TextRequest(options.Text));
 }

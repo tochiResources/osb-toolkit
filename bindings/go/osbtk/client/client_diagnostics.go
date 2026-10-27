@@ -21,10 +21,12 @@ func IsDiagnostics(value any) bool {
 	return ok
 }
 
-func (c *Diagnostics) DiagnoseOsb(ctx context.Context, body osbtk.TextRequest) (*osbtk.DiagnosticReport, *http.Response, error) {
-	return c.api.DiagnoseOsb(ctx).TextRequest(body).Execute()
+func (c *Diagnostics) DiagnoseOsb(ctx context.Context, options TextOptions) (*osbtk.DiagnosticReport, *http.Response, error) {
+	body := osbtk.NewTextRequest(options.Text)
+	return c.api.DiagnoseOsb(ctx).TextRequest(*body).Execute()
 }
 
-func (c *Diagnostics) DiagnoseOsu(ctx context.Context, body osbtk.TextRequest) (*osbtk.DiagnosticReport, *http.Response, error) {
-	return c.api.DiagnoseOsu(ctx).TextRequest(body).Execute()
+func (c *Diagnostics) DiagnoseOsu(ctx context.Context, options TextOptions) (*osbtk.DiagnosticReport, *http.Response, error) {
+	body := osbtk.NewTextRequest(options.Text)
+	return c.api.DiagnoseOsu(ctx).TextRequest(*body).Execute()
 }

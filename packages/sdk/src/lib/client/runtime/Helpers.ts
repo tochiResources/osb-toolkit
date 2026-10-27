@@ -1,6 +1,6 @@
 import { HelpersAPI } from '../../api/HelpersAPI';
-import type { HelperRequest } from '../../models/HelperRequest';
 import type { HelperResult } from '../../models/HelperResult';
+import type { HelperOptions } from '../options';
 
 export class Helpers {
     constructor(private readonly api: HelpersAPI) {}
@@ -9,15 +9,15 @@ export class Helpers {
         return value instanceof Helpers;
     }
 
-    async call(body: HelperRequest): Promise<HelperResult> {
-        return this.api.call(body);
+    async call(options: HelperOptions): Promise<HelperResult> {
+        return this.api.call(options);
     }
 
-    async commands(body: HelperRequest): Promise<HelperResult> {
-        return this.api.commands(body);
+    async commands(options: HelperOptions): Promise<HelperResult> {
+        return this.api.commands(options);
     }
 
-    async keyframes(body: HelperRequest): Promise<HelperResult> {
-        return this.api.keyframes(body);
+    async keyframes(options: HelperOptions): Promise<HelperResult> {
+        return this.api.keyframes(options);
     }
 }

@@ -17,7 +17,12 @@ public final class Imagegen {
         return value instanceof Imagegen;
     }
 
-    public ImageInfo renderShapes(RenderShapesRequest body) throws ApiException {
-        return api.renderShapes(body);
+    public ImageInfo renderShapes(RenderShapesOptions options) throws ApiException {
+        return api.renderShapes(new RenderShapesRequest()
+            .background(options.background)
+            .height(options.height)
+            .output(options.output)
+            .shapes(options.shapes)
+            .width(options.width));
     }
 }

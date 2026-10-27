@@ -22,19 +22,34 @@ public final class Media {
         return value instanceof Media;
     }
 
-    public MediaInfo encodeVideo(EncodeVideoRequest body) throws ApiException {
-        return api.encodeVideo(body);
+    public MediaInfo encodeVideo(EncodeVideoOptions options) throws ApiException {
+        return api.encodeVideo(new EncodeVideoRequest()
+            .codec(options.codec)
+            .crf(options.crf)
+            .fps(options.fps)
+            .inputPattern(options.inputPattern)
+            .output(options.output));
     }
 
-    public OkResult extractAudio(ExtractAudioRequest body) throws ApiException {
-        return api.extractAudio(body);
+    public OkResult extractAudio(ExtractAudioOptions options) throws ApiException {
+        return api.extractAudio(new ExtractAudioRequest()
+            .input(options.input)
+            .output(options.output));
     }
 
-    public FrameResult extractFrames(ExtractFramesRequest body) throws ApiException {
-        return api.extractFrames(body);
+    public FrameResult extractFrames(ExtractFramesOptions options) throws ApiException {
+        return api.extractFrames(new ExtractFramesRequest()
+            .count(options.count)
+            .fps(options.fps)
+            .height(options.height)
+            .input(options.input)
+            .outputDir(options.outputDir)
+            .start(options.start)
+            .width(options.width));
     }
 
-    public MediaInfo info(PathRequest body) throws ApiException {
-        return api.info(body);
+    public MediaInfo info(PathOptions options) throws ApiException {
+        return api.info(new PathRequest()
+            .path(options.path));
     }
 }

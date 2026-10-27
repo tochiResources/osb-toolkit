@@ -17,7 +17,8 @@ public final class Storyboarding3d {
         return value instanceof Storyboarding3d;
     }
 
-    public BakedStoryboard bake3d(Bake3dRequest body) throws ApiException {
-        return api.bake3d(body);
+    public BakedStoryboard bake3d(Bake3dOptions options) throws ApiException {
+        return api.bake3d(new Bake3dRequest()
+            .input(options.input));
     }
 }

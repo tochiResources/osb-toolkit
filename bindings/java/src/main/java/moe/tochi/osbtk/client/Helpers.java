@@ -17,15 +17,21 @@ public final class Helpers {
         return value instanceof Helpers;
     }
 
-    public HelperResult call(HelperRequest body) throws ApiException {
-        return api.call(body);
+    public HelperResult call(HelperOptions options) throws ApiException {
+        return api.call(new HelperRequest()
+            .input(options.input)
+            .name(options.name));
     }
 
-    public HelperResult commands(HelperRequest body) throws ApiException {
-        return api.commands(body);
+    public HelperResult commands(HelperOptions options) throws ApiException {
+        return api.commands(new HelperRequest()
+            .input(options.input)
+            .name(options.name));
     }
 
-    public HelperResult keyframes(HelperRequest body) throws ApiException {
-        return api.keyframes(body);
+    public HelperResult keyframes(HelperOptions options) throws ApiException {
+        return api.keyframes(new HelperRequest()
+            .input(options.input)
+            .name(options.name));
     }
 }

@@ -1,6 +1,6 @@
 import { DiagnosticsAPI } from '../../api/DiagnosticsAPI';
 import type { DiagnosticReport } from '../../models/DiagnosticReport';
-import type { TextRequest } from '../../models/TextRequest';
+import type { TextOptions } from '../options';
 
 export class Diagnostics {
     constructor(private readonly api: DiagnosticsAPI) {}
@@ -9,11 +9,11 @@ export class Diagnostics {
         return value instanceof Diagnostics;
     }
 
-    async diagnoseOsb(body: TextRequest): Promise<DiagnosticReport> {
-        return this.api.diagnoseOsb(body);
+    async diagnoseOsb(options: TextOptions): Promise<DiagnosticReport> {
+        return this.api.diagnoseOsb(options);
     }
 
-    async diagnoseOsu(body: TextRequest): Promise<DiagnosticReport> {
-        return this.api.diagnoseOsu(body);
+    async diagnoseOsu(options: TextOptions): Promise<DiagnosticReport> {
+        return this.api.diagnoseOsu(options);
     }
 }

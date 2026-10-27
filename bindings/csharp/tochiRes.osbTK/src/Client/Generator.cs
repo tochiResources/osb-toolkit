@@ -16,19 +16,19 @@ public sealed class Generator
 
     public Beatmap Beatmap() => api.Beatmap();
 
-    public ControlPoint ControlPointAt(TimeRequest body) => api.ControlPointAt(body);
+    public ControlPoint ControlPointAt(TimeOptions options) => api.ControlPointAt(new TimeRequest(options.Time));
 
-    public ImportOsbResult ImportOsb(TextRequest body) => api.ImportOsb(body);
+    public ImportOsbResult ImportOsb(TextOptions options) => api.ImportOsb(new TextRequest(options.Text));
 
-    public LayerHandle LayerHandle(LayerHandleRequest body) => api.LayerHandle(body);
+    public LayerHandle LayerHandle(LayerHandleOptions options) => api.LayerHandle(new LayerHandleRequest(options.Name));
 
-    public LoadBeatmapResult LoadBeatmap(TextRequest body) => api.LoadBeatmap(body);
+    public LoadBeatmapResult LoadBeatmap(TextOptions options) => api.LoadBeatmap(new TextRequest(options.Text));
 
-    public RandomResult Random(RandomRequest body) => api.Random(body);
+    public RandomResult Random(RandomOptions options) => api.Random(new RandomRequest(options.Max, options.Min));
 
     public SpriteCountResult SpriteCount() => api.SpriteCount();
 
     public Storyboard Storyboard() => api.Storyboard();
 
-    public ControlPoint TimingPointAt(TimeRequest body) => api.TimingPointAt(body);
+    public ControlPoint TimingPointAt(TimeOptions options) => api.TimingPointAt(new TimeRequest(options.Time));
 }

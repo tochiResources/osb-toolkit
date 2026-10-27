@@ -21,6 +21,10 @@ func IsImagegen(value any) bool {
 	return ok
 }
 
-func (c *Imagegen) RenderShapes(ctx context.Context, body osbtk.RenderShapesRequest) (*osbtk.ImageInfo, *http.Response, error) {
-	return c.api.RenderShapes(ctx).RenderShapesRequest(body).Execute()
+func (c *Imagegen) RenderShapes(ctx context.Context, options RenderShapesOptions) (*osbtk.ImageInfo, *http.Response, error) {
+	body := osbtk.NewRenderShapesRequest(options.Height, options.Output, options.Shapes, options.Width)
+	if options.Background != nil {
+		body.SetBackground(*options.Background)
+	}
+	return c.api.RenderShapes(ctx).RenderShapesRequest(*body).Execute()
 }

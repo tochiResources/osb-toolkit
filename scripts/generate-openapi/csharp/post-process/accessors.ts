@@ -27,12 +27,13 @@ export function protectTransport(apiDir: string): void {
                     `public ${type} ${name}WithHttpInfo(`,
                     `protected ${type} _${name}WithHttpInfo(`
                 )
-                .replace(new RegExp(`(?<!_)\\b${name}WithHttpInfo\\(`, 'g'), `_${name}WithHttpInfo(`);
+                .replace(
+                    new RegExp(`(?<!_)\\b${name}WithHttpInfo\\(`, 'g'),
+                    `_${name}WithHttpInfo(`
+                );
         }
 
-        for (const match of text.matchAll(
-            /public async (.*?) (\w+)WithHttpInfoAsync\(/g
-        )) {
+        for (const match of text.matchAll(/public async (.*?) (\w+)WithHttpInfoAsync\(/g)) {
             const [, type, name] = match;
             text = text
                 .replace(

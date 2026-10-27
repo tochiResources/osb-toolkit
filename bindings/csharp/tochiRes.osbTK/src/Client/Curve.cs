@@ -14,29 +14,29 @@ public sealed class Curve
 
     public static bool InstanceOf(object value) => value is Curve;
 
-    public PointListResult Arc(ArcRequest body) => api.Arc(body);
+    public PointListResult Arc(ArcOptions options) => api.Arc(new ArcRequest(options.Center, options.Count, options.Radius, options.StartAngle, options.SweepAngle));
 
-    public Box2 BoundingBox(CurveRequest body) => api.BoundingBox(body);
+    public Box2 BoundingBox(CurveOptions options) => api.BoundingBox(new CurveRequest(options.Curve));
 
-    public ScalarResult Curvature(CurvePointRequest body) => api.Curvature(body);
+    public ScalarResult Curvature(CurvePointOptions options) => api.Curvature(new CurvePointRequest(options.ByArcLength, options.Curve, options.T));
 
-    public ScalarResult DistanceTo(CurveDistanceRequest body) => api.DistanceTo(body);
+    public ScalarResult DistanceTo(CurveDistanceOptions options) => api.DistanceTo(new CurveDistanceRequest(options.Curve, options.Point));
 
-    public PointListResult Ellipse(EllipseRequest body) => api.Ellipse(body);
+    public PointListResult Ellipse(EllipseOptions options) => api.Ellipse(new EllipseRequest(options.Center, options.Count, options.RadiusX, options.RadiusY));
 
-    public ScalarResult Length(CurveRequest body) => api.Length(body);
+    public ScalarResult Length(CurveOptions options) => api.Length(new CurveRequest(options.Curve));
 
-    public OptionalPointResult LineIntersect(LineIntersectRequest body) => api.LineIntersect(body);
+    public OptionalPointResult LineIntersect(LineIntersectOptions options) => api.LineIntersect(new LineIntersectRequest(options.A1, options.A2, options.B1, options.B2));
 
-    public Vector2 Normal(CurvePointRequest body) => api.Normal(body);
+    public Vector2 Normal(CurvePointOptions options) => api.Normal(new CurvePointRequest(options.ByArcLength, options.Curve, options.T));
 
-    public PointListResult Offset(CurveOffsetRequest body) => api.Offset(body);
+    public PointListResult Offset(CurveOffsetOptions options) => api.Offset(new CurveOffsetRequest(options.Curve, options.Distance));
 
-    public Vector2 Point(CurvePointRequest body) => api.Point(body);
+    public Vector2 Point(CurvePointOptions options) => api.Point(new CurvePointRequest(options.ByArcLength, options.Curve, options.T));
 
-    public PointListResult Sample(CurveSampleRequest body) => api.Sample(body);
+    public PointListResult Sample(CurveSampleOptions options) => api.Sample(new CurveSampleRequest(options.ByArcLength, options.Count, options.Curve));
 
-    public PointListResult Simplify(SimplifyRequest body) => api.Simplify(body);
+    public PointListResult Simplify(SimplifyOptions options) => api.Simplify(new SimplifyRequest(options.Points, options.Tolerance));
 
-    public Vector2 Tangent(CurvePointRequest body) => api.Tangent(body);
+    public Vector2 Tangent(CurvePointOptions options) => api.Tangent(new CurvePointRequest(options.ByArcLength, options.Curve, options.T));
 }

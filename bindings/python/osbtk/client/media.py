@@ -8,6 +8,7 @@ from ..models.frame_result import FrameResult
 from ..models.media_info import MediaInfo
 from ..models.ok_result import OkResult
 from ..models.path_request import PathRequest
+from .options import EncodeVideoOptions, ExtractAudioOptions, ExtractFramesOptions, PathOptions, to_kwargs
 
 
 class Media:
@@ -18,14 +19,14 @@ class Media:
     def instance_of(value: object) -> bool:
         return isinstance(value, Media)
 
-    def encode_video(self, body: EncodeVideoRequest) -> MediaInfo:
-        return self._api.encode_video(body)
+    def encode_video(self, options: EncodeVideoOptions) -> MediaInfo:
+        return self._api.encode_video(EncodeVideoRequest(**to_kwargs(options)))
 
-    def extract_audio(self, body: ExtractAudioRequest) -> OkResult:
-        return self._api.extract_audio(body)
+    def extract_audio(self, options: ExtractAudioOptions) -> OkResult:
+        return self._api.extract_audio(ExtractAudioRequest(**to_kwargs(options)))
 
-    def extract_frames(self, body: ExtractFramesRequest) -> FrameResult:
-        return self._api.extract_frames(body)
+    def extract_frames(self, options: ExtractFramesOptions) -> FrameResult:
+        return self._api.extract_frames(ExtractFramesRequest(**to_kwargs(options)))
 
-    def info(self, body: PathRequest) -> MediaInfo:
-        return self._api.info(body)
+    def info(self, options: PathOptions) -> MediaInfo:
+        return self._api.info(PathRequest(**to_kwargs(options)))

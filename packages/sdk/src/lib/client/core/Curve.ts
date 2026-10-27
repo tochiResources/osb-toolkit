@@ -1,18 +1,10 @@
 import { CurveAPI } from '../../api/CurveAPI';
-import type { ArcRequest } from '../../models/ArcRequest';
 import type { Box2 } from '../../models/Box2';
-import type { CurveDistanceRequest } from '../../models/CurveDistanceRequest';
-import type { CurveOffsetRequest } from '../../models/CurveOffsetRequest';
-import type { CurvePointRequest } from '../../models/CurvePointRequest';
-import type { CurveRequest } from '../../models/CurveRequest';
-import type { CurveSampleRequest } from '../../models/CurveSampleRequest';
-import type { EllipseRequest } from '../../models/EllipseRequest';
-import type { LineIntersectRequest } from '../../models/LineIntersectRequest';
 import type { OptionalPointResult } from '../../models/OptionalPointResult';
 import type { PointListResult } from '../../models/PointListResult';
 import type { ScalarResult } from '../../models/ScalarResult';
-import type { SimplifyRequest } from '../../models/SimplifyRequest';
 import type { Vector2 } from '../../models/Vector2';
+import type { ArcOptions, CurveDistanceOptions, CurveOffsetOptions, CurveOptions, CurvePointOptions, CurveSampleOptions, EllipseOptions, LineIntersectOptions, SimplifyOptions } from '../options';
 
 export class Curve {
     constructor(private readonly api: CurveAPI) {}
@@ -21,55 +13,55 @@ export class Curve {
         return value instanceof Curve;
     }
 
-    async arc(body: ArcRequest): Promise<PointListResult> {
-        return this.api.arc(body);
+    async arc(options: ArcOptions): Promise<PointListResult> {
+        return this.api.arc(options);
     }
 
-    async boundingBox(body: CurveRequest): Promise<Box2> {
-        return this.api.boundingBox(body);
+    async boundingBox(options: CurveOptions): Promise<Box2> {
+        return this.api.boundingBox(options);
     }
 
-    async curvature(body: CurvePointRequest): Promise<ScalarResult> {
-        return this.api.curvature(body);
+    async curvature(options: CurvePointOptions): Promise<ScalarResult> {
+        return this.api.curvature(options);
     }
 
-    async distanceTo(body: CurveDistanceRequest): Promise<ScalarResult> {
-        return this.api.distanceTo(body);
+    async distanceTo(options: CurveDistanceOptions): Promise<ScalarResult> {
+        return this.api.distanceTo(options);
     }
 
-    async ellipse(body: EllipseRequest): Promise<PointListResult> {
-        return this.api.ellipse(body);
+    async ellipse(options: EllipseOptions): Promise<PointListResult> {
+        return this.api.ellipse(options);
     }
 
-    async length(body: CurveRequest): Promise<ScalarResult> {
-        return this.api.length(body);
+    async length(options: CurveOptions): Promise<ScalarResult> {
+        return this.api.length(options);
     }
 
-    async lineIntersect(body: LineIntersectRequest): Promise<OptionalPointResult> {
-        return this.api.lineIntersect(body);
+    async lineIntersect(options: LineIntersectOptions): Promise<OptionalPointResult> {
+        return this.api.lineIntersect(options);
     }
 
-    async normal(body: CurvePointRequest): Promise<Vector2> {
-        return this.api.normal(body);
+    async normal(options: CurvePointOptions): Promise<Vector2> {
+        return this.api.normal(options);
     }
 
-    async offset(body: CurveOffsetRequest): Promise<PointListResult> {
-        return this.api.offset(body);
+    async offset(options: CurveOffsetOptions): Promise<PointListResult> {
+        return this.api.offset(options);
     }
 
-    async point(body: CurvePointRequest): Promise<Vector2> {
-        return this.api.point(body);
+    async point(options: CurvePointOptions): Promise<Vector2> {
+        return this.api.point(options);
     }
 
-    async sample(body: CurveSampleRequest): Promise<PointListResult> {
-        return this.api.sample(body);
+    async sample(options: CurveSampleOptions): Promise<PointListResult> {
+        return this.api.sample(options);
     }
 
-    async simplify(body: SimplifyRequest): Promise<PointListResult> {
-        return this.api.simplify(body);
+    async simplify(options: SimplifyOptions): Promise<PointListResult> {
+        return this.api.simplify(options);
     }
 
-    async tangent(body: CurvePointRequest): Promise<Vector2> {
-        return this.api.tangent(body);
+    async tangent(options: CurvePointOptions): Promise<Vector2> {
+        return this.api.tangent(options);
     }
 }
