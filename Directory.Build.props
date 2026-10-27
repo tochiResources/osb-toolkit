@@ -1,0 +1,19 @@
+<Project>
+
+  <!-- Applies to every C# project in the repo (the lint tool, and any future
+       binding/facade projects). Roslyn analyzers + code style run at build, and
+       warnings are errors, so the C# side stays as clean as the biome/rustfmt
+       passes keep the TypeScript and Rust. -->
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- The SDK entry class is intentionally named `osb` (lower-case). -->
+    <NoWarn>$(NoWarn);CS8981</NoWarn>
+  </PropertyGroup>
+
+</Project>
