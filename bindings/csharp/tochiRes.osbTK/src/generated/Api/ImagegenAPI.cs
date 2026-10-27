@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="renderShapesRequest"></param>
         /// <returns>ApiResponse of ImageInfo</returns>
-        ApiResponse<ImageInfo> RenderShapesWithHttpInfo(RenderShapesRequest renderShapesRequest);
         #endregion Synchronous Operations
     }
 
@@ -78,7 +77,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="renderShapesRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ImageInfo)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ImageInfo>> RenderShapesWithHttpInfoAsync(RenderShapesRequest renderShapesRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -300,7 +298,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>ImageInfo</returns>
         public ImageInfo RenderShapes(RenderShapesRequest renderShapesRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<ImageInfo> localVarResponse = RenderShapesWithHttpInfo(renderShapesRequest);
+            tochiRes.osbTK.Client.ApiResponse<ImageInfo> localVarResponse = _RenderShapesWithHttpInfo(renderShapesRequest);
             return localVarResponse.Data;
         }
 
@@ -310,7 +308,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="renderShapesRequest"></param>
         /// <returns>ApiResponse of ImageInfo</returns>
-        public tochiRes.osbTK.Client.ApiResponse<ImageInfo> RenderShapesWithHttpInfo(RenderShapesRequest renderShapesRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<ImageInfo> _RenderShapesWithHttpInfo(RenderShapesRequest renderShapesRequest)
         {
             // verify the required parameter 'renderShapesRequest' is set
             if (renderShapesRequest == null)
@@ -357,7 +355,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of ImageInfo</returns>
         public async System.Threading.Tasks.Task<ImageInfo> RenderShapesAsync(RenderShapesRequest renderShapesRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<ImageInfo> localVarResponse = await RenderShapesWithHttpInfoAsync(renderShapesRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<ImageInfo> localVarResponse = await _RenderShapesWithHttpInfoAsync(renderShapesRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -368,7 +366,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="renderShapesRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ImageInfo)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ImageInfo>> RenderShapesWithHttpInfoAsync(RenderShapesRequest renderShapesRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ImageInfo>> _RenderShapesWithHttpInfoAsync(RenderShapesRequest renderShapesRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'renderShapesRequest' is set
             if (renderShapesRequest == null)

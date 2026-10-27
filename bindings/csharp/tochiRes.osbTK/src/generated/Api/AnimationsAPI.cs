@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applyEasingRequest"></param>
         /// <returns>ApiResponse of EasingResult</returns>
-        ApiResponse<EasingResult> ApplyEasingWithHttpInfo(ApplyEasingRequest applyEasingRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +63,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="easingValueRequest"></param>
         /// <returns>ApiResponse of EasingResult</returns>
-        ApiResponse<EasingResult> EasingValueWithHttpInfo(EasingValueRequest easingValueRequest);
         #endregion Synchronous Operations
     }
 
@@ -96,7 +94,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="applyEasingRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (EasingResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<EasingResult>> ApplyEasingWithHttpInfoAsync(ApplyEasingRequest applyEasingRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -119,7 +116,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="easingValueRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (EasingResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<EasingResult>> EasingValueWithHttpInfoAsync(EasingValueRequest easingValueRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -341,7 +337,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>EasingResult</returns>
         public EasingResult ApplyEasing(ApplyEasingRequest applyEasingRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<EasingResult> localVarResponse = ApplyEasingWithHttpInfo(applyEasingRequest);
+            tochiRes.osbTK.Client.ApiResponse<EasingResult> localVarResponse = _ApplyEasingWithHttpInfo(applyEasingRequest);
             return localVarResponse.Data;
         }
 
@@ -351,7 +347,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applyEasingRequest"></param>
         /// <returns>ApiResponse of EasingResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<EasingResult> ApplyEasingWithHttpInfo(ApplyEasingRequest applyEasingRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<EasingResult> _ApplyEasingWithHttpInfo(ApplyEasingRequest applyEasingRequest)
         {
             // verify the required parameter 'applyEasingRequest' is set
             if (applyEasingRequest == null)
@@ -398,7 +394,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of EasingResult</returns>
         public async System.Threading.Tasks.Task<EasingResult> ApplyEasingAsync(ApplyEasingRequest applyEasingRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<EasingResult> localVarResponse = await ApplyEasingWithHttpInfoAsync(applyEasingRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<EasingResult> localVarResponse = await _ApplyEasingWithHttpInfoAsync(applyEasingRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -409,7 +405,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="applyEasingRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (EasingResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<EasingResult>> ApplyEasingWithHttpInfoAsync(ApplyEasingRequest applyEasingRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<EasingResult>> _ApplyEasingWithHttpInfoAsync(ApplyEasingRequest applyEasingRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applyEasingRequest' is set
             if (applyEasingRequest == null)
@@ -458,7 +454,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>EasingResult</returns>
         public EasingResult EasingValue(EasingValueRequest easingValueRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<EasingResult> localVarResponse = EasingValueWithHttpInfo(easingValueRequest);
+            tochiRes.osbTK.Client.ApiResponse<EasingResult> localVarResponse = _EasingValueWithHttpInfo(easingValueRequest);
             return localVarResponse.Data;
         }
 
@@ -468,7 +464,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="easingValueRequest"></param>
         /// <returns>ApiResponse of EasingResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<EasingResult> EasingValueWithHttpInfo(EasingValueRequest easingValueRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<EasingResult> _EasingValueWithHttpInfo(EasingValueRequest easingValueRequest)
         {
             // verify the required parameter 'easingValueRequest' is set
             if (easingValueRequest == null)
@@ -515,7 +511,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of EasingResult</returns>
         public async System.Threading.Tasks.Task<EasingResult> EasingValueAsync(EasingValueRequest easingValueRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<EasingResult> localVarResponse = await EasingValueWithHttpInfoAsync(easingValueRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<EasingResult> localVarResponse = await _EasingValueWithHttpInfoAsync(easingValueRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -526,7 +522,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="easingValueRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (EasingResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<EasingResult>> EasingValueWithHttpInfoAsync(EasingValueRequest easingValueRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<EasingResult>> _EasingValueWithHttpInfoAsync(EasingValueRequest easingValueRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'easingValueRequest' is set
             if (easingValueRequest == null)

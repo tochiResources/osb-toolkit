@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="optimizeRequest"></param>
         /// <returns>ApiResponse of OptimizeResult</returns>
-        ApiResponse<OptimizeResult> OptimizeOsbWithHttpInfo(OptimizeRequest optimizeRequest);
         #endregion Synchronous Operations
     }
 
@@ -78,7 +77,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="optimizeRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OptimizeResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OptimizeResult>> OptimizeOsbWithHttpInfoAsync(OptimizeRequest optimizeRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -300,7 +298,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OptimizeResult</returns>
         public OptimizeResult OptimizeOsb(OptimizeRequest optimizeRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OptimizeResult> localVarResponse = OptimizeOsbWithHttpInfo(optimizeRequest);
+            tochiRes.osbTK.Client.ApiResponse<OptimizeResult> localVarResponse = _OptimizeOsbWithHttpInfo(optimizeRequest);
             return localVarResponse.Data;
         }
 
@@ -310,7 +308,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="optimizeRequest"></param>
         /// <returns>ApiResponse of OptimizeResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OptimizeResult> OptimizeOsbWithHttpInfo(OptimizeRequest optimizeRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OptimizeResult> _OptimizeOsbWithHttpInfo(OptimizeRequest optimizeRequest)
         {
             // verify the required parameter 'optimizeRequest' is set
             if (optimizeRequest == null)
@@ -357,7 +355,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OptimizeResult</returns>
         public async System.Threading.Tasks.Task<OptimizeResult> OptimizeOsbAsync(OptimizeRequest optimizeRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OptimizeResult> localVarResponse = await OptimizeOsbWithHttpInfoAsync(optimizeRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OptimizeResult> localVarResponse = await _OptimizeOsbWithHttpInfoAsync(optimizeRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -368,7 +366,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="optimizeRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OptimizeResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OptimizeResult>> OptimizeOsbWithHttpInfoAsync(OptimizeRequest optimizeRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OptimizeResult>> _OptimizeOsbWithHttpInfoAsync(OptimizeRequest optimizeRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'optimizeRequest' is set
             if (optimizeRequest == null)

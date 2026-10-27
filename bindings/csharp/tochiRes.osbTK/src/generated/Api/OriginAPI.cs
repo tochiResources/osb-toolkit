@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="getOriginVectorRequest"></param>
         /// <returns>ApiResponse of Vector2</returns>
-        ApiResponse<Vector2> GetOriginVectorWithHttpInfo(GetOriginVectorRequest getOriginVectorRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +63,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="inScreenBoundsRequest"></param>
         /// <returns>ApiResponse of BoolResult</returns>
-        ApiResponse<BoolResult> InScreenBoundsWithHttpInfo(InScreenBoundsRequest inScreenBoundsRequest);
         #endregion Synchronous Operations
     }
 
@@ -96,7 +94,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="getOriginVectorRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Vector2)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Vector2>> GetOriginVectorWithHttpInfoAsync(GetOriginVectorRequest getOriginVectorRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -119,7 +116,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="inScreenBoundsRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BoolResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<BoolResult>> InScreenBoundsWithHttpInfoAsync(InScreenBoundsRequest inScreenBoundsRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -341,7 +337,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Vector2</returns>
         public Vector2 GetOriginVector(GetOriginVectorRequest getOriginVectorRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = GetOriginVectorWithHttpInfo(getOriginVectorRequest);
+            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = _GetOriginVectorWithHttpInfo(getOriginVectorRequest);
             return localVarResponse.Data;
         }
 
@@ -351,7 +347,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="getOriginVectorRequest"></param>
         /// <returns>ApiResponse of Vector2</returns>
-        public tochiRes.osbTK.Client.ApiResponse<Vector2> GetOriginVectorWithHttpInfo(GetOriginVectorRequest getOriginVectorRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<Vector2> _GetOriginVectorWithHttpInfo(GetOriginVectorRequest getOriginVectorRequest)
         {
             // verify the required parameter 'getOriginVectorRequest' is set
             if (getOriginVectorRequest == null)
@@ -398,7 +394,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of Vector2</returns>
         public async System.Threading.Tasks.Task<Vector2> GetOriginVectorAsync(GetOriginVectorRequest getOriginVectorRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = await GetOriginVectorWithHttpInfoAsync(getOriginVectorRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = await _GetOriginVectorWithHttpInfoAsync(getOriginVectorRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -409,7 +405,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="getOriginVectorRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Vector2)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Vector2>> GetOriginVectorWithHttpInfoAsync(GetOriginVectorRequest getOriginVectorRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Vector2>> _GetOriginVectorWithHttpInfoAsync(GetOriginVectorRequest getOriginVectorRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'getOriginVectorRequest' is set
             if (getOriginVectorRequest == null)
@@ -458,7 +454,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>BoolResult</returns>
         public BoolResult InScreenBounds(InScreenBoundsRequest inScreenBoundsRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<BoolResult> localVarResponse = InScreenBoundsWithHttpInfo(inScreenBoundsRequest);
+            tochiRes.osbTK.Client.ApiResponse<BoolResult> localVarResponse = _InScreenBoundsWithHttpInfo(inScreenBoundsRequest);
             return localVarResponse.Data;
         }
 
@@ -468,7 +464,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="inScreenBoundsRequest"></param>
         /// <returns>ApiResponse of BoolResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<BoolResult> InScreenBoundsWithHttpInfo(InScreenBoundsRequest inScreenBoundsRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<BoolResult> _InScreenBoundsWithHttpInfo(InScreenBoundsRequest inScreenBoundsRequest)
         {
             // verify the required parameter 'inScreenBoundsRequest' is set
             if (inScreenBoundsRequest == null)
@@ -515,7 +511,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of BoolResult</returns>
         public async System.Threading.Tasks.Task<BoolResult> InScreenBoundsAsync(InScreenBoundsRequest inScreenBoundsRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<BoolResult> localVarResponse = await InScreenBoundsWithHttpInfoAsync(inScreenBoundsRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<BoolResult> localVarResponse = await _InScreenBoundsWithHttpInfoAsync(inScreenBoundsRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -526,7 +522,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="inScreenBoundsRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BoolResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<BoolResult>> InScreenBoundsWithHttpInfoAsync(InScreenBoundsRequest inScreenBoundsRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<BoolResult>> _InScreenBoundsWithHttpInfoAsync(InScreenBoundsRequest inScreenBoundsRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'inScreenBoundsRequest' is set
             if (inScreenBoundsRequest == null)

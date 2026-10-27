@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentAddIndexRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        ApiResponse<OkResult> AddIndexWithHttpInfo(SegmentAddIndexRequest segmentAddIndexRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +63,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentChangePositionRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        ApiResponse<OkResult> ChangePositionWithHttpInfo(SegmentChangePositionRequest segmentChangePositionRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -82,7 +80,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentRequest"></param>
         /// <returns>ApiResponse of SegmentCleanResult</returns>
-        ApiResponse<SegmentCleanResult> CleanWithHttpInfo(SegmentRequest segmentRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -100,7 +97,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createAnimationRequest"></param>
         /// <returns>ApiResponse of Handle</returns>
-        ApiResponse<Handle> CreateAnimationWithHttpInfo(CreateAnimationRequest createAnimationRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -118,7 +114,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSampleRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        ApiResponse<OkResult> CreateSampleWithHttpInfo(CreateSampleRequest createSampleRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -136,7 +131,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentRequest"></param>
         /// <returns>ApiResponse of LayerHandle</returns>
-        ApiResponse<LayerHandle> CreateSegmentWithHttpInfo(SegmentRequest segmentRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -154,7 +148,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSpriteRequest"></param>
         /// <returns>ApiResponse of Handle</returns>
-        ApiResponse<Handle> CreateSpriteWithHttpInfo(CreateSpriteRequest createSpriteRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -172,7 +165,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentRequest"></param>
         /// <returns>ApiResponse of SegmentDiscardResult</returns>
-        ApiResponse<SegmentDiscardResult> DiscardWithHttpInfo(SegmentRequest segmentRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -190,7 +182,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="handleRequest"></param>
         /// <returns>ApiResponse of BoolResult</returns>
-        ApiResponse<BoolResult> DiscardSpriteWithHttpInfo(HandleRequest handleRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -208,7 +199,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentRequest"></param>
         /// <returns>ApiResponse of SegmentIndexesResult</returns>
-        ApiResponse<SegmentIndexesResult> IndexesWithHttpInfo(SegmentRequest segmentRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -226,7 +216,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        ApiResponse<OkResult> MoveToBottomWithHttpInfo(SegmentRequest segmentRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -244,7 +233,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        ApiResponse<OkResult> MoveToTopWithHttpInfo(SegmentRequest segmentRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -262,7 +250,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentReverseDepthRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        ApiResponse<OkResult> ReverseDepthWithHttpInfo(SegmentReverseDepthRequest segmentReverseDepthRequest);
         #endregion Synchronous Operations
     }
 
@@ -294,7 +281,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentAddIndexRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OkResult>> AddIndexWithHttpInfoAsync(SegmentAddIndexRequest segmentAddIndexRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -317,7 +303,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentChangePositionRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OkResult>> ChangePositionWithHttpInfoAsync(SegmentChangePositionRequest segmentChangePositionRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -340,7 +325,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SegmentCleanResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SegmentCleanResult>> CleanWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -363,7 +347,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="createAnimationRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Handle)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Handle>> CreateAnimationWithHttpInfoAsync(CreateAnimationRequest createAnimationRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -386,7 +369,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="createSampleRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OkResult>> CreateSampleWithHttpInfoAsync(CreateSampleRequest createSampleRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -409,7 +391,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LayerHandle)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LayerHandle>> CreateSegmentWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -432,7 +413,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="createSpriteRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Handle)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Handle>> CreateSpriteWithHttpInfoAsync(CreateSpriteRequest createSpriteRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -455,7 +435,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SegmentDiscardResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SegmentDiscardResult>> DiscardWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -478,7 +457,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="handleRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BoolResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<BoolResult>> DiscardSpriteWithHttpInfoAsync(HandleRequest handleRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -501,7 +479,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SegmentIndexesResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SegmentIndexesResult>> IndexesWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -524,7 +501,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OkResult>> MoveToBottomWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -547,7 +523,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OkResult>> MoveToTopWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -570,7 +545,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentReverseDepthRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OkResult>> ReverseDepthWithHttpInfoAsync(SegmentReverseDepthRequest segmentReverseDepthRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -792,7 +766,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OkResult</returns>
         public OkResult AddIndex(SegmentAddIndexRequest segmentAddIndexRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = AddIndexWithHttpInfo(segmentAddIndexRequest);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = _AddIndexWithHttpInfo(segmentAddIndexRequest);
             return localVarResponse.Data;
         }
 
@@ -802,7 +776,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentAddIndexRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OkResult> AddIndexWithHttpInfo(SegmentAddIndexRequest segmentAddIndexRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OkResult> _AddIndexWithHttpInfo(SegmentAddIndexRequest segmentAddIndexRequest)
         {
             // verify the required parameter 'segmentAddIndexRequest' is set
             if (segmentAddIndexRequest == null)
@@ -849,7 +823,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OkResult</returns>
         public async System.Threading.Tasks.Task<OkResult> AddIndexAsync(SegmentAddIndexRequest segmentAddIndexRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await AddIndexWithHttpInfoAsync(segmentAddIndexRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await _AddIndexWithHttpInfoAsync(segmentAddIndexRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -860,7 +834,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentAddIndexRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> AddIndexWithHttpInfoAsync(SegmentAddIndexRequest segmentAddIndexRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> _AddIndexWithHttpInfoAsync(SegmentAddIndexRequest segmentAddIndexRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'segmentAddIndexRequest' is set
             if (segmentAddIndexRequest == null)
@@ -909,7 +883,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OkResult</returns>
         public OkResult ChangePosition(SegmentChangePositionRequest segmentChangePositionRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = ChangePositionWithHttpInfo(segmentChangePositionRequest);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = _ChangePositionWithHttpInfo(segmentChangePositionRequest);
             return localVarResponse.Data;
         }
 
@@ -919,7 +893,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentChangePositionRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OkResult> ChangePositionWithHttpInfo(SegmentChangePositionRequest segmentChangePositionRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OkResult> _ChangePositionWithHttpInfo(SegmentChangePositionRequest segmentChangePositionRequest)
         {
             // verify the required parameter 'segmentChangePositionRequest' is set
             if (segmentChangePositionRequest == null)
@@ -966,7 +940,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OkResult</returns>
         public async System.Threading.Tasks.Task<OkResult> ChangePositionAsync(SegmentChangePositionRequest segmentChangePositionRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await ChangePositionWithHttpInfoAsync(segmentChangePositionRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await _ChangePositionWithHttpInfoAsync(segmentChangePositionRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -977,7 +951,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentChangePositionRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> ChangePositionWithHttpInfoAsync(SegmentChangePositionRequest segmentChangePositionRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> _ChangePositionWithHttpInfoAsync(SegmentChangePositionRequest segmentChangePositionRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'segmentChangePositionRequest' is set
             if (segmentChangePositionRequest == null)
@@ -1026,7 +1000,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>SegmentCleanResult</returns>
         public SegmentCleanResult Clean(SegmentRequest segmentRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<SegmentCleanResult> localVarResponse = CleanWithHttpInfo(segmentRequest);
+            tochiRes.osbTK.Client.ApiResponse<SegmentCleanResult> localVarResponse = _CleanWithHttpInfo(segmentRequest);
             return localVarResponse.Data;
         }
 
@@ -1036,7 +1010,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentRequest"></param>
         /// <returns>ApiResponse of SegmentCleanResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<SegmentCleanResult> CleanWithHttpInfo(SegmentRequest segmentRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<SegmentCleanResult> _CleanWithHttpInfo(SegmentRequest segmentRequest)
         {
             // verify the required parameter 'segmentRequest' is set
             if (segmentRequest == null)
@@ -1083,7 +1057,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of SegmentCleanResult</returns>
         public async System.Threading.Tasks.Task<SegmentCleanResult> CleanAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<SegmentCleanResult> localVarResponse = await CleanWithHttpInfoAsync(segmentRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<SegmentCleanResult> localVarResponse = await _CleanWithHttpInfoAsync(segmentRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1094,7 +1068,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SegmentCleanResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<SegmentCleanResult>> CleanWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<SegmentCleanResult>> _CleanWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'segmentRequest' is set
             if (segmentRequest == null)
@@ -1143,7 +1117,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Handle</returns>
         public Handle CreateAnimation(CreateAnimationRequest createAnimationRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<Handle> localVarResponse = CreateAnimationWithHttpInfo(createAnimationRequest);
+            tochiRes.osbTK.Client.ApiResponse<Handle> localVarResponse = _CreateAnimationWithHttpInfo(createAnimationRequest);
             return localVarResponse.Data;
         }
 
@@ -1153,7 +1127,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createAnimationRequest"></param>
         /// <returns>ApiResponse of Handle</returns>
-        public tochiRes.osbTK.Client.ApiResponse<Handle> CreateAnimationWithHttpInfo(CreateAnimationRequest createAnimationRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<Handle> _CreateAnimationWithHttpInfo(CreateAnimationRequest createAnimationRequest)
         {
             // verify the required parameter 'createAnimationRequest' is set
             if (createAnimationRequest == null)
@@ -1200,7 +1174,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of Handle</returns>
         public async System.Threading.Tasks.Task<Handle> CreateAnimationAsync(CreateAnimationRequest createAnimationRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<Handle> localVarResponse = await CreateAnimationWithHttpInfoAsync(createAnimationRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<Handle> localVarResponse = await _CreateAnimationWithHttpInfoAsync(createAnimationRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1211,7 +1185,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="createAnimationRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Handle)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Handle>> CreateAnimationWithHttpInfoAsync(CreateAnimationRequest createAnimationRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Handle>> _CreateAnimationWithHttpInfoAsync(CreateAnimationRequest createAnimationRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'createAnimationRequest' is set
             if (createAnimationRequest == null)
@@ -1260,7 +1234,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OkResult</returns>
         public OkResult CreateSample(CreateSampleRequest createSampleRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = CreateSampleWithHttpInfo(createSampleRequest);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = _CreateSampleWithHttpInfo(createSampleRequest);
             return localVarResponse.Data;
         }
 
@@ -1270,7 +1244,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSampleRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OkResult> CreateSampleWithHttpInfo(CreateSampleRequest createSampleRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OkResult> _CreateSampleWithHttpInfo(CreateSampleRequest createSampleRequest)
         {
             // verify the required parameter 'createSampleRequest' is set
             if (createSampleRequest == null)
@@ -1317,7 +1291,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OkResult</returns>
         public async System.Threading.Tasks.Task<OkResult> CreateSampleAsync(CreateSampleRequest createSampleRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await CreateSampleWithHttpInfoAsync(createSampleRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await _CreateSampleWithHttpInfoAsync(createSampleRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1328,7 +1302,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="createSampleRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> CreateSampleWithHttpInfoAsync(CreateSampleRequest createSampleRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> _CreateSampleWithHttpInfoAsync(CreateSampleRequest createSampleRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'createSampleRequest' is set
             if (createSampleRequest == null)
@@ -1377,7 +1351,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>LayerHandle</returns>
         public LayerHandle CreateSegment(SegmentRequest segmentRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<LayerHandle> localVarResponse = CreateSegmentWithHttpInfo(segmentRequest);
+            tochiRes.osbTK.Client.ApiResponse<LayerHandle> localVarResponse = _CreateSegmentWithHttpInfo(segmentRequest);
             return localVarResponse.Data;
         }
 
@@ -1387,7 +1361,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentRequest"></param>
         /// <returns>ApiResponse of LayerHandle</returns>
-        public tochiRes.osbTK.Client.ApiResponse<LayerHandle> CreateSegmentWithHttpInfo(SegmentRequest segmentRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<LayerHandle> _CreateSegmentWithHttpInfo(SegmentRequest segmentRequest)
         {
             // verify the required parameter 'segmentRequest' is set
             if (segmentRequest == null)
@@ -1434,7 +1408,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of LayerHandle</returns>
         public async System.Threading.Tasks.Task<LayerHandle> CreateSegmentAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<LayerHandle> localVarResponse = await CreateSegmentWithHttpInfoAsync(segmentRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<LayerHandle> localVarResponse = await _CreateSegmentWithHttpInfoAsync(segmentRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1445,7 +1419,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LayerHandle)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<LayerHandle>> CreateSegmentWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<LayerHandle>> _CreateSegmentWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'segmentRequest' is set
             if (segmentRequest == null)
@@ -1494,7 +1468,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Handle</returns>
         public Handle CreateSprite(CreateSpriteRequest createSpriteRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<Handle> localVarResponse = CreateSpriteWithHttpInfo(createSpriteRequest);
+            tochiRes.osbTK.Client.ApiResponse<Handle> localVarResponse = _CreateSpriteWithHttpInfo(createSpriteRequest);
             return localVarResponse.Data;
         }
 
@@ -1504,7 +1478,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSpriteRequest"></param>
         /// <returns>ApiResponse of Handle</returns>
-        public tochiRes.osbTK.Client.ApiResponse<Handle> CreateSpriteWithHttpInfo(CreateSpriteRequest createSpriteRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<Handle> _CreateSpriteWithHttpInfo(CreateSpriteRequest createSpriteRequest)
         {
             // verify the required parameter 'createSpriteRequest' is set
             if (createSpriteRequest == null)
@@ -1551,7 +1525,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of Handle</returns>
         public async System.Threading.Tasks.Task<Handle> CreateSpriteAsync(CreateSpriteRequest createSpriteRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<Handle> localVarResponse = await CreateSpriteWithHttpInfoAsync(createSpriteRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<Handle> localVarResponse = await _CreateSpriteWithHttpInfoAsync(createSpriteRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1562,7 +1536,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="createSpriteRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Handle)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Handle>> CreateSpriteWithHttpInfoAsync(CreateSpriteRequest createSpriteRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Handle>> _CreateSpriteWithHttpInfoAsync(CreateSpriteRequest createSpriteRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'createSpriteRequest' is set
             if (createSpriteRequest == null)
@@ -1611,7 +1585,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>SegmentDiscardResult</returns>
         public SegmentDiscardResult Discard(SegmentRequest segmentRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<SegmentDiscardResult> localVarResponse = DiscardWithHttpInfo(segmentRequest);
+            tochiRes.osbTK.Client.ApiResponse<SegmentDiscardResult> localVarResponse = _DiscardWithHttpInfo(segmentRequest);
             return localVarResponse.Data;
         }
 
@@ -1621,7 +1595,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentRequest"></param>
         /// <returns>ApiResponse of SegmentDiscardResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<SegmentDiscardResult> DiscardWithHttpInfo(SegmentRequest segmentRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<SegmentDiscardResult> _DiscardWithHttpInfo(SegmentRequest segmentRequest)
         {
             // verify the required parameter 'segmentRequest' is set
             if (segmentRequest == null)
@@ -1668,7 +1642,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of SegmentDiscardResult</returns>
         public async System.Threading.Tasks.Task<SegmentDiscardResult> DiscardAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<SegmentDiscardResult> localVarResponse = await DiscardWithHttpInfoAsync(segmentRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<SegmentDiscardResult> localVarResponse = await _DiscardWithHttpInfoAsync(segmentRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1679,7 +1653,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SegmentDiscardResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<SegmentDiscardResult>> DiscardWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<SegmentDiscardResult>> _DiscardWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'segmentRequest' is set
             if (segmentRequest == null)
@@ -1728,7 +1702,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>BoolResult</returns>
         public BoolResult DiscardSprite(HandleRequest handleRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<BoolResult> localVarResponse = DiscardSpriteWithHttpInfo(handleRequest);
+            tochiRes.osbTK.Client.ApiResponse<BoolResult> localVarResponse = _DiscardSpriteWithHttpInfo(handleRequest);
             return localVarResponse.Data;
         }
 
@@ -1738,7 +1712,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="handleRequest"></param>
         /// <returns>ApiResponse of BoolResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<BoolResult> DiscardSpriteWithHttpInfo(HandleRequest handleRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<BoolResult> _DiscardSpriteWithHttpInfo(HandleRequest handleRequest)
         {
             // verify the required parameter 'handleRequest' is set
             if (handleRequest == null)
@@ -1785,7 +1759,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of BoolResult</returns>
         public async System.Threading.Tasks.Task<BoolResult> DiscardSpriteAsync(HandleRequest handleRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<BoolResult> localVarResponse = await DiscardSpriteWithHttpInfoAsync(handleRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<BoolResult> localVarResponse = await _DiscardSpriteWithHttpInfoAsync(handleRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1796,7 +1770,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="handleRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BoolResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<BoolResult>> DiscardSpriteWithHttpInfoAsync(HandleRequest handleRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<BoolResult>> _DiscardSpriteWithHttpInfoAsync(HandleRequest handleRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'handleRequest' is set
             if (handleRequest == null)
@@ -1845,7 +1819,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>SegmentIndexesResult</returns>
         public SegmentIndexesResult Indexes(SegmentRequest segmentRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<SegmentIndexesResult> localVarResponse = IndexesWithHttpInfo(segmentRequest);
+            tochiRes.osbTK.Client.ApiResponse<SegmentIndexesResult> localVarResponse = _IndexesWithHttpInfo(segmentRequest);
             return localVarResponse.Data;
         }
 
@@ -1855,7 +1829,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentRequest"></param>
         /// <returns>ApiResponse of SegmentIndexesResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<SegmentIndexesResult> IndexesWithHttpInfo(SegmentRequest segmentRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<SegmentIndexesResult> _IndexesWithHttpInfo(SegmentRequest segmentRequest)
         {
             // verify the required parameter 'segmentRequest' is set
             if (segmentRequest == null)
@@ -1902,7 +1876,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of SegmentIndexesResult</returns>
         public async System.Threading.Tasks.Task<SegmentIndexesResult> IndexesAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<SegmentIndexesResult> localVarResponse = await IndexesWithHttpInfoAsync(segmentRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<SegmentIndexesResult> localVarResponse = await _IndexesWithHttpInfoAsync(segmentRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1913,7 +1887,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SegmentIndexesResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<SegmentIndexesResult>> IndexesWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<SegmentIndexesResult>> _IndexesWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'segmentRequest' is set
             if (segmentRequest == null)
@@ -1962,7 +1936,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OkResult</returns>
         public OkResult MoveToBottom(SegmentRequest segmentRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = MoveToBottomWithHttpInfo(segmentRequest);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = _MoveToBottomWithHttpInfo(segmentRequest);
             return localVarResponse.Data;
         }
 
@@ -1972,7 +1946,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OkResult> MoveToBottomWithHttpInfo(SegmentRequest segmentRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OkResult> _MoveToBottomWithHttpInfo(SegmentRequest segmentRequest)
         {
             // verify the required parameter 'segmentRequest' is set
             if (segmentRequest == null)
@@ -2019,7 +1993,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OkResult</returns>
         public async System.Threading.Tasks.Task<OkResult> MoveToBottomAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await MoveToBottomWithHttpInfoAsync(segmentRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await _MoveToBottomWithHttpInfoAsync(segmentRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2030,7 +2004,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> MoveToBottomWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> _MoveToBottomWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'segmentRequest' is set
             if (segmentRequest == null)
@@ -2079,7 +2053,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OkResult</returns>
         public OkResult MoveToTop(SegmentRequest segmentRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = MoveToTopWithHttpInfo(segmentRequest);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = _MoveToTopWithHttpInfo(segmentRequest);
             return localVarResponse.Data;
         }
 
@@ -2089,7 +2063,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OkResult> MoveToTopWithHttpInfo(SegmentRequest segmentRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OkResult> _MoveToTopWithHttpInfo(SegmentRequest segmentRequest)
         {
             // verify the required parameter 'segmentRequest' is set
             if (segmentRequest == null)
@@ -2136,7 +2110,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OkResult</returns>
         public async System.Threading.Tasks.Task<OkResult> MoveToTopAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await MoveToTopWithHttpInfoAsync(segmentRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await _MoveToTopWithHttpInfoAsync(segmentRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2147,7 +2121,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> MoveToTopWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> _MoveToTopWithHttpInfoAsync(SegmentRequest segmentRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'segmentRequest' is set
             if (segmentRequest == null)
@@ -2196,7 +2170,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OkResult</returns>
         public OkResult ReverseDepth(SegmentReverseDepthRequest segmentReverseDepthRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = ReverseDepthWithHttpInfo(segmentReverseDepthRequest);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = _ReverseDepthWithHttpInfo(segmentReverseDepthRequest);
             return localVarResponse.Data;
         }
 
@@ -2206,7 +2180,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="segmentReverseDepthRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OkResult> ReverseDepthWithHttpInfo(SegmentReverseDepthRequest segmentReverseDepthRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OkResult> _ReverseDepthWithHttpInfo(SegmentReverseDepthRequest segmentReverseDepthRequest)
         {
             // verify the required parameter 'segmentReverseDepthRequest' is set
             if (segmentReverseDepthRequest == null)
@@ -2253,7 +2227,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OkResult</returns>
         public async System.Threading.Tasks.Task<OkResult> ReverseDepthAsync(SegmentReverseDepthRequest segmentReverseDepthRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await ReverseDepthWithHttpInfoAsync(segmentReverseDepthRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await _ReverseDepthWithHttpInfoAsync(segmentReverseDepthRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2264,7 +2238,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="segmentReverseDepthRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> ReverseDepthWithHttpInfoAsync(SegmentReverseDepthRequest segmentReverseDepthRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> _ReverseDepthWithHttpInfoAsync(SegmentReverseDepthRequest segmentReverseDepthRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'segmentReverseDepthRequest' is set
             if (segmentReverseDepthRequest == null)

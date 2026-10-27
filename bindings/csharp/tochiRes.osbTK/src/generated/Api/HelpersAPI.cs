@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="helperRequest"></param>
         /// <returns>ApiResponse of HelperResult</returns>
-        ApiResponse<HelperResult> CallWithHttpInfo(HelperRequest helperRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +63,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="helperRequest"></param>
         /// <returns>ApiResponse of HelperResult</returns>
-        ApiResponse<HelperResult> CommandsWithHttpInfo(HelperRequest helperRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -82,7 +80,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="helperRequest"></param>
         /// <returns>ApiResponse of HelperResult</returns>
-        ApiResponse<HelperResult> KeyframesWithHttpInfo(HelperRequest helperRequest);
         #endregion Synchronous Operations
     }
 
@@ -114,7 +111,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="helperRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (HelperResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<HelperResult>> CallWithHttpInfoAsync(HelperRequest helperRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -137,7 +133,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="helperRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (HelperResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<HelperResult>> CommandsWithHttpInfoAsync(HelperRequest helperRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -160,7 +155,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="helperRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (HelperResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<HelperResult>> KeyframesWithHttpInfoAsync(HelperRequest helperRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -382,7 +376,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>HelperResult</returns>
         public HelperResult Call(HelperRequest helperRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<HelperResult> localVarResponse = CallWithHttpInfo(helperRequest);
+            tochiRes.osbTK.Client.ApiResponse<HelperResult> localVarResponse = _CallWithHttpInfo(helperRequest);
             return localVarResponse.Data;
         }
 
@@ -392,7 +386,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="helperRequest"></param>
         /// <returns>ApiResponse of HelperResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<HelperResult> CallWithHttpInfo(HelperRequest helperRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<HelperResult> _CallWithHttpInfo(HelperRequest helperRequest)
         {
             // verify the required parameter 'helperRequest' is set
             if (helperRequest == null)
@@ -439,7 +433,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of HelperResult</returns>
         public async System.Threading.Tasks.Task<HelperResult> CallAsync(HelperRequest helperRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<HelperResult> localVarResponse = await CallWithHttpInfoAsync(helperRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<HelperResult> localVarResponse = await _CallWithHttpInfoAsync(helperRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -450,7 +444,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="helperRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (HelperResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<HelperResult>> CallWithHttpInfoAsync(HelperRequest helperRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<HelperResult>> _CallWithHttpInfoAsync(HelperRequest helperRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'helperRequest' is set
             if (helperRequest == null)
@@ -499,7 +493,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>HelperResult</returns>
         public HelperResult Commands(HelperRequest helperRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<HelperResult> localVarResponse = CommandsWithHttpInfo(helperRequest);
+            tochiRes.osbTK.Client.ApiResponse<HelperResult> localVarResponse = _CommandsWithHttpInfo(helperRequest);
             return localVarResponse.Data;
         }
 
@@ -509,7 +503,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="helperRequest"></param>
         /// <returns>ApiResponse of HelperResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<HelperResult> CommandsWithHttpInfo(HelperRequest helperRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<HelperResult> _CommandsWithHttpInfo(HelperRequest helperRequest)
         {
             // verify the required parameter 'helperRequest' is set
             if (helperRequest == null)
@@ -556,7 +550,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of HelperResult</returns>
         public async System.Threading.Tasks.Task<HelperResult> CommandsAsync(HelperRequest helperRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<HelperResult> localVarResponse = await CommandsWithHttpInfoAsync(helperRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<HelperResult> localVarResponse = await _CommandsWithHttpInfoAsync(helperRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -567,7 +561,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="helperRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (HelperResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<HelperResult>> CommandsWithHttpInfoAsync(HelperRequest helperRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<HelperResult>> _CommandsWithHttpInfoAsync(HelperRequest helperRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'helperRequest' is set
             if (helperRequest == null)
@@ -616,7 +610,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>HelperResult</returns>
         public HelperResult Keyframes(HelperRequest helperRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<HelperResult> localVarResponse = KeyframesWithHttpInfo(helperRequest);
+            tochiRes.osbTK.Client.ApiResponse<HelperResult> localVarResponse = _KeyframesWithHttpInfo(helperRequest);
             return localVarResponse.Data;
         }
 
@@ -626,7 +620,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="helperRequest"></param>
         /// <returns>ApiResponse of HelperResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<HelperResult> KeyframesWithHttpInfo(HelperRequest helperRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<HelperResult> _KeyframesWithHttpInfo(HelperRequest helperRequest)
         {
             // verify the required parameter 'helperRequest' is set
             if (helperRequest == null)
@@ -673,7 +667,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of HelperResult</returns>
         public async System.Threading.Tasks.Task<HelperResult> KeyframesAsync(HelperRequest helperRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<HelperResult> localVarResponse = await KeyframesWithHttpInfoAsync(helperRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<HelperResult> localVarResponse = await _KeyframesWithHttpInfoAsync(helperRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -684,7 +678,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="helperRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (HelperResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<HelperResult>> KeyframesWithHttpInfoAsync(HelperRequest helperRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<HelperResult>> _KeyframesWithHttpInfoAsync(HelperRequest helperRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'helperRequest' is set
             if (helperRequest == null)

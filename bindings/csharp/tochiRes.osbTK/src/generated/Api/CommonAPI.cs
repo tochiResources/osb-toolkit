@@ -44,7 +44,6 @@ namespace tochiRes.osbTK.Api
         /// </remarks>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of VersionResult</returns>
-        ApiResponse<VersionResult> VersionWithHttpInfo();
         #endregion Synchronous Operations
     }
 
@@ -74,7 +73,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (VersionResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VersionResult>> VersionWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -295,7 +293,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>VersionResult</returns>
         public VersionResult Version()
         {
-            tochiRes.osbTK.Client.ApiResponse<VersionResult> localVarResponse = VersionWithHttpInfo();
+            tochiRes.osbTK.Client.ApiResponse<VersionResult> localVarResponse = _VersionWithHttpInfo();
             return localVarResponse.Data;
         }
 
@@ -304,7 +302,7 @@ namespace tochiRes.osbTK.Api
         /// </summary>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of VersionResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<VersionResult> VersionWithHttpInfo()
+        protected tochiRes.osbTK.Client.ApiResponse<VersionResult> _VersionWithHttpInfo()
         {
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -344,7 +342,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of VersionResult</returns>
         public async System.Threading.Tasks.Task<VersionResult> VersionAsync(System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<VersionResult> localVarResponse = await VersionWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<VersionResult> localVarResponse = await _VersionWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -354,7 +352,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (VersionResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<VersionResult>> VersionWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<VersionResult>> _VersionWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
         {
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();

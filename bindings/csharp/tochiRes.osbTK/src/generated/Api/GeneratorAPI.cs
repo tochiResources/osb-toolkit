@@ -44,7 +44,6 @@ namespace tochiRes.osbTK.Api
         /// </remarks>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of Beatmap</returns>
-        ApiResponse<Beatmap> BeatmapWithHttpInfo();
         /// <summary>
         /// 
         /// </summary>
@@ -62,7 +61,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="timeRequest"></param>
         /// <returns>ApiResponse of ControlPoint</returns>
-        ApiResponse<ControlPoint> ControlPointAtWithHttpInfo(TimeRequest timeRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -80,7 +78,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="textRequest"></param>
         /// <returns>ApiResponse of ImportOsbResult</returns>
-        ApiResponse<ImportOsbResult> ImportOsbWithHttpInfo(TextRequest textRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -98,7 +95,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="layerHandleRequest"></param>
         /// <returns>ApiResponse of LayerHandle</returns>
-        ApiResponse<LayerHandle> LayerHandleWithHttpInfo(LayerHandleRequest layerHandleRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -116,7 +112,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="textRequest"></param>
         /// <returns>ApiResponse of LoadBeatmapResult</returns>
-        ApiResponse<LoadBeatmapResult> LoadBeatmapWithHttpInfo(TextRequest textRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -134,7 +129,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="randomRequest"></param>
         /// <returns>ApiResponse of RandomResult</returns>
-        ApiResponse<RandomResult> RandomWithHttpInfo(RandomRequest randomRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -150,7 +144,6 @@ namespace tochiRes.osbTK.Api
         /// </remarks>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of SpriteCountResult</returns>
-        ApiResponse<SpriteCountResult> SpriteCountWithHttpInfo();
         /// <summary>
         /// 
         /// </summary>
@@ -166,7 +159,6 @@ namespace tochiRes.osbTK.Api
         /// </remarks>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of Storyboard</returns>
-        ApiResponse<Storyboard> StoryboardWithHttpInfo();
         /// <summary>
         /// 
         /// </summary>
@@ -184,7 +176,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="timeRequest"></param>
         /// <returns>ApiResponse of ControlPoint</returns>
-        ApiResponse<ControlPoint> TimingPointAtWithHttpInfo(TimeRequest timeRequest);
         #endregion Synchronous Operations
     }
 
@@ -214,7 +205,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Beatmap)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Beatmap>> BeatmapWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -237,7 +227,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="timeRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ControlPoint)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ControlPoint>> ControlPointAtWithHttpInfoAsync(TimeRequest timeRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -260,7 +249,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="textRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ImportOsbResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ImportOsbResult>> ImportOsbWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -283,7 +271,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="layerHandleRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LayerHandle)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LayerHandle>> LayerHandleWithHttpInfoAsync(LayerHandleRequest layerHandleRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -306,7 +293,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="textRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LoadBeatmapResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LoadBeatmapResult>> LoadBeatmapWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -329,7 +315,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="randomRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RandomResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RandomResult>> RandomWithHttpInfoAsync(RandomRequest randomRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -350,7 +335,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SpriteCountResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SpriteCountResult>> SpriteCountWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -371,7 +355,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Storyboard)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Storyboard>> StoryboardWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -394,7 +377,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="timeRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ControlPoint)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ControlPoint>> TimingPointAtWithHttpInfoAsync(TimeRequest timeRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -615,7 +597,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Beatmap</returns>
         public Beatmap Beatmap()
         {
-            tochiRes.osbTK.Client.ApiResponse<Beatmap> localVarResponse = BeatmapWithHttpInfo();
+            tochiRes.osbTK.Client.ApiResponse<Beatmap> localVarResponse = _BeatmapWithHttpInfo();
             return localVarResponse.Data;
         }
 
@@ -624,7 +606,7 @@ namespace tochiRes.osbTK.Api
         /// </summary>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of Beatmap</returns>
-        public tochiRes.osbTK.Client.ApiResponse<Beatmap> BeatmapWithHttpInfo()
+        protected tochiRes.osbTK.Client.ApiResponse<Beatmap> _BeatmapWithHttpInfo()
         {
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -664,7 +646,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of Beatmap</returns>
         public async System.Threading.Tasks.Task<Beatmap> BeatmapAsync(System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<Beatmap> localVarResponse = await BeatmapWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<Beatmap> localVarResponse = await _BeatmapWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -674,7 +656,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Beatmap)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Beatmap>> BeatmapWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Beatmap>> _BeatmapWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
         {
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -717,7 +699,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>ControlPoint</returns>
         public ControlPoint ControlPointAt(TimeRequest timeRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<ControlPoint> localVarResponse = ControlPointAtWithHttpInfo(timeRequest);
+            tochiRes.osbTK.Client.ApiResponse<ControlPoint> localVarResponse = _ControlPointAtWithHttpInfo(timeRequest);
             return localVarResponse.Data;
         }
 
@@ -727,7 +709,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="timeRequest"></param>
         /// <returns>ApiResponse of ControlPoint</returns>
-        public tochiRes.osbTK.Client.ApiResponse<ControlPoint> ControlPointAtWithHttpInfo(TimeRequest timeRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<ControlPoint> _ControlPointAtWithHttpInfo(TimeRequest timeRequest)
         {
             // verify the required parameter 'timeRequest' is set
             if (timeRequest == null)
@@ -774,7 +756,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of ControlPoint</returns>
         public async System.Threading.Tasks.Task<ControlPoint> ControlPointAtAsync(TimeRequest timeRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<ControlPoint> localVarResponse = await ControlPointAtWithHttpInfoAsync(timeRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<ControlPoint> localVarResponse = await _ControlPointAtWithHttpInfoAsync(timeRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -785,7 +767,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="timeRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ControlPoint)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ControlPoint>> ControlPointAtWithHttpInfoAsync(TimeRequest timeRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ControlPoint>> _ControlPointAtWithHttpInfoAsync(TimeRequest timeRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'timeRequest' is set
             if (timeRequest == null)
@@ -834,7 +816,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>ImportOsbResult</returns>
         public ImportOsbResult ImportOsb(TextRequest textRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<ImportOsbResult> localVarResponse = ImportOsbWithHttpInfo(textRequest);
+            tochiRes.osbTK.Client.ApiResponse<ImportOsbResult> localVarResponse = _ImportOsbWithHttpInfo(textRequest);
             return localVarResponse.Data;
         }
 
@@ -844,7 +826,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="textRequest"></param>
         /// <returns>ApiResponse of ImportOsbResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<ImportOsbResult> ImportOsbWithHttpInfo(TextRequest textRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<ImportOsbResult> _ImportOsbWithHttpInfo(TextRequest textRequest)
         {
             // verify the required parameter 'textRequest' is set
             if (textRequest == null)
@@ -891,7 +873,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of ImportOsbResult</returns>
         public async System.Threading.Tasks.Task<ImportOsbResult> ImportOsbAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<ImportOsbResult> localVarResponse = await ImportOsbWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<ImportOsbResult> localVarResponse = await _ImportOsbWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -902,7 +884,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="textRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ImportOsbResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ImportOsbResult>> ImportOsbWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ImportOsbResult>> _ImportOsbWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'textRequest' is set
             if (textRequest == null)
@@ -951,7 +933,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>LayerHandle</returns>
         public LayerHandle LayerHandle(LayerHandleRequest layerHandleRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<LayerHandle> localVarResponse = LayerHandleWithHttpInfo(layerHandleRequest);
+            tochiRes.osbTK.Client.ApiResponse<LayerHandle> localVarResponse = _LayerHandleWithHttpInfo(layerHandleRequest);
             return localVarResponse.Data;
         }
 
@@ -961,7 +943,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="layerHandleRequest"></param>
         /// <returns>ApiResponse of LayerHandle</returns>
-        public tochiRes.osbTK.Client.ApiResponse<LayerHandle> LayerHandleWithHttpInfo(LayerHandleRequest layerHandleRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<LayerHandle> _LayerHandleWithHttpInfo(LayerHandleRequest layerHandleRequest)
         {
             // verify the required parameter 'layerHandleRequest' is set
             if (layerHandleRequest == null)
@@ -1008,7 +990,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of LayerHandle</returns>
         public async System.Threading.Tasks.Task<LayerHandle> LayerHandleAsync(LayerHandleRequest layerHandleRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<LayerHandle> localVarResponse = await LayerHandleWithHttpInfoAsync(layerHandleRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<LayerHandle> localVarResponse = await _LayerHandleWithHttpInfoAsync(layerHandleRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1019,7 +1001,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="layerHandleRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LayerHandle)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<LayerHandle>> LayerHandleWithHttpInfoAsync(LayerHandleRequest layerHandleRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<LayerHandle>> _LayerHandleWithHttpInfoAsync(LayerHandleRequest layerHandleRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'layerHandleRequest' is set
             if (layerHandleRequest == null)
@@ -1068,7 +1050,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>LoadBeatmapResult</returns>
         public LoadBeatmapResult LoadBeatmap(TextRequest textRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<LoadBeatmapResult> localVarResponse = LoadBeatmapWithHttpInfo(textRequest);
+            tochiRes.osbTK.Client.ApiResponse<LoadBeatmapResult> localVarResponse = _LoadBeatmapWithHttpInfo(textRequest);
             return localVarResponse.Data;
         }
 
@@ -1078,7 +1060,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="textRequest"></param>
         /// <returns>ApiResponse of LoadBeatmapResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<LoadBeatmapResult> LoadBeatmapWithHttpInfo(TextRequest textRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<LoadBeatmapResult> _LoadBeatmapWithHttpInfo(TextRequest textRequest)
         {
             // verify the required parameter 'textRequest' is set
             if (textRequest == null)
@@ -1125,7 +1107,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of LoadBeatmapResult</returns>
         public async System.Threading.Tasks.Task<LoadBeatmapResult> LoadBeatmapAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<LoadBeatmapResult> localVarResponse = await LoadBeatmapWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<LoadBeatmapResult> localVarResponse = await _LoadBeatmapWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1136,7 +1118,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="textRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LoadBeatmapResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<LoadBeatmapResult>> LoadBeatmapWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<LoadBeatmapResult>> _LoadBeatmapWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'textRequest' is set
             if (textRequest == null)
@@ -1185,7 +1167,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>RandomResult</returns>
         public RandomResult Random(RandomRequest randomRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<RandomResult> localVarResponse = RandomWithHttpInfo(randomRequest);
+            tochiRes.osbTK.Client.ApiResponse<RandomResult> localVarResponse = _RandomWithHttpInfo(randomRequest);
             return localVarResponse.Data;
         }
 
@@ -1195,7 +1177,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="randomRequest"></param>
         /// <returns>ApiResponse of RandomResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<RandomResult> RandomWithHttpInfo(RandomRequest randomRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<RandomResult> _RandomWithHttpInfo(RandomRequest randomRequest)
         {
             // verify the required parameter 'randomRequest' is set
             if (randomRequest == null)
@@ -1242,7 +1224,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of RandomResult</returns>
         public async System.Threading.Tasks.Task<RandomResult> RandomAsync(RandomRequest randomRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<RandomResult> localVarResponse = await RandomWithHttpInfoAsync(randomRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<RandomResult> localVarResponse = await _RandomWithHttpInfoAsync(randomRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1253,7 +1235,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="randomRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RandomResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<RandomResult>> RandomWithHttpInfoAsync(RandomRequest randomRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<RandomResult>> _RandomWithHttpInfoAsync(RandomRequest randomRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'randomRequest' is set
             if (randomRequest == null)
@@ -1301,7 +1283,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>SpriteCountResult</returns>
         public SpriteCountResult SpriteCount()
         {
-            tochiRes.osbTK.Client.ApiResponse<SpriteCountResult> localVarResponse = SpriteCountWithHttpInfo();
+            tochiRes.osbTK.Client.ApiResponse<SpriteCountResult> localVarResponse = _SpriteCountWithHttpInfo();
             return localVarResponse.Data;
         }
 
@@ -1310,7 +1292,7 @@ namespace tochiRes.osbTK.Api
         /// </summary>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of SpriteCountResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<SpriteCountResult> SpriteCountWithHttpInfo()
+        protected tochiRes.osbTK.Client.ApiResponse<SpriteCountResult> _SpriteCountWithHttpInfo()
         {
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -1350,7 +1332,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of SpriteCountResult</returns>
         public async System.Threading.Tasks.Task<SpriteCountResult> SpriteCountAsync(System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<SpriteCountResult> localVarResponse = await SpriteCountWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<SpriteCountResult> localVarResponse = await _SpriteCountWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1360,7 +1342,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SpriteCountResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<SpriteCountResult>> SpriteCountWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<SpriteCountResult>> _SpriteCountWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
         {
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -1402,7 +1384,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Storyboard</returns>
         public Storyboard Storyboard()
         {
-            tochiRes.osbTK.Client.ApiResponse<Storyboard> localVarResponse = StoryboardWithHttpInfo();
+            tochiRes.osbTK.Client.ApiResponse<Storyboard> localVarResponse = _StoryboardWithHttpInfo();
             return localVarResponse.Data;
         }
 
@@ -1411,7 +1393,7 @@ namespace tochiRes.osbTK.Api
         /// </summary>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of Storyboard</returns>
-        public tochiRes.osbTK.Client.ApiResponse<Storyboard> StoryboardWithHttpInfo()
+        protected tochiRes.osbTK.Client.ApiResponse<Storyboard> _StoryboardWithHttpInfo()
         {
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -1451,7 +1433,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of Storyboard</returns>
         public async System.Threading.Tasks.Task<Storyboard> StoryboardAsync(System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<Storyboard> localVarResponse = await StoryboardWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<Storyboard> localVarResponse = await _StoryboardWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1461,7 +1443,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Storyboard)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Storyboard>> StoryboardWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Storyboard>> _StoryboardWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
         {
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -1504,7 +1486,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>ControlPoint</returns>
         public ControlPoint TimingPointAt(TimeRequest timeRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<ControlPoint> localVarResponse = TimingPointAtWithHttpInfo(timeRequest);
+            tochiRes.osbTK.Client.ApiResponse<ControlPoint> localVarResponse = _TimingPointAtWithHttpInfo(timeRequest);
             return localVarResponse.Data;
         }
 
@@ -1514,7 +1496,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="timeRequest"></param>
         /// <returns>ApiResponse of ControlPoint</returns>
-        public tochiRes.osbTK.Client.ApiResponse<ControlPoint> TimingPointAtWithHttpInfo(TimeRequest timeRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<ControlPoint> _TimingPointAtWithHttpInfo(TimeRequest timeRequest)
         {
             // verify the required parameter 'timeRequest' is set
             if (timeRequest == null)
@@ -1561,7 +1543,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of ControlPoint</returns>
         public async System.Threading.Tasks.Task<ControlPoint> TimingPointAtAsync(TimeRequest timeRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<ControlPoint> localVarResponse = await TimingPointAtWithHttpInfoAsync(timeRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<ControlPoint> localVarResponse = await _TimingPointAtWithHttpInfoAsync(timeRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1572,7 +1554,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="timeRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ControlPoint)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ControlPoint>> TimingPointAtWithHttpInfoAsync(TimeRequest timeRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ControlPoint>> _TimingPointAtWithHttpInfoAsync(TimeRequest timeRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'timeRequest' is set
             if (timeRequest == null)

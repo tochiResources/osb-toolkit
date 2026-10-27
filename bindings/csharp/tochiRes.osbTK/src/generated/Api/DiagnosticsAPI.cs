@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="textRequest"></param>
         /// <returns>ApiResponse of DiagnosticReport</returns>
-        ApiResponse<DiagnosticReport> DiagnoseOsbWithHttpInfo(TextRequest textRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +63,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="textRequest"></param>
         /// <returns>ApiResponse of DiagnosticReport</returns>
-        ApiResponse<DiagnosticReport> DiagnoseOsuWithHttpInfo(TextRequest textRequest);
         #endregion Synchronous Operations
     }
 
@@ -96,7 +94,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="textRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DiagnosticReport)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DiagnosticReport>> DiagnoseOsbWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -119,7 +116,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="textRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DiagnosticReport)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DiagnosticReport>> DiagnoseOsuWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -341,7 +337,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>DiagnosticReport</returns>
         public DiagnosticReport DiagnoseOsb(TextRequest textRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<DiagnosticReport> localVarResponse = DiagnoseOsbWithHttpInfo(textRequest);
+            tochiRes.osbTK.Client.ApiResponse<DiagnosticReport> localVarResponse = _DiagnoseOsbWithHttpInfo(textRequest);
             return localVarResponse.Data;
         }
 
@@ -351,7 +347,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="textRequest"></param>
         /// <returns>ApiResponse of DiagnosticReport</returns>
-        public tochiRes.osbTK.Client.ApiResponse<DiagnosticReport> DiagnoseOsbWithHttpInfo(TextRequest textRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<DiagnosticReport> _DiagnoseOsbWithHttpInfo(TextRequest textRequest)
         {
             // verify the required parameter 'textRequest' is set
             if (textRequest == null)
@@ -398,7 +394,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of DiagnosticReport</returns>
         public async System.Threading.Tasks.Task<DiagnosticReport> DiagnoseOsbAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<DiagnosticReport> localVarResponse = await DiagnoseOsbWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<DiagnosticReport> localVarResponse = await _DiagnoseOsbWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -409,7 +405,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="textRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DiagnosticReport)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<DiagnosticReport>> DiagnoseOsbWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<DiagnosticReport>> _DiagnoseOsbWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'textRequest' is set
             if (textRequest == null)
@@ -458,7 +454,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>DiagnosticReport</returns>
         public DiagnosticReport DiagnoseOsu(TextRequest textRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<DiagnosticReport> localVarResponse = DiagnoseOsuWithHttpInfo(textRequest);
+            tochiRes.osbTK.Client.ApiResponse<DiagnosticReport> localVarResponse = _DiagnoseOsuWithHttpInfo(textRequest);
             return localVarResponse.Data;
         }
 
@@ -468,7 +464,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="textRequest"></param>
         /// <returns>ApiResponse of DiagnosticReport</returns>
-        public tochiRes.osbTK.Client.ApiResponse<DiagnosticReport> DiagnoseOsuWithHttpInfo(TextRequest textRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<DiagnosticReport> _DiagnoseOsuWithHttpInfo(TextRequest textRequest)
         {
             // verify the required parameter 'textRequest' is set
             if (textRequest == null)
@@ -515,7 +511,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of DiagnosticReport</returns>
         public async System.Threading.Tasks.Task<DiagnosticReport> DiagnoseOsuAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<DiagnosticReport> localVarResponse = await DiagnoseOsuWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<DiagnosticReport> localVarResponse = await _DiagnoseOsuWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -526,7 +522,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="textRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DiagnosticReport)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<DiagnosticReport>> DiagnoseOsuWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<DiagnosticReport>> _DiagnoseOsuWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'textRequest' is set
             if (textRequest == null)

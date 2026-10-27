@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="textRequest"></param>
         /// <returns>ApiResponse of ParseOsbResult</returns>
-        ApiResponse<ParseOsbResult> ParseOsbWithHttpInfo(TextRequest textRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +63,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="textRequest"></param>
         /// <returns>ApiResponse of Beatmap</returns>
-        ApiResponse<Beatmap> ParseOsuWithHttpInfo(TextRequest textRequest);
         #endregion Synchronous Operations
     }
 
@@ -96,7 +94,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="textRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ParseOsbResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ParseOsbResult>> ParseOsbWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -119,7 +116,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="textRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Beatmap)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Beatmap>> ParseOsuWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -341,7 +337,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>ParseOsbResult</returns>
         public ParseOsbResult ParseOsb(TextRequest textRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<ParseOsbResult> localVarResponse = ParseOsbWithHttpInfo(textRequest);
+            tochiRes.osbTK.Client.ApiResponse<ParseOsbResult> localVarResponse = _ParseOsbWithHttpInfo(textRequest);
             return localVarResponse.Data;
         }
 
@@ -351,7 +347,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="textRequest"></param>
         /// <returns>ApiResponse of ParseOsbResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<ParseOsbResult> ParseOsbWithHttpInfo(TextRequest textRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<ParseOsbResult> _ParseOsbWithHttpInfo(TextRequest textRequest)
         {
             // verify the required parameter 'textRequest' is set
             if (textRequest == null)
@@ -398,7 +394,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of ParseOsbResult</returns>
         public async System.Threading.Tasks.Task<ParseOsbResult> ParseOsbAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<ParseOsbResult> localVarResponse = await ParseOsbWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<ParseOsbResult> localVarResponse = await _ParseOsbWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -409,7 +405,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="textRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ParseOsbResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ParseOsbResult>> ParseOsbWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ParseOsbResult>> _ParseOsbWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'textRequest' is set
             if (textRequest == null)
@@ -458,7 +454,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Beatmap</returns>
         public Beatmap ParseOsu(TextRequest textRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<Beatmap> localVarResponse = ParseOsuWithHttpInfo(textRequest);
+            tochiRes.osbTK.Client.ApiResponse<Beatmap> localVarResponse = _ParseOsuWithHttpInfo(textRequest);
             return localVarResponse.Data;
         }
 
@@ -468,7 +464,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="textRequest"></param>
         /// <returns>ApiResponse of Beatmap</returns>
-        public tochiRes.osbTK.Client.ApiResponse<Beatmap> ParseOsuWithHttpInfo(TextRequest textRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<Beatmap> _ParseOsuWithHttpInfo(TextRequest textRequest)
         {
             // verify the required parameter 'textRequest' is set
             if (textRequest == null)
@@ -515,7 +511,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of Beatmap</returns>
         public async System.Threading.Tasks.Task<Beatmap> ParseOsuAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<Beatmap> localVarResponse = await ParseOsuWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<Beatmap> localVarResponse = await _ParseOsuWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -526,7 +522,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="textRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Beatmap)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Beatmap>> ParseOsuWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Beatmap>> _ParseOsuWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'textRequest' is set
             if (textRequest == null)

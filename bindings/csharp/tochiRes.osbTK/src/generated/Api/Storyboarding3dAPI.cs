@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bake3dRequest"></param>
         /// <returns>ApiResponse of BakedStoryboard</returns>
-        ApiResponse<BakedStoryboard> Bake3dWithHttpInfo(Bake3dRequest bake3dRequest);
         #endregion Synchronous Operations
     }
 
@@ -78,7 +77,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="bake3dRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BakedStoryboard)</returns>
-        System.Threading.Tasks.Task<ApiResponse<BakedStoryboard>> Bake3dWithHttpInfoAsync(Bake3dRequest bake3dRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -300,7 +298,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>BakedStoryboard</returns>
         public BakedStoryboard Bake3d(Bake3dRequest bake3dRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<BakedStoryboard> localVarResponse = Bake3dWithHttpInfo(bake3dRequest);
+            tochiRes.osbTK.Client.ApiResponse<BakedStoryboard> localVarResponse = _Bake3dWithHttpInfo(bake3dRequest);
             return localVarResponse.Data;
         }
 
@@ -310,7 +308,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bake3dRequest"></param>
         /// <returns>ApiResponse of BakedStoryboard</returns>
-        public tochiRes.osbTK.Client.ApiResponse<BakedStoryboard> Bake3dWithHttpInfo(Bake3dRequest bake3dRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<BakedStoryboard> _Bake3dWithHttpInfo(Bake3dRequest bake3dRequest)
         {
             // verify the required parameter 'bake3dRequest' is set
             if (bake3dRequest == null)
@@ -357,7 +355,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of BakedStoryboard</returns>
         public async System.Threading.Tasks.Task<BakedStoryboard> Bake3dAsync(Bake3dRequest bake3dRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<BakedStoryboard> localVarResponse = await Bake3dWithHttpInfoAsync(bake3dRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<BakedStoryboard> localVarResponse = await _Bake3dWithHttpInfoAsync(bake3dRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -368,7 +366,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="bake3dRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BakedStoryboard)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<BakedStoryboard>> Bake3dWithHttpInfoAsync(Bake3dRequest bake3dRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<BakedStoryboard>> _Bake3dWithHttpInfoAsync(Bake3dRequest bake3dRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bake3dRequest' is set
             if (bake3dRequest == null)

@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="commandRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        ApiResponse<OkResult> CommandWithHttpInfo(CommandRequest commandRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +63,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="handleRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        ApiResponse<OkResult> EndGroupWithHttpInfo(HandleRequest handleRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -82,7 +80,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="handleRequest"></param>
         /// <returns>ApiResponse of SpriteInfo</returns>
-        ApiResponse<SpriteInfo> InfoWithHttpInfo(HandleRequest handleRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -100,7 +97,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="startLoopGroupRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        ApiResponse<OkResult> StartLoopGroupWithHttpInfo(StartLoopGroupRequest startLoopGroupRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -118,7 +114,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="startTriggerGroupRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        ApiResponse<OkResult> StartTriggerGroupWithHttpInfo(StartTriggerGroupRequest startTriggerGroupRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -136,7 +131,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="spriteTimeRequest"></param>
         /// <returns>ApiResponse of SpriteState</returns>
-        ApiResponse<SpriteState> StateAtWithHttpInfo(SpriteTimeRequest spriteTimeRequest);
         #endregion Synchronous Operations
     }
 
@@ -168,7 +162,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="commandRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OkResult>> CommandWithHttpInfoAsync(CommandRequest commandRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -191,7 +184,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="handleRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OkResult>> EndGroupWithHttpInfoAsync(HandleRequest handleRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -214,7 +206,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="handleRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SpriteInfo)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SpriteInfo>> InfoWithHttpInfoAsync(HandleRequest handleRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -237,7 +228,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="startLoopGroupRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OkResult>> StartLoopGroupWithHttpInfoAsync(StartLoopGroupRequest startLoopGroupRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -260,7 +250,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="startTriggerGroupRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OkResult>> StartTriggerGroupWithHttpInfoAsync(StartTriggerGroupRequest startTriggerGroupRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -283,7 +272,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="spriteTimeRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SpriteState)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SpriteState>> StateAtWithHttpInfoAsync(SpriteTimeRequest spriteTimeRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -505,7 +493,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OkResult</returns>
         public OkResult Command(CommandRequest commandRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = CommandWithHttpInfo(commandRequest);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = _CommandWithHttpInfo(commandRequest);
             return localVarResponse.Data;
         }
 
@@ -515,7 +503,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="commandRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OkResult> CommandWithHttpInfo(CommandRequest commandRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OkResult> _CommandWithHttpInfo(CommandRequest commandRequest)
         {
             // verify the required parameter 'commandRequest' is set
             if (commandRequest == null)
@@ -562,7 +550,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OkResult</returns>
         public async System.Threading.Tasks.Task<OkResult> CommandAsync(CommandRequest commandRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await CommandWithHttpInfoAsync(commandRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await _CommandWithHttpInfoAsync(commandRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -573,7 +561,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="commandRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> CommandWithHttpInfoAsync(CommandRequest commandRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> _CommandWithHttpInfoAsync(CommandRequest commandRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'commandRequest' is set
             if (commandRequest == null)
@@ -622,7 +610,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OkResult</returns>
         public OkResult EndGroup(HandleRequest handleRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = EndGroupWithHttpInfo(handleRequest);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = _EndGroupWithHttpInfo(handleRequest);
             return localVarResponse.Data;
         }
 
@@ -632,7 +620,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="handleRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OkResult> EndGroupWithHttpInfo(HandleRequest handleRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OkResult> _EndGroupWithHttpInfo(HandleRequest handleRequest)
         {
             // verify the required parameter 'handleRequest' is set
             if (handleRequest == null)
@@ -679,7 +667,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OkResult</returns>
         public async System.Threading.Tasks.Task<OkResult> EndGroupAsync(HandleRequest handleRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await EndGroupWithHttpInfoAsync(handleRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await _EndGroupWithHttpInfoAsync(handleRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -690,7 +678,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="handleRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> EndGroupWithHttpInfoAsync(HandleRequest handleRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> _EndGroupWithHttpInfoAsync(HandleRequest handleRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'handleRequest' is set
             if (handleRequest == null)
@@ -739,7 +727,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>SpriteInfo</returns>
         public SpriteInfo Info(HandleRequest handleRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<SpriteInfo> localVarResponse = InfoWithHttpInfo(handleRequest);
+            tochiRes.osbTK.Client.ApiResponse<SpriteInfo> localVarResponse = _InfoWithHttpInfo(handleRequest);
             return localVarResponse.Data;
         }
 
@@ -749,7 +737,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="handleRequest"></param>
         /// <returns>ApiResponse of SpriteInfo</returns>
-        public tochiRes.osbTK.Client.ApiResponse<SpriteInfo> InfoWithHttpInfo(HandleRequest handleRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<SpriteInfo> _InfoWithHttpInfo(HandleRequest handleRequest)
         {
             // verify the required parameter 'handleRequest' is set
             if (handleRequest == null)
@@ -796,7 +784,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of SpriteInfo</returns>
         public async System.Threading.Tasks.Task<SpriteInfo> InfoAsync(HandleRequest handleRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<SpriteInfo> localVarResponse = await InfoWithHttpInfoAsync(handleRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<SpriteInfo> localVarResponse = await _InfoWithHttpInfoAsync(handleRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -807,7 +795,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="handleRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SpriteInfo)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<SpriteInfo>> InfoWithHttpInfoAsync(HandleRequest handleRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<SpriteInfo>> _InfoWithHttpInfoAsync(HandleRequest handleRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'handleRequest' is set
             if (handleRequest == null)
@@ -856,7 +844,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OkResult</returns>
         public OkResult StartLoopGroup(StartLoopGroupRequest startLoopGroupRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = StartLoopGroupWithHttpInfo(startLoopGroupRequest);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = _StartLoopGroupWithHttpInfo(startLoopGroupRequest);
             return localVarResponse.Data;
         }
 
@@ -866,7 +854,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="startLoopGroupRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OkResult> StartLoopGroupWithHttpInfo(StartLoopGroupRequest startLoopGroupRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OkResult> _StartLoopGroupWithHttpInfo(StartLoopGroupRequest startLoopGroupRequest)
         {
             // verify the required parameter 'startLoopGroupRequest' is set
             if (startLoopGroupRequest == null)
@@ -913,7 +901,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OkResult</returns>
         public async System.Threading.Tasks.Task<OkResult> StartLoopGroupAsync(StartLoopGroupRequest startLoopGroupRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await StartLoopGroupWithHttpInfoAsync(startLoopGroupRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await _StartLoopGroupWithHttpInfoAsync(startLoopGroupRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -924,7 +912,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="startLoopGroupRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> StartLoopGroupWithHttpInfoAsync(StartLoopGroupRequest startLoopGroupRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> _StartLoopGroupWithHttpInfoAsync(StartLoopGroupRequest startLoopGroupRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'startLoopGroupRequest' is set
             if (startLoopGroupRequest == null)
@@ -973,7 +961,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OkResult</returns>
         public OkResult StartTriggerGroup(StartTriggerGroupRequest startTriggerGroupRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = StartTriggerGroupWithHttpInfo(startTriggerGroupRequest);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = _StartTriggerGroupWithHttpInfo(startTriggerGroupRequest);
             return localVarResponse.Data;
         }
 
@@ -983,7 +971,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="startTriggerGroupRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OkResult> StartTriggerGroupWithHttpInfo(StartTriggerGroupRequest startTriggerGroupRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OkResult> _StartTriggerGroupWithHttpInfo(StartTriggerGroupRequest startTriggerGroupRequest)
         {
             // verify the required parameter 'startTriggerGroupRequest' is set
             if (startTriggerGroupRequest == null)
@@ -1030,7 +1018,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OkResult</returns>
         public async System.Threading.Tasks.Task<OkResult> StartTriggerGroupAsync(StartTriggerGroupRequest startTriggerGroupRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await StartTriggerGroupWithHttpInfoAsync(startTriggerGroupRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await _StartTriggerGroupWithHttpInfoAsync(startTriggerGroupRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1041,7 +1029,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="startTriggerGroupRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> StartTriggerGroupWithHttpInfoAsync(StartTriggerGroupRequest startTriggerGroupRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> _StartTriggerGroupWithHttpInfoAsync(StartTriggerGroupRequest startTriggerGroupRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'startTriggerGroupRequest' is set
             if (startTriggerGroupRequest == null)
@@ -1090,7 +1078,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>SpriteState</returns>
         public SpriteState StateAt(SpriteTimeRequest spriteTimeRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<SpriteState> localVarResponse = StateAtWithHttpInfo(spriteTimeRequest);
+            tochiRes.osbTK.Client.ApiResponse<SpriteState> localVarResponse = _StateAtWithHttpInfo(spriteTimeRequest);
             return localVarResponse.Data;
         }
 
@@ -1100,7 +1088,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="spriteTimeRequest"></param>
         /// <returns>ApiResponse of SpriteState</returns>
-        public tochiRes.osbTK.Client.ApiResponse<SpriteState> StateAtWithHttpInfo(SpriteTimeRequest spriteTimeRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<SpriteState> _StateAtWithHttpInfo(SpriteTimeRequest spriteTimeRequest)
         {
             // verify the required parameter 'spriteTimeRequest' is set
             if (spriteTimeRequest == null)
@@ -1147,7 +1135,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of SpriteState</returns>
         public async System.Threading.Tasks.Task<SpriteState> StateAtAsync(SpriteTimeRequest spriteTimeRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<SpriteState> localVarResponse = await StateAtWithHttpInfoAsync(spriteTimeRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<SpriteState> localVarResponse = await _StateAtWithHttpInfoAsync(spriteTimeRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1158,7 +1146,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="spriteTimeRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SpriteState)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<SpriteState>> StateAtWithHttpInfoAsync(SpriteTimeRequest spriteTimeRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<SpriteState>> _StateAtWithHttpInfoAsync(SpriteTimeRequest spriteTimeRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'spriteTimeRequest' is set
             if (spriteTimeRequest == null)

@@ -44,7 +44,6 @@ namespace tochiRes.osbTK.Api
         /// </remarks>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of AudioDurationResult</returns>
-        ApiResponse<AudioDurationResult> AudioDurationWithHttpInfo();
         /// <summary>
         /// 
         /// </summary>
@@ -62,7 +61,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="fftRequest"></param>
         /// <returns>ApiResponse of FftResult</returns>
-        ApiResponse<FftResult> FftWithHttpInfo(FftRequest fftRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -80,7 +78,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="getFftRequest"></param>
         /// <returns>ApiResponse of FftResult</returns>
-        ApiResponse<FftResult> GetFftWithHttpInfo(GetFftRequest getFftRequest);
         #endregion Synchronous Operations
     }
 
@@ -110,7 +107,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AudioDurationResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AudioDurationResult>> AudioDurationWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -133,7 +129,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="fftRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FftResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FftResult>> FftWithHttpInfoAsync(FftRequest fftRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -156,7 +151,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="getFftRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FftResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FftResult>> GetFftWithHttpInfoAsync(GetFftRequest getFftRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -377,7 +371,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>AudioDurationResult</returns>
         public AudioDurationResult AudioDuration()
         {
-            tochiRes.osbTK.Client.ApiResponse<AudioDurationResult> localVarResponse = AudioDurationWithHttpInfo();
+            tochiRes.osbTK.Client.ApiResponse<AudioDurationResult> localVarResponse = _AudioDurationWithHttpInfo();
             return localVarResponse.Data;
         }
 
@@ -386,7 +380,7 @@ namespace tochiRes.osbTK.Api
         /// </summary>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of AudioDurationResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<AudioDurationResult> AudioDurationWithHttpInfo()
+        protected tochiRes.osbTK.Client.ApiResponse<AudioDurationResult> _AudioDurationWithHttpInfo()
         {
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -426,7 +420,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of AudioDurationResult</returns>
         public async System.Threading.Tasks.Task<AudioDurationResult> AudioDurationAsync(System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<AudioDurationResult> localVarResponse = await AudioDurationWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<AudioDurationResult> localVarResponse = await _AudioDurationWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -436,7 +430,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AudioDurationResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<AudioDurationResult>> AudioDurationWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<AudioDurationResult>> _AudioDurationWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
         {
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -479,7 +473,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>FftResult</returns>
         public FftResult Fft(FftRequest fftRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<FftResult> localVarResponse = FftWithHttpInfo(fftRequest);
+            tochiRes.osbTK.Client.ApiResponse<FftResult> localVarResponse = _FftWithHttpInfo(fftRequest);
             return localVarResponse.Data;
         }
 
@@ -489,7 +483,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="fftRequest"></param>
         /// <returns>ApiResponse of FftResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<FftResult> FftWithHttpInfo(FftRequest fftRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<FftResult> _FftWithHttpInfo(FftRequest fftRequest)
         {
             // verify the required parameter 'fftRequest' is set
             if (fftRequest == null)
@@ -536,7 +530,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of FftResult</returns>
         public async System.Threading.Tasks.Task<FftResult> FftAsync(FftRequest fftRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<FftResult> localVarResponse = await FftWithHttpInfoAsync(fftRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<FftResult> localVarResponse = await _FftWithHttpInfoAsync(fftRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -547,7 +541,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="fftRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FftResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<FftResult>> FftWithHttpInfoAsync(FftRequest fftRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<FftResult>> _FftWithHttpInfoAsync(FftRequest fftRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'fftRequest' is set
             if (fftRequest == null)
@@ -596,7 +590,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>FftResult</returns>
         public FftResult GetFft(GetFftRequest getFftRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<FftResult> localVarResponse = GetFftWithHttpInfo(getFftRequest);
+            tochiRes.osbTK.Client.ApiResponse<FftResult> localVarResponse = _GetFftWithHttpInfo(getFftRequest);
             return localVarResponse.Data;
         }
 
@@ -606,7 +600,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="getFftRequest"></param>
         /// <returns>ApiResponse of FftResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<FftResult> GetFftWithHttpInfo(GetFftRequest getFftRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<FftResult> _GetFftWithHttpInfo(GetFftRequest getFftRequest)
         {
             // verify the required parameter 'getFftRequest' is set
             if (getFftRequest == null)
@@ -653,7 +647,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of FftResult</returns>
         public async System.Threading.Tasks.Task<FftResult> GetFftAsync(GetFftRequest getFftRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<FftResult> localVarResponse = await GetFftWithHttpInfoAsync(getFftRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<FftResult> localVarResponse = await _GetFftWithHttpInfoAsync(getFftRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -664,7 +658,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="getFftRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FftResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<FftResult>> GetFftWithHttpInfoAsync(GetFftRequest getFftRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<FftResult>> _GetFftWithHttpInfoAsync(GetFftRequest getFftRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'getFftRequest' is set
             if (getFftRequest == null)

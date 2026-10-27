@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pathRequest"></param>
         /// <returns>ApiResponse of ImageInfo</returns>
-        ApiResponse<ImageInfo> InfoWithHttpInfo(PathRequest pathRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +63,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="imageProcessRequest"></param>
         /// <returns>ApiResponse of ImageInfo</returns>
-        ApiResponse<ImageInfo> ProcessWithHttpInfo(ImageProcessRequest imageProcessRequest);
         #endregion Synchronous Operations
     }
 
@@ -96,7 +94,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="pathRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ImageInfo)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ImageInfo>> InfoWithHttpInfoAsync(PathRequest pathRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -119,7 +116,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="imageProcessRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ImageInfo)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ImageInfo>> ProcessWithHttpInfoAsync(ImageProcessRequest imageProcessRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -341,7 +337,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>ImageInfo</returns>
         public ImageInfo Info(PathRequest pathRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<ImageInfo> localVarResponse = InfoWithHttpInfo(pathRequest);
+            tochiRes.osbTK.Client.ApiResponse<ImageInfo> localVarResponse = _InfoWithHttpInfo(pathRequest);
             return localVarResponse.Data;
         }
 
@@ -351,7 +347,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pathRequest"></param>
         /// <returns>ApiResponse of ImageInfo</returns>
-        public tochiRes.osbTK.Client.ApiResponse<ImageInfo> InfoWithHttpInfo(PathRequest pathRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<ImageInfo> _InfoWithHttpInfo(PathRequest pathRequest)
         {
             // verify the required parameter 'pathRequest' is set
             if (pathRequest == null)
@@ -398,7 +394,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of ImageInfo</returns>
         public async System.Threading.Tasks.Task<ImageInfo> InfoAsync(PathRequest pathRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<ImageInfo> localVarResponse = await InfoWithHttpInfoAsync(pathRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<ImageInfo> localVarResponse = await _InfoWithHttpInfoAsync(pathRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -409,7 +405,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="pathRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ImageInfo)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ImageInfo>> InfoWithHttpInfoAsync(PathRequest pathRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ImageInfo>> _InfoWithHttpInfoAsync(PathRequest pathRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'pathRequest' is set
             if (pathRequest == null)
@@ -458,7 +454,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>ImageInfo</returns>
         public ImageInfo Process(ImageProcessRequest imageProcessRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<ImageInfo> localVarResponse = ProcessWithHttpInfo(imageProcessRequest);
+            tochiRes.osbTK.Client.ApiResponse<ImageInfo> localVarResponse = _ProcessWithHttpInfo(imageProcessRequest);
             return localVarResponse.Data;
         }
 
@@ -468,7 +464,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="imageProcessRequest"></param>
         /// <returns>ApiResponse of ImageInfo</returns>
-        public tochiRes.osbTK.Client.ApiResponse<ImageInfo> ProcessWithHttpInfo(ImageProcessRequest imageProcessRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<ImageInfo> _ProcessWithHttpInfo(ImageProcessRequest imageProcessRequest)
         {
             // verify the required parameter 'imageProcessRequest' is set
             if (imageProcessRequest == null)
@@ -515,7 +511,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of ImageInfo</returns>
         public async System.Threading.Tasks.Task<ImageInfo> ProcessAsync(ImageProcessRequest imageProcessRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<ImageInfo> localVarResponse = await ProcessWithHttpInfoAsync(imageProcessRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<ImageInfo> localVarResponse = await _ProcessWithHttpInfoAsync(imageProcessRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -526,7 +522,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="imageProcessRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ImageInfo)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ImageInfo>> ProcessWithHttpInfoAsync(ImageProcessRequest imageProcessRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ImageInfo>> _ProcessWithHttpInfoAsync(ImageProcessRequest imageProcessRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'imageProcessRequest' is set
             if (imageProcessRequest == null)

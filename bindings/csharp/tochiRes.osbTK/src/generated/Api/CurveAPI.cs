@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="arcRequest"></param>
         /// <returns>ApiResponse of PointListResult</returns>
-        ApiResponse<PointListResult> ArcWithHttpInfo(ArcRequest arcRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +63,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curveRequest"></param>
         /// <returns>ApiResponse of Box2</returns>
-        ApiResponse<Box2> BoundingBoxWithHttpInfo(CurveRequest curveRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -82,7 +80,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curvePointRequest"></param>
         /// <returns>ApiResponse of ScalarResult</returns>
-        ApiResponse<ScalarResult> CurvatureWithHttpInfo(CurvePointRequest curvePointRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -100,7 +97,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curveDistanceRequest"></param>
         /// <returns>ApiResponse of ScalarResult</returns>
-        ApiResponse<ScalarResult> DistanceToWithHttpInfo(CurveDistanceRequest curveDistanceRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -118,7 +114,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ellipseRequest"></param>
         /// <returns>ApiResponse of PointListResult</returns>
-        ApiResponse<PointListResult> EllipseWithHttpInfo(EllipseRequest ellipseRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -136,7 +131,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curveRequest"></param>
         /// <returns>ApiResponse of ScalarResult</returns>
-        ApiResponse<ScalarResult> LengthWithHttpInfo(CurveRequest curveRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -154,7 +148,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="lineIntersectRequest"></param>
         /// <returns>ApiResponse of OptionalPointResult</returns>
-        ApiResponse<OptionalPointResult> LineIntersectWithHttpInfo(LineIntersectRequest lineIntersectRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -172,7 +165,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curvePointRequest"></param>
         /// <returns>ApiResponse of Vector2</returns>
-        ApiResponse<Vector2> NormalWithHttpInfo(CurvePointRequest curvePointRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -190,7 +182,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curveOffsetRequest"></param>
         /// <returns>ApiResponse of PointListResult</returns>
-        ApiResponse<PointListResult> OffsetWithHttpInfo(CurveOffsetRequest curveOffsetRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -208,7 +199,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curvePointRequest"></param>
         /// <returns>ApiResponse of Vector2</returns>
-        ApiResponse<Vector2> PointWithHttpInfo(CurvePointRequest curvePointRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -226,7 +216,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curveSampleRequest"></param>
         /// <returns>ApiResponse of PointListResult</returns>
-        ApiResponse<PointListResult> SampleWithHttpInfo(CurveSampleRequest curveSampleRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -244,7 +233,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="simplifyRequest"></param>
         /// <returns>ApiResponse of PointListResult</returns>
-        ApiResponse<PointListResult> SimplifyWithHttpInfo(SimplifyRequest simplifyRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -262,7 +250,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curvePointRequest"></param>
         /// <returns>ApiResponse of Vector2</returns>
-        ApiResponse<Vector2> TangentWithHttpInfo(CurvePointRequest curvePointRequest);
         #endregion Synchronous Operations
     }
 
@@ -294,7 +281,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="arcRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PointListResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PointListResult>> ArcWithHttpInfoAsync(ArcRequest arcRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -317,7 +303,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="curveRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Box2)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Box2>> BoundingBoxWithHttpInfoAsync(CurveRequest curveRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -340,7 +325,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="curvePointRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScalarResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScalarResult>> CurvatureWithHttpInfoAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -363,7 +347,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="curveDistanceRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScalarResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScalarResult>> DistanceToWithHttpInfoAsync(CurveDistanceRequest curveDistanceRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -386,7 +369,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="ellipseRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PointListResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PointListResult>> EllipseWithHttpInfoAsync(EllipseRequest ellipseRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -409,7 +391,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="curveRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScalarResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScalarResult>> LengthWithHttpInfoAsync(CurveRequest curveRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -432,7 +413,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="lineIntersectRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OptionalPointResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OptionalPointResult>> LineIntersectWithHttpInfoAsync(LineIntersectRequest lineIntersectRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -455,7 +435,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="curvePointRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Vector2)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Vector2>> NormalWithHttpInfoAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -478,7 +457,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="curveOffsetRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PointListResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PointListResult>> OffsetWithHttpInfoAsync(CurveOffsetRequest curveOffsetRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -501,7 +479,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="curvePointRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Vector2)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Vector2>> PointWithHttpInfoAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -524,7 +501,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="curveSampleRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PointListResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PointListResult>> SampleWithHttpInfoAsync(CurveSampleRequest curveSampleRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -547,7 +523,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="simplifyRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PointListResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PointListResult>> SimplifyWithHttpInfoAsync(SimplifyRequest simplifyRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -570,7 +545,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="curvePointRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Vector2)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Vector2>> TangentWithHttpInfoAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -792,7 +766,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>PointListResult</returns>
         public PointListResult Arc(ArcRequest arcRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = ArcWithHttpInfo(arcRequest);
+            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = _ArcWithHttpInfo(arcRequest);
             return localVarResponse.Data;
         }
 
@@ -802,7 +776,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="arcRequest"></param>
         /// <returns>ApiResponse of PointListResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<PointListResult> ArcWithHttpInfo(ArcRequest arcRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<PointListResult> _ArcWithHttpInfo(ArcRequest arcRequest)
         {
             // verify the required parameter 'arcRequest' is set
             if (arcRequest == null)
@@ -849,7 +823,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of PointListResult</returns>
         public async System.Threading.Tasks.Task<PointListResult> ArcAsync(ArcRequest arcRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = await ArcWithHttpInfoAsync(arcRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = await _ArcWithHttpInfoAsync(arcRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -860,7 +834,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="arcRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PointListResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<PointListResult>> ArcWithHttpInfoAsync(ArcRequest arcRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<PointListResult>> _ArcWithHttpInfoAsync(ArcRequest arcRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'arcRequest' is set
             if (arcRequest == null)
@@ -909,7 +883,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Box2</returns>
         public Box2 BoundingBox(CurveRequest curveRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<Box2> localVarResponse = BoundingBoxWithHttpInfo(curveRequest);
+            tochiRes.osbTK.Client.ApiResponse<Box2> localVarResponse = _BoundingBoxWithHttpInfo(curveRequest);
             return localVarResponse.Data;
         }
 
@@ -919,7 +893,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curveRequest"></param>
         /// <returns>ApiResponse of Box2</returns>
-        public tochiRes.osbTK.Client.ApiResponse<Box2> BoundingBoxWithHttpInfo(CurveRequest curveRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<Box2> _BoundingBoxWithHttpInfo(CurveRequest curveRequest)
         {
             // verify the required parameter 'curveRequest' is set
             if (curveRequest == null)
@@ -966,7 +940,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of Box2</returns>
         public async System.Threading.Tasks.Task<Box2> BoundingBoxAsync(CurveRequest curveRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<Box2> localVarResponse = await BoundingBoxWithHttpInfoAsync(curveRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<Box2> localVarResponse = await _BoundingBoxWithHttpInfoAsync(curveRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -977,7 +951,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="curveRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Box2)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Box2>> BoundingBoxWithHttpInfoAsync(CurveRequest curveRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Box2>> _BoundingBoxWithHttpInfoAsync(CurveRequest curveRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'curveRequest' is set
             if (curveRequest == null)
@@ -1026,7 +1000,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>ScalarResult</returns>
         public ScalarResult Curvature(CurvePointRequest curvePointRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<ScalarResult> localVarResponse = CurvatureWithHttpInfo(curvePointRequest);
+            tochiRes.osbTK.Client.ApiResponse<ScalarResult> localVarResponse = _CurvatureWithHttpInfo(curvePointRequest);
             return localVarResponse.Data;
         }
 
@@ -1036,7 +1010,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curvePointRequest"></param>
         /// <returns>ApiResponse of ScalarResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<ScalarResult> CurvatureWithHttpInfo(CurvePointRequest curvePointRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<ScalarResult> _CurvatureWithHttpInfo(CurvePointRequest curvePointRequest)
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
@@ -1083,7 +1057,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of ScalarResult</returns>
         public async System.Threading.Tasks.Task<ScalarResult> CurvatureAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<ScalarResult> localVarResponse = await CurvatureWithHttpInfoAsync(curvePointRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<ScalarResult> localVarResponse = await _CurvatureWithHttpInfoAsync(curvePointRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1094,7 +1068,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="curvePointRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScalarResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ScalarResult>> CurvatureWithHttpInfoAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ScalarResult>> _CurvatureWithHttpInfoAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
@@ -1143,7 +1117,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>ScalarResult</returns>
         public ScalarResult DistanceTo(CurveDistanceRequest curveDistanceRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<ScalarResult> localVarResponse = DistanceToWithHttpInfo(curveDistanceRequest);
+            tochiRes.osbTK.Client.ApiResponse<ScalarResult> localVarResponse = _DistanceToWithHttpInfo(curveDistanceRequest);
             return localVarResponse.Data;
         }
 
@@ -1153,7 +1127,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curveDistanceRequest"></param>
         /// <returns>ApiResponse of ScalarResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<ScalarResult> DistanceToWithHttpInfo(CurveDistanceRequest curveDistanceRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<ScalarResult> _DistanceToWithHttpInfo(CurveDistanceRequest curveDistanceRequest)
         {
             // verify the required parameter 'curveDistanceRequest' is set
             if (curveDistanceRequest == null)
@@ -1200,7 +1174,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of ScalarResult</returns>
         public async System.Threading.Tasks.Task<ScalarResult> DistanceToAsync(CurveDistanceRequest curveDistanceRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<ScalarResult> localVarResponse = await DistanceToWithHttpInfoAsync(curveDistanceRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<ScalarResult> localVarResponse = await _DistanceToWithHttpInfoAsync(curveDistanceRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1211,7 +1185,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="curveDistanceRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScalarResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ScalarResult>> DistanceToWithHttpInfoAsync(CurveDistanceRequest curveDistanceRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ScalarResult>> _DistanceToWithHttpInfoAsync(CurveDistanceRequest curveDistanceRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'curveDistanceRequest' is set
             if (curveDistanceRequest == null)
@@ -1260,7 +1234,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>PointListResult</returns>
         public PointListResult Ellipse(EllipseRequest ellipseRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = EllipseWithHttpInfo(ellipseRequest);
+            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = _EllipseWithHttpInfo(ellipseRequest);
             return localVarResponse.Data;
         }
 
@@ -1270,7 +1244,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ellipseRequest"></param>
         /// <returns>ApiResponse of PointListResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<PointListResult> EllipseWithHttpInfo(EllipseRequest ellipseRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<PointListResult> _EllipseWithHttpInfo(EllipseRequest ellipseRequest)
         {
             // verify the required parameter 'ellipseRequest' is set
             if (ellipseRequest == null)
@@ -1317,7 +1291,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of PointListResult</returns>
         public async System.Threading.Tasks.Task<PointListResult> EllipseAsync(EllipseRequest ellipseRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = await EllipseWithHttpInfoAsync(ellipseRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = await _EllipseWithHttpInfoAsync(ellipseRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1328,7 +1302,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="ellipseRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PointListResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<PointListResult>> EllipseWithHttpInfoAsync(EllipseRequest ellipseRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<PointListResult>> _EllipseWithHttpInfoAsync(EllipseRequest ellipseRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'ellipseRequest' is set
             if (ellipseRequest == null)
@@ -1377,7 +1351,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>ScalarResult</returns>
         public ScalarResult Length(CurveRequest curveRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<ScalarResult> localVarResponse = LengthWithHttpInfo(curveRequest);
+            tochiRes.osbTK.Client.ApiResponse<ScalarResult> localVarResponse = _LengthWithHttpInfo(curveRequest);
             return localVarResponse.Data;
         }
 
@@ -1387,7 +1361,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curveRequest"></param>
         /// <returns>ApiResponse of ScalarResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<ScalarResult> LengthWithHttpInfo(CurveRequest curveRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<ScalarResult> _LengthWithHttpInfo(CurveRequest curveRequest)
         {
             // verify the required parameter 'curveRequest' is set
             if (curveRequest == null)
@@ -1434,7 +1408,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of ScalarResult</returns>
         public async System.Threading.Tasks.Task<ScalarResult> LengthAsync(CurveRequest curveRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<ScalarResult> localVarResponse = await LengthWithHttpInfoAsync(curveRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<ScalarResult> localVarResponse = await _LengthWithHttpInfoAsync(curveRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1445,7 +1419,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="curveRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScalarResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ScalarResult>> LengthWithHttpInfoAsync(CurveRequest curveRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ScalarResult>> _LengthWithHttpInfoAsync(CurveRequest curveRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'curveRequest' is set
             if (curveRequest == null)
@@ -1494,7 +1468,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OptionalPointResult</returns>
         public OptionalPointResult LineIntersect(LineIntersectRequest lineIntersectRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OptionalPointResult> localVarResponse = LineIntersectWithHttpInfo(lineIntersectRequest);
+            tochiRes.osbTK.Client.ApiResponse<OptionalPointResult> localVarResponse = _LineIntersectWithHttpInfo(lineIntersectRequest);
             return localVarResponse.Data;
         }
 
@@ -1504,7 +1478,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="lineIntersectRequest"></param>
         /// <returns>ApiResponse of OptionalPointResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OptionalPointResult> LineIntersectWithHttpInfo(LineIntersectRequest lineIntersectRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OptionalPointResult> _LineIntersectWithHttpInfo(LineIntersectRequest lineIntersectRequest)
         {
             // verify the required parameter 'lineIntersectRequest' is set
             if (lineIntersectRequest == null)
@@ -1551,7 +1525,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OptionalPointResult</returns>
         public async System.Threading.Tasks.Task<OptionalPointResult> LineIntersectAsync(LineIntersectRequest lineIntersectRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OptionalPointResult> localVarResponse = await LineIntersectWithHttpInfoAsync(lineIntersectRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OptionalPointResult> localVarResponse = await _LineIntersectWithHttpInfoAsync(lineIntersectRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1562,7 +1536,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="lineIntersectRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OptionalPointResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OptionalPointResult>> LineIntersectWithHttpInfoAsync(LineIntersectRequest lineIntersectRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OptionalPointResult>> _LineIntersectWithHttpInfoAsync(LineIntersectRequest lineIntersectRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'lineIntersectRequest' is set
             if (lineIntersectRequest == null)
@@ -1611,7 +1585,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Vector2</returns>
         public Vector2 Normal(CurvePointRequest curvePointRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = NormalWithHttpInfo(curvePointRequest);
+            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = _NormalWithHttpInfo(curvePointRequest);
             return localVarResponse.Data;
         }
 
@@ -1621,7 +1595,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curvePointRequest"></param>
         /// <returns>ApiResponse of Vector2</returns>
-        public tochiRes.osbTK.Client.ApiResponse<Vector2> NormalWithHttpInfo(CurvePointRequest curvePointRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<Vector2> _NormalWithHttpInfo(CurvePointRequest curvePointRequest)
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
@@ -1668,7 +1642,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of Vector2</returns>
         public async System.Threading.Tasks.Task<Vector2> NormalAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = await NormalWithHttpInfoAsync(curvePointRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = await _NormalWithHttpInfoAsync(curvePointRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1679,7 +1653,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="curvePointRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Vector2)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Vector2>> NormalWithHttpInfoAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Vector2>> _NormalWithHttpInfoAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
@@ -1728,7 +1702,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>PointListResult</returns>
         public PointListResult Offset(CurveOffsetRequest curveOffsetRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = OffsetWithHttpInfo(curveOffsetRequest);
+            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = _OffsetWithHttpInfo(curveOffsetRequest);
             return localVarResponse.Data;
         }
 
@@ -1738,7 +1712,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curveOffsetRequest"></param>
         /// <returns>ApiResponse of PointListResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<PointListResult> OffsetWithHttpInfo(CurveOffsetRequest curveOffsetRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<PointListResult> _OffsetWithHttpInfo(CurveOffsetRequest curveOffsetRequest)
         {
             // verify the required parameter 'curveOffsetRequest' is set
             if (curveOffsetRequest == null)
@@ -1785,7 +1759,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of PointListResult</returns>
         public async System.Threading.Tasks.Task<PointListResult> OffsetAsync(CurveOffsetRequest curveOffsetRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = await OffsetWithHttpInfoAsync(curveOffsetRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = await _OffsetWithHttpInfoAsync(curveOffsetRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1796,7 +1770,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="curveOffsetRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PointListResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<PointListResult>> OffsetWithHttpInfoAsync(CurveOffsetRequest curveOffsetRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<PointListResult>> _OffsetWithHttpInfoAsync(CurveOffsetRequest curveOffsetRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'curveOffsetRequest' is set
             if (curveOffsetRequest == null)
@@ -1845,7 +1819,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Vector2</returns>
         public Vector2 Point(CurvePointRequest curvePointRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = PointWithHttpInfo(curvePointRequest);
+            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = _PointWithHttpInfo(curvePointRequest);
             return localVarResponse.Data;
         }
 
@@ -1855,7 +1829,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curvePointRequest"></param>
         /// <returns>ApiResponse of Vector2</returns>
-        public tochiRes.osbTK.Client.ApiResponse<Vector2> PointWithHttpInfo(CurvePointRequest curvePointRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<Vector2> _PointWithHttpInfo(CurvePointRequest curvePointRequest)
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
@@ -1902,7 +1876,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of Vector2</returns>
         public async System.Threading.Tasks.Task<Vector2> PointAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = await PointWithHttpInfoAsync(curvePointRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = await _PointWithHttpInfoAsync(curvePointRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1913,7 +1887,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="curvePointRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Vector2)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Vector2>> PointWithHttpInfoAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Vector2>> _PointWithHttpInfoAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
@@ -1962,7 +1936,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>PointListResult</returns>
         public PointListResult Sample(CurveSampleRequest curveSampleRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = SampleWithHttpInfo(curveSampleRequest);
+            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = _SampleWithHttpInfo(curveSampleRequest);
             return localVarResponse.Data;
         }
 
@@ -1972,7 +1946,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curveSampleRequest"></param>
         /// <returns>ApiResponse of PointListResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<PointListResult> SampleWithHttpInfo(CurveSampleRequest curveSampleRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<PointListResult> _SampleWithHttpInfo(CurveSampleRequest curveSampleRequest)
         {
             // verify the required parameter 'curveSampleRequest' is set
             if (curveSampleRequest == null)
@@ -2019,7 +1993,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of PointListResult</returns>
         public async System.Threading.Tasks.Task<PointListResult> SampleAsync(CurveSampleRequest curveSampleRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = await SampleWithHttpInfoAsync(curveSampleRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = await _SampleWithHttpInfoAsync(curveSampleRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2030,7 +2004,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="curveSampleRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PointListResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<PointListResult>> SampleWithHttpInfoAsync(CurveSampleRequest curveSampleRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<PointListResult>> _SampleWithHttpInfoAsync(CurveSampleRequest curveSampleRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'curveSampleRequest' is set
             if (curveSampleRequest == null)
@@ -2079,7 +2053,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>PointListResult</returns>
         public PointListResult Simplify(SimplifyRequest simplifyRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = SimplifyWithHttpInfo(simplifyRequest);
+            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = _SimplifyWithHttpInfo(simplifyRequest);
             return localVarResponse.Data;
         }
 
@@ -2089,7 +2063,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="simplifyRequest"></param>
         /// <returns>ApiResponse of PointListResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<PointListResult> SimplifyWithHttpInfo(SimplifyRequest simplifyRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<PointListResult> _SimplifyWithHttpInfo(SimplifyRequest simplifyRequest)
         {
             // verify the required parameter 'simplifyRequest' is set
             if (simplifyRequest == null)
@@ -2136,7 +2110,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of PointListResult</returns>
         public async System.Threading.Tasks.Task<PointListResult> SimplifyAsync(SimplifyRequest simplifyRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = await SimplifyWithHttpInfoAsync(simplifyRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<PointListResult> localVarResponse = await _SimplifyWithHttpInfoAsync(simplifyRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2147,7 +2121,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="simplifyRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PointListResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<PointListResult>> SimplifyWithHttpInfoAsync(SimplifyRequest simplifyRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<PointListResult>> _SimplifyWithHttpInfoAsync(SimplifyRequest simplifyRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'simplifyRequest' is set
             if (simplifyRequest == null)
@@ -2196,7 +2170,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Vector2</returns>
         public Vector2 Tangent(CurvePointRequest curvePointRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = TangentWithHttpInfo(curvePointRequest);
+            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = _TangentWithHttpInfo(curvePointRequest);
             return localVarResponse.Data;
         }
 
@@ -2206,7 +2180,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curvePointRequest"></param>
         /// <returns>ApiResponse of Vector2</returns>
-        public tochiRes.osbTK.Client.ApiResponse<Vector2> TangentWithHttpInfo(CurvePointRequest curvePointRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<Vector2> _TangentWithHttpInfo(CurvePointRequest curvePointRequest)
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
@@ -2253,7 +2227,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of Vector2</returns>
         public async System.Threading.Tasks.Task<Vector2> TangentAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = await TangentWithHttpInfoAsync(curvePointRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = await _TangentWithHttpInfoAsync(curvePointRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2264,7 +2238,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="curvePointRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Vector2)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Vector2>> TangentWithHttpInfoAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Vector2>> _TangentWithHttpInfoAsync(CurvePointRequest curvePointRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)

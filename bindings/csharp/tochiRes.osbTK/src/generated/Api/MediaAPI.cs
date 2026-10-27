@@ -46,7 +46,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="encodeVideoRequest"></param>
         /// <returns>ApiResponse of MediaInfo</returns>
-        ApiResponse<MediaInfo> EncodeVideoWithHttpInfo(EncodeVideoRequest encodeVideoRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +63,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="extractAudioRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        ApiResponse<OkResult> ExtractAudioWithHttpInfo(ExtractAudioRequest extractAudioRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -82,7 +80,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="extractFramesRequest"></param>
         /// <returns>ApiResponse of FrameResult</returns>
-        ApiResponse<FrameResult> ExtractFramesWithHttpInfo(ExtractFramesRequest extractFramesRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -100,7 +97,6 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pathRequest"></param>
         /// <returns>ApiResponse of MediaInfo</returns>
-        ApiResponse<MediaInfo> InfoWithHttpInfo(PathRequest pathRequest);
         #endregion Synchronous Operations
     }
 
@@ -132,7 +128,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="encodeVideoRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (MediaInfo)</returns>
-        System.Threading.Tasks.Task<ApiResponse<MediaInfo>> EncodeVideoWithHttpInfoAsync(EncodeVideoRequest encodeVideoRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -155,7 +150,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="extractAudioRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OkResult>> ExtractAudioWithHttpInfoAsync(ExtractAudioRequest extractAudioRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -178,7 +172,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="extractFramesRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FrameResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FrameResult>> ExtractFramesWithHttpInfoAsync(ExtractFramesRequest extractFramesRequest, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -201,7 +194,6 @@ namespace tochiRes.osbTK.Api
         /// <param name="pathRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (MediaInfo)</returns>
-        System.Threading.Tasks.Task<ApiResponse<MediaInfo>> InfoWithHttpInfoAsync(PathRequest pathRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -423,7 +415,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>MediaInfo</returns>
         public MediaInfo EncodeVideo(EncodeVideoRequest encodeVideoRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<MediaInfo> localVarResponse = EncodeVideoWithHttpInfo(encodeVideoRequest);
+            tochiRes.osbTK.Client.ApiResponse<MediaInfo> localVarResponse = _EncodeVideoWithHttpInfo(encodeVideoRequest);
             return localVarResponse.Data;
         }
 
@@ -433,7 +425,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="encodeVideoRequest"></param>
         /// <returns>ApiResponse of MediaInfo</returns>
-        public tochiRes.osbTK.Client.ApiResponse<MediaInfo> EncodeVideoWithHttpInfo(EncodeVideoRequest encodeVideoRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<MediaInfo> _EncodeVideoWithHttpInfo(EncodeVideoRequest encodeVideoRequest)
         {
             // verify the required parameter 'encodeVideoRequest' is set
             if (encodeVideoRequest == null)
@@ -480,7 +472,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of MediaInfo</returns>
         public async System.Threading.Tasks.Task<MediaInfo> EncodeVideoAsync(EncodeVideoRequest encodeVideoRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<MediaInfo> localVarResponse = await EncodeVideoWithHttpInfoAsync(encodeVideoRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<MediaInfo> localVarResponse = await _EncodeVideoWithHttpInfoAsync(encodeVideoRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -491,7 +483,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="encodeVideoRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (MediaInfo)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<MediaInfo>> EncodeVideoWithHttpInfoAsync(EncodeVideoRequest encodeVideoRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<MediaInfo>> _EncodeVideoWithHttpInfoAsync(EncodeVideoRequest encodeVideoRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'encodeVideoRequest' is set
             if (encodeVideoRequest == null)
@@ -540,7 +532,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>OkResult</returns>
         public OkResult ExtractAudio(ExtractAudioRequest extractAudioRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = ExtractAudioWithHttpInfo(extractAudioRequest);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = _ExtractAudioWithHttpInfo(extractAudioRequest);
             return localVarResponse.Data;
         }
 
@@ -550,7 +542,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="extractAudioRequest"></param>
         /// <returns>ApiResponse of OkResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<OkResult> ExtractAudioWithHttpInfo(ExtractAudioRequest extractAudioRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<OkResult> _ExtractAudioWithHttpInfo(ExtractAudioRequest extractAudioRequest)
         {
             // verify the required parameter 'extractAudioRequest' is set
             if (extractAudioRequest == null)
@@ -597,7 +589,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of OkResult</returns>
         public async System.Threading.Tasks.Task<OkResult> ExtractAudioAsync(ExtractAudioRequest extractAudioRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await ExtractAudioWithHttpInfoAsync(extractAudioRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<OkResult> localVarResponse = await _ExtractAudioWithHttpInfoAsync(extractAudioRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -608,7 +600,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="extractAudioRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OkResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> ExtractAudioWithHttpInfoAsync(ExtractAudioRequest extractAudioRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<OkResult>> _ExtractAudioWithHttpInfoAsync(ExtractAudioRequest extractAudioRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'extractAudioRequest' is set
             if (extractAudioRequest == null)
@@ -657,7 +649,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>FrameResult</returns>
         public FrameResult ExtractFrames(ExtractFramesRequest extractFramesRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<FrameResult> localVarResponse = ExtractFramesWithHttpInfo(extractFramesRequest);
+            tochiRes.osbTK.Client.ApiResponse<FrameResult> localVarResponse = _ExtractFramesWithHttpInfo(extractFramesRequest);
             return localVarResponse.Data;
         }
 
@@ -667,7 +659,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="extractFramesRequest"></param>
         /// <returns>ApiResponse of FrameResult</returns>
-        public tochiRes.osbTK.Client.ApiResponse<FrameResult> ExtractFramesWithHttpInfo(ExtractFramesRequest extractFramesRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<FrameResult> _ExtractFramesWithHttpInfo(ExtractFramesRequest extractFramesRequest)
         {
             // verify the required parameter 'extractFramesRequest' is set
             if (extractFramesRequest == null)
@@ -714,7 +706,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of FrameResult</returns>
         public async System.Threading.Tasks.Task<FrameResult> ExtractFramesAsync(ExtractFramesRequest extractFramesRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<FrameResult> localVarResponse = await ExtractFramesWithHttpInfoAsync(extractFramesRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<FrameResult> localVarResponse = await _ExtractFramesWithHttpInfoAsync(extractFramesRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -725,7 +717,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="extractFramesRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FrameResult)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<FrameResult>> ExtractFramesWithHttpInfoAsync(ExtractFramesRequest extractFramesRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<FrameResult>> _ExtractFramesWithHttpInfoAsync(ExtractFramesRequest extractFramesRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'extractFramesRequest' is set
             if (extractFramesRequest == null)
@@ -774,7 +766,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>MediaInfo</returns>
         public MediaInfo Info(PathRequest pathRequest)
         {
-            tochiRes.osbTK.Client.ApiResponse<MediaInfo> localVarResponse = InfoWithHttpInfo(pathRequest);
+            tochiRes.osbTK.Client.ApiResponse<MediaInfo> localVarResponse = _InfoWithHttpInfo(pathRequest);
             return localVarResponse.Data;
         }
 
@@ -784,7 +776,7 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pathRequest"></param>
         /// <returns>ApiResponse of MediaInfo</returns>
-        public tochiRes.osbTK.Client.ApiResponse<MediaInfo> InfoWithHttpInfo(PathRequest pathRequest)
+        protected tochiRes.osbTK.Client.ApiResponse<MediaInfo> _InfoWithHttpInfo(PathRequest pathRequest)
         {
             // verify the required parameter 'pathRequest' is set
             if (pathRequest == null)
@@ -831,7 +823,7 @@ namespace tochiRes.osbTK.Api
         /// <returns>Task of MediaInfo</returns>
         public async System.Threading.Tasks.Task<MediaInfo> InfoAsync(PathRequest pathRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            tochiRes.osbTK.Client.ApiResponse<MediaInfo> localVarResponse = await InfoWithHttpInfoAsync(pathRequest, cancellationToken).ConfigureAwait(false);
+            tochiRes.osbTK.Client.ApiResponse<MediaInfo> localVarResponse = await _InfoWithHttpInfoAsync(pathRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -842,7 +834,7 @@ namespace tochiRes.osbTK.Api
         /// <param name="pathRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (MediaInfo)</returns>
-        public async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<MediaInfo>> InfoWithHttpInfoAsync(PathRequest pathRequest, System.Threading.CancellationToken cancellationToken = default)
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<MediaInfo>> _InfoWithHttpInfoAsync(PathRequest pathRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'pathRequest' is set
             if (pathRequest == null)
