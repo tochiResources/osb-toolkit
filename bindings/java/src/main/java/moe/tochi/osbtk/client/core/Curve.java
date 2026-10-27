@@ -9,6 +9,7 @@ import moe.tochi.osbtk.model.CurveOffsetRequest;
 import moe.tochi.osbtk.model.CurvePointRequest;
 import moe.tochi.osbtk.model.CurveRequest;
 import moe.tochi.osbtk.model.CurveSampleRequest;
+import moe.tochi.osbtk.model.CurveSpec;
 import moe.tochi.osbtk.model.EllipseRequest;
 import moe.tochi.osbtk.model.LineIntersectRequest;
 import moe.tochi.osbtk.model.OptionalPointResult;
@@ -47,9 +48,21 @@ public final class Curve {
             .sweepAngle(options.sweepAngle));
     }
 
+    public PointListResult arc(Vector2 center, Double radius, Double startAngle, Double sweepAngle) throws ApiException {
+        return arc(ArcOptions.builder().center(center).radius(radius).startAngle(startAngle).sweepAngle(sweepAngle).build());
+    }
+
+    public PointListResult arc(Vector2 center, Double radius, Double startAngle, Double sweepAngle, Integer count) throws ApiException {
+        return arc(ArcOptions.builder().center(center).radius(radius).startAngle(startAngle).sweepAngle(sweepAngle).count(count).build());
+    }
+
     public Box2 boundingBox(CurveOptions options) throws ApiException {
         return api.boundingBox(new CurveRequest()
             .curve(options.curve));
+    }
+
+    public Box2 boundingBox(CurveSpec curve) throws ApiException {
+        return boundingBox(CurveOptions.builder().curve(curve).build());
     }
 
     public ScalarResult curvature(CurvePointOptions options) throws ApiException {
@@ -59,10 +72,22 @@ public final class Curve {
             .t(options.t));
     }
 
+    public ScalarResult curvature(CurveSpec curve, Double t) throws ApiException {
+        return curvature(CurvePointOptions.builder().curve(curve).t(t).build());
+    }
+
+    public ScalarResult curvature(CurveSpec curve, Double t, Boolean byArcLength) throws ApiException {
+        return curvature(CurvePointOptions.builder().curve(curve).t(t).byArcLength(byArcLength).build());
+    }
+
     public ScalarResult distanceTo(CurveDistanceOptions options) throws ApiException {
         return api.distanceTo(new CurveDistanceRequest()
             .curve(options.curve)
             .point(options.point));
+    }
+
+    public ScalarResult distanceTo(CurveSpec curve, Vector2 point) throws ApiException {
+        return distanceTo(CurveDistanceOptions.builder().curve(curve).point(point).build());
     }
 
     public PointListResult ellipse(EllipseOptions options) throws ApiException {
@@ -73,9 +98,21 @@ public final class Curve {
             .radiusY(options.radiusY));
     }
 
+    public PointListResult ellipse(Vector2 center, Double radiusX, Double radiusY) throws ApiException {
+        return ellipse(EllipseOptions.builder().center(center).radiusX(radiusX).radiusY(radiusY).build());
+    }
+
+    public PointListResult ellipse(Vector2 center, Double radiusX, Double radiusY, Integer count) throws ApiException {
+        return ellipse(EllipseOptions.builder().center(center).radiusX(radiusX).radiusY(radiusY).count(count).build());
+    }
+
     public ScalarResult length(CurveOptions options) throws ApiException {
         return api.length(new CurveRequest()
             .curve(options.curve));
+    }
+
+    public ScalarResult length(CurveSpec curve) throws ApiException {
+        return length(CurveOptions.builder().curve(curve).build());
     }
 
     public OptionalPointResult lineIntersect(LineIntersectOptions options) throws ApiException {
@@ -86,6 +123,10 @@ public final class Curve {
             .b2(options.b2));
     }
 
+    public OptionalPointResult lineIntersect(Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2) throws ApiException {
+        return lineIntersect(LineIntersectOptions.builder().a1(a1).a2(a2).b1(b1).b2(b2).build());
+    }
+
     public Vector2 normal(CurvePointOptions options) throws ApiException {
         return api.normal(new CurvePointRequest()
             .byArcLength(options.byArcLength)
@@ -93,10 +134,22 @@ public final class Curve {
             .t(options.t));
     }
 
+    public Vector2 normal(CurveSpec curve, Double t) throws ApiException {
+        return normal(CurvePointOptions.builder().curve(curve).t(t).build());
+    }
+
+    public Vector2 normal(CurveSpec curve, Double t, Boolean byArcLength) throws ApiException {
+        return normal(CurvePointOptions.builder().curve(curve).t(t).byArcLength(byArcLength).build());
+    }
+
     public PointListResult offset(CurveOffsetOptions options) throws ApiException {
         return api.offset(new CurveOffsetRequest()
             .curve(options.curve)
             .distance(options.distance));
+    }
+
+    public PointListResult offset(CurveSpec curve, Double distance) throws ApiException {
+        return offset(CurveOffsetOptions.builder().curve(curve).distance(distance).build());
     }
 
     public Vector2 point(CurvePointOptions options) throws ApiException {
@@ -106,11 +159,27 @@ public final class Curve {
             .t(options.t));
     }
 
+    public Vector2 point(CurveSpec curve, Double t) throws ApiException {
+        return point(CurvePointOptions.builder().curve(curve).t(t).build());
+    }
+
+    public Vector2 point(CurveSpec curve, Double t, Boolean byArcLength) throws ApiException {
+        return point(CurvePointOptions.builder().curve(curve).t(t).byArcLength(byArcLength).build());
+    }
+
     public PointListResult sample(CurveSampleOptions options) throws ApiException {
         return api.sample(new CurveSampleRequest()
             .byArcLength(options.byArcLength)
             .count(options.count)
             .curve(options.curve));
+    }
+
+    public PointListResult sample(Integer count, CurveSpec curve) throws ApiException {
+        return sample(CurveSampleOptions.builder().count(count).curve(curve).build());
+    }
+
+    public PointListResult sample(Integer count, CurveSpec curve, Boolean byArcLength) throws ApiException {
+        return sample(CurveSampleOptions.builder().count(count).curve(curve).byArcLength(byArcLength).build());
     }
 
     public PointListResult simplify(SimplifyOptions options) throws ApiException {
@@ -119,10 +188,22 @@ public final class Curve {
             .tolerance(options.tolerance));
     }
 
+    public PointListResult simplify(List<Vector2> points, Double tolerance) throws ApiException {
+        return simplify(SimplifyOptions.builder().points(points).tolerance(tolerance).build());
+    }
+
     public Vector2 tangent(CurvePointOptions options) throws ApiException {
         return api.tangent(new CurvePointRequest()
             .byArcLength(options.byArcLength)
             .curve(options.curve)
             .t(options.t));
+    }
+
+    public Vector2 tangent(CurveSpec curve, Double t) throws ApiException {
+        return tangent(CurvePointOptions.builder().curve(curve).t(t).build());
+    }
+
+    public Vector2 tangent(CurveSpec curve, Double t, Boolean byArcLength) throws ApiException {
+        return tangent(CurvePointOptions.builder().curve(curve).t(t).byArcLength(byArcLength).build());
     }
 }

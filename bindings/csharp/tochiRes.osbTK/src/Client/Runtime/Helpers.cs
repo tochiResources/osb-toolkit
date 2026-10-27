@@ -1,3 +1,4 @@
+#nullable disable
 using tochiRes.osbTK.Api;
 using tochiRes.osbTK.Client;
 using tochiRes.osbTK.Model;
@@ -17,7 +18,16 @@ public sealed class Helpers
 
     public HelperResult Call(HelperOptions options) => api.Call(new HelperRequest(options.Input, options.Name));
 
+    public HelperResult Call(string Name, string Input = default) =>
+        Call(new HelperOptions { Name = Name, Input = Input });
+
     public HelperResult Commands(HelperOptions options) => api.Commands(new HelperRequest(options.Input, options.Name));
 
+    public HelperResult Commands(string Name, string Input = default) =>
+        Commands(new HelperOptions { Name = Name, Input = Input });
+
     public HelperResult Keyframes(HelperOptions options) => api.Keyframes(new HelperRequest(options.Input, options.Name));
+
+    public HelperResult Keyframes(string Name, string Input = default) =>
+        Keyframes(new HelperOptions { Name = Name, Input = Input });
 }

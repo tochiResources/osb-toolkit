@@ -3,6 +3,7 @@ package moe.tochi.osbtk.client.runtime;
 import moe.tochi.osbtk.ApiException;
 import moe.tochi.osbtk.api.AudioAPI;
 import moe.tochi.osbtk.model.AudioDurationResult;
+import moe.tochi.osbtk.model.Easing;
 import moe.tochi.osbtk.model.FftRequest;
 import moe.tochi.osbtk.model.FftResult;
 import moe.tochi.osbtk.model.GetFftRequest;
@@ -32,11 +33,35 @@ public final class Audio {
             .time(options.time));
     }
 
+    public FftResult fft(String path) throws ApiException {
+        return fft(FftOptions.builder().path(path).build());
+    }
+
+    public FftResult fft(String path, Integer magnitudes) throws ApiException {
+        return fft(FftOptions.builder().path(path).magnitudes(magnitudes).build());
+    }
+
+    public FftResult fft(String path, Integer magnitudes, Double time) throws ApiException {
+        return fft(FftOptions.builder().path(path).magnitudes(magnitudes).time(time).build());
+    }
+
     public FftResult getFft(GetFftOptions options) throws ApiException {
         return api.getFft(new GetFftRequest()
             .cutoff(options.cutoff)
             .easing(options.easing)
             .magnitudes(options.magnitudes)
             .time(options.time));
+    }
+
+    public FftResult getFft(Double time, Integer magnitudes) throws ApiException {
+        return getFft(GetFftOptions.builder().time(time).magnitudes(magnitudes).build());
+    }
+
+    public FftResult getFft(Double time, Integer magnitudes, Double cutoff) throws ApiException {
+        return getFft(GetFftOptions.builder().time(time).magnitudes(magnitudes).cutoff(cutoff).build());
+    }
+
+    public FftResult getFft(Double time, Integer magnitudes, Double cutoff, Easing easing) throws ApiException {
+        return getFft(GetFftOptions.builder().time(time).magnitudes(magnitudes).cutoff(cutoff).easing(easing).build());
     }
 }

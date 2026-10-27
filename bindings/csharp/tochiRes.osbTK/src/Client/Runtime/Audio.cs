@@ -1,3 +1,4 @@
+#nullable disable
 using tochiRes.osbTK.Api;
 using tochiRes.osbTK.Client;
 using tochiRes.osbTK.Model;
@@ -19,5 +20,11 @@ public sealed class Audio
 
     public FftResult Fft(FftOptions options) => api.Fft(new FftRequest(options.Magnitudes, options.Path, options.Time));
 
+    public FftResult Fft(string Path, int? Magnitudes = default, double? Time = default) =>
+        Fft(new FftOptions { Path = Path, Magnitudes = Magnitudes, Time = Time });
+
     public FftResult GetFft(GetFftOptions options) => api.GetFft(new GetFftRequest(options.Cutoff, options.Easing, options.Magnitudes, options.Time));
+
+    public FftResult GetFft(double Time, int Magnitudes, double? Cutoff = default, Easing? Easing = default) =>
+        GetFft(new GetFftOptions { Time = Time, Magnitudes = Magnitudes, Cutoff = Cutoff, Easing = Easing });
 }

@@ -25,6 +25,10 @@ export interface ApplyEasingOptions {
     t: number;
 }
 
+export function isApplyEasingOptions(value: unknown): value is ApplyEasingOptions {
+    return typeof value === 'object' && value !== null && 'easing' in value && 't' in value;
+}
+
 /**
  * A circular-arc sampling request.
  */
@@ -51,6 +55,10 @@ export interface ArcOptions {
     sweepAngle: number;
 }
 
+export function isArcOptions(value: unknown): value is ArcOptions {
+    return typeof value === 'object' && value !== null && 'center' in value && 'radius' in value && 'startAngle' in value && 'sweepAngle' in value;
+}
+
 /**
  * A `bake3d` request: a plain 3D scene.
  */
@@ -59,6 +67,10 @@ export interface Bake3dOptions {
      * The 3D scene.
      */
     input: Scene3dInput;
+}
+
+export function isBake3dOptions(value: unknown): value is Bake3dOptions {
+    return typeof value === 'object' && value !== null && 'input' in value;
 }
 
 /**
@@ -73,7 +85,7 @@ export interface CommandOptions {
     /**
      * The end value (scalar, point or color).
      */
-    end?: object;
+    end?: unknown;
     /**
      * The command end time in milliseconds.
      */
@@ -91,11 +103,15 @@ export interface CommandOptions {
     /**
      * The start value (scalar, point or color).
      */
-    start?: object;
+    start?: unknown;
     /**
      * The command start time in milliseconds.
      */
     startTime: number;
+}
+
+export function isCommandOptions(value: unknown): value is CommandOptions {
+    return typeof value === 'object' && value !== null && 'easing' in value && 'endTime' in value && 'kind' in value && 'startTime' in value;
 }
 
 /**
@@ -132,6 +148,10 @@ export interface CreateAnimationOptions {
     position: Vector2;
 }
 
+export function isCreateAnimationOptions(value: unknown): value is CreateAnimationOptions {
+    return typeof value === 'object' && value !== null && 'frameDelay' in value && 'frames' in value && 'loopType' in value && 'origin' in value && 'path' in value && 'position' in value;
+}
+
 /**
  * Create a sound sample on a layer.
  */
@@ -152,6 +172,10 @@ export interface CreateSampleOptions {
      * The sample volume (`0..=100`).
      */
     volume?: number | null;
+}
+
+export function isCreateSampleOptions(value: unknown): value is CreateSampleOptions {
+    return typeof value === 'object' && value !== null && 'path' in value && 'time' in value;
 }
 
 /**
@@ -176,6 +200,10 @@ export interface CreateSpriteOptions {
     position?: Vector2 | null;
 }
 
+export function isCreateSpriteOptions(value: unknown): value is CreateSpriteOptions {
+    return typeof value === 'object' && value !== null && 'origin' in value && 'path' in value;
+}
+
 /**
  * A curve hit-test request.
  */
@@ -190,6 +218,10 @@ export interface CurveDistanceOptions {
     point: Vector2;
 }
 
+export function isCurveDistanceOptions(value: unknown): value is CurveDistanceOptions {
+    return typeof value === 'object' && value !== null && 'curve' in value && 'point' in value;
+}
+
 /**
  * A curve offset request.
  */
@@ -202,6 +234,10 @@ export interface CurveOffsetOptions {
      * The signed offset along the curve's local normal.
      */
     distance: number;
+}
+
+export function isCurveOffsetOptions(value: unknown): value is CurveOffsetOptions {
+    return typeof value === 'object' && value !== null && 'curve' in value && 'distance' in value;
 }
 
 /**
@@ -222,6 +258,10 @@ export interface CurvePointOptions {
     t: number;
 }
 
+export function isCurvePointOptions(value: unknown): value is CurvePointOptions {
+    return typeof value === 'object' && value !== null && 'curve' in value && 't' in value;
+}
+
 /**
  * A curve query.
  */
@@ -230,6 +270,10 @@ export interface CurveOptions {
      * The curve.
      */
     curve: CurveSpec;
+}
+
+export function isCurveOptions(value: unknown): value is CurveOptions {
+    return typeof value === 'object' && value !== null && 'curve' in value;
 }
 
 /**
@@ -250,6 +294,10 @@ export interface CurveSampleOptions {
     curve: CurveSpec;
 }
 
+export function isCurveSampleOptions(value: unknown): value is CurveSampleOptions {
+    return typeof value === 'object' && value !== null && 'count' in value && 'curve' in value;
+}
+
 /**
  * A named-or-custom easing evaluation request.
  */
@@ -266,6 +314,10 @@ export interface EasingValueOptions {
      * The normalized time in `0.0..=1.0`.
      */
     t: number;
+}
+
+export function isEasingValueOptions(value: unknown): value is EasingValueOptions {
+    return typeof value === 'object' && value !== null && 't' in value;
 }
 
 /**
@@ -288,6 +340,10 @@ export interface EllipseOptions {
      * The vertical radius.
      */
     radiusY: number;
+}
+
+export function isEllipseOptions(value: unknown): value is EllipseOptions {
+    return typeof value === 'object' && value !== null && 'center' in value && 'radiusX' in value && 'radiusY' in value;
 }
 
 /**
@@ -316,6 +372,10 @@ export interface EncodeVideoOptions {
     output: string;
 }
 
+export function isEncodeVideoOptions(value: unknown): value is EncodeVideoOptions {
+    return typeof value === 'object' && value !== null && 'fps' in value && 'inputPattern' in value && 'output' in value;
+}
+
 /**
  * An audio-extraction request (media -> audio file).
  */
@@ -328,6 +388,10 @@ export interface ExtractAudioOptions {
      * The output audio path (its extension selects the format).
      */
     output: string;
+}
+
+export function isExtractAudioOptions(value: unknown): value is ExtractAudioOptions {
+    return typeof value === 'object' && value !== null && 'input' in value && 'output' in value;
 }
 
 /**
@@ -364,6 +428,10 @@ export interface ExtractFramesOptions {
     width?: number | null;
 }
 
+export function isExtractFramesOptions(value: unknown): value is ExtractFramesOptions {
+    return typeof value === 'object' && value !== null && 'input' in value && 'outputDir' in value;
+}
+
 /**
  * An FFT request against a `.wav` file.
  */
@@ -380,6 +448,10 @@ export interface FftOptions {
      * Sample time in milliseconds.
      */
     time?: number | null;
+}
+
+export function isFftOptions(value: unknown): value is FftOptions {
+    return typeof value === 'object' && value !== null && 'path' in value;
 }
 
 /**
@@ -404,6 +476,10 @@ export interface GetFftOptions {
     time: number;
 }
 
+export function isGetFftOptions(value: unknown): value is GetFftOptions {
+    return typeof value === 'object' && value !== null && 'magnitudes' in value && 'time' in value;
+}
+
 /**
  * The anchor offset for an origin.
  */
@@ -420,6 +496,10 @@ export interface GetOriginVectorOptions {
      * The sprite width.
      */
     width: number;
+}
+
+export function isGetOriginVectorOptions(value: unknown): value is GetOriginVectorOptions {
+    return typeof value === 'object' && value !== null && 'height' in value && 'origin' in value && 'width' in value;
 }
 
 /**
@@ -443,6 +523,10 @@ export interface HelperOptions {
     name: string;
 }
 
+export function isHelperOptions(value: unknown): value is HelperOptions {
+    return typeof value === 'object' && value !== null && 'name' in value;
+}
+
 /**
  * An image processing request: read `path`, apply `options`, write `output`.
  */
@@ -459,6 +543,10 @@ export interface ImageProcessOptions {
      * The input file path.
      */
     path: string;
+}
+
+export function isImageProcessOptions(value: unknown): value is ImageProcessOptions {
+    return typeof value === 'object' && value !== null && 'options' in value && 'output' in value && 'path' in value;
 }
 
 /**
@@ -484,6 +572,10 @@ export interface InScreenBoundsOptions {
     size: Vector2;
 }
 
+export function isInScreenBoundsOptions(value: unknown): value is InScreenBoundsOptions {
+    return typeof value === 'object' && value !== null && 'origin' in value && 'position' in value && 'rotation' in value && 'size' in value;
+}
+
 /**
  * Resolve (or create) a layer by name.
  */
@@ -492,6 +584,10 @@ export interface LayerHandleOptions {
      * The layer name.
      */
     name: string;
+}
+
+export function isLayerHandleOptions(value: unknown): value is LayerHandleOptions {
+    return typeof value === 'object' && value !== null && 'name' in value;
 }
 
 /**
@@ -516,6 +612,10 @@ export interface LineIntersectOptions {
     b2: Vector2;
 }
 
+export function isLineIntersectOptions(value: unknown): value is LineIntersectOptions {
+    return typeof value === 'object' && value !== null && 'a1' in value && 'a2' in value && 'b1' in value && 'b2' in value;
+}
+
 /**
  * An `.osb` optimization request.
  */
@@ -530,6 +630,10 @@ export interface OptimizeOptions {
     text: string;
 }
 
+export function isOptimizeOptions(value: unknown): value is OptimizeOptions {
+    return typeof value === 'object' && value !== null && 'options' in value && 'text' in value;
+}
+
 /**
  * A request carrying a single file path.
  */
@@ -538,6 +642,10 @@ export interface PathOptions {
      * The input file path.
      */
     path: string;
+}
+
+export function isPathOptions(value: unknown): value is PathOptions {
+    return typeof value === 'object' && value !== null && 'path' in value;
 }
 
 /**
@@ -552,6 +660,10 @@ export interface RandomOptions {
      * The inclusive lower bound.
      */
     min: number;
+}
+
+export function isRandomOptions(value: unknown): value is RandomOptions {
+    return typeof value === 'object' && value !== null && 'max' in value && 'min' in value;
 }
 
 /**
@@ -580,6 +692,10 @@ export interface RenderShapesOptions {
     width: number;
 }
 
+export function isRenderShapesOptions(value: unknown): value is RenderShapesOptions {
+    return typeof value === 'object' && value !== null && 'height' in value && 'output' in value && 'shapes' in value && 'width' in value;
+}
+
 /**
  * Record a depth index on a segment.
  */
@@ -590,6 +706,10 @@ export interface SegmentAddIndexOptions {
     index: number;
 }
 
+export function isSegmentAddIndexOptions(value: unknown): value is SegmentAddIndexOptions {
+    return typeof value === 'object' && value !== null && 'index' in value;
+}
+
 /**
  * Move a segment to another osu! layer (`ChangePosition`).
  */
@@ -598,6 +718,10 @@ export interface SegmentChangePositionOptions {
      * The destination osu! layer.
      */
     osbLayer: OsbLayer;
+}
+
+export function isSegmentChangePositionOptions(value: unknown): value is SegmentChangePositionOptions {
+    return typeof value === 'object' && value !== null && 'osbLayer' in value;
 }
 
 /**
@@ -617,6 +741,10 @@ export interface SegmentReverseDepthOptions {
     value: boolean;
 }
 
+export function isSegmentReverseDepthOptions(value: unknown): value is SegmentReverseDepthOptions {
+    return typeof value === 'object' && value !== null && 'value' in value;
+}
+
 /**
  * A Douglas-Peucker simplification request.
  */
@@ -631,6 +759,10 @@ export interface SimplifyOptions {
     tolerance: number;
 }
 
+export function isSimplifyOptions(value: unknown): value is SimplifyOptions {
+    return typeof value === 'object' && value !== null && 'points' in value && 'tolerance' in value;
+}
+
 /**
  * A sprite handle pair plus a sample time.
  */
@@ -639,6 +771,10 @@ export interface SpriteTimeOptions {
      * The sample time in milliseconds.
      */
     time: number;
+}
+
+export function isSpriteTimeOptions(value: unknown): value is SpriteTimeOptions {
+    return typeof value === 'object' && value !== null && 'time' in value;
 }
 
 /**
@@ -653,6 +789,10 @@ export interface StartLoopGroupOptions {
      * The loop start time in milliseconds.
      */
     startTime: number;
+}
+
+export function isStartLoopGroupOptions(value: unknown): value is StartLoopGroupOptions {
+    return typeof value === 'object' && value !== null && 'count' in value && 'startTime' in value;
 }
 
 /**
@@ -677,6 +817,10 @@ export interface StartTriggerGroupOptions {
     startTime: number;
 }
 
+export function isStartTriggerGroupOptions(value: unknown): value is StartTriggerGroupOptions {
+    return typeof value === 'object' && value !== null && 'endTime' in value && 'group' in value && 'name' in value && 'startTime' in value;
+}
+
 /**
  * A request carrying a block of text (an effect script, `.osu` or `.osb`).
  */
@@ -687,6 +831,10 @@ export interface TextOptions {
     text: string;
 }
 
+export function isTextOptions(value: unknown): value is TextOptions {
+    return typeof value === 'object' && value !== null && 'text' in value;
+}
+
 /**
  * A time query.
  */
@@ -695,4 +843,8 @@ export interface TimeOptions {
      * The time in milliseconds.
      */
     time: number;
+}
+
+export function isTimeOptions(value: unknown): value is TimeOptions {
+    return typeof value === 'object' && value !== null && 'time' in value;
 }

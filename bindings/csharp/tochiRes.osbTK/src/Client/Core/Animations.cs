@@ -1,3 +1,4 @@
+#nullable disable
 using tochiRes.osbTK.Api;
 using tochiRes.osbTK.Client;
 using tochiRes.osbTK.Model;
@@ -17,5 +18,11 @@ public sealed class Animations
 
     public EasingResult ApplyEasing(ApplyEasingOptions options) => api.ApplyEasing(new ApplyEasingRequest(options.Easing, options.T));
 
+    public EasingResult ApplyEasing(Easing Easing, double T) =>
+        ApplyEasing(new ApplyEasingOptions { Easing = Easing, T = T });
+
     public EasingResult EasingValue(EasingValueOptions options) => api.EasingValue(new EasingValueRequest(options.CubicBezier, options.Easing, options.T));
+
+    public EasingResult EasingValue(double T, Easing? Easing = default, List<double> CubicBezier = default) =>
+        EasingValue(new EasingValueOptions { T = T, Easing = Easing, CubicBezier = CubicBezier });
 }

@@ -92,7 +92,7 @@ function primitive(type: string | undefined): string {
         case 'string':
             return 'string';
         case 'object':
-            return 'object';
+            return 'unknown';
         default:
             return 'unknown';
     }
@@ -216,6 +216,68 @@ function optionFor(contract: Contract, op: Operation): OptionModel | undefined {
     return op.body ? contract.options.get(op.body) : undefined;
 }
 
+/** The friendly positional order for the most-used options. */
+const preferredOrder: Record<string, string[]> = {
+    CreateSpriteRequest: ['path', 'origin', 'position', 'layer'],
+    CreateAnimationRequest: [
+        'path',
+        'frames',
+        'frameDelay',
+        'loopType',
+        'origin',
+        'position',
+        'layer',
+    ],
+    CreateSampleRequest: ['path', 'time', 'volume', 'layer'],
+    CommandRequest: ['kind', 'startTime', 'endTime', 'easing', 'start', 'end', 'parameter'],
+    ArcRequest: ['center', 'radius', 'startAngle', 'sweepAngle', 'count'],
+    EllipseRequest: ['center', 'radiusX', 'radiusY', 'count'],
+    EasingValueRequest: ['easing', 't', 'cubicBezier'],
+    GetFftRequest: ['time', 'magnitudes', 'cutoff', 'easing'],
+    EncodeVideoRequest: ['inputPattern', 'output', 'fps', 'codec', 'crf'],
+    GetOriginVectorRequest: ['origin', 'width', 'height'],
+    InScreenBoundsRequest: ['position', 'size', 'rotation', 'origin'],
+    RenderShapesRequest: ['width', 'height', 'shapes', 'output', 'background'],
+    StartLoopGroupRequest: ['startTime', 'count'],
+    StartTriggerGroupRequest: ['name', 'startTime', 'endTime', 'group'],
+};
+
+/** Properties in the order used by the positional convenience overload. */
+function orderedProperties(option: OptionModel): OptionProperty[] {
+    const preferred = preferredOrder[option.source] ?? [];
+    const byName = new Map(option.properties.map(property => [property.name, property]));
+    const ordered = preferred.flatMap(name => {
+        const property = byName.get(name);
+        return property ? [property] : [];
+    });
+    const remaining = option.properties
+        .filter(property => !preferred.includes(property.name))
+        .sort((a, b) => Number(b.required) - Number(a.required) || a.name.localeCompare(b.name));
+    return [...ordered, ...remaining].sort((a, b) => Number(b.required) - Number(a.required));
+}
+
+function tsPropertyType(property: OptionProperty): string {
+    return `${property.type}${property.nullable ? ' | null' : ''}`;
+}
+
+function tsParameter(property: OptionProperty): string {
+    const optional = property.required ? '' : '?';
+    return `${property.name}${optional}: ${tsPropertyType(property)}`;
+}
+
+function tsGuardName(option: OptionModel): string {
+    return `is${option.name}`;
+}
+
+function tsGuard(option: OptionModel): string {
+    const keys = option.properties.filter(property => property.required);
+    const names = (keys.length ? keys : option.properties).map(
+        property => `'${property.name}' in value`
+    );
+    const check = names.join(keys.length ? ' && ' : ' || ');
+    return `export function ${tsGuardName(option)}(value: unknown): value is ${option.name} {\n    return typeof value === 'object' && value !== null && ${check};\n}`;
+}
+
 function emitTypeScriptOptions(dir: string, contract: Contract): void {
     const models = new Set<string>();
     for (const option of contract.options.values()) {
@@ -235,7 +297,8 @@ function emitTypeScriptOptions(dir: string, contract: Contract): void {
                     return `${jsdoc(property.description, '    ')}    ${property.name}${optional}: ${property.type}${nullable};`;
                 })
                 .join('\n');
-            return `${jsdoc(option.description)}export interface ${option.name} {\n${properties}\n}`;
+            const guard = option.properties.length > 0 ? `\n\n${tsGuard(option)}` : '';
+            return `${jsdoc(option.description)}export interface ${option.name} {\n${properties}\n}${guard}`;
         })
         .join('\n\n');
     const text = `${imports.length ? `${imports.join('\n')}\n\n` : ''}${interfaces}\n`;
@@ -280,6 +343,9 @@ function tsMethod(tag: string, op: Operation, option: OptionModel | undefined): 
         args = hasOptions ? `options: ${option.name}` : '';
         call = hasOptions ? 'options' : '{}';
     }
+    if (isSprite && op.name === 'command') {
+        call = `${call} as Parameters<SpriteAPI['command']>[0]`;
+    }
 
     if (isLayer && (op.name === 'createSprite' || op.name === 'createAnimation')) {
         statement = `        const handle = await this.api.${op.name}(${call});\n        return new Sprite(this.sprites, handle.layer ?? this.handle, handle.sprite ?? 0);`;
@@ -289,7 +355,27 @@ function tsMethod(tag: string, op: Operation, option: OptionModel | undefined): 
         statement = `        return this.api.${op.name}(${call});`;
     }
 
-    return `${jsdoc(op.description, '    ')}    async ${op.name}(${args}): Promise<${result}> {\n${statement}\n    }`;
+    const overload =
+        option && option.properties.length > 0 && option.properties.length < 8
+            ? orderedProperties(option)
+            : [];
+    if (overload.length === 0) {
+        return `${jsdoc(op.description, '    ')}    async ${op.name}(${args}): Promise<${result}> {\n${statement}\n    }`;
+    }
+
+    const first = overload[0];
+    const firstVar = `optionsOr${pascal(first.name)}`;
+    const positional = overload.map(tsParameter).join(', ');
+    const implementation = [
+        `${firstVar}?: ${option.name} | ${tsPropertyType(first)}`,
+        ...overload.slice(1).map(property => `${property.name}?: ${tsPropertyType(property)}`),
+    ].join(', ');
+    const fields = overload
+        .map(property => `${property.name}: ${property === first ? firstVar : property.name}`)
+        .join(', ');
+    const prelude = `        const options: ${option.name} = ${tsGuardName(option)}(${firstVar})\n            ? ${firstVar}\n            : ({ ${fields} } as ${option.name});`;
+    const doc = jsdoc(op.description, '    ');
+    return `${doc}    async ${op.name}(options: ${option.name}): Promise<${result}>;\n    async ${op.name}(${positional}): Promise<${result}>;\n    async ${op.name}(${implementation}): Promise<${result}> {\n${prelude}\n${statement}\n    }`;
 }
 
 function emitTypeScript(contract: Contract): void {
@@ -309,6 +395,12 @@ function emitTypeScript(contract: Contract): void {
             if (op.result && result === resultType(op, type => `${type}[]`, 'void')) {
                 results.add(op.result);
             }
+            const option = optionFor(contract, op);
+            if (option) {
+                for (const property of option.properties) {
+                    for (const ref of property.refs) results.add(ref);
+                }
+            }
         }
         const imports = [
             `import { ${tag}API } from '../../api/${tag}API';`,
@@ -323,12 +415,19 @@ function emitTypeScript(contract: Contract): void {
                 : []),
         ];
         const options = new Set<string>();
+        const guards = new Set<string>();
         for (const op of operations) {
             const option = optionFor(contract, op);
-            if (option && option.properties.length > 0) options.add(option.name);
+            if (option && option.properties.length > 0) {
+                options.add(option.name);
+                if (option.properties.length < 8) guards.add(tsGuardName(option));
+            }
         }
         if (options.size) {
             imports.push(`import type { ${[...options].sort().join(', ')} } from '../options';`);
+        }
+        if (guards.size) {
+            imports.push(`import { ${[...guards].sort().join(', ')} } from '../options';`);
         }
         const methods = operations
             .map(op => tsMethod(tag, op, optionFor(contract, op)))
@@ -412,11 +511,7 @@ function emitPythonOptions(dir: string, contract: Contract): void {
     }
     const classes = [...contract.options.values()]
         .map(option => {
-            const properties = [...option.properties]
-                .sort(
-                    (a, b) =>
-                        Number(b.required) - Number(a.required) || a.name.localeCompare(b.name)
-                )
+            const properties = orderedProperties(option)
                 .map(property => {
                     const type = pythonType({
                         name: property.name,
@@ -429,7 +524,7 @@ function emitPythonOptions(dir: string, contract: Contract): void {
                 })
                 .join('\n');
             const title = option.description ? `    """${option.description}"""\n` : '';
-            return `@dataclass(kw_only=True)\nclass ${option.name}:\n${title}${properties}`;
+            return `@dataclass\nclass ${option.name}:\n${title}${properties}`;
         })
         .join('\n\n');
     const text = `from __future__ import annotations\n\nfrom dataclasses import asdict, dataclass\nfrom typing import Any, Dict, List, Optional\n${[
@@ -476,6 +571,7 @@ function emitPython(contract: Contract): void {
         mkdirSync(outDir, { recursive: true });
         const models = new Set<string>();
         const optionNames = new Set<string>();
+        let hasOverload = false;
         for (const op of operations) {
             if (op.body) models.add(op.body);
             const result = pythonResult(tag, op.name, op);
@@ -483,7 +579,15 @@ function emitPython(contract: Contract): void {
                 models.add(op.result);
             }
             const option = optionFor(contract, op);
-            if (option && option.properties.length > 0) optionNames.add(option.name);
+            if (option) {
+                if (option.properties.length > 0) optionNames.add(option.name);
+                if (option.properties.length > 0 && option.properties.length < 8) {
+                    hasOverload = true;
+                }
+                for (const property of option.properties) {
+                    for (const ref of property.refs) models.add(ref);
+                }
+            }
         }
         const imports = [
             'from __future__ import annotations',
@@ -496,6 +600,7 @@ function emitPython(contract: Contract): void {
             ...(optionNames.size
                 ? [`from ..options import ${[...optionNames].sort().join(', ')}, to_kwargs`]
                 : []),
+            ...(hasOverload ? ['from typing import overload'] : []),
         ];
         const methods = operations
             .map(op => {
@@ -512,13 +617,32 @@ function emitPython(contract: Contract): void {
                 }
                 const result = pythonResult(tag, op.name, op);
                 const name = snake(op.name);
+                let body: string;
                 if (isLayer && (op.name === 'createSprite' || op.name === 'createAnimation')) {
-                    return `    def ${name}(self${args}) -> ${result}:\n        handle = self._api.${name}(${call})\n        return Sprite(self._sprites, handle.layer, handle.sprite)`;
+                    body = `        handle = self._api.${name}(${call})\n        return Sprite(self._sprites, handle.layer, handle.sprite)`;
+                } else if (isLayer && op.name === 'createSegment') {
+                    body = `        handle = self._api.${name}(${call})\n        return Layer(self._api, self._sprites, handle.layer)`;
+                } else {
+                    body = `        return self._api.${name}(${call})`;
                 }
-                if (isLayer && op.name === 'createSegment') {
-                    return `    def ${name}(self${args}) -> ${result}:\n        handle = self._api.${name}(${call})\n        return Layer(self._api, self._sprites, handle.layer)`;
+                const overload =
+                    option && option.properties.length > 0 && option.properties.length < 8
+                        ? orderedProperties(option)
+                        : [];
+                if (overload.length === 0) {
+                    return `    def ${name}(self${args}) -> ${result}:\n${body}`;
                 }
-                return `    def ${name}(self${args}) -> ${result}:\n        return self._api.${name}(${call})`;
+                const positional = overload
+                    .map(property => {
+                        const type = pythonType({
+                            name: property.name,
+                            property: property.schema,
+                            required: property.required,
+                        });
+                        return `${property.name}: ${type}${property.required ? '' : ' = None'}`;
+                    })
+                    .join(', ');
+                return `    @overload\n    def ${name}(self, options: ${option.name}) -> ${result}: ...\n\n    @overload\n    def ${name}(self, ${positional}) -> ${result}: ...\n\n    def ${name}(self, *args: object, **kwargs: object) -> ${result}:\n        options = args[0] if args and isinstance(args[0], ${option.name}) else ${option.name}(*args, **kwargs)\n${body}`;
             })
             .join('\n\n');
         const constructor = isLayer
@@ -857,7 +981,12 @@ function emitJava(contract: Contract): void {
             }
             if (isLayer && op.name === 'createSegment') models.add('LayerHandle');
             const option = optionFor(contract, op);
-            if (option && option.properties.length > 0) optionNames.add(option.name);
+            if (option) {
+                if (option.properties.length > 0) optionNames.add(option.name);
+                for (const property of option.properties) {
+                    for (const ref of property.refs) models.add(ref);
+                }
+            }
         }
         const imports = [
             'import moe.tochi.osbtk.ApiException;',
@@ -880,13 +1009,42 @@ function emitJava(contract: Contract): void {
                     call = javaRequest(tag, option.source, contract);
                 }
                 const result = javaResult(tag, op.name, op);
+                let text: string;
                 if (isLayer && (op.name === 'createSprite' || op.name === 'createAnimation')) {
-                    return `    public ${result} ${op.name}(${args}) throws ApiException {\n        Handle handle = api.${op.name}(${call});\n        return new Sprite(this.sprites, handle.getLayer(), handle.getSprite());\n    }`;
+                    text = `    public ${result} ${op.name}(${args}) throws ApiException {\n        Handle handle = api.${op.name}(${call});\n        return new Sprite(this.sprites, handle.getLayer(), handle.getSprite());\n    }`;
+                } else if (isLayer && op.name === 'createSegment') {
+                    text = `    public ${result} ${op.name}(${args}) throws ApiException {\n        LayerHandle handle = api.${op.name}(${call});\n        return new Layer(this.api, this.sprites, handle.getLayer());\n    }`;
+                } else {
+                    text = `    public ${result} ${op.name}(${args}) throws ApiException {\n        return api.${op.name}(${call});\n    }`;
                 }
-                if (isLayer && op.name === 'createSegment') {
-                    return `    public ${result} ${op.name}(${args}) throws ApiException {\n        LayerHandle handle = api.${op.name}(${call});\n        return new Layer(this.api, this.sprites, handle.getLayer());\n    }`;
+                if (option && option.properties.length > 0 && option.properties.length < 8) {
+                    const order = orderedProperties(option);
+                    const requiredCount = order.filter(property => property.required).length;
+                    const start = requiredCount === 0 ? 0 : requiredCount;
+                    for (let arity = start; arity <= order.length; arity++) {
+                        const subset = order.slice(0, arity);
+                        const parameters = subset
+                            .map(property => {
+                                const type = javaType({
+                                    name: property.name,
+                                    property: property.schema,
+                                    required: property.required,
+                                });
+                                return `${type} ${property.name}`;
+                            })
+                            .join(', ');
+                        const setters = subset
+                            .map(property => `.${property.name}(${property.name})`)
+                            .join('');
+                        const invocation = `${op.name}(${option.name}.builder()${setters}.build());`;
+                        const body =
+                            result === 'void'
+                                ? `        ${invocation}`
+                                : `        return ${invocation}`;
+                        text += `\n\n    public ${result} ${op.name}(${parameters}) throws ApiException {\n${body}\n    }`;
+                    }
                 }
-                return `    public ${result} ${op.name}(${args}) throws ApiException {\n        return api.${op.name}(${call});\n    }`;
+                return text;
             })
             .join('\n\n');
         const member = isLayer
@@ -1018,13 +1176,38 @@ function emitCSharp(contract: Contract): void {
                 }
                 const result = csharpResult(tag, op.name, op);
                 const method = pascal(op.name);
+                let text: string;
                 if (isLayer && (op.name === 'createSprite' || op.name === 'createAnimation')) {
-                    return `    public ${result} ${method}(${args})\n    {\n        var handle = api.${method}(${call});\n        return new Sprite(this.sprites, handle.Layer, handle.Sprite);\n    }`;
+                    text = `    public ${result} ${method}(${args})\n    {\n        var handle = api.${method}(${call});\n        return new Sprite(this.sprites, handle.Layer, handle.Sprite);\n    }`;
+                } else if (isLayer && op.name === 'createSegment') {
+                    text = `    public ${result} ${method}(${args})\n    {\n        var handle = api.${method}(${call});\n        return new Layer(this.api, this.sprites, handle.Layer);\n    }`;
+                } else {
+                    text = `    public ${result} ${method}(${args}) => api.${method}(${call});`;
                 }
-                if (isLayer && op.name === 'createSegment') {
-                    return `    public ${result} ${method}(${args})\n    {\n        var handle = api.${method}(${call});\n        return new Layer(this.api, this.sprites, handle.Layer);\n    }`;
+                const overload =
+                    option && option.properties.length > 0 && option.properties.length < 8
+                        ? orderedProperties(option)
+                        : [];
+                if (overload.length) {
+                    const parameters = overload
+                        .map(property => {
+                            const type = csharpType(
+                                {
+                                    name: property.name,
+                                    property: property.schema,
+                                    required: property.required,
+                                },
+                                contract
+                            );
+                            return `${type} ${pascal(property.name)}${property.required ? '' : ' = default'}`;
+                        })
+                        .join(', ');
+                    const initializer = overload
+                        .map(property => `${pascal(property.name)} = ${pascal(property.name)}`)
+                        .join(', ');
+                    text += `\n\n    public ${result} ${method}(${parameters}) =>\n        ${method}(new ${option.name} { ${initializer} });`;
                 }
-                return `    public ${result} ${method}(${args}) => api.${method}(${call});`;
+                return text;
             })
             .join('\n\n');
         const member = isLayer
@@ -1032,7 +1215,7 @@ function emitCSharp(contract: Contract): void {
             : bound
               ? `    private readonly ${tag}API api;\n    private readonly int layer;\n    private readonly int sprite;\n\n    public Sprite(SpriteAPI api, int layer, int sprite)\n    {\n        this.api = api;\n        this.layer = layer;\n        this.sprite = sprite;\n    }`
               : `    private readonly ${tag}API api;\n\n    public ${tag}(${tag}API api)\n    {\n        this.api = api;\n    }`;
-        const text = `using tochiRes.osbTK.Api;\nusing tochiRes.osbTK.Client;\nusing tochiRes.osbTK.Model;\n\nnamespace tochiRes.osbTK.Client.${pascal(section)};\n\npublic sealed class ${tag}\n{\n${member}\n\n    public static bool InstanceOf(object value) => value is ${tag};\n\n${methods}\n}\n`;
+        const text = `#nullable disable\nusing tochiRes.osbTK.Api;\nusing tochiRes.osbTK.Client;\nusing tochiRes.osbTK.Model;\n\nnamespace tochiRes.osbTK.Client.${pascal(section)};\n\npublic sealed class ${tag}\n{\n${member}\n\n    public static bool InstanceOf(object value) => value is ${tag};\n\n${methods}\n}\n`;
         writeFileSync(join(outDir, `${tag}.cs`), text, 'utf8');
     }
 }

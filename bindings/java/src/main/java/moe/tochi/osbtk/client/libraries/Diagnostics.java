@@ -23,8 +23,16 @@ public final class Diagnostics {
             .text(options.text));
     }
 
+    public DiagnosticReport diagnoseOsb(String text) throws ApiException {
+        return diagnoseOsb(TextOptions.builder().text(text).build());
+    }
+
     public DiagnosticReport diagnoseOsu(TextOptions options) throws ApiException {
         return api.diagnoseOsu(new TextRequest()
             .text(options.text));
+    }
+
+    public DiagnosticReport diagnoseOsu(String text) throws ApiException {
+        return diagnoseOsu(TextOptions.builder().text(text).build());
     }
 }

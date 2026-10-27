@@ -35,10 +35,26 @@ public final class Media {
             .output(options.output));
     }
 
+    public MediaInfo encodeVideo(String inputPattern, String output, Double fps) throws ApiException {
+        return encodeVideo(EncodeVideoOptions.builder().inputPattern(inputPattern).output(output).fps(fps).build());
+    }
+
+    public MediaInfo encodeVideo(String inputPattern, String output, Double fps, String codec) throws ApiException {
+        return encodeVideo(EncodeVideoOptions.builder().inputPattern(inputPattern).output(output).fps(fps).codec(codec).build());
+    }
+
+    public MediaInfo encodeVideo(String inputPattern, String output, Double fps, String codec, Integer crf) throws ApiException {
+        return encodeVideo(EncodeVideoOptions.builder().inputPattern(inputPattern).output(output).fps(fps).codec(codec).crf(crf).build());
+    }
+
     public OkResult extractAudio(ExtractAudioOptions options) throws ApiException {
         return api.extractAudio(new ExtractAudioRequest()
             .input(options.input)
             .output(options.output));
+    }
+
+    public OkResult extractAudio(String input, String output) throws ApiException {
+        return extractAudio(ExtractAudioOptions.builder().input(input).output(output).build());
     }
 
     public FrameResult extractFrames(ExtractFramesOptions options) throws ApiException {
@@ -52,8 +68,36 @@ public final class Media {
             .width(options.width));
     }
 
+    public FrameResult extractFrames(String input, String outputDir) throws ApiException {
+        return extractFrames(ExtractFramesOptions.builder().input(input).outputDir(outputDir).build());
+    }
+
+    public FrameResult extractFrames(String input, String outputDir, Integer count) throws ApiException {
+        return extractFrames(ExtractFramesOptions.builder().input(input).outputDir(outputDir).count(count).build());
+    }
+
+    public FrameResult extractFrames(String input, String outputDir, Integer count, Double fps) throws ApiException {
+        return extractFrames(ExtractFramesOptions.builder().input(input).outputDir(outputDir).count(count).fps(fps).build());
+    }
+
+    public FrameResult extractFrames(String input, String outputDir, Integer count, Double fps, Integer height) throws ApiException {
+        return extractFrames(ExtractFramesOptions.builder().input(input).outputDir(outputDir).count(count).fps(fps).height(height).build());
+    }
+
+    public FrameResult extractFrames(String input, String outputDir, Integer count, Double fps, Integer height, Double start) throws ApiException {
+        return extractFrames(ExtractFramesOptions.builder().input(input).outputDir(outputDir).count(count).fps(fps).height(height).start(start).build());
+    }
+
+    public FrameResult extractFrames(String input, String outputDir, Integer count, Double fps, Integer height, Double start, Integer width) throws ApiException {
+        return extractFrames(ExtractFramesOptions.builder().input(input).outputDir(outputDir).count(count).fps(fps).height(height).start(start).width(width).build());
+    }
+
     public MediaInfo info(PathOptions options) throws ApiException {
         return api.info(new PathRequest()
             .path(options.path));
+    }
+
+    public MediaInfo info(String path) throws ApiException {
+        return info(PathOptions.builder().path(path).build());
     }
 }

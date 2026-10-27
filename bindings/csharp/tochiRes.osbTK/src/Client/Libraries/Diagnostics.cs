@@ -1,3 +1,4 @@
+#nullable disable
 using tochiRes.osbTK.Api;
 using tochiRes.osbTK.Client;
 using tochiRes.osbTK.Model;
@@ -17,5 +18,11 @@ public sealed class Diagnostics
 
     public DiagnosticReport DiagnoseOsb(TextOptions options) => api.DiagnoseOsb(new TextRequest(options.Text));
 
+    public DiagnosticReport DiagnoseOsb(string Text) =>
+        DiagnoseOsb(new TextOptions { Text = Text });
+
     public DiagnosticReport DiagnoseOsu(TextOptions options) => api.DiagnoseOsu(new TextRequest(options.Text));
+
+    public DiagnosticReport DiagnoseOsu(string Text) =>
+        DiagnoseOsu(new TextOptions { Text = Text });
 }

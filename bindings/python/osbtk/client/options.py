@@ -16,7 +16,7 @@ from ..models.scene3d_input import Scene3dInput
 from ..models.shape import Shape
 from ..models.vector2 import Vector2
 
-@dataclass(kw_only=True)
+@dataclass
 class ApplyEasingOptions:
     """An easing evaluation request."""
     # The easing function.
@@ -24,7 +24,7 @@ class ApplyEasingOptions:
     # The normalized time in `0.0..=1.0`.
     t: float
 
-@dataclass(kw_only=True)
+@dataclass
 class ArcOptions:
     """A circular-arc sampling request."""
     # The arc centre.
@@ -38,76 +38,76 @@ class ArcOptions:
     # The number of points (default `64`).
     count: Optional[int] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class Bake3dOptions:
     """A `bake3d` request: a plain 3D scene."""
     # The 3D scene.
     input: Scene3dInput
 
-@dataclass(kw_only=True)
+@dataclass
 class CommandOptions:
     """A sprite command. `start`/`end` are a scalar, a `Vector2`, or a `Color4`
 depending on `kind`."""
-    # The easing function.
-    easing: Easing
-    # The command end time in milliseconds.
-    endTime: float
     # The command kind (`move`, `moveX`, `moveY`, `scale`, `scaleVec`,
     # `rotate`, `fade`, `color`, `colorHsb`, `anchor`, `parameter`, `flipH`,
     # `flipV`, `additive`).
     kind: str
     # The command start time in milliseconds.
     startTime: float
+    # The command end time in milliseconds.
+    endTime: float
+    # The easing function.
+    easing: Easing
+    # The start value (scalar, point or color).
+    start: Optional[Dict[str, Any]] = None
     # The end value (scalar, point or color).
     end: Optional[Dict[str, Any]] = None
     # The parameter kind for a `parameter` command.
     parameter: Optional[ParameterType] = None
-    # The start value (scalar, point or color).
-    start: Optional[Dict[str, Any]] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class CreateAnimationOptions:
     """Create an animation sprite."""
-    # Delay between frames, in milliseconds.
-    frameDelay: float
+    # The texture path (relative to the mapset).
+    path: str
     # The number of frames.
     frames: int
+    # Delay between frames, in milliseconds.
+    frameDelay: float
     # How the animation loops.
     loopType: OsbLoopType
     # The sprite anchor origin.
     origin: OsbOrigin
-    # The texture path (relative to the mapset).
-    path: str
     # The initial position.
     position: Vector2
     # The target layer name (omitted when `layerHandle` is set).
     layer: Optional[str] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class CreateSampleOptions:
     """Create a sound sample on a layer."""
     # The sample path (relative to the mapset).
     path: str
     # The sample time in milliseconds.
     time: float
-    # The target layer name (omitted when `layerHandle` is set).
-    layer: Optional[str] = None
     # The sample volume (`0..=100`).
     volume: Optional[float] = None
-
-@dataclass(kw_only=True)
-class CreateSpriteOptions:
-    """Create a sprite."""
-    # The sprite anchor origin.
-    origin: OsbOrigin
-    # The texture path (relative to the mapset).
-    path: str
     # The target layer name (omitted when `layerHandle` is set).
     layer: Optional[str] = None
+
+@dataclass
+class CreateSpriteOptions:
+    """Create a sprite."""
+    # The texture path (relative to the mapset).
+    path: str
+    # The sprite anchor origin.
+    origin: OsbOrigin
     # The initial position; omitted means the sprite's default.
     position: Optional[Vector2] = None
+    # The target layer name (omitted when `layerHandle` is set).
+    layer: Optional[str] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class CurveDistanceOptions:
     """A curve hit-test request."""
     # The curve.
@@ -115,7 +115,7 @@ class CurveDistanceOptions:
     # The query point.
     point: Vector2
 
-@dataclass(kw_only=True)
+@dataclass
 class CurveOffsetOptions:
     """A curve offset request."""
     # The curve.
@@ -123,7 +123,7 @@ class CurveOffsetOptions:
     # The signed offset along the curve's local normal.
     distance: float
 
-@dataclass(kw_only=True)
+@dataclass
 class CurvePointOptions:
     """A curve query at a parametric or arc-length position."""
     # The curve.
@@ -133,13 +133,13 @@ class CurvePointOptions:
     # Sample by arc length instead of the raw parameter (default `false`).
     byArcLength: Optional[bool] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class CurveOptions:
     """A curve query."""
     # The curve.
     curve: CurveSpec
 
-@dataclass(kw_only=True)
+@dataclass
 class CurveSampleOptions:
     """A curve sampling request."""
     # The number of points to sample.
@@ -149,17 +149,17 @@ class CurveSampleOptions:
     # Sample by arc length instead of the raw parameter (default `false`).
     byArcLength: Optional[bool] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class EasingValueOptions:
     """A named-or-custom easing evaluation request."""
     # The normalized time in `0.0..=1.0`.
     t: float
-    # A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`.
-    cubicBezier: Optional[List[float]] = None
     # A named easing (used when `cubicBezier` is absent).
     easing: Optional[Easing] = None
+    # A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`.
+    cubicBezier: Optional[List[float]] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class EllipseOptions:
     """An ellipse sampling request."""
     # The ellipse centre.
@@ -171,21 +171,21 @@ class EllipseOptions:
     # The number of points (default `64`).
     count: Optional[int] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class EncodeVideoOptions:
     """An image-sequence encoding request (frames -> video)."""
-    # The frame rate.
-    fps: float
     # The input filename pattern (e.g. `frames/frame_%04d.png`).
     inputPattern: str
     # The output video path.
     output: str
+    # The frame rate.
+    fps: float
     # The video codec (default `libx264`).
     codec: Optional[str] = None
     # The constant-rate-factor quality (`0`-`51`; lower is better).
     crf: Optional[int] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class ExtractAudioOptions:
     """An audio-extraction request (media -> audio file)."""
     # The input media path.
@@ -193,7 +193,7 @@ class ExtractAudioOptions:
     # The output audio path (its extension selects the format).
     output: str
 
-@dataclass(kw_only=True)
+@dataclass
 class ExtractFramesOptions:
     """A frame-extraction request (video -> image sequence)."""
     # The input media path.
@@ -211,7 +211,7 @@ class ExtractFramesOptions:
     # Scale frames to this width.
     width: Optional[int] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class FftOptions:
     """An FFT request against a `.wav` file."""
     # Path to the audio file.
@@ -221,34 +221,34 @@ class FftOptions:
     # Sample time in milliseconds.
     time: Optional[float] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class GetFftOptions:
     """An FFT request against the runtime's loaded audio."""
-    # Number of frequency bins.
-    magnitudes: int
     # Sample time in milliseconds.
     time: float
+    # Number of frequency bins.
+    magnitudes: int
     # A frequency cut-off.
     cutoff: Optional[float] = None
     # The easing applied across the bins.
     easing: Optional[Easing] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class GetOriginVectorOptions:
     """The anchor offset for an origin."""
-    # The sprite height.
-    height: float
     # The sprite anchor origin.
     origin: OsbOrigin
     # The sprite width.
     width: float
+    # The sprite height.
+    height: float
 
-@dataclass(kw_only=True)
+@dataclass
 class HandleOptions:
     """A sprite handle pair."""
 
 
-@dataclass(kw_only=True)
+@dataclass
 class HelperOptions:
     """A motion-graphics helper call: a helper `name` plus its input."""
     # The helper name, e.g. `flatten`, `orbit`, `selectCommands`.
@@ -256,7 +256,7 @@ class HelperOptions:
     # The helper's input (a keyframe channel, a command list, or its parameters).
     input: Optional[str] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class ImageProcessOptions:
     """An image processing request: read `path`, apply `options`, write `output`."""
     # The processing options.
@@ -266,26 +266,26 @@ class ImageProcessOptions:
     # The input file path.
     path: str
 
-@dataclass(kw_only=True)
+@dataclass
 class InScreenBoundsOptions:
     """Whether a rotated sprite's bounding box intersects the widescreen
 storyboard area."""
-    # The anchor offset (from `GetOriginVector`).
-    origin: Vector2
     # The sprite centre position.
     position: Vector2
-    # The rotation in radians.
-    rotation: float
     # The sprite size.
     size: Vector2
+    # The rotation in radians.
+    rotation: float
+    # The anchor offset (from `GetOriginVector`).
+    origin: Vector2
 
-@dataclass(kw_only=True)
+@dataclass
 class LayerHandleOptions:
     """Resolve (or create) a layer by name."""
     # The layer name.
     name: str
 
-@dataclass(kw_only=True)
+@dataclass
 class LineIntersectOptions:
     """A line-segment intersection request."""
     # The first segment's start.
@@ -297,7 +297,7 @@ class LineIntersectOptions:
     # The second segment's end.
     b2: Vector2
 
-@dataclass(kw_only=True)
+@dataclass
 class OptimizeOptions:
     """An `.osb` optimization request."""
     # The optimization options.
@@ -305,13 +305,13 @@ class OptimizeOptions:
     # The `.osb` storyboard text.
     text: str
 
-@dataclass(kw_only=True)
+@dataclass
 class PathOptions:
     """A request carrying a single file path."""
     # The input file path.
     path: str
 
-@dataclass(kw_only=True)
+@dataclass
 class RandomOptions:
     """A deterministic random request."""
     # The exclusive upper bound.
@@ -319,44 +319,44 @@ class RandomOptions:
     # The inclusive lower bound.
     min: float
 
-@dataclass(kw_only=True)
+@dataclass
 class RenderShapesOptions:
     """A shape-rendering request: a canvas, a background and a shape list."""
-    # The canvas height in pixels.
-    height: int
-    # The output file path (its extension selects the format).
-    output: str
-    # The shapes to draw, in order.
-    shapes: List[Shape]
     # The canvas width in pixels.
     width: int
+    # The canvas height in pixels.
+    height: int
+    # The shapes to draw, in order.
+    shapes: List[Shape]
+    # The output file path (its extension selects the format).
+    output: str
     # The background colour (default transparent).
     background: Optional[RgbaColor] = None
 
-@dataclass(kw_only=True)
+@dataclass
 class SegmentAddIndexOptions:
     """Record a depth index on a segment."""
     # The index to record.
     index: float
 
-@dataclass(kw_only=True)
+@dataclass
 class SegmentChangePositionOptions:
     """Move a segment to another osu! layer (`ChangePosition`)."""
     # The destination osu! layer.
     osbLayer: OsbLayer
 
-@dataclass(kw_only=True)
+@dataclass
 class SegmentOptions:
     """A segment handle request."""
 
 
-@dataclass(kw_only=True)
+@dataclass
 class SegmentReverseDepthOptions:
     """Set a segment's reverse-depth flag."""
     # Whether children are emitted in reverse order.
     value: bool
 
-@dataclass(kw_only=True)
+@dataclass
 class SimplifyOptions:
     """A Douglas-Peucker simplification request."""
     # The polyline to simplify.
@@ -364,39 +364,39 @@ class SimplifyOptions:
     # The maximum deviation to allow.
     tolerance: float
 
-@dataclass(kw_only=True)
+@dataclass
 class SpriteTimeOptions:
     """A sprite handle pair plus a sample time."""
     # The sample time in milliseconds.
     time: float
 
-@dataclass(kw_only=True)
+@dataclass
 class StartLoopGroupOptions:
     """Start a loop group."""
-    # The number of iterations.
-    count: float
     # The loop start time in milliseconds.
     startTime: float
+    # The number of iterations.
+    count: float
 
-@dataclass(kw_only=True)
+@dataclass
 class StartTriggerGroupOptions:
     """Start a trigger group."""
-    # The trigger end time in milliseconds.
-    endTime: float
-    # The trigger group index.
-    group: int
     # The trigger name (matches a hit object).
     name: str
     # The trigger start time in milliseconds.
     startTime: float
+    # The trigger end time in milliseconds.
+    endTime: float
+    # The trigger group index.
+    group: int
 
-@dataclass(kw_only=True)
+@dataclass
 class TextOptions:
     """A request carrying a block of text (an effect script, `.osu` or `.osb`)."""
     # The text payload.
     text: str
 
-@dataclass(kw_only=True)
+@dataclass
 class TimeOptions:
     """A time query."""
     # The time in milliseconds.

@@ -1,3 +1,4 @@
+#nullable disable
 using tochiRes.osbTK.Api;
 using tochiRes.osbTK.Client;
 using tochiRes.osbTK.Model;

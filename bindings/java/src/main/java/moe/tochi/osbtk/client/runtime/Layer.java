@@ -10,6 +10,9 @@ import moe.tochi.osbtk.model.Handle;
 import moe.tochi.osbtk.model.HandleRequest;
 import moe.tochi.osbtk.model.LayerHandle;
 import moe.tochi.osbtk.model.OkResult;
+import moe.tochi.osbtk.model.OsbLayer;
+import moe.tochi.osbtk.model.OsbLoopType;
+import moe.tochi.osbtk.model.OsbOrigin;
 import moe.tochi.osbtk.model.SegmentAddIndexRequest;
 import moe.tochi.osbtk.model.SegmentChangePositionRequest;
 import moe.tochi.osbtk.model.SegmentCleanResult;
@@ -17,6 +20,7 @@ import moe.tochi.osbtk.model.SegmentDiscardResult;
 import moe.tochi.osbtk.model.SegmentIndexesResult;
 import moe.tochi.osbtk.model.SegmentRequest;
 import moe.tochi.osbtk.model.SegmentReverseDepthRequest;
+import moe.tochi.osbtk.model.Vector2;
 import moe.tochi.osbtk.client.CreateAnimationOptions;
 import moe.tochi.osbtk.client.CreateSampleOptions;
 import moe.tochi.osbtk.client.CreateSpriteOptions;
@@ -47,10 +51,18 @@ public final class Layer {
             .layer(this.handle));
     }
 
+    public OkResult addIndex(Double index) throws ApiException {
+        return addIndex(SegmentAddIndexOptions.builder().index(index).build());
+    }
+
     public OkResult changePosition(SegmentChangePositionOptions options) throws ApiException {
         return api.changePosition(new SegmentChangePositionRequest()
             .layer(this.handle)
             .osbLayer(options.osbLayer));
+    }
+
+    public OkResult changePosition(OsbLayer osbLayer) throws ApiException {
+        return changePosition(SegmentChangePositionOptions.builder().osbLayer(osbLayer).build());
     }
 
     public SegmentCleanResult clean() throws ApiException {
@@ -71,6 +83,14 @@ public final class Layer {
         return new Sprite(this.sprites, handle.getLayer(), handle.getSprite());
     }
 
+    public Sprite createAnimation(String path, Integer frames, Double frameDelay, OsbLoopType loopType, OsbOrigin origin, Vector2 position) throws ApiException {
+        return createAnimation(CreateAnimationOptions.builder().path(path).frames(frames).frameDelay(frameDelay).loopType(loopType).origin(origin).position(position).build());
+    }
+
+    public Sprite createAnimation(String path, Integer frames, Double frameDelay, OsbLoopType loopType, OsbOrigin origin, Vector2 position, String layer) throws ApiException {
+        return createAnimation(CreateAnimationOptions.builder().path(path).frames(frames).frameDelay(frameDelay).loopType(loopType).origin(origin).position(position).layer(layer).build());
+    }
+
     public OkResult createSample(CreateSampleOptions options) throws ApiException {
         return api.createSample(new CreateSampleRequest()
             .layer(options.layer)
@@ -78,6 +98,18 @@ public final class Layer {
             .path(options.path)
             .time(options.time)
             .volume(options.volume));
+    }
+
+    public OkResult createSample(String path, Double time) throws ApiException {
+        return createSample(CreateSampleOptions.builder().path(path).time(time).build());
+    }
+
+    public OkResult createSample(String path, Double time, Double volume) throws ApiException {
+        return createSample(CreateSampleOptions.builder().path(path).time(time).volume(volume).build());
+    }
+
+    public OkResult createSample(String path, Double time, Double volume, String layer) throws ApiException {
+        return createSample(CreateSampleOptions.builder().path(path).time(time).volume(volume).layer(layer).build());
     }
 
     public Layer createSegment() throws ApiException {
@@ -94,6 +126,18 @@ public final class Layer {
             .path(options.path)
             .position(options.position));
         return new Sprite(this.sprites, handle.getLayer(), handle.getSprite());
+    }
+
+    public Sprite createSprite(String path, OsbOrigin origin) throws ApiException {
+        return createSprite(CreateSpriteOptions.builder().path(path).origin(origin).build());
+    }
+
+    public Sprite createSprite(String path, OsbOrigin origin, Vector2 position) throws ApiException {
+        return createSprite(CreateSpriteOptions.builder().path(path).origin(origin).position(position).build());
+    }
+
+    public Sprite createSprite(String path, OsbOrigin origin, Vector2 position, String layer) throws ApiException {
+        return createSprite(CreateSpriteOptions.builder().path(path).origin(origin).position(position).layer(layer).build());
     }
 
     public SegmentDiscardResult discard() throws ApiException {
@@ -126,5 +170,9 @@ public final class Layer {
         return api.reverseDepth(new SegmentReverseDepthRequest()
             .layer(this.handle)
             .value(options.value));
+    }
+
+    public OkResult reverseDepth(Boolean value) throws ApiException {
+        return reverseDepth(SegmentReverseDepthOptions.builder().value(value).build());
     }
 }

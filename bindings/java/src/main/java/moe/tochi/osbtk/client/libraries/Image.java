@@ -3,6 +3,7 @@ package moe.tochi.osbtk.client.libraries;
 import moe.tochi.osbtk.ApiException;
 import moe.tochi.osbtk.api.ImageAPI;
 import moe.tochi.osbtk.model.ImageInfo;
+import moe.tochi.osbtk.model.ImageOptions;
 import moe.tochi.osbtk.model.ImageProcessRequest;
 import moe.tochi.osbtk.model.PathRequest;
 import moe.tochi.osbtk.client.ImageProcessOptions;
@@ -25,10 +26,18 @@ public final class Image {
             .path(options.path));
     }
 
+    public ImageInfo info(String path) throws ApiException {
+        return info(PathOptions.builder().path(path).build());
+    }
+
     public ImageInfo process(ImageProcessOptions options) throws ApiException {
         return api.process(new ImageProcessRequest()
             .options(options.options)
             .output(options.output)
             .path(options.path));
+    }
+
+    public ImageInfo process(ImageOptions options, String output, String path) throws ApiException {
+        return process(ImageProcessOptions.builder().options(options).output(output).path(path).build());
     }
 }

@@ -24,15 +24,39 @@ public final class Helpers {
             .name(options.name));
     }
 
+    public HelperResult call(String name) throws ApiException {
+        return call(HelperOptions.builder().name(name).build());
+    }
+
+    public HelperResult call(String name, String input) throws ApiException {
+        return call(HelperOptions.builder().name(name).input(input).build());
+    }
+
     public HelperResult commands(HelperOptions options) throws ApiException {
         return api.commands(new HelperRequest()
             .input(options.input)
             .name(options.name));
     }
 
+    public HelperResult commands(String name) throws ApiException {
+        return commands(HelperOptions.builder().name(name).build());
+    }
+
+    public HelperResult commands(String name, String input) throws ApiException {
+        return commands(HelperOptions.builder().name(name).input(input).build());
+    }
+
     public HelperResult keyframes(HelperOptions options) throws ApiException {
         return api.keyframes(new HelperRequest()
             .input(options.input)
             .name(options.name));
+    }
+
+    public HelperResult keyframes(String name) throws ApiException {
+        return keyframes(HelperOptions.builder().name(name).build());
+    }
+
+    public HelperResult keyframes(String name, String input) throws ApiException {
+        return keyframes(HelperOptions.builder().name(name).input(input).build());
     }
 }

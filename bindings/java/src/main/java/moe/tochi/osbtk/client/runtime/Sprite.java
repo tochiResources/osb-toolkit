@@ -3,8 +3,10 @@ package moe.tochi.osbtk.client.runtime;
 import moe.tochi.osbtk.ApiException;
 import moe.tochi.osbtk.api.SpriteAPI;
 import moe.tochi.osbtk.model.CommandRequest;
+import moe.tochi.osbtk.model.Easing;
 import moe.tochi.osbtk.model.HandleRequest;
 import moe.tochi.osbtk.model.OkResult;
+import moe.tochi.osbtk.model.ParameterType;
 import moe.tochi.osbtk.model.SpriteInfo;
 import moe.tochi.osbtk.model.SpriteState;
 import moe.tochi.osbtk.model.SpriteTimeRequest;
@@ -44,6 +46,22 @@ public final class Sprite {
             .startTime(options.startTime));
     }
 
+    public OkResult command(String kind, Double startTime, Double endTime, Easing easing) throws ApiException {
+        return command(CommandOptions.builder().kind(kind).startTime(startTime).endTime(endTime).easing(easing).build());
+    }
+
+    public OkResult command(String kind, Double startTime, Double endTime, Easing easing, Object start) throws ApiException {
+        return command(CommandOptions.builder().kind(kind).startTime(startTime).endTime(endTime).easing(easing).start(start).build());
+    }
+
+    public OkResult command(String kind, Double startTime, Double endTime, Easing easing, Object start, Object end) throws ApiException {
+        return command(CommandOptions.builder().kind(kind).startTime(startTime).endTime(endTime).easing(easing).start(start).end(end).build());
+    }
+
+    public OkResult command(String kind, Double startTime, Double endTime, Easing easing, Object start, Object end, ParameterType parameter) throws ApiException {
+        return command(CommandOptions.builder().kind(kind).startTime(startTime).endTime(endTime).easing(easing).start(start).end(end).parameter(parameter).build());
+    }
+
     public OkResult endGroup() throws ApiException {
         return api.endGroup(new HandleRequest()
             .layer(this.layer)
@@ -64,6 +82,10 @@ public final class Sprite {
             .startTime(options.startTime));
     }
 
+    public OkResult startLoopGroup(Double startTime, Double count) throws ApiException {
+        return startLoopGroup(StartLoopGroupOptions.builder().startTime(startTime).count(count).build());
+    }
+
     public OkResult startTriggerGroup(StartTriggerGroupOptions options) throws ApiException {
         return api.startTriggerGroup(new StartTriggerGroupRequest()
             .endTime(options.endTime)
@@ -74,10 +96,18 @@ public final class Sprite {
             .startTime(options.startTime));
     }
 
+    public OkResult startTriggerGroup(String name, Double startTime, Double endTime, Integer group) throws ApiException {
+        return startTriggerGroup(StartTriggerGroupOptions.builder().name(name).startTime(startTime).endTime(endTime).group(group).build());
+    }
+
     public SpriteState stateAt(SpriteTimeOptions options) throws ApiException {
         return api.stateAt(new SpriteTimeRequest()
             .layer(this.layer)
             .sprite(this.sprite)
             .time(options.time));
+    }
+
+    public SpriteState stateAt(Double time) throws ApiException {
+        return stateAt(SpriteTimeOptions.builder().time(time).build());
     }
 }

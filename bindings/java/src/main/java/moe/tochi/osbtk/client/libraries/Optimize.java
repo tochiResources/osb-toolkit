@@ -2,6 +2,7 @@ package moe.tochi.osbtk.client.libraries;
 
 import moe.tochi.osbtk.ApiException;
 import moe.tochi.osbtk.api.OptimizeAPI;
+import moe.tochi.osbtk.model.OptimizeOptionsInput;
 import moe.tochi.osbtk.model.OptimizeRequest;
 import moe.tochi.osbtk.model.OptimizeResult;
 import moe.tochi.osbtk.client.OptimizeOptions;
@@ -22,5 +23,9 @@ public final class Optimize {
         return api.optimizeOsb(new OptimizeRequest()
             .options(options.options)
             .text(options.text));
+    }
+
+    public OptimizeResult optimizeOsb(OptimizeOptionsInput options, String text) throws ApiException {
+        return optimizeOsb(OptimizeOptions.builder().options(options).text(text).build());
     }
 }
