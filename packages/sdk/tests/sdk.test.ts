@@ -15,6 +15,7 @@ import {
     type Timeline,
     type TimelineClip,
 } from '../src/index';
+import { Layer as CleanLayer, Sprite as CleanSprite } from '../src/lib/client';
 
 const OSU =
     'osu file format v14\n\n[General]\nAudioFilename: song.mp3\nMode: 0\n[TimingPoints]\n0,500,4,2,1,100,1,0\n[HitObjects]\n256,192,1000,1,0\n';
@@ -88,6 +89,34 @@ describe('@tochii/osb-sdk-js', () => {
                 sprite: handle.sprite,
                 time: 500,
             });
+            expect(state.position.x).toBeCloseTo(50, 4);
+        } finally {
+            runtime.free();
+        }
+    });
+
+    it('drives the handle-bound clean client without passing handles', async () => {
+        const runtime = new Runtime();
+        try {
+            const handle = await runtime.generator.layerHandle({ name: 'Foreground' });
+            const layer = new CleanLayer(runtime.layer, runtime.sprite, handle.layer);
+            expect(CleanLayer.instanceOf(layer)).toBe(true);
+
+            const sprite = await layer.createSprite({
+                path: 'sb/dot.png',
+                origin: OsbOrigin.Centre,
+            });
+            expect(CleanSprite.instanceOf(sprite)).toBe(true);
+
+            await sprite.command({
+                kind: 'move',
+                startTime: 0,
+                endTime: 1000,
+                easing: Easing.None,
+                start: { x: 0, y: 0 },
+                end: { x: 100, y: 0 },
+            });
+            const state = await sprite.stateAt({ time: 500 });
             expect(state.position.x).toBeCloseTo(50, 4);
         } finally {
             runtime.free();

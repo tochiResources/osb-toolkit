@@ -6,6 +6,8 @@ from __future__ import annotations
 import unittest
 
 from osbtk import Generator, Runtime, osb
+from osbtk.client import Layer as CleanLayer, Sprite as CleanSprite
+from osbtk.client.options import CommandOptions, CreateSpriteOptions, SpriteTimeOptions
 from osbtk.exceptions import ApiException
 from osbtk.models import (
     CommandRequest,
@@ -13,6 +15,7 @@ from osbtk.models import (
     CurveKind,
     CurveSpec,
     FftRequest,
+    LayerHandleRequest,
     OptimizeOptionsInput,
     RenderShapesRequest,
     RgbaColor,
@@ -78,6 +81,33 @@ class SdkTests(unittest.TestCase):
             state = runtime.sprite.state_at(
                 SpriteTimeRequest(layer=handle.layer, sprite=handle.sprite, time=500)
             )
+            self.assertAlmostEqual(state.position.x, 50.0, places=4)
+        finally:
+            runtime.close()
+
+    def test_drives_the_handle_bound_clean_client(self) -> None:
+        runtime = Runtime()
+        try:
+            handle = runtime.generator.layer_handle(LayerHandleRequest(name="Foreground"))
+            layer = CleanLayer(runtime.layer, runtime.sprite, handle.layer)
+            self.assertTrue(CleanLayer.instance_of(layer))
+
+            sprite = layer.create_sprite(
+                CreateSpriteOptions(path="sb/dot.png", origin="Centre")
+            )
+            self.assertTrue(CleanSprite.instance_of(sprite))
+
+            sprite.command(
+                CommandOptions(
+                    kind="move",
+                    startTime=0,
+                    endTime=1000,
+                    easing="None",
+                    start={"x": 0, "y": 0},
+                    end={"x": 100, "y": 0},
+                )
+            )
+            state = sprite.state_at(SpriteTimeOptions(time=500))
             self.assertAlmostEqual(state.position.x, 50.0, places=4)
         finally:
             runtime.close()

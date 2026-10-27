@@ -8,6 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.Map;
 import com.google.gson.reflect.TypeToken;
+import moe.tochi.osbtk.client.CommandOptions;
+import moe.tochi.osbtk.client.CreateSpriteOptions;
+import moe.tochi.osbtk.client.Layer;
+import moe.tochi.osbtk.client.Sprite;
+import moe.tochi.osbtk.client.SpriteTimeOptions;
 import moe.tochi.osbtk.model.Beatmap;
 import moe.tochi.osbtk.model.CommandRequest;
 import moe.tochi.osbtk.model.CreateSpriteRequest;
@@ -18,6 +23,8 @@ import moe.tochi.osbtk.model.Easing;
 import moe.tochi.osbtk.model.Handle;
 import moe.tochi.osbtk.model.HitObjectKind;
 import moe.tochi.osbtk.model.ImageInfo;
+import moe.tochi.osbtk.model.LayerHandle;
+import moe.tochi.osbtk.model.LayerHandleRequest;
 import moe.tochi.osbtk.model.OsbOrigin;
 import moe.tochi.osbtk.model.OptimizeOptionsInput;
 import moe.tochi.osbtk.model.OptimizeResult;
@@ -92,6 +99,37 @@ class OsbTkSdkTest {
                                             .layer(handle.getLayer())
                                             .sprite(handle.getSprite())
                                             .time(500.0));
+            assertEquals(50.0, state.getPosition().getX(), 0.1);
+        }
+    }
+
+    @Test
+    void drivesTheHandleBoundCleanClient() throws Exception {
+        try (Runtime runtime = new Runtime()) {
+            LayerHandle handle =
+                    runtime.generator()
+                            .layerHandle(new LayerHandleRequest().name("Foreground"));
+            Layer layer = new Layer(runtime.layer(), runtime.sprite(), handle.getLayer());
+            assertTrue(Layer.instanceOf(layer));
+
+            Sprite sprite =
+                    layer.createSprite(
+                            CreateSpriteOptions.builder()
+                                    .path("sb/dot.png")
+                                    .origin(OsbOrigin.CENTRE)
+                                    .build());
+            assertTrue(Sprite.instanceOf(sprite));
+
+            sprite.command(
+                    CommandOptions.builder()
+                            .kind("move")
+                            .startTime(0.0)
+                            .endTime(1000.0)
+                            .easing(Easing.NONE)
+                            .start(Map.of("x", 0.0, "y", 0.0))
+                            .end(Map.of("x", 100.0, "y", 0.0))
+                            .build());
+            SpriteState state = sprite.stateAt(SpriteTimeOptions.builder().time(500.0).build());
             assertEquals(50.0, state.getPosition().getX(), 0.1);
         }
     }
