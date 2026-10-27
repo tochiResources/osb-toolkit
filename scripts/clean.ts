@@ -46,7 +46,7 @@ function remove(relative: string): void {
     }
     let size = 0;
     try {
-        size = dirSize(path);
+        size = statSync(path).isDirectory() ? dirSize(path) : statSync(path).size;
     } catch {
         size = 0;
     }
@@ -56,15 +56,37 @@ function remove(relative: string): void {
     console.log(`clean: removed ${relative} (${(size / 1024 / 1024).toFixed(1)} MB)`);
 }
 
-/** Removes every direct child of `relative` whose name matches `predicate`. */
-function removeChildren(relative: string, predicate: (name: string) => boolean): void {
+/** Removes `<parent>/<child>/<name>` for every grandchild name in `names`. */
+function removeNestedChildren(parent: string, names: ReadonlySet<string>): void {
+    const path = join(root, parent);
+    if (!existsSync(path)) {
+        return;
+    }
+    for (const entry of readdirSync(path, { withFileTypes: true })) {
+        if (!entry.isDirectory()) {
+            continue;
+        }
+        for (const name of names) {
+            remove(join(parent, entry.name, name));
+        }
+    }
+}
+
+/** Removes every directory named `name` anywhere below `relative`. */
+function removeNamedRecursive(relative: string, name: string): void {
     const path = join(root, relative);
     if (!existsSync(path)) {
         return;
     }
     for (const entry of readdirSync(path, { withFileTypes: true })) {
-        if (entry.isDirectory() && predicate(entry.name)) {
-            remove(join(relative, entry.name));
+        if (!entry.isDirectory()) {
+            continue;
+        }
+        const child = join(relative, entry.name);
+        if (entry.name === name) {
+            remove(child);
+        } else {
+            removeNamedRecursive(child, name);
         }
     }
 }
@@ -127,16 +149,26 @@ if (incrementalOnly) {
 if (!rustOnly && !incrementalOnly) {
     // Native binding build outputs.
     remove('packages/native/wasm');
-    removeChildren('bindings/csharp', name => name === 'bin' || name === 'obj');
+    removeNestedChildren('bindings/csharp', new Set(['bin', 'obj']));
     removeNestedTargets('bindings/csharp');
     remove('bindings/java/target');
     remove('bindings/cpp/test/build');
 
+    // .NET helper and test projects outside the bindings tree.
+    removeNestedChildren('tools', new Set(['bin', 'obj']));
+
     // JS/TS build outputs and caches.
-    removeChildren('packages', name => name === 'dist');
-    removeChildren('apps', name => name === 'dist');
+    removeNestedChildren('packages', new Set(['dist']));
+    removeNestedChildren('apps', new Set(['dist']));
+    remove('docs/dist');
     remove('docs/.vitepress/dist');
+    remove('docs/.vitepress/cache');
     remove('.turbo');
+    remove('node_modules/.vite');
+    remove('.yarn/install-state.gz');
+
+    // Python bytecode caches.
+    removeNamedRecursive('bindings/python', '__pycache__');
 }
 
 console.log(
