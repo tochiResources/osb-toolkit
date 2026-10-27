@@ -55,6 +55,19 @@ func TestHandleBoundCleanClient(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	if _, err := sprite.EndGroup(context.Background()); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := layer.AddIndex(
+		context.Background(),
+		options.SegmentAddIndexOptions{Index: 1},
+	); err != nil {
+		t.Fatal(err)
+	}
+	if _, _, err := layer.Clean(context.Background()); err != nil {
+		t.Fatal(err)
+	}
+
 	state, _, err := sprite.StateAt(context.Background(), options.SpriteTimeOptions{Time: 500})
 	if err != nil {
 		t.Fatal(err)
