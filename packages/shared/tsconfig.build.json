@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.default.json",
+    "compilerOptions": {
+        "noEmit": true,
+        "paths": {
+            "@tochii/errors": ["../../../errors/src/index.ts"]
+        }
+    },
+    "include": ["src", "vitest.config.ts", "tsdown.config.ts", "../../package.json"]
+}
