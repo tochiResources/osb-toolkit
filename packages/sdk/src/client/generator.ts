@@ -6,16 +6,20 @@ import {
     type Beatmap,
     Configuration,
     type ControlPoint,
-    type CreateAnimationRequest,
     type FftResult,
-    type Handle,
-    type OsbOrigin,
-    type Storyboard,
     GeneratorAPI,
     LayerAPI,
+    type OsbOrigin,
     SpriteAPI,
+    type Storyboard,
 } from '../lib';
-import { Layer } from './sprite';
+import {
+    Audio,
+    type CreateAnimationOptions,
+    Generator as GeneratorClient,
+    Layer,
+    Sprite,
+} from '../lib/client';
 
 /**
  * A live storyboard runtime bound to a WASM handle. Its clients are driven
@@ -25,33 +29,41 @@ import { Layer } from './sprite';
 export class Runtime {
     private readonly handle: native.Runtime;
 
-    /** The generated generator client. */
-    readonly generator: GeneratorAPI;
+    /** The clean generator client bound to this runtime. */
+    readonly generator: GeneratorClient;
 
-    /** The generated layer client. */
-    readonly layer: LayerAPI;
+    /** The clean audio client bound to this runtime. */
+    readonly audio: Audio;
 
-    /** The generated sprite client. */
-    readonly sprite: SpriteAPI;
-
-    /** The generated audio client bound to this runtime. */
-    readonly audio: AudioAPI;
+    private readonly layerApi: LayerAPI;
+    private readonly spriteApi: SpriteAPI;
 
     constructor(width = 640, height = 480) {
         this.handle = new native.Runtime(width, height);
         const configuration = new Configuration({
             fetchApi: bridgeFetch(request => this.handle.exec(request)),
         });
-        this.generator = new GeneratorAPI(configuration);
-        this.layer = new LayerAPI(configuration);
-        this.sprite = new SpriteAPI(configuration);
-        this.audio = new AudioAPI(configuration);
+        this.generator = new GeneratorClient(new GeneratorAPI(configuration));
+        this.audio = new Audio(new AudioAPI(configuration));
+        this.layerApi = new LayerAPI(configuration);
+        this.spriteApi = new SpriteAPI(configuration);
         runtimeFinalizer.register(this, this.handle, this);
     }
 
     /** The loaded audio duration in milliseconds. */
     async audioDuration(): Promise<number> {
         return (await this.audio.audioDuration()).audioDuration;
+    }
+
+    /** Resolves (or creates) a layer by name and binds its handle. */
+    async layer(name: string): Promise<Layer> {
+        const handle = await this.generator.layerHandle(name);
+        return new Layer(this.layerApi, this.spriteApi, handle.layer);
+    }
+
+    /** Binds an existing layer/sprite pair. */
+    sprite(layer: number, sprite: number): Sprite {
+        return new Sprite(this.spriteApi, layer, sprite);
     }
 
     /** Frees the underlying native runtime. */
@@ -79,24 +91,23 @@ export abstract class Generator {
     }
 
     /** Creates a sprite on a layer. */
-    createSprite(layer: string, path: string, origin: OsbOrigin = 'Centre'): Promise<Handle> {
-        return this.runtime.layer.createSprite({ layer, path, origin });
+    async createSprite(layer: string, path: string, origin: OsbOrigin = 'Centre'): Promise<Sprite> {
+        return (await this.getLayer(layer)).createSprite(path, origin);
     }
 
     /** Returns a layer that creates sprites/animations/samples. */
-    async getLayer(name: string): Promise<Layer> {
-        const handle = await this.runtime.generator.layerHandle({ name });
-        return new Layer(this.runtime.layer, this.runtime.sprite, name, handle.layer);
+    getLayer(name: string): Promise<Layer> {
+        return this.runtime.layer(name);
     }
 
-    /** Creates an animation sprite. */
-    createAnimation(request: CreateAnimationRequest): Promise<Handle> {
-        return this.runtime.layer.createAnimation(request);
+    /** Creates an animation sprite on a layer. */
+    async createAnimation(layer: string, options: CreateAnimationOptions): Promise<Sprite> {
+        return (await this.getLayer(layer)).createAnimation(options);
     }
 
     /** Adds a sound sample to a layer. */
     async createSample(layer: string, path: string, time: number, volume: number): Promise<void> {
-        await this.runtime.layer.createSample({ layer, path, time, volume });
+        await (await this.getLayer(layer)).createSample(path, time, volume);
     }
 
     /** The loaded beatmap. */
@@ -106,12 +117,12 @@ export abstract class Generator {
 
     /** The FFT magnitudes of the loaded audio. */
     getFft(time: number, magnitudes: number): Promise<FftResult> {
-        return this.runtime.audio.getFft({ time, magnitudes });
+        return this.runtime.audio.getFft(time, magnitudes);
     }
 
     /** The active timing point at a time. */
     getTimingPointAt(time: number): Promise<ControlPoint> {
-        return this.runtime.generator.timingPointAt({ time });
+        return this.runtime.generator.timingPointAt(time);
     }
 
     /** The number of sprites on the storyboard. */

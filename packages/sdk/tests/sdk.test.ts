@@ -8,14 +8,15 @@ import {
     CurveKind,
     Easing,
     Generator,
+    Layer as CleanLayer,
     OsbOrigin,
     osb,
     Runtime,
+    Sprite as CleanSprite,
     type StoryboardCommand,
     type Timeline,
     type TimelineClip,
 } from '../src/index';
-import { Layer as CleanLayer, Sprite as CleanSprite } from '../src/lib/client';
 
 const OSU =
     'osu file format v14\n\n[General]\nAudioFilename: song.mp3\nMode: 0\n[TimingPoints]\n0,500,4,2,1,100,1,0\n[HitObjects]\n256,192,1000,1,0\n';
@@ -66,40 +67,23 @@ describe('@tochii/osb-sdk-js', () => {
         ).toBeCloseTo(1.0, 6);
     });
 
-    it('drives the storyboard through the generated client', async () => {
+    it('drives the storyboard through the clean runtime client', async () => {
         const runtime = new Runtime();
         try {
-            const handle = await runtime.layer.createSprite({
-                layer: 'Foreground',
-                path: 'sb/dot.png',
-                origin: OsbOrigin.Centre,
-            });
-            await runtime.sprite.command({
-                kind: 'move',
-                layer: handle.layer,
-                sprite: handle.sprite,
-                startTime: 0,
-                endTime: 1000,
-                easing: Easing.None,
-                start: { x: 0, y: 0 },
-                end: { x: 100, y: 0 },
-            });
-            const state = await runtime.sprite.stateAt({
-                layer: handle.layer,
-                sprite: handle.sprite,
-                time: 500,
-            });
+            const layer = await runtime.layer('Foreground');
+            const sprite = await layer.createSprite('sb/dot.png', OsbOrigin.Centre);
+            await sprite.command('move', 0, 1000, Easing.None, { x: 0, y: 0 }, { x: 100, y: 0 });
+            const state = await sprite.stateAt(500);
             expect(state.position.x).toBeCloseTo(50, 4);
         } finally {
             runtime.free();
         }
     });
 
-    it('drives the handle-bound clean client without passing handles', async () => {
+    it('accepts options objects for the handle-bound clean client', async () => {
         const runtime = new Runtime();
         try {
-            const handle = await runtime.generator.layerHandle({ name: 'Foreground' });
-            const layer = new CleanLayer(runtime.layer, runtime.sprite, handle.layer);
+            const layer = await runtime.layer('Foreground');
             expect(CleanLayer.instanceOf(layer)).toBe(true);
 
             const sprite = await layer.createSprite({
@@ -224,7 +208,7 @@ describe('@tochii/osb-sdk-js', () => {
             async generate(): Promise<void> {
                 const layer = await this.getLayer('Foreground');
                 const sprite = await layer.createSprite('sb/dot.png', OsbOrigin.Centre);
-                await sprite.fade(0, 1000, 0, 1);
+                await sprite.command('fade', 0, 1000, Easing.None, 0, 1);
             }
         }
         const effect = new Effect();
@@ -244,12 +228,19 @@ describe('@tochii/osb-sdk-js', () => {
             async generate(): Promise<void> {
                 const layer = await this.getLayer('Foreground');
                 const sprite = await layer.createSprite('sb/dot.png', OsbOrigin.Centre);
-                await sprite.move(Easing.None, 0, 1000, { x: 0, y: 0 }, { x: 100, y: 0 });
+                await sprite.command(
+                    'move',
+                    0,
+                    1000,
+                    Easing.None,
+                    { x: 0, y: 0 },
+                    { x: 100, y: 0 }
+                );
                 await sprite.startLoopGroup(1000, 2);
-                await sprite.fade(0, 100, 0, 1);
-                await sprite.fade(150, 1);
+                await sprite.command('fade', 0, 100, Easing.None, 0, 1);
+                await sprite.command('fade', 150, 150, Easing.None, 1, 1);
                 await sprite.endGroup();
-                expect((await sprite.positionAt(500)).x).toBeCloseTo(50, 4);
+                expect((await sprite.stateAt(500)).position.x).toBeCloseTo(50, 4);
                 expect(await this.spriteCount()).toBe(1);
             }
         }
@@ -266,8 +257,15 @@ describe('@tochii/osb-sdk-js', () => {
             async generate(): Promise<void> {
                 const layer = await this.getLayer('Foreground');
                 const sprite = await layer.createSprite('sb/dot.png', OsbOrigin.Centre);
-                await sprite.anchor(Easing.None, 0, 1000, { x: 0, y: 0 }, { x: 100, y: 50 });
-                const mid = await sprite.anchorAt(500);
+                await sprite.command(
+                    'anchor',
+                    0,
+                    1000,
+                    Easing.None,
+                    { x: 0, y: 0 },
+                    { x: 100, y: 50 }
+                );
+                const mid = (await sprite.stateAt(500)).anchor;
                 expect(mid.x).toBeCloseTo(50, 4);
                 expect(mid.y).toBeCloseTo(25, 4);
             }
@@ -287,7 +285,7 @@ describe('@tochii/osb-sdk-js', () => {
                 await group.createSprite('sb/group.png', OsbOrigin.Centre);
                 const child = await group.createSegment();
                 await child.createSprite('sb/child.png', OsbOrigin.Centre);
-                await child.setReverseDepth(true);
+                await child.reverseDepth(true);
                 await child.addIndex(3);
                 await child.addIndex(-1);
                 const indexes = await child.indexes();

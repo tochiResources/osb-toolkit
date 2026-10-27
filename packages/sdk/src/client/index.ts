@@ -3,7 +3,7 @@ import * as native from '@tochii/osb-toolkit-native';
 import { nativeConfiguration } from '../interceptor';
 import {
     AudioAPI,
-    type Configuration,
+    Configuration,
     DiagnosticsAPI,
     HelpersAPI,
     ImageAPI,
@@ -12,42 +12,45 @@ import {
     OptimizeAPI,
     Storyboarding3dAPI,
 } from '../lib';
+import {
+    Audio,
+    Diagnostics,
+    Image,
+    Imagegen,
+    Media,
+    Optimize,
+    Storyboarding3d,
+} from '../lib/client';
 import { createHelpers, type Helpers } from './helpers';
 import { createIO, type IO } from './io';
 
-// The runtime client wrapper: a single
-// entrypoint that exposes every **non-core** generated OpenAPI group, sourced
-// from the generated output (`../lib`), plus the conveniences OpenAPI cannot
-// express (the fluent `Layer`/`Sprite` builders, the `Runtime`/`Generator`
-// lifetime scope, the typed helper namespaces and the file-operations bridge).
-// The non-runtime `Core` surface lives in the sibling `../core` entry.
-
-// Re-export the generated groups this entry owns, plus every shared model/enum
-// (the models are dimension- and transport-agnostic, so both entries re-export
-// them). The generated classes carry the `API` suffix (`GeneratorAPI`,
-// `AudioAPI`, …) so the plain names stay free for the conveniences below.
+// The runtime SDK: the clean generated clients plus the conveniences OpenAPI
+// cannot express (the effect `Generator`/`Runtime` lifetime scope, the typed
+// helper namespaces and the file-operations bridge). The clean clients are the
+// primary surface; the `interceptor` remains the only transport seam.
 export {
-    AudioAPI,
-    DiagnosticsAPI,
-    HelpersAPI,
-    ImageAPI,
-    ImagegenAPI,
-    MediaAPI,
-    OptimizeAPI,
-    Storyboarding3dAPI,
-} from '../lib';
+    Audio,
+    Diagnostics,
+    Image,
+    Imagegen,
+    Media,
+    Optimize,
+    Storyboarding3d,
+    Layer,
+    Sprite,
+} from '../lib/client';
+export { Generator as GeneratorClient, Helpers as HelpersClient } from '../lib/client';
+export * from '../lib/client/options';
 export * from '../lib/models';
 export type { FetchAPI } from '../lib/runtime';
 
-// The conveniences OpenAPI cannot express.
 export { Generator, Runtime, run } from './generator';
-export { Layer, Sprite, spriteFrom } from './sprite';
 export * from './helpers';
 export * from './io';
 
 /**
  * The runtime SDK: the storyboarding runtime and the non-core libraries, each a
- * configured generated client (or a convenience over one).
+ * clean generated client (or a convenience over one).
  */
 export interface Client {
     /** The native runtime version string. */
@@ -55,19 +58,19 @@ export interface Client {
     /** The shared motion-graphics helper namespaces. */
     helpers: Helpers;
     /** The audio library: FFT and the loaded audio. */
-    audio: AudioAPI;
+    audio: Audio;
     /** The diagnostics library: storyboard and mapset analysis. */
-    diagnostics: DiagnosticsAPI;
+    diagnostics: Diagnostics;
     /** The optimization library: storyboard optimization and `.osb` round-trip. */
-    optimize: OptimizeAPI;
+    optimize: Optimize;
     /** The image library: decode/encode and processing. */
-    image: ImageAPI;
+    image: Image;
     /** The image-generation library: draw primitive shapes. */
-    imageGen: ImagegenAPI;
+    imageGen: Imagegen;
     /** The media library: probing, frame extraction/encoding and audio. */
-    media: MediaAPI;
+    media: Media;
     /** The 3D storyboard library: the 3D -> 2D bake. */
-    storyboarding3d: Storyboarding3dAPI;
+    storyboarding3d: Storyboarding3d;
     /** The file-operations library (`osb-core`): the toolkit's filesystem API. */
     io: IO;
 }
@@ -81,13 +84,13 @@ export function createClient(configuration: Configuration = nativeConfiguration(
     return {
         version: (): string => native.version(),
         helpers: createHelpers(new HelpersAPI(configuration)),
-        audio: new AudioAPI(configuration),
-        diagnostics: new DiagnosticsAPI(configuration),
-        optimize: new OptimizeAPI(configuration),
-        image: new ImageAPI(configuration),
-        imageGen: new ImagegenAPI(configuration),
-        media: new MediaAPI(configuration),
-        storyboarding3d: new Storyboarding3dAPI(configuration),
+        audio: new Audio(new AudioAPI(configuration)),
+        diagnostics: new Diagnostics(new DiagnosticsAPI(configuration)),
+        optimize: new Optimize(new OptimizeAPI(configuration)),
+        image: new Image(new ImageAPI(configuration)),
+        imageGen: new Imagegen(new ImagegenAPI(configuration)),
+        media: new Media(new MediaAPI(configuration)),
+        storyboarding3d: new Storyboarding3d(new Storyboarding3dAPI(configuration)),
         io: createIO(),
     };
 }
