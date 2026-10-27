@@ -1,0 +1,35 @@
+{
+    "name": "@tochii/osb-toolkit-native",
+    "version": "0.1.0",
+    "private": true,
+    "description": "wasm-bindgen binding of the osbTK runtime for JavaScript/TypeScript (browser + Node).",
+    "type": "module",
+    "license": "BSD-3-Clause",
+    "author": "T0chi",
+    "homepage": "https://osb-toolkit.tochi.moe",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tochiResources/osb-toolkit.git",
+        "directory": "packages/native"
+    },
+    "scripts": {
+        "build:wasm": "node -e \"const fs=require('node:fs');fs.rmSync('wasm',{recursive:true,force:true})\" && tsx ../../scripts/cargo.ts build -p osb-wasm --target wasm32-unknown-unknown --release && wasm-bindgen --target nodejs --out-dir wasm --out-name osb_wasm ../../target/wasm32-unknown-unknown/release/osb_wasm.wasm && node -e \"require('node:fs').writeFileSync('wasm/package.json',JSON.stringify({type:'commonjs'}))\"",
+        "build": "yarn build:wasm",
+        "test": "yarn build:wasm && vitest run",
+        "typecheck": "yarn build:wasm && tsc -p tsconfig.build.json --noEmit"
+    },
+    "devDependencies": {
+        "@types/node": "catalog:",
+        "typescript": "catalog:",
+        "vitest": "catalog:"
+    },
+    "types": "./src/index.ts",
+    "exports": {
+        ".": "./src/index.ts",
+        "./package.json": "./package.json"
+    },
+    "packageManager": "yarn@4.17.1",
+    "engines": {
+        "node": ">=22.5.0"
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "extends": "./tsconfig.default.json",
+    "compilerOptions": {
+        "noEmit": true
+    },
+    "include": ["src", "tests", "vitest.config.ts", "../../package.json"]
+}
