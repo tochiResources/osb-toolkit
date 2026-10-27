@@ -20,6 +20,14 @@ public final class Imagegen {
         return value instanceof Imagegen;
     }
 
+    public ImageInfo renderShapes(Integer width, Integer height, List<Shape> shapes, String output) throws ApiException {
+        return renderShapes(RenderShapesOptions.builder().width(width).height(height).shapes(shapes).output(output).build());
+    }
+
+    public ImageInfo renderShapes(Integer width, Integer height, List<Shape> shapes, String output, RgbaColor background) throws ApiException {
+        return renderShapes(RenderShapesOptions.builder().width(width).height(height).shapes(shapes).output(output).background(background).build());
+    }
+
     public ImageInfo renderShapes(RenderShapesOptions options) throws ApiException {
         return api.renderShapes(new RenderShapesRequest()
             .background(options.background)
@@ -27,13 +35,5 @@ public final class Imagegen {
             .output(options.output)
             .shapes(options.shapes)
             .width(options.width));
-    }
-
-    public ImageInfo renderShapes(Integer width, Integer height, List<Shape> shapes, String output) throws ApiException {
-        return renderShapes(RenderShapesOptions.builder().width(width).height(height).shapes(shapes).output(output).build());
-    }
-
-    public ImageInfo renderShapes(Integer width, Integer height, List<Shape> shapes, String output, RgbaColor background) throws ApiException {
-        return renderShapes(RenderShapesOptions.builder().width(width).height(height).shapes(shapes).output(output).background(background).build());
     }
 }

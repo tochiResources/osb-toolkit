@@ -5,7 +5,7 @@ from ...models.beatmap import Beatmap
 from ...models.parse_osb_result import ParseOsbResult
 from ...models.text_request import TextRequest
 from ..options import TextOptions, to_kwargs
-from typing import Any, Optional
+from typing import Any, Dict, List, Optional
 from typing import overload
 
 
@@ -18,20 +18,20 @@ class Parsing:
         return isinstance(value, Parsing)
 
     @overload
-    def parse_osb(self, options: TextOptions) -> ParseOsbResult: ...
+    def parse_osb(self, text: str) -> ParseOsbResult: ...
 
     @overload
-    def parse_osb(self, text: str) -> ParseOsbResult: ...
+    def parse_osb(self, options: TextOptions) -> ParseOsbResult: ...
 
     def parse_osb(self, *args: object, **kwargs: object) -> ParseOsbResult:
         options = args[0] if args and isinstance(args[0], TextOptions) else TextOptions(*args, **kwargs)
         return self._api.parse_osb(TextRequest(**to_kwargs(options)))
 
     @overload
-    def parse_osu(self, options: TextOptions) -> Beatmap: ...
+    def parse_osu(self, text: str) -> Beatmap: ...
 
     @overload
-    def parse_osu(self, text: str) -> Beatmap: ...
+    def parse_osu(self, options: TextOptions) -> Beatmap: ...
 
     def parse_osu(self, *args: object, **kwargs: object) -> Beatmap:
         options = args[0] if args and isinstance(args[0], TextOptions) else TextOptions(*args, **kwargs)

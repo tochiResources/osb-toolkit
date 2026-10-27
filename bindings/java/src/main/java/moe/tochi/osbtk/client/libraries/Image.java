@@ -21,13 +21,17 @@ public final class Image {
         return value instanceof Image;
     }
 
+    public ImageInfo info(String path) throws ApiException {
+        return info(PathOptions.builder().path(path).build());
+    }
+
     public ImageInfo info(PathOptions options) throws ApiException {
         return api.info(new PathRequest()
             .path(options.path));
     }
 
-    public ImageInfo info(String path) throws ApiException {
-        return info(PathOptions.builder().path(path).build());
+    public ImageInfo process(ImageOptions options, String output, String path) throws ApiException {
+        return process(ImageProcessOptions.builder().options(options).output(output).path(path).build());
     }
 
     public ImageInfo process(ImageProcessOptions options) throws ApiException {
@@ -35,9 +39,5 @@ public final class Image {
             .options(options.options)
             .output(options.output)
             .path(options.path));
-    }
-
-    public ImageInfo process(ImageOptions options, String output, String path) throws ApiException {
-        return process(ImageProcessOptions.builder().options(options).output(output).path(path).build());
     }
 }

@@ -11,8 +11,8 @@ export class Parsing {
         return value instanceof Parsing;
     }
 
-    async parseOsb(options: TextOptions): Promise<ParseOsbResult>;
     async parseOsb(text: string): Promise<ParseOsbResult>;
+    async parseOsb(options: TextOptions): Promise<ParseOsbResult>;
     async parseOsb(optionsOrText?: TextOptions | string): Promise<ParseOsbResult> {
         const options: TextOptions = isTextOptions(optionsOrText)
             ? optionsOrText
@@ -20,8 +20,8 @@ export class Parsing {
         return this.api.parseOsb(options);
     }
 
-    async parseOsu(options: TextOptions): Promise<Beatmap>;
     async parseOsu(text: string): Promise<Beatmap>;
+    async parseOsu(options: TextOptions): Promise<Beatmap>;
     async parseOsu(optionsOrText?: TextOptions | string): Promise<Beatmap> {
         const options: TextOptions = isTextOptions(optionsOrText)
             ? optionsOrText

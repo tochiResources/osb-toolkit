@@ -6,7 +6,7 @@ from ...models.render_shapes_request import RenderShapesRequest
 from ...models.rgba_color import RgbaColor
 from ...models.shape import Shape
 from ..options import RenderShapesOptions, to_kwargs
-from typing import Any, Optional
+from typing import Any, Dict, List, Optional
 from typing import overload
 
 
@@ -19,10 +19,13 @@ class Imagegen:
         return isinstance(value, Imagegen)
 
     @overload
-    def render_shapes(self, options: RenderShapesOptions) -> ImageInfo: ...
+    def render_shapes(self, width: int, height: int, shapes: List[Shape], output: str) -> ImageInfo: ...
 
     @overload
-    def render_shapes(self, width: int, height: int, shapes: List[Shape], output: str, background: Optional[RgbaColor] = None) -> ImageInfo: ...
+    def render_shapes(self, width: int, height: int, shapes: List[Shape], output: str, background: Optional[RgbaColor]) -> ImageInfo: ...
+
+    @overload
+    def render_shapes(self, options: RenderShapesOptions) -> ImageInfo: ...
 
     def render_shapes(self, *args: object, **kwargs: object) -> ImageInfo:
         options = args[0] if args and isinstance(args[0], RenderShapesOptions) else RenderShapesOptions(*args, **kwargs)

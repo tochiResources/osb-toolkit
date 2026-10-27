@@ -25,8 +25,9 @@ The SDKs are generated from one OpenAPI 3.1 contract
 (`bindings/openapi/osbtk.openapi.json`) emitted by `crates/osb-api`. The
 generated clients are clean, `<X>Options`-based surfaces over a small
 per-language interceptor that routes them to the native JSON bridge
-(`osbtk_exec` / `osbtk_runtime_exec`). Methods with fewer than eight options
-also accept positional values, and single-field result wrappers are unwrapped
+(`osbtk_exec` / `osbtk_runtime_exec`). Every options-based method also accepts
+positional values, with overloads ordered by ascending parameter count; the
+options forms come last. Single-field result wrappers are unwrapped
 (`OkResult` becomes `void`, `BoolResult` a boolean, and so on).
 
 ## Development

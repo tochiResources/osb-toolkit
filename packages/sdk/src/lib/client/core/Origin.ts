@@ -11,8 +11,8 @@ export class Origin {
         return value instanceof Origin;
     }
 
-    async getOriginVector(options: GetOriginVectorOptions): Promise<Vector2>;
     async getOriginVector(origin: OsbOrigin, width: number, height: number): Promise<Vector2>;
+    async getOriginVector(options: GetOriginVectorOptions): Promise<Vector2>;
     async getOriginVector(optionsOrOrigin?: GetOriginVectorOptions | OsbOrigin, width?: number, height?: number): Promise<Vector2> {
         const options: GetOriginVectorOptions = isGetOriginVectorOptions(optionsOrOrigin)
             ? optionsOrOrigin
@@ -20,8 +20,8 @@ export class Origin {
         return this.api.getOriginVector(options);
     }
 
-    async inScreenBounds(options: InScreenBoundsOptions): Promise<boolean>;
     async inScreenBounds(position: Vector2, size: Vector2, rotation: number, origin: Vector2): Promise<boolean>;
+    async inScreenBounds(options: InScreenBoundsOptions): Promise<boolean>;
     async inScreenBounds(optionsOrPosition?: InScreenBoundsOptions | Vector2, size?: Vector2, rotation?: number, origin?: Vector2): Promise<boolean> {
         const options: InScreenBoundsOptions = isInScreenBoundsOptions(optionsOrPosition)
             ? optionsOrPosition

@@ -10,8 +10,8 @@ export class Diagnostics {
         return value instanceof Diagnostics;
     }
 
-    async diagnoseOsb(options: TextOptions): Promise<DiagnosticReport>;
     async diagnoseOsb(text: string): Promise<DiagnosticReport>;
+    async diagnoseOsb(options: TextOptions): Promise<DiagnosticReport>;
     async diagnoseOsb(optionsOrText?: TextOptions | string): Promise<DiagnosticReport> {
         const options: TextOptions = isTextOptions(optionsOrText)
             ? optionsOrText
@@ -19,8 +19,8 @@ export class Diagnostics {
         return this.api.diagnoseOsb(options);
     }
 
-    async diagnoseOsu(options: TextOptions): Promise<DiagnosticReport>;
     async diagnoseOsu(text: string): Promise<DiagnosticReport>;
+    async diagnoseOsu(options: TextOptions): Promise<DiagnosticReport>;
     async diagnoseOsu(optionsOrText?: TextOptions | string): Promise<DiagnosticReport> {
         const options: TextOptions = isTextOptions(optionsOrText)
             ? optionsOrText

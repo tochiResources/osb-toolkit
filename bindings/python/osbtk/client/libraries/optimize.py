@@ -5,7 +5,7 @@ from ...models.optimize_options_input import OptimizeOptionsInput
 from ...models.optimize_request import OptimizeRequest
 from ...models.optimize_result import OptimizeResult
 from ..options import OptimizeOptions, to_kwargs
-from typing import Any, Optional
+from typing import Any, Dict, List, Optional
 from typing import overload
 
 
@@ -18,10 +18,10 @@ class Optimize:
         return isinstance(value, Optimize)
 
     @overload
-    def optimize_osb(self, options: OptimizeOptions) -> OptimizeResult: ...
+    def optimize_osb(self, options: OptimizeOptionsInput, text: str) -> OptimizeResult: ...
 
     @overload
-    def optimize_osb(self, options: OptimizeOptionsInput, text: str) -> OptimizeResult: ...
+    def optimize_osb(self, options: OptimizeOptions) -> OptimizeResult: ...
 
     def optimize_osb(self, *args: object, **kwargs: object) -> OptimizeResult:
         options = args[0] if args and isinstance(args[0], OptimizeOptions) else OptimizeOptions(*args, **kwargs)

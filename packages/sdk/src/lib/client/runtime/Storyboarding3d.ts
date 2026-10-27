@@ -11,8 +11,8 @@ export class Storyboarding3d {
         return value instanceof Storyboarding3d;
     }
 
-    async bake3d(options: Bake3dOptions): Promise<BakedStoryboard>;
     async bake3d(input: Scene3dInput): Promise<BakedStoryboard>;
+    async bake3d(options: Bake3dOptions): Promise<BakedStoryboard>;
     async bake3d(optionsOrInput?: Bake3dOptions | Scene3dInput): Promise<BakedStoryboard> {
         const options: Bake3dOptions = isBake3dOptions(optionsOrInput)
             ? optionsOrInput

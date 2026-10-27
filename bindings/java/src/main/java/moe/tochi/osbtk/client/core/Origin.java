@@ -21,6 +21,10 @@ public final class Origin {
         return value instanceof Origin;
     }
 
+    public Vector2 getOriginVector(OsbOrigin origin, Double width, Double height) throws ApiException {
+        return getOriginVector(GetOriginVectorOptions.builder().origin(origin).width(width).height(height).build());
+    }
+
     public Vector2 getOriginVector(GetOriginVectorOptions options) throws ApiException {
         return api.getOriginVector(new GetOriginVectorRequest()
             .height(options.height)
@@ -28,8 +32,8 @@ public final class Origin {
             .width(options.width));
     }
 
-    public Vector2 getOriginVector(OsbOrigin origin, Double width, Double height) throws ApiException {
-        return getOriginVector(GetOriginVectorOptions.builder().origin(origin).width(width).height(height).build());
+    public boolean inScreenBounds(Vector2 position, Vector2 size, Double rotation, Vector2 origin) throws ApiException {
+        return inScreenBounds(InScreenBoundsOptions.builder().position(position).size(size).rotation(rotation).origin(origin).build());
     }
 
     public boolean inScreenBounds(InScreenBoundsOptions options) throws ApiException {
@@ -38,9 +42,5 @@ public final class Origin {
             .position(options.position)
             .rotation(options.rotation)
             .size(options.size)).getValue();
-    }
-
-    public boolean inScreenBounds(Vector2 position, Vector2 size, Double rotation, Vector2 origin) throws ApiException {
-        return inScreenBounds(InScreenBoundsOptions.builder().position(position).size(size).rotation(rotation).origin(origin).build());
     }
 }

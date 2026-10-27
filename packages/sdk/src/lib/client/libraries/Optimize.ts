@@ -11,8 +11,8 @@ export class Optimize {
         return value instanceof Optimize;
     }
 
-    async optimizeOsb(options: OptimizeOptions): Promise<OptimizeResult>;
     async optimizeOsb(options: OptimizeOptionsInput, text: string): Promise<OptimizeResult>;
+    async optimizeOsb(options: OptimizeOptions): Promise<OptimizeResult>;
     async optimizeOsb(optionsOrOptions?: OptimizeOptions | OptimizeOptionsInput, text?: string): Promise<OptimizeResult> {
         const options: OptimizeOptions = isOptimizeOptions(optionsOrOptions)
             ? optionsOrOptions

@@ -8,7 +8,7 @@ from ...models.frame_result import FrameResult
 from ...models.media_info import MediaInfo
 from ...models.path_request import PathRequest
 from ..options import EncodeVideoOptions, ExtractAudioOptions, ExtractFramesOptions, PathOptions, to_kwargs
-from typing import Any, Optional
+from typing import Any, Dict, List, Optional
 from typing import overload
 
 
@@ -21,40 +21,61 @@ class Media:
         return isinstance(value, Media)
 
     @overload
-    def encode_video(self, options: EncodeVideoOptions) -> MediaInfo: ...
+    def encode_video(self, inputPattern: str, output: str, fps: float) -> MediaInfo: ...
 
     @overload
-    def encode_video(self, inputPattern: str, output: str, fps: float, codec: Optional[str] = None, crf: Optional[int] = None) -> MediaInfo: ...
+    def encode_video(self, inputPattern: str, output: str, fps: float, codec: Optional[str]) -> MediaInfo: ...
+
+    @overload
+    def encode_video(self, inputPattern: str, output: str, fps: float, codec: Optional[str], crf: Optional[int]) -> MediaInfo: ...
+
+    @overload
+    def encode_video(self, options: EncodeVideoOptions) -> MediaInfo: ...
 
     def encode_video(self, *args: object, **kwargs: object) -> MediaInfo:
         options = args[0] if args and isinstance(args[0], EncodeVideoOptions) else EncodeVideoOptions(*args, **kwargs)
         return self._api.encode_video(EncodeVideoRequest(**to_kwargs(options)))
 
     @overload
-    def extract_audio(self, options: ExtractAudioOptions) -> None: ...
+    def extract_audio(self, input: str, output: str) -> None: ...
 
     @overload
-    def extract_audio(self, input: str, output: str) -> None: ...
+    def extract_audio(self, options: ExtractAudioOptions) -> None: ...
 
     def extract_audio(self, *args: object, **kwargs: object) -> None:
         options = args[0] if args and isinstance(args[0], ExtractAudioOptions) else ExtractAudioOptions(*args, **kwargs)
         self._api.extract_audio(ExtractAudioRequest(**to_kwargs(options)))
 
     @overload
-    def extract_frames(self, options: ExtractFramesOptions) -> FrameResult: ...
+    def extract_frames(self, input: str, outputDir: str) -> FrameResult: ...
 
     @overload
-    def extract_frames(self, input: str, outputDir: str, count: Optional[int] = None, fps: Optional[float] = None, height: Optional[int] = None, start: Optional[float] = None, width: Optional[int] = None) -> FrameResult: ...
+    def extract_frames(self, input: str, outputDir: str, count: Optional[int]) -> FrameResult: ...
+
+    @overload
+    def extract_frames(self, input: str, outputDir: str, count: Optional[int], fps: Optional[float]) -> FrameResult: ...
+
+    @overload
+    def extract_frames(self, input: str, outputDir: str, count: Optional[int], fps: Optional[float], height: Optional[int]) -> FrameResult: ...
+
+    @overload
+    def extract_frames(self, input: str, outputDir: str, count: Optional[int], fps: Optional[float], height: Optional[int], start: Optional[float]) -> FrameResult: ...
+
+    @overload
+    def extract_frames(self, input: str, outputDir: str, count: Optional[int], fps: Optional[float], height: Optional[int], start: Optional[float], width: Optional[int]) -> FrameResult: ...
+
+    @overload
+    def extract_frames(self, options: ExtractFramesOptions) -> FrameResult: ...
 
     def extract_frames(self, *args: object, **kwargs: object) -> FrameResult:
         options = args[0] if args and isinstance(args[0], ExtractFramesOptions) else ExtractFramesOptions(*args, **kwargs)
         return self._api.extract_frames(ExtractFramesRequest(**to_kwargs(options)))
 
     @overload
-    def info(self, options: PathOptions) -> MediaInfo: ...
+    def info(self, path: str) -> MediaInfo: ...
 
     @overload
-    def info(self, path: str) -> MediaInfo: ...
+    def info(self, options: PathOptions) -> MediaInfo: ...
 
     def info(self, *args: object, **kwargs: object) -> MediaInfo:
         options = args[0] if args and isinstance(args[0], PathOptions) else PathOptions(*args, **kwargs)

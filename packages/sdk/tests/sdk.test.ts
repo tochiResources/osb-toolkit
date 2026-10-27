@@ -162,9 +162,9 @@ describe('@tochii/osb-sdk-js', () => {
 
     it('unwraps clean single-field results', async () => {
         expect(typeof (await Core.common.version())).toBe('string');
-        expect(
-            typeof (await Core.animations.applyEasing({ easing: Easing.None, t: 0.5 }))
-        ).toBe('number');
+        expect(typeof (await Core.animations.applyEasing({ easing: Easing.None, t: 0.5 }))).toBe(
+            'number'
+        );
         expect(
             typeof (await Core.origin.inScreenBounds({
                 position: { x: 427, y: 240 },

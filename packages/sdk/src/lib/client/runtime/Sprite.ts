@@ -17,8 +17,11 @@ export class Sprite {
         return value instanceof Sprite;
     }
 
+    async command(kind: string, startTime: number, endTime: number, easing: Easing): Promise<void>;
+    async command(kind: string, startTime: number, endTime: number, easing: Easing, start: unknown): Promise<void>;
+    async command(kind: string, startTime: number, endTime: number, easing: Easing, start: unknown, end: unknown): Promise<void>;
+    async command(kind: string, startTime: number, endTime: number, easing: Easing, start: unknown, end: unknown, parameter: ParameterType | null): Promise<void>;
     async command(options: CommandOptions): Promise<void>;
-    async command(kind: string, startTime: number, endTime: number, easing: Easing, start?: unknown, end?: unknown, parameter?: ParameterType | null): Promise<void>;
     async command(optionsOrKind?: CommandOptions | string, startTime?: number, endTime?: number, easing?: Easing, start?: unknown, end?: unknown, parameter?: ParameterType | null): Promise<void> {
         const options: CommandOptions = isCommandOptions(optionsOrKind)
             ? optionsOrKind
@@ -34,8 +37,8 @@ export class Sprite {
         return this.api.info({ layer: this.layer, sprite: this.sprite });
     }
 
-    async startLoopGroup(options: StartLoopGroupOptions): Promise<void>;
     async startLoopGroup(startTime: number, count: number): Promise<void>;
+    async startLoopGroup(options: StartLoopGroupOptions): Promise<void>;
     async startLoopGroup(optionsOrStartTime?: StartLoopGroupOptions | number, count?: number): Promise<void> {
         const options: StartLoopGroupOptions = isStartLoopGroupOptions(optionsOrStartTime)
             ? optionsOrStartTime
@@ -43,8 +46,8 @@ export class Sprite {
         await this.api.startLoopGroup({ layer: this.layer, sprite: this.sprite, ...options });
     }
 
-    async startTriggerGroup(options: StartTriggerGroupOptions): Promise<void>;
     async startTriggerGroup(name: string, startTime: number, endTime: number, group: number): Promise<void>;
+    async startTriggerGroup(options: StartTriggerGroupOptions): Promise<void>;
     async startTriggerGroup(optionsOrName?: StartTriggerGroupOptions | string, startTime?: number, endTime?: number, group?: number): Promise<void> {
         const options: StartTriggerGroupOptions = isStartTriggerGroupOptions(optionsOrName)
             ? optionsOrName
@@ -52,8 +55,8 @@ export class Sprite {
         await this.api.startTriggerGroup({ layer: this.layer, sprite: this.sprite, ...options });
     }
 
-    async stateAt(options: SpriteTimeOptions): Promise<SpriteState>;
     async stateAt(time: number): Promise<SpriteState>;
+    async stateAt(options: SpriteTimeOptions): Promise<SpriteState>;
     async stateAt(optionsOrTime?: SpriteTimeOptions | number): Promise<SpriteState> {
         const options: SpriteTimeOptions = isSpriteTimeOptions(optionsOrTime)
             ? optionsOrTime

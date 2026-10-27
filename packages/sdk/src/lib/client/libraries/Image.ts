@@ -11,8 +11,8 @@ export class Image {
         return value instanceof Image;
     }
 
-    async info(options: PathOptions): Promise<ImageInfo>;
     async info(path: string): Promise<ImageInfo>;
+    async info(options: PathOptions): Promise<ImageInfo>;
     async info(optionsOrPath?: PathOptions | string): Promise<ImageInfo> {
         const options: PathOptions = isPathOptions(optionsOrPath)
             ? optionsOrPath
@@ -20,8 +20,8 @@ export class Image {
         return this.api.info(options);
     }
 
-    async process(options: ImageProcessOptions): Promise<ImageInfo>;
     async process(options: ImageOptions, output: string, path: string): Promise<ImageInfo>;
+    async process(options: ImageProcessOptions): Promise<ImageInfo>;
     async process(optionsOrOptions?: ImageProcessOptions | ImageOptions, output?: string, path?: string): Promise<ImageInfo> {
         const options: ImageProcessOptions = isImageProcessOptions(optionsOrOptions)
             ? optionsOrOptions

@@ -5,7 +5,7 @@ from ...models.bake3d_request import Bake3dRequest
 from ...models.baked_storyboard import BakedStoryboard
 from ...models.scene3d_input import Scene3dInput
 from ..options import Bake3dOptions, to_kwargs
-from typing import Any, Optional
+from typing import Any, Dict, List, Optional
 from typing import overload
 
 
@@ -18,10 +18,10 @@ class Storyboarding3d:
         return isinstance(value, Storyboarding3d)
 
     @overload
-    def bake3d(self, options: Bake3dOptions) -> BakedStoryboard: ...
+    def bake3d(self, input: Scene3dInput) -> BakedStoryboard: ...
 
     @overload
-    def bake3d(self, input: Scene3dInput) -> BakedStoryboard: ...
+    def bake3d(self, options: Bake3dOptions) -> BakedStoryboard: ...
 
     def bake3d(self, *args: object, **kwargs: object) -> BakedStoryboard:
         options = args[0] if args and isinstance(args[0], Bake3dOptions) else Bake3dOptions(*args, **kwargs)

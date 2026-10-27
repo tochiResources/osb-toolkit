@@ -25,13 +25,6 @@ public final class Audio {
         return api.audioDuration().getAudioDuration();
     }
 
-    public FftResult fft(FftOptions options) throws ApiException {
-        return api.fft(new FftRequest()
-            .magnitudes(options.magnitudes)
-            .path(options.path)
-            .time(options.time));
-    }
-
     public FftResult fft(String path) throws ApiException {
         return fft(FftOptions.builder().path(path).build());
     }
@@ -44,11 +37,10 @@ public final class Audio {
         return fft(FftOptions.builder().path(path).magnitudes(magnitudes).time(time).build());
     }
 
-    public FftResult getFft(GetFftOptions options) throws ApiException {
-        return api.getFft(new GetFftRequest()
-            .cutoff(options.cutoff)
-            .easing(options.easing)
+    public FftResult fft(FftOptions options) throws ApiException {
+        return api.fft(new FftRequest()
             .magnitudes(options.magnitudes)
+            .path(options.path)
             .time(options.time));
     }
 
@@ -62,5 +54,13 @@ public final class Audio {
 
     public FftResult getFft(Double time, Integer magnitudes, Double cutoff, Easing easing) throws ApiException {
         return getFft(GetFftOptions.builder().time(time).magnitudes(magnitudes).cutoff(cutoff).easing(easing).build());
+    }
+
+    public FftResult getFft(GetFftOptions options) throws ApiException {
+        return api.getFft(new GetFftRequest()
+            .cutoff(options.cutoff)
+            .easing(options.easing)
+            .magnitudes(options.magnitudes)
+            .time(options.time));
     }
 }

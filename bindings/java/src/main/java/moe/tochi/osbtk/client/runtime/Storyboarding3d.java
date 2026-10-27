@@ -19,12 +19,12 @@ public final class Storyboarding3d {
         return value instanceof Storyboarding3d;
     }
 
+    public BakedStoryboard bake3d(Scene3dInput input) throws ApiException {
+        return bake3d(Bake3dOptions.builder().input(input).build());
+    }
+
     public BakedStoryboard bake3d(Bake3dOptions options) throws ApiException {
         return api.bake3d(new Bake3dRequest()
             .input(options.input));
-    }
-
-    public BakedStoryboard bake3d(Scene3dInput input) throws ApiException {
-        return bake3d(Bake3dOptions.builder().input(input).build());
     }
 }

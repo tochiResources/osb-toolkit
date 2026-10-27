@@ -6,7 +6,7 @@ from ...models.fft_request import FftRequest
 from ...models.fft_result import FftResult
 from ...models.get_fft_request import GetFftRequest
 from ..options import FftOptions, GetFftOptions, to_kwargs
-from typing import Any, Optional
+from typing import Any, Dict, List, Optional
 from typing import overload
 
 
@@ -22,20 +22,32 @@ class Audio:
         return self._api.audio_duration().audio_duration
 
     @overload
-    def fft(self, options: FftOptions) -> FftResult: ...
+    def fft(self, path: str) -> FftResult: ...
 
     @overload
-    def fft(self, path: str, magnitudes: Optional[int] = None, time: Optional[float] = None) -> FftResult: ...
+    def fft(self, path: str, magnitudes: Optional[int]) -> FftResult: ...
+
+    @overload
+    def fft(self, path: str, magnitudes: Optional[int], time: Optional[float]) -> FftResult: ...
+
+    @overload
+    def fft(self, options: FftOptions) -> FftResult: ...
 
     def fft(self, *args: object, **kwargs: object) -> FftResult:
         options = args[0] if args and isinstance(args[0], FftOptions) else FftOptions(*args, **kwargs)
         return self._api.fft(FftRequest(**to_kwargs(options)))
 
     @overload
-    def get_fft(self, options: GetFftOptions) -> FftResult: ...
+    def get_fft(self, time: float, magnitudes: int) -> FftResult: ...
 
     @overload
-    def get_fft(self, time: float, magnitudes: int, cutoff: Optional[float] = None, easing: Optional[Easing] = None) -> FftResult: ...
+    def get_fft(self, time: float, magnitudes: int, cutoff: Optional[float]) -> FftResult: ...
+
+    @overload
+    def get_fft(self, time: float, magnitudes: int, cutoff: Optional[float], easing: Optional[Easing]) -> FftResult: ...
+
+    @overload
+    def get_fft(self, options: GetFftOptions) -> FftResult: ...
 
     def get_fft(self, *args: object, **kwargs: object) -> FftResult:
         options = args[0] if args and isinstance(args[0], GetFftOptions) else GetFftOptions(*args, **kwargs)

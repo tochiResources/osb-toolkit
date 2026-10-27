@@ -10,8 +10,8 @@ export class Animations {
         return value instanceof Animations;
     }
 
-    async applyEasing(options: ApplyEasingOptions): Promise<number>;
     async applyEasing(easing: Easing, t: number): Promise<number>;
+    async applyEasing(options: ApplyEasingOptions): Promise<number>;
     async applyEasing(optionsOrEasing?: ApplyEasingOptions | Easing, t?: number): Promise<number> {
         const options: ApplyEasingOptions = isApplyEasingOptions(optionsOrEasing)
             ? optionsOrEasing
@@ -19,8 +19,10 @@ export class Animations {
         return (await this.api.applyEasing(options)).value;
     }
 
+    async easingValue(t: number): Promise<number>;
+    async easingValue(t: number, easing: Easing | null): Promise<number>;
+    async easingValue(t: number, easing: Easing | null, cubicBezier: number[] | null): Promise<number>;
     async easingValue(options: EasingValueOptions): Promise<number>;
-    async easingValue(t: number, easing?: Easing | null, cubicBezier?: number[] | null): Promise<number>;
     async easingValue(optionsOrT?: EasingValueOptions | number, easing?: Easing | null, cubicBezier?: number[] | null): Promise<number> {
         const options: EasingValueOptions = isEasingValueOptions(optionsOrT)
             ? optionsOrT

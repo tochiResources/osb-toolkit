@@ -32,19 +32,6 @@ public final class Sprite {
         return value instanceof Sprite;
     }
 
-    public void command(CommandOptions options) throws ApiException {
-        api.command(new CommandRequest()
-            .easing(options.easing)
-            .end(options.end)
-            .endTime(options.endTime)
-            .kind(options.kind)
-            .layer(this.layer)
-            .parameter(options.parameter)
-            .sprite(this.sprite)
-            .start(options.start)
-            .startTime(options.startTime));
-    }
-
     public void command(String kind, Double startTime, Double endTime, Easing easing) throws ApiException {
         command(CommandOptions.builder().kind(kind).startTime(startTime).endTime(endTime).easing(easing).build());
     }
@@ -61,6 +48,19 @@ public final class Sprite {
         command(CommandOptions.builder().kind(kind).startTime(startTime).endTime(endTime).easing(easing).start(start).end(end).parameter(parameter).build());
     }
 
+    public void command(CommandOptions options) throws ApiException {
+        api.command(new CommandRequest()
+            .easing(options.easing)
+            .end(options.end)
+            .endTime(options.endTime)
+            .kind(options.kind)
+            .layer(this.layer)
+            .parameter(options.parameter)
+            .sprite(this.sprite)
+            .start(options.start)
+            .startTime(options.startTime));
+    }
+
     public void endGroup() throws ApiException {
         api.endGroup(new HandleRequest()
             .layer(this.layer)
@@ -73,6 +73,10 @@ public final class Sprite {
             .sprite(this.sprite));
     }
 
+    public void startLoopGroup(Double startTime, Double count) throws ApiException {
+        startLoopGroup(StartLoopGroupOptions.builder().startTime(startTime).count(count).build());
+    }
+
     public void startLoopGroup(StartLoopGroupOptions options) throws ApiException {
         api.startLoopGroup(new StartLoopGroupRequest()
             .count(options.count)
@@ -81,8 +85,8 @@ public final class Sprite {
             .startTime(options.startTime));
     }
 
-    public void startLoopGroup(Double startTime, Double count) throws ApiException {
-        startLoopGroup(StartLoopGroupOptions.builder().startTime(startTime).count(count).build());
+    public void startTriggerGroup(String name, Double startTime, Double endTime, Integer group) throws ApiException {
+        startTriggerGroup(StartTriggerGroupOptions.builder().name(name).startTime(startTime).endTime(endTime).group(group).build());
     }
 
     public void startTriggerGroup(StartTriggerGroupOptions options) throws ApiException {
@@ -95,8 +99,8 @@ public final class Sprite {
             .startTime(options.startTime));
     }
 
-    public void startTriggerGroup(String name, Double startTime, Double endTime, Integer group) throws ApiException {
-        startTriggerGroup(StartTriggerGroupOptions.builder().name(name).startTime(startTime).endTime(endTime).group(group).build());
+    public SpriteState stateAt(Double time) throws ApiException {
+        return stateAt(SpriteTimeOptions.builder().time(time).build());
     }
 
     public SpriteState stateAt(SpriteTimeOptions options) throws ApiException {
@@ -104,9 +108,5 @@ public final class Sprite {
             .layer(this.layer)
             .sprite(this.sprite)
             .time(options.time));
-    }
-
-    public SpriteState stateAt(Double time) throws ApiException {
-        return stateAt(SpriteTimeOptions.builder().time(time).build());
     }
 }

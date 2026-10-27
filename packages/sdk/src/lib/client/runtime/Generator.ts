@@ -17,8 +17,8 @@ export class Generator {
         return this.api.beatmap();
     }
 
-    async controlPointAt(options: TimeOptions): Promise<ControlPoint>;
     async controlPointAt(time: number): Promise<ControlPoint>;
+    async controlPointAt(options: TimeOptions): Promise<ControlPoint>;
     async controlPointAt(optionsOrTime?: TimeOptions | number): Promise<ControlPoint> {
         const options: TimeOptions = isTimeOptions(optionsOrTime)
             ? optionsOrTime
@@ -26,8 +26,8 @@ export class Generator {
         return this.api.controlPointAt(options);
     }
 
-    async importOsb(options: TextOptions): Promise<number>;
     async importOsb(text: string): Promise<number>;
+    async importOsb(options: TextOptions): Promise<number>;
     async importOsb(optionsOrText?: TextOptions | string): Promise<number> {
         const options: TextOptions = isTextOptions(optionsOrText)
             ? optionsOrText
@@ -35,8 +35,8 @@ export class Generator {
         return (await this.api.importOsb(options)).spriteCount;
     }
 
-    async layerHandle(options: LayerHandleOptions): Promise<number>;
     async layerHandle(name: string): Promise<number>;
+    async layerHandle(options: LayerHandleOptions): Promise<number>;
     async layerHandle(optionsOrName?: LayerHandleOptions | string): Promise<number> {
         const options: LayerHandleOptions = isLayerHandleOptions(optionsOrName)
             ? optionsOrName
@@ -44,8 +44,8 @@ export class Generator {
         return (await this.api.layerHandle(options)).layer;
     }
 
-    async loadBeatmap(options: TextOptions): Promise<LoadBeatmapResult>;
     async loadBeatmap(text: string): Promise<LoadBeatmapResult>;
+    async loadBeatmap(options: TextOptions): Promise<LoadBeatmapResult>;
     async loadBeatmap(optionsOrText?: TextOptions | string): Promise<LoadBeatmapResult> {
         const options: TextOptions = isTextOptions(optionsOrText)
             ? optionsOrText
@@ -53,8 +53,8 @@ export class Generator {
         return this.api.loadBeatmap(options);
     }
 
-    async random(options: RandomOptions): Promise<number>;
     async random(max: number, min: number): Promise<number>;
+    async random(options: RandomOptions): Promise<number>;
     async random(optionsOrMax?: RandomOptions | number, min?: number): Promise<number> {
         const options: RandomOptions = isRandomOptions(optionsOrMax)
             ? optionsOrMax
@@ -70,8 +70,8 @@ export class Generator {
         return this.api.storyboard();
     }
 
-    async timingPointAt(options: TimeOptions): Promise<ControlPoint>;
     async timingPointAt(time: number): Promise<ControlPoint>;
+    async timingPointAt(options: TimeOptions): Promise<ControlPoint>;
     async timingPointAt(optionsOrTime?: TimeOptions | number): Promise<ControlPoint> {
         const options: TimeOptions = isTimeOptions(optionsOrTime)
             ? optionsOrTime

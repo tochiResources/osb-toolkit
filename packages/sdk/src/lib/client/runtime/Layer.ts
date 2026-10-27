@@ -20,8 +20,8 @@ export class Layer {
         return value instanceof Layer;
     }
 
-    async addIndex(options: SegmentAddIndexOptions): Promise<void>;
     async addIndex(index: number): Promise<void>;
+    async addIndex(options: SegmentAddIndexOptions): Promise<void>;
     async addIndex(optionsOrIndex?: SegmentAddIndexOptions | number): Promise<void> {
         const options: SegmentAddIndexOptions = isSegmentAddIndexOptions(optionsOrIndex)
             ? optionsOrIndex
@@ -29,8 +29,8 @@ export class Layer {
         await this.api.addIndex({ layer: this.handle, ...options });
     }
 
-    async changePosition(options: SegmentChangePositionOptions): Promise<void>;
     async changePosition(osbLayer: OsbLayer): Promise<void>;
+    async changePosition(options: SegmentChangePositionOptions): Promise<void>;
     async changePosition(optionsOrOsbLayer?: SegmentChangePositionOptions | OsbLayer): Promise<void> {
         const options: SegmentChangePositionOptions = isSegmentChangePositionOptions(optionsOrOsbLayer)
             ? optionsOrOsbLayer
@@ -42,8 +42,9 @@ export class Layer {
         return (await this.api.clean({ layer: this.handle })).removed;
     }
 
+    async createAnimation(path: string, frames: number, frameDelay: number, loopType: OsbLoopType, origin: OsbOrigin, position: Vector2): Promise<Sprite>;
+    async createAnimation(path: string, frames: number, frameDelay: number, loopType: OsbLoopType, origin: OsbOrigin, position: Vector2, layer: string | null): Promise<Sprite>;
     async createAnimation(options: CreateAnimationOptions): Promise<Sprite>;
-    async createAnimation(path: string, frames: number, frameDelay: number, loopType: OsbLoopType, origin: OsbOrigin, position: Vector2, layer?: string | null): Promise<Sprite>;
     async createAnimation(optionsOrPath?: CreateAnimationOptions | string, frames?: number, frameDelay?: number, loopType?: OsbLoopType, origin?: OsbOrigin, position?: Vector2, layer?: string | null): Promise<Sprite> {
         const options: CreateAnimationOptions = isCreateAnimationOptions(optionsOrPath)
             ? optionsOrPath
@@ -52,8 +53,10 @@ export class Layer {
         return new Sprite(this.sprites, handle.layer ?? this.handle, handle.sprite ?? 0);
     }
 
+    async createSample(path: string, time: number): Promise<void>;
+    async createSample(path: string, time: number, volume: number | null): Promise<void>;
+    async createSample(path: string, time: number, volume: number | null, layer: string | null): Promise<void>;
     async createSample(options: CreateSampleOptions): Promise<void>;
-    async createSample(path: string, time: number, volume?: number | null, layer?: string | null): Promise<void>;
     async createSample(optionsOrPath?: CreateSampleOptions | string, time?: number, volume?: number | null, layer?: string | null): Promise<void> {
         const options: CreateSampleOptions = isCreateSampleOptions(optionsOrPath)
             ? optionsOrPath
@@ -66,8 +69,10 @@ export class Layer {
         return new Layer(this.api, this.sprites, handle.layer ?? this.handle);
     }
 
+    async createSprite(path: string, origin: OsbOrigin): Promise<Sprite>;
+    async createSprite(path: string, origin: OsbOrigin, position: Vector2 | null): Promise<Sprite>;
+    async createSprite(path: string, origin: OsbOrigin, position: Vector2 | null, layer: string | null): Promise<Sprite>;
     async createSprite(options: CreateSpriteOptions): Promise<Sprite>;
-    async createSprite(path: string, origin: OsbOrigin, position?: Vector2 | null, layer?: string | null): Promise<Sprite>;
     async createSprite(optionsOrPath?: CreateSpriteOptions | string, origin?: OsbOrigin, position?: Vector2 | null, layer?: string | null): Promise<Sprite> {
         const options: CreateSpriteOptions = isCreateSpriteOptions(optionsOrPath)
             ? optionsOrPath
@@ -96,8 +101,8 @@ export class Layer {
         await this.api.moveToTop({ layer: this.handle });
     }
 
-    async reverseDepth(options: SegmentReverseDepthOptions): Promise<void>;
     async reverseDepth(value: boolean): Promise<void>;
+    async reverseDepth(options: SegmentReverseDepthOptions): Promise<void>;
     async reverseDepth(optionsOrValue?: SegmentReverseDepthOptions | boolean): Promise<void> {
         const options: SegmentReverseDepthOptions = isSegmentReverseDepthOptions(optionsOrValue)
             ? optionsOrValue

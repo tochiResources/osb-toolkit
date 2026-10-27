@@ -19,13 +19,13 @@ public final class Optimize {
         return value instanceof Optimize;
     }
 
+    public OptimizeResult optimizeOsb(OptimizeOptionsInput options, String text) throws ApiException {
+        return optimizeOsb(OptimizeOptions.builder().options(options).text(text).build());
+    }
+
     public OptimizeResult optimizeOsb(OptimizeOptions options) throws ApiException {
         return api.optimizeOsb(new OptimizeRequest()
             .options(options.options)
             .text(options.text));
-    }
-
-    public OptimizeResult optimizeOsb(OptimizeOptionsInput options, String text) throws ApiException {
-        return optimizeOsb(OptimizeOptions.builder().options(options).text(text).build());
     }
 }

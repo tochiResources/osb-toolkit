@@ -17,7 +17,7 @@ from ...models.vector2 import Vector2
 from ...api.sprite_api import SpriteAPI
 from .sprite import Sprite
 from ..options import CreateAnimationOptions, CreateSampleOptions, CreateSpriteOptions, SegmentAddIndexOptions, SegmentChangePositionOptions, SegmentReverseDepthOptions, to_kwargs
-from typing import Any, Optional
+from typing import Any, Dict, List, Optional
 from typing import overload
 
 
@@ -32,20 +32,20 @@ class Layer:
         return isinstance(value, Layer)
 
     @overload
-    def add_index(self, options: SegmentAddIndexOptions) -> None: ...
+    def add_index(self, index: float) -> None: ...
 
     @overload
-    def add_index(self, index: float) -> None: ...
+    def add_index(self, options: SegmentAddIndexOptions) -> None: ...
 
     def add_index(self, *args: object, **kwargs: object) -> None:
         options = args[0] if args and isinstance(args[0], SegmentAddIndexOptions) else SegmentAddIndexOptions(*args, **kwargs)
         self._api.add_index(SegmentAddIndexRequest(layer=self._handle, **to_kwargs(options)))
 
     @overload
-    def change_position(self, options: SegmentChangePositionOptions) -> None: ...
+    def change_position(self, osbLayer: OsbLayer) -> None: ...
 
     @overload
-    def change_position(self, osbLayer: OsbLayer) -> None: ...
+    def change_position(self, options: SegmentChangePositionOptions) -> None: ...
 
     def change_position(self, *args: object, **kwargs: object) -> None:
         options = args[0] if args and isinstance(args[0], SegmentChangePositionOptions) else SegmentChangePositionOptions(*args, **kwargs)
@@ -55,10 +55,13 @@ class Layer:
         return self._api.clean(SegmentRequest(layer=self._handle)).removed
 
     @overload
-    def create_animation(self, options: CreateAnimationOptions) -> Sprite: ...
+    def create_animation(self, path: str, frames: int, frameDelay: float, loopType: OsbLoopType, origin: OsbOrigin, position: Vector2) -> Sprite: ...
 
     @overload
-    def create_animation(self, path: str, frames: int, frameDelay: float, loopType: OsbLoopType, origin: OsbOrigin, position: Vector2, layer: Optional[str] = None) -> Sprite: ...
+    def create_animation(self, path: str, frames: int, frameDelay: float, loopType: OsbLoopType, origin: OsbOrigin, position: Vector2, layer: Optional[str]) -> Sprite: ...
+
+    @overload
+    def create_animation(self, options: CreateAnimationOptions) -> Sprite: ...
 
     def create_animation(self, *args: object, **kwargs: object) -> Sprite:
         options = args[0] if args and isinstance(args[0], CreateAnimationOptions) else CreateAnimationOptions(*args, **kwargs)
@@ -66,10 +69,16 @@ class Layer:
         return Sprite(self._sprites, handle.layer, handle.sprite)
 
     @overload
-    def create_sample(self, options: CreateSampleOptions) -> None: ...
+    def create_sample(self, path: str, time: float) -> None: ...
 
     @overload
-    def create_sample(self, path: str, time: float, volume: Optional[float] = None, layer: Optional[str] = None) -> None: ...
+    def create_sample(self, path: str, time: float, volume: Optional[float]) -> None: ...
+
+    @overload
+    def create_sample(self, path: str, time: float, volume: Optional[float], layer: Optional[str]) -> None: ...
+
+    @overload
+    def create_sample(self, options: CreateSampleOptions) -> None: ...
 
     def create_sample(self, *args: object, **kwargs: object) -> None:
         options = args[0] if args and isinstance(args[0], CreateSampleOptions) else CreateSampleOptions(*args, **kwargs)
@@ -80,10 +89,16 @@ class Layer:
         return Layer(self._api, self._sprites, handle.layer)
 
     @overload
-    def create_sprite(self, options: CreateSpriteOptions) -> Sprite: ...
+    def create_sprite(self, path: str, origin: OsbOrigin) -> Sprite: ...
 
     @overload
-    def create_sprite(self, path: str, origin: OsbOrigin, position: Optional[Vector2] = None, layer: Optional[str] = None) -> Sprite: ...
+    def create_sprite(self, path: str, origin: OsbOrigin, position: Optional[Vector2]) -> Sprite: ...
+
+    @overload
+    def create_sprite(self, path: str, origin: OsbOrigin, position: Optional[Vector2], layer: Optional[str]) -> Sprite: ...
+
+    @overload
+    def create_sprite(self, options: CreateSpriteOptions) -> Sprite: ...
 
     def create_sprite(self, *args: object, **kwargs: object) -> Sprite:
         options = args[0] if args and isinstance(args[0], CreateSpriteOptions) else CreateSpriteOptions(*args, **kwargs)
@@ -106,10 +121,10 @@ class Layer:
         self._api.move_to_top(SegmentRequest(layer=self._handle))
 
     @overload
-    def reverse_depth(self, options: SegmentReverseDepthOptions) -> None: ...
+    def reverse_depth(self, value: bool) -> None: ...
 
     @overload
-    def reverse_depth(self, value: bool) -> None: ...
+    def reverse_depth(self, options: SegmentReverseDepthOptions) -> None: ...
 
     def reverse_depth(self, *args: object, **kwargs: object) -> None:
         options = args[0] if args and isinstance(args[0], SegmentReverseDepthOptions) else SegmentReverseDepthOptions(*args, **kwargs)

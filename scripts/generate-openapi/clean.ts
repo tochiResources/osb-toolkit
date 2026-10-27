@@ -305,11 +305,6 @@ function tsPropertyType(property: OptionProperty): string {
     return `${property.type}${property.nullable ? ' | null' : ''}`;
 }
 
-function tsParameter(property: OptionProperty): string {
-    const optional = property.required ? '' : '?';
-    return `${property.name}${optional}: ${tsPropertyType(property)}`;
-}
-
 function tsGuardName(option: OptionModel): string {
     return `is${option.name}`;
 }
@@ -424,17 +419,13 @@ function tsMethod(tag: string, op: Operation, option: OptionModel | undefined): 
         statement = `        return this.api.${op.name}(${call});`;
     }
 
-    const overload =
-        option && option.properties.length > 0 && option.properties.length < 8
-            ? orderedProperties(option)
-            : [];
+    const overload = option && option.properties.length > 0 ? orderedProperties(option) : [];
     if (overload.length === 0) {
         return `${jsdoc(op.description, '    ')}    async ${op.name}(${args}): Promise<${result}> {\n${statement}\n    }`;
     }
 
     const first = overload[0];
     const firstVar = `optionsOr${pascal(first.name)}`;
-    const positional = overload.map(tsParameter).join(', ');
     const implementation = [
         `${firstVar}?: ${option.name} | ${tsPropertyType(first)}`,
         ...overload.slice(1).map(property => `${property.name}?: ${tsPropertyType(property)}`),
@@ -443,8 +434,19 @@ function tsMethod(tag: string, op: Operation, option: OptionModel | undefined): 
         .map(property => `${property.name}: ${property === first ? firstVar : property.name}`)
         .join(', ');
     const prelude = `        const options: ${option.name} = ${tsGuardName(option)}(${firstVar})\n            ? ${firstVar}\n            : ({ ${fields} } as ${option.name});`;
+    const requiredCount = overload.filter(property => property.required).length;
+    const start = requiredCount === 0 ? 0 : requiredCount;
+    const signatures: string[] = [];
+    for (let arity = start; arity <= overload.length; arity++) {
+        const parameters = overload
+            .slice(0, arity)
+            .map(property => `${property.name}: ${tsPropertyType(property)}`)
+            .join(', ');
+        signatures.push(`    async ${op.name}(${parameters}): Promise<${result}>;`);
+    }
+    signatures.push(`    async ${op.name}(options: ${option.name}): Promise<${result}>;`);
     const doc = jsdoc(op.description, '    ');
-    return `${doc}    async ${op.name}(options: ${option.name}): Promise<${result}>;\n    async ${op.name}(${positional}): Promise<${result}>;\n    async ${op.name}(${implementation}): Promise<${result}> {\n${prelude}\n${statement}\n    }`;
+    return `${doc}${signatures.join('\n')}\n    async ${op.name}(${implementation}): Promise<${result}> {\n${prelude}\n${statement}\n    }`;
 }
 
 function emitTypeScript(contract: Contract): void {
@@ -669,7 +671,7 @@ function emitPython(contract: Contract): void {
             const option = optionFor(contract, op);
             if (option) {
                 if (option.properties.length > 0) optionNames.add(option.name);
-                if (option.properties.length > 0 && option.properties.length < 8) {
+                if (option.properties.length > 0) {
                     hasOverload = true;
                 }
                 for (const property of option.properties) {
@@ -688,7 +690,7 @@ function emitPython(contract: Contract): void {
             ...(optionNames.size
                 ? [`from ..options import ${[...optionNames].sort().join(', ')}, to_kwargs`]
                 : []),
-            'from typing import Any, Optional',
+            'from typing import Any, Dict, List, Optional',
             ...(hasOverload ? ['from typing import overload'] : []),
         ];
         const methods = operations
@@ -722,23 +724,33 @@ function emitPython(contract: Contract): void {
                     }
                 }
                 const overload =
-                    option && option.properties.length > 0 && option.properties.length < 8
-                        ? orderedProperties(option)
-                        : [];
+                    option && option.properties.length > 0 ? orderedProperties(option) : [];
                 if (overload.length === 0) {
                     return `    def ${name}(self${args}) -> ${result}:\n${body}`;
                 }
-                const positional = overload
-                    .map(property => {
-                        const type = pythonType({
-                            name: property.name,
-                            property: property.schema,
-                            required: property.required,
-                        });
-                        return `${property.name}: ${type}${property.required ? '' : ' = None'}`;
-                    })
-                    .join(', ');
-                return `    @overload\n    def ${name}(self, options: ${option.name}) -> ${result}: ...\n\n    @overload\n    def ${name}(self, ${positional}) -> ${result}: ...\n\n    def ${name}(self, *args: object, **kwargs: object) -> ${result}:\n        options = args[0] if args and isinstance(args[0], ${option.name}) else ${option.name}(*args, **kwargs)\n${body}`;
+                const requiredCount = overload.filter(property => property.required).length;
+                const start = requiredCount === 0 ? 0 : requiredCount;
+                const signatures: string[] = [];
+                for (let arity = start; arity <= overload.length; arity++) {
+                    const parameters = overload
+                        .slice(0, arity)
+                        .map(property => {
+                            const type = pythonType({
+                                name: property.name,
+                                property: property.schema,
+                                required: property.required,
+                            });
+                            return `${property.name}: ${type}`;
+                        })
+                        .join(', ');
+                    signatures.push(
+                        `    @overload\n    def ${name}(self${parameters ? `, ${parameters}` : ''}) -> ${result}: ...`
+                    );
+                }
+                signatures.push(
+                    `    @overload\n    def ${name}(self, options: ${option.name}) -> ${result}: ...`
+                );
+                return `${signatures.join('\n\n')}\n\n    def ${name}(self, *args: object, **kwargs: object) -> ${result}:\n        options = args[0] if args and isinstance(args[0], ${option.name}) else ${option.name}(*args, **kwargs)\n${body}`;
             })
             .join('\n\n');
         const constructor = isLayer
@@ -1186,7 +1198,8 @@ function emitJava(contract: Contract): void {
                         text = `    public ${result} ${op.name}(${args}) throws ApiException {\n        return api.${op.name}(${call})${access};\n    }`;
                     }
                 }
-                if (option && option.properties.length > 0 && option.properties.length < 8) {
+                const overloads: string[] = [];
+                if (option && option.properties.length > 0) {
                     const order = orderedProperties(option);
                     const requiredCount = order.filter(property => property.required).length;
                     const start = requiredCount === 0 ? 0 : requiredCount;
@@ -1210,10 +1223,12 @@ function emitJava(contract: Contract): void {
                             result === 'void'
                                 ? `        ${invocation}`
                                 : `        return ${invocation}`;
-                        text += `\n\n    public ${result} ${op.name}(${parameters}) throws ApiException {\n${body}\n    }`;
+                        overloads.push(
+                            `    public ${result} ${op.name}(${parameters}) throws ApiException {\n${body}\n    }`
+                        );
                     }
                 }
-                return text;
+                return [...overloads, text].join('\n\n');
             })
             .join('\n\n');
         const member = isLayer
@@ -1362,29 +1377,35 @@ function emitCSharp(contract: Contract): void {
                     }
                 }
                 const overload =
-                    option && option.properties.length > 0 && option.properties.length < 8
-                        ? orderedProperties(option)
-                        : [];
+                    option && option.properties.length > 0 ? orderedProperties(option) : [];
+                const overloads: string[] = [];
                 if (overload.length) {
-                    const parameters = overload
-                        .map(property => {
-                            const type = csharpType(
-                                {
-                                    name: property.name,
-                                    property: property.schema,
-                                    required: property.required,
-                                },
-                                contract
-                            );
-                            return `${type} ${pascal(property.name)}${property.required ? '' : ' = default'}`;
-                        })
-                        .join(', ');
-                    const initializer = overload
-                        .map(property => `${pascal(property.name)} = ${pascal(property.name)}`)
-                        .join(', ');
-                    text += `\n\n    public ${result} ${method}(${parameters}) =>\n        ${method}(new ${option.name} { ${initializer} });`;
+                    const requiredCount = overload.filter(property => property.required).length;
+                    const start = requiredCount === 0 ? 0 : requiredCount;
+                    for (let arity = start; arity <= overload.length; arity++) {
+                        const subset = overload.slice(0, arity);
+                        const parameters = subset
+                            .map(property => {
+                                const type = csharpType(
+                                    {
+                                        name: property.name,
+                                        property: property.schema,
+                                        required: property.required,
+                                    },
+                                    contract
+                                );
+                                return `${type} ${pascal(property.name)}`;
+                            })
+                            .join(', ');
+                        const initializer = subset
+                            .map(property => `${pascal(property.name)} = ${pascal(property.name)}`)
+                            .join(', ');
+                        overloads.push(
+                            `    public ${result} ${method}(${parameters}) =>\n        ${method}(new ${option.name} { ${initializer} });`
+                        );
+                    }
                 }
-                return text;
+                return [...overloads, text].join('\n\n');
             })
             .join('\n\n');
         const member = isLayer

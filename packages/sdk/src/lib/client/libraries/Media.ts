@@ -11,8 +11,10 @@ export class Media {
         return value instanceof Media;
     }
 
+    async encodeVideo(inputPattern: string, output: string, fps: number): Promise<MediaInfo>;
+    async encodeVideo(inputPattern: string, output: string, fps: number, codec: string | null): Promise<MediaInfo>;
+    async encodeVideo(inputPattern: string, output: string, fps: number, codec: string | null, crf: number | null): Promise<MediaInfo>;
     async encodeVideo(options: EncodeVideoOptions): Promise<MediaInfo>;
-    async encodeVideo(inputPattern: string, output: string, fps: number, codec?: string | null, crf?: number | null): Promise<MediaInfo>;
     async encodeVideo(optionsOrInputPattern?: EncodeVideoOptions | string, output?: string, fps?: number, codec?: string | null, crf?: number | null): Promise<MediaInfo> {
         const options: EncodeVideoOptions = isEncodeVideoOptions(optionsOrInputPattern)
             ? optionsOrInputPattern
@@ -20,8 +22,8 @@ export class Media {
         return this.api.encodeVideo(options);
     }
 
-    async extractAudio(options: ExtractAudioOptions): Promise<void>;
     async extractAudio(input: string, output: string): Promise<void>;
+    async extractAudio(options: ExtractAudioOptions): Promise<void>;
     async extractAudio(optionsOrInput?: ExtractAudioOptions | string, output?: string): Promise<void> {
         const options: ExtractAudioOptions = isExtractAudioOptions(optionsOrInput)
             ? optionsOrInput
@@ -29,8 +31,13 @@ export class Media {
         await this.api.extractAudio(options);
     }
 
+    async extractFrames(input: string, outputDir: string): Promise<FrameResult>;
+    async extractFrames(input: string, outputDir: string, count: number | null): Promise<FrameResult>;
+    async extractFrames(input: string, outputDir: string, count: number | null, fps: number | null): Promise<FrameResult>;
+    async extractFrames(input: string, outputDir: string, count: number | null, fps: number | null, height: number | null): Promise<FrameResult>;
+    async extractFrames(input: string, outputDir: string, count: number | null, fps: number | null, height: number | null, start: number | null): Promise<FrameResult>;
+    async extractFrames(input: string, outputDir: string, count: number | null, fps: number | null, height: number | null, start: number | null, width: number | null): Promise<FrameResult>;
     async extractFrames(options: ExtractFramesOptions): Promise<FrameResult>;
-    async extractFrames(input: string, outputDir: string, count?: number | null, fps?: number | null, height?: number | null, start?: number | null, width?: number | null): Promise<FrameResult>;
     async extractFrames(optionsOrInput?: ExtractFramesOptions | string, outputDir?: string, count?: number | null, fps?: number | null, height?: number | null, start?: number | null, width?: number | null): Promise<FrameResult> {
         const options: ExtractFramesOptions = isExtractFramesOptions(optionsOrInput)
             ? optionsOrInput
@@ -38,8 +45,8 @@ export class Media {
         return this.api.extractFrames(options);
     }
 
-    async info(options: PathOptions): Promise<MediaInfo>;
     async info(path: string): Promise<MediaInfo>;
+    async info(options: PathOptions): Promise<MediaInfo>;
     async info(optionsOrPath?: PathOptions | string): Promise<MediaInfo> {
         const options: PathOptions = isPathOptions(optionsOrPath)
             ? optionsOrPath

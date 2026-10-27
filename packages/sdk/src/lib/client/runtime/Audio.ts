@@ -15,8 +15,10 @@ export class Audio {
         return (await this.api.audioDuration()).audioDuration;
     }
 
+    async fft(path: string): Promise<FftResult>;
+    async fft(path: string, magnitudes: number | null): Promise<FftResult>;
+    async fft(path: string, magnitudes: number | null, time: number | null): Promise<FftResult>;
     async fft(options: FftOptions): Promise<FftResult>;
-    async fft(path: string, magnitudes?: number | null, time?: number | null): Promise<FftResult>;
     async fft(optionsOrPath?: FftOptions | string, magnitudes?: number | null, time?: number | null): Promise<FftResult> {
         const options: FftOptions = isFftOptions(optionsOrPath)
             ? optionsOrPath
@@ -24,8 +26,10 @@ export class Audio {
         return this.api.fft(options);
     }
 
+    async getFft(time: number, magnitudes: number): Promise<FftResult>;
+    async getFft(time: number, magnitudes: number, cutoff: number | null): Promise<FftResult>;
+    async getFft(time: number, magnitudes: number, cutoff: number | null, easing: Easing | null): Promise<FftResult>;
     async getFft(options: GetFftOptions): Promise<FftResult>;
-    async getFft(time: number, magnitudes: number, cutoff?: number | null, easing?: Easing | null): Promise<FftResult>;
     async getFft(optionsOrTime?: GetFftOptions | number, magnitudes?: number, cutoff?: number | null, easing?: Easing | null): Promise<FftResult> {
         const options: GetFftOptions = isGetFftOptions(optionsOrTime)
             ? optionsOrTime

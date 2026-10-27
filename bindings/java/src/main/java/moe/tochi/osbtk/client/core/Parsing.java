@@ -19,21 +19,21 @@ public final class Parsing {
         return value instanceof Parsing;
     }
 
+    public ParseOsbResult parseOsb(String text) throws ApiException {
+        return parseOsb(TextOptions.builder().text(text).build());
+    }
+
     public ParseOsbResult parseOsb(TextOptions options) throws ApiException {
         return api.parseOsb(new TextRequest()
             .text(options.text));
     }
 
-    public ParseOsbResult parseOsb(String text) throws ApiException {
-        return parseOsb(TextOptions.builder().text(text).build());
+    public Beatmap parseOsu(String text) throws ApiException {
+        return parseOsu(TextOptions.builder().text(text).build());
     }
 
     public Beatmap parseOsu(TextOptions options) throws ApiException {
         return api.parseOsu(new TextRequest()
             .text(options.text));
-    }
-
-    public Beatmap parseOsu(String text) throws ApiException {
-        return parseOsu(TextOptions.builder().text(text).build());
     }
 }

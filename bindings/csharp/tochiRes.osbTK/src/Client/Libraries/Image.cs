@@ -16,13 +16,13 @@ public sealed class Image
 
     public static bool InstanceOf(object value) => value is Image;
 
-    public ImageInfo Info(PathOptions options) => api.Info(new PathRequest(options.Path));
-
     public ImageInfo Info(string Path) =>
         Info(new PathOptions { Path = Path });
 
-    public ImageInfo Process(ImageProcessOptions options) => api.Process(new ImageProcessRequest(options.Options, options.Output, options.Path));
+    public ImageInfo Info(PathOptions options) => api.Info(new PathRequest(options.Path));
 
     public ImageInfo Process(ImageOptions Options, string Output, string Path) =>
         Process(new ImageProcessOptions { Options = Options, Output = Output, Path = Path });
+
+    public ImageInfo Process(ImageProcessOptions options) => api.Process(new ImageProcessRequest(options.Options, options.Output, options.Path));
 }

@@ -31,13 +31,17 @@ public final class Generator {
         return api.beatmap();
     }
 
+    public ControlPoint controlPointAt(Double time) throws ApiException {
+        return controlPointAt(TimeOptions.builder().time(time).build());
+    }
+
     public ControlPoint controlPointAt(TimeOptions options) throws ApiException {
         return api.controlPointAt(new TimeRequest()
             .time(options.time));
     }
 
-    public ControlPoint controlPointAt(Double time) throws ApiException {
-        return controlPointAt(TimeOptions.builder().time(time).build());
+    public int importOsb(String text) throws ApiException {
+        return importOsb(TextOptions.builder().text(text).build());
     }
 
     public int importOsb(TextOptions options) throws ApiException {
@@ -45,8 +49,8 @@ public final class Generator {
             .text(options.text)).getSpriteCount();
     }
 
-    public int importOsb(String text) throws ApiException {
-        return importOsb(TextOptions.builder().text(text).build());
+    public int layerHandle(String name) throws ApiException {
+        return layerHandle(LayerHandleOptions.builder().name(name).build());
     }
 
     public int layerHandle(LayerHandleOptions options) throws ApiException {
@@ -54,8 +58,8 @@ public final class Generator {
             .name(options.name)).getLayer();
     }
 
-    public int layerHandle(String name) throws ApiException {
-        return layerHandle(LayerHandleOptions.builder().name(name).build());
+    public LoadBeatmapResult loadBeatmap(String text) throws ApiException {
+        return loadBeatmap(TextOptions.builder().text(text).build());
     }
 
     public LoadBeatmapResult loadBeatmap(TextOptions options) throws ApiException {
@@ -63,18 +67,14 @@ public final class Generator {
             .text(options.text));
     }
 
-    public LoadBeatmapResult loadBeatmap(String text) throws ApiException {
-        return loadBeatmap(TextOptions.builder().text(text).build());
+    public double random(Double max, Double min) throws ApiException {
+        return random(RandomOptions.builder().max(max).min(min).build());
     }
 
     public double random(RandomOptions options) throws ApiException {
         return api.random(new RandomRequest()
             .max(options.max)
             .min(options.min)).getValue();
-    }
-
-    public double random(Double max, Double min) throws ApiException {
-        return random(RandomOptions.builder().max(max).min(min).build());
     }
 
     public int spriteCount() throws ApiException {
@@ -85,12 +85,12 @@ public final class Generator {
         return api.storyboard();
     }
 
+    public ControlPoint timingPointAt(Double time) throws ApiException {
+        return timingPointAt(TimeOptions.builder().time(time).build());
+    }
+
     public ControlPoint timingPointAt(TimeOptions options) throws ApiException {
         return api.timingPointAt(new TimeRequest()
             .time(options.time));
-    }
-
-    public ControlPoint timingPointAt(Double time) throws ApiException {
-        return timingPointAt(TimeOptions.builder().time(time).build());
     }
 }

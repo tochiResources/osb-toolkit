@@ -20,19 +20,12 @@ public final class Animations {
         return value instanceof Animations;
     }
 
-    public double applyEasing(ApplyEasingOptions options) throws ApiException {
-        return api.applyEasing(new ApplyEasingRequest()
-            .easing(options.easing)
-            .t(options.t)).getValue();
-    }
-
     public double applyEasing(Easing easing, Double t) throws ApiException {
         return applyEasing(ApplyEasingOptions.builder().easing(easing).t(t).build());
     }
 
-    public double easingValue(EasingValueOptions options) throws ApiException {
-        return api.easingValue(new EasingValueRequest()
-            .cubicBezier(options.cubicBezier)
+    public double applyEasing(ApplyEasingOptions options) throws ApiException {
+        return api.applyEasing(new ApplyEasingRequest()
             .easing(options.easing)
             .t(options.t)).getValue();
     }
@@ -47,5 +40,12 @@ public final class Animations {
 
     public double easingValue(Double t, Easing easing, List<Double> cubicBezier) throws ApiException {
         return easingValue(EasingValueOptions.builder().t(t).easing(easing).cubicBezier(cubicBezier).build());
+    }
+
+    public double easingValue(EasingValueOptions options) throws ApiException {
+        return api.easingValue(new EasingValueRequest()
+            .cubicBezier(options.cubicBezier)
+            .easing(options.easing)
+            .t(options.t)).getValue();
     }
 }
