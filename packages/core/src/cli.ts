@@ -186,7 +186,7 @@ async function collectCsFiles(path: string): Promise<string[]> {
 }
 
 function printHelp(): void {
-    console.log(`osbtk-fx-convert — effect script converter
+    console.log(`osbtk-fx-convert - effect script converter
 
 Usage:
   osbtk-fx-convert <Effect.cs...> [options]
