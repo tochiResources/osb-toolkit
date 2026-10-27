@@ -1,0 +1,27 @@
+[package]
+name = "osb-server"
+description = "osbTK service layer (convert/bake3d/build) and the headless HTTP API (section 5.6, M15/M16)."
+version = "0.1.0"
+edition = "2021"
+license = "BSD-3-Clause"
+repository = "https://github.com/tochiResources/osb-toolkit"
+authors = ["T0chi"]
+
+[dependencies]
+osb-core = { path = "../osb-core" }
+osb-runtime = { path = "../osb-runtime" }
+osb-native = { path = "../osb-native" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+axum = { version = "0.8", features = ["json"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "sync", "time"] }
+jsonwebtoken = "9"
+argon2 = "0.5"
+getrandom = "0.2"
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
+
+[lints]
+workspace = true
