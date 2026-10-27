@@ -1,0 +1,46 @@
+{
+    "name": "@tochii/osb-sdk-js",
+    "version": "0.1.0",
+    "description": "Typed TypeScript SDK over the osbTK native engine (section 5.13, M21): OpenAPI-generated models and clients driven through the WASM bridge.",
+    "type": "module",
+    "license": "BSD-3-Clause",
+    "author": "T0chi",
+    "homepage": "https://osb-toolkit.tochi.moe",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tochiResources/osb-toolkit.git",
+        "directory": "packages/sdk"
+    },
+    "scripts": {
+        "build": "tsdown --config-loader unrun",
+        "test": "yarn workspace @tochii/osb-toolkit-native build:wasm && vitest run",
+        "typecheck": "tsc -p tsconfig.build.json --noEmit"
+    },
+    "dependencies": {
+        "@tochii/osb-toolkit-native": "workspace:*"
+    },
+    "devDependencies": {
+        "@types/node": "catalog:",
+        "tsdown": "catalog:",
+        "tsx": "catalog:",
+        "typescript": "catalog:",
+        "vite": "catalog:",
+        "vitest": "catalog:"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "packageManager": "yarn@4.17.1",
+    "engines": {
+        "node": ">=22.5.0"
+    },
+    "files": [
+        "dist"
+    ],
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": "./dist/index.js",
+        "./core": "./dist/core.js",
+        "./package.json": "./package.json"
+    }
+}
