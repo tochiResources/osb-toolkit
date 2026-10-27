@@ -1,0 +1,70 @@
+{
+  "curves": [
+    {
+      "name": "linear",
+      "kind": "Linear",
+      "points": [[0.0, 0.0], [100.0, 0.0]],
+      "length": 100.0,
+      "boundingBox": { "min": { "x": 0.0, "y": 0.0 }, "max": { "x": 100.0, "y": 0.0 } },
+      "queries": [
+        { "t": 0.0, "byArcLength": false, "point": { "x": 0.0, "y": 0.0 } },
+        { "t": 0.5, "byArcLength": false, "point": { "x": 50.0, "y": 0.0 } },
+        { "t": 1.0, "byArcLength": false, "point": { "x": 100.0, "y": 0.0 } },
+        { "t": 0.5, "byArcLength": true, "point": { "x": 50.0, "y": 0.0 } }
+      ]
+    },
+    {
+      "name": "quadratic",
+      "kind": "Quadratic",
+      "points": [[0.0, 0.0], [50.0, 100.0], [100.0, 0.0]],
+      "boundingBox": { "min": { "x": 0.0, "y": 0.0 }, "max": { "x": 100.0, "y": 50.0 } },
+      "queries": [
+        { "t": 0.0, "byArcLength": false, "point": { "x": 0.0, "y": 0.0 } },
+        { "t": 0.5, "byArcLength": false, "point": { "x": 50.0, "y": 50.0 } },
+        { "t": 0.5, "byArcLength": true, "point": { "x": 50.0, "y": 50.0 } },
+        { "t": 1.0, "byArcLength": false, "point": { "x": 100.0, "y": 0.0 } }
+      ]
+    },
+    {
+      "name": "cubic",
+      "kind": "Cubic",
+      "points": [[0.0, 0.0], [0.0, 100.0], [100.0, 100.0], [100.0, 0.0]],
+      "boundingBox": { "min": { "x": 0.0, "y": 0.0 }, "max": { "x": 100.0, "y": 75.0 } },
+      "queries": [
+        { "t": 0.5, "byArcLength": false, "point": { "x": 50.0, "y": 75.0 } }
+      ]
+    },
+    {
+      "name": "bezier-degree-3",
+      "kind": "Bezier",
+      "points": [[0.0, 0.0], [0.0, 100.0], [100.0, 100.0], [100.0, 0.0]],
+      "queries": [
+        { "t": 0.5, "byArcLength": false, "point": { "x": 50.0, "y": 75.0 } }
+      ]
+    },
+    {
+      "name": "catmull-rom",
+      "kind": "CatmullRom",
+      "points": [[0.0, 0.0], [100.0, 0.0], [100.0, 100.0]],
+      "queries": [
+        { "t": 0.0, "byArcLength": false, "point": { "x": 0.0, "y": 0.0 } },
+        { "t": 0.5, "byArcLength": false, "point": { "x": 100.0, "y": 0.0 } },
+        { "t": 1.0, "byArcLength": false, "point": { "x": 100.0, "y": 100.0 } }
+      ]
+    }
+  ],
+  "simplifications": [
+    {
+      "name": "collapse-near-collinear",
+      "points": [[0.0, 0.0], [1.0, 0.05], [2.0, 0.0], [3.0, 0.0]],
+      "tolerance": 0.1,
+      "expect": [[0.0, 0.0], [3.0, 0.0]]
+    },
+    {
+      "name": "keep-corner",
+      "points": [[0.0, 0.0], [1.0, 1.0], [2.0, 0.0]],
+      "tolerance": 0.5,
+      "expect": [[0.0, 0.0], [1.0, 1.0], [2.0, 0.0]]
+    }
+  ]
+}
