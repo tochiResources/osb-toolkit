@@ -466,17 +466,20 @@ function emitPython(contract: Contract): void {
     const dir = join(targets.python, 'client');
     clear(dir);
     emitPythonOptions(dir, contract);
-    const exports: string[] = [];
+    const sections: Record<string, string[]> = { runtime: [], core: [], libraries: [] };
     for (const [tag, operations] of [...contract.operations].sort()) {
         const isLayer = tag === 'Layer';
         const isSprite = tag === 'Sprite';
         const bound = isLayer || isSprite;
+        const section = sectionOf(tag);
+        const outDir = join(dir, section);
+        mkdirSync(outDir, { recursive: true });
         const models = new Set<string>();
         const optionNames = new Set<string>();
         for (const op of operations) {
             if (op.body) models.add(op.body);
             const result = pythonResult(tag, op.name, op);
-            if (op.result && result === resultType(op, type => `List[${type}]`, 'None')) {
+            if (op.result && result === resultType(op, type => `List<${type}>`, 'None')) {
                 models.add(op.result);
             }
             const option = optionFor(contract, op);
@@ -485,13 +488,13 @@ function emitPython(contract: Contract): void {
         const imports = [
             'from __future__ import annotations',
             '',
-            `from ..api.${snake(tag)}_api import ${tag}API`,
-            ...[...models].sort().map(type => `from ..models.${snake(type)} import ${type}`),
+            `from ...api.${snake(tag)}_api import ${tag}API`,
+            ...[...models].sort().map(type => `from ...models.${snake(type)} import ${type}`),
             ...(isLayer
-                ? ['from ..api.sprite_api import SpriteAPI', 'from .sprite import Sprite']
+                ? ['from ...api.sprite_api import SpriteAPI', 'from .sprite import Sprite']
                 : []),
             ...(optionNames.size
-                ? [`from .options import ${[...optionNames].sort().join(', ')}, to_kwargs`]
+                ? [`from ..options import ${[...optionNames].sort().join(', ')}, to_kwargs`]
                 : []),
         ];
         const methods = operations
@@ -524,12 +527,24 @@ function emitPython(contract: Contract): void {
               ? `    def __init__(self, api: ${tag}API, layer: int, sprite: int) -> None:\n        self._api = api\n        self._layer = layer\n        self._sprite = sprite`
               : `    def __init__(self, api: ${tag}API) -> None:\n        self._api = api`;
         const text = `${imports.join('\n')}\n\n\nclass ${tag}:\n${constructor}\n\n    @staticmethod\n    def instance_of(value: object) -> bool:\n        return isinstance(value, ${tag})\n\n${methods}\n`;
-        writeFileSync(join(dir, `${snake(tag)}.py`), text, 'utf8');
-        exports.push(tag);
+        writeFileSync(join(outDir, `${snake(tag)}.py`), text, 'utf8');
+        sections[section].push(tag);
+    }
+    for (const [section, tags] of Object.entries(sections)) {
+        writeFileSync(
+            join(dir, section, '__init__.py'),
+            `${tags.map(tag => `from .${snake(tag)} import ${tag}`).join('\n')}\n\n__all__ = [${tags.map(tag => `"${tag}"`).join(', ')}]\n`,
+            'utf8'
+        );
     }
     writeFileSync(
         join(dir, '__init__.py'),
-        `${exports.map(tag => `from .${snake(tag)} import ${tag}`).join('\n')}\n\n__all__ = [${exports.map(tag => `"${tag}"`).join(', ')}]\n`,
+        `${Object.entries(sections)
+            .map(([section, tags]) => `from .${section} import ${tags.join(', ')}`)
+            .join('\n')}\n\n__all__ = [${Object.values(sections)
+            .flat()
+            .map(tag => `"${tag}"`)
+            .join(', ')}]\n`,
         'utf8'
     );
 }
@@ -598,8 +613,10 @@ function emitGoOptions(dir: string, contract: Contract): void {
             return `${goDoc(option.description)}type ${option.name} struct {\n${fields}\n}`;
         })
         .join('\n\n');
-    const text = `package client\n\nimport (\n\tosbtk "github.com/tochiResources/osb-toolkit/bindings/go/osbtk"\n)\n\n${structs}\n`;
-    writeFileSync(join(dir, 'options.go'), text, 'utf8');
+    const text = `package options\n\nimport (\n\tosbtk "github.com/tochiResources/osb-toolkit/bindings/go/osbtk"\n)\n\n${structs}\n`;
+    const outDir = join(dir, 'options');
+    mkdirSync(outDir, { recursive: true });
+    writeFileSync(join(outDir, 'options.go'), text, 'utf8');
 }
 
 function goBinding(tag: string, name: string): string {
@@ -653,6 +670,12 @@ function emitGo(contract: Contract): void {
     for (const [tag, operations] of [...contract.operations].sort()) {
         const isLayer = tag === 'Layer';
         const isSprite = tag === 'Sprite';
+        const section = sectionOf(tag);
+        const outDir = join(dir, section);
+        mkdirSync(outDir, { recursive: true });
+        const usesOptions = operations.some(
+            op => (optionFor(contract, op)?.properties.length ?? 0) > 0
+        );
         const methods = operations
             .map(op => {
                 const name = pascal(op.name);
@@ -664,7 +687,7 @@ function emitGo(contract: Contract): void {
                     args += ', sprite int32';
                     body = goRequest(tag, op.body, contract);
                 } else if (option && op.body) {
-                    if (hasOptions) args += `, options ${option.name}`;
+                    if (hasOptions) args += `, options clean.${option.name}`;
                     body = goRequest(tag, option.source, contract);
                 }
                 const result = goResult(tag, op.name, op);
@@ -690,8 +713,11 @@ function emitGo(contract: Contract): void {
             : isSprite
               ? `// Sprite is the handle-bound clean sprite client.\ntype Sprite struct {\n\tapi    *osbtk.SpriteAPIService\n\tlayer  int32\n\tsprite int32\n}\n\nfunc NewSprite(api *osbtk.SpriteAPIService, layer int32, sprite int32) *Sprite {\n\treturn &Sprite{api: api, layer: layer, sprite: sprite}\n}`
               : `// ${tag} is the clean high-level client.\ntype ${tag} struct {\n\tapi *osbtk.${tag}APIService\n}\n\nfunc New${tag}(api *osbtk.${tag}APIService) *${tag} {\n\treturn &${tag}{api: api}\n}`;
-        const text = `package client\n\nimport (\n\t"context"\n\t"net/http"\n\n\tosbtk "github.com/tochiResources/osb-toolkit/bindings/go/osbtk"\n)\n\n${member}\n\nfunc Is${tag}(value any) bool {\n\t_, ok := value.(*${tag})\n\treturn ok\n}\n\n${methods}\n`;
-        writeFileSync(join(dir, `client_${snake(tag)}.go`), text, 'utf8');
+        const optionsImport = usesOptions
+            ? '\tclean "github.com/tochiResources/osb-toolkit/bindings/go/osbtk/client/options"\n'
+            : '';
+        const text = `package ${section}\n\nimport (\n\t"context"\n\t"net/http"\n\n${optionsImport}\tosbtk "github.com/tochiResources/osb-toolkit/bindings/go/osbtk"\n)\n\n${member}\n\nfunc Is${tag}(value any) bool {\n\t_, ok := value.(*${tag})\n\treturn ok\n}\n\n${methods}\n`;
+        writeFileSync(join(outDir, `client_${snake(tag)}.go`), text, 'utf8');
     }
 }
 
@@ -815,7 +841,11 @@ function emitJava(contract: Contract): void {
         const isLayer = tag === 'Layer';
         const isSprite = tag === 'Sprite';
         const bound = isLayer || isSprite;
+        const section = sectionOf(tag);
+        const outDir = join(dir, section);
+        mkdirSync(outDir, { recursive: true });
         const models = new Set<string>();
+        const optionNames = new Set<string>();
         for (const op of operations) {
             if (op.body) models.add(op.body);
             const result = javaResult(tag, op.name, op);
@@ -826,11 +856,14 @@ function emitJava(contract: Contract): void {
                 models.add('Handle');
             }
             if (isLayer && op.name === 'createSegment') models.add('LayerHandle');
+            const option = optionFor(contract, op);
+            if (option && option.properties.length > 0) optionNames.add(option.name);
         }
         const imports = [
             'import moe.tochi.osbtk.ApiException;',
             `import moe.tochi.osbtk.api.${tag}API;`,
             ...[...models].sort().map(type => `import moe.tochi.osbtk.model.${type};`),
+            ...[...optionNames].sort().map(type => `import moe.tochi.osbtk.client.${type};`),
             ...(isLayer ? ['import moe.tochi.osbtk.api.SpriteAPI;'] : []),
         ];
         const methods = operations
@@ -861,8 +894,8 @@ function emitJava(contract: Contract): void {
             : bound
               ? `    private final SpriteAPI api;\n    private final int layer;\n    private final int sprite;\n\n    public Sprite(SpriteAPI api, int layer, int sprite) {\n        this.api = api;\n        this.layer = layer;\n        this.sprite = sprite;\n    }`
               : `    private final ${tag}API api;\n\n    public ${tag}(${tag}API api) {\n        this.api = api;\n    }`;
-        const text = `package moe.tochi.osbtk.client;\n\n${imports.join('\n')}\nimport java.util.List;\n\npublic final class ${tag} {\n${member}\n\n    public static boolean instanceOf(Object value) {\n        return value instanceof ${tag};\n    }\n\n${methods}\n}\n`;
-        writeFileSync(join(dir, `${tag}.java`), text, 'utf8');
+        const text = `package moe.tochi.osbtk.client.${section};\n\n${imports.join('\n')}\nimport java.util.List;\n\npublic final class ${tag} {\n${member}\n\n    public static boolean instanceOf(Object value) {\n        return value instanceof ${tag};\n    }\n\n${methods}\n}\n`;
+        writeFileSync(join(outDir, `${tag}.java`), text, 'utf8');
     }
 }
 
@@ -967,6 +1000,9 @@ function emitCSharp(contract: Contract): void {
         const isLayer = tag === 'Layer';
         const isSprite = tag === 'Sprite';
         const bound = isLayer || isSprite;
+        const section = sectionOf(tag);
+        const outDir = join(dir, pascal(section));
+        mkdirSync(outDir, { recursive: true });
         const methods = operations
             .map(op => {
                 const option = optionFor(contract, op);
@@ -996,8 +1032,8 @@ function emitCSharp(contract: Contract): void {
             : bound
               ? `    private readonly ${tag}API api;\n    private readonly int layer;\n    private readonly int sprite;\n\n    public Sprite(SpriteAPI api, int layer, int sprite)\n    {\n        this.api = api;\n        this.layer = layer;\n        this.sprite = sprite;\n    }`
               : `    private readonly ${tag}API api;\n\n    public ${tag}(${tag}API api)\n    {\n        this.api = api;\n    }`;
-        const text = `using tochiRes.osbTK.Api;\nusing tochiRes.osbTK.Model;\n\nnamespace tochiRes.osbTK.Client;\n\npublic sealed class ${tag}\n{\n${member}\n\n    public static bool InstanceOf(object value) => value is ${tag};\n\n${methods}\n}\n`;
-        writeFileSync(join(dir, `${tag}.cs`), text, 'utf8');
+        const text = `using tochiRes.osbTK.Api;\nusing tochiRes.osbTK.Client;\nusing tochiRes.osbTK.Model;\n\nnamespace tochiRes.osbTK.Client.${pascal(section)};\n\npublic sealed class ${tag}\n{\n${member}\n\n    public static bool InstanceOf(object value) => value is ${tag};\n\n${methods}\n}\n`;
+        writeFileSync(join(outDir, `${tag}.cs`), text, 'utf8');
     }
 }
 

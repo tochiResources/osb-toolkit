@@ -1,3 +1,4 @@
+import { execSync } from 'node:child_process';
 import { cpSync, mkdtempSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -41,6 +42,11 @@ export function generateGo(): void {
         }
         cleanGoNames(targets.go);
         emitGoClient();
+        execSync('gofmt -w .', {
+            cwd: join(targets.go, 'client'),
+            stdio: 'inherit',
+            shell: true,
+        });
         console.log(`openapi: generated Go SDK into ${targets.go}`);
     } finally {
         rmSync(out, { recursive: true, force: true });

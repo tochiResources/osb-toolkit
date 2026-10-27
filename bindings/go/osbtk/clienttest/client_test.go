@@ -5,7 +5,8 @@ import (
 	"testing"
 
 	osbtk "github.com/tochiResources/osb-toolkit/bindings/go/osbtk"
-	client "github.com/tochiResources/osb-toolkit/bindings/go/osbtk/client"
+	options "github.com/tochiResources/osb-toolkit/bindings/go/osbtk/client/options"
+	cleanruntime "github.com/tochiResources/osb-toolkit/bindings/go/osbtk/client/runtime"
 )
 
 func TestHandleBoundCleanClient(t *testing.T) {
@@ -23,25 +24,25 @@ func TestHandleBoundCleanClient(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	layer := client.NewLayer(runtime.Layer(), runtime.Sprite(), handle.Layer)
-	if !client.IsLayer(layer) {
+	layer := cleanruntime.NewLayer(runtime.Layer(), runtime.Sprite(), handle.Layer)
+	if !cleanruntime.IsLayer(layer) {
 		t.Fatal("not a layer")
 	}
 
 	sprite, _, err := layer.CreateSprite(
 		context.Background(),
-		client.CreateSpriteOptions{Path: "sb/dot.png", Origin: osbtk.OSBORIGIN_CENTRE},
+		options.CreateSpriteOptions{Path: "sb/dot.png", Origin: osbtk.OSBORIGIN_CENTRE},
 	)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !client.IsSprite(sprite) {
+	if !cleanruntime.IsSprite(sprite) {
 		t.Fatal("not a sprite")
 	}
 
 	_, _, err = sprite.Command(
 		context.Background(),
-		client.CommandOptions{
+		options.CommandOptions{
 			Kind:      "move",
 			StartTime: 0,
 			EndTime:   1000,
@@ -54,7 +55,7 @@ func TestHandleBoundCleanClient(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	state, _, err := sprite.StateAt(context.Background(), client.SpriteTimeOptions{Time: 500})
+	state, _, err := sprite.StateAt(context.Background(), options.SpriteTimeOptions{Time: 500})
 	if err != nil {
 		t.Fatal(err)
 	}
