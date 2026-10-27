@@ -2357,18 +2357,6 @@ __metadata:
   languageName: node
   linkType: soft
 
-"@tochii/installer@portal:../../../installer::locator=%40tochii%2Fosb-toolkit-core%40workspace%3Apackages%2Fcore":
-  version: 0.0.0-use.local
-  resolution: "@tochii/installer@portal:../../../installer::locator=%40tochii%2Fosb-toolkit-core%40workspace%3Apackages%2Fcore"
-  languageName: node
-  linkType: soft
-
-"@tochii/installer@portal:../installer::locator=%40tochii%2Fosb-toolkit%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@tochii/installer@portal:../installer::locator=%40tochii%2Fosb-toolkit%40workspace%3A."
-  languageName: node
-  linkType: soft
-
 "@tochii/osb-sdk-js@workspace:packages/sdk":
   version: 0.0.0-use.local
   resolution: "@tochii/osb-sdk-js@workspace:packages/sdk"
@@ -2387,7 +2375,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tochii/osb-toolkit-core@workspace:packages/core"
   dependencies:
-    "@tochii/installer": "portal:../../../installer"
     "@tochii/osb-toolkit-shared": "workspace:*"
     "@types/node": "catalog:"
     tsdown: "catalog:"
@@ -2452,7 +2439,6 @@ __metadata:
     "@deltabox/toolchain": "npm:^1.11.3"
     "@mermaid-js/mermaid-cli": "npm:^12.0.0"
     "@openapitools/openapi-generator-cli": "npm:^2.41.0"
-    "@tochii/installer": "portal:../installer"
     "@types/node": "catalog:"
     husky: "npm:^9.1.7"
     mermaid: "npm:^12.2.0"

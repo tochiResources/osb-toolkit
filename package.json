@@ -2,7 +2,7 @@
     "name": "@tochii/osb-toolkit",
     "version": "0.1.0",
     "private": true,
-    "description": "osu! Storyboarding Toolkit provides useful tools for your storyboarding pipeline in C#, Java, JavaScript/TypeScript, Go, Rust, Python, and C++.",
+    "description": "osu! Storyboarding Toolkit provides useful tools for your storyboarding pipeline as SDKs in C#, Java, JavaScript/TypeScript, Go, Rust, Python, and C++.",
     "license": "BSD-3-Clause",
     "type": "module",
     "homepage": "https://osb-toolkit.tochi.moe",
@@ -15,9 +15,6 @@
         "packages/*",
         "docs"
     ],
-    "resolutions": {
-        "@tochii/platform-shared": "portal:../platform/packages/shared"
-    },
     "scripts": {
         "build": "yarn clean:rust:if-large && dbx run -r build",
         "format": "dbx fmt && yarn format:rust && yarn format:csharp",
@@ -45,7 +42,6 @@
         "dev:web": "yarn workspace @tochii/osb-toolkit-web dev",
         "dev:client": "yarn workspace @tochii/osb-toolkit-client tauri dev",
         "convert": "yarn workspace @tochii/osb-toolkit-core cli",
-        "installers": "tsx scripts/package-installers.ts",
         "check": "dbx check",
         "diagrams": "tsx scripts/render-diagrams.ts",
         "dbx:sync": "dbx sync",
@@ -71,7 +67,6 @@
         "@deltabox/toolchain": "^1.11.3",
         "@mermaid-js/mermaid-cli": "^12.0.0",
         "@openapitools/openapi-generator-cli": "^2.41.0",
-        "@tochii/installer": "portal:../installer",
         "@types/node": "catalog:",
         "husky": "^9.1.7",
         "mermaid": "^12.2.0",

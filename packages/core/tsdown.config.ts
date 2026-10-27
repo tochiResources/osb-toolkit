@@ -14,7 +14,6 @@ export default defineConfig({
         'generate/ofx': 'src/generate/ofx.ts',
         'generate/ppro': 'src/generate/ppro.ts',
         'generate/rust': 'src/generate/rust/index.ts',
-        installer: 'src/installer.ts',
     },
     format: ['esm'],
     platform: 'node',

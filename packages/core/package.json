@@ -21,7 +21,6 @@
         "typecheck": "tsc -p tsconfig.build.json --noEmit"
     },
     "dependencies": {
-        "@tochii/installer": "portal:../../../installer",
         "@tochii/osb-toolkit-shared": "workspace:*",
         "zod": "catalog:"
     },
@@ -56,7 +55,6 @@
         "./generate/ofx": "./dist/generate/ofx.js",
         "./generate/ppro": "./dist/generate/ppro.js",
         "./generate/rust": "./dist/generate/rust.js",
-        "./installer": "./dist/installer.js",
         "./convert": "./dist/convert.js",
         "./package.json": "./package.json"
     }

@@ -20,7 +20,6 @@ interface CliOptions {
     bundle: boolean;
     combineParameters: boolean;
     json: boolean;
-    installer?: string;
     quiet: boolean;
 }
 
@@ -39,7 +38,6 @@ async function main(): Promise<void> {
             bundle: { type: 'boolean' },
             separate: { type: 'boolean' },
             'combine-parameters': { type: 'boolean' },
-            installer: { type: 'string' },
             json: { type: 'boolean' },
             quiet: { type: 'boolean', short: 'q' },
             help: { type: 'boolean', short: 'h' },
@@ -68,7 +66,6 @@ async function main(): Promise<void> {
         bundle: Boolean(values.bundle) && !values.separate,
         combineParameters: Boolean(values['combine-parameters']),
         json: Boolean(values.json),
-        installer: values.installer,
         quiet: Boolean(values.quiet),
     };
 
@@ -103,13 +100,6 @@ async function main(): Promise<void> {
         for (const plugin of result.plugins) {
             const files = await writeGeneratedFiles(plugin.files, { root: outDir });
             written.push({ plugin, files: files.map(file => file.path) });
-        }
-
-        if (options.installer) {
-            const { packageInstaller } = await import('@tochii/installer');
-            const config = JSON.parse(await readFile(resolve(options.installer), 'utf8'));
-            const installer = await packageInstaller(config);
-            logger.info(`installer: ${installer.product} → ${installer.outputDir}`);
         }
 
         if (options.json) {
@@ -213,7 +203,6 @@ Options:
       --bundle            bundle all effects into a single plug-in
       --separate          convert each effect into its own plug-in (default)
       --combine-parameters  merge bundled parameters by [Group] instead of per effect
-      --installer <path>  generate an installer from a config JSON after converting
       --json              machine-readable output
   -q, --quiet             only log warnings and errors
   -h, --help              show this help
