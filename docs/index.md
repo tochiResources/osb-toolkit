@@ -3,23 +3,23 @@ layout: home
 
 hero:
     name: osbTK
-    text: Effect scripts and native video plug-ins
-    tagline: Convert .cs effect scripts to After Effects, DaVinci Resolve, Final Cut Pro and Premiere Pro.
+    text: osu! storyboarding toolkit
+    tagline: A Rust-first engine and typed SDKs for converting effect scripts and building osu! storyboards.
     actions:
         - theme: brand
           text: Get started
           link: /getting-started
         - theme: alt
-          text: Compatibility
-          link: /reference/compatibility
+          text: How it works
+          link: /how-it-works
 
 features:
-    - title: One script, four hosts
-      details: A single effect script is parsed, transpiled and emitted as a target-specific plug-in project.
-    - title: After Effects first
-      details: Emits an ES3 ExtendScript plus a native AEGP plug-in project, built with the After Effects SDK.
-    - title: Browser and desktop
-      details: A pure web UI (Vite 8 + React + CSS Modules) and a Tauri v2 desktop app that reuses it.
-    - title: Shared contract
-      details: Typed IR, stable error codes on top of @tochii/errors, and per-host compatibility data.
+    - title: Rust source of truth
+      details: The engine, wire contract and docs are written once in Rust; every SDK and binding is generated or thin.
+    - title: Seven SDKs
+      details: TypeScript, C#, Python, Go, Java, C++ and Rust share one OpenAPI contract and one native bridge.
+    - title: 2D and 3D scenes
+      details: Layers, sprites, nodes, cameras, meshes, keyframes, timelines, loops and triggers.
+    - title: Host plug-ins
+      details: The After Effects, Premiere Pro and DaVinci Resolve plug-ins consume this runtime from the osb-to-plugin repo.
 ---
