@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>tochiRes.osbTK</RootNamespace>
+    <AssemblyName>tochiRes.osbTK</AssemblyName>
+    <PackageId>tochiRes.osbTK</PackageId>
+    <Description>Typed SDK over the osbTK native engine (section 5.13, M21/M22). Models and clients are generated from the OpenAPI contract in crates/osb-api; the transport calls the native bridge.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonSubTypes" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Polly" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\tochiRes.osbTK.Native\tochiRes.osbTK.Native.csproj" />
+  </ItemGroup>
+
+</Project>
