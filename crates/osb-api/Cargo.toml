@@ -1,0 +1,26 @@
+[package]
+name = "osb-api"
+description = "Typed wire contract for the osbTK native bridge and the OpenAPI schema generated from it (M21)."
+version = "0.1.0"
+edition = "2021"
+license = "BSD-3-Clause"
+repository = "https://github.com/tochiResources/osb-toolkit"
+authors = ["T0chi"]
+
+[lib]
+name = "osb_api"
+
+[[bin]]
+name = "osbtk-openapi"
+path = "src/bin/openapi.rs"
+
+[dependencies]
+osb-image = { path = "../osb-image" }
+osb-media = { path = "../osb-media" }
+osb-runtime = { path = "../osb-runtime" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+utoipa = { version = "6" }
+
+[lints]
+workspace = true
