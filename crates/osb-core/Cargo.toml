@@ -1,0 +1,24 @@
+[package]
+name = "osb-core"
+description = "The osbTK foundation: shared math, file I/O, curve math and the 3D-first scene model (animation core) consumed by the runtime and the capability libraries."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+thiserror = "2"
+utoipa = { version = "6" }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+js-sys = "0.3"
+wasm-bindgen = "0.2"
+
+[dev-dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[lints]
+workspace = true
