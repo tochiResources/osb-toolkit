@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "composite": false,
+        "noEmit": true,
+        "types": ["node"],
+        "allowJs": true,
+        "paths": {
+            "@tochii/osb-toolkit-shared": ["./packages/shared/src/index.ts"],
+            "@tochii/osb-toolkit-shared/*": ["./packages/shared/src/*"],
+            "@tochii/osb-toolkit-core": ["./packages/core/src/index.ts"],
+            "@tochii/osb-toolkit-core/*": ["./packages/core/src/*"],
+            "@tochii/osb-toolkit-to-after-effects": ["./packages/after-effects/src/index.ts"],
+            "@tochii/osb-toolkit-to-after-effects/*": ["./packages/after-effects/src/*"],
+            "@tochii/osb-toolkit-to-davinci-resolve": ["./packages/davinci-resolve/src/index.ts"],
+            "@tochii/osb-toolkit-to-davinci-resolve/*": ["./packages/davinci-resolve/src/*"],
+            "@tochii/osb-toolkit-to-premiere-pro": ["./packages/premiere-pro/src/index.ts"],
+            "@tochii/osb-toolkit-to-premiere-pro/*": ["./packages/premiere-pro/src/*"]
+        }
+    }
+}
