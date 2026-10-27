@@ -1,0 +1,22 @@
+[package]
+name = "osb-cli"
+description = "osbTK CLI: convert / bake3d / serve over the shared service layer (section 5.6, M16)."
+version = "0.1.0"
+edition = "2021"
+license = "BSD-3-Clause"
+repository = "https://github.com/tochiResources/osb-toolkit"
+authors = ["T0chi"]
+
+[[bin]]
+name = "osb"
+path = "src/main.rs"
+
+[dependencies]
+osb-core = { path = "../osb-core" }
+clap = { version = "4", features = ["derive"] }
+osb-server = { path = "../osb-server" }
+serde_json = "1"
+tokio = { version = "1", features = ["rt-multi-thread"] }
+
+[lints]
+workspace = true
