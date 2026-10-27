@@ -23,8 +23,11 @@ See the full docs at [osb-toolkit.tochi.moe/docs](https://osb-toolkit.tochi.moe/
 
 The SDKs are generated from one OpenAPI 3.1 contract
 (`bindings/openapi/osbtk.openapi.json`) emitted by `crates/osb-api`. The
-generated clients are normal OpenAPI clients; a small per-language interceptor
-routes them to the native JSON bridge (`osbtk_exec` / `osbtk_runtime_exec`).
+generated clients are clean, `<X>Options`-based surfaces over a small
+per-language interceptor that routes them to the native JSON bridge
+(`osbtk_exec` / `osbtk_runtime_exec`). Methods with fewer than eight options
+also accept positional values, and single-field result wrappers are unwrapped
+(`OkResult` becomes `void`, `BoolResult` a boolean, and so on).
 
 ## Development
 
