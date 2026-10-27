@@ -1,0 +1,91 @@
+classDiagram
+    direction TB
+
+    class Object {
+        <<trait>>
+        +name
+        +layer
+        +children
+        +addChild(child)
+        +sample(time)
+        +leaves()
+    }
+    class Node {
+        +transform : Transform
+        +timeline : Timeline
+    }
+    class Sprite {
+        +texturePath
+        +origin
+        +additive
+        +frames
+    }
+    class Line {
+        +start
+        +end
+        +thickness
+    }
+    class LineEx
+    class Triangle {
+        +position0..2
+    }
+    class Mesh {
+        +vertices
+        +faces
+        +materials
+    }
+    class Scene {
+        +name
+        +root : Node
+        +camera : Camera
+        +addChild(child)
+        +createNode() / createSprite()
+        +generate(target)
+    }
+    class World {
+        <<alias of Scene>>
+    }
+    class Camera {
+        <<trait>>
+        +stateAt(time)
+    }
+    class ObjectState
+    class CameraState
+    class Transform
+    class Generator {
+        +getLayer(name)
+        +createScene() / createWorld()
+        +generateScene(scene)
+        +createSprite() / createNode()
+    }
+    class Layer {
+        +createSprite() / createAnimation()
+        +createSample() / createSegment()
+    }
+    class Core {
+        <<non-runtime subpath>>
+        +math
+        +curve
+        +easing
+        +parse
+    }
+
+    Object <|-- Node
+    Node <|-- Sprite
+    Node <|-- Line
+    Line <|-- LineEx
+    Node <|-- Triangle
+    Node <|-- Mesh
+    Scene o-- Node : root
+    Scene o-- Camera
+    Camera ..> CameraState
+    Object ..> ObjectState
+    Node ..> Transform
+    Generator --> Scene : createScene / generateScene
+    Generator --> Layer : getLayer
+    Layer --> Sprite : createSprite
+    Generator ..> Core : Core subpath
+
+    note for Object "3D = Vector3 / Quaternion. 2D = the same type with the extra axis omitted (Vector2 in, z = 0). Names: Object2d/Object3d, Node2d/Node3d, Sprite2d/Sprite3d, Scene2d/Scene3d, World2d/World3d, Camera2d/Camera3d."
+    note for Scene "Scenes generate themselves. The generator creates and generates them (createScene / generateScene). No bakeScene on the generator."
+    note for Core "The non-runtime surface ships in the same SDK under the Core subpath. No separate math SDK."
