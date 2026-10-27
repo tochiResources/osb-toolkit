@@ -1,0 +1,63 @@
+{
+    "name": "@tochii/osb-toolkit-core",
+    "version": "0.1.0",
+    "description": "Core parser, C# and JS transpiler and plug-in generators for osbTK.",
+    "type": "module",
+    "license": "BSD-3-Clause",
+    "author": "T0chi",
+    "homepage": "https://osb-toolkit.tochi.moe",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tochiResources/osb-toolkit.git",
+        "directory": "packages/core"
+    },
+    "bin": {
+        "osbtk-fx-convert": "./dist/cli.js"
+    },
+    "scripts": {
+        "build": "tsdown --config-loader unrun",
+        "cli": "tsx src/cli.ts",
+        "test": "vitest run",
+        "typecheck": "tsc -p tsconfig.build.json --noEmit"
+    },
+    "dependencies": {
+        "@tochii/installer": "portal:../../../installer",
+        "@tochii/osb-toolkit-shared": "workspace:*",
+        "zod": "catalog:"
+    },
+    "devDependencies": {
+        "@types/node": "catalog:",
+        "tsdown": "catalog:",
+        "tsx": "catalog:",
+        "type-fest": "catalog:",
+        "typescript": "catalog:",
+        "vite": "catalog:",
+        "vitest": "catalog:"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "packageManager": "yarn@4.17.1",
+    "engines": {
+        "node": ">=22.5.0"
+    },
+    "files": [
+        "dist"
+    ],
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": "./dist/index.js",
+        "./csharp": "./dist/csharp/index.js",
+        "./csharp/parser": "./dist/csharp/parser.js",
+        "./csharp/rust": "./dist/csharp/rust.js",
+        "./csharp/tokenizer": "./dist/csharp/tokenizer.js",
+        "./generate": "./dist/generate/index.js",
+        "./generate/ae": "./dist/generate/ae.js",
+        "./generate/ofx": "./dist/generate/ofx.js",
+        "./generate/ppro": "./dist/generate/ppro.js",
+        "./generate/rust": "./dist/generate/rust.js",
+        "./installer": "./dist/installer.js",
+        "./convert": "./dist/convert.js",
+        "./package.json": "./package.json"
+    }
+}
