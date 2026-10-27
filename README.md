@@ -30,6 +30,13 @@ positional values, with overloads ordered by ascending parameter count; the
 options forms come last. Single-field result wrappers are unwrapped
 (`OkResult` becomes `void`, `BoolResult` a boolean, and so on).
 
+Go has no overloading, so its clean clients stay options-only. The composed Go
+surface is `osbtk/clientkit`: `clientkit.New()` returns the stateless clean
+clients and `clientkit.NewRuntime` resolves handle-bound `Layer`/`Sprite`
+values. The root `osbtk` facades keep the effect-runtime conveniences; its
+bridge constructor is `NewClient` (the generated transport type stays
+`APIClient`, which does not collide with any convenience name).
+
 ## Development
 
 ```bash

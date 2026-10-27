@@ -1,7 +1,8 @@
 // Package osbtk is the typed Go SDK over the osbTK native engine. The models and services in this package are generated from the
 // OpenAPI contract in `crates/osb-api`; this file wraps the native C ABI with
 // `purego` (no cgo) and holds the entry point, the runtime/generator and the
-// layer/sprite facade. The per-library facades live in `library_*.go`.
+// layer/sprite facade. The per-library facades live in `library_*.go`; the
+// composed clean-client surface is the `clientkit` subpackage.
 package osbtk
 
 import (
@@ -12,8 +13,8 @@ import (
 	"runtime"
 )
 
-// Client builds the generated bridge client, wired to the native bridge.
-func Client() (*APIClient, error) {
+// NewClient builds the generated bridge client, wired to the native bridge.
+func NewClient() (*APIClient, error) {
 	library, err := loadNative()
 	if err != nil {
 		return nil, err
