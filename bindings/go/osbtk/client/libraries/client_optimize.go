@@ -22,6 +22,12 @@ func IsOptimize(value any) bool {
 	return ok
 }
 
+// OptimizeOsb: An `.osb` optimization request.
+//
+// ctx: The request context.
+// options: An `.osb` optimization request.
+//
+// returns: The optimized `.osb` text and stats
 func (c *Optimize) OptimizeOsb(ctx context.Context, options clean.OptimizeOptions) (*osbtk.OptimizeResult, *http.Response, error) {
 	body := osbtk.NewOptimizeRequest(options.Options, options.Text)
 	return c.api.OptimizeOsb(ctx).OptimizeRequest(*body).Execute()

@@ -22,11 +22,23 @@ func IsOrigin(value any) bool {
 	return ok
 }
 
+// GetOriginVector: The anchor offset for an origin.
+//
+// ctx: The request context.
+// options: The anchor offset for an origin.
+//
+// returns: The anchor offset for the origin
 func (c *Origin) GetOriginVector(ctx context.Context, options clean.GetOriginVectorOptions) (*osbtk.Vector2, *http.Response, error) {
 	body := osbtk.NewGetOriginVectorRequest(options.Height, options.Origin, options.Width)
 	return c.api.GetOriginVector(ctx).GetOriginVectorRequest(*body).Execute()
 }
 
+// InScreenBounds: Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+//
+// ctx: The request context.
+// options: Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+//
+// returns: Whether the sprite's bounds intersect the screen
 func (c *Origin) InScreenBounds(ctx context.Context, options clean.InScreenBoundsOptions) (bool, *http.Response, error) {
 	body := osbtk.NewInScreenBoundsRequest(options.Origin, options.Position, options.Rotation, options.Size)
 	value, resp, err := c.api.InScreenBounds(ctx).InScreenBoundsRequest(*body).Execute()

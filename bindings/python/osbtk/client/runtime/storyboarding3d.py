@@ -18,11 +18,34 @@ class Storyboarding3d:
         return isinstance(value, Storyboarding3d)
 
     @overload
-    def bake3d(self, input: Scene3dInput) -> BakedStoryboard: ...
+    def bake3d(self, input: Scene3dInput) -> BakedStoryboard:
+        """A `bake3d` request: a plain 3D scene.
+
+        Args:
+            input: The 3D scene.
+
+        Returns:
+            Baked command spans
+        """
+        ...
 
     @overload
-    def bake3d(self, options: Bake3dOptions) -> BakedStoryboard: ...
+    def bake3d(self, options: Bake3dOptions) -> BakedStoryboard:
+        """A `bake3d` request: a plain 3D scene.
+
+        Args:
+            options: A `bake3d` request: a plain 3D scene.
+
+        Returns:
+            Baked command spans
+        """
+        ...
 
     def bake3d(self, *args: object, **kwargs: object) -> BakedStoryboard:
+        """A `bake3d` request: a plain 3D scene.
+
+        Returns:
+            Baked command spans
+        """
         options = args[0] if args and isinstance(args[0], Bake3dOptions) else Bake3dOptions(*args, **kwargs)
         return self._api.bake3d(Bake3dRequest(**to_kwargs(options)))

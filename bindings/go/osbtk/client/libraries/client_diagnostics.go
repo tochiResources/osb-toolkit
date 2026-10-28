@@ -22,11 +22,23 @@ func IsDiagnostics(value any) bool {
 	return ok
 }
 
+// DiagnoseOsb: A request carrying a block of text (an effect script, `.osu` or `.osb`).
+//
+// ctx: The request context.
+// options: A request carrying a block of text (an effect script, `.osu` or `.osb`).
+//
+// returns: Diagnostics for an `.osb` storyboard
 func (c *Diagnostics) DiagnoseOsb(ctx context.Context, options clean.TextOptions) (*osbtk.DiagnosticReport, *http.Response, error) {
 	body := osbtk.NewTextRequest(options.Text)
 	return c.api.DiagnoseOsb(ctx).TextRequest(*body).Execute()
 }
 
+// DiagnoseOsu: A request carrying a block of text (an effect script, `.osu` or `.osb`).
+//
+// ctx: The request context.
+// options: A request carrying a block of text (an effect script, `.osu` or `.osb`).
+//
+// returns: Diagnostics for an `.osu` beatmap
 func (c *Diagnostics) DiagnoseOsu(ctx context.Context, options clean.TextOptions) (*osbtk.DiagnosticReport, *http.Response, error) {
 	body := osbtk.NewTextRequest(options.Text)
 	return c.api.DiagnoseOsu(ctx).TextRequest(*body).Execute()

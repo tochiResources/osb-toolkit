@@ -22,6 +22,12 @@ func IsStoryboarding3d(value any) bool {
 	return ok
 }
 
+// Bake3d: A `bake3d` request: a plain 3D scene.
+//
+// ctx: The request context.
+// options: A `bake3d` request: a plain 3D scene.
+//
+// returns: Baked command spans
 func (c *Storyboarding3d) Bake3d(ctx context.Context, options clean.Bake3dOptions) (*osbtk.BakedStoryboard, *http.Response, error) {
 	body := osbtk.NewBake3dRequest(options.Input)
 	return c.api.Bake3d(ctx).Bake3dRequest(*body).Execute()

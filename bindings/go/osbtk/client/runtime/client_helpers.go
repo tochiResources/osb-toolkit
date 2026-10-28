@@ -22,6 +22,12 @@ func IsHelpers(value any) bool {
 	return ok
 }
 
+// Call: A motion-graphics helper call: a helper `name` plus its input.
+//
+// ctx: The request context.
+// options: A motion-graphics helper call: a helper `name` plus its input.
+//
+// returns: The shared motion-graphics helper's result
 func (c *Helpers) Call(ctx context.Context, options clean.HelperOptions) (any, *http.Response, error) {
 	body := osbtk.NewHelperRequest(options.Name)
 	if options.Input != nil {
@@ -34,6 +40,12 @@ func (c *Helpers) Call(ctx context.Context, options clean.HelperOptions) (any, *
 	return value.Value, resp, nil
 }
 
+// Commands: A motion-graphics helper call: a helper `name` plus its input.
+//
+// ctx: The request context.
+// options: A motion-graphics helper call: a helper `name` plus its input.
+//
+// returns: The helper's result (a command list or scalar)
 func (c *Helpers) Commands(ctx context.Context, options clean.HelperOptions) (any, *http.Response, error) {
 	body := osbtk.NewHelperRequest(options.Name)
 	if options.Input != nil {
@@ -46,6 +58,12 @@ func (c *Helpers) Commands(ctx context.Context, options clean.HelperOptions) (an
 	return value.Value, resp, nil
 }
 
+// Keyframes: A motion-graphics helper call: a helper `name` plus its input.
+//
+// ctx: The request context.
+// options: A motion-graphics helper call: a helper `name` plus its input.
+//
+// returns: The helper's result (a keyframe channel or vectors)
 func (c *Helpers) Keyframes(ctx context.Context, options clean.HelperOptions) (any, *http.Response, error) {
 	body := osbtk.NewHelperRequest(options.Name)
 	if options.Input != nil {

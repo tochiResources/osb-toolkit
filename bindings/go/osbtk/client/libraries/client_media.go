@@ -22,6 +22,12 @@ func IsMedia(value any) bool {
 	return ok
 }
 
+// EncodeVideo: An image-sequence encoding request (frames -> video).
+//
+// ctx: The request context.
+// options: An image-sequence encoding request (frames -> video).
+//
+// returns: The encoded video's metadata
 func (c *Media) EncodeVideo(ctx context.Context, options clean.EncodeVideoOptions) (*osbtk.MediaInfo, *http.Response, error) {
 	body := osbtk.NewEncodeVideoRequest(options.Fps, options.InputPattern, options.Output)
 	if options.Codec != nil {
@@ -33,12 +39,24 @@ func (c *Media) EncodeVideo(ctx context.Context, options clean.EncodeVideoOption
 	return c.api.EncodeVideo(ctx).EncodeVideoRequest(*body).Execute()
 }
 
+// ExtractAudio: An audio-extraction request (media -> audio file).
+//
+// ctx: The request context.
+// options: An audio-extraction request (media -> audio file).
+//
+// returns: Acknowledged
 func (c *Media) ExtractAudio(ctx context.Context, options clean.ExtractAudioOptions) (*http.Response, error) {
 	body := osbtk.NewExtractAudioRequest(options.Input, options.Output)
 	_, resp, err := c.api.ExtractAudio(ctx).ExtractAudioRequest(*body).Execute()
 	return resp, err
 }
 
+// ExtractFrames: A frame-extraction request (video -> image sequence).
+//
+// ctx: The request context.
+// options: A frame-extraction request (video -> image sequence).
+//
+// returns: The extracted frame count
 func (c *Media) ExtractFrames(ctx context.Context, options clean.ExtractFramesOptions) (*osbtk.FrameResult, *http.Response, error) {
 	body := osbtk.NewExtractFramesRequest(options.Input, options.OutputDir)
 	if options.Count != nil {
@@ -59,6 +77,12 @@ func (c *Media) ExtractFrames(ctx context.Context, options clean.ExtractFramesOp
 	return c.api.ExtractFrames(ctx).ExtractFramesRequest(*body).Execute()
 }
 
+// Info: A request carrying a single file path.
+//
+// ctx: The request context.
+// options: A request carrying a single file path.
+//
+// returns: The media metadata
 func (c *Media) Info(ctx context.Context, options clean.PathOptions) (*osbtk.MediaInfo, *http.Response, error) {
 	body := osbtk.NewPathRequest(options.Path)
 	return c.api.Info(ctx).PathRequest(*body).Execute()

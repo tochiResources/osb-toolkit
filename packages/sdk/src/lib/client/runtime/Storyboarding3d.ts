@@ -11,7 +11,21 @@ export class Storyboarding3d {
         return value instanceof Storyboarding3d;
     }
 
+    /**
+     * A `bake3d` request: a plain 3D scene.
+     *
+     * @param input The 3D scene.
+     *
+     * @returns Baked command spans
+     */
     async bake3d(input: Scene3dInput): Promise<BakedStoryboard>;
+    /**
+     * A `bake3d` request: a plain 3D scene.
+     *
+     * @param options A `bake3d` request: a plain 3D scene.
+     *
+     * @returns Baked command spans
+     */
     async bake3d(options: Bake3dOptions): Promise<BakedStoryboard>;
     async bake3d(optionsOrInput?: Bake3dOptions | Scene3dInput): Promise<BakedStoryboard> {
         const options: Bake3dOptions = isBake3dOptions(optionsOrInput)

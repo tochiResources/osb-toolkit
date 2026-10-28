@@ -10,6 +10,7 @@ interface Operation {
     result?: string;
     resultArray?: boolean;
     description?: string;
+    responseDescription?: string;
 }
 
 interface OptionProperty {
@@ -65,6 +66,7 @@ function readOperations(spec: any): Map<string, Operation[]> {
                 result: refName(resultSchema) ?? refName(resultSchema?.items),
                 resultArray: resultSchema?.type === 'array',
                 description: op.description || op.summary,
+                responseDescription: op.responses?.['200']?.description,
             });
             byTag.set(tag, list);
         }
@@ -261,6 +263,21 @@ function optionFor(contract: Contract, op: Operation): OptionModel | undefined {
     return op.body ? contract.options.get(op.body) : undefined;
 }
 
+/** The short summary shown above a clean accessor. */
+function operationSummary(tag: string, op: Operation, option?: OptionModel): string {
+    return op.description || option?.description || `Calls the ${tag}.${op.name} bridge operation.`;
+}
+
+/** The description of one positional parameter. */
+function parameterDescription(property: OptionProperty): string {
+    return property.description || `The \`${property.name}\` value.`;
+}
+
+/** The description of the `<X>Options` parameter. */
+function optionsDescription(option: OptionModel): string {
+    return option.description || 'The request options.';
+}
+
 /** The friendly positional order for the most-used options. */
 const preferredOrder: Record<string, string[]> = {
     CreateSpriteRequest: ['path', 'origin', 'position', 'layer'],
@@ -371,6 +388,27 @@ function tsResultType(tag: string, op: Operation): string {
     }
 }
 
+/** One JSDoc block with a summary, parameter docs and an optional return doc. */
+function tsDoc(
+    tag: string,
+    op: Operation,
+    option: OptionModel | undefined,
+    params: { name: string; description: string }[],
+    indent = '    '
+): string {
+    const oneLine = (text: string) => text.replace(/\s+/g, ' ').trim();
+    const lines = [`${indent}/**`, `${indent} * ${oneLine(operationSummary(tag, op, option))}`];
+    if (params.length > 0) lines.push(`${indent} *`);
+    for (const param of params) {
+        lines.push(`${indent} * @param ${param.name} ${oneLine(param.description)}`);
+    }
+    if (op.responseDescription) {
+        lines.push(`${indent} *`, `${indent} * @returns ${oneLine(op.responseDescription)}`);
+    }
+    lines.push(`${indent} */`);
+    return `${lines.join('\n')}\n`;
+}
+
 function tsMethod(tag: string, op: Operation, option: OptionModel | undefined): string {
     const result = tsResultType(tag, op);
     const hasOptions = (option?.properties.length ?? 0) > 0;
@@ -421,7 +459,11 @@ function tsMethod(tag: string, op: Operation, option: OptionModel | undefined): 
 
     const overload = option && option.properties.length > 0 ? orderedProperties(option) : [];
     if (overload.length === 0) {
-        return `${jsdoc(op.description, '    ')}    async ${op.name}(${args}): Promise<${result}> {\n${statement}\n    }`;
+        const params =
+            isLayer && op.body === 'HandleRequest'
+                ? [{ name: 'sprite', description: 'The sprite handle.' }]
+                : [];
+        return `${tsDoc(tag, op, option, params)}    async ${op.name}(${args}): Promise<${result}> {\n${statement}\n    }`;
     }
 
     const first = overload[0];
@@ -438,15 +480,25 @@ function tsMethod(tag: string, op: Operation, option: OptionModel | undefined): 
     const start = requiredCount === 0 ? 0 : requiredCount;
     const signatures: string[] = [];
     for (let arity = start; arity <= overload.length; arity++) {
-        const parameters = overload
-            .slice(0, arity)
+        const subset = overload.slice(0, arity);
+        const parameters = subset
             .map(property => `${property.name}: ${tsPropertyType(property)}`)
             .join(', ');
-        signatures.push(`    async ${op.name}(${parameters}): Promise<${result}>;`);
+        const doc = tsDoc(
+            tag,
+            op,
+            option,
+            subset.map(property => ({
+                name: property.name,
+                description: parameterDescription(property),
+            }))
+        );
+        signatures.push(`${doc}    async ${op.name}(${parameters}): Promise<${result}>;`);
     }
-    signatures.push(`    async ${op.name}(options: ${option.name}): Promise<${result}>;`);
-    const doc = jsdoc(op.description, '    ');
-    return `${doc}${signatures.join('\n')}\n    async ${op.name}(${implementation}): Promise<${result}> {\n${prelude}\n${statement}\n    }`;
+    signatures.push(
+        `${tsDoc(tag, op, option, [{ name: 'options', description: optionsDescription(option) }])}    async ${op.name}(options: ${option.name}): Promise<${result}>;`
+    );
+    return `${signatures.join('\n')}\n    async ${op.name}(${implementation}): Promise<${result}> {\n${prelude}\n${statement}\n    }`;
 }
 
 function emitTypeScript(contract: Contract): void {
@@ -570,6 +622,29 @@ function pythonDoc(text: string | undefined, indent = ''): string {
         .split('\n')
         .map(line => `${indent}# ${line}`.trimEnd())
         .join('\n');
+}
+
+/** A method docstring with the summary, parameter docs and an optional return. */
+function pythonMethodDoc(
+    tag: string,
+    op: Operation,
+    option: OptionModel | undefined,
+    params: { name: string; description: string }[],
+    indent = '        '
+): string {
+    const oneLine = (text: string) => text.replace(/\s+/g, ' ').trim();
+    const lines = [`${indent}"""${oneLine(operationSummary(tag, op, option))}`];
+    if (params.length > 0) {
+        lines.push('', `${indent}Args:`);
+        for (const param of params) {
+            lines.push(`${indent}    ${param.name}: ${oneLine(param.description)}`);
+        }
+    }
+    if (op.responseDescription) {
+        lines.push('', `${indent}Returns:`, `${indent}    ${oneLine(op.responseDescription)}`);
+    }
+    lines.push(`${indent}"""`);
+    return `${lines.join('\n')}\n`;
 }
 
 function emitPythonOptions(dir: string, contract: Contract): void {
@@ -725,15 +800,19 @@ function emitPython(contract: Contract): void {
                 }
                 const overload =
                     option && option.properties.length > 0 ? orderedProperties(option) : [];
+                const docParams =
+                    isLayer && op.body === 'HandleRequest'
+                        ? [{ name: 'sprite', description: 'The sprite handle.' }]
+                        : [];
                 if (overload.length === 0) {
-                    return `    def ${name}(self${args}) -> ${result}:\n${body}`;
+                    return `    def ${name}(self${args}) -> ${result}:\n${pythonMethodDoc(tag, op, option, docParams)}${body}`;
                 }
                 const requiredCount = overload.filter(property => property.required).length;
                 const start = requiredCount === 0 ? 0 : requiredCount;
                 const signatures: string[] = [];
                 for (let arity = start; arity <= overload.length; arity++) {
-                    const parameters = overload
-                        .slice(0, arity)
+                    const subset = overload.slice(0, arity);
+                    const parameters = subset
                         .map(property => {
                             const type = pythonType({
                                 name: property.name,
@@ -744,13 +823,26 @@ function emitPython(contract: Contract): void {
                         })
                         .join(', ');
                     signatures.push(
-                        `    @overload\n    def ${name}(self${parameters ? `, ${parameters}` : ''}) -> ${result}: ...`
+                        `    @overload\n    def ${name}(self${parameters ? `, ${parameters}` : ''}) -> ${result}:\n${pythonMethodDoc(
+                            tag,
+                            op,
+                            option,
+                            subset.map(property => ({
+                                name: property.name,
+                                description: parameterDescription(property),
+                            }))
+                        )}        ...`
                     );
                 }
                 signatures.push(
-                    `    @overload\n    def ${name}(self, options: ${option.name}) -> ${result}: ...`
+                    `    @overload\n    def ${name}(self, options: ${option.name}) -> ${result}:\n${pythonMethodDoc(
+                        tag,
+                        op,
+                        option,
+                        [{ name: 'options', description: optionsDescription(option) }]
+                    )}        ...`
                 );
-                return `${signatures.join('\n\n')}\n\n    def ${name}(self, *args: object, **kwargs: object) -> ${result}:\n        options = args[0] if args and isinstance(args[0], ${option.name}) else ${option.name}(*args, **kwargs)\n${body}`;
+                return `${signatures.join('\n\n')}\n\n    def ${name}(self, *args: object, **kwargs: object) -> ${result}:\n${pythonMethodDoc(tag, op, option, docParams)}        options = args[0] if args and isinstance(args[0], ${option.name}) else ${option.name}(*args, **kwargs)\n${body}`;
             })
             .join('\n\n');
         const constructor = isLayer
@@ -827,6 +919,25 @@ function goDoc(text: string | undefined, indent = ''): string {
         .split('\n')
         .map(line => `${indent}// ${line}`.trimEnd())
         .join('\n')}\n`;
+}
+
+/** A method comment with the summary, parameter docs and an optional return. */
+function goMethodDoc(
+    tag: string,
+    op: Operation,
+    option: OptionModel | undefined,
+    params: { name: string; description: string }[]
+): string {
+    const oneLine = (text: string) => text.replace(/\s+/g, ' ').trim();
+    const lines = [`// ${pascal(op.name)}: ${oneLine(operationSummary(tag, op, option))}`];
+    if (params.length > 0) lines.push('//');
+    for (const param of params) {
+        lines.push(`// ${param.name}: ${oneLine(param.description)}`);
+    }
+    if (op.responseDescription) {
+        lines.push('//', `// returns: ${oneLine(op.responseDescription)}`);
+    }
+    return `${lines.join('\n')}\n`;
 }
 
 function emitGoOptions(dir: string, contract: Contract): void {
@@ -984,7 +1095,16 @@ function emitGo(contract: Contract): void {
                 const signature = result
                     ? `(${result}, *http.Response, error)`
                     : '(*http.Response, error)';
-                return `func (c *${tag}) ${name}(${args}) ${signature} {\n\t${statements.join('\n\t')}\n}`;
+                const docParams = [
+                    { name: 'ctx', description: 'The request context.' },
+                    ...(isLayer && op.body === 'HandleRequest'
+                        ? [{ name: 'sprite', description: 'The sprite handle.' }]
+                        : hasOptions
+                          ? [{ name: 'options', description: optionsDescription(option!) }]
+                          : []),
+                ];
+                const doc = goMethodDoc(tag, op, option, docParams);
+                return `${doc}func (c *${tag}) ${name}(${args}) ${signature} {\n\t${statements.join('\n\t')}\n}`;
             })
             .join('\n\n');
         const member = isLayer
@@ -1031,6 +1151,27 @@ function javaDoc(text: string | undefined, indent = ''): string {
         .map(line => `${indent} * ${line}`.trimEnd())
         .join('\n');
     return `${indent}/**\n${body}\n${indent} */\n`;
+}
+
+/** A method Javadoc block with the summary, parameter docs and return doc. */
+function javaMethodDoc(
+    tag: string,
+    op: Operation,
+    option: OptionModel | undefined,
+    params: { name: string; description: string }[],
+    hasReturn: boolean
+): string {
+    const oneLine = (text: string) => text.replace(/\s+/g, ' ').trim();
+    const lines = ['    /**', `     * ${oneLine(operationSummary(tag, op, option))}`];
+    if (params.length > 0) lines.push('     *');
+    for (const param of params) {
+        lines.push(`     * @param ${param.name} ${oneLine(param.description)}`);
+    }
+    if (hasReturn && op.responseDescription) {
+        lines.push('     *', `     * @return ${oneLine(op.responseDescription)}`);
+    }
+    lines.push('     */');
+    return `${lines.join('\n')}\n`;
 }
 
 function emitJavaOptions(dir: string, contract: Contract): void {
@@ -1223,12 +1364,29 @@ function emitJava(contract: Contract): void {
                             result === 'void'
                                 ? `        ${invocation}`
                                 : `        return ${invocation}`;
+                        const doc = javaMethodDoc(
+                            tag,
+                            op,
+                            option,
+                            subset.map(property => ({
+                                name: property.name,
+                                description: parameterDescription(property),
+                            })),
+                            result !== 'void'
+                        );
                         overloads.push(
-                            `    public ${result} ${op.name}(${parameters}) throws ApiException {\n${body}\n    }`
+                            `${doc}    public ${result} ${op.name}(${parameters}) throws ApiException {\n${body}\n    }`
                         );
                     }
                 }
-                return [...overloads, text].join('\n\n');
+                const docParams =
+                    isLayer && op.body === 'HandleRequest'
+                        ? [{ name: 'sprite', description: 'The sprite handle.' }]
+                        : hasOptions
+                          ? [{ name: 'options', description: optionsDescription(option!) }]
+                          : [];
+                const doc = javaMethodDoc(tag, op, option, docParams, result !== 'void');
+                return [...overloads, `${doc}${text}`].join('\n\n');
             })
             .join('\n\n');
         const member = isLayer
@@ -1297,6 +1455,30 @@ function xml(text: string | undefined, indent = '    '): string {
         .map(line => `${indent}/// ${line}`.trimEnd())
         .join('\n');
     return `${indent}/// <summary>\n${body}\n${indent}/// </summary>\n`;
+}
+
+/** A method XML-doc block with the summary, parameter docs and return doc. */
+function xmlMethodDoc(
+    tag: string,
+    op: Operation,
+    option: OptionModel | undefined,
+    params: { name: string; description: string }[],
+    hasReturn: boolean
+): string {
+    const escape = (text: string) =>
+        text.replace(/\s+/g, ' ').trim().replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+    const lines = [
+        '    /// <summary>',
+        `    /// ${escape(operationSummary(tag, op, option))}`,
+        '    /// </summary>',
+    ];
+    for (const param of params) {
+        lines.push(`    /// <param name="${param.name}">${escape(param.description)}</param>`);
+    }
+    if (hasReturn && op.responseDescription) {
+        lines.push(`    /// <returns>${escape(op.responseDescription)}</returns>`);
+    }
+    return `${lines.join('\n')}\n`;
 }
 
 function emitCSharpOptions(dir: string, contract: Contract): void {
@@ -1400,12 +1582,29 @@ function emitCSharp(contract: Contract): void {
                         const initializer = subset
                             .map(property => `${pascal(property.name)} = ${pascal(property.name)}`)
                             .join(', ');
+                        const doc = xmlMethodDoc(
+                            tag,
+                            op,
+                            option,
+                            subset.map(property => ({
+                                name: pascal(property.name),
+                                description: parameterDescription(property),
+                            })),
+                            result !== 'void'
+                        );
                         overloads.push(
-                            `    public ${result} ${method}(${parameters}) =>\n        ${method}(new ${option.name} { ${initializer} });`
+                            `${doc}    public ${result} ${method}(${parameters}) =>\n        ${method}(new ${option.name} { ${initializer} });`
                         );
                     }
                 }
-                return [...overloads, text].join('\n\n');
+                const docParams =
+                    isLayer && op.body === 'HandleRequest'
+                        ? [{ name: 'sprite', description: 'The sprite handle.' }]
+                        : hasOptions
+                          ? [{ name: 'options', description: optionsDescription(option!) }]
+                          : [];
+                const doc = xmlMethodDoc(tag, op, option, docParams, result !== 'void');
+                return [...overloads, `${doc}${text}`].join('\n\n');
             })
             .join('\n\n');
         const member = isLayer

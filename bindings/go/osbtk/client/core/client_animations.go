@@ -22,6 +22,12 @@ func IsAnimations(value any) bool {
 	return ok
 }
 
+// ApplyEasing: An easing evaluation request.
+//
+// ctx: The request context.
+// options: An easing evaluation request.
+//
+// returns: The eased value
 func (c *Animations) ApplyEasing(ctx context.Context, options clean.ApplyEasingOptions) (float64, *http.Response, error) {
 	body := osbtk.NewApplyEasingRequest(options.Easing, options.T)
 	value, resp, err := c.api.ApplyEasing(ctx).ApplyEasingRequest(*body).Execute()
@@ -31,6 +37,12 @@ func (c *Animations) ApplyEasing(ctx context.Context, options clean.ApplyEasingO
 	return value.Value, resp, nil
 }
 
+// EasingValue: A named-or-custom easing evaluation request.
+//
+// ctx: The request context.
+// options: A named-or-custom easing evaluation request.
+//
+// returns: The eased value (named easing or cubic-bezier)
 func (c *Animations) EasingValue(ctx context.Context, options clean.EasingValueOptions) (float64, *http.Response, error) {
 	body := osbtk.NewEasingValueRequest(options.T)
 	if options.CubicBezier != nil {

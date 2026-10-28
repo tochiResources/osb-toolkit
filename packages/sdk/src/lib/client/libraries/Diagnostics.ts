@@ -10,7 +10,21 @@ export class Diagnostics {
         return value instanceof Diagnostics;
     }
 
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param text The text payload.
+     *
+     * @returns Diagnostics for an `.osb` storyboard
+     */
     async diagnoseOsb(text: string): Promise<DiagnosticReport>;
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @returns Diagnostics for an `.osb` storyboard
+     */
     async diagnoseOsb(options: TextOptions): Promise<DiagnosticReport>;
     async diagnoseOsb(optionsOrText?: TextOptions | string): Promise<DiagnosticReport> {
         const options: TextOptions = isTextOptions(optionsOrText)
@@ -19,7 +33,21 @@ export class Diagnostics {
         return this.api.diagnoseOsb(options);
     }
 
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param text The text payload.
+     *
+     * @returns Diagnostics for an `.osu` beatmap
+     */
     async diagnoseOsu(text: string): Promise<DiagnosticReport>;
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @returns Diagnostics for an `.osu` beatmap
+     */
     async diagnoseOsu(options: TextOptions): Promise<DiagnosticReport>;
     async diagnoseOsu(optionsOrText?: TextOptions | string): Promise<DiagnosticReport> {
         const options: TextOptions = isTextOptions(optionsOrText)

@@ -19,10 +19,25 @@ public final class Optimize {
         return value instanceof Optimize;
     }
 
+    /**
+     * An `.osb` optimization request.
+     *
+     * @param options The optimization options.
+     * @param text The `.osb` storyboard text.
+     *
+     * @return The optimized `.osb` text and stats
+     */
     public OptimizeResult optimizeOsb(OptimizeOptionsInput options, String text) throws ApiException {
         return optimizeOsb(OptimizeOptions.builder().options(options).text(text).build());
     }
 
+    /**
+     * An `.osb` optimization request.
+     *
+     * @param options An `.osb` optimization request.
+     *
+     * @return The optimized `.osb` text and stats
+     */
     public OptimizeResult optimizeOsb(OptimizeOptions options) throws ApiException {
         return api.optimizeOsb(new OptimizeRequest()
             .options(options.options)

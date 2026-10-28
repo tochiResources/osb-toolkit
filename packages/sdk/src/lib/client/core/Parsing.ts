@@ -11,7 +11,21 @@ export class Parsing {
         return value instanceof Parsing;
     }
 
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param text The text payload.
+     *
+     * @returns The storyboard summary
+     */
     async parseOsb(text: string): Promise<ParseOsbResult>;
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @returns The storyboard summary
+     */
     async parseOsb(options: TextOptions): Promise<ParseOsbResult>;
     async parseOsb(optionsOrText?: TextOptions | string): Promise<ParseOsbResult> {
         const options: TextOptions = isTextOptions(optionsOrText)
@@ -20,7 +34,21 @@ export class Parsing {
         return this.api.parseOsb(options);
     }
 
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param text The text payload.
+     *
+     * @returns The parsed beatmap
+     */
     async parseOsu(text: string): Promise<Beatmap>;
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @returns The parsed beatmap
+     */
     async parseOsu(options: TextOptions): Promise<Beatmap>;
     async parseOsu(optionsOrText?: TextOptions | string): Promise<Beatmap> {
         const options: TextOptions = isTextOptions(optionsOrText)

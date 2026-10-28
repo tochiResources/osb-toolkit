@@ -24,6 +24,12 @@ func IsSprite(value any) bool {
 	return ok
 }
 
+// Command: A sprite command. `start`/`end` are a scalar, a `Vector2`, or a `Color4` depending on `kind`.
+//
+// ctx: The request context.
+// options: A sprite command. `start`/`end` are a scalar, a `Vector2`, or a `Color4` depending on `kind`.
+//
+// returns: Acknowledged
 func (c *Sprite) Command(ctx context.Context, options clean.CommandOptions) (*http.Response, error) {
 	body := osbtk.NewCommandRequest(options.Easing, options.EndTime, options.Kind, c.layer, c.sprite, options.StartTime)
 	if options.End != nil {
@@ -39,29 +45,57 @@ func (c *Sprite) Command(ctx context.Context, options clean.CommandOptions) (*ht
 	return resp, err
 }
 
+// EndGroup: A sprite handle pair.
+//
+// ctx: The request context.
+//
+// returns: Acknowledged
 func (c *Sprite) EndGroup(ctx context.Context) (*http.Response, error) {
 	body := osbtk.NewHandleRequest(c.layer, c.sprite)
 	_, resp, err := c.api.EndGroup(ctx).HandleRequest(*body).Execute()
 	return resp, err
 }
 
+// Info: A sprite handle pair.
+//
+// ctx: The request context.
+//
+// returns: The sprite's initial state
 func (c *Sprite) Info(ctx context.Context) (*osbtk.SpriteInfo, *http.Response, error) {
 	body := osbtk.NewHandleRequest(c.layer, c.sprite)
 	return c.api.Info(ctx).HandleRequest(*body).Execute()
 }
 
+// StartLoopGroup: Start a loop group.
+//
+// ctx: The request context.
+// options: Start a loop group.
+//
+// returns: Acknowledged
 func (c *Sprite) StartLoopGroup(ctx context.Context, options clean.StartLoopGroupOptions) (*http.Response, error) {
 	body := osbtk.NewStartLoopGroupRequest(options.Count, c.layer, c.sprite, options.StartTime)
 	_, resp, err := c.api.StartLoopGroup(ctx).StartLoopGroupRequest(*body).Execute()
 	return resp, err
 }
 
+// StartTriggerGroup: Start a trigger group.
+//
+// ctx: The request context.
+// options: Start a trigger group.
+//
+// returns: Acknowledged
 func (c *Sprite) StartTriggerGroup(ctx context.Context, options clean.StartTriggerGroupOptions) (*http.Response, error) {
 	body := osbtk.NewStartTriggerGroupRequest(options.EndTime, options.Group, c.layer, options.Name, c.sprite, options.StartTime)
 	_, resp, err := c.api.StartTriggerGroup(ctx).StartTriggerGroupRequest(*body).Execute()
 	return resp, err
 }
 
+// StateAt: A sprite handle pair plus a sample time.
+//
+// ctx: The request context.
+// options: A sprite handle pair plus a sample time.
+//
+// returns: The sampled sprite state
 func (c *Sprite) StateAt(ctx context.Context, options clean.SpriteTimeOptions) (*osbtk.SpriteState, *http.Response, error) {
 	body := osbtk.NewSpriteTimeRequest(c.layer, c.sprite, options.Time)
 	return c.api.StateAt(ctx).SpriteTimeRequest(*body).Execute()

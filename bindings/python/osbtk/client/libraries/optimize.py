@@ -18,11 +18,35 @@ class Optimize:
         return isinstance(value, Optimize)
 
     @overload
-    def optimize_osb(self, options: OptimizeOptionsInput, text: str) -> OptimizeResult: ...
+    def optimize_osb(self, options: OptimizeOptionsInput, text: str) -> OptimizeResult:
+        """An `.osb` optimization request.
+
+        Args:
+            options: The optimization options.
+            text: The `.osb` storyboard text.
+
+        Returns:
+            The optimized `.osb` text and stats
+        """
+        ...
 
     @overload
-    def optimize_osb(self, options: OptimizeOptions) -> OptimizeResult: ...
+    def optimize_osb(self, options: OptimizeOptions) -> OptimizeResult:
+        """An `.osb` optimization request.
+
+        Args:
+            options: An `.osb` optimization request.
+
+        Returns:
+            The optimized `.osb` text and stats
+        """
+        ...
 
     def optimize_osb(self, *args: object, **kwargs: object) -> OptimizeResult:
+        """An `.osb` optimization request.
+
+        Returns:
+            The optimized `.osb` text and stats
+        """
         options = args[0] if args and isinstance(args[0], OptimizeOptions) else OptimizeOptions(*args, **kwargs)
         return self._api.optimize_osb(OptimizeRequest(**to_kwargs(options)))

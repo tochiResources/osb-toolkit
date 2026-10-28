@@ -15,6 +15,11 @@ public final class Common {
         return value instanceof Common;
     }
 
+    /**
+     * Calls the Common.version bridge operation.
+     *
+     * @return The runtime version
+     */
     public String version() throws ApiException {
         return api.version().getVersion();
     }

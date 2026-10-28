@@ -19,14 +19,53 @@ class Imagegen:
         return isinstance(value, Imagegen)
 
     @overload
-    def render_shapes(self, width: int, height: int, shapes: List[Shape], output: str) -> ImageInfo: ...
+    def render_shapes(self, width: int, height: int, shapes: List[Shape], output: str) -> ImageInfo:
+        """A shape-rendering request: a canvas, a background and a shape list.
+
+        Args:
+            width: The canvas width in pixels.
+            height: The canvas height in pixels.
+            shapes: The shapes to draw, in order.
+            output: The output file path (its extension selects the format).
+
+        Returns:
+            The rendered image's metadata
+        """
+        ...
 
     @overload
-    def render_shapes(self, width: int, height: int, shapes: List[Shape], output: str, background: Optional[RgbaColor]) -> ImageInfo: ...
+    def render_shapes(self, width: int, height: int, shapes: List[Shape], output: str, background: Optional[RgbaColor]) -> ImageInfo:
+        """A shape-rendering request: a canvas, a background and a shape list.
+
+        Args:
+            width: The canvas width in pixels.
+            height: The canvas height in pixels.
+            shapes: The shapes to draw, in order.
+            output: The output file path (its extension selects the format).
+            background: The background colour (default transparent).
+
+        Returns:
+            The rendered image's metadata
+        """
+        ...
 
     @overload
-    def render_shapes(self, options: RenderShapesOptions) -> ImageInfo: ...
+    def render_shapes(self, options: RenderShapesOptions) -> ImageInfo:
+        """A shape-rendering request: a canvas, a background and a shape list.
+
+        Args:
+            options: A shape-rendering request: a canvas, a background and a shape list.
+
+        Returns:
+            The rendered image's metadata
+        """
+        ...
 
     def render_shapes(self, *args: object, **kwargs: object) -> ImageInfo:
+        """A shape-rendering request: a canvas, a background and a shape list.
+
+        Returns:
+            The rendered image's metadata
+        """
         options = args[0] if args and isinstance(args[0], RenderShapesOptions) else RenderShapesOptions(*args, **kwargs)
         return self._api.render_shapes(RenderShapesRequest(**to_kwargs(options)))

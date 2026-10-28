@@ -13,4 +13,9 @@ class Common:
         return isinstance(value, Common)
 
     def version(self) -> str:
+        """Calls the Common.version bridge operation.
+
+        Returns:
+            The runtime version
+        """
         return self._api.version().version

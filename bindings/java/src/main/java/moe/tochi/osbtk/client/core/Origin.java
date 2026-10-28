@@ -21,10 +21,26 @@ public final class Origin {
         return value instanceof Origin;
     }
 
+    /**
+     * The anchor offset for an origin.
+     *
+     * @param origin The sprite anchor origin.
+     * @param width The sprite width.
+     * @param height The sprite height.
+     *
+     * @return The anchor offset for the origin
+     */
     public Vector2 getOriginVector(OsbOrigin origin, Double width, Double height) throws ApiException {
         return getOriginVector(GetOriginVectorOptions.builder().origin(origin).width(width).height(height).build());
     }
 
+    /**
+     * The anchor offset for an origin.
+     *
+     * @param options The anchor offset for an origin.
+     *
+     * @return The anchor offset for the origin
+     */
     public Vector2 getOriginVector(GetOriginVectorOptions options) throws ApiException {
         return api.getOriginVector(new GetOriginVectorRequest()
             .height(options.height)
@@ -32,10 +48,27 @@ public final class Origin {
             .width(options.width));
     }
 
+    /**
+     * Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+     *
+     * @param position The sprite centre position.
+     * @param size The sprite size.
+     * @param rotation The rotation in radians.
+     * @param origin The anchor offset (from `GetOriginVector`).
+     *
+     * @return Whether the sprite's bounds intersect the screen
+     */
     public boolean inScreenBounds(Vector2 position, Vector2 size, Double rotation, Vector2 origin) throws ApiException {
         return inScreenBounds(InScreenBoundsOptions.builder().position(position).size(size).rotation(rotation).origin(origin).build());
     }
 
+    /**
+     * Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+     *
+     * @param options Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+     *
+     * @return Whether the sprite's bounds intersect the screen
+     */
     public boolean inScreenBounds(InScreenBoundsOptions options) throws ApiException {
         return api.inScreenBounds(new InScreenBoundsRequest()
             .origin(options.origin)

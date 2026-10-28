@@ -21,6 +21,11 @@ func IsCommon(value any) bool {
 	return ok
 }
 
+// Version: Calls the Common.version bridge operation.
+//
+// ctx: The request context.
+//
+// returns: The runtime version
 func (c *Common) Version(ctx context.Context) (string, *http.Response, error) {
 	value, resp, err := c.api.Version(ctx).Execute()
 	if err != nil {

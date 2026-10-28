@@ -11,7 +11,22 @@ export class Optimize {
         return value instanceof Optimize;
     }
 
+    /**
+     * An `.osb` optimization request.
+     *
+     * @param options The optimization options.
+     * @param text The `.osb` storyboard text.
+     *
+     * @returns The optimized `.osb` text and stats
+     */
     async optimizeOsb(options: OptimizeOptionsInput, text: string): Promise<OptimizeResult>;
+    /**
+     * An `.osb` optimization request.
+     *
+     * @param options An `.osb` optimization request.
+     *
+     * @returns The optimized `.osb` text and stats
+     */
     async optimizeOsb(options: OptimizeOptions): Promise<OptimizeResult>;
     async optimizeOsb(optionsOrOptions?: OptimizeOptions | OptimizeOptionsInput, text?: string): Promise<OptimizeResult> {
         const options: OptimizeOptions = isOptimizeOptions(optionsOrOptions)

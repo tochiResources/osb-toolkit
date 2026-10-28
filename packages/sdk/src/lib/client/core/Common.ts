@@ -7,6 +7,11 @@ export class Common {
         return value instanceof Common;
     }
 
+    /**
+     * Calls the Common.version bridge operation.
+     *
+     * @returns The runtime version
+     */
     async version(): Promise<string> {
         return (await this.api.version()).version;
     }

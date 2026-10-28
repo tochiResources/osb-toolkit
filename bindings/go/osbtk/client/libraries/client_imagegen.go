@@ -22,6 +22,12 @@ func IsImagegen(value any) bool {
 	return ok
 }
 
+// RenderShapes: A shape-rendering request: a canvas, a background and a shape list.
+//
+// ctx: The request context.
+// options: A shape-rendering request: a canvas, a background and a shape list.
+//
+// returns: The rendered image's metadata
 func (c *Imagegen) RenderShapes(ctx context.Context, options clean.RenderShapesOptions) (*osbtk.ImageInfo, *http.Response, error) {
 	body := osbtk.NewRenderShapesRequest(options.Height, options.Output, options.Shapes, options.Width)
 	if options.Background != nil {

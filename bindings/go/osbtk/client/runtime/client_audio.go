@@ -22,6 +22,11 @@ func IsAudio(value any) bool {
 	return ok
 }
 
+// AudioDuration: Calls the Audio.audioDuration bridge operation.
+//
+// ctx: The request context.
+//
+// returns: The loaded audio duration
 func (c *Audio) AudioDuration(ctx context.Context) (float64, *http.Response, error) {
 	value, resp, err := c.api.AudioDuration(ctx).Execute()
 	if err != nil {
@@ -30,6 +35,12 @@ func (c *Audio) AudioDuration(ctx context.Context) (float64, *http.Response, err
 	return value.AudioDuration, resp, nil
 }
 
+// Fft: An FFT request against a `.wav` file.
+//
+// ctx: The request context.
+// options: An FFT request against a `.wav` file.
+//
+// returns: The FFT magnitudes
 func (c *Audio) Fft(ctx context.Context, options clean.FftOptions) (*osbtk.FftResult, *http.Response, error) {
 	body := osbtk.NewFftRequest(options.Path)
 	if options.Magnitudes != nil {
@@ -41,6 +52,12 @@ func (c *Audio) Fft(ctx context.Context, options clean.FftOptions) (*osbtk.FftRe
 	return c.api.Fft(ctx).FftRequest(*body).Execute()
 }
 
+// GetFft: An FFT request against the runtime's loaded audio.
+//
+// ctx: The request context.
+// options: An FFT request against the runtime's loaded audio.
+//
+// returns: The FFT magnitudes
 func (c *Audio) GetFft(ctx context.Context, options clean.GetFftOptions) (*osbtk.FftResult, *http.Response, error) {
 	body := osbtk.NewGetFftRequest(options.Magnitudes, options.Time)
 	if options.Cutoff != nil {

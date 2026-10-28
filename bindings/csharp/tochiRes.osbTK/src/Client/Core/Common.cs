@@ -16,5 +16,9 @@ public sealed class Common
 
     public static bool InstanceOf(object value) => value is Common;
 
+    /// <summary>
+    /// Calls the Common.version bridge operation.
+    /// </summary>
+    /// <returns>The runtime version</returns>
     public string Version() => api.Version().VarVersion;
 }

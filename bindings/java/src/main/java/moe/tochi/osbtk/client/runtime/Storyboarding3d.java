@@ -19,10 +19,24 @@ public final class Storyboarding3d {
         return value instanceof Storyboarding3d;
     }
 
+    /**
+     * A `bake3d` request: a plain 3D scene.
+     *
+     * @param input The 3D scene.
+     *
+     * @return Baked command spans
+     */
     public BakedStoryboard bake3d(Scene3dInput input) throws ApiException {
         return bake3d(Bake3dOptions.builder().input(input).build());
     }
 
+    /**
+     * A `bake3d` request: a plain 3D scene.
+     *
+     * @param options A `bake3d` request: a plain 3D scene.
+     *
+     * @return Baked command spans
+     */
     public BakedStoryboard bake3d(Bake3dOptions options) throws ApiException {
         return api.bake3d(new Bake3dRequest()
             .input(options.input));
