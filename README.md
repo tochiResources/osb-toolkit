@@ -22,19 +22,11 @@ See the full docs at [osb-toolkit.tochi.moe/docs](https://osb-toolkit.tochi.moe/
 | Rust                  | `osb-sdk` (`crates/osb-sdk`)          |
 
 The SDKs are generated from one OpenAPI 3.1 contract
-([bindings/openapi/osbtk.openapi.json](/bindings/openapi/osbtk.openapi.json)) emitted by [crates/osb-api](/crates/osb-api). The generated clients are clean, `<X>Options`-based surfaces over a small
-per-language interceptor that routes them to the native JSON bridge
-(`osbtk_exec` / `osbtk_runtime_exec`). Every options-based method also accepts
-positional values, with overloads ordered by ascending parameter count; the
-options forms come last. Single-field result wrappers are unwrapped
-(`OkResult` becomes `void`, `BoolResult` a boolean, and so on).
+([bindings/openapi/osbtk.openapi.json](/bindings/openapi/osbtk.openapi.json)) emitted by [crates/osb-api](/crates/osb-api).
 
-Go has no overloading, so its clean clients stay options-only. The composed Go
-surface is `osbtk/clientkit`: `clientkit.New()` returns the stateless clean
-clients and `clientkit.NewRuntime` resolves handle-bound `Layer`/`Sprite`
-values. The root `osbtk` facades keep the effect-runtime conveniences; its
-bridge constructor is `Client` (the generated transport type is `ClientAPI`, so
-the plain `Client` name stays free).
+The SDK clients uses a small per-language interceptor that routes them to the native JSON bridge (`osbtk_exec` / `osbtk_runtime_exec`).
+
+Go has no overloading, so it's SDK client stay options-only unlike the other SDKs.
 
 ## Development
 
@@ -50,7 +42,7 @@ yarn build             # all TypeScript packages
 yarn build:native      # the osb-native C ABI
 yarn openapi           # regenerate the contract and every SDK
 
-yarn w:docs dev        # the documentation site
+yarn w:docs dev        # run the documentation site
 ```
 
 ## License
