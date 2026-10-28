@@ -30,6 +30,50 @@ func TestComposedStatelessClient(t *testing.T) {
 	}
 }
 
+func TestComposedHelpersAcceptStructuredInput(t *testing.T) {
+	client, err := clientkit.New()
+	if err != nil {
+		t.Fatal(err)
+	}
+	value, _, err := client.Helpers.Call(
+		context.Background(),
+		clean.HelperOptions{
+			Name: "keyframe.scaleKeyframes",
+			Input: map[string]interface{}{
+				"channel": map[string]interface{}{
+					"keys": []interface{}{
+						map[string]interface{}{"time": 0.0, "value": []float64{1, 2}},
+						map[string]interface{}{"time": 100.0, "value": []float64{3, 4}},
+					},
+				},
+				"factor": 2.0,
+			},
+		},
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	channel, ok := value.(map[string]interface{})
+	if !ok {
+		t.Fatalf("helper result: %T", value)
+	}
+	keys, ok := channel["keys"].([]interface{})
+	if !ok || len(keys) != 2 {
+		t.Fatalf("keys: %+v", channel["keys"])
+	}
+	last, ok := keys[1].(map[string]interface{})
+	if !ok {
+		t.Fatalf("key: %T", keys[1])
+	}
+	values, ok := last["value"].([]interface{})
+	if !ok || len(values) != 2 {
+		t.Fatalf("values: %+v", last["value"])
+	}
+	if values[0].(float64) != 6 || values[1].(float64) != 8 {
+		t.Fatalf("scaled: %+v", values)
+	}
+}
+
 func TestComposedRuntimeBindsLayers(t *testing.T) {
 	runtime, err := clientkit.NewRuntime(640, 480)
 	if err != nil {

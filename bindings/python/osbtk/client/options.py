@@ -254,7 +254,7 @@ class HelperOptions:
     # The helper name, e.g. `flatten`, `orbit`, `selectCommands`.
     name: str
     # The helper's input (a keyframe channel, a command list, or its parameters).
-    input: Optional[str] = None
+    input: Optional[Any] = None
 
 @dataclass
 class ImageProcessOptions:

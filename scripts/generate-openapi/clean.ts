@@ -605,11 +605,14 @@ function pythonType(property: { name: string; property: any; required: boolean }
             case 'boolean':
                 base = 'bool';
                 break;
+            case 'string':
+                base = 'str';
+                break;
             case 'object':
                 base = 'Dict[str, Any]';
                 break;
             default:
-                base = 'str';
+                base = 'Any';
         }
     }
     const optional = !property.required || !!property.nullable;
@@ -901,12 +904,16 @@ function goType(property: { name: string; property: any; required: boolean }): {
             case 'boolean':
                 base = 'bool';
                 break;
+            case 'string':
+                base = 'string';
+                break;
             case 'object':
                 base = 'map[string]interface{}';
                 container = true;
                 break;
             default:
-                base = 'string';
+                base = 'interface{}';
+                container = true;
         }
     }
     if (property.required || container) return { type: base, pointer: false, container };
@@ -1137,10 +1144,12 @@ function javaType(property: { name: string; property: any; required: boolean }):
             return 'Double';
         case 'boolean':
             return 'Boolean';
+        case 'string':
+            return 'String';
         case 'object':
             return 'Object';
         default:
-            return 'String';
+            return 'Object';
     }
 }
 
@@ -1438,10 +1447,12 @@ function csharpType(
             return property.required ? 'double' : 'double?';
         case 'boolean':
             return property.required ? 'bool' : 'bool?';
+        case 'string':
+            return 'string';
         case 'object':
             return 'object';
         default:
-            return 'string';
+            return 'object';
     }
 }
 

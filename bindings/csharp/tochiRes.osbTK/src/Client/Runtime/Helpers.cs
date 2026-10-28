@@ -33,7 +33,7 @@ public sealed class Helpers
     /// <param name="Name">The helper name, e.g. `flatten`, `orbit`, `selectCommands`.</param>
     /// <param name="Input">The helper's input (a keyframe channel, a command list, or its parameters).</param>
     /// <returns>The shared motion-graphics helper's result</returns>
-    public object Call(string Name, string Input) =>
+    public object Call(string Name, object Input) =>
         Call(new HelperOptions { Name = Name, Input = Input });
 
     /// <summary>
@@ -57,7 +57,7 @@ public sealed class Helpers
     /// <param name="Name">The helper name, e.g. `flatten`, `orbit`, `selectCommands`.</param>
     /// <param name="Input">The helper's input (a keyframe channel, a command list, or its parameters).</param>
     /// <returns>The helper's result (a command list or scalar)</returns>
-    public object Commands(string Name, string Input) =>
+    public object Commands(string Name, object Input) =>
         Commands(new HelperOptions { Name = Name, Input = Input });
 
     /// <summary>
@@ -81,7 +81,7 @@ public sealed class Helpers
     /// <param name="Name">The helper name, e.g. `flatten`, `orbit`, `selectCommands`.</param>
     /// <param name="Input">The helper's input (a keyframe channel, a command list, or its parameters).</param>
     /// <returns>The helper's result (a keyframe channel or vectors)</returns>
-    public object Keyframes(string Name, string Input) =>
+    public object Keyframes(string Name, object Input) =>
         Keyframes(new HelperOptions { Name = Name, Input = Input });
 
     /// <summary>

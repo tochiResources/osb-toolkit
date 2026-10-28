@@ -39,7 +39,7 @@ public final class Helpers {
      *
      * @return The shared motion-graphics helper's result
      */
-    public Object call(String name, String input) throws ApiException {
+    public Object call(String name, Object input) throws ApiException {
         return call(HelperOptions.builder().name(name).input(input).build());
     }
 
@@ -75,7 +75,7 @@ public final class Helpers {
      *
      * @return The helper's result (a command list or scalar)
      */
-    public Object commands(String name, String input) throws ApiException {
+    public Object commands(String name, Object input) throws ApiException {
         return commands(HelperOptions.builder().name(name).input(input).build());
     }
 
@@ -111,7 +111,7 @@ public final class Helpers {
      *
      * @return The helper's result (a keyframe channel or vectors)
      */
-    public Object keyframes(String name, String input) throws ApiException {
+    public Object keyframes(String name, Object input) throws ApiException {
         return keyframes(HelperOptions.builder().name(name).input(input).build());
     }
 

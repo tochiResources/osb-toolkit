@@ -503,7 +503,7 @@ public sealed class HelperOptions
     /// <summary>
     /// The helper's input (a keyframe channel, a command list, or its parameters).
     /// </summary>
-    public string Input { get; set; }
+    public object Input { get; set; }
 
     /// <summary>
     /// The helper name, e.g. `flatten`, `orbit`, `selectCommands`.

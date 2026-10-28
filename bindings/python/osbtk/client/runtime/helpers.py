@@ -30,7 +30,7 @@ class Helpers:
         ...
 
     @overload
-    def call(self, name: str, input: Optional[str]) -> Any:
+    def call(self, name: str, input: Optional[Any]) -> Any:
         """A motion-graphics helper call: a helper `name` plus its input.
 
         Args:
@@ -76,7 +76,7 @@ class Helpers:
         ...
 
     @overload
-    def commands(self, name: str, input: Optional[str]) -> Any:
+    def commands(self, name: str, input: Optional[Any]) -> Any:
         """A motion-graphics helper call: a helper `name` plus its input.
 
         Args:
@@ -122,7 +122,7 @@ class Helpers:
         ...
 
     @overload
-    def keyframes(self, name: str, input: Optional[str]) -> Any:
+    def keyframes(self, name: str, input: Optional[Any]) -> Any:
         """A motion-graphics helper call: a helper `name` plus its input.
 
         Args:

@@ -9,7 +9,7 @@ public final class HelperOptions {
     /**
      * The helper's input (a keyframe channel, a command list, or its parameters).
      */
-    public final String input;
+    public final Object input;
     /**
      * The helper name, e.g. `flatten`, `orbit`, `selectCommands`.
      */
@@ -25,10 +25,10 @@ public final class HelperOptions {
     }
 
     public static final class Builder {
-        private String input;
+        private Object input;
         private String name;
 
-        public Builder input(String value) {
+        public Builder input(Object value) {
             this.input = value;
             return this;
         }

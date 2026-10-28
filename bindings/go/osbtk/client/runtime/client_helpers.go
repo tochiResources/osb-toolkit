@@ -31,7 +31,7 @@ func IsHelpers(value any) bool {
 func (c *Helpers) Call(ctx context.Context, options clean.HelperOptions) (any, *http.Response, error) {
 	body := osbtk.NewHelperRequest(options.Name)
 	if options.Input != nil {
-		body.SetInput(*options.Input)
+		body.SetInput(options.Input)
 	}
 	value, resp, err := c.api.Call(ctx).HelperRequest(*body).Execute()
 	if err != nil {
@@ -49,7 +49,7 @@ func (c *Helpers) Call(ctx context.Context, options clean.HelperOptions) (any, *
 func (c *Helpers) Commands(ctx context.Context, options clean.HelperOptions) (any, *http.Response, error) {
 	body := osbtk.NewHelperRequest(options.Name)
 	if options.Input != nil {
-		body.SetInput(*options.Input)
+		body.SetInput(options.Input)
 	}
 	value, resp, err := c.api.Commands(ctx).HelperRequest(*body).Execute()
 	if err != nil {
@@ -67,7 +67,7 @@ func (c *Helpers) Commands(ctx context.Context, options clean.HelperOptions) (an
 func (c *Helpers) Keyframes(ctx context.Context, options clean.HelperOptions) (any, *http.Response, error) {
 	body := osbtk.NewHelperRequest(options.Name)
 	if options.Input != nil {
-		body.SetInput(*options.Input)
+		body.SetInput(options.Input)
 	}
 	value, resp, err := c.api.Keyframes(ctx).HelperRequest(*body).Execute()
 	if err != nil {

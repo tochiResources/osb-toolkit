@@ -113,6 +113,29 @@ class SdkTests(unittest.TestCase):
         with self.assertRaises(ApiException):
             osb.audio.fft("does-not-exist.wav")
 
+    def test_clean_helpers_accept_structured_input(self) -> None:
+        from osbtk.api.helpers_api import HelpersAPI
+        from osbtk.client import Helpers
+        from osbtk.client.options import HelperOptions
+        from osbtk.libraries._client import STATELESS
+
+        scaled = Helpers(HelpersAPI(STATELESS)).call(
+            HelperOptions(
+                name="keyframe.scaleKeyframes",
+                input={
+                    "channel": {
+                        "keys": [
+                            {"time": 0.0, "value": [1.0, 2.0]},
+                            {"time": 100.0, "value": [3.0, 4.0]},
+                        ]
+                    },
+                    "factor": 2.0,
+                },
+            )
+        )
+        self.assertAlmostEqual(scaled["keys"][1]["value"][0], 6.0, 6)
+        self.assertAlmostEqual(scaled["keys"][1]["value"][1], 8.0, 6)
+
     def test_drives_the_curve_library(self) -> None:
         curve = CurveSpec(
             kind=CurveKind("Linear"),

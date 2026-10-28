@@ -238,7 +238,7 @@ type HandleOptions struct {
 // A motion-graphics helper call: a helper `name` plus its input.
 type HelperOptions struct {
 	// The helper's input (a keyframe channel, a command list, or its parameters).
-	Input *string
+	Input interface{}
 	// The helper name, e.g. `flatten`, `orbit`, `selectCommands`.
 	Name string
 }
