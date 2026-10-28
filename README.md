@@ -22,8 +22,7 @@ See the full docs at [osb-toolkit.tochi.moe/docs](https://osb-toolkit.tochi.moe/
 | Rust                  | `osb-sdk` (`crates/osb-sdk`)          |
 
 The SDKs are generated from one OpenAPI 3.1 contract
-(`bindings/openapi/osbtk.openapi.json`) emitted by `crates/osb-api`. The
-generated clients are clean, `<X>Options`-based surfaces over a small
+([bindings/openapi/osbtk.openapi.json](/bindings/openapi/osbtk.openapi.json)) emitted by [crates/osb-api](/crates/osb-api). The generated clients are clean, `<X>Options`-based surfaces over a small
 per-language interceptor that routes them to the native JSON bridge
 (`osbtk_exec` / `osbtk_runtime_exec`). Every options-based method also accepts
 positional values, with overloads ordered by ascending parameter count; the
@@ -34,8 +33,8 @@ Go has no overloading, so its clean clients stay options-only. The composed Go
 surface is `osbtk/clientkit`: `clientkit.New()` returns the stateless clean
 clients and `clientkit.NewRuntime` resolves handle-bound `Layer`/`Sprite`
 values. The root `osbtk` facades keep the effect-runtime conveniences; its
-bridge constructor is `NewClient` (the generated transport type stays
-`APIClient`, which does not collide with any convenience name).
+bridge constructor is `Client` (the generated transport type is `ClientAPI`, so
+the plain `Client` name stays free).
 
 ## Development
 

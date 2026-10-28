@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 import { runGenerator, targets } from '../shared';
-import { cleanGoNames, emitGoClient } from './post-process';
+import { cleanGoNames, emitGoClient, renameGoTransport } from './post-process';
 
 /** Generates the Go SDK (models + one service per tag + the client). */
 export function generateGo(): void {
@@ -40,6 +40,7 @@ export function generateGo(): void {
                 cpSync(join(out, file), join(targets.go, file), { force: true });
             }
         }
+        renameGoTransport(targets.go);
         cleanGoNames(targets.go);
         emitGoClient();
         execSync('gofmt -w .', {

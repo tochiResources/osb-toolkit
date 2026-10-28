@@ -13,22 +13,22 @@ import (
 	"runtime"
 )
 
-// NewClient builds the generated bridge client, wired to the native bridge.
-func NewClient() (*APIClient, error) {
+// Client builds the generated bridge client, wired to the native bridge.
+func Client() (*ClientAPI, error) {
 	library, err := loadNative()
 	if err != nil {
 		return nil, err
 	}
 	configuration := NewConfiguration()
 	configuration.HTTPClient = &http.Client{Transport: bridgeTransport{exec: library.callExec}}
-	return NewAPIClient(configuration), nil
+	return NewClientAPI(configuration), nil
 }
 
 // Runtime is a live storyboard runtime bound to a native handle.
 type Runtime struct {
 	library *nativeLibrary
 	handle  uintptr
-	client  *APIClient
+	client  *ClientAPI
 }
 
 // NewRuntime creates a runtime of the given storyboard resolution.
@@ -40,7 +40,7 @@ func NewRuntime(width, height float64) (*Runtime, error) {
 	instance := &Runtime{library: library, handle: library.runtimeNew(width, height)}
 	configuration := NewConfiguration()
 	configuration.HTTPClient = &http.Client{Transport: bridgeTransport{exec: instance.callExec}}
-	instance.client = NewAPIClient(configuration)
+	instance.client = NewClientAPI(configuration)
 	runtime.SetFinalizer(instance, func(r *Runtime) { r.Close() })
 	return instance, nil
 }

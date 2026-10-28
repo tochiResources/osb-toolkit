@@ -21,7 +21,7 @@ import (
 
 // Client is the stateless SDK surface: the core and library clean clients.
 type Client struct {
-	API *osbtk.APIClient
+	API *osbtk.ClientAPI
 
 	Common     *core.Common
 	Curve      *core.Curve
@@ -42,7 +42,7 @@ type Client struct {
 
 // New builds the stateless client over the native bridge.
 func New() (*Client, error) {
-	api, err := osbtk.NewClient()
+	api, err := osbtk.Client()
 	if err != nil {
 		return nil, err
 	}

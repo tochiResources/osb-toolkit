@@ -1,2 +1,2 @@
 export { emitGoClient } from '../../clean';
-export { cleanGoNames } from './naming';
+export { cleanGoNames, renameGoTransport } from './naming';

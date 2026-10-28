@@ -2,6 +2,24 @@ import { readdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 /**
+ * Renames the generated transport `APIClient` to `ClientAPI`, keeping the
+ * plain `Client` name free for the hand-written bridge constructor.
+ */
+export function renameGoTransport(dir: string): void {
+    for (const file of readdirSync(dir)) {
+        if (!file.endsWith('.go') || file.endsWith('_test.go')) continue;
+        const path = join(dir, file);
+        const text = readFileSync(path, 'utf8');
+        if (!text.includes('APIClient')) continue;
+        writeFileSync(
+            path,
+            text.replace(/\bNewAPIClient\b/g, 'NewClientAPI').replace(/\bAPIClient\b/g, 'ClientAPI'),
+            'utf8'
+        );
+    }
+}
+
+/**
  * Removes the generated `Api` prefix from the Go request wrappers and `api_`
  * filename prefix, and unexports the raw `<op>Execute` service helpers.
  */

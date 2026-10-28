@@ -41,9 +41,9 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the osbTK Native Bridge API v0.1.0
-// In most cases there should be only one, shared, APIClient.
-type APIClient struct {
+// ClientAPI manages communication with the osbTK Native Bridge API v0.1.0
+// In most cases there should be only one, shared, ClientAPI.
+type ClientAPI struct {
 	cfg    *Configuration
 	common service // Reuse a single struct instead of allocating one for each service on the heap.
 
@@ -83,17 +83,17 @@ type APIClient struct {
 }
 
 type service struct {
-	client *APIClient
+	client *ClientAPI
 }
 
-// NewAPIClient creates a new API client. Requires a userAgent string describing your application.
+// NewClientAPI creates a new API client. Requires a userAgent string describing your application.
 // optionally a custom http.Client to allow for advanced features such as caching.
-func NewAPIClient(cfg *Configuration) *APIClient {
+func NewClientAPI(cfg *Configuration) *ClientAPI {
 	if cfg.HTTPClient == nil {
 		cfg.HTTPClient = http.DefaultClient
 	}
 
-	c := &APIClient{}
+	c := &ClientAPI{}
 	c.cfg = cfg
 	c.common.client = c
 
@@ -329,7 +329,7 @@ func parameterToJson(obj interface{}) (string, error) {
 }
 
 // callAPI do the request.
-func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
+func (c *ClientAPI) callAPI(request *http.Request) (*http.Response, error) {
 	if c.cfg.Debug {
 		dump, err := httputil.DumpRequestOut(request, true)
 		if err != nil {
@@ -355,7 +355,7 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 
 // Allow modification of underlying config for alternate implementations and testing
 // Caution: modifying the configuration while live can cause data races and potentially unwanted behavior
-func (c *APIClient) GetConfig() *Configuration {
+func (c *ClientAPI) GetConfig() *Configuration {
 	return c.cfg
 }
 
@@ -366,7 +366,7 @@ type formFile struct {
 }
 
 // prepareRequest build the request
-func (c *APIClient) prepareRequest(
+func (c *ClientAPI) prepareRequest(
 	ctx context.Context,
 	path string, method string,
 	postBody interface{},
@@ -510,7 +510,7 @@ func (c *APIClient) prepareRequest(
 	return localVarRequest, nil
 }
 
-func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err error) {
+func (c *ClientAPI) decode(v interface{}, b []byte, contentType string) (err error) {
 	if len(b) == 0 {
 		return nil
 	}
