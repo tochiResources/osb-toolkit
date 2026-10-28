@@ -1,3 +1,4 @@
+import { generateCpp } from './cpp';
 import { generateCSharp } from './csharp';
 import { generateDocs } from './docs';
 import { generateGo } from './go';
@@ -16,5 +17,6 @@ export function generate(): void {
     generateGo();
     generateJava();
     generateRust();
+    generateCpp();
     generateDocs();
 }

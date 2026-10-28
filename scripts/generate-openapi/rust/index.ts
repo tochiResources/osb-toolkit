@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 import { root, runGenerator, targets } from '../shared';
+import { emitRustClean } from '../clean';
 
 /** Generates the Rust SDK models (the client/runtime are hand-written). */
 export function generateRust(): void {
@@ -21,6 +22,7 @@ export function generateRust(): void {
         // are hand-written and live beside them.
         rmSync(targets.rust, { recursive: true, force: true });
         cpSync(join(out, 'src', 'models'), targets.rust, { recursive: true });
+        emitRustClean();
         execSync('cargo fmt -p osb-sdk', { cwd: root, stdio: 'inherit', shell: true });
         console.log(`openapi: generated Rust SDK models into ${targets.rust}`);
     } finally {
