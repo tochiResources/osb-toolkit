@@ -8,6 +8,9 @@ import moe.tochi.osbtk.model.OptimizeResult;
 import moe.tochi.osbtk.client.OptimizeOptions;
 import java.util.List;
 
+/**
+ * The clean `Optimize` client.
+ */
 public final class Optimize {
     private final OptimizeAPI api;
 

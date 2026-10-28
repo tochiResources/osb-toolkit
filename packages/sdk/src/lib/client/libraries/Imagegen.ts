@@ -5,6 +5,9 @@ import type { Shape } from '../../models/Shape';
 import type { RenderShapesOptions } from '../options';
 import { isRenderShapesOptions } from '../options';
 
+/**
+ * The clean `Imagegen` client.
+ */
 export class Imagegen {
     constructor(private readonly api: ImagegenAPI) {}
 

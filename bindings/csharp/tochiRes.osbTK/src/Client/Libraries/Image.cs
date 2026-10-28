@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Libraries;
 
+/// <summary>
+/// The clean `Image` client.
+/// </summary>
 public sealed class Image
 {
     private readonly ImageAPI api;

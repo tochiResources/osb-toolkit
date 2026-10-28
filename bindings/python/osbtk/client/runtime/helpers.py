@@ -8,6 +8,8 @@ from typing import overload
 
 
 class Helpers:
+    """The clean `Helpers` client."""
+
     def __init__(self, api: HelpersAPI) -> None:
         self._api = api
 

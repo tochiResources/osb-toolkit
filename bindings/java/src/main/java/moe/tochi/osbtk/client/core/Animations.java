@@ -9,6 +9,9 @@ import moe.tochi.osbtk.client.ApplyEasingOptions;
 import moe.tochi.osbtk.client.EasingValueOptions;
 import java.util.List;
 
+/**
+ * The clean `Animations` client.
+ */
 public final class Animations {
     private final AnimationsAPI api;
 

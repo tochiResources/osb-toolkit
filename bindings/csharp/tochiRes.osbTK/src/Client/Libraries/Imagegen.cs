@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Libraries;
 
+/// <summary>
+/// The clean `Imagegen` client.
+/// </summary>
 public sealed class Imagegen
 {
     private readonly ImagegenAPI api;

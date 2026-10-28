@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Core;
 
+/// <summary>
+/// The clean `Parsing` client.
+/// </summary>
 public sealed class Parsing
 {
     private readonly ParsingAPI api;

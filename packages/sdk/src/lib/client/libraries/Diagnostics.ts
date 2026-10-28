@@ -3,6 +3,9 @@ import type { DiagnosticReport } from '../../models/DiagnosticReport';
 import type { TextOptions } from '../options';
 import { isTextOptions } from '../options';
 
+/**
+ * The clean `Diagnostics` client.
+ */
 export class Diagnostics {
     constructor(private readonly api: DiagnosticsAPI) {}
 

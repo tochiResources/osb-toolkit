@@ -9,6 +9,8 @@ from typing import overload
 
 
 class Diagnostics:
+    """The clean `Diagnostics` client."""
+
     def __init__(self, api: DiagnosticsAPI) -> None:
         self._api = api
 

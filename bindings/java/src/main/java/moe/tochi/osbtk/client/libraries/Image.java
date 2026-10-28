@@ -10,6 +10,9 @@ import moe.tochi.osbtk.client.ImageProcessOptions;
 import moe.tochi.osbtk.client.PathOptions;
 import java.util.List;
 
+/**
+ * The clean `Image` client.
+ */
 public final class Image {
     private final ImageAPI api;
 

@@ -8,6 +8,9 @@ import moe.tochi.osbtk.model.TextRequest;
 import moe.tochi.osbtk.client.TextOptions;
 import java.util.List;
 
+/**
+ * The clean `Parsing` client.
+ */
 public final class Parsing {
     private final ParsingAPI api;
 

@@ -2,6 +2,9 @@ import { HelpersAPI } from '../../api/HelpersAPI';
 import type { HelperOptions } from '../options';
 import { isHelperOptions } from '../options';
 
+/**
+ * The clean `Helpers` client.
+ */
 export class Helpers {
     constructor(private readonly api: HelpersAPI) {}
 

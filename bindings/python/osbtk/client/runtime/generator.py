@@ -15,6 +15,8 @@ from typing import overload
 
 
 class Generator:
+    """The clean `Generator` client."""
+
     def __init__(self, api: GeneratorAPI) -> None:
         self._api = api
 

@@ -16,6 +16,9 @@ import moe.tochi.osbtk.client.TextOptions;
 import moe.tochi.osbtk.client.TimeOptions;
 import java.util.List;
 
+/**
+ * The clean `Generator` client.
+ */
 public final class Generator {
     private final GeneratorAPI api;
 

@@ -4,6 +4,9 @@ import moe.tochi.osbtk.ApiException;
 import moe.tochi.osbtk.api.CommonAPI;
 import java.util.List;
 
+/**
+ * The clean `Common` client.
+ */
 public final class Common {
     private final CommonAPI api;
 

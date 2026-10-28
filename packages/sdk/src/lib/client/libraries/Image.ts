@@ -4,6 +4,9 @@ import type { ImageOptions } from '../../models/ImageOptions';
 import type { ImageProcessOptions, PathOptions } from '../options';
 import { isImageProcessOptions, isPathOptions } from '../options';
 
+/**
+ * The clean `Image` client.
+ */
 export class Image {
     constructor(private readonly api: ImageAPI) {}
 

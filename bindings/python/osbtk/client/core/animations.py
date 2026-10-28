@@ -10,6 +10,8 @@ from typing import overload
 
 
 class Animations:
+    """The clean `Animations` client."""
+
     def __init__(self, api: AnimationsAPI) -> None:
         self._api = api
 

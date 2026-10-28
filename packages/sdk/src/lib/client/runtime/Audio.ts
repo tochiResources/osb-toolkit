@@ -4,6 +4,9 @@ import type { FftResult } from '../../models/FftResult';
 import type { FftOptions, GetFftOptions } from '../options';
 import { isFftOptions, isGetFftOptions } from '../options';
 
+/**
+ * The clean `Audio` client.
+ */
 export class Audio {
     constructor(private readonly api: AudioAPI) {}
 

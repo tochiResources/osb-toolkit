@@ -26,6 +26,9 @@ import moe.tochi.osbtk.client.SegmentReverseDepthOptions;
 import moe.tochi.osbtk.api.SpriteAPI;
 import java.util.List;
 
+/**
+ * The clean `Layer` client.
+ */
 public final class Layer {
     private final LayerAPI api;
     private final SpriteAPI sprites;

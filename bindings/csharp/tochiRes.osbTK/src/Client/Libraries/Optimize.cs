@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Libraries;
 
+/// <summary>
+/// The clean `Optimize` client.
+/// </summary>
 public sealed class Optimize
 {
     private readonly OptimizeAPI api;

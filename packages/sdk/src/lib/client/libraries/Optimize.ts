@@ -4,6 +4,9 @@ import type { OptimizeResult } from '../../models/OptimizeResult';
 import type { OptimizeOptions } from '../options';
 import { isOptimizeOptions } from '../options';
 
+/**
+ * The clean `Optimize` client.
+ */
 export class Optimize {
     constructor(private readonly api: OptimizeAPI) {}
 

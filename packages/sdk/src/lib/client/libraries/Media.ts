@@ -4,6 +4,9 @@ import type { MediaInfo } from '../../models/MediaInfo';
 import type { EncodeVideoOptions, ExtractAudioOptions, ExtractFramesOptions, PathOptions } from '../options';
 import { isEncodeVideoOptions, isExtractAudioOptions, isExtractFramesOptions, isPathOptions } from '../options';
 
+/**
+ * The clean `Media` client.
+ */
 export class Media {
     constructor(private readonly api: MediaAPI) {}
 

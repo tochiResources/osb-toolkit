@@ -11,6 +11,8 @@ from typing import overload
 
 
 class Audio:
+    """The clean `Audio` client."""
+
     def __init__(self, api: AudioAPI) -> None:
         self._api = api
 

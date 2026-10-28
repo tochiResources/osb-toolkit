@@ -20,6 +20,8 @@ from typing import overload
 
 
 class Curve:
+    """The clean `Curve` client."""
+
     def __init__(self, api: CurveAPI) -> None:
         self._api = api
 

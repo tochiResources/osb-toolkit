@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Runtime;
 
+/// <summary>
+/// The clean `Layer` client.
+/// </summary>
 public sealed class Layer
 {
     private readonly LayerAPI api;

@@ -6,6 +6,9 @@ import type { Vector2 } from '../../models/Vector2';
 import type { ArcOptions, CurveDistanceOptions, CurveOffsetOptions, CurveOptions, CurvePointOptions, CurveSampleOptions, EllipseOptions, LineIntersectOptions, SimplifyOptions } from '../options';
 import { isArcOptions, isCurveDistanceOptions, isCurveOffsetOptions, isCurveOptions, isCurvePointOptions, isCurveSampleOptions, isEllipseOptions, isLineIntersectOptions, isSimplifyOptions } from '../options';
 
+/**
+ * The clean `Curve` client.
+ */
 export class Curve {
     constructor(private readonly api: CurveAPI) {}
 

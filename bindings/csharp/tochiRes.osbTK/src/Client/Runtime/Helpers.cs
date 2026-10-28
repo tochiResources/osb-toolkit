@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Runtime;
 
+/// <summary>
+/// The clean `Helpers` client.
+/// </summary>
 public sealed class Helpers
 {
     private readonly HelpersAPI api;

@@ -4,6 +4,9 @@ import type { ParseOsbResult } from '../../models/ParseOsbResult';
 import type { TextOptions } from '../options';
 import { isTextOptions } from '../options';
 
+/**
+ * The clean `Parsing` client.
+ */
 export class Parsing {
     constructor(private readonly api: ParsingAPI) {}
 

@@ -14,6 +14,9 @@ import moe.tochi.osbtk.client.ExtractFramesOptions;
 import moe.tochi.osbtk.client.PathOptions;
 import java.util.List;
 
+/**
+ * The clean `Media` client.
+ */
 public final class Media {
     private final MediaAPI api;
 

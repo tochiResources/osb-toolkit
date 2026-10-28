@@ -8,6 +8,9 @@ import moe.tochi.osbtk.model.Scene3dInput;
 import moe.tochi.osbtk.client.Bake3dOptions;
 import java.util.List;
 
+/**
+ * The clean `Storyboarding3d` client.
+ */
 public final class Storyboarding3d {
     private final Storyboarding3dAPI api;
 

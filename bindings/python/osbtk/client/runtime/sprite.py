@@ -16,6 +16,8 @@ from typing import overload
 
 
 class Sprite:
+    """The clean `Sprite` client."""
+
     def __init__(self, api: SpriteAPI, layer: int, sprite: int) -> None:
         self._api = api
         self._layer = layer

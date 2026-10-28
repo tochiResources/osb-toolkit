@@ -11,6 +11,8 @@ from typing import overload
 
 
 class Image:
+    """The clean `Image` client."""
+
     def __init__(self, api: ImageAPI) -> None:
         self._api = api
 

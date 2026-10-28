@@ -7,6 +7,9 @@ import moe.tochi.osbtk.model.TextRequest;
 import moe.tochi.osbtk.client.TextOptions;
 import java.util.List;
 
+/**
+ * The clean `Diagnostics` client.
+ */
 public final class Diagnostics {
     private final DiagnosticsAPI api;
 

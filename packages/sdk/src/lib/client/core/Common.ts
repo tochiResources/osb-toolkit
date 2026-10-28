@@ -1,5 +1,8 @@
 import { CommonAPI } from '../../api/CommonAPI';
 
+/**
+ * The clean `Common` client.
+ */
 export class Common {
     constructor(private readonly api: CommonAPI) {}
 

@@ -22,6 +22,8 @@ from typing import overload
 
 
 class Layer:
+    """The clean `Layer` client."""
+
     def __init__(self, api: LayerAPI, sprites: SpriteAPI, handle: int) -> None:
         self._api = api
         self._sprites = sprites

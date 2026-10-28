@@ -17,6 +17,9 @@ import moe.tochi.osbtk.client.StartLoopGroupOptions;
 import moe.tochi.osbtk.client.StartTriggerGroupOptions;
 import java.util.List;
 
+/**
+ * The clean `Sprite` client.
+ */
 public final class Sprite {
     private final SpriteAPI api;
     private final int layer;

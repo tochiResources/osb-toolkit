@@ -3,6 +3,9 @@ import type { Easing } from '../../models/Easing';
 import type { ApplyEasingOptions, EasingValueOptions } from '../options';
 import { isApplyEasingOptions, isEasingValueOptions } from '../options';
 
+/**
+ * The clean `Animations` client.
+ */
 export class Animations {
     constructor(private readonly api: AnimationsAPI) {}
 

@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Core;
 
+/// <summary>
+/// The clean `Animations` client.
+/// </summary>
 public sealed class Animations
 {
     private readonly AnimationsAPI api;

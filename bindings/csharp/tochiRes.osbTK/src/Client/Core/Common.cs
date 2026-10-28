@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Core;
 
+/// <summary>
+/// The clean `Common` client.
+/// </summary>
 public sealed class Common
 {
     private readonly CommonAPI api;

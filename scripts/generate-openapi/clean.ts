@@ -559,7 +559,7 @@ function emitTypeScript(contract: Contract): void {
             : bound
               ? `    constructor(\n        private readonly api: ${tag}API,\n        private readonly layer: number,\n        private readonly sprite: number\n    ) {}`
               : `    constructor(private readonly api: ${tag}API) {}`;
-        const text = `${imports.join('\n')}\n\nexport class ${tag} {\n${constructor}\n\n    static instanceOf(value: unknown): value is ${tag} {\n        return value instanceof ${tag};\n    }\n\n${methods}\n}\n`;
+        const text = `${imports.join('\n')}\n\n${jsdoc(`The clean \`${tag}\` client.`)}export class ${tag} {\n${constructor}\n\n    static instanceOf(value: unknown): value is ${tag} {\n        return value instanceof ${tag};\n    }\n\n${methods}\n}\n`;
         writeFileSync(join(outDir, `${tag}.ts`), text, 'utf8');
         sections[section].push(tag);
     }
@@ -850,7 +850,7 @@ function emitPython(contract: Contract): void {
             : bound
               ? `    def __init__(self, api: ${tag}API, layer: int, sprite: int) -> None:\n        self._api = api\n        self._layer = layer\n        self._sprite = sprite`
               : `    def __init__(self, api: ${tag}API) -> None:\n        self._api = api`;
-        const text = `${imports.join('\n')}\n\n\nclass ${tag}:\n${constructor}\n\n    @staticmethod\n    def instance_of(value: object) -> bool:\n        return isinstance(value, ${tag})\n\n${methods}\n`;
+        const text = `${imports.join('\n')}\n\n\nclass ${tag}:\n    """The clean \`${tag}\` client."""\n\n${constructor}\n\n    @staticmethod\n    def instance_of(value: object) -> bool:\n        return isinstance(value, ${tag})\n\n${methods}\n`;
         writeFileSync(join(outDir, `${snake(tag)}.py`), text, 'utf8');
         sections[section].push(tag);
     }
@@ -1394,7 +1394,7 @@ function emitJava(contract: Contract): void {
             : bound
               ? `    private final SpriteAPI api;\n    private final int layer;\n    private final int sprite;\n\n    public Sprite(SpriteAPI api, int layer, int sprite) {\n        this.api = api;\n        this.layer = layer;\n        this.sprite = sprite;\n    }`
               : `    private final ${tag}API api;\n\n    public ${tag}(${tag}API api) {\n        this.api = api;\n    }`;
-        const text = `package moe.tochi.osbtk.client.${section};\n\n${imports.join('\n')}\nimport java.util.List;\n\npublic final class ${tag} {\n${member}\n\n    public static boolean instanceOf(Object value) {\n        return value instanceof ${tag};\n    }\n\n${methods}\n}\n`;
+        const text = `package moe.tochi.osbtk.client.${section};\n\n${imports.join('\n')}\nimport java.util.List;\n\n${javaDoc(`The clean \`${tag}\` client.`)}public final class ${tag} {\n${member}\n\n    public static boolean instanceOf(Object value) {\n        return value instanceof ${tag};\n    }\n\n${methods}\n}\n`;
         writeFileSync(join(outDir, `${tag}.java`), text, 'utf8');
     }
 }
@@ -1612,7 +1612,7 @@ function emitCSharp(contract: Contract): void {
             : bound
               ? `    private readonly ${tag}API api;\n    private readonly int layer;\n    private readonly int sprite;\n\n    public Sprite(SpriteAPI api, int layer, int sprite)\n    {\n        this.api = api;\n        this.layer = layer;\n        this.sprite = sprite;\n    }`
               : `    private readonly ${tag}API api;\n\n    public ${tag}(${tag}API api)\n    {\n        this.api = api;\n    }`;
-        const text = `#nullable disable\nusing tochiRes.osbTK.Api;\nusing tochiRes.osbTK.Client;\nusing tochiRes.osbTK.Model;\n\nnamespace tochiRes.osbTK.Client.${pascal(section)};\n\npublic sealed class ${tag}\n{\n${member}\n\n    public static bool InstanceOf(object value) => value is ${tag};\n\n${methods}\n}\n`;
+        const text = `#nullable disable\nusing tochiRes.osbTK.Api;\nusing tochiRes.osbTK.Client;\nusing tochiRes.osbTK.Model;\n\nnamespace tochiRes.osbTK.Client.${pascal(section)};\n\n${xml(`The clean \`${tag}\` client.`, '')}public sealed class ${tag}\n{\n${member}\n\n    public static bool InstanceOf(object value) => value is ${tag};\n\n${methods}\n}\n`;
         writeFileSync(join(outDir, `${tag}.cs`), text, 'utf8');
     }
 }

@@ -13,6 +13,8 @@ from typing import overload
 
 
 class Media:
+    """The clean `Media` client."""
+
     def __init__(self, api: MediaAPI) -> None:
         self._api = api
 

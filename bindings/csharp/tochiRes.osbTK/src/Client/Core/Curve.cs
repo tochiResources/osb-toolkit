@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Core;
 
+/// <summary>
+/// The clean `Curve` client.
+/// </summary>
 public sealed class Curve
 {
     private readonly CurveAPI api;

@@ -5,6 +5,8 @@ from typing import Any, Dict, List, Optional
 
 
 class Common:
+    """The clean `Common` client."""
+
     def __init__(self, api: CommonAPI) -> None:
         self._api = api
 

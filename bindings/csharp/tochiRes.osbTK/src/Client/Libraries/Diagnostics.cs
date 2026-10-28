@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Libraries;
 
+/// <summary>
+/// The clean `Diagnostics` client.
+/// </summary>
 public sealed class Diagnostics
 {
     private readonly DiagnosticsAPI api;

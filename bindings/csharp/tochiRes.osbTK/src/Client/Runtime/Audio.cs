@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Runtime;
 
+/// <summary>
+/// The clean `Audio` client.
+/// </summary>
 public sealed class Audio
 {
     private readonly AudioAPI api;

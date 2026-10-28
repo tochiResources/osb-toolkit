@@ -6,6 +6,9 @@ import moe.tochi.osbtk.model.HelperRequest;
 import moe.tochi.osbtk.client.HelperOptions;
 import java.util.List;
 
+/**
+ * The clean `Helpers` client.
+ */
 public final class Helpers {
     private final HelpersAPI api;
 

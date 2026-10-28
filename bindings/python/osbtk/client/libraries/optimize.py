@@ -10,6 +10,8 @@ from typing import overload
 
 
 class Optimize:
+    """The clean `Optimize` client."""
+
     def __init__(self, api: OptimizeAPI) -> None:
         self._api = api
 

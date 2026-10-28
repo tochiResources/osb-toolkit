@@ -11,6 +11,8 @@ from typing import overload
 
 
 class Origin:
+    """The clean `Origin` client."""
+
     def __init__(self, api: OriginAPI) -> None:
         self._api = api
 

@@ -9,6 +9,9 @@ import { Sprite } from './Sprite';
 import type { CreateAnimationOptions, CreateSampleOptions, CreateSpriteOptions, SegmentAddIndexOptions, SegmentChangePositionOptions, SegmentReverseDepthOptions } from '../options';
 import { isCreateAnimationOptions, isCreateSampleOptions, isCreateSpriteOptions, isSegmentAddIndexOptions, isSegmentChangePositionOptions, isSegmentReverseDepthOptions } from '../options';
 
+/**
+ * The clean `Layer` client.
+ */
 export class Layer {
     constructor(
         private readonly api: LayerAPI,

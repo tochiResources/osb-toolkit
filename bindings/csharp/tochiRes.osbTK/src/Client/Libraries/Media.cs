@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Libraries;
 
+/// <summary>
+/// The clean `Media` client.
+/// </summary>
 public sealed class Media
 {
     private readonly MediaAPI api;

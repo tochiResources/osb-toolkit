@@ -4,6 +4,9 @@ import type { Scene3dInput } from '../../models/Scene3dInput';
 import type { Bake3dOptions } from '../options';
 import { isBake3dOptions } from '../options';
 
+/**
+ * The clean `Storyboarding3d` client.
+ */
 export class Storyboarding3d {
     constructor(private readonly api: Storyboarding3dAPI) {}
 

@@ -10,6 +10,9 @@ import moe.tochi.osbtk.client.GetOriginVectorOptions;
 import moe.tochi.osbtk.client.InScreenBoundsOptions;
 import java.util.List;
 
+/**
+ * The clean `Origin` client.
+ */
 public final class Origin {
     private final OriginAPI api;
 

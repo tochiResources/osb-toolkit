@@ -6,6 +6,9 @@ import type { SpriteState } from '../../models/SpriteState';
 import type { CommandOptions, SpriteTimeOptions, StartLoopGroupOptions, StartTriggerGroupOptions } from '../options';
 import { isCommandOptions, isSpriteTimeOptions, isStartLoopGroupOptions, isStartTriggerGroupOptions } from '../options';
 
+/**
+ * The clean `Sprite` client.
+ */
 export class Sprite {
     constructor(
         private readonly api: SpriteAPI,

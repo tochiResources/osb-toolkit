@@ -26,6 +26,9 @@ import moe.tochi.osbtk.client.LineIntersectOptions;
 import moe.tochi.osbtk.client.SimplifyOptions;
 import java.util.List;
 
+/**
+ * The clean `Curve` client.
+ */
 public final class Curve {
     private final CurveAPI api;
 

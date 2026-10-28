@@ -10,6 +10,8 @@ from typing import overload
 
 
 class Storyboarding3d:
+    """The clean `Storyboarding3d` client."""
+
     def __init__(self, api: Storyboarding3dAPI) -> None:
         self._api = api
 

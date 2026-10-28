@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Runtime;
 
+/// <summary>
+/// The clean `Storyboarding3d` client.
+/// </summary>
 public sealed class Storyboarding3d
 {
     private readonly Storyboarding3dAPI api;

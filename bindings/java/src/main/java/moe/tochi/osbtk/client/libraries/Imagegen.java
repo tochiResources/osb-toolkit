@@ -9,6 +9,9 @@ import moe.tochi.osbtk.model.Shape;
 import moe.tochi.osbtk.client.RenderShapesOptions;
 import java.util.List;
 
+/**
+ * The clean `Imagegen` client.
+ */
 public final class Imagegen {
     private final ImagegenAPI api;
 

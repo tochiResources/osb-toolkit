@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Core;
 
+/// <summary>
+/// The clean `Origin` client.
+/// </summary>
 public sealed class Origin
 {
     private readonly OriginAPI api;

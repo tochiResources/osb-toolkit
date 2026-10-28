@@ -10,6 +10,8 @@ from typing import overload
 
 
 class Parsing:
+    """The clean `Parsing` client."""
+
     def __init__(self, api: ParsingAPI) -> None:
         self._api = api
 

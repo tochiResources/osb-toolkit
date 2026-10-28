@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Runtime;
 
+/// <summary>
+/// The clean `Generator` client.
+/// </summary>
 public sealed class Generator
 {
     private readonly GeneratorAPI api;

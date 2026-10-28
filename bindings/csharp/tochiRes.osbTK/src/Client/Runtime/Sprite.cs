@@ -5,6 +5,9 @@ using tochiRes.osbTK.Model;
 
 namespace tochiRes.osbTK.Client.Runtime;
 
+/// <summary>
+/// The clean `Sprite` client.
+/// </summary>
 public sealed class Sprite
 {
     private readonly SpriteAPI api;

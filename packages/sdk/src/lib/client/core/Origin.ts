@@ -4,6 +4,9 @@ import type { Vector2 } from '../../models/Vector2';
 import type { GetOriginVectorOptions, InScreenBoundsOptions } from '../options';
 import { isGetOriginVectorOptions, isInScreenBoundsOptions } from '../options';
 
+/**
+ * The clean `Origin` client.
+ */
 export class Origin {
     constructor(private readonly api: OriginAPI) {}
 

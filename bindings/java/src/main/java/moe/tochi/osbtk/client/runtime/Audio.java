@@ -10,6 +10,9 @@ import moe.tochi.osbtk.client.FftOptions;
 import moe.tochi.osbtk.client.GetFftOptions;
 import java.util.List;
 
+/**
+ * The clean `Audio` client.
+ */
 public final class Audio {
     private final AudioAPI api;
 

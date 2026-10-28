@@ -6,6 +6,9 @@ import type { Storyboard } from '../../models/Storyboard';
 import type { LayerHandleOptions, RandomOptions, TextOptions, TimeOptions } from '../options';
 import { isLayerHandleOptions, isRandomOptions, isTextOptions, isTimeOptions } from '../options';
 
+/**
+ * The clean `Generator` client.
+ */
 export class Generator {
     constructor(private readonly api: GeneratorAPI) {}
 
