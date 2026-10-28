@@ -19,6 +19,8 @@ pub mod helpers;
 mod libraries;
 mod runtime;
 
+pub mod clean;
+
 pub use client::Client;
 pub use error::Error;
 pub use generator::{run, Generate, Generator};

@@ -46,6 +46,22 @@ impl Client {
         .value)
     }
 
+    /// Evaluates a named or CSS-style cubic-bezier easing at a normalized time.
+    pub fn easing_value(
+        t: f64,
+        easing: Option<Easing>,
+        cubic_bezier: Option<Vec<f64>>,
+    ) -> Result<f64, Error> {
+        let mut request = json!({ "op": "Animations.easingValue", "t": t });
+        if let Some(easing) = easing {
+            request["easing"] = json!(easing);
+        }
+        if let Some(points) = cubic_bezier {
+            request["cubicBezier"] = json!(points);
+        }
+        Ok(call::<EasingResult>(request)?.value)
+    }
+
     /// Reads FFT magnitudes from a `.wav` file.
     pub fn fft(path: &str, time: f64, magnitudes: usize) -> Result<FftResult, Error> {
         call(json!({ "op": "Audio.fft", "path": path, "time": time, "magnitudes": magnitudes }))

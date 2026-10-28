@@ -20,7 +20,7 @@ if ($isWindows) {
     $devcmd = Join-Path $vs "Common7\Tools\VsDevCmd.bat"
 }
 
-foreach ($name in @("main", "sdk")) {
+foreach ($name in @("main", "sdk", "clean")) {
     $source = Join-Path $PSScriptRoot "test\$name.cpp"
     $exe = Join-Path $out "osbtk_cpp_$name.exe"
     if ($isWindows) {
