@@ -1,8 +1,13 @@
 ﻿# osu! Storyboarding Toolkit
 
-SDKs that provides useful tools for osu! storyboarding development in C#, Java, JavaScript/TypeScript, Go, Rust, Python, and C++.
+> Still in early development phase.
+> - All crates in [crates/](./crates) except for `osb-cli`, `osb-parser-ae`, `osb-sdk`, `osb-server` are well tested and mostly ready.
+> - The architecture can be seen in the mermaid files at [docs/architecture/](./docs/architecture).
+
+SDKs that provides useful tools for osu! storyboarding development in `C#`, `Java`, `JavaScript`/`TypeScript`, `Go`, `Rust`, `Python`, and `C++`.
 
 See the full docs at [osb-toolkit.tochi.moe/docs](https://osb-toolkit.tochi.moe/docs).
+> Docs not live yet.
 
 ## Projects using osbTK
 
@@ -48,3 +53,4 @@ yarn w:docs dev        # run the documentation site
 ## License
 
 BSD-3-Clause. See [LICENSE](/LICENSE).
+> Subject to change due to this project no longer using vendor libs from After Effects & OpenFX.
