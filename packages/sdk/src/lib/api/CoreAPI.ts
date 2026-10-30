@@ -14,10 +14,25 @@
 
 import * as runtime from '../runtime';
 import {
+    type ApplyEasingRequest,
+    ApplyEasingRequestFromJSON,
+    ApplyEasingRequestToJSON,
+} from '../models/ApplyEasingRequest';
+import {
     type ArcRequest,
     ArcRequestFromJSON,
     ArcRequestToJSON,
 } from '../models/ArcRequest';
+import {
+    type Beatmap,
+    BeatmapFromJSON,
+    BeatmapToJSON,
+} from '../models/Beatmap';
+import {
+    type BoolResult,
+    BoolResultFromJSON,
+    BoolResultToJSON,
+} from '../models/BoolResult';
 import {
     type Box2,
     Box2FromJSON,
@@ -49,10 +64,30 @@ import {
     CurveSampleRequestToJSON,
 } from '../models/CurveSampleRequest';
 import {
+    type EasingResult,
+    EasingResultFromJSON,
+    EasingResultToJSON,
+} from '../models/EasingResult';
+import {
+    type EasingValueRequest,
+    EasingValueRequestFromJSON,
+    EasingValueRequestToJSON,
+} from '../models/EasingValueRequest';
+import {
     type EllipseRequest,
     EllipseRequestFromJSON,
     EllipseRequestToJSON,
 } from '../models/EllipseRequest';
+import {
+    type GetOriginVectorRequest,
+    GetOriginVectorRequestFromJSON,
+    GetOriginVectorRequestToJSON,
+} from '../models/GetOriginVectorRequest';
+import {
+    type InScreenBoundsRequest,
+    InScreenBoundsRequestFromJSON,
+    InScreenBoundsRequestToJSON,
+} from '../models/InScreenBoundsRequest';
 import {
     type LineIntersectRequest,
     LineIntersectRequestFromJSON,
@@ -63,6 +98,11 @@ import {
     OptionalPointResultFromJSON,
     OptionalPointResultToJSON,
 } from '../models/OptionalPointResult';
+import {
+    type ParseOsbResult,
+    ParseOsbResultFromJSON,
+    ParseOsbResultToJSON,
+} from '../models/ParseOsbResult';
 import {
     type PointListResult,
     PointListResultFromJSON,
@@ -79,96 +119,148 @@ import {
     SimplifyRequestToJSON,
 } from '../models/SimplifyRequest';
 import {
+    type TextRequest,
+    TextRequestFromJSON,
+    TextRequestToJSON,
+} from '../models/TextRequest';
+import {
     type Vector2,
     Vector2FromJSON,
     Vector2ToJSON,
 } from '../models/Vector2';
+import {
+    type VersionResult,
+    VersionResultFromJSON,
+    VersionResultToJSON,
+} from '../models/VersionResult';
 
-export interface ApiCurveAPIArcOperationRequest {
+export interface ApiCoreAPIApplyEasingOperationRequest {
+    /**
+     * 
+     */
+    applyEasingRequest: ApplyEasingRequest;
+}
+
+export interface ApiCoreAPIArcOperationRequest {
     /**
      * 
      */
     arcRequest: ArcRequest;
 }
 
-export interface ApiCurveAPIBoundingBoxRequest {
+export interface ApiCoreAPIBoundingBoxRequest {
     /**
      * 
      */
     curveRequest: CurveRequest;
 }
 
-export interface ApiCurveAPICurvatureRequest {
+export interface ApiCoreAPICurvatureRequest {
     /**
      * 
      */
     curvePointRequest: CurvePointRequest;
 }
 
-export interface ApiCurveAPIDistanceToRequest {
+export interface ApiCoreAPIDistanceToRequest {
     /**
      * 
      */
     curveDistanceRequest: CurveDistanceRequest;
 }
 
-export interface ApiCurveAPIEllipseOperationRequest {
+export interface ApiCoreAPIEasingValueOperationRequest {
+    /**
+     * 
+     */
+    easingValueRequest: EasingValueRequest;
+}
+
+export interface ApiCoreAPIEllipseOperationRequest {
     /**
      * 
      */
     ellipseRequest: EllipseRequest;
 }
 
-export interface ApiCurveAPILengthRequest {
+export interface ApiCoreAPIGetOriginVectorOperationRequest {
+    /**
+     * 
+     */
+    getOriginVectorRequest: GetOriginVectorRequest;
+}
+
+export interface ApiCoreAPIInScreenBoundsOperationRequest {
+    /**
+     * 
+     */
+    inScreenBoundsRequest: InScreenBoundsRequest;
+}
+
+export interface ApiCoreAPILengthRequest {
     /**
      * 
      */
     curveRequest: CurveRequest;
 }
 
-export interface ApiCurveAPILineIntersectOperationRequest {
+export interface ApiCoreAPILineIntersectOperationRequest {
     /**
      * 
      */
     lineIntersectRequest: LineIntersectRequest;
 }
 
-export interface ApiCurveAPINormalRequest {
+export interface ApiCoreAPINormalRequest {
     /**
      * 
      */
     curvePointRequest: CurvePointRequest;
 }
 
-export interface ApiCurveAPIOffsetRequest {
+export interface ApiCoreAPIOffsetRequest {
     /**
      * 
      */
     curveOffsetRequest: CurveOffsetRequest;
 }
 
-export interface ApiCurveAPIPointRequest {
+export interface ApiCoreAPIParseOsbRequest {
+    /**
+     * 
+     */
+    textRequest: TextRequest;
+}
+
+export interface ApiCoreAPIParseOsuRequest {
+    /**
+     * 
+     */
+    textRequest: TextRequest;
+}
+
+export interface ApiCoreAPIPointRequest {
     /**
      * 
      */
     curvePointRequest: CurvePointRequest;
 }
 
-export interface ApiCurveAPISampleRequest {
+export interface ApiCoreAPISampleRequest {
     /**
      * 
      */
     curveSampleRequest: CurveSampleRequest;
 }
 
-export interface ApiCurveAPISimplifyOperationRequest {
+export interface ApiCoreAPISimplifyOperationRequest {
     /**
      * 
      */
     simplifyRequest: SimplifyRequest;
 }
 
-export interface ApiCurveAPITangentRequest {
+export interface ApiCoreAPITangentRequest {
     /**
      * 
      */
@@ -178,12 +270,57 @@ export interface ApiCurveAPITangentRequest {
 /**
  * 
  */
-export class CurveAPI extends runtime.BaseAPI {
+export class CoreAPI extends runtime.BaseAPI {
+
+    /**
+     * Creates request options for applyEasing without sending the request
+     */
+    protected async _applyEasingRequestOpts(requestParameters: ApiCoreAPIApplyEasingOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['applyEasingRequest'] == null) {
+            throw new runtime.RequiredError(
+                'applyEasingRequest',
+                'Required parameter "applyEasingRequest" was null or undefined when calling applyEasing().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/bridge/Animations.applyEasing`;
+
+        return {
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ApplyEasingRequestToJSON(requestParameters['applyEasingRequest']),
+        };
+    }
+
+    /**
+     */
+    protected async _applyEasingRaw(requestParameters: ApiCoreAPIApplyEasingOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EasingResult>> {
+        const requestOptions = await this._applyEasingRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EasingResultFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async applyEasing(applyEasingRequest: ApplyEasingRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EasingResult> {
+        const response = await this._applyEasingRaw({ applyEasingRequest: applyEasingRequest }, initOverrides);
+        return await response.value();
+    }
 
     /**
      * Creates request options for arc without sending the request
      */
-    protected async _arcRequestOpts(requestParameters: ApiCurveAPIArcOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _arcRequestOpts(requestParameters: ApiCoreAPIArcOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['arcRequest'] == null) {
             throw new runtime.RequiredError(
                 'arcRequest',
@@ -211,7 +348,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _arcRaw(requestParameters: ApiCurveAPIArcOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PointListResult>> {
+    protected async _arcRaw(requestParameters: ApiCoreAPIArcOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PointListResult>> {
         const requestOptions = await this._arcRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -228,7 +365,7 @@ export class CurveAPI extends runtime.BaseAPI {
     /**
      * Creates request options for boundingBox without sending the request
      */
-    protected async _boundingBoxRequestOpts(requestParameters: ApiCurveAPIBoundingBoxRequest): Promise<runtime.RequestOpts> {
+    protected async _boundingBoxRequestOpts(requestParameters: ApiCoreAPIBoundingBoxRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['curveRequest'] == null) {
             throw new runtime.RequiredError(
                 'curveRequest',
@@ -256,7 +393,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _boundingBoxRaw(requestParameters: ApiCurveAPIBoundingBoxRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Box2>> {
+    protected async _boundingBoxRaw(requestParameters: ApiCoreAPIBoundingBoxRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Box2>> {
         const requestOptions = await this._boundingBoxRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -273,7 +410,7 @@ export class CurveAPI extends runtime.BaseAPI {
     /**
      * Creates request options for curvature without sending the request
      */
-    protected async _curvatureRequestOpts(requestParameters: ApiCurveAPICurvatureRequest): Promise<runtime.RequestOpts> {
+    protected async _curvatureRequestOpts(requestParameters: ApiCoreAPICurvatureRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['curvePointRequest'] == null) {
             throw new runtime.RequiredError(
                 'curvePointRequest',
@@ -301,7 +438,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _curvatureRaw(requestParameters: ApiCurveAPICurvatureRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ScalarResult>> {
+    protected async _curvatureRaw(requestParameters: ApiCoreAPICurvatureRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ScalarResult>> {
         const requestOptions = await this._curvatureRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -318,7 +455,7 @@ export class CurveAPI extends runtime.BaseAPI {
     /**
      * Creates request options for distanceTo without sending the request
      */
-    protected async _distanceToRequestOpts(requestParameters: ApiCurveAPIDistanceToRequest): Promise<runtime.RequestOpts> {
+    protected async _distanceToRequestOpts(requestParameters: ApiCoreAPIDistanceToRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['curveDistanceRequest'] == null) {
             throw new runtime.RequiredError(
                 'curveDistanceRequest',
@@ -346,7 +483,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _distanceToRaw(requestParameters: ApiCurveAPIDistanceToRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ScalarResult>> {
+    protected async _distanceToRaw(requestParameters: ApiCoreAPIDistanceToRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ScalarResult>> {
         const requestOptions = await this._distanceToRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -361,9 +498,54 @@ export class CurveAPI extends runtime.BaseAPI {
     }
 
     /**
+     * Creates request options for easingValue without sending the request
+     */
+    protected async _easingValueRequestOpts(requestParameters: ApiCoreAPIEasingValueOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['easingValueRequest'] == null) {
+            throw new runtime.RequiredError(
+                'easingValueRequest',
+                'Required parameter "easingValueRequest" was null or undefined when calling easingValue().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/bridge/Animations.easingValue`;
+
+        return {
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EasingValueRequestToJSON(requestParameters['easingValueRequest']),
+        };
+    }
+
+    /**
+     */
+    protected async _easingValueRaw(requestParameters: ApiCoreAPIEasingValueOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EasingResult>> {
+        const requestOptions = await this._easingValueRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EasingResultFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async easingValue(easingValueRequest: EasingValueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EasingResult> {
+        const response = await this._easingValueRaw({ easingValueRequest: easingValueRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Creates request options for ellipse without sending the request
      */
-    protected async _ellipseRequestOpts(requestParameters: ApiCurveAPIEllipseOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _ellipseRequestOpts(requestParameters: ApiCoreAPIEllipseOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['ellipseRequest'] == null) {
             throw new runtime.RequiredError(
                 'ellipseRequest',
@@ -391,7 +573,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _ellipseRaw(requestParameters: ApiCurveAPIEllipseOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PointListResult>> {
+    protected async _ellipseRaw(requestParameters: ApiCoreAPIEllipseOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PointListResult>> {
         const requestOptions = await this._ellipseRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -406,9 +588,99 @@ export class CurveAPI extends runtime.BaseAPI {
     }
 
     /**
+     * Creates request options for getOriginVector without sending the request
+     */
+    protected async _getOriginVectorRequestOpts(requestParameters: ApiCoreAPIGetOriginVectorOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['getOriginVectorRequest'] == null) {
+            throw new runtime.RequiredError(
+                'getOriginVectorRequest',
+                'Required parameter "getOriginVectorRequest" was null or undefined when calling getOriginVector().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/bridge/Origin.getOriginVector`;
+
+        return {
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: GetOriginVectorRequestToJSON(requestParameters['getOriginVectorRequest']),
+        };
+    }
+
+    /**
+     */
+    protected async _getOriginVectorRaw(requestParameters: ApiCoreAPIGetOriginVectorOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Vector2>> {
+        const requestOptions = await this._getOriginVectorRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => Vector2FromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async getOriginVector(getOriginVectorRequest: GetOriginVectorRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Vector2> {
+        const response = await this._getOriginVectorRaw({ getOriginVectorRequest: getOriginVectorRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for inScreenBounds without sending the request
+     */
+    protected async _inScreenBoundsRequestOpts(requestParameters: ApiCoreAPIInScreenBoundsOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['inScreenBoundsRequest'] == null) {
+            throw new runtime.RequiredError(
+                'inScreenBoundsRequest',
+                'Required parameter "inScreenBoundsRequest" was null or undefined when calling inScreenBounds().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/bridge/Origin.inScreenBounds`;
+
+        return {
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: InScreenBoundsRequestToJSON(requestParameters['inScreenBoundsRequest']),
+        };
+    }
+
+    /**
+     */
+    protected async _inScreenBoundsRaw(requestParameters: ApiCoreAPIInScreenBoundsOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BoolResult>> {
+        const requestOptions = await this._inScreenBoundsRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => BoolResultFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async inScreenBounds(inScreenBoundsRequest: InScreenBoundsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BoolResult> {
+        const response = await this._inScreenBoundsRaw({ inScreenBoundsRequest: inScreenBoundsRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Creates request options for length without sending the request
      */
-    protected async _lengthRequestOpts(requestParameters: ApiCurveAPILengthRequest): Promise<runtime.RequestOpts> {
+    protected async _lengthRequestOpts(requestParameters: ApiCoreAPILengthRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['curveRequest'] == null) {
             throw new runtime.RequiredError(
                 'curveRequest',
@@ -436,7 +708,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _lengthRaw(requestParameters: ApiCurveAPILengthRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ScalarResult>> {
+    protected async _lengthRaw(requestParameters: ApiCoreAPILengthRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ScalarResult>> {
         const requestOptions = await this._lengthRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -453,7 +725,7 @@ export class CurveAPI extends runtime.BaseAPI {
     /**
      * Creates request options for lineIntersect without sending the request
      */
-    protected async _lineIntersectRequestOpts(requestParameters: ApiCurveAPILineIntersectOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _lineIntersectRequestOpts(requestParameters: ApiCoreAPILineIntersectOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['lineIntersectRequest'] == null) {
             throw new runtime.RequiredError(
                 'lineIntersectRequest',
@@ -481,7 +753,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _lineIntersectRaw(requestParameters: ApiCurveAPILineIntersectOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OptionalPointResult>> {
+    protected async _lineIntersectRaw(requestParameters: ApiCoreAPILineIntersectOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<OptionalPointResult>> {
         const requestOptions = await this._lineIntersectRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -498,7 +770,7 @@ export class CurveAPI extends runtime.BaseAPI {
     /**
      * Creates request options for normal without sending the request
      */
-    protected async _normalRequestOpts(requestParameters: ApiCurveAPINormalRequest): Promise<runtime.RequestOpts> {
+    protected async _normalRequestOpts(requestParameters: ApiCoreAPINormalRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['curvePointRequest'] == null) {
             throw new runtime.RequiredError(
                 'curvePointRequest',
@@ -526,7 +798,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _normalRaw(requestParameters: ApiCurveAPINormalRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Vector2>> {
+    protected async _normalRaw(requestParameters: ApiCoreAPINormalRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Vector2>> {
         const requestOptions = await this._normalRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -543,7 +815,7 @@ export class CurveAPI extends runtime.BaseAPI {
     /**
      * Creates request options for offset without sending the request
      */
-    protected async _offsetRequestOpts(requestParameters: ApiCurveAPIOffsetRequest): Promise<runtime.RequestOpts> {
+    protected async _offsetRequestOpts(requestParameters: ApiCoreAPIOffsetRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['curveOffsetRequest'] == null) {
             throw new runtime.RequiredError(
                 'curveOffsetRequest',
@@ -571,7 +843,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _offsetRaw(requestParameters: ApiCurveAPIOffsetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PointListResult>> {
+    protected async _offsetRaw(requestParameters: ApiCoreAPIOffsetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PointListResult>> {
         const requestOptions = await this._offsetRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -586,9 +858,99 @@ export class CurveAPI extends runtime.BaseAPI {
     }
 
     /**
+     * Creates request options for parseOsb without sending the request
+     */
+    protected async _parseOsbRequestOpts(requestParameters: ApiCoreAPIParseOsbRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['textRequest'] == null) {
+            throw new runtime.RequiredError(
+                'textRequest',
+                'Required parameter "textRequest" was null or undefined when calling parseOsb().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/bridge/Parsing.parseOsb`;
+
+        return {
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: TextRequestToJSON(requestParameters['textRequest']),
+        };
+    }
+
+    /**
+     */
+    protected async _parseOsbRaw(requestParameters: ApiCoreAPIParseOsbRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ParseOsbResult>> {
+        const requestOptions = await this._parseOsbRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ParseOsbResultFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async parseOsb(textRequest: TextRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ParseOsbResult> {
+        const response = await this._parseOsbRaw({ textRequest: textRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for parseOsu without sending the request
+     */
+    protected async _parseOsuRequestOpts(requestParameters: ApiCoreAPIParseOsuRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['textRequest'] == null) {
+            throw new runtime.RequiredError(
+                'textRequest',
+                'Required parameter "textRequest" was null or undefined when calling parseOsu().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/bridge/Parsing.parseOsu`;
+
+        return {
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: TextRequestToJSON(requestParameters['textRequest']),
+        };
+    }
+
+    /**
+     */
+    protected async _parseOsuRaw(requestParameters: ApiCoreAPIParseOsuRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Beatmap>> {
+        const requestOptions = await this._parseOsuRequestOpts(requestParameters);
+        const response = await this._request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => BeatmapFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async parseOsu(textRequest: TextRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Beatmap> {
+        const response = await this._parseOsuRaw({ textRequest: textRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Creates request options for point without sending the request
      */
-    protected async _pointRequestOpts(requestParameters: ApiCurveAPIPointRequest): Promise<runtime.RequestOpts> {
+    protected async _pointRequestOpts(requestParameters: ApiCoreAPIPointRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['curvePointRequest'] == null) {
             throw new runtime.RequiredError(
                 'curvePointRequest',
@@ -616,7 +978,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _pointRaw(requestParameters: ApiCurveAPIPointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Vector2>> {
+    protected async _pointRaw(requestParameters: ApiCoreAPIPointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Vector2>> {
         const requestOptions = await this._pointRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -633,7 +995,7 @@ export class CurveAPI extends runtime.BaseAPI {
     /**
      * Creates request options for sample without sending the request
      */
-    protected async _sampleRequestOpts(requestParameters: ApiCurveAPISampleRequest): Promise<runtime.RequestOpts> {
+    protected async _sampleRequestOpts(requestParameters: ApiCoreAPISampleRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['curveSampleRequest'] == null) {
             throw new runtime.RequiredError(
                 'curveSampleRequest',
@@ -661,7 +1023,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _sampleRaw(requestParameters: ApiCurveAPISampleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PointListResult>> {
+    protected async _sampleRaw(requestParameters: ApiCoreAPISampleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PointListResult>> {
         const requestOptions = await this._sampleRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -678,7 +1040,7 @@ export class CurveAPI extends runtime.BaseAPI {
     /**
      * Creates request options for simplify without sending the request
      */
-    protected async _simplifyRequestOpts(requestParameters: ApiCurveAPISimplifyOperationRequest): Promise<runtime.RequestOpts> {
+    protected async _simplifyRequestOpts(requestParameters: ApiCoreAPISimplifyOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['simplifyRequest'] == null) {
             throw new runtime.RequiredError(
                 'simplifyRequest',
@@ -706,7 +1068,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _simplifyRaw(requestParameters: ApiCurveAPISimplifyOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PointListResult>> {
+    protected async _simplifyRaw(requestParameters: ApiCoreAPISimplifyOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PointListResult>> {
         const requestOptions = await this._simplifyRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -723,7 +1085,7 @@ export class CurveAPI extends runtime.BaseAPI {
     /**
      * Creates request options for tangent without sending the request
      */
-    protected async _tangentRequestOpts(requestParameters: ApiCurveAPITangentRequest): Promise<runtime.RequestOpts> {
+    protected async _tangentRequestOpts(requestParameters: ApiCoreAPITangentRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['curvePointRequest'] == null) {
             throw new runtime.RequiredError(
                 'curvePointRequest',
@@ -751,7 +1113,7 @@ export class CurveAPI extends runtime.BaseAPI {
 
     /**
      */
-    protected async _tangentRaw(requestParameters: ApiCurveAPITangentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Vector2>> {
+    protected async _tangentRaw(requestParameters: ApiCoreAPITangentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Vector2>> {
         const requestOptions = await this._tangentRequestOpts(requestParameters);
         const response = await this._request(requestOptions, initOverrides);
 
@@ -762,6 +1124,41 @@ export class CurveAPI extends runtime.BaseAPI {
      */
     async tangent(curvePointRequest: CurvePointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Vector2> {
         const response = await this._tangentRaw({ curvePointRequest: curvePointRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for version without sending the request
+     */
+    protected async _versionRequestOpts(): Promise<runtime.RequestOpts> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/bridge/Common.version`;
+
+        return {
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     */
+    protected async _versionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<VersionResult>> {
+        const requestOptions = await this._versionRequestOpts();
+        const response = await this._request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => VersionResultFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async version(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<VersionResult> {
+        const response = await this._versionRaw(initOverrides);
         return await response.value();
     }
 

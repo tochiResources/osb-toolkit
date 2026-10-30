@@ -49,13 +49,9 @@ type ClientAPI struct {
 
 	// API Services
 
-	AnimationsAPI *AnimationsAPIService
-
 	AudioAPI *AudioAPIService
 
-	CommonAPI *CommonAPIService
-
-	CurveAPI *CurveAPIService
+	CoreAPI *CoreAPIService
 
 	DiagnosticsAPI *DiagnosticsAPIService
 
@@ -72,10 +68,6 @@ type ClientAPI struct {
 	MediaAPI *MediaAPIService
 
 	OptimizeAPI *OptimizeAPIService
-
-	OriginAPI *OriginAPIService
-
-	ParsingAPI *ParsingAPIService
 
 	SpriteAPI *SpriteAPIService
 
@@ -98,10 +90,8 @@ func NewClientAPI(cfg *Configuration) *ClientAPI {
 	c.common.client = c
 
 	// API Services
-	c.AnimationsAPI = (*AnimationsAPIService)(&c.common)
 	c.AudioAPI = (*AudioAPIService)(&c.common)
-	c.CommonAPI = (*CommonAPIService)(&c.common)
-	c.CurveAPI = (*CurveAPIService)(&c.common)
+	c.CoreAPI = (*CoreAPIService)(&c.common)
 	c.DiagnosticsAPI = (*DiagnosticsAPIService)(&c.common)
 	c.GeneratorAPI = (*GeneratorAPIService)(&c.common)
 	c.HelpersAPI = (*HelpersAPIService)(&c.common)
@@ -110,8 +100,6 @@ func NewClientAPI(cfg *Configuration) *ClientAPI {
 	c.LayerAPI = (*LayerAPIService)(&c.common)
 	c.MediaAPI = (*MediaAPIService)(&c.common)
 	c.OptimizeAPI = (*OptimizeAPIService)(&c.common)
-	c.OriginAPI = (*OriginAPIService)(&c.common)
-	c.ParsingAPI = (*ParsingAPIService)(&c.common)
 	c.SpriteAPI = (*SpriteAPIService)(&c.common)
 	c.Storyboarding3dAPI = (*Storyboarding3dAPIService)(&c.common)
 

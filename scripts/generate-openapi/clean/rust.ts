@@ -14,18 +14,14 @@ import type { Operation, OptionModel, OptionProperty } from './shared';
 
 /** The stateless tags that get a clean Rust client. */
 const rustCleanTags = [
-    'Animations',
     'Audio',
-    'Common',
-    'Curve',
+    'Core',
     'Diagnostics',
     'Helpers',
     'Image',
     'Imagegen',
     'Media',
     'Optimize',
-    'Origin',
-    'Parsing',
     'Storyboarding3d',
 ] as const;
 
@@ -100,45 +96,45 @@ function rustResultType(tag: string, op: Operation): string {
 function rustBody(tag: string, op: Operation): string {
     const key = `${tag}.${op.name}`;
     switch (key) {
-        case 'Common.version':
+        case 'Core.version':
             return 'crate::Client::version()';
-        case 'Curve.length':
+        case 'Core.length':
             return 'crate::Client::curve_length(options.curve)';
-        case 'Curve.boundingBox':
+        case 'Core.boundingBox':
             return 'crate::Client::curve_bounding_box(options.curve)';
-        case 'Curve.point':
+        case 'Core.point':
             return 'crate::Client::curve_point(\n            options.curve,\n            options.t,\n            options.by_arc_length.unwrap_or(false),\n        )';
-        case 'Curve.tangent':
+        case 'Core.tangent':
             return 'crate::Client::curve_tangent(options.curve, options.t)';
-        case 'Curve.sample':
+        case 'Core.sample':
             return 'crate::Client::curve_sample(\n            options.curve,\n            options.count as usize,\n            options.by_arc_length.unwrap_or(false),\n        )';
-        case 'Curve.simplify':
+        case 'Core.simplify':
             return 'crate::Client::simplify(options.points, options.tolerance)';
-        case 'Curve.normal':
+        case 'Core.normal':
             return 'crate::Client::curve_normal(options.curve, options.t)';
-        case 'Curve.curvature':
+        case 'Core.curvature':
             return 'crate::Client::curve_curvature(options.curve, options.t)';
-        case 'Curve.distanceTo':
+        case 'Core.distanceTo':
             return 'crate::Client::curve_distance_to(options.curve, options.point)';
-        case 'Curve.offset':
+        case 'Core.offset':
             return 'crate::Client::curve_offset(options.curve, options.distance)';
-        case 'Curve.arc':
+        case 'Core.arc':
             return 'crate::Client::curve_arc(\n            options.center,\n            options.radius,\n            options.start_angle,\n            options.sweep_angle,\n            options.count.unwrap_or(64).max(0) as usize,\n        )';
-        case 'Curve.ellipse':
+        case 'Core.ellipse':
             return 'crate::Client::curve_ellipse(\n            options.center,\n            options.radius_x,\n            options.radius_y,\n            options.count.unwrap_or(64).max(0) as usize,\n        )';
-        case 'Curve.lineIntersect':
+        case 'Core.lineIntersect':
             return 'crate::Client::line_intersect(options.a1, options.a2, options.b1, options.b2)';
-        case 'Animations.applyEasing':
+        case 'Core.applyEasing':
             return 'crate::Client::apply_easing(options.easing, options.t)';
-        case 'Animations.easingValue':
+        case 'Core.easingValue':
             return 'crate::Client::easing_value(options.t, options.easing, options.cubic_bezier)';
-        case 'Parsing.parseOsu':
+        case 'Core.parseOsu':
             return 'crate::Client::parse_beatmap(&options.text)';
-        case 'Parsing.parseOsb':
+        case 'Core.parseOsb':
             return 'crate::Client::parse_osb(&options.text)';
-        case 'Origin.getOriginVector':
+        case 'Core.getOriginVector':
             return 'crate::Client::get_origin_vector(options.origin, options.width, options.height)';
-        case 'Origin.inScreenBounds':
+        case 'Core.inScreenBounds':
             return 'crate::Client::in_screen_bounds(\n            options.position,\n            options.size,\n            options.rotation,\n            options.origin,\n        )';
         case 'Audio.fft':
             return 'crate::Client::fft(\n            &options.path,\n            options.time.unwrap_or(0.0),\n            options.magnitudes.unwrap_or(64).max(0) as usize,\n        )';

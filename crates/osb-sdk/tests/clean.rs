@@ -4,10 +4,10 @@ use osb_sdk::models;
 #[test]
 fn drives_the_clean_core_and_library_clients() {
     let client = Client::new();
-    assert!(!client.common.version().unwrap().is_empty());
+    assert!(!client.core.version().unwrap().is_empty());
     assert_eq!(
         client
-            .animations
+            .core
             .apply_easing(ApplyEasingOptions {
                 easing: models::Easing::InQuad,
                 t: 0.5,
@@ -25,7 +25,7 @@ fn drives_the_clean_core_and_library_clients() {
     };
     assert_eq!(
         client
-            .curve
+            .core
             .length(CurveOptions {
                 curve: curve.clone()
             })
@@ -34,7 +34,7 @@ fn drives_the_clean_core_and_library_clients() {
     );
     assert_eq!(
         client
-            .curve
+            .core
             .point(CurvePointOptions {
                 curve: curve.clone(),
                 t: 0.5,
@@ -46,7 +46,7 @@ fn drives_the_clean_core_and_library_clients() {
     );
     assert_eq!(
         client
-            .curve
+            .core
             .sample(CurveSampleOptions {
                 count: 3,
                 curve,

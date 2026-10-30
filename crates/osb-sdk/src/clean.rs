@@ -270,19 +270,6 @@ pub struct TextOptions {
     pub text: String,
 }
 
-/// The clean `Animations` client.
-pub struct Animations;
-
-impl Animations {
-    pub fn apply_easing(&self, options: ApplyEasingOptions) -> Result<f64, Error> {
-        crate::Client::apply_easing(options.easing, options.t)
-    }
-
-    pub fn easing_value(&self, options: EasingValueOptions) -> Result<f64, Error> {
-        crate::Client::easing_value(options.t, options.easing, options.cubic_bezier)
-    }
-}
-
 /// The clean `Audio` client.
 pub struct Audio;
 
@@ -296,19 +283,22 @@ impl Audio {
     }
 }
 
-/// The clean `Common` client.
-pub struct Common;
+/// The clean `Core` client.
+pub struct Core;
 
-impl Common {
+impl Core {
+    pub fn apply_easing(&self, options: ApplyEasingOptions) -> Result<f64, Error> {
+        crate::Client::apply_easing(options.easing, options.t)
+    }
+
+    pub fn easing_value(&self, options: EasingValueOptions) -> Result<f64, Error> {
+        crate::Client::easing_value(options.t, options.easing, options.cubic_bezier)
+    }
+
     pub fn version(&self) -> Result<String, Error> {
         crate::Client::version()
     }
-}
 
-/// The clean `Curve` client.
-pub struct Curve;
-
-impl Curve {
     pub fn arc(&self, options: ArcOptions) -> Result<models::PointListResult, Error> {
         crate::Client::curve_arc(
             options.center,
@@ -381,6 +371,30 @@ impl Curve {
 
     pub fn tangent(&self, options: CurvePointOptions) -> Result<models::Vector2, Error> {
         crate::Client::curve_tangent(options.curve, options.t)
+    }
+
+    pub fn get_origin_vector(
+        &self,
+        options: GetOriginVectorOptions,
+    ) -> Result<models::Vector2, Error> {
+        crate::Client::get_origin_vector(options.origin, options.width, options.height)
+    }
+
+    pub fn in_screen_bounds(&self, options: InScreenBoundsOptions) -> Result<bool, Error> {
+        crate::Client::in_screen_bounds(
+            options.position,
+            options.size,
+            options.rotation,
+            options.origin,
+        )
+    }
+
+    pub fn parse_osb(&self, options: TextOptions) -> Result<models::ParseOsbResult, Error> {
+        crate::Client::parse_osb(&options.text)
+    }
+
+    pub fn parse_osu(&self, options: TextOptions) -> Result<models::Beatmap, Error> {
+        crate::Client::parse_beatmap(&options.text)
     }
 }
 
@@ -489,40 +503,6 @@ impl Optimize {
     }
 }
 
-/// The clean `Origin` client.
-pub struct Origin;
-
-impl Origin {
-    pub fn get_origin_vector(
-        &self,
-        options: GetOriginVectorOptions,
-    ) -> Result<models::Vector2, Error> {
-        crate::Client::get_origin_vector(options.origin, options.width, options.height)
-    }
-
-    pub fn in_screen_bounds(&self, options: InScreenBoundsOptions) -> Result<bool, Error> {
-        crate::Client::in_screen_bounds(
-            options.position,
-            options.size,
-            options.rotation,
-            options.origin,
-        )
-    }
-}
-
-/// The clean `Parsing` client.
-pub struct Parsing;
-
-impl Parsing {
-    pub fn parse_osb(&self, options: TextOptions) -> Result<models::ParseOsbResult, Error> {
-        crate::Client::parse_osb(&options.text)
-    }
-
-    pub fn parse_osu(&self, options: TextOptions) -> Result<models::Beatmap, Error> {
-        crate::Client::parse_beatmap(&options.text)
-    }
-}
-
 /// The clean `Storyboarding3d` client.
 pub struct Storyboarding3d;
 
@@ -543,18 +523,14 @@ fn helper(op: &str, options: HelperOptions) -> Result<Value, Error> {
 
 /// The composed stateless clean client, mirroring the other SDKs' entry points.
 pub struct Client {
-    pub animations: Animations,
     pub audio: Audio,
-    pub common: Common,
-    pub curve: Curve,
+    pub core: Core,
     pub diagnostics: Diagnostics,
     pub helpers: Helpers,
     pub image: Image,
     pub image_gen: Imagegen,
     pub media: Media,
     pub optimize: Optimize,
-    pub origin: Origin,
-    pub parsing: Parsing,
     pub storyboarding3d: Storyboarding3d,
 }
 
@@ -567,18 +543,14 @@ impl Default for Client {
 impl Client {
     pub fn new() -> Self {
         Client {
-            animations: Animations,
             audio: Audio,
-            common: Common,
-            curve: Curve,
+            core: Core,
             diagnostics: Diagnostics,
             helpers: Helpers,
             image: Image,
             image_gen: Imagegen,
             media: Media,
             optimize: Optimize,
-            origin: Origin,
-            parsing: Parsing,
             storyboarding3d: Storyboarding3d,
         }
     }

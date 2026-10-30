@@ -77,54 +77,6 @@ struct SimplifyOptions {
     double tolerance = 0.0;
 };
 
-/// The clean curve client.
-class Curve {
-public:
-    explicit Curve(const Library& library) : impl_(library) {}
-
-    double length(const CurveOptions& options) const { return impl_.length(options.curve); }
-    sdk::Box2 bounding_box(const CurveOptions& options) const {
-        return impl_.bounding_box(options.curve);
-    }
-    sdk::Vector2 point(const CurvePointOptions& options) const {
-        return impl_.point(options.curve, options.t, options.by_arc_length);
-    }
-    sdk::Vector2 tangent(const CurvePointOptions& options) const {
-        return impl_.tangent(options.curve, options.t);
-    }
-    sdk::PointList sample(const CurveSampleOptions& options) const {
-        return impl_.sample(options.curve, options.count, options.by_arc_length);
-    }
-    sdk::PointList simplify(const SimplifyOptions& options) const {
-        return impl_.simplify(options.points, options.tolerance);
-    }
-    sdk::Vector2 normal(const CurvePointOptions& options) const {
-        return impl_.normal(options.curve, options.t);
-    }
-    double curvature(const CurvePointOptions& options) const {
-        return impl_.curvature(options.curve, options.t);
-    }
-    double distance_to(const CurveDistanceOptions& options) const {
-        return impl_.distance_to(options.curve, options.point);
-    }
-    sdk::PointList offset(const CurveOffsetOptions& options) const {
-        return impl_.offset(options.curve, options.distance);
-    }
-    sdk::PointList arc(const ArcOptions& options) const {
-        return impl_.arc(options.center, options.radius, options.start_angle, options.sweep_angle,
-                         options.count);
-    }
-    sdk::PointList ellipse(const EllipseOptions& options) const {
-        return impl_.ellipse(options.center, options.radius_x, options.radius_y, options.count);
-    }
-    Json line_intersect(const LineIntersectOptions& options) const {
-        return impl_.line_intersect(options.a1, options.a2, options.b1, options.b2);
-    }
-
-private:
-    sdk::Curve impl_;
-};
-
 /// A named easing evaluation request.
 struct ApplyEasingOptions {
     std::string easing = "None";
@@ -136,44 +88,6 @@ struct EasingValueOptions {
     double t = 0.0;
     std::string easing = "None";
     std::vector<double> cubic_bezier;
-};
-
-/// The clean animations client.
-class Animations {
-public:
-    explicit Animations(const Library& library) : library_(&library), impl_(library) {}
-
-    double apply_easing(const ApplyEasingOptions& options) const {
-        return impl_.apply_easing(options.easing, options.t);
-    }
-
-    double easing_value(const EasingValueOptions& options) const {
-        std::string body = "{\"t\":" + sdk::detail::number(options.t);
-        if (!options.cubic_bezier.empty()) {
-            body += ",\"cubicBezier\":[";
-            for (std::size_t index = 0; index < options.cubic_bezier.size(); ++index) {
-                if (index != 0) body += ",";
-                body += sdk::detail::number(options.cubic_bezier[index]);
-            }
-            body += "]";
-        } else {
-            body += ",\"easing\":" + sdk::detail::quote(options.easing);
-        }
-        body += "}";
-        return call("Animations.easingValue", body).at("value").number();
-    }
-
-private:
-    const Library* library_;
-    sdk::Client impl_;
-    Json call(const std::string& op, const std::string& body) const {
-        Json json = sdk::detail::parse_json(
-            library_->exec("{\"op\":" + sdk::detail::quote(op) + "," + body.substr(1)));
-        if (const Json* error = json.find("error"); error != nullptr) {
-            throw std::runtime_error("osbtk: " + error->string());
-        }
-        return json;
-    }
 };
 
 /// An FFT request.
@@ -208,20 +122,6 @@ struct TextOptions {
     std::string text;
 };
 
-/// The clean parsers.
-class Parsing {
-public:
-    explicit Parsing(const Library& library) : impl_(library) {}
-
-    sdk::Beatmap parse_osu(const TextOptions& options) const {
-        return impl_.parse_beatmap(options.text);
-    }
-    Json parse_osb(const TextOptions& options) const { return impl_.parse_osb(options.text); }
-
-private:
-    sdk::Storyboarding impl_;
-};
-
 /// A request to resolve an origin's anchor offset.
 struct GetOriginVectorOptions {
     sdk::OsbOrigin origin = sdk::OsbOrigin::Centre;
@@ -235,23 +135,6 @@ struct InScreenBoundsOptions {
     sdk::Vector2 size;
     double rotation = 0.0;
     sdk::Vector2 origin;
-};
-
-/// The clean origin client.
-class Origin {
-public:
-    explicit Origin(const Library& library) : impl_(library) {}
-
-    sdk::Vector2 get_origin_vector(const GetOriginVectorOptions& options) const {
-        return impl_.get_origin_vector(options.origin, options.width, options.height);
-    }
-    bool in_screen_bounds(const InScreenBoundsOptions& options) const {
-        return impl_.in_screen_bounds(options.position, options.size, options.rotation,
-                                      options.origin);
-    }
-
-private:
-    sdk::Storyboarding impl_;
 };
 
 /// The clean diagnostics client.
@@ -404,14 +287,98 @@ private:
     sdk::Storyboarding3d::Helpers impl_;
 };
 
-/// The clean common client.
-class Common {
+/// The clean non-runtime `Core` client: version, parsers, easing and math.
+class Core {
 public:
-    explicit Common(const Library& library) : library_(&library) {}
-    std::string version() const { return library_->version(); }
+    explicit Core(const Library& library)
+        : library_(&library), impl_(library), curve_(library) {}
+
+    std::string version() const { return impl_.version(); }
+
+    double apply_easing(const ApplyEasingOptions& options) const {
+        return impl_.apply_easing(options.easing, options.t);
+    }
+
+    double easing_value(const EasingValueOptions& options) const {
+        std::string body = "{\"t\":" + sdk::detail::number(options.t);
+        if (!options.cubic_bezier.empty()) {
+            body += ",\"cubicBezier\":[";
+            for (std::size_t index = 0; index < options.cubic_bezier.size(); ++index) {
+                if (index != 0) body += ",";
+                body += sdk::detail::number(options.cubic_bezier[index]);
+            }
+            body += "]";
+        } else {
+            body += ",\"easing\":" + sdk::detail::quote(options.easing);
+        }
+        body += "}";
+        return call("Animations.easingValue", body).at("value").number();
+    }
+
+    sdk::Beatmap parse_osu(const TextOptions& options) const {
+        return impl_.parse_beatmap(options.text);
+    }
+    Json parse_osb(const TextOptions& options) const { return impl_.parse_osb(options.text); }
+
+    sdk::Vector2 get_origin_vector(const GetOriginVectorOptions& options) const {
+        return impl_.get_origin_vector(options.origin, options.width, options.height);
+    }
+    bool in_screen_bounds(const InScreenBoundsOptions& options) const {
+        return impl_.in_screen_bounds(options.position, options.size, options.rotation,
+                                      options.origin);
+    }
+
+    double length(const CurveOptions& options) const { return curve_.length(options.curve); }
+    sdk::Box2 bounding_box(const CurveOptions& options) const {
+        return curve_.bounding_box(options.curve);
+    }
+    sdk::Vector2 point(const CurvePointOptions& options) const {
+        return curve_.point(options.curve, options.t, options.by_arc_length);
+    }
+    sdk::Vector2 tangent(const CurvePointOptions& options) const {
+        return curve_.tangent(options.curve, options.t);
+    }
+    sdk::PointList sample(const CurveSampleOptions& options) const {
+        return curve_.sample(options.curve, options.count, options.by_arc_length);
+    }
+    sdk::PointList simplify(const SimplifyOptions& options) const {
+        return curve_.simplify(options.points, options.tolerance);
+    }
+    sdk::Vector2 normal(const CurvePointOptions& options) const {
+        return curve_.normal(options.curve, options.t);
+    }
+    double curvature(const CurvePointOptions& options) const {
+        return curve_.curvature(options.curve, options.t);
+    }
+    double distance_to(const CurveDistanceOptions& options) const {
+        return curve_.distance_to(options.curve, options.point);
+    }
+    sdk::PointList offset(const CurveOffsetOptions& options) const {
+        return curve_.offset(options.curve, options.distance);
+    }
+    sdk::PointList arc(const ArcOptions& options) const {
+        return curve_.arc(options.center, options.radius, options.start_angle, options.sweep_angle,
+                          options.count);
+    }
+    sdk::PointList ellipse(const EllipseOptions& options) const {
+        return curve_.ellipse(options.center, options.radius_x, options.radius_y, options.count);
+    }
+    Json line_intersect(const LineIntersectOptions& options) const {
+        return curve_.line_intersect(options.a1, options.a2, options.b1, options.b2);
+    }
 
 private:
     const Library* library_;
+    sdk::Client impl_;
+    sdk::Curve curve_;
+    Json call(const std::string& op, const std::string& body) const {
+        Json json = sdk::detail::parse_json(
+            library_->exec("{\"op\":" + sdk::detail::quote(op) + "," + body.substr(1)));
+        if (const Json* error = json.find("error"); error != nullptr) {
+            throw std::runtime_error("osbtk: " + error->string());
+        }
+        return json;
+    }
 };
 
 /// The runtime classes are already high-level and handle-bound.
@@ -424,11 +391,7 @@ using Sprite = sdk::Sprite;
 class Client {
 public:
     explicit Client(const Library& library)
-        : common(library),
-          curve(library),
-          animations(library),
-          parsing(library),
-          origin(library),
+        : core(library),
           audio(library),
           diagnostics(library),
           optimize(library),
@@ -438,11 +401,7 @@ public:
           storyboarding3d(library),
           helpers(library) {}
 
-    Common common;
-    Curve curve;
-    Animations animations;
-    Parsing parsing;
-    Origin origin;
+    Core core;
     Audio audio;
     Diagnostics diagnostics;
     Optimize optimize;

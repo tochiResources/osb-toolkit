@@ -22,11 +22,7 @@ options form only. Single-field results are unwrapped: `OkResult` is
 
 ## Core
 
-- [Animations](./core/Animations.md)
-- [Common](./core/Common.md)
-- [Curve](./core/Curve.md)
-- [Origin](./core/Origin.md)
-- [Parsing](./core/Parsing.md)
+- [Core](./core/Core.md)
 
 ## Libraries
 

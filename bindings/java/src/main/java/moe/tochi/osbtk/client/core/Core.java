@@ -1,8 +1,10 @@
 package moe.tochi.osbtk.client.core;
 
 import moe.tochi.osbtk.ApiException;
-import moe.tochi.osbtk.api.CurveAPI;
+import moe.tochi.osbtk.api.CoreAPI;
+import moe.tochi.osbtk.model.ApplyEasingRequest;
 import moe.tochi.osbtk.model.ArcRequest;
+import moe.tochi.osbtk.model.Beatmap;
 import moe.tochi.osbtk.model.Box2;
 import moe.tochi.osbtk.model.CurveDistanceRequest;
 import moe.tochi.osbtk.model.CurveOffsetRequest;
@@ -10,34 +12,130 @@ import moe.tochi.osbtk.model.CurvePointRequest;
 import moe.tochi.osbtk.model.CurveRequest;
 import moe.tochi.osbtk.model.CurveSampleRequest;
 import moe.tochi.osbtk.model.CurveSpec;
+import moe.tochi.osbtk.model.Easing;
+import moe.tochi.osbtk.model.EasingValueRequest;
 import moe.tochi.osbtk.model.EllipseRequest;
+import moe.tochi.osbtk.model.GetOriginVectorRequest;
+import moe.tochi.osbtk.model.InScreenBoundsRequest;
 import moe.tochi.osbtk.model.LineIntersectRequest;
+import moe.tochi.osbtk.model.OsbOrigin;
+import moe.tochi.osbtk.model.ParseOsbResult;
 import moe.tochi.osbtk.model.PointListResult;
 import moe.tochi.osbtk.model.SimplifyRequest;
+import moe.tochi.osbtk.model.TextRequest;
 import moe.tochi.osbtk.model.Vector2;
+import moe.tochi.osbtk.client.ApplyEasingOptions;
 import moe.tochi.osbtk.client.ArcOptions;
 import moe.tochi.osbtk.client.CurveDistanceOptions;
 import moe.tochi.osbtk.client.CurveOffsetOptions;
 import moe.tochi.osbtk.client.CurveOptions;
 import moe.tochi.osbtk.client.CurvePointOptions;
 import moe.tochi.osbtk.client.CurveSampleOptions;
+import moe.tochi.osbtk.client.EasingValueOptions;
 import moe.tochi.osbtk.client.EllipseOptions;
+import moe.tochi.osbtk.client.GetOriginVectorOptions;
+import moe.tochi.osbtk.client.InScreenBoundsOptions;
 import moe.tochi.osbtk.client.LineIntersectOptions;
 import moe.tochi.osbtk.client.SimplifyOptions;
+import moe.tochi.osbtk.client.TextOptions;
 import java.util.List;
 
 /**
- * The clean `Curve` client.
+ * The clean `Core` client.
  */
-public final class Curve {
-    private final CurveAPI api;
+public final class Core {
+    private final CoreAPI api;
 
-    public Curve(CurveAPI api) {
+    public Core(CoreAPI api) {
         this.api = api;
     }
 
     public static boolean instanceOf(Object value) {
-        return value instanceof Curve;
+        return value instanceof Core;
+    }
+
+    /**
+     * An easing evaluation request.
+     *
+     * @param easing The easing function.
+     * @param t The normalized time in `0.0..=1.0`.
+     *
+     * @return The eased value
+     */
+    public double applyEasing(Easing easing, Double t) throws ApiException {
+        return applyEasing(ApplyEasingOptions.builder().easing(easing).t(t).build());
+    }
+
+    /**
+     * An easing evaluation request.
+     *
+     * @param options An easing evaluation request.
+     *
+     * @return The eased value
+     */
+    public double applyEasing(ApplyEasingOptions options) throws ApiException {
+        return api.applyEasing(new ApplyEasingRequest()
+            .easing(options.easing)
+            .t(options.t)).getValue();
+    }
+
+    /**
+     * A named-or-custom easing evaluation request.
+     *
+     * @param t The normalized time in `0.0..=1.0`.
+     *
+     * @return The eased value (named easing or cubic-bezier)
+     */
+    public double easingValue(Double t) throws ApiException {
+        return easingValue(EasingValueOptions.builder().t(t).build());
+    }
+
+    /**
+     * A named-or-custom easing evaluation request.
+     *
+     * @param t The normalized time in `0.0..=1.0`.
+     * @param easing A named easing (used when `cubicBezier` is absent).
+     *
+     * @return The eased value (named easing or cubic-bezier)
+     */
+    public double easingValue(Double t, Easing easing) throws ApiException {
+        return easingValue(EasingValueOptions.builder().t(t).easing(easing).build());
+    }
+
+    /**
+     * A named-or-custom easing evaluation request.
+     *
+     * @param t The normalized time in `0.0..=1.0`.
+     * @param easing A named easing (used when `cubicBezier` is absent).
+     * @param cubicBezier A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`.
+     *
+     * @return The eased value (named easing or cubic-bezier)
+     */
+    public double easingValue(Double t, Easing easing, List<Double> cubicBezier) throws ApiException {
+        return easingValue(EasingValueOptions.builder().t(t).easing(easing).cubicBezier(cubicBezier).build());
+    }
+
+    /**
+     * A named-or-custom easing evaluation request.
+     *
+     * @param options A named-or-custom easing evaluation request.
+     *
+     * @return The eased value (named easing or cubic-bezier)
+     */
+    public double easingValue(EasingValueOptions options) throws ApiException {
+        return api.easingValue(new EasingValueRequest()
+            .cubicBezier(options.cubicBezier)
+            .easing(options.easing)
+            .t(options.t)).getValue();
+    }
+
+    /**
+     * Calls the Core.version bridge operation.
+     *
+     * @return The runtime version
+     */
+    public String version() throws ApiException {
+        return api.version().getVersion();
     }
 
     /**
@@ -470,5 +568,107 @@ public final class Curve {
             .byArcLength(options.byArcLength)
             .curve(options.curve)
             .t(options.t));
+    }
+
+    /**
+     * The anchor offset for an origin.
+     *
+     * @param origin The sprite anchor origin.
+     * @param width The sprite width.
+     * @param height The sprite height.
+     *
+     * @return The anchor offset for the origin
+     */
+    public Vector2 getOriginVector(OsbOrigin origin, Double width, Double height) throws ApiException {
+        return getOriginVector(GetOriginVectorOptions.builder().origin(origin).width(width).height(height).build());
+    }
+
+    /**
+     * The anchor offset for an origin.
+     *
+     * @param options The anchor offset for an origin.
+     *
+     * @return The anchor offset for the origin
+     */
+    public Vector2 getOriginVector(GetOriginVectorOptions options) throws ApiException {
+        return api.getOriginVector(new GetOriginVectorRequest()
+            .height(options.height)
+            .origin(options.origin)
+            .width(options.width));
+    }
+
+    /**
+     * Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+     *
+     * @param position The sprite centre position.
+     * @param size The sprite size.
+     * @param rotation The rotation in radians.
+     * @param origin The anchor offset (from `GetOriginVector`).
+     *
+     * @return Whether the sprite's bounds intersect the screen
+     */
+    public boolean inScreenBounds(Vector2 position, Vector2 size, Double rotation, Vector2 origin) throws ApiException {
+        return inScreenBounds(InScreenBoundsOptions.builder().position(position).size(size).rotation(rotation).origin(origin).build());
+    }
+
+    /**
+     * Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+     *
+     * @param options Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+     *
+     * @return Whether the sprite's bounds intersect the screen
+     */
+    public boolean inScreenBounds(InScreenBoundsOptions options) throws ApiException {
+        return api.inScreenBounds(new InScreenBoundsRequest()
+            .origin(options.origin)
+            .position(options.position)
+            .rotation(options.rotation)
+            .size(options.size)).getValue();
+    }
+
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param text The text payload.
+     *
+     * @return The storyboard summary
+     */
+    public ParseOsbResult parseOsb(String text) throws ApiException {
+        return parseOsb(TextOptions.builder().text(text).build());
+    }
+
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @return The storyboard summary
+     */
+    public ParseOsbResult parseOsb(TextOptions options) throws ApiException {
+        return api.parseOsb(new TextRequest()
+            .text(options.text));
+    }
+
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param text The text payload.
+     *
+     * @return The parsed beatmap
+     */
+    public Beatmap parseOsu(String text) throws ApiException {
+        return parseOsu(TextOptions.builder().text(text).build());
+    }
+
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @return The parsed beatmap
+     */
+    public Beatmap parseOsu(TextOptions options) throws ApiException {
+        return api.parseOsu(new TextRequest()
+            .text(options.text));
     }
 }

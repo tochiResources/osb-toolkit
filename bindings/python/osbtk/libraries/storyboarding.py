@@ -5,16 +5,13 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
+from osbtk.api.core_api import CoreAPI
 from osbtk.api.helpers_api import HelpersAPI as HelpersApi
-from osbtk.api.origin_api import OriginAPI
-from osbtk.api.parsing_api import ParsingAPI
-from osbtk.client.core.origin import Origin
-from osbtk.client.core.parsing import Parsing
+from osbtk.client.core.core import Core
 from osbtk.libraries._client import STATELESS
 from osbtk.models.helper_request import HelperRequest
 
-_parsing = Parsing(ParsingAPI(STATELESS))
-_origin = Origin(OriginAPI(STATELESS))
+_core = Core(CoreAPI(STATELESS))
 _helpers = HelpersApi(STATELESS)
 
 
@@ -23,19 +20,19 @@ class Storyboarding:
 
     @staticmethod
     def parse_osu(text: str) -> Any:
-        return _parsing.parse_osu(text)
+        return _core.parse_osu(text)
 
     @staticmethod
     def parse_osb(text: str) -> Any:
-        return _parsing.parse_osb(text)
+        return _core.parse_osb(text)
 
     @staticmethod
     def get_origin_vector(origin: str, width: float, height: float) -> Any:
-        return _origin.get_origin_vector(origin, width, height)
+        return _core.get_origin_vector(origin, width, height)
 
     @staticmethod
     def in_screen_bounds(position: Any, size: Any, rotation: float, origin: Any) -> bool:
-        return _origin.in_screen_bounds(position, size, rotation, origin)
+        return _core.in_screen_bounds(position, size, rotation, origin)
 
     class Commands:
         """The 2D storyboard command utilities: pure transforms over a

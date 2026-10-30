@@ -6,18 +6,74 @@ using tochiRes.osbTK.Model;
 namespace tochiRes.osbTK.Client.Core;
 
 /// <summary>
-/// The clean `Curve` client.
+/// The clean `Core` client.
 /// </summary>
-public sealed class Curve
+public sealed class Core
 {
-    private readonly CurveAPI api;
+    private readonly CoreAPI api;
 
-    public Curve(CurveAPI api)
+    public Core(CoreAPI api)
     {
         this.api = api;
     }
 
-    public static bool InstanceOf(object value) => value is Curve;
+    public static bool InstanceOf(object value) => value is Core;
+
+    /// <summary>
+    /// An easing evaluation request.
+    /// </summary>
+    /// <param name="Easing">The easing function.</param>
+    /// <param name="T">The normalized time in `0.0..=1.0`.</param>
+    /// <returns>The eased value</returns>
+    public double ApplyEasing(Easing Easing, double T) =>
+        ApplyEasing(new ApplyEasingOptions { Easing = Easing, T = T });
+
+    /// <summary>
+    /// An easing evaluation request.
+    /// </summary>
+    /// <param name="options">An easing evaluation request.</param>
+    /// <returns>The eased value</returns>
+    public double ApplyEasing(ApplyEasingOptions options) => api.ApplyEasing(new ApplyEasingRequest(options.Easing, options.T)).Value;
+
+    /// <summary>
+    /// A named-or-custom easing evaluation request.
+    /// </summary>
+    /// <param name="T">The normalized time in `0.0..=1.0`.</param>
+    /// <returns>The eased value (named easing or cubic-bezier)</returns>
+    public double EasingValue(double T) =>
+        EasingValue(new EasingValueOptions { T = T });
+
+    /// <summary>
+    /// A named-or-custom easing evaluation request.
+    /// </summary>
+    /// <param name="T">The normalized time in `0.0..=1.0`.</param>
+    /// <param name="Easing">A named easing (used when `cubicBezier` is absent).</param>
+    /// <returns>The eased value (named easing or cubic-bezier)</returns>
+    public double EasingValue(double T, Easing? Easing) =>
+        EasingValue(new EasingValueOptions { T = T, Easing = Easing });
+
+    /// <summary>
+    /// A named-or-custom easing evaluation request.
+    /// </summary>
+    /// <param name="T">The normalized time in `0.0..=1.0`.</param>
+    /// <param name="Easing">A named easing (used when `cubicBezier` is absent).</param>
+    /// <param name="CubicBezier">A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`.</param>
+    /// <returns>The eased value (named easing or cubic-bezier)</returns>
+    public double EasingValue(double T, Easing? Easing, List<double> CubicBezier) =>
+        EasingValue(new EasingValueOptions { T = T, Easing = Easing, CubicBezier = CubicBezier });
+
+    /// <summary>
+    /// A named-or-custom easing evaluation request.
+    /// </summary>
+    /// <param name="options">A named-or-custom easing evaluation request.</param>
+    /// <returns>The eased value (named easing or cubic-bezier)</returns>
+    public double EasingValue(EasingValueOptions options) => api.EasingValue(new EasingValueRequest(options.CubicBezier, options.Easing, options.T)).Value;
+
+    /// <summary>
+    /// Calls the Core.version bridge operation.
+    /// </summary>
+    /// <returns>The runtime version</returns>
+    public string Version() => api.Version().VarVersion;
 
     /// <summary>
     /// A circular-arc sampling request.
@@ -302,4 +358,69 @@ public sealed class Curve
     /// <param name="options">A curve query at a parametric or arc-length position.</param>
     /// <returns>The unit tangent at `t`</returns>
     public Vector2 Tangent(CurvePointOptions options) => api.Tangent(new CurvePointRequest(options.ByArcLength, options.Curve, options.T));
+
+    /// <summary>
+    /// The anchor offset for an origin.
+    /// </summary>
+    /// <param name="Origin">The sprite anchor origin.</param>
+    /// <param name="Width">The sprite width.</param>
+    /// <param name="Height">The sprite height.</param>
+    /// <returns>The anchor offset for the origin</returns>
+    public Vector2 GetOriginVector(OsbOrigin Origin, double Width, double Height) =>
+        GetOriginVector(new GetOriginVectorOptions { Origin = Origin, Width = Width, Height = Height });
+
+    /// <summary>
+    /// The anchor offset for an origin.
+    /// </summary>
+    /// <param name="options">The anchor offset for an origin.</param>
+    /// <returns>The anchor offset for the origin</returns>
+    public Vector2 GetOriginVector(GetOriginVectorOptions options) => api.GetOriginVector(new GetOriginVectorRequest(options.Height, options.Origin, options.Width));
+
+    /// <summary>
+    /// Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+    /// </summary>
+    /// <param name="Position">The sprite centre position.</param>
+    /// <param name="Size">The sprite size.</param>
+    /// <param name="Rotation">The rotation in radians.</param>
+    /// <param name="Origin">The anchor offset (from `GetOriginVector`).</param>
+    /// <returns>Whether the sprite's bounds intersect the screen</returns>
+    public bool InScreenBounds(Vector2 Position, Vector2 Size, double Rotation, Vector2 Origin) =>
+        InScreenBounds(new InScreenBoundsOptions { Position = Position, Size = Size, Rotation = Rotation, Origin = Origin });
+
+    /// <summary>
+    /// Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+    /// </summary>
+    /// <param name="options">Whether a rotated sprite's bounding box intersects the widescreen storyboard area.</param>
+    /// <returns>Whether the sprite's bounds intersect the screen</returns>
+    public bool InScreenBounds(InScreenBoundsOptions options) => api.InScreenBounds(new InScreenBoundsRequest(options.Origin, options.Position, options.Rotation, options.Size)).Value;
+
+    /// <summary>
+    /// A request carrying a block of text (an effect script, `.osu` or `.osb`).
+    /// </summary>
+    /// <param name="Text">The text payload.</param>
+    /// <returns>The storyboard summary</returns>
+    public ParseOsbResult ParseOsb(string Text) =>
+        ParseOsb(new TextOptions { Text = Text });
+
+    /// <summary>
+    /// A request carrying a block of text (an effect script, `.osu` or `.osb`).
+    /// </summary>
+    /// <param name="options">A request carrying a block of text (an effect script, `.osu` or `.osb`).</param>
+    /// <returns>The storyboard summary</returns>
+    public ParseOsbResult ParseOsb(TextOptions options) => api.ParseOsb(new TextRequest(options.Text));
+
+    /// <summary>
+    /// A request carrying a block of text (an effect script, `.osu` or `.osb`).
+    /// </summary>
+    /// <param name="Text">The text payload.</param>
+    /// <returns>The parsed beatmap</returns>
+    public Beatmap ParseOsu(string Text) =>
+        ParseOsu(new TextOptions { Text = Text });
+
+    /// <summary>
+    /// A request carrying a block of text (an effect script, `.osu` or `.osb`).
+    /// </summary>
+    /// <param name="options">A request carrying a block of text (an effect script, `.osu` or `.osb`).</param>
+    /// <returns>The parsed beatmap</returns>
+    public Beatmap ParseOsu(TextOptions options) => api.ParseOsu(new TextRequest(options.Text));
 }

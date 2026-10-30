@@ -2,6 +2,11 @@
 //! native `op` string, so the generated SDK clients and the custom bridge
 //! transport agree on one name. The functions are documentation-only: they are
 //! never called, they exist so `utoipa` can derive the `paths` object.
+//!
+//! The stateless surface (version, parsing, easing, curves and origin math) is
+//! tagged `Core` so every SDK emits one grouped `Core` class. The operation IDs
+//! keep their historical `Common.*`/`Curve.*`/... bridge names until the
+//! class-scoped naming pass (M31a) renames them.
 
 use crate::curve::{ArcRequest, EllipseRequest, LineIntersectRequest, OptionalPointResult};
 use crate::diagnostics::DiagnosticReport;
@@ -35,7 +40,7 @@ use crate::storyboarding3d::BakedStoryboard;
 #[utoipa::path(
     post,
     path = "/bridge/Common.version",
-    tag = "Common",
+    tag = "Core",
     operation_id = "Common.version",
     responses((status = 200, description = "The runtime version", body = VersionResult))
 )]
@@ -56,7 +61,7 @@ pub(crate) fn bake3d() {}
 #[utoipa::path(
     post,
     path = "/bridge/Parsing.parseOsu",
-    tag = "Parsing",
+    tag = "Core",
     operation_id = "Parsing.parseOsu",
     request_body = TextRequest,
     responses((status = 200, description = "The parsed beatmap", body = Beatmap))
@@ -67,7 +72,7 @@ pub(crate) fn parse_osu() {}
 #[utoipa::path(
     post,
     path = "/bridge/Parsing.parseOsb",
-    tag = "Parsing",
+    tag = "Core",
     operation_id = "Parsing.parseOsb",
     request_body = TextRequest,
     responses((status = 200, description = "The storyboard summary", body = ParseOsbResult))
@@ -385,7 +390,7 @@ pub(crate) fn random() {}
 #[utoipa::path(
     post,
     path = "/bridge/Animations.applyEasing",
-    tag = "Animations",
+    tag = "Core",
     operation_id = "Animations.applyEasing",
     request_body = ApplyEasingRequest,
     responses((status = 200, description = "The eased value", body = EasingResult))
@@ -396,7 +401,7 @@ pub(crate) fn apply_easing() {}
 #[utoipa::path(
     post,
     path = "/bridge/Animations.easingValue",
-    tag = "Animations",
+    tag = "Core",
     operation_id = "Animations.easingValue",
     request_body = EasingValueRequest,
     responses((status = 200, description = "The eased value (named easing or cubic-bezier)", body = EasingResult))
@@ -436,7 +441,7 @@ pub(crate) fn audio_duration() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.length",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.length",
     request_body = CurveRequest,
     responses((status = 200, description = "The curve's arc length", body = ScalarResult))
@@ -446,7 +451,7 @@ pub(crate) fn curve_length() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.boundingBox",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.boundingBox",
     request_body = CurveRequest,
     responses((status = 200, description = "The curve's axis-aligned bounding box", body = Box2))
@@ -457,7 +462,7 @@ pub(crate) fn curve_bounding_box() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.point",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.point",
     request_body = CurvePointRequest,
     responses((status = 200, description = "The point at `t`, parametrically or by arc length", body = Vector2))
@@ -468,7 +473,7 @@ pub(crate) fn curve_point() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.tangent",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.tangent",
     request_body = CurvePointRequest,
     responses((status = 200, description = "The unit tangent at `t`", body = Vector2))
@@ -479,7 +484,7 @@ pub(crate) fn curve_tangent() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.sample",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.sample",
     request_body = CurveSampleRequest,
     responses((status = 200, description = "`count` points along the curve", body = PointListResult))
@@ -490,7 +495,7 @@ pub(crate) fn curve_sample() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.simplify",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.simplify",
     request_body = SimplifyRequest,
     responses((status = 200, description = "The simplified polyline", body = PointListResult))
@@ -501,7 +506,7 @@ pub(crate) fn simplify() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.normal",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.normal",
     request_body = CurvePointRequest,
     responses((status = 200, description = "The unit normal at `t`", body = Vector2))
@@ -512,7 +517,7 @@ pub(crate) fn curve_normal() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.curvature",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.curvature",
     request_body = CurvePointRequest,
     responses((status = 200, description = "The curvature at `t`", body = ScalarResult))
@@ -523,7 +528,7 @@ pub(crate) fn curve_curvature() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.distanceTo",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.distanceTo",
     request_body = CurveDistanceRequest,
     responses((status = 200, description = "The distance from a point to the curve", body = ScalarResult))
@@ -534,7 +539,7 @@ pub(crate) fn curve_distance_to() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.offset",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.offset",
     request_body = CurveOffsetRequest,
     responses((status = 200, description = "The polyline offset along the curve's normal", body = PointListResult))
@@ -545,7 +550,7 @@ pub(crate) fn curve_offset() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.arc",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.arc",
     request_body = ArcRequest,
     responses((status = 200, description = "Points along a circular arc", body = PointListResult))
@@ -556,7 +561,7 @@ pub(crate) fn curve_arc() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.ellipse",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.ellipse",
     request_body = EllipseRequest,
     responses((status = 200, description = "Points around an ellipse", body = PointListResult))
@@ -567,7 +572,7 @@ pub(crate) fn curve_ellipse() {}
 #[utoipa::path(
     post,
     path = "/bridge/Curve.lineIntersect",
-    tag = "Curve",
+    tag = "Core",
     operation_id = "Curve.lineIntersect",
     request_body = LineIntersectRequest,
     responses((status = 200, description = "The intersection point, or null", body = OptionalPointResult))
@@ -688,7 +693,7 @@ pub(crate) fn extract_audio() {}
 #[utoipa::path(
     post,
     path = "/bridge/Origin.getOriginVector",
-    tag = "Origin",
+    tag = "Core",
     operation_id = "Origin.getOriginVector",
     request_body = GetOriginVectorRequest,
     responses((status = 200, description = "The anchor offset for the origin", body = Vector2))
@@ -699,7 +704,7 @@ pub(crate) fn get_origin_vector() {}
 #[utoipa::path(
     post,
     path = "/bridge/Origin.inScreenBounds",
-    tag = "Origin",
+    tag = "Core",
     operation_id = "Origin.inScreenBounds",
     request_body = InScreenBoundsRequest,
     responses((status = 200, description = "Whether the sprite's bounds intersect the screen", body = BoolResult))

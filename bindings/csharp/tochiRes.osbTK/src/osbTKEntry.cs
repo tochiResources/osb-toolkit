@@ -21,25 +21,12 @@ public static partial class osb
     /// <summary>The native runtime version string.</summary>
     public static string Version => NativeFacade.Version();
 
-    /// <summary>The common surface (the native version).</summary>
-    public static Client.Core.Common Common { get; } =
-        new(new CommonAPI(StatelessTransport, StatelessTransport, DefaultConfiguration));
-
-    /// <summary>The curve library: Bezier/Catmull-Rom curves and simplification.</summary>
-    public static Client.Core.Curve Curve { get; } =
-        new(new CurveAPI(StatelessTransport, StatelessTransport, DefaultConfiguration));
-
-    /// <summary>The animations library: easing evaluation.</summary>
-    public static Client.Core.Animations Animations { get; } =
-        new(new AnimationsAPI(StatelessTransport, StatelessTransport, DefaultConfiguration));
-
-    /// <summary>The stateless parsers for `.osu` beatmaps and `.osb` storyboards.</summary>
-    public static Client.Core.Parsing Parsing { get; } =
-        new(new ParsingAPI(StatelessTransport, StatelessTransport, DefaultConfiguration));
-
-    /// <summary>The stateless origin and screen-bound queries.</summary>
-    public static Client.Core.Origin Origin { get; } =
-        new(new OriginAPI(StatelessTransport, StatelessTransport, DefaultConfiguration));
+    /// <summary>
+    /// The non-runtime `Core` surface: the native version, the stateless
+    /// parsers, easing and the curve/origin math.
+    /// </summary>
+    public static Client.Core.Core Core { get; } =
+        new(new CoreAPI(StatelessTransport, StatelessTransport, DefaultConfiguration));
 
     /// <summary>The audio library: FFT.</summary>
     public static Client.Runtime.Audio Audio { get; } =

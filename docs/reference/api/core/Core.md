@@ -1,10 +1,51 @@
-# Curve
+# Core
 
-The clean `Curve` client. Its overloads take positional values from the
+The clean `Core` client. Its overloads take positional values from the
 smallest required arity upward, then the `<X>Options` form; results are
 unwrapped into ordinary values.
 
 ## Methods
+
+### `applyEasing`
+
+```ts
+applyEasing(easing: Easing, t: number): number
+applyEasing(options: ApplyEasingOptions): number
+```
+
+**Options — `ApplyEasingOptions`**
+
+An easing evaluation request.
+
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `easing` | `Easing` | yes | The easing function. |
+| `t` | `number` | yes | The normalized time in `0.0..=1.0`. |
+
+### `easingValue`
+
+```ts
+easingValue(t: number): number
+easingValue(t: number, easing: Easing | null): number
+easingValue(t: number, easing: Easing | null, cubicBezier: number[] | null): number
+easingValue(options: EasingValueOptions): number
+```
+
+**Options — `EasingValueOptions`**
+
+A named-or-custom easing evaluation request.
+
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `t` | `number` | yes | The normalized time in `0.0..=1.0`. |
+| `easing` | `Easing | null` | no | A named easing (used when `cubicBezier` is absent). |
+| `cubicBezier` | `number[] | null` | no | A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`. |
+
+### `version`
+
+```ts
+version(): string
+```
 
 ### `arc`
 
@@ -230,3 +271,69 @@ A curve query at a parametric or arc-length position.
 | `curve` | `CurveSpec` | yes | The curve. |
 | `t` | `number` | yes | The position in `0.0..=1.0`. |
 | `byArcLength` | `boolean | null` | no | Sample by arc length instead of the raw parameter (default `false`). |
+
+### `getOriginVector`
+
+```ts
+getOriginVector(origin: OsbOrigin, width: number, height: number): Vector2
+getOriginVector(options: GetOriginVectorOptions): Vector2
+```
+
+**Options — `GetOriginVectorOptions`**
+
+The anchor offset for an origin.
+
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `origin` | `OsbOrigin` | yes | The sprite anchor origin. |
+| `width` | `number` | yes | The sprite width. |
+| `height` | `number` | yes | The sprite height. |
+
+### `inScreenBounds`
+
+```ts
+inScreenBounds(position: Vector2, size: Vector2, rotation: number, origin: Vector2): boolean
+inScreenBounds(options: InScreenBoundsOptions): boolean
+```
+
+**Options — `InScreenBoundsOptions`**
+
+Whether a rotated sprite's bounding box intersects the widescreen
+storyboard area.
+
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `position` | `Vector2` | yes | The sprite centre position. |
+| `size` | `Vector2` | yes | The sprite size. |
+| `rotation` | `number` | yes | The rotation in radians. |
+| `origin` | `Vector2` | yes | The anchor offset (from `GetOriginVector`). |
+
+### `parseOsb`
+
+```ts
+parseOsb(text: string): ParseOsbResult
+parseOsb(options: TextOptions): ParseOsbResult
+```
+
+**Options — `TextOptions`**
+
+A request carrying a block of text (an effect script, `.osu` or `.osb`).
+
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | yes | The text payload. |
+
+### `parseOsu`
+
+```ts
+parseOsu(text: string): Beatmap
+parseOsu(options: TextOptions): Beatmap
+```
+
+**Options — `TextOptions`**
+
+A request carrying a block of text (an effect script, `.osu` or `.osb`).
+
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | yes | The text payload. |

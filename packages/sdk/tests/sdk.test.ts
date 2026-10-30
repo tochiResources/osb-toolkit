@@ -27,24 +27,24 @@ describe('@tochii/osb-sdk-js', () => {
     });
 
     it('parses a beatmap into the typed model', async () => {
-        const beatmap = await Core.parsing.parseOsu({ text: OSU });
+        const beatmap = await Core.parseOsu({ text: OSU });
         expect(beatmap.audioFilename).toBe('song.mp3');
         expect(beatmap.hitObjects[0]?.kind).toBe('Circle');
     });
 
     it('exposes the non-runtime Core subpath', async () => {
-        const beatmap = await Core.parsing.parseOsu({ text: OSU });
+        const beatmap = await Core.parseOsu({ text: OSU });
         expect(beatmap.audioFilename).toBe('song.mp3');
     });
 
     it('computes origin vectors and screen bounds', async () => {
-        const origin = await Core.origin.getOriginVector({
+        const origin = await Core.getOriginVector({
             origin: OsbOrigin.Centre,
             width: 100,
             height: 100,
         });
         expect(origin.x).toBeCloseTo(50, 6);
-        const inBounds = await Core.origin.inScreenBounds({
+        const inBounds = await Core.inScreenBounds({
             position: { x: 427, y: 240 },
             size: { x: 100, y: 100 },
             rotation: 0,
@@ -54,12 +54,12 @@ describe('@tochii/osb-sdk-js', () => {
     });
 
     it('applies easing', async () => {
-        expect(await Core.animations.applyEasing({ easing: Easing.InQuad, t: 0.5 })).toBeCloseTo(
+        expect(await Core.applyEasing({ easing: Easing.InQuad, t: 0.5 })).toBeCloseTo(
             0.25,
             6
         );
         expect(
-            await Core.animations.easingValue({
+            await Core.easingValue({
                 cubicBezier: [0.42, 0.0, 0.58, 1.0],
                 t: 1.0,
             })
@@ -118,11 +118,11 @@ describe('@tochii/osb-sdk-js', () => {
                 { x: 100, y: 0 },
             ],
         };
-        expect(await Core.curve.length({ curve })).toBeCloseTo(100, 6);
-        expect((await Core.curve.point({ curve, t: 0.5 })).x).toBeCloseTo(50, 6);
-        expect((await Core.curve.sample({ curve, count: 3 })).points).toHaveLength(3);
-        expect((await Core.curve.boundingBox({ curve })).max.x).toBeCloseTo(100, 6);
-        const simplified = await Core.curve.simplify({
+        expect(await Core.length({ curve })).toBeCloseTo(100, 6);
+        expect((await Core.point({ curve, t: 0.5 })).x).toBeCloseTo(50, 6);
+        expect((await Core.sample({ curve, count: 3 })).points).toHaveLength(3);
+        expect((await Core.boundingBox({ curve })).max.x).toBeCloseTo(100, 6);
+        const simplified = await Core.simplify({
             points: [
                 { x: 0, y: 0 },
                 { x: 1, y: 0.05 },
@@ -132,13 +132,13 @@ describe('@tochii/osb-sdk-js', () => {
             tolerance: 0.1,
         });
         expect(simplified.points).toHaveLength(2);
-        expect((await Core.curve.normal({ curve, t: 0.5 })).x).toBeCloseTo(0, 6);
-        expect(await Core.curve.curvature({ curve, t: 0.5 })).toBeCloseTo(0, 6);
-        expect(await Core.curve.distanceTo({ curve, point: { x: 50, y: 10 } })).toBeCloseTo(10, 6);
-        expect((await Core.curve.offset({ curve, distance: 5 })).points).toHaveLength(2);
+        expect((await Core.normal({ curve, t: 0.5 })).x).toBeCloseTo(0, 6);
+        expect(await Core.curvature({ curve, t: 0.5 })).toBeCloseTo(0, 6);
+        expect(await Core.distanceTo({ curve, point: { x: 50, y: 10 } })).toBeCloseTo(10, 6);
+        expect((await Core.offset({ curve, distance: 5 })).points).toHaveLength(2);
         expect(
             (
-                await Core.curve.arc({
+                await Core.arc({
                     center: { x: 0, y: 0 },
                     radius: 10,
                     startAngle: 0,
@@ -148,10 +148,10 @@ describe('@tochii/osb-sdk-js', () => {
             ).points
         ).toHaveLength(3);
         expect(
-            (await Core.curve.ellipse({ center: { x: 0, y: 0 }, radiusX: 4, radiusY: 2, count: 4 }))
+            (await Core.ellipse({ center: { x: 0, y: 0 }, radiusX: 4, radiusY: 2, count: 4 }))
                 .points
         ).toHaveLength(4);
-        const hit = await Core.curve.lineIntersect({
+        const hit = await Core.lineIntersect({
             a1: { x: 0, y: 0 },
             a2: { x: 10, y: 10 },
             b1: { x: 0, y: 10 },
@@ -161,12 +161,12 @@ describe('@tochii/osb-sdk-js', () => {
     });
 
     it('unwraps clean single-field results', async () => {
-        expect(typeof (await Core.common.version())).toBe('string');
-        expect(typeof (await Core.animations.applyEasing({ easing: Easing.None, t: 0.5 }))).toBe(
+        expect(typeof (await Core.version())).toBe('string');
+        expect(typeof (await Core.applyEasing({ easing: Easing.None, t: 0.5 }))).toBe(
             'number'
         );
         expect(
-            typeof (await Core.origin.inScreenBounds({
+            typeof (await Core.inScreenBounds({
                 position: { x: 427, y: 240 },
                 size: { x: 100, y: 100 },
                 rotation: 0,
@@ -174,7 +174,7 @@ describe('@tochii/osb-sdk-js', () => {
             }))
         ).toBe('boolean');
         expect(
-            await Core.curve.lineIntersect({
+            await Core.lineIntersect({
                 a1: { x: 0, y: 0 },
                 a2: { x: 10, y: 0 },
                 b1: { x: 0, y: 10 },

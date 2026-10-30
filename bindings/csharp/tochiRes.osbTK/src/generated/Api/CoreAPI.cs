@@ -26,9 +26,26 @@ namespace tochiRes.osbTK.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface ICurveAPISync : IApiAccessor
+    public interface ICoreAPISync : IApiAccessor
     {
         #region Synchronous Operations
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applyEasingRequest"></param>
+        /// <returns>EasingResult</returns>
+        EasingResult ApplyEasing(ApplyEasingRequest applyEasingRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applyEasingRequest"></param>
+        /// <returns>ApiResponse of EasingResult</returns>
         /// <summary>
         /// 
         /// </summary>
@@ -101,6 +118,23 @@ namespace tochiRes.osbTK.Api
         /// 
         /// </summary>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="easingValueRequest"></param>
+        /// <returns>EasingResult</returns>
+        EasingResult EasingValue(EasingValueRequest easingValueRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="easingValueRequest"></param>
+        /// <returns>ApiResponse of EasingResult</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ellipseRequest"></param>
         /// <returns>PointListResult</returns>
         PointListResult Ellipse(EllipseRequest ellipseRequest);
@@ -114,6 +148,40 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ellipseRequest"></param>
         /// <returns>ApiResponse of PointListResult</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="getOriginVectorRequest"></param>
+        /// <returns>Vector2</returns>
+        Vector2 GetOriginVector(GetOriginVectorRequest getOriginVectorRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="getOriginVectorRequest"></param>
+        /// <returns>ApiResponse of Vector2</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="inScreenBoundsRequest"></param>
+        /// <returns>BoolResult</returns>
+        BoolResult InScreenBounds(InScreenBoundsRequest inScreenBoundsRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="inScreenBoundsRequest"></param>
+        /// <returns>ApiResponse of BoolResult</returns>
         /// <summary>
         /// 
         /// </summary>
@@ -186,6 +254,40 @@ namespace tochiRes.osbTK.Api
         /// 
         /// </summary>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <returns>ParseOsbResult</returns>
+        ParseOsbResult ParseOsb(TextRequest textRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <returns>ApiResponse of ParseOsbResult</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <returns>Beatmap</returns>
+        Beatmap ParseOsu(TextRequest textRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <returns>ApiResponse of Beatmap</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curvePointRequest"></param>
         /// <returns>Vector2</returns>
         Vector2 Point(CurvePointRequest curvePointRequest);
@@ -250,15 +352,52 @@ namespace tochiRes.osbTK.Api
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curvePointRequest"></param>
         /// <returns>ApiResponse of Vector2</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>VersionResult</returns>
+        VersionResult Version();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of VersionResult</returns>
         #endregion Synchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface ICurveAPIAsync : IApiAccessor
+    public interface ICoreAPIAsync : IApiAccessor
     {
         #region Asynchronous Operations
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applyEasingRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of EasingResult</returns>
+        System.Threading.Tasks.Task<EasingResult> ApplyEasingAsync(ApplyEasingRequest applyEasingRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applyEasingRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (EasingResult)</returns>
         /// <summary>
         /// 
         /// </summary>
@@ -354,6 +493,28 @@ namespace tochiRes.osbTK.Api
         /// 
         /// </remarks>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="easingValueRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of EasingResult</returns>
+        System.Threading.Tasks.Task<EasingResult> EasingValueAsync(EasingValueRequest easingValueRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="easingValueRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (EasingResult)</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ellipseRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PointListResult</returns>
@@ -369,6 +530,50 @@ namespace tochiRes.osbTK.Api
         /// <param name="ellipseRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PointListResult)</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="getOriginVectorRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Vector2</returns>
+        System.Threading.Tasks.Task<Vector2> GetOriginVectorAsync(GetOriginVectorRequest getOriginVectorRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="getOriginVectorRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Vector2)</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="inScreenBoundsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of BoolResult</returns>
+        System.Threading.Tasks.Task<BoolResult> InScreenBoundsAsync(InScreenBoundsRequest inScreenBoundsRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="inScreenBoundsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (BoolResult)</returns>
         /// <summary>
         /// 
         /// </summary>
@@ -464,6 +669,50 @@ namespace tochiRes.osbTK.Api
         /// 
         /// </remarks>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ParseOsbResult</returns>
+        System.Threading.Tasks.Task<ParseOsbResult> ParseOsbAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (ParseOsbResult)</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Beatmap</returns>
+        System.Threading.Tasks.Task<Beatmap> ParseOsuAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Beatmap)</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curvePointRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Vector2</returns>
@@ -545,13 +794,33 @@ namespace tochiRes.osbTK.Api
         /// <param name="curvePointRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Vector2)</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of VersionResult</returns>
+        System.Threading.Tasks.Task<VersionResult> VersionAsync(System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (VersionResult)</returns>
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface ICurveAPI : ICurveAPISync, ICurveAPIAsync
+    public interface ICoreAPI : ICoreAPISync, ICoreAPIAsync
     {
 
     }
@@ -559,29 +828,29 @@ namespace tochiRes.osbTK.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class CurveAPI : IDisposable, ICurveAPI
+    public partial class CoreAPI : IDisposable, ICoreAPI
     {
         private tochiRes.osbTK.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurveAPI"/> class.
+        /// Initializes a new instance of the <see cref="CoreAPI"/> class.
         /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
         /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
         /// </summary>
         /// <returns></returns>
-        public CurveAPI() : this((string)null)
+        public CoreAPI() : this((string)null)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurveAPI"/> class.
+        /// Initializes a new instance of the <see cref="CoreAPI"/> class.
         /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
         /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
         /// </summary>
         /// <param name="basePath">The target service's base path in URL format.</param>
         /// <exception cref="ArgumentException"></exception>
         /// <returns></returns>
-        public CurveAPI(string basePath)
+        public CoreAPI(string basePath)
         {
             this.Configuration = tochiRes.osbTK.Client.Configuration.MergeConfigurations(
                 tochiRes.osbTK.Client.GlobalConfiguration.Instance,
@@ -594,14 +863,14 @@ namespace tochiRes.osbTK.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurveAPI"/> class using Configuration object.
+        /// Initializes a new instance of the <see cref="CoreAPI"/> class using Configuration object.
         /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
         /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
         /// </summary>
         /// <param name="configuration">An instance of Configuration.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
-        public CurveAPI(tochiRes.osbTK.Client.Configuration configuration)
+        public CoreAPI(tochiRes.osbTK.Client.Configuration configuration)
         {
             if (configuration == null) throw new ArgumentNullException("configuration");
 
@@ -616,7 +885,7 @@ namespace tochiRes.osbTK.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurveAPI"/> class.
+        /// Initializes a new instance of the <see cref="CoreAPI"/> class.
         /// </summary>
         /// <param name="client">An instance of HttpClient.</param>
         /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
@@ -626,12 +895,12 @@ namespace tochiRes.osbTK.Api
         /// Some configuration settings will not be applied without passing an HttpClientHandler.
         /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
         /// </remarks>
-        public CurveAPI(HttpClient client, HttpClientHandler handler = null) : this(client, (string)null, handler)
+        public CoreAPI(HttpClient client, HttpClientHandler handler = null) : this(client, (string)null, handler)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurveAPI"/> class.
+        /// Initializes a new instance of the <see cref="CoreAPI"/> class.
         /// </summary>
         /// <param name="client">An instance of HttpClient.</param>
         /// <param name="basePath">The target service's base path in URL format.</param>
@@ -643,7 +912,7 @@ namespace tochiRes.osbTK.Api
         /// Some configuration settings will not be applied without passing an HttpClientHandler.
         /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
         /// </remarks>
-        public CurveAPI(HttpClient client, string basePath, HttpClientHandler handler = null)
+        public CoreAPI(HttpClient client, string basePath, HttpClientHandler handler = null)
         {
             if (client == null) throw new ArgumentNullException("client");
 
@@ -658,7 +927,7 @@ namespace tochiRes.osbTK.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurveAPI"/> class using Configuration object.
+        /// Initializes a new instance of the <see cref="CoreAPI"/> class using Configuration object.
         /// </summary>
         /// <param name="client">An instance of HttpClient.</param>
         /// <param name="configuration">An instance of Configuration.</param>
@@ -669,7 +938,7 @@ namespace tochiRes.osbTK.Api
         /// Some configuration settings will not be applied without passing an HttpClientHandler.
         /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
         /// </remarks>
-        public CurveAPI(HttpClient client, tochiRes.osbTK.Client.Configuration configuration, HttpClientHandler handler = null)
+        public CoreAPI(HttpClient client, tochiRes.osbTK.Client.Configuration configuration, HttpClientHandler handler = null)
         {
             if (configuration == null) throw new ArgumentNullException("configuration");
             if (client == null) throw new ArgumentNullException("client");
@@ -685,14 +954,14 @@ namespace tochiRes.osbTK.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurveAPI"/> class
+        /// Initializes a new instance of the <see cref="CoreAPI"/> class
         /// using a Configuration object and client instance.
         /// </summary>
         /// <param name="client">The client interface for synchronous API access.</param>
         /// <param name="asyncClient">The client interface for asynchronous API access.</param>
         /// <param name="configuration">The configuration object.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public CurveAPI(tochiRes.osbTK.Client.ISynchronousClient client, tochiRes.osbTK.Client.IAsynchronousClient asyncClient, tochiRes.osbTK.Client.IReadableConfiguration configuration)
+        public CoreAPI(tochiRes.osbTK.Client.ISynchronousClient client, tochiRes.osbTK.Client.IAsynchronousClient asyncClient, tochiRes.osbTK.Client.IReadableConfiguration configuration)
         {
             if (client == null) throw new ArgumentNullException("client");
             if (asyncClient == null) throw new ArgumentNullException("asyncClient");
@@ -762,6 +1031,123 @@ namespace tochiRes.osbTK.Api
         ///  
         /// </summary>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applyEasingRequest"></param>
+        /// <returns>EasingResult</returns>
+        public EasingResult ApplyEasing(ApplyEasingRequest applyEasingRequest)
+        {
+            tochiRes.osbTK.Client.ApiResponse<EasingResult> localVarResponse = _ApplyEasingWithHttpInfo(applyEasingRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applyEasingRequest"></param>
+        /// <returns>ApiResponse of EasingResult</returns>
+        protected tochiRes.osbTK.Client.ApiResponse<EasingResult> _ApplyEasingWithHttpInfo(ApplyEasingRequest applyEasingRequest)
+        {
+            // verify the required parameter 'applyEasingRequest' is set
+            if (applyEasingRequest == null)
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'applyEasingRequest' when calling CoreAPI->ApplyEasing");
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = applyEasingRequest;
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<EasingResult>("/bridge/Animations.applyEasing", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ApplyEasing", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applyEasingRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of EasingResult</returns>
+        public async System.Threading.Tasks.Task<EasingResult> ApplyEasingAsync(ApplyEasingRequest applyEasingRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            tochiRes.osbTK.Client.ApiResponse<EasingResult> localVarResponse = await _ApplyEasingWithHttpInfoAsync(applyEasingRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applyEasingRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (EasingResult)</returns>
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<EasingResult>> _ApplyEasingWithHttpInfoAsync(ApplyEasingRequest applyEasingRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'applyEasingRequest' is set
+            if (applyEasingRequest == null)
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'applyEasingRequest' when calling CoreAPI->ApplyEasing");
+
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = applyEasingRequest;
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<EasingResult>("/bridge/Animations.applyEasing", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ApplyEasing", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="arcRequest"></param>
         /// <returns>PointListResult</returns>
         public PointListResult Arc(ArcRequest arcRequest)
@@ -780,7 +1166,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'arcRequest' is set
             if (arcRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'arcRequest' when calling CurveAPI->Arc");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'arcRequest' when calling CoreAPI->Arc");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -838,7 +1224,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'arcRequest' is set
             if (arcRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'arcRequest' when calling CurveAPI->Arc");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'arcRequest' when calling CoreAPI->Arc");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -897,7 +1283,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curveRequest' is set
             if (curveRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveRequest' when calling CurveAPI->BoundingBox");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveRequest' when calling CoreAPI->BoundingBox");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -955,7 +1341,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curveRequest' is set
             if (curveRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveRequest' when calling CurveAPI->BoundingBox");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveRequest' when calling CoreAPI->BoundingBox");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -1014,7 +1400,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CurveAPI->Curvature");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CoreAPI->Curvature");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -1072,7 +1458,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CurveAPI->Curvature");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CoreAPI->Curvature");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -1131,7 +1517,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curveDistanceRequest' is set
             if (curveDistanceRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveDistanceRequest' when calling CurveAPI->DistanceTo");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveDistanceRequest' when calling CoreAPI->DistanceTo");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -1189,7 +1575,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curveDistanceRequest' is set
             if (curveDistanceRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveDistanceRequest' when calling CurveAPI->DistanceTo");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveDistanceRequest' when calling CoreAPI->DistanceTo");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -1230,6 +1616,123 @@ namespace tochiRes.osbTK.Api
         ///  
         /// </summary>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="easingValueRequest"></param>
+        /// <returns>EasingResult</returns>
+        public EasingResult EasingValue(EasingValueRequest easingValueRequest)
+        {
+            tochiRes.osbTK.Client.ApiResponse<EasingResult> localVarResponse = _EasingValueWithHttpInfo(easingValueRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="easingValueRequest"></param>
+        /// <returns>ApiResponse of EasingResult</returns>
+        protected tochiRes.osbTK.Client.ApiResponse<EasingResult> _EasingValueWithHttpInfo(EasingValueRequest easingValueRequest)
+        {
+            // verify the required parameter 'easingValueRequest' is set
+            if (easingValueRequest == null)
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'easingValueRequest' when calling CoreAPI->EasingValue");
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = easingValueRequest;
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<EasingResult>("/bridge/Animations.easingValue", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("EasingValue", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="easingValueRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of EasingResult</returns>
+        public async System.Threading.Tasks.Task<EasingResult> EasingValueAsync(EasingValueRequest easingValueRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            tochiRes.osbTK.Client.ApiResponse<EasingResult> localVarResponse = await _EasingValueWithHttpInfoAsync(easingValueRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="easingValueRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (EasingResult)</returns>
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<EasingResult>> _EasingValueWithHttpInfoAsync(EasingValueRequest easingValueRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'easingValueRequest' is set
+            if (easingValueRequest == null)
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'easingValueRequest' when calling CoreAPI->EasingValue");
+
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = easingValueRequest;
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<EasingResult>("/bridge/Animations.easingValue", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("EasingValue", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ellipseRequest"></param>
         /// <returns>PointListResult</returns>
         public PointListResult Ellipse(EllipseRequest ellipseRequest)
@@ -1248,7 +1751,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'ellipseRequest' is set
             if (ellipseRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'ellipseRequest' when calling CurveAPI->Ellipse");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'ellipseRequest' when calling CoreAPI->Ellipse");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -1306,7 +1809,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'ellipseRequest' is set
             if (ellipseRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'ellipseRequest' when calling CurveAPI->Ellipse");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'ellipseRequest' when calling CoreAPI->Ellipse");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -1347,6 +1850,240 @@ namespace tochiRes.osbTK.Api
         ///  
         /// </summary>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="getOriginVectorRequest"></param>
+        /// <returns>Vector2</returns>
+        public Vector2 GetOriginVector(GetOriginVectorRequest getOriginVectorRequest)
+        {
+            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = _GetOriginVectorWithHttpInfo(getOriginVectorRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="getOriginVectorRequest"></param>
+        /// <returns>ApiResponse of Vector2</returns>
+        protected tochiRes.osbTK.Client.ApiResponse<Vector2> _GetOriginVectorWithHttpInfo(GetOriginVectorRequest getOriginVectorRequest)
+        {
+            // verify the required parameter 'getOriginVectorRequest' is set
+            if (getOriginVectorRequest == null)
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'getOriginVectorRequest' when calling CoreAPI->GetOriginVector");
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = getOriginVectorRequest;
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Vector2>("/bridge/Origin.getOriginVector", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetOriginVector", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="getOriginVectorRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Vector2</returns>
+        public async System.Threading.Tasks.Task<Vector2> GetOriginVectorAsync(GetOriginVectorRequest getOriginVectorRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            tochiRes.osbTK.Client.ApiResponse<Vector2> localVarResponse = await _GetOriginVectorWithHttpInfoAsync(getOriginVectorRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="getOriginVectorRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Vector2)</returns>
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Vector2>> _GetOriginVectorWithHttpInfoAsync(GetOriginVectorRequest getOriginVectorRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'getOriginVectorRequest' is set
+            if (getOriginVectorRequest == null)
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'getOriginVectorRequest' when calling CoreAPI->GetOriginVector");
+
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = getOriginVectorRequest;
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Vector2>("/bridge/Origin.getOriginVector", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetOriginVector", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="inScreenBoundsRequest"></param>
+        /// <returns>BoolResult</returns>
+        public BoolResult InScreenBounds(InScreenBoundsRequest inScreenBoundsRequest)
+        {
+            tochiRes.osbTK.Client.ApiResponse<BoolResult> localVarResponse = _InScreenBoundsWithHttpInfo(inScreenBoundsRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="inScreenBoundsRequest"></param>
+        /// <returns>ApiResponse of BoolResult</returns>
+        protected tochiRes.osbTK.Client.ApiResponse<BoolResult> _InScreenBoundsWithHttpInfo(InScreenBoundsRequest inScreenBoundsRequest)
+        {
+            // verify the required parameter 'inScreenBoundsRequest' is set
+            if (inScreenBoundsRequest == null)
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'inScreenBoundsRequest' when calling CoreAPI->InScreenBounds");
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = inScreenBoundsRequest;
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<BoolResult>("/bridge/Origin.inScreenBounds", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("InScreenBounds", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="inScreenBoundsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of BoolResult</returns>
+        public async System.Threading.Tasks.Task<BoolResult> InScreenBoundsAsync(InScreenBoundsRequest inScreenBoundsRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            tochiRes.osbTK.Client.ApiResponse<BoolResult> localVarResponse = await _InScreenBoundsWithHttpInfoAsync(inScreenBoundsRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="inScreenBoundsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (BoolResult)</returns>
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<BoolResult>> _InScreenBoundsWithHttpInfoAsync(InScreenBoundsRequest inScreenBoundsRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'inScreenBoundsRequest' is set
+            if (inScreenBoundsRequest == null)
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'inScreenBoundsRequest' when calling CoreAPI->InScreenBounds");
+
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = inScreenBoundsRequest;
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<BoolResult>("/bridge/Origin.inScreenBounds", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("InScreenBounds", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curveRequest"></param>
         /// <returns>ScalarResult</returns>
         public ScalarResult Length(CurveRequest curveRequest)
@@ -1365,7 +2102,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curveRequest' is set
             if (curveRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveRequest' when calling CurveAPI->Length");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveRequest' when calling CoreAPI->Length");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -1423,7 +2160,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curveRequest' is set
             if (curveRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveRequest' when calling CurveAPI->Length");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveRequest' when calling CoreAPI->Length");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -1482,7 +2219,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'lineIntersectRequest' is set
             if (lineIntersectRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'lineIntersectRequest' when calling CurveAPI->LineIntersect");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'lineIntersectRequest' when calling CoreAPI->LineIntersect");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -1540,7 +2277,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'lineIntersectRequest' is set
             if (lineIntersectRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'lineIntersectRequest' when calling CurveAPI->LineIntersect");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'lineIntersectRequest' when calling CoreAPI->LineIntersect");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -1599,7 +2336,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CurveAPI->Normal");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CoreAPI->Normal");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -1657,7 +2394,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CurveAPI->Normal");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CoreAPI->Normal");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -1716,7 +2453,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curveOffsetRequest' is set
             if (curveOffsetRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveOffsetRequest' when calling CurveAPI->Offset");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveOffsetRequest' when calling CoreAPI->Offset");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -1774,7 +2511,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curveOffsetRequest' is set
             if (curveOffsetRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveOffsetRequest' when calling CurveAPI->Offset");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveOffsetRequest' when calling CoreAPI->Offset");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -1815,6 +2552,240 @@ namespace tochiRes.osbTK.Api
         ///  
         /// </summary>
         /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <returns>ParseOsbResult</returns>
+        public ParseOsbResult ParseOsb(TextRequest textRequest)
+        {
+            tochiRes.osbTK.Client.ApiResponse<ParseOsbResult> localVarResponse = _ParseOsbWithHttpInfo(textRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <returns>ApiResponse of ParseOsbResult</returns>
+        protected tochiRes.osbTK.Client.ApiResponse<ParseOsbResult> _ParseOsbWithHttpInfo(TextRequest textRequest)
+        {
+            // verify the required parameter 'textRequest' is set
+            if (textRequest == null)
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'textRequest' when calling CoreAPI->ParseOsb");
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = textRequest;
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<ParseOsbResult>("/bridge/Parsing.parseOsb", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ParseOsb", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ParseOsbResult</returns>
+        public async System.Threading.Tasks.Task<ParseOsbResult> ParseOsbAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            tochiRes.osbTK.Client.ApiResponse<ParseOsbResult> localVarResponse = await _ParseOsbWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (ParseOsbResult)</returns>
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<ParseOsbResult>> _ParseOsbWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'textRequest' is set
+            if (textRequest == null)
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'textRequest' when calling CoreAPI->ParseOsb");
+
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = textRequest;
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<ParseOsbResult>("/bridge/Parsing.parseOsb", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ParseOsb", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <returns>Beatmap</returns>
+        public Beatmap ParseOsu(TextRequest textRequest)
+        {
+            tochiRes.osbTK.Client.ApiResponse<Beatmap> localVarResponse = _ParseOsuWithHttpInfo(textRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <returns>ApiResponse of Beatmap</returns>
+        protected tochiRes.osbTK.Client.ApiResponse<Beatmap> _ParseOsuWithHttpInfo(TextRequest textRequest)
+        {
+            // verify the required parameter 'textRequest' is set
+            if (textRequest == null)
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'textRequest' when calling CoreAPI->ParseOsu");
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = textRequest;
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Beatmap>("/bridge/Parsing.parseOsu", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ParseOsu", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Beatmap</returns>
+        public async System.Threading.Tasks.Task<Beatmap> ParseOsuAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            tochiRes.osbTK.Client.ApiResponse<Beatmap> localVarResponse = await _ParseOsuWithHttpInfoAsync(textRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="textRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Beatmap)</returns>
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<Beatmap>> _ParseOsuWithHttpInfoAsync(TextRequest textRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'textRequest' is set
+            if (textRequest == null)
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'textRequest' when calling CoreAPI->ParseOsu");
+
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = textRequest;
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Beatmap>("/bridge/Parsing.parseOsu", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ParseOsu", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="curvePointRequest"></param>
         /// <returns>Vector2</returns>
         public Vector2 Point(CurvePointRequest curvePointRequest)
@@ -1833,7 +2804,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CurveAPI->Point");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CoreAPI->Point");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -1891,7 +2862,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CurveAPI->Point");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CoreAPI->Point");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -1950,7 +2921,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curveSampleRequest' is set
             if (curveSampleRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveSampleRequest' when calling CurveAPI->Sample");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveSampleRequest' when calling CoreAPI->Sample");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -2008,7 +2979,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curveSampleRequest' is set
             if (curveSampleRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveSampleRequest' when calling CurveAPI->Sample");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curveSampleRequest' when calling CoreAPI->Sample");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -2067,7 +3038,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'simplifyRequest' is set
             if (simplifyRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'simplifyRequest' when calling CurveAPI->Simplify");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'simplifyRequest' when calling CoreAPI->Simplify");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -2125,7 +3096,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'simplifyRequest' is set
             if (simplifyRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'simplifyRequest' when calling CurveAPI->Simplify");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'simplifyRequest' when calling CoreAPI->Simplify");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -2184,7 +3155,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CurveAPI->Tangent");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CoreAPI->Tangent");
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
 
@@ -2242,7 +3213,7 @@ namespace tochiRes.osbTK.Api
         {
             // verify the required parameter 'curvePointRequest' is set
             if (curvePointRequest == null)
-                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CurveAPI->Tangent");
+                throw new tochiRes.osbTK.Client.ApiException(400, "Missing required parameter 'curvePointRequest' when calling CoreAPI->Tangent");
 
 
             tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
@@ -2273,6 +3244,107 @@ namespace tochiRes.osbTK.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("Tangent", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>VersionResult</returns>
+        public VersionResult Version()
+        {
+            tochiRes.osbTK.Client.ApiResponse<VersionResult> localVarResponse = _VersionWithHttpInfo();
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of VersionResult</returns>
+        protected tochiRes.osbTK.Client.ApiResponse<VersionResult> _VersionWithHttpInfo()
+        {
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<VersionResult>("/bridge/Common.version", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("Version", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of VersionResult</returns>
+        public async System.Threading.Tasks.Task<VersionResult> VersionAsync(System.Threading.CancellationToken cancellationToken = default)
+        {
+            tochiRes.osbTK.Client.ApiResponse<VersionResult> localVarResponse = await _VersionWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="tochiRes.osbTK.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (VersionResult)</returns>
+        protected async System.Threading.Tasks.Task<tochiRes.osbTK.Client.ApiResponse<VersionResult>> _VersionWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
+        {
+
+            tochiRes.osbTK.Client.RequestOptions localVarRequestOptions = new tochiRes.osbTK.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = tochiRes.osbTK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = tochiRes.osbTK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<VersionResult>("/bridge/Common.version", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("Version", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

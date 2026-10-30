@@ -41,13 +41,13 @@ int main() {
     osbtk::Library lib(path);
     osbtk::clean::Client clean(lib);
 
-    if (clean.common.version().empty()) {
+    if (clean.core.version().empty()) {
         return fail("clean version");
     }
-    if (std::abs(clean.animations.apply_easing({"InQuad", 0.5}) - 0.25) > 1e-6) {
+    if (std::abs(clean.core.apply_easing({"InQuad", 0.5}) - 0.25) > 1e-6) {
         return fail("clean easing");
     }
-    if (std::abs(clean.animations.easing_value({1.0, "None", {0.42, 0.0, 0.58, 1.0}}) - 1.0) >
+    if (std::abs(clean.core.easing_value({1.0, "None", {0.42, 0.0, 0.58, 1.0}}) - 1.0) >
         1e-6) {
         return fail("clean cubic bezier");
     }
@@ -55,26 +55,26 @@ int main() {
     osbtk::sdk::CurveSpec curve;
     curve.kind = osbtk::sdk::CurveKind::Linear;
     curve.points = {{0.0, 0.0}, {100.0, 0.0}};
-    if (std::abs(clean.curve.length({curve}) - 100.0) > 1e-6) {
+    if (std::abs(clean.core.length({curve}) - 100.0) > 1e-6) {
         return fail("clean curve length");
     }
-    if (std::abs(clean.curve.point({curve, 0.5, false}).x - 50.0) > 1e-6) {
+    if (std::abs(clean.core.point({curve, 0.5, false}).x - 50.0) > 1e-6) {
         return fail("clean curve point");
     }
-    if (clean.curve.sample({3, curve, false}).points.size() != 3) {
+    if (clean.core.sample({3, curve, false}).points.size() != 3) {
         return fail("clean curve sample");
     }
-    if (clean.curve.arc({0.0, 0.0, 10.0, 0.0, 180.0, 3}).points.size() != 3) {
+    if (clean.core.arc({0.0, 0.0, 10.0, 0.0, 180.0, 3}).points.size() != 3) {
         return fail("clean curve arc");
     }
 
     osbtk::sdk::Beatmap beatmap =
-        clean.parsing.parse_osu({"osu file format v14\n\n[General]\nAudioFilename: song.mp3\nMode: 0\n"});
+        clean.core.parse_osu({"osu file format v14\n\n[General]\nAudioFilename: song.mp3\nMode: 0\n"});
     if (beatmap.audio_filename != "song.mp3") {
         return fail("clean parse");
     }
     osbtk::sdk::Vector2 origin =
-        clean.origin.get_origin_vector({osbtk::sdk::OsbOrigin::Centre, 100.0, 100.0});
+        clean.core.get_origin_vector({osbtk::sdk::OsbOrigin::Centre, 100.0, 100.0});
     if (std::abs(origin.x - 50.0) > 1e-6) {
         return fail("clean origin");
     }

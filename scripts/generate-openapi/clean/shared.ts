@@ -36,7 +36,7 @@ export interface Contract {
     schemas: Record<string, any>;
 }
 
-const core = new Set(['Animations', 'Common', 'Curve', 'Origin', 'Parsing']);
+const core = new Set(['Core']);
 const runtime = new Set(['Audio', 'Generator', 'Helpers', 'Layer', 'Sprite', 'Storyboarding3d']);
 
 export function sectionOf(tag: string): 'runtime' | 'core' | 'libraries' {

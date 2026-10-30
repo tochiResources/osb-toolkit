@@ -55,7 +55,7 @@ class SdkTests(unittest.TestCase):
         )
 
     def test_applies_easing(self) -> None:
-        self.assertAlmostEqual(osb.animations.apply_easing("InQuad", 0.5), 0.25, places=6)
+        self.assertAlmostEqual(osb.core.apply_easing("InQuad", 0.5), 0.25, places=6)
 
     def test_drives_the_storyboard_through_the_generated_client(self) -> None:
         runtime = Runtime()
@@ -141,11 +141,11 @@ class SdkTests(unittest.TestCase):
             kind=CurveKind("Linear"),
             points=[Vector2(x=0.0, y=0.0), Vector2(x=100.0, y=0.0)],
         )
-        self.assertAlmostEqual(osb.curve.length(curve), 100.0, places=6)
-        self.assertAlmostEqual(osb.curve.point(curve, 0.5).x, 50.0, places=6)
-        self.assertEqual(len(osb.curve.sample(3, curve).points), 3)
-        self.assertAlmostEqual(osb.curve.bounding_box(curve).max.x, 100.0, places=6)
-        simplified = osb.curve.simplify(
+        self.assertAlmostEqual(osb.core.length(curve), 100.0, places=6)
+        self.assertAlmostEqual(osb.core.point(curve, 0.5).x, 50.0, places=6)
+        self.assertEqual(len(osb.core.sample(3, curve).points), 3)
+        self.assertAlmostEqual(osb.core.bounding_box(curve).max.x, 100.0, places=6)
+        simplified = osb.core.simplify(
             [
                 Vector2(x=0.0, y=0.0),
                 Vector2(x=1.0, y=0.05),
@@ -155,15 +155,15 @@ class SdkTests(unittest.TestCase):
             0.1,
         )
         self.assertEqual(len(simplified.points), 2)
-        self.assertAlmostEqual(osb.curve.normal(curve, 0.5).x, 0.0, places=6)
-        self.assertAlmostEqual(osb.curve.curvature(curve, 0.5), 0.0, places=6)
+        self.assertAlmostEqual(osb.core.normal(curve, 0.5).x, 0.0, places=6)
+        self.assertAlmostEqual(osb.core.curvature(curve, 0.5), 0.0, places=6)
         self.assertAlmostEqual(
-            osb.curve.distance_to(curve, Vector2(x=50.0, y=10.0)), 10.0, places=6
+            osb.core.distance_to(curve, Vector2(x=50.0, y=10.0)), 10.0, places=6
         )
-        self.assertEqual(len(osb.curve.offset(curve, 5.0).points), 2)
-        self.assertEqual(len(osb.curve.arc(Vector2(x=0.0, y=0.0), 10.0, 0.0, 180.0, 3).points), 3)
-        self.assertEqual(len(osb.curve.ellipse(Vector2(x=0.0, y=0.0), 4.0, 2.0, 4).points), 4)
-        hit = osb.curve.line_intersect(
+        self.assertEqual(len(osb.core.offset(curve, 5.0).points), 2)
+        self.assertEqual(len(osb.core.arc(Vector2(x=0.0, y=0.0), 10.0, 0.0, 180.0, 3).points), 3)
+        self.assertEqual(len(osb.core.ellipse(Vector2(x=0.0, y=0.0), 4.0, 2.0, 4).points), 4)
+        hit = osb.core.line_intersect(
             Vector2(x=0.0, y=0.0),
             Vector2(x=10.0, y=10.0),
             Vector2(x=0.0, y=10.0),

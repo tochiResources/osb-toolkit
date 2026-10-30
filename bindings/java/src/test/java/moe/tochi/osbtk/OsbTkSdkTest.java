@@ -65,7 +65,7 @@ class OsbTkSdkTest {
 
     @Test
     void appliesEasing() throws Exception {
-        assertEquals(0.25, osb.Animations.applyEasing(Easing.IN_QUAD, 0.5), 1e-6);
+        assertEquals(0.25, osb.Core.applyEasing(Easing.IN_QUAD, 0.5), 1e-6);
     }
 
     @Test
@@ -138,13 +138,13 @@ class OsbTkSdkTest {
                                 List.of(
                                         new Vector2().x(0.0).y(0.0),
                                         new Vector2().x(100.0).y(0.0)));
-        assertEquals(100.0, osb.Curve.length(curve), 1e-6);
-        assertEquals(50.0, osb.Curve.point(curve, 0.5, false).getX(), 1e-6);
-        assertEquals(3, osb.Curve.sample(curve, 3, false).getPoints().size());
-        assertEquals(100.0, osb.Curve.boundingBox(curve).getMax().getX(), 1e-6);
+        assertEquals(100.0, osb.Core.length(curve), 1e-6);
+        assertEquals(50.0, osb.Core.point(curve, 0.5, false).getX(), 1e-6);
+        assertEquals(3, osb.Core.sample(3, curve, false).getPoints().size());
+        assertEquals(100.0, osb.Core.boundingBox(curve).getMax().getX(), 1e-6);
 
         PointListResult simplified =
-                osb.Curve.simplify(
+                osb.Core.simplify(
                         List.of(
                                 new Vector2().x(0.0).y(0.0),
                                 new Vector2().x(1.0).y(0.05),
@@ -152,14 +152,14 @@ class OsbTkSdkTest {
                                 new Vector2().x(3.0).y(0.0)),
                         0.1);
         assertEquals(2, simplified.getPoints().size());
-        assertEquals(0.0, osb.Curve.normal(curve, 0.5).getX(), 1e-6);
-        assertEquals(0.0, osb.Curve.curvature(curve, 0.5), 1e-6);
-        assertEquals(10.0, osb.Curve.distanceTo(curve, new Vector2().x(50.0).y(10.0)), 1e-6);
-        assertEquals(2, osb.Curve.offset(curve, 5.0).getPoints().size());
-        assertEquals(3, osb.Curve.arc(new Vector2().x(0.0).y(0.0), 10.0, 0.0, 180.0, 3).getPoints().size());
-        assertEquals(4, osb.Curve.ellipse(new Vector2().x(0.0).y(0.0), 4.0, 2.0, 4).getPoints().size());
+        assertEquals(0.0, osb.Core.normal(curve, 0.5).getX(), 1e-6);
+        assertEquals(0.0, osb.Core.curvature(curve, 0.5), 1e-6);
+        assertEquals(10.0, osb.Core.distanceTo(curve, new Vector2().x(50.0).y(10.0)), 1e-6);
+        assertEquals(2, osb.Core.offset(curve, 5.0).getPoints().size());
+        assertEquals(3, osb.Core.arc(new Vector2().x(0.0).y(0.0), 10.0, 0.0, 180.0, 3).getPoints().size());
+        assertEquals(4, osb.Core.ellipse(new Vector2().x(0.0).y(0.0), 4.0, 2.0, 4).getPoints().size());
         Vector2 hit =
-                osb.Curve.lineIntersect(
+                osb.Core.lineIntersect(
                         new Vector2().x(0.0).y(0.0),
                         new Vector2().x(10.0).y(10.0),
                         new Vector2().x(0.0).y(10.0),

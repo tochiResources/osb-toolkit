@@ -27,20 +27,30 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import moe.tochi.osbtk.model.ApplyEasingRequest;
 import moe.tochi.osbtk.model.ArcRequest;
+import moe.tochi.osbtk.model.Beatmap;
+import moe.tochi.osbtk.model.BoolResult;
 import moe.tochi.osbtk.model.Box2;
 import moe.tochi.osbtk.model.CurveDistanceRequest;
 import moe.tochi.osbtk.model.CurveOffsetRequest;
 import moe.tochi.osbtk.model.CurvePointRequest;
 import moe.tochi.osbtk.model.CurveRequest;
 import moe.tochi.osbtk.model.CurveSampleRequest;
+import moe.tochi.osbtk.model.EasingResult;
+import moe.tochi.osbtk.model.EasingValueRequest;
 import moe.tochi.osbtk.model.EllipseRequest;
+import moe.tochi.osbtk.model.GetOriginVectorRequest;
+import moe.tochi.osbtk.model.InScreenBoundsRequest;
 import moe.tochi.osbtk.model.LineIntersectRequest;
 import moe.tochi.osbtk.model.OptionalPointResult;
+import moe.tochi.osbtk.model.ParseOsbResult;
 import moe.tochi.osbtk.model.PointListResult;
 import moe.tochi.osbtk.model.ScalarResult;
 import moe.tochi.osbtk.model.SimplifyRequest;
+import moe.tochi.osbtk.model.TextRequest;
 import moe.tochi.osbtk.model.Vector2;
+import moe.tochi.osbtk.model.VersionResult;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -48,16 +58,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CurveAPI {
+public class CoreAPI {
     private ApiClient localVarApiClient;
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public CurveAPI() {
+    public CoreAPI() {
         this(Configuration.getDefaultApiClient());
     }
 
-    public CurveAPI(ApiClient apiClient) {
+    public CoreAPI(ApiClient apiClient) {
         this.localVarApiClient = apiClient;
     }
 
@@ -85,6 +95,133 @@ public class CurveAPI {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    /**
+     * Build call for applyEasing
+     * @param applyEasingRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The eased value </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call applyEasingCall(@javax.annotation.Nonnull ApplyEasingRequest applyEasingRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = applyEasingRequest;
+
+        // create path and map variables
+        String localVarPath = "/bridge/Animations.applyEasing";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call applyEasingValidateBeforeCall(@javax.annotation.Nonnull ApplyEasingRequest applyEasingRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'applyEasingRequest' is set
+        if (applyEasingRequest == null) {
+            throw new ApiException("Missing the required parameter 'applyEasingRequest' when calling applyEasing(Async)");
+        }
+
+        return applyEasingCall(applyEasingRequest, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param applyEasingRequest  (required)
+     * @return EasingResult
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The eased value </td><td>  -  </td></tr>
+     </table>
+     */
+    public EasingResult applyEasing(@javax.annotation.Nonnull ApplyEasingRequest applyEasingRequest) throws ApiException {
+        ApiResponse<EasingResult> localVarResp = _applyEasingWithHttpInfo(applyEasingRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @param applyEasingRequest  (required)
+     * @return ApiResponse&lt;EasingResult&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The eased value </td><td>  -  </td></tr>
+     </table>
+     */
+    protected ApiResponse<EasingResult> _applyEasingWithHttpInfo(@javax.annotation.Nonnull ApplyEasingRequest applyEasingRequest) throws ApiException {
+        okhttp3.Call localVarCall = applyEasingValidateBeforeCall(applyEasingRequest, null);
+        Type localVarReturnType = new TypeToken<EasingResult>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param applyEasingRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The eased value </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call applyEasingAsync(@javax.annotation.Nonnull ApplyEasingRequest applyEasingRequest, final ApiCallback<EasingResult> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = applyEasingValidateBeforeCall(applyEasingRequest, _callback);
+        Type localVarReturnType = new TypeToken<EasingResult>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
     /**
      * Build call for arc
      * @param arcRequest  (required)
@@ -594,6 +731,133 @@ public class CurveAPI {
         return localVarCall;
     }
     /**
+     * Build call for easingValue
+     * @param easingValueRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The eased value (named easing or cubic-bezier) </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call easingValueCall(@javax.annotation.Nonnull EasingValueRequest easingValueRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = easingValueRequest;
+
+        // create path and map variables
+        String localVarPath = "/bridge/Animations.easingValue";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call easingValueValidateBeforeCall(@javax.annotation.Nonnull EasingValueRequest easingValueRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'easingValueRequest' is set
+        if (easingValueRequest == null) {
+            throw new ApiException("Missing the required parameter 'easingValueRequest' when calling easingValue(Async)");
+        }
+
+        return easingValueCall(easingValueRequest, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param easingValueRequest  (required)
+     * @return EasingResult
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The eased value (named easing or cubic-bezier) </td><td>  -  </td></tr>
+     </table>
+     */
+    public EasingResult easingValue(@javax.annotation.Nonnull EasingValueRequest easingValueRequest) throws ApiException {
+        ApiResponse<EasingResult> localVarResp = _easingValueWithHttpInfo(easingValueRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @param easingValueRequest  (required)
+     * @return ApiResponse&lt;EasingResult&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The eased value (named easing or cubic-bezier) </td><td>  -  </td></tr>
+     </table>
+     */
+    protected ApiResponse<EasingResult> _easingValueWithHttpInfo(@javax.annotation.Nonnull EasingValueRequest easingValueRequest) throws ApiException {
+        okhttp3.Call localVarCall = easingValueValidateBeforeCall(easingValueRequest, null);
+        Type localVarReturnType = new TypeToken<EasingResult>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param easingValueRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The eased value (named easing or cubic-bezier) </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call easingValueAsync(@javax.annotation.Nonnull EasingValueRequest easingValueRequest, final ApiCallback<EasingResult> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = easingValueValidateBeforeCall(easingValueRequest, _callback);
+        Type localVarReturnType = new TypeToken<EasingResult>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for ellipse
      * @param ellipseRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -717,6 +981,260 @@ public class CurveAPI {
 
         okhttp3.Call localVarCall = ellipseValidateBeforeCall(ellipseRequest, _callback);
         Type localVarReturnType = new TypeToken<PointListResult>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getOriginVector
+     * @param getOriginVectorRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The anchor offset for the origin </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getOriginVectorCall(@javax.annotation.Nonnull GetOriginVectorRequest getOriginVectorRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = getOriginVectorRequest;
+
+        // create path and map variables
+        String localVarPath = "/bridge/Origin.getOriginVector";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getOriginVectorValidateBeforeCall(@javax.annotation.Nonnull GetOriginVectorRequest getOriginVectorRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'getOriginVectorRequest' is set
+        if (getOriginVectorRequest == null) {
+            throw new ApiException("Missing the required parameter 'getOriginVectorRequest' when calling getOriginVector(Async)");
+        }
+
+        return getOriginVectorCall(getOriginVectorRequest, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param getOriginVectorRequest  (required)
+     * @return Vector2
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The anchor offset for the origin </td><td>  -  </td></tr>
+     </table>
+     */
+    public Vector2 getOriginVector(@javax.annotation.Nonnull GetOriginVectorRequest getOriginVectorRequest) throws ApiException {
+        ApiResponse<Vector2> localVarResp = _getOriginVectorWithHttpInfo(getOriginVectorRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @param getOriginVectorRequest  (required)
+     * @return ApiResponse&lt;Vector2&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The anchor offset for the origin </td><td>  -  </td></tr>
+     </table>
+     */
+    protected ApiResponse<Vector2> _getOriginVectorWithHttpInfo(@javax.annotation.Nonnull GetOriginVectorRequest getOriginVectorRequest) throws ApiException {
+        okhttp3.Call localVarCall = getOriginVectorValidateBeforeCall(getOriginVectorRequest, null);
+        Type localVarReturnType = new TypeToken<Vector2>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param getOriginVectorRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The anchor offset for the origin </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getOriginVectorAsync(@javax.annotation.Nonnull GetOriginVectorRequest getOriginVectorRequest, final ApiCallback<Vector2> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getOriginVectorValidateBeforeCall(getOriginVectorRequest, _callback);
+        Type localVarReturnType = new TypeToken<Vector2>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for inScreenBounds
+     * @param inScreenBoundsRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Whether the sprite&#39;s bounds intersect the screen </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call inScreenBoundsCall(@javax.annotation.Nonnull InScreenBoundsRequest inScreenBoundsRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = inScreenBoundsRequest;
+
+        // create path and map variables
+        String localVarPath = "/bridge/Origin.inScreenBounds";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call inScreenBoundsValidateBeforeCall(@javax.annotation.Nonnull InScreenBoundsRequest inScreenBoundsRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'inScreenBoundsRequest' is set
+        if (inScreenBoundsRequest == null) {
+            throw new ApiException("Missing the required parameter 'inScreenBoundsRequest' when calling inScreenBounds(Async)");
+        }
+
+        return inScreenBoundsCall(inScreenBoundsRequest, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param inScreenBoundsRequest  (required)
+     * @return BoolResult
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Whether the sprite&#39;s bounds intersect the screen </td><td>  -  </td></tr>
+     </table>
+     */
+    public BoolResult inScreenBounds(@javax.annotation.Nonnull InScreenBoundsRequest inScreenBoundsRequest) throws ApiException {
+        ApiResponse<BoolResult> localVarResp = _inScreenBoundsWithHttpInfo(inScreenBoundsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @param inScreenBoundsRequest  (required)
+     * @return ApiResponse&lt;BoolResult&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Whether the sprite&#39;s bounds intersect the screen </td><td>  -  </td></tr>
+     </table>
+     */
+    protected ApiResponse<BoolResult> _inScreenBoundsWithHttpInfo(@javax.annotation.Nonnull InScreenBoundsRequest inScreenBoundsRequest) throws ApiException {
+        okhttp3.Call localVarCall = inScreenBoundsValidateBeforeCall(inScreenBoundsRequest, null);
+        Type localVarReturnType = new TypeToken<BoolResult>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param inScreenBoundsRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Whether the sprite&#39;s bounds intersect the screen </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call inScreenBoundsAsync(@javax.annotation.Nonnull InScreenBoundsRequest inScreenBoundsRequest, final ApiCallback<BoolResult> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = inScreenBoundsValidateBeforeCall(inScreenBoundsRequest, _callback);
+        Type localVarReturnType = new TypeToken<BoolResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -1229,6 +1747,260 @@ public class CurveAPI {
         return localVarCall;
     }
     /**
+     * Build call for parseOsb
+     * @param textRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The storyboard summary </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call parseOsbCall(@javax.annotation.Nonnull TextRequest textRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = textRequest;
+
+        // create path and map variables
+        String localVarPath = "/bridge/Parsing.parseOsb";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call parseOsbValidateBeforeCall(@javax.annotation.Nonnull TextRequest textRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'textRequest' is set
+        if (textRequest == null) {
+            throw new ApiException("Missing the required parameter 'textRequest' when calling parseOsb(Async)");
+        }
+
+        return parseOsbCall(textRequest, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param textRequest  (required)
+     * @return ParseOsbResult
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The storyboard summary </td><td>  -  </td></tr>
+     </table>
+     */
+    public ParseOsbResult parseOsb(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
+        ApiResponse<ParseOsbResult> localVarResp = _parseOsbWithHttpInfo(textRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @param textRequest  (required)
+     * @return ApiResponse&lt;ParseOsbResult&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The storyboard summary </td><td>  -  </td></tr>
+     </table>
+     */
+    protected ApiResponse<ParseOsbResult> _parseOsbWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
+        okhttp3.Call localVarCall = parseOsbValidateBeforeCall(textRequest, null);
+        Type localVarReturnType = new TypeToken<ParseOsbResult>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param textRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The storyboard summary </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call parseOsbAsync(@javax.annotation.Nonnull TextRequest textRequest, final ApiCallback<ParseOsbResult> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = parseOsbValidateBeforeCall(textRequest, _callback);
+        Type localVarReturnType = new TypeToken<ParseOsbResult>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for parseOsu
+     * @param textRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The parsed beatmap </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call parseOsuCall(@javax.annotation.Nonnull TextRequest textRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = textRequest;
+
+        // create path and map variables
+        String localVarPath = "/bridge/Parsing.parseOsu";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call parseOsuValidateBeforeCall(@javax.annotation.Nonnull TextRequest textRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'textRequest' is set
+        if (textRequest == null) {
+            throw new ApiException("Missing the required parameter 'textRequest' when calling parseOsu(Async)");
+        }
+
+        return parseOsuCall(textRequest, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param textRequest  (required)
+     * @return Beatmap
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The parsed beatmap </td><td>  -  </td></tr>
+     </table>
+     */
+    public Beatmap parseOsu(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
+        ApiResponse<Beatmap> localVarResp = _parseOsuWithHttpInfo(textRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @param textRequest  (required)
+     * @return ApiResponse&lt;Beatmap&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The parsed beatmap </td><td>  -  </td></tr>
+     </table>
+     */
+    protected ApiResponse<Beatmap> _parseOsuWithHttpInfo(@javax.annotation.Nonnull TextRequest textRequest) throws ApiException {
+        okhttp3.Call localVarCall = parseOsuValidateBeforeCall(textRequest, null);
+        Type localVarReturnType = new TypeToken<Beatmap>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param textRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The parsed beatmap </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call parseOsuAsync(@javax.annotation.Nonnull TextRequest textRequest, final ApiCallback<Beatmap> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = parseOsuValidateBeforeCall(textRequest, _callback);
+        Type localVarReturnType = new TypeToken<Beatmap>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for point
      * @param curvePointRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -1733,6 +2505,123 @@ public class CurveAPI {
 
         okhttp3.Call localVarCall = tangentValidateBeforeCall(curvePointRequest, _callback);
         Type localVarReturnType = new TypeToken<Vector2>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for version
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The runtime version </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call versionCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/bridge/Common.version";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call versionValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return versionCall(_callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @return VersionResult
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The runtime version </td><td>  -  </td></tr>
+     </table>
+     */
+    public VersionResult version() throws ApiException {
+        ApiResponse<VersionResult> localVarResp = _versionWithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @return ApiResponse&lt;VersionResult&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The runtime version </td><td>  -  </td></tr>
+     </table>
+     */
+    protected ApiResponse<VersionResult> _versionWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = versionValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<VersionResult>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The runtime version </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call versionAsync(final ApiCallback<VersionResult> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = versionValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<VersionResult>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

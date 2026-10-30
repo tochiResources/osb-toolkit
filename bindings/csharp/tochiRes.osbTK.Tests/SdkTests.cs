@@ -32,7 +32,7 @@ public class SdkTests
     }
 
     [Fact]
-    public void AppliesEasing() => Assert.Equal(0.25, Entry.Animations.ApplyEasing(Easing.InQuad, 0.5), 6);
+    public void AppliesEasing() => Assert.Equal(0.25, Entry.Core.ApplyEasing(Easing.InQuad, 0.5), 6);
 
     [Fact]
     public void DrivesTheStoryboardThroughTheGeneratedClient()
@@ -214,8 +214,8 @@ public class SdkTests
         Assert.Equal("sb/dot.png", baked.Sprites[0].SpritePath);
         Assert.NotEmpty(baked.Sprites[0].Commands);
 
-        Assert.Equal(0.0, Entry.Animations.EasingValue(0.0, null, [0.42, 0.0, 0.58, 1.0]), 6);
-        Assert.Equal(1.0, Entry.Animations.EasingValue(1.0, null, [0.42, 0.0, 0.58, 1.0]), 6);
+        Assert.Equal(0.0, Entry.Core.EasingValue(0.0, null, [0.42, 0.0, 0.58, 1.0]), 6);
+        Assert.Equal(1.0, Entry.Core.EasingValue(1.0, null, [0.42, 0.0, 0.58, 1.0]), 6);
     }
 
     [Fact]
@@ -225,16 +225,16 @@ public class SdkTests
             kind: CurveKind.Linear,
             points: [new Vector2 { X = 0, Y = 0 }, new Vector2 { X = 100, Y = 0 }]
         );
-        Assert.Equal(100.0, Entry.Curve.Length(curve), 6);
-        Assert.Equal(50.0, Entry.Curve.Point(curve, 0.5).X, 6);
-        Assert.Equal(3, Entry.Curve.Sample(3, curve).Points.Count);
-        Assert.Equal(100.0, Entry.Curve.BoundingBox(curve).Max.X, 6);
-        Assert.Equal(0.0, Entry.Curve.Normal(curve, 0.5).X, 6);
-        Assert.Equal(0.0, Entry.Curve.Curvature(curve, 0.5), 6);
-        Assert.Equal(10.0, Entry.Curve.DistanceTo(curve, new Vector2 { X = 50, Y = 10 }), 6);
-        Assert.Equal(2, Entry.Curve.Offset(curve, 5.0).Points.Count);
+        Assert.Equal(100.0, Entry.Core.Length(curve), 6);
+        Assert.Equal(50.0, Entry.Core.Point(curve, 0.5).X, 6);
+        Assert.Equal(3, Entry.Core.Sample(3, curve).Points.Count);
+        Assert.Equal(100.0, Entry.Core.BoundingBox(curve).Max.X, 6);
+        Assert.Equal(0.0, Entry.Core.Normal(curve, 0.5).X, 6);
+        Assert.Equal(0.0, Entry.Core.Curvature(curve, 0.5), 6);
+        Assert.Equal(10.0, Entry.Core.DistanceTo(curve, new Vector2 { X = 50, Y = 10 }), 6);
+        Assert.Equal(2, Entry.Core.Offset(curve, 5.0).Points.Count);
 
-        PointListResult simplified = Entry.Curve.Simplify(
+        PointListResult simplified = Entry.Core.Simplify(
             [
                 new Vector2 { X = 0, Y = 0 },
                 new Vector2 { X = 1, Y = 0.05 },
@@ -245,9 +245,9 @@ public class SdkTests
         );
         Assert.Equal(2, simplified.Points.Count);
 
-        Assert.Equal(3, Entry.Curve.Arc(new Vector2 { X = 0, Y = 0 }, 10, 0, 180, 3).Points.Count);
-        Assert.Equal(4, Entry.Curve.Ellipse(new Vector2 { X = 0, Y = 0 }, 4, 2, 4).Points.Count);
-        Vector2 hit = Entry.Curve.LineIntersect(
+        Assert.Equal(3, Entry.Core.Arc(new Vector2 { X = 0, Y = 0 }, 10, 0, 180, 3).Points.Count);
+        Assert.Equal(4, Entry.Core.Ellipse(new Vector2 { X = 0, Y = 0 }, 4, 2, 4).Points.Count);
+        Vector2 hit = Entry.Core.LineIntersect(
             new Vector2 { X = 0, Y = 0 },
             new Vector2 { X = 10, Y = 10 },
             new Vector2 { X = 0, Y = 10 },

@@ -18,7 +18,7 @@ func TestComposedStatelessClient(t *testing.T) {
 		Kind:   osbtk.CURVEKIND_LINEAR,
 		Points: []osbtk.Vector2{{X: 0, Y: 0}, {X: 100, Y: 0}},
 	}
-	length, _, err := client.Curve.Length(
+	length, _, err := client.Core.Length(
 		context.Background(),
 		clean.CurveOptions{Curve: curve},
 	)

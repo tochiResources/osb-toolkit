@@ -16,7 +16,7 @@
     "/bridge/Animations.applyEasing": {
       "post": {
         "tags": [
-          "Animations"
+          "Core"
         ],
         "operationId": "Animations.applyEasing",
         "requestBody": {
@@ -46,7 +46,7 @@
     "/bridge/Animations.easingValue": {
       "post": {
         "tags": [
-          "Animations"
+          "Core"
         ],
         "operationId": "Animations.easingValue",
         "requestBody": {
@@ -156,7 +156,7 @@
     "/bridge/Common.version": {
       "post": {
         "tags": [
-          "Common"
+          "Core"
         ],
         "operationId": "Common.version",
         "responses": {
@@ -176,7 +176,7 @@
     "/bridge/Curve.arc": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.arc",
         "requestBody": {
@@ -206,7 +206,7 @@
     "/bridge/Curve.boundingBox": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.boundingBox",
         "requestBody": {
@@ -236,7 +236,7 @@
     "/bridge/Curve.curvature": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.curvature",
         "requestBody": {
@@ -266,7 +266,7 @@
     "/bridge/Curve.distanceTo": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.distanceTo",
         "requestBody": {
@@ -296,7 +296,7 @@
     "/bridge/Curve.ellipse": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.ellipse",
         "requestBody": {
@@ -326,7 +326,7 @@
     "/bridge/Curve.length": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.length",
         "requestBody": {
@@ -356,7 +356,7 @@
     "/bridge/Curve.lineIntersect": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.lineIntersect",
         "requestBody": {
@@ -386,7 +386,7 @@
     "/bridge/Curve.normal": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.normal",
         "requestBody": {
@@ -416,7 +416,7 @@
     "/bridge/Curve.offset": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.offset",
         "requestBody": {
@@ -446,7 +446,7 @@
     "/bridge/Curve.point": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.point",
         "requestBody": {
@@ -476,7 +476,7 @@
     "/bridge/Curve.sample": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.sample",
         "requestBody": {
@@ -506,7 +506,7 @@
     "/bridge/Curve.simplify": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.simplify",
         "requestBody": {
@@ -536,7 +536,7 @@
     "/bridge/Curve.tangent": {
       "post": {
         "tags": [
-          "Curve"
+          "Core"
         ],
         "operationId": "Curve.tangent",
         "requestBody": {
@@ -956,7 +956,7 @@
     "/bridge/Origin.getOriginVector": {
       "post": {
         "tags": [
-          "Origin"
+          "Core"
         ],
         "operationId": "Origin.getOriginVector",
         "requestBody": {
@@ -986,7 +986,7 @@
     "/bridge/Origin.inScreenBounds": {
       "post": {
         "tags": [
-          "Origin"
+          "Core"
         ],
         "operationId": "Origin.inScreenBounds",
         "requestBody": {
@@ -1016,7 +1016,7 @@
     "/bridge/Parsing.parseOsb": {
       "post": {
         "tags": [
-          "Parsing"
+          "Core"
         ],
         "operationId": "Parsing.parseOsb",
         "requestBody": {
@@ -1046,7 +1046,7 @@
     "/bridge/Parsing.parseOsu": {
       "post": {
         "tags": [
-          "Parsing"
+          "Core"
         ],
         "operationId": "Parsing.parseOsu",
         "requestBody": {

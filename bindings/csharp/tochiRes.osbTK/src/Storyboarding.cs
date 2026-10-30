@@ -33,19 +33,19 @@ public static partial class osb
         public static Beatmap ParseOsu(string text)
         {
             ArgumentException.ThrowIfNullOrEmpty(text);
-            return osb.Parsing.ParseOsu(text);
+            return osb.Core.ParseOsu(text);
         }
 
         /// <summary>Parses a `.osb` storyboard into a summary.</summary>
         public static ParseOsbResult ParseOsb(string text)
         {
             ArgumentException.ThrowIfNullOrEmpty(text);
-            return osb.Parsing.ParseOsb(text);
+            return osb.Core.ParseOsb(text);
         }
 
         /// <summary>The anchor offset for an origin.</summary>
         public static Vector2 GetOriginVector(OsbOrigin origin, double width, double height) =>
-            osb.Origin.GetOriginVector(origin, width, height);
+            osb.Core.GetOriginVector(origin, width, height);
 
         /// <summary>Whether a rotated sprite's bounds intersect the screen.</summary>
         public static bool InScreenBounds(
@@ -53,7 +53,7 @@ public static partial class osb
             Vector2 size,
             double rotation,
             Vector2 origin
-        ) => osb.Origin.InScreenBounds(position, size, rotation, origin);
+        ) => osb.Core.InScreenBounds(position, size, rotation, origin);
 
         /// <summary>
         /// A live storyboard runtime: the effect context (beatmap, audio,

@@ -13,10 +13,8 @@ from typing import Any
 
 from osbtk import models  # noqa: F401  (re-export the generated models)
 from osbtk._native import bake3d, exec, fft, parse_osb, parse_osu, version
-from osbtk.api.animations_api import AnimationsAPI
 from osbtk.api.audio_api import AudioAPI
-from osbtk.api.common_api import CommonAPI
-from osbtk.api.curve_api import CurveAPI
+from osbtk.api.core_api import CoreAPI
 from osbtk.api.diagnostics_api import DiagnosticsAPI
 from osbtk.api.generator_api import GeneratorAPI
 from osbtk.api.image_api import ImageAPI
@@ -24,24 +22,18 @@ from osbtk.api.imagegen_api import ImagegenAPI
 from osbtk.api.layer_api import LayerAPI
 from osbtk.api.media_api import MediaAPI
 from osbtk.api.optimize_api import OptimizeAPI
-from osbtk.api.origin_api import OriginAPI
-from osbtk.api.parsing_api import ParsingAPI
 from osbtk.api.sprite_api import SpriteAPI
 from osbtk.api_client import ApiClient
 from osbtk.bridge import BridgeRestClient
 from osbtk.client import (
-    Animations,
     Audio as AudioClient,
-    Common,
-    Curve,
+    Core,
     Diagnostics,
     Generator as GeneratorClient,
     Image,
     Imagegen,
     Media,
     Optimize,
-    Origin,
-    Parsing,
 )
 from osbtk.libraries import Helpers, Storyboarding, Storyboarding3d
 from osbtk.libraries._client import STATELESS
@@ -73,11 +65,7 @@ class _Osb:
     storyboarding3d = Storyboarding3d
     helpers = Helpers
 
-    common = Common(CommonAPI(STATELESS))
-    curve = Curve(CurveAPI(STATELESS))
-    animations = Animations(AnimationsAPI(STATELESS))
-    parsing = Parsing(ParsingAPI(STATELESS))
-    origin = Origin(OriginAPI(STATELESS))
+    core = Core(CoreAPI(STATELESS))
     audio = AudioClient(AudioAPI(STATELESS))
     diagnostics = Diagnostics(DiagnosticsAPI(STATELESS))
     optimize = Optimize(OptimizeAPI(STATELESS))

@@ -86,8 +86,8 @@ import moe.tochi.osbtk.model.Vector3;
 import okhttp3.OkHttpClient;
 
 /**
- * The osb SDK entry point, organized into libraries: {@link Storyboarding},
- * {@link Animations}, {@link Audio} and {@link Storyboarding3d}.
+ * The osb SDK entry point, organized into libraries: {@link Core},
+ * {@link Storyboarding}, {@link Audio} and {@link Storyboarding3d}.
  */
 public final class osb {
     private osb() {}
@@ -106,6 +106,14 @@ public final class osb {
         apiClient.setBasePath("http://osbtk.invalid");
         return apiClient;
     }
+
+    /**
+     * The non-runtime `Core` surface: the native version, the stateless
+     * parsers, easing and the curve/origin math.
+     */
+    public static final moe.tochi.osbtk.client.core.Core Core =
+            new moe.tochi.osbtk.client.core.Core(
+                    new moe.tochi.osbtk.api.CoreAPI(statelessClient()));
 
     /**
      * The shared motion-graphics helpers: one {@code helper} op namespaced
@@ -519,37 +527,31 @@ public final class osb {
 
     /** The storyboarding library: `.osu`/`.osb` parsing. */
     public static final class Storyboarding {
-        private static final moe.tochi.osbtk.client.core.Parsing Parsing =
-                new moe.tochi.osbtk.client.core.Parsing(
-                        new moe.tochi.osbtk.api.ParsingAPI(statelessClient()));
-        private static final moe.tochi.osbtk.client.core.Origin Origin =
-                new moe.tochi.osbtk.client.core.Origin(
-                        new moe.tochi.osbtk.api.OriginAPI(statelessClient()));
         private static final moe.tochi.osbtk.api.HelpersAPI Helpers = new moe.tochi.osbtk.api.HelpersAPI(statelessClient());
 
         private Storyboarding() {}
 
         /** Parses a `.osu` beatmap into the typed model. */
         public static Beatmap parseOsu(String text) throws ApiException {
-            return Parsing.parseOsu(text);
+            return Core.parseOsu(text);
         }
 
         /** Parses a `.osb` storyboard into a summary. */
         public static ParseOsbResult parseOsb(String text) throws ApiException {
-            return Parsing.parseOsb(text);
+            return Core.parseOsb(text);
         }
 
         /** {@code OsbSprite.GetOriginVector}. */
         public static Vector2 getOriginVector(OsbOrigin origin, double width, double height)
                 throws ApiException {
-            return Origin.getOriginVector(origin, width, height);
+            return Core.getOriginVector(origin, width, height);
         }
 
         /** {@code OsbSprite.InScreenBounds}. */
         public static boolean inScreenBounds(
                 Vector2 position, Vector2 size, double rotation, Vector2 origin)
                 throws ApiException {
-            return Origin.inScreenBounds(position, size, rotation, origin);
+            return Core.inScreenBounds(position, size, rotation, origin);
         }
 
         /**
@@ -742,26 +744,6 @@ public final class osb {
                 input.put("valueStep", valueStep);
                 return commands("quantizeCommands", input);
             }
-        }
-    }
-
-    /** The animations library: easing evaluation. */
-    public static final class Animations {
-        private static final moe.tochi.osbtk.client.core.Animations CLIENT =
-                new moe.tochi.osbtk.client.core.Animations(
-                        new moe.tochi.osbtk.api.AnimationsAPI(statelessClient()));
-
-        private Animations() {}
-
-        /** Applies a named easing to a normalized time in `0..1`. */
-        public static double applyEasing(Easing easing, double t) throws ApiException {
-            return CLIENT.applyEasing(easing, t);
-        }
-
-        /** Evaluates a CSS cubic-bezier easing ({@code CustomEasing}). */
-        public static double applyCubicBezier(double x1, double y1, double x2, double y2, double t)
-                throws ApiException {
-            return CLIENT.easingValue(t, null, List.of(x1, y1, x2, y2));
         }
     }
 
@@ -1084,90 +1066,6 @@ public final class osb {
                 input.put("byArcLength", byArcLength);
                 return channel("pathFollow", input);
             }
-        }
-    }
-
-    /**
-     * The curve library: Bezier/Catmull-Rom curves, sampling, arc length, tangents,
-     * bounding boxes and Douglas-Peucker simplification.
-     */
-    public static final class Curve {
-        private static final moe.tochi.osbtk.client.core.Curve CLIENT =
-                new moe.tochi.osbtk.client.core.Curve(
-                        new moe.tochi.osbtk.api.CurveAPI(statelessClient()));
-
-        private Curve() {}
-
-        /** The arc length of a curve. */
-        public static double length(CurveSpec curve) throws ApiException {
-            return CLIENT.length(curve);
-        }
-
-        /** The axis-aligned bounding box of a curve. */
-        public static Box2 boundingBox(CurveSpec curve) throws ApiException {
-            return CLIENT.boundingBox(curve);
-        }
-
-        /** The point at {@code t}, parametrically or by arc length. */
-        public static Vector2 point(CurveSpec curve, double t, boolean byArcLength)
-                throws ApiException {
-            return CLIENT.point(curve, t, byArcLength);
-        }
-
-        /** The unit tangent at {@code t}. */
-        public static Vector2 tangent(CurveSpec curve, double t) throws ApiException {
-            return CLIENT.tangent(curve, t);
-        }
-
-        /** {@code count} points along the curve, parametrically or by arc length. */
-        public static PointListResult sample(CurveSpec curve, int count, boolean byArcLength)
-                throws ApiException {
-            return CLIENT.sample(count, curve, byArcLength);
-        }
-
-        /** Simplifies a polyline with the Douglas-Peucker algorithm. */
-        public static PointListResult simplify(List<Vector2> points, double tolerance)
-                throws ApiException {
-            return CLIENT.simplify(points, tolerance);
-        }
-
-        /** The unit normal at {@code t}. */
-        public static Vector2 normal(CurveSpec curve, double t) throws ApiException {
-            return CLIENT.normal(curve, t);
-        }
-
-        /** The curvature at {@code t}. */
-        public static double curvature(CurveSpec curve, double t) throws ApiException {
-            return CLIENT.curvature(curve, t);
-        }
-
-        /** The distance from {@code point} to the curve. */
-        public static double distanceTo(CurveSpec curve, Vector2 point) throws ApiException {
-            return CLIENT.distanceTo(curve, point);
-        }
-
-        /** The polyline offset along the curve's local normal. */
-        public static PointListResult offset(CurveSpec curve, double distance) throws ApiException {
-            return CLIENT.offset(curve, distance);
-        }
-
-        /** Points along a circular arc. */
-        public static PointListResult arc(
-                Vector2 center, double radius, double startAngle, double sweepAngle, int count)
-                throws ApiException {
-            return CLIENT.arc(center, radius, startAngle, sweepAngle, count);
-        }
-
-        /** Points around an ellipse. */
-        public static PointListResult ellipse(
-                Vector2 center, double radiusX, double radiusY, int count) throws ApiException {
-            return CLIENT.ellipse(center, radiusX, radiusY, count);
-        }
-
-        /** The intersection of two line segments, if any. */
-        public static Vector2 lineIntersect(
-                Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2) throws ApiException {
-            return CLIENT.lineIntersect(a1, a2, b1, b2);
         }
     }
 

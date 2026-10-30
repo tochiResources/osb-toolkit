@@ -23,11 +23,7 @@ import (
 type Client struct {
 	API *osbtk.ClientAPI
 
-	Common     *core.Common
-	Curve      *core.Curve
-	Animations *core.Animations
-	Parsing    *core.Parsing
-	Origin     *core.Origin
+	Core *core.Core
 
 	Audio           *cleanruntime.Audio
 	Helpers         *cleanruntime.Helpers
@@ -48,11 +44,7 @@ func New() (*Client, error) {
 	}
 	return &Client{
 		API:             api,
-		Common:          core.NewCommon(api.CommonAPI),
-		Curve:           core.NewCurve(api.CurveAPI),
-		Animations:      core.NewAnimations(api.AnimationsAPI),
-		Parsing:         core.NewParsing(api.ParsingAPI),
-		Origin:          core.NewOrigin(api.OriginAPI),
+		Core:            core.NewCore(api.CoreAPI),
 		Audio:           cleanruntime.NewAudio(api.AudioAPI),
 		Helpers:         cleanruntime.NewHelpers(api.HelpersAPI),
 		Storyboarding3d: cleanruntime.NewStoryboarding3d(api.Storyboarding3dAPI),
