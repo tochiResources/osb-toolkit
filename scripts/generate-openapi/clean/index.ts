@@ -6,5 +6,6 @@ export { emitGoClient } from './go';
 export { emitJavaClient } from './java';
 export { emitCSharpClient } from './csharp';
 export { emitRustClean } from './rust';
+export { emitCppClean } from './cpp';
 export { emitCleanDocs } from './reference';
 export * from './shared';
