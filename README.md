@@ -11,8 +11,8 @@ See the full docs at [osb-toolkit.tochi.moe/docs](https://osb-toolkit.tochi.moe/
 
 ## Projects using osbTK
 
-- **AeToOsb:** https://github.com/tochiResources/AeToOsb
-- **AeBrew:** https://github.com/tochiResources/AeBrew
+- [AeToOsb](https://github.com/tochiResources/AeToOsb)
+- [AeBrew](https://github.com/tochiResources/AeBrew)
 
 ## SDKs and bindings
 
