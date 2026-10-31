@@ -1,6 +1,7 @@
 # CLI
 
-`@tochii/osb-toolkit-core` ships the converter as `osbtk-fx-convert`.
+`@tochii/osb-toolkit-core` (in the `osb-to-plugin` repo) ships the converter as
+`osbtk-fx-convert`.
 
 ```bash
 yarn workspace @tochii/osb-toolkit-core cli <Effect.cs...> [options]

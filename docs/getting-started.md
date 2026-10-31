@@ -28,7 +28,7 @@ yarn openapi        # regenerate the contract and every SDK
 
 ## Convert a script
 
-The converter CLI lives in `@tochii/osb-toolkit-core`:
+The converter CLI lives in the `osb-to-plugin` repo as `@tochii/osb-toolkit-core` (run this from that repo):
 
 ```bash
 yarn workspace @tochii/osb-toolkit-core cli path/to/Background.cs -t after-effects -o dist

@@ -11,10 +11,6 @@
         "test": "vitest run --passWithNoTests",
         "typecheck": "tsc -p tsconfig.json --noEmit"
     },
-    "dependencies": {
-        "@tochii/osb-toolkit-core": "workspace:*",
-        "@tochii/osb-toolkit-shared": "workspace:*"
-    },
     "devDependencies": {
         "@types/node": "catalog:",
         "tsx": "catalog:",

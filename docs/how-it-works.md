@@ -1,7 +1,7 @@
 # How it works
 
 Conversion and rendering run on the Rust engine (`crates/osb-runtime`), driven by
-the converter in `@tochii/osb-toolkit-core`.
+the converter in `@tochii/osb-toolkit-core` (in the `osb-to-plugin` repo).
 
 ## 1. Parse
 
@@ -13,7 +13,7 @@ the converter in `@tochii/osb-toolkit-core`.
 - the `Generate()` body and any helper methods.
 
 The result is an `EffectScript` object (see `src/types/ir.ts` in
-`@tochii/osb-toolkit-shared`).
+`@tochii/osb-toolkit-shared`, in the `osb-to-plugin` repo).
 
 ## 2. Transpile
 
