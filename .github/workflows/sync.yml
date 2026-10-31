@@ -25,3 +25,5 @@ jobs:
         run: yarn install --immutable
       - name: Verify generated files are in sync
         run: yarn dbx sync --check
+      - name: Verify every workspace is in sync
+        run: yarn dbx sync --recursive --check

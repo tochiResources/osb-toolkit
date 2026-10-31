@@ -4,13 +4,29 @@
         ".github/workflows/ci.yml",
         ".github/workflows/sync.yml",
         ".husky/commit-msg",
+        ".oxfmtrc.json",
+        ".oxlintrc.json",
         ".vscode/extensions.json",
         ".vscode/settings.json",
         "commitlint.config.mjs",
-        "package.json",
         "packages/native/tsconfig.json",
         "packages/sdk/tsconfig.json",
         "tsconfig.json",
         "vite.config.ts"
-    ]
+    ],
+    "origins": {
+        ".github/workflows/changelog.yml": "created",
+        ".github/workflows/ci.yml": "created",
+        ".github/workflows/sync.yml": "created",
+        ".husky/commit-msg": "created",
+        ".oxfmtrc.json": "created",
+        ".oxlintrc.json": "created",
+        ".vscode/extensions.json": "created",
+        ".vscode/settings.json": "created",
+        "commitlint.config.mjs": "created",
+        "packages/native/tsconfig.json": "created",
+        "packages/sdk/tsconfig.json": "created",
+        "tsconfig.json": "created",
+        "vite.config.ts": "created"
+    }
 }

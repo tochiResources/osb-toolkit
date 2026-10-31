@@ -1,0 +1,74 @@
+{
+    "$schema": "./node_modules/oxfmt/configuration_schema.json",
+    "useTabs": false,
+    "tabWidth": 4,
+    "printWidth": 100,
+    "endOfLine": "lf",
+    "insertFinalNewline": true,
+    "singleQuote": true,
+    "jsxSingleQuote": false,
+    "quoteProps": "as-needed",
+    "trailingComma": "es5",
+    "semi": true,
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "bracketSameLine": false,
+    "singleAttributePerLine": false,
+    "objectWrap": "preserve",
+    "proseWrap": "preserve",
+    "embeddedLanguageFormatting": "auto",
+    "htmlWhitespaceSensitivity": "css",
+    "vueIndentScriptAndStyle": false,
+    "sortPackageJson": false,
+    "ignorePatterns": [
+        "/vite.config.ts",
+        "docs/reference/api/**",
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/.turbo/**",
+        "**/.generated/**",
+        "**/generated/**",
+        "packages/*/src/lib/**",
+        "**/conformance/golden/**",
+        "**/extensions/**",
+        "packages/*/src/build/**",
+        "packages/native/wasm/**",
+        "**/.vitepress/cache/**",
+        "**/.vitepress/dist/**",
+        "*.json",
+        "docs/*/*.json",
+        "**/tsconfig*.json",
+        "**/*.yml",
+        "**/*.yaml",
+        "**/CHANGELOG.md"
+    ],
+    "sortImports": {
+        "groups": [
+            "builtin",
+            "external",
+            [
+                "custom0",
+                "internal"
+            ],
+            [
+                "parent",
+                "sibling",
+                "index"
+            ]
+        ],
+        "internalPattern": [
+            "~/",
+            "@/"
+        ],
+        "newlinesBetween": true,
+        "sortPackageJson": false,
+        "customGroups": [
+            {
+                "groupName": "custom0",
+                "elementNamePattern": [
+                    "@tochii/**"
+                ]
+            }
+        ]
+    }
+}

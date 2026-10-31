@@ -10,5 +10,6 @@ export default defineConfig({
             packageManager: 'yarn',
             packageManagerVersion: '4.17.1',
         },
+        vite: { config: false },
     },
 });

@@ -16,42 +16,53 @@ export default defineConfig({
             packageManagerVersion: '4.17.1',
         },
         changelog: {
-            branches: { main: 'dev', dev: 'dev' },
-            scopes: ['docs', 'csharp', 'codegen', 'ci', 'release', 'deps'],
-            workflows: {
-                changelog: true,
-                release: false,
-                issues: false,
-                ci: {
-                    steps: {
-                        before: [
-                            {
-                                uses: 'dtolnay/rust-toolchain@stable',
-                                with: { components: 'rustfmt, clippy' },
-                            },
-                            {
-                                uses: 'actions/setup-dotnet@v4',
-                                with: { 'dotnet-version': '10.0.x' },
-                            },
-                        ],
-                        after: [
-                            { run: 'dotnet tool restore' },
-                            { run: 'yarn typecheck' },
-                            { run: 'yarn lint' },
-                            { run: 'yarn test' },
-                            { run: 'yarn clean:rust:if-large' },
-                            { run: 'tsx scripts/cargo.ts test --workspace' },
-                            { run: 'rustup target add wasm32-unknown-unknown' },
-                            {
-                                run: 'cargo install wasm-bindgen-cli --version 0.2.129 --locked',
-                            },
-                            { run: 'yarn build:native' },
-                            { run: 'yarn test:csharp' },
-                            { run: 'yarn test:cpp' },
-                            { run: 'yarn test:python' },
-                            { run: 'yarn test:wasm' },
-                        ],
-                    },
+            commitlint: {
+                scopes: ['docs', 'csharp', 'codegen', 'ci', 'release', 'deps'],
+            },
+        },
+        ci: {
+            changelog: {
+                branches: { main: 'dev', dev: 'dev' },
+            },
+            ci: {
+                steps: {
+                    before: [
+                        {
+                            uses: 'dtolnay/rust-toolchain@stable',
+                            with: { components: 'rustfmt, clippy' },
+                        },
+                        {
+                            uses: 'actions/setup-dotnet@v4',
+                            with: { 'dotnet-version': '10.0.x' },
+                        },
+                    ],
+                    after: [
+                        { run: 'dotnet tool restore' },
+                        { run: 'yarn typecheck' },
+                        { run: 'yarn lint' },
+                        { run: 'yarn test' },
+                        { run: 'yarn clean:rust:if-large' },
+                        { run: 'tsx scripts/cargo.ts test --workspace' },
+                        { run: 'rustup target add wasm32-unknown-unknown' },
+                        {
+                            run: 'cargo install wasm-bindgen-cli --version 0.2.129 --locked',
+                        },
+                        { run: 'yarn build:native' },
+                        { run: 'yarn test:csharp' },
+                        { run: 'yarn test:cpp' },
+                        { run: 'yarn test:python' },
+                        { run: 'yarn test:wasm' },
+                    ],
+                },
+            },
+            sync: {
+                steps: {
+                    after: [
+                        {
+                            name: 'Verify every workspace is in sync',
+                            run: 'yarn dbx sync --recursive --check',
+                        },
+                    ],
                 },
             },
         },
