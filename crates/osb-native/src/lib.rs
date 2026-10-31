@@ -26,7 +26,7 @@ pub use ffi::{
     osbtk_string_free, osbtk_version,
 };
 pub use osb_api::{openapi, openapi_json};
-pub use runtime::{runtime_exec, OsbtkRuntime};
+pub use runtime::{runtime_exec, OsbTKRuntime};
 
 /// The JSON error envelope shared by every entry point.
 pub(crate) fn error_json(message: &str) -> String {

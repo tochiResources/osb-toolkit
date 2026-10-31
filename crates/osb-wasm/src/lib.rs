@@ -2,7 +2,7 @@
 //! `Runtime` class - so the same engine drives JavaScript/TypeScript in the
 //! browser and Node.
 
-use osb_native::{bake_to_json, exec as exec_bridge, runtime_exec, OsbtkRuntime};
+use osb_native::{bake_to_json, exec as exec_bridge, runtime_exec, OsbTKRuntime};
 use wasm_bindgen::prelude::*;
 
 /// The runtime version string.
@@ -26,7 +26,7 @@ pub fn exec_bridge_js(request_json: &str) -> String {
 /// A live runtime (storyboard + context) - the storyboard API.
 #[wasm_bindgen]
 pub struct Runtime {
-    inner: OsbtkRuntime,
+    inner: OsbTKRuntime,
 }
 
 #[wasm_bindgen]
@@ -34,7 +34,7 @@ impl Runtime {
     #[wasm_bindgen(constructor)]
     pub fn new(width: f64, height: f64) -> Runtime {
         Runtime {
-            inner: OsbtkRuntime::new(width as f32, height as f32),
+            inner: OsbTKRuntime::new(width as f32, height as f32),
         }
     }
 

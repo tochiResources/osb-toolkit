@@ -12,14 +12,14 @@ use crate::models::{
 
 /// A live storyboard runtime bound to the native engine.
 pub struct Runtime {
-    inner: osb_native::OsbtkRuntime,
+    inner: osb_native::OsbTKRuntime,
 }
 
 impl Runtime {
     /// Creates a runtime of the given storyboard resolution.
     pub fn new(width: f32, height: f32) -> Self {
         Runtime {
-            inner: osb_native::OsbtkRuntime::new(width, height),
+            inner: osb_native::OsbTKRuntime::new(width, height),
         }
     }
 

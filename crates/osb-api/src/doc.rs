@@ -204,11 +204,11 @@ use crate::{curve, enums, mapset, math, model, request, response, storyboard};
         crate::helper::HelperResult
     ))
 )]
-pub struct OsbtkApi;
+pub struct OsbTKApi;
 
 /// The OpenAPI document as a `utoipa` value.
 pub fn openapi() -> utoipa::openapi::OpenApi {
-    OsbtkApi::openapi()
+    OsbTKApi::openapi()
 }
 
 /// The OpenAPI document serialized as pretty JSON.

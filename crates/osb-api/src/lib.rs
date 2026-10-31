@@ -29,7 +29,7 @@ pub use curve::{
     ArcRequest, CurveKind, CurveSpec, EllipseRequest, LineIntersectRequest, OptionalPointResult,
 };
 pub use diagnostics::{Diagnostic, DiagnosticCode, DiagnosticReport, DiagnosticSeverity};
-pub use doc::{openapi, openapi_json, OsbtkApi};
+pub use doc::{openapi, openapi_json, OsbTKApi};
 pub use enums::{Easing, HitObjectKind, OsbLayer, OsbLoopType, OsbOrigin, ParameterType};
 pub use helper::{HelperRequest, HelperResult};
 pub use image::{ImageCrop, ImageInfo, ImageOptions, ImageProcessRequest, PathRequest};

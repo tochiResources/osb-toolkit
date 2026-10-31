@@ -8,7 +8,7 @@ use std::panic::{catch_unwind, AssertUnwindSafe};
 use crate::bake::bake_to_json;
 use crate::error_json;
 use crate::exec::exec;
-use crate::runtime::{runtime_exec, OsbtkRuntime};
+use crate::runtime::{runtime_exec, OsbTKRuntime};
 
 fn into_c_string(value: String) -> *mut c_char {
     CString::new(value)
@@ -86,8 +86,8 @@ pub unsafe extern "C" fn osbtk_string_free(ptr: *mut c_char) {
 
 /// Creates a runtime handle (storyboard + context) of the given resolution.
 #[no_mangle]
-pub extern "C" fn osbtk_runtime_new(width: f64, height: f64) -> *mut OsbtkRuntime {
-    Box::into_raw(Box::new(OsbtkRuntime::new(width as f32, height as f32)))
+pub extern "C" fn osbtk_runtime_new(width: f64, height: f64) -> *mut OsbTKRuntime {
+    Box::into_raw(Box::new(OsbTKRuntime::new(width as f32, height as f32)))
 }
 
 /// Releases a runtime handle created by [`osbtk_runtime_new`].
@@ -97,7 +97,7 @@ pub extern "C" fn osbtk_runtime_new(width: f64, height: f64) -> *mut OsbtkRuntim
 /// `runtime` must be a pointer returned by [`osbtk_runtime_new`] and not already
 /// freed; null is ignored.
 #[no_mangle]
-pub unsafe extern "C" fn osbtk_runtime_free(runtime: *mut OsbtkRuntime) {
+pub unsafe extern "C" fn osbtk_runtime_free(runtime: *mut OsbTKRuntime) {
     if !runtime.is_null() {
         drop(Box::from_raw(runtime));
     }
@@ -112,7 +112,7 @@ pub unsafe extern "C" fn osbtk_runtime_free(runtime: *mut OsbtkRuntime) {
 /// [`osbtk_string_free`].
 #[no_mangle]
 pub unsafe extern "C" fn osbtk_runtime_exec(
-    runtime: *mut OsbtkRuntime,
+    runtime: *mut OsbTKRuntime,
     request_json: *const c_char,
 ) -> *mut c_char {
     if runtime.is_null() {

@@ -17,7 +17,7 @@ extern "C" {
 #endif
 
 /* Opaque handle to a live runtime (storyboard + context). */
-typedef struct OsbtkRuntime OsbtkRuntime;
+typedef struct OsbTKRuntime OsbTKRuntime;
 
 /* The runtime version string. */
 char *osbtk_version(void);
@@ -31,13 +31,13 @@ char *osbtk_bake3d(const char *input_json);
 char *osbtk_exec(const char *request_json);
 
 /* Creates a runtime handle of the given resolution. Free with osbtk_runtime_free. */
-OsbtkRuntime *osbtk_runtime_new(double width, double height);
+OsbTKRuntime *osbtk_runtime_new(double width, double height);
 
 /* Releases a runtime handle. NULL is ignored. */
-void osbtk_runtime_free(OsbtkRuntime *runtime);
+void osbtk_runtime_free(OsbTKRuntime *runtime);
 
 /* Runs a JSON request against a runtime handle (layers/sprites/commands/sampling). */
-char *osbtk_runtime_exec(OsbtkRuntime *runtime, const char *request_json);
+char *osbtk_runtime_exec(OsbTKRuntime *runtime, const char *request_json);
 
 /* Releases a string returned by any `osbtk_*` function. NULL is ignored. */
 void osbtk_string_free(char *ptr);

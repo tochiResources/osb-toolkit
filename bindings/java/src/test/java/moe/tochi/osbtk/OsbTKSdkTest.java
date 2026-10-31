@@ -40,7 +40,7 @@ import moe.tochi.osbtk.model.Vector2;
 import org.junit.jupiter.api.Test;
 
 /** The Java SDK: generated OpenAPI models and clients driven through the native bridge. */
-class OsbTkSdkTest {
+class OsbTKSdkTest {
     private static final String OSU =
             "osu file format v14\n\n[General]\nAudioFilename: song.mp3\nMode: 0\n"
                     + "[TimingPoints]\n0,500,4,2,1,100,1,0\n"

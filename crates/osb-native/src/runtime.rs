@@ -28,14 +28,14 @@ use crate::{error_json, to_json};
 
 /// An opaque handle to a live runtime: the effect context (beatmap, audio, RNG)
 /// plus the storyboard being built.
-pub struct OsbtkRuntime {
+pub struct OsbTKRuntime {
     context: Context,
     storyboard: Storyboard,
 }
 
-impl OsbtkRuntime {
+impl OsbTKRuntime {
     pub fn new(width: f32, height: f32) -> Self {
-        OsbtkRuntime {
+        OsbTKRuntime {
             context: Context::new(width, height),
             storyboard: Storyboard::new(),
         }
@@ -43,7 +43,7 @@ impl OsbtkRuntime {
 }
 
 /// Runs a JSON request against a runtime handle.
-pub fn runtime_exec(runtime: &mut OsbtkRuntime, request: &str) -> String {
+pub fn runtime_exec(runtime: &mut OsbTKRuntime, request: &str) -> String {
     let value: Value = match serde_json::from_str(request) {
         Ok(value) => value,
         Err(error) => return error_json(&error.to_string()),
@@ -202,7 +202,7 @@ fn parameter_type(value: &Value) -> ParameterType {
     }
 }
 
-fn import_osb(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn import_osb(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(text) = value.get("text").and_then(Value::as_str) else {
         return error_json("Generator.importOsb requires `text`");
     };
@@ -214,7 +214,7 @@ fn import_osb(runtime: &mut OsbtkRuntime, value: &Value) -> String {
 
 /// Bakes a `{ worlds2d, worlds3d, options, options2d }` scene into the runtime's
 /// storyboard (so a generator can compose baked worlds with authored sprites).
-fn bake_scene(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn bake_scene(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     match crate::helpers::build_storyboard_scene(value) {
         Ok((scene, options2d, options3d)) => {
             scene.bake_into(&mut runtime.storyboard, &options2d, &options3d);
@@ -226,7 +226,7 @@ fn bake_scene(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     }
 }
 
-fn load_beatmap(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn load_beatmap(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(text) = value.get("text").and_then(Value::as_str) else {
         return error_json("Generator.loadBeatmap requires `text`");
     };
@@ -243,14 +243,14 @@ fn load_beatmap(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     }
 }
 
-fn beatmap(runtime: &OsbtkRuntime) -> String {
+fn beatmap(runtime: &OsbTKRuntime) -> String {
     match runtime.context.beatmap() {
         Some(beatmap) => to_json(&Beatmap::from(beatmap)),
         None => "null".to_string(),
     }
 }
 
-fn timing_point_at(runtime: &OsbtkRuntime, value: &Value) -> String {
+fn timing_point_at(runtime: &OsbTKRuntime, value: &Value) -> String {
     let Some(beatmap) = runtime.context.beatmap() else {
         return "null".to_string();
     };
@@ -259,7 +259,7 @@ fn timing_point_at(runtime: &OsbtkRuntime, value: &Value) -> String {
     ))
 }
 
-fn control_point_at(runtime: &OsbtkRuntime, value: &Value) -> String {
+fn control_point_at(runtime: &OsbTKRuntime, value: &Value) -> String {
     let Some(beatmap) = runtime.context.beatmap() else {
         return "null".to_string();
     };
@@ -269,7 +269,7 @@ fn control_point_at(runtime: &OsbtkRuntime, value: &Value) -> String {
     }
 }
 
-fn layer_handle(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn layer_handle(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(name) = value.get("name").and_then(Value::as_str) else {
         return error_json("Generator.layerHandle requires `name`");
     };
@@ -277,7 +277,7 @@ fn layer_handle(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&LayerHandle { layer: handle.0 })
 }
 
-fn create_sprite(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn create_sprite(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(target) = layer_target(value) else {
         return error_json("Layer.createSprite requires `layer` or `layerHandle`");
     };
@@ -315,7 +315,7 @@ fn create_sprite(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     })
 }
 
-fn create_animation(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn create_animation(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(target) = layer_target(value) else {
         return error_json("Layer.createAnimation requires `layer` or `layerHandle`");
     };
@@ -350,7 +350,7 @@ fn create_animation(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     })
 }
 
-fn command(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn command(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = handle(value) else {
         return error_json("Sprite.command requires `layer`/`sprite`");
     };
@@ -456,7 +456,7 @@ fn command(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&OkResult { ok: true })
 }
 
-fn start_loop_group(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn start_loop_group(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = handle(value) else {
         return error_json("Sprite.startLoopGroup requires `layer`/`sprite`");
     };
@@ -466,7 +466,7 @@ fn start_loop_group(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&OkResult { ok: true })
 }
 
-fn end_group(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn end_group(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = handle(value) else {
         return error_json("Sprite.endGroup requires `layer`/`sprite`");
     };
@@ -474,7 +474,7 @@ fn end_group(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&OkResult { ok: true })
 }
 
-fn start_trigger_group(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn start_trigger_group(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = handle(value) else {
         return error_json("Sprite.startTriggerGroup requires `layer`/`sprite`");
     };
@@ -489,7 +489,7 @@ fn start_trigger_group(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&OkResult { ok: true })
 }
 
-fn create_sample(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn create_sample(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(target) = layer_target(value) else {
         return error_json("Layer.createSample requires `layer` or `layerHandle`");
     };
@@ -513,7 +513,7 @@ fn create_sample(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&OkResult { ok: true })
 }
 
-fn create_segment(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn create_segment(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(parent) = layer_of(value) else {
         return error_json("Layer.createSegment requires `layer`");
     };
@@ -521,7 +521,7 @@ fn create_segment(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&LayerHandle { layer: handle.0 })
 }
 
-fn segment_reverse_depth(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn segment_reverse_depth(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = layer_of(value) else {
         return error_json("Layer.reverseDepth requires `layer`");
     };
@@ -533,7 +533,7 @@ fn segment_reverse_depth(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&OkResult { ok: true })
 }
 
-fn segment_add_index(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn segment_add_index(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = layer_of(value) else {
         return error_json("Layer.addIndex requires `layer`");
     };
@@ -544,7 +544,7 @@ fn segment_add_index(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&OkResult { ok: true })
 }
 
-fn segment_indexes(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn segment_indexes(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = layer_of(value) else {
         return error_json("Layer.indexes requires `layer`");
     };
@@ -556,7 +556,7 @@ fn segment_indexes(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     })
 }
 
-fn segment_change_position(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn segment_change_position(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = layer_of(value) else {
         return error_json("Layer.changePosition requires `layer`");
     };
@@ -564,7 +564,7 @@ fn segment_change_position(runtime: &mut OsbtkRuntime, value: &Value) -> String 
     to_json(&OkResult { ok: true })
 }
 
-fn segment_move_to_top(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn segment_move_to_top(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = layer_of(value) else {
         return error_json("Layer.moveToTop requires `layer`");
     };
@@ -572,7 +572,7 @@ fn segment_move_to_top(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&OkResult { ok: true })
 }
 
-fn segment_move_to_bottom(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn segment_move_to_bottom(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = layer_of(value) else {
         return error_json("Layer.moveToBottom requires `layer`");
     };
@@ -580,7 +580,7 @@ fn segment_move_to_bottom(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&OkResult { ok: true })
 }
 
-fn segment_clean(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn segment_clean(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = layer_of(value) else {
         return error_json("Layer.clean requires `layer`");
     };
@@ -588,7 +588,7 @@ fn segment_clean(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&SegmentCleanResult { removed })
 }
 
-fn segment_discard(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn segment_discard(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = layer_of(value) else {
         return error_json("Layer.discard requires `layer`");
     };
@@ -596,7 +596,7 @@ fn segment_discard(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&SegmentDiscardResult { layer_count })
 }
 
-fn segment_discard_sprite(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn segment_discard_sprite(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = handle(value) else {
         return error_json("Layer.discardSprite requires `layer`/`sprite`");
     };
@@ -604,7 +604,7 @@ fn segment_discard_sprite(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     to_json(&BoolResult { value })
 }
 
-fn get_fft(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn get_fft(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let magnitudes = value
         .get("magnitudes")
         .and_then(Value::as_u64)
@@ -621,7 +621,7 @@ fn get_fft(runtime: &mut OsbtkRuntime, value: &Value) -> String {
     })
 }
 
-fn sprite_state_at(runtime: &OsbtkRuntime, value: &Value) -> String {
+fn sprite_state_at(runtime: &OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = handle(value) else {
         return error_json("Sprite.stateAt requires `layer`/`sprite`");
     };
@@ -638,7 +638,7 @@ fn sprite_state_at(runtime: &OsbtkRuntime, value: &Value) -> String {
     })
 }
 
-fn sprite_info(runtime: &OsbtkRuntime, value: &Value) -> String {
+fn sprite_info(runtime: &OsbTKRuntime, value: &Value) -> String {
     let Some(handle) = handle(value) else {
         return error_json("Sprite.info requires `layer`/`sprite`");
     };
@@ -660,7 +660,7 @@ fn sprite_info(runtime: &OsbtkRuntime, value: &Value) -> String {
     })
 }
 
-fn random(runtime: &mut OsbtkRuntime, value: &Value) -> String {
+fn random(runtime: &mut OsbTKRuntime, value: &Value) -> String {
     let min = scalar(value, "min");
     let max = value.get("max").and_then(Value::as_f64).unwrap_or(1.0);
     to_json(&RandomResult {
@@ -672,13 +672,13 @@ fn random(runtime: &mut OsbtkRuntime, value: &Value) -> String {
 mod tests {
     use super::*;
 
-    fn run(runtime: &mut OsbtkRuntime, request: Value) -> Value {
+    fn run(runtime: &mut OsbTKRuntime, request: Value) -> Value {
         serde_json::from_str(&runtime_exec(runtime, &request.to_string())).unwrap()
     }
 
     #[test]
     fn builds_and_samples_a_sprite() {
-        let mut runtime = OsbtkRuntime::new(640.0, 480.0);
+        let mut runtime = OsbTKRuntime::new(640.0, 480.0);
         let handle = run(
             &mut runtime,
             serde_json::json!({ "op": "Layer.createSprite", "layer": "Foreground", "path": "sb/dot.png" }),
@@ -705,7 +705,7 @@ mod tests {
 
     #[test]
     fn animates_and_samples_a_sprite_anchor() {
-        let mut runtime = OsbtkRuntime::new(640.0, 480.0);
+        let mut runtime = OsbTKRuntime::new(640.0, 480.0);
         let handle = run(
             &mut runtime,
             serde_json::json!({ "op": "Layer.createSprite", "layer": "Foreground", "path": "sb/dot.png" }),
@@ -732,7 +732,7 @@ mod tests {
 
     #[test]
     fn reads_back_the_built_storyboard() {
-        let mut runtime = OsbtkRuntime::new(640.0, 480.0);
+        let mut runtime = OsbTKRuntime::new(640.0, 480.0);
         let handle = run(
             &mut runtime,
             serde_json::json!({ "op": "Layer.createSprite", "layer": "Foreground", "path": "sb/dot.png", "origin": "Centre" }),
@@ -779,7 +779,7 @@ mod tests {
 
     #[test]
     fn accepts_string_and_legacy_numeric_origins() {
-        let mut runtime = OsbtkRuntime::new(640.0, 480.0);
+        let mut runtime = OsbTKRuntime::new(640.0, 480.0);
         let named = run(
             &mut runtime,
             serde_json::json!({ "op": "Layer.createSprite", "layer": "Foreground", "path": "a.png", "origin": "BottomLeft" }),
@@ -803,7 +803,7 @@ mod tests {
 
     #[test]
     fn imports_an_osb() {
-        let mut runtime = OsbtkRuntime::new(640.0, 480.0);
+        let mut runtime = OsbTKRuntime::new(640.0, 480.0);
         let value = run(
             &mut runtime,
             serde_json::json!({
@@ -816,7 +816,7 @@ mod tests {
 
     #[test]
     fn creates_an_animation_and_loops() {
-        let mut runtime = OsbtkRuntime::new(640.0, 480.0);
+        let mut runtime = OsbTKRuntime::new(640.0, 480.0);
         let handle = run(
             &mut runtime,
             serde_json::json!({
@@ -854,7 +854,7 @@ mod tests {
 
     #[test]
     fn creates_segments_and_discards_sprites() {
-        let mut runtime = OsbtkRuntime::new(640.0, 480.0);
+        let mut runtime = OsbTKRuntime::new(640.0, 480.0);
         let group = run(
             &mut runtime,
             serde_json::json!({ "op": "Generator.layerHandle", "name": "Group" }),
@@ -914,7 +914,7 @@ mod tests {
 
     #[test]
     fn loads_and_queries_a_beatmap() {
-        let mut runtime = OsbtkRuntime::new(640.0, 480.0);
+        let mut runtime = OsbTKRuntime::new(640.0, 480.0);
         run(
             &mut runtime,
             serde_json::json!({
@@ -939,7 +939,7 @@ mod tests {
 
     #[test]
     fn applies_easing_by_name_and_id() {
-        let mut runtime = OsbtkRuntime::new(1.0, 1.0);
+        let mut runtime = OsbTKRuntime::new(1.0, 1.0);
         let named = run(
             &mut runtime,
             serde_json::json!({ "op": "Core.applyEasing", "easing": "InQuad", "t": 0.5 }),
