@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "description": "osu! Storyboarding Toolkit provides useful tools for storyboarding development as SDKs in C#, Java, JavaScript/TypeScript, Go, Rust, Python, and C++.",
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "type": "module",
     "homepage": "https://osb-toolkit.tochi.moe",
     "repository": {

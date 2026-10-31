@@ -3,7 +3,7 @@ name = "osb-server"
 description = "osbTK service layer (convert/bake3d/build) and the headless HTTP API (section 5.6, M15/M16)."
 version = "0.1.0"
 edition = "2021"
-license = "BSD-3-Clause"
+license = "MIT"
 repository = "https://github.com/tochiResources/osb-toolkit"
 authors = ["T0chi"]
 

@@ -3,7 +3,7 @@ name = "osb-api"
 description = "Typed wire contract for the osbTK native bridge and the OpenAPI schema generated from it (M21)."
 version = "0.1.0"
 edition = "2021"
-license = "BSD-3-Clause"
+license = "MIT"
 repository = "https://github.com/tochiResources/osb-toolkit"
 authors = ["T0chi"]
 

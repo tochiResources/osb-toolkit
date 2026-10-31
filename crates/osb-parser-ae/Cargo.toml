@@ -3,7 +3,7 @@ name = "osb-parser-ae"
 description = "Static parser for Adobe After Effects *.aep project files (RIFX): project depth, items, compositions, layers and properties, without a running After Effects."
 version = "0.1.0"
 edition = "2021"
-license = "BSD-3-Clause"
+license = "MIT"
 repository = "https://github.com/tochiResources/osb-toolkit"
 authors = ["T0chi"]
 

@@ -3,7 +3,7 @@ name = "osb-image-gen"
 description = "Image generation: draw primitive shapes (rect/rounded-rect/ellipse/circle/line/polygon) with fill and stroke onto a raster image (M25)."
 version = "0.1.0"
 edition = "2021"
-license = "BSD-3-Clause"
+license = "MIT"
 repository = "https://github.com/tochiResources/osb-toolkit"
 authors = ["T0chi"]
 

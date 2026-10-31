@@ -3,7 +3,7 @@ name = "osb-image"
 description = "Canonical image library: decode/encode, resize, crop, rotate/flip, colour ops and filters, shared by every language (M23)."
 version = "0.1.0"
 edition = "2021"
-license = "BSD-3-Clause"
+license = "MIT"
 repository = "https://github.com/tochiResources/osb-toolkit"
 authors = ["T0chi"]
 

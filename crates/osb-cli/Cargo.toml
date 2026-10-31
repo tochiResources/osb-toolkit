@@ -3,7 +3,7 @@ name = "osb-cli"
 description = "osbTK CLI: convert / bake3d / serve over the shared service layer (section 5.6, M16)."
 version = "0.1.0"
 edition = "2021"
-license = "BSD-3-Clause"
+license = "MIT"
 repository = "https://github.com/tochiResources/osb-toolkit"
 authors = ["T0chi"]
 

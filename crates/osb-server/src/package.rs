@@ -50,13 +50,14 @@ pub struct ProductInfo {
 }
 
 /// The license carried by the installer (embedded, written next to the plug-ins and
-/// shown as the EULA). Defaults to BSD-3-Clause for OpenFX compatibility.
+/// shown as the EULA). Defaults to MIT; BSD-3-Clause and Apache-2.0 remain
+/// available for OpenFX-compatible output.
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", tag = "kind", content = "text")]
 pub enum License {
-    #[default]
     #[serde(rename = "bsd-3-clause")]
     Bsd3Clause,
+    #[default]
     #[serde(rename = "mit")]
     Mit,
     #[serde(rename = "apache-2.0")]
@@ -487,7 +488,7 @@ mod tests {
         assert!(out.join("LICENSE.txt").is_file());
         assert!(out.join("installer.nsi").is_file());
         assert!(out.join("payload/Thing.aex").is_file());
-        assert_eq!(installer.manifest["license"], "BSD-3-Clause");
+        assert_eq!(installer.manifest["license"], "MIT");
         assert_eq!(
             installer.manifest["components"][0]["destination"],
             "$AE_PLUGINS"

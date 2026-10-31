@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "description": "Typed TypeScript SDK over the osbTK native engine (section 5.13, M21): OpenAPI-generated models and clients driven through the WASM bridge.",
     "type": "module",
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "author": "T0chi",
     "homepage": "https://osb-toolkit.tochi.moe",
     "repository": {

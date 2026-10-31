@@ -3,7 +3,7 @@ name = "osb-sdk"
 description = "Generated Rust SDK over the osbTK native bridge (section 5.13, M21): models from the OpenAPI contract, driven by a client over crates/osb-native."
 version = "0.1.0"
 edition = "2021"
-license = "BSD-3-Clause"
+license = "MIT"
 repository = "https://github.com/tochiResources/osb-toolkit"
 authors = ["T0chi"]
 

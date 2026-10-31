@@ -4,7 +4,7 @@
     "private": true,
     "description": "wasm-bindgen binding of the osbTK runtime for JavaScript/TypeScript (browser + Node).",
     "type": "module",
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "author": "T0chi",
     "homepage": "https://osb-toolkit.tochi.moe",
     "repository": {

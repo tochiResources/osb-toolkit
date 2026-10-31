@@ -7,7 +7,7 @@ name = "osbtk-sdk"
 version = "0.1.0"
 description = "Typed Python SDK over the osbTK native engine (section 5.13, M21): OpenAPI-generated models and clients driven through the native bridge."
 requires-python = ">=3.10"
-license = { text = "BSD-3-Clause" }
+license = { text = "MIT" }
 authors = [{ name = "T0chi" }]
 dependencies = ["pydantic>=2", "urllib3>=2", "python-dateutil>=2", "typing-extensions>=4"]
 

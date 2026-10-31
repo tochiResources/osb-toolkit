@@ -1,4 +1,4 @@
-﻿# osu! Storyboarding Toolkit
+# osu! Storyboarding Toolkit
 
 > Still in early development phase.
 > - All crates in [crates/](./crates) except for `osb-cli`, `osb-parser-ae`, `osb-sdk`, `osb-server` are well tested and mostly ready.
@@ -52,5 +52,4 @@ yarn w:docs dev        # run the documentation site
 
 ## License
 
-BSD-3-Clause. See [LICENSE](/LICENSE).
-> Subject to change due to this project no longer using vendor libs from After Effects & OpenFX.
+MIT. See [LICENSE](/LICENSE).

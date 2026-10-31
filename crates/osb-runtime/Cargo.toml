@@ -3,7 +3,7 @@ name = "osb-runtime"
 description = "Effect-script runtime: mapset, storyboard, animations, audio and the sprite compositor."
 version = "0.1.0"
 edition = "2021"
-license = "BSD-3-Clause"
+license = "MIT"
 repository = "https://github.com/tochiResources/osb-toolkit"
 authors = ["T0chi"]
 

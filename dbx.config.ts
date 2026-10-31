@@ -6,7 +6,7 @@ export default defineConfig({
             type: 'monorepo-root',
             name: 'osb-toolkit',
             scope: '@tochii',
-            license: 'BSD-3-Clause',
+            license: 'MIT',
             homepage: 'https://osb-toolkit.tochi.moe',
             description:
                 'osu! Storyboarding Toolkit provides useful tools for storyboarding development as SDKs in C#, Java, JavaScript/TypeScript, Go, Rust, Python, and C++.',

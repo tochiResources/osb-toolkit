@@ -7,8 +7,8 @@
       "name": "T0chi"
     },
     "license": {
-      "name": "BSD-3-Clause",
-      "identifier": "BSD-3-Clause"
+      "name": "MIT",
+      "identifier": "MIT"
     },
     "version": "0.1.0"
   },
