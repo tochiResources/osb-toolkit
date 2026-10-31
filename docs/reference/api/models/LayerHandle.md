@@ -1,3 +1,5 @@
+> Clean SDKs unwrap this result to `number` (the layer index).
+
 # LayerHandle
 ## Properties
 

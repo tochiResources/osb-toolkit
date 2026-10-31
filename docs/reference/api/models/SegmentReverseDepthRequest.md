@@ -1,3 +1,5 @@
+> Clean SDK type: `SegmentReverseDepthOptions` ([`Layer`](../runtime/Layer.md)). Handle properties (`layerHandle`, `sprite` and numeric `layer`) are injected by the handle-bound client.
+
 # SegmentReverseDepthRequest
 ## Properties
 

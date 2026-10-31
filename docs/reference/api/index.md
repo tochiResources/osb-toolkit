@@ -32,6 +32,17 @@ options form only. Single-field results are unwrapped: `OkResult` is
 - [Media](./libraries/Media.md)
 - [Optimize](./libraries/Optimize.md)
 
+## Clean mapping
+
+Every `*Request` model maps to a `<X>Options` type in the clean SDKs,
+and wrapper results are unwrapped into ordinary values. The
+[models index](./models/index.md#clean-options) lists both mappings.
+
+## Other clean surfaces
+
+- [Rust clean module](./rust.md)
+- [C++ clean header](./cpp.md)
+
 ## Models
 
 The shared request/response models are documented in the

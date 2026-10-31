@@ -1,3 +1,5 @@
+> Clean SDKs unwrap this result to `unknown`.
+
 # HelperResult
 ## Properties
 

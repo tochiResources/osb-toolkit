@@ -1,3 +1,5 @@
+> Clean SDK type: `CurvePointOptions` ([`Core`](../core/Core.md)). Handle properties (`layerHandle`, `sprite` and numeric `layer`) are injected by the handle-bound client.
+
 # CurvePointRequest
 ## Properties
 

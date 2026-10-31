@@ -1,3 +1,5 @@
+> Handle-bound only ([`Layer`](../runtime/Layer.md), [`Sprite`](../runtime/Sprite.md)): the clean client takes the bound handle directly, so no `<X>Options` type is generated.
+
 # HandleRequest
 ## Properties
 

@@ -1,3 +1,5 @@
+> Handle-bound only ([`Layer`](../runtime/Layer.md)): the clean client takes the bound handle directly, so no `<X>Options` type is generated.
+
 # SegmentRequest
 ## Properties
 

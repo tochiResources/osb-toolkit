@@ -1,3 +1,5 @@
+> Clean SDK type: `HelperOptions` ([`Helpers`](../runtime/Helpers.md)). Handle properties (`layerHandle`, `sprite` and numeric `layer`) are injected by the handle-bound client.
+
 # HelperRequest
 ## Properties
 

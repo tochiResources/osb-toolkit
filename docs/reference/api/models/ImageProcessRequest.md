@@ -1,3 +1,5 @@
+> Clean SDK type: `ImageProcessOptions` ([`Image`](../libraries/Image.md)). Handle properties (`layerHandle`, `sprite` and numeric `layer`) are injected by the handle-bound client.
+
 # ImageProcessRequest
 ## Properties
 
