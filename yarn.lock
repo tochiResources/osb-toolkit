@@ -2351,10 +2351,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tochii/errors@npm:^0.1.11":
+  version: 0.1.11
+  resolution: "@tochii/errors@npm:0.1.11"
+  checksum: 10c0/35659a1b1807077b352964f8d44db1d7f9c5737466b56944cb09094dbc6bd57e666d6ec9639a435230ddfdbfa0cb2f0a6c196b709a5fdab969d33ef697e67899
+  languageName: node
+  linkType: hard
+
 "@tochii/osb-sdk-js@workspace:packages/sdk":
   version: 0.0.0-use.local
   resolution: "@tochii/osb-sdk-js@workspace:packages/sdk"
   dependencies:
+    "@tochii/errors": "npm:^0.1.11"
     "@tochii/osb-toolkit-native": "workspace:*"
     "@types/node": "catalog:"
     tsdown: "catalog:"

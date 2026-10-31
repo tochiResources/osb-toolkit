@@ -17,6 +17,7 @@
         "typecheck": "tsc -p tsconfig.build.json --noEmit"
     },
     "dependencies": {
+        "@tochii/errors": "^0.1.11",
         "@tochii/osb-toolkit-native": "workspace:*"
     },
     "devDependencies": {

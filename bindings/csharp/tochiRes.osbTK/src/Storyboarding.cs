@@ -74,7 +74,7 @@ public static partial class osb
             public Runtime(double width = 640, double height = 480)
             {
                 _native = new NativeRuntime(width, height);
-                var transport = new OsbtkTransport(_native);
+                var transport = new osbTKTransport(_native);
                 _generator = new Client.Runtime.Generator(
                     new GeneratorApi(transport, transport, DefaultConfiguration)
                 );

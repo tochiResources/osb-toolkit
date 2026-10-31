@@ -15,7 +15,7 @@ namespace tochiRes.osbTK;
 /// </summary>
 public static partial class osb
 {
-    internal static readonly OsbtkTransport StatelessTransport = new();
+    internal static readonly osbTKTransport StatelessTransport = new();
     internal static readonly Configuration DefaultConfiguration = new();
 
     /// <summary>The native runtime version string.</summary>

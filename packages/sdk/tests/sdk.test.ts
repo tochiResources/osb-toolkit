@@ -3,6 +3,8 @@ import { join } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
+import { ErrorCode, TochiResError } from '@tochii/errors';
+
 import {
     Core,
     CurveKind,
@@ -11,6 +13,7 @@ import {
     Layer as CleanLayer,
     OsbOrigin,
     osb,
+    ResponseError,
     Runtime,
     Sprite as CleanSprite,
     type StoryboardCommand,
@@ -108,6 +111,19 @@ describe('@tochii/osb-sdk-js', () => {
 
     it('surfaces bridge errors', async () => {
         await expect(osb.audio.fft({ path: 'does-not-exist.wav' })).rejects.toThrow();
+    });
+
+    it('raises typed errors for bridge failures', async () => {
+        const error = await osb.audio
+            .fft({ path: 'does-not-exist.wav' })
+            .catch((value: unknown) => value);
+        expect(error).toBeInstanceOf(TochiResError);
+        expect(error).toBeInstanceOf(ResponseError);
+        expect(error).toMatchObject({
+            code: ErrorCode.ApiBadRequest,
+            category: 'api',
+            name: 'ResponseError',
+        });
     });
 
     it('drives the curve library', async () => {

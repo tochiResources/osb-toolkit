@@ -1,50 +1,58 @@
-# Error codes
+# Errors
 
-Error handling builds on the shared `@tochii/errors` package. The base class,
-guards and serialization are reused; osbTK adds its own stable codes
-under the `OSB_` prefix (classified by `osbTKCategoryOf`).
+The SDKs build on the shared [`@tochii/errors`](https://www.npmjs.com/package/@tochii/errors)
+contract: every error carries a stable code, a coarse category, optional
+structured context and an optional cause chain. The C# binding uses the matching
+`TochiRes.Errors` NuGet package, so codes cross the language boundary unchanged.
 
-Import from `@tochii/osb-toolkit-shared/errors` so the code set stays in
-one place.
+## TypeScript
 
-| Code                        | Category  | Meaning                                        |
-| --------------------------- | --------- | ---------------------------------------------- |
-| `OSB_PARSE_ERROR`           | parse     | The effect script could not be parsed.         |
-| `OSB_INVALID_SCRIPT`        | parse     | Valid C#, but not a usable effect script.      |
-| `OSB_UNSUPPORTED_CONSTRUCT` | transpile | A C# construct has no supported transpilation. |
-| `OSB_TRANSPILE_ERROR`       | transpile | The C# and JS transpilation failed.            |
-| `OSB_GENERATION_ERROR`      | generate  | A target plug-in could not be generated.       |
-| `OSB_UNSUPPORTED_TARGET`    | generate  | The requested target is unknown.               |
-| `OSB_INVALID_OPTION`        | option    | An option passed to the converter is invalid.  |
-| `OSB_BUILD_ERROR`           | build     | A native plug-in build failed.                 |
-| `OSB_SDK_NOT_FOUND`         | sdk       | A required host SDK could not be located.      |
-| `OSB_IO_ERROR`              | io        | A filesystem operation failed.                 |
+| Class           | Default code                                   | Category    |
+| --------------- | ---------------------------------------------- | ----------- |
+| `ResponseError` | derived from the response status (`Api*`)      | `api`       |
+| `FetchError`    | `TOCHIRES_API_UNAVAILABLE`                     | `api`       |
+| `RequiredError` | `TOCHIRES_VALIDATION_FAILED`                   | `validation` |
 
-## Classes
-
-| Class                       | Default code                |
-| --------------------------- | --------------------------- |
-| `ParseError`                | `OSB_PARSE_ERROR`           |
-| `InvalidScriptError`        | `OSB_INVALID_SCRIPT`        |
-| `UnsupportedConstructError` | `OSB_UNSUPPORTED_CONSTRUCT` |
-| `TranspileError`            | `OSB_TRANSPILE_ERROR`       |
-| `GenerationError`           | `OSB_GENERATION_ERROR`      |
-| `UnsupportedTargetError`    | `OSB_UNSUPPORTED_TARGET`    |
-| `OptionError`               | `OSB_INVALID_OPTION`        |
-| `BuildError`                | `OSB_BUILD_ERROR`           |
-| `SdkError`                  | `OSB_SDK_NOT_FOUND`         |
-| `IOError`                   | `OSB_IO_ERROR`              |
-
-## Example
+`ResponseError` maps `400`, `401`, `403`, `404`, `408`, `409`, `422`, `429`,
+`503` and `504` to their specific codes and falls back to `ApiBadRequest` or
+`ApiUnavailable`.
 
 ```ts
-import { osbTKError, isosbTKError, ParseError } from '@tochii/osb-toolkit-shared/errors';
+import { ErrorCode, TochiResError } from '@tochii/errors';
+import { ResponseError, osb } from '@tochii/osb-sdk-js';
 
 try {
-    // ...
+    await osb.audio.fft({ path: 'missing.wav' });
 } catch (error) {
-    if (isosbTKError(error)) {
-        console.error(error.osbCode, error.osbCategory, error.message);
+    if (error instanceof TochiResError) {
+        console.error(error.code, error.category, error.message);
     }
+    if (error instanceof ResponseError) {
+        console.error(error.response.status);
+    }
+}
+```
+
+## C#
+
+| Class          | Code                        | Category |
+| -------------- | --------------------------- | -------- |
+| `osbTKException` | `TOCHIRES_NATIVE_CALL_FAILED` | `native` |
+| `Client.ApiException` | `TOCHIRES_API_BAD_REQUEST` | `api`    |
+
+Both derive from `TochiRes.Errors.TochiResException`, which exposes `Code`,
+`Category` and `Context`.
+
+```csharp
+using TochiRes.Errors;
+using tochiRes.osbTK;
+
+try
+{
+    osb.Audio.Fft("missing.wav");
+}
+catch (TochiResException error)
+{
+    Console.Error.WriteLine($"{error.Code} ({error.Category}): {error.Message}");
 }
 ```

@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+import { ErrorCode, TochiResError } from '@tochii/errors';
 /**
  * osbTK Native Bridge
  * Typed wire contract for the osbTK native engine. Rust (`crates/osb-api`) is the source of truth; the C#, C++, Python, TypeScript, Go and Java SDK models and clients are generated from this document. Every `operationId` is the native bridge `op`.
@@ -256,45 +257,64 @@ function isFormData(value: any): value is FormData {
     return typeof FormData !== "undefined" && value instanceof FormData;
 }
 
-export class ResponseError extends Error {
-    override name: "ResponseError" = "ResponseError";
+/** Map an HTTP status code to the matching shared error code. */
+function errorCodeForStatus(status: number): ErrorCode {
+    switch (status) {
+        case 400:
+            return ErrorCode.ApiBadRequest;
+        case 401:
+            return ErrorCode.ApiUnauthorized;
+        case 403:
+            return ErrorCode.ApiForbidden;
+        case 404:
+            return ErrorCode.ApiNotFound;
+        case 408:
+        case 504:
+            return ErrorCode.ApiTimeout;
+        case 409:
+            return ErrorCode.ApiConflict;
+        case 422:
+            return ErrorCode.ApiUnprocessable;
+        case 429:
+            return ErrorCode.ApiTooManyRequests;
+        case 503:
+            return ErrorCode.ApiUnavailable;
+        default:
+            return status >= 500 ? ErrorCode.ApiUnavailable : ErrorCode.ApiBadRequest;
+    }
+}
+
+export class ResponseError extends TochiResError {
+    override name = 'ResponseError';
+
     constructor(public response: Response, msg?: string) {
-        super(msg);
-
-        // restore prototype chain
-        const actualProto = new.target.prototype;
-        if (Object.setPrototypeOf) {
-            Object.setPrototypeOf(this, actualProto);
-        }
+        super(errorCodeForStatus(response.status), msg ?? 'Response returned an error code', {
+            context: {
+                status: response.status,
+                statusText: response.statusText,
+                url: response.url,
+            },
+        });
     }
 }
 
-export class FetchError extends Error {
-    override name: "FetchError" = "FetchError";
-    constructor(public cause: Error, msg?: string) {
-        super(msg);
+export class FetchError extends TochiResError {
+    override name = 'FetchError';
 
-        // restore prototype chain
-        const actualProto = new.target.prototype;
-        if (Object.setPrototypeOf) {
-            Object.setPrototypeOf(this, actualProto);
-        }
+    constructor(cause: Error, msg?: string) {
+        super(ErrorCode.ApiUnavailable, msg ?? 'The request failed', { cause });
     }
 }
 
-export class RequiredError extends Error {
-    override name: "RequiredError" = "RequiredError";
+export class RequiredError extends TochiResError {
+    override name = 'RequiredError';
+
     constructor(public field: string, msg?: string) {
-        super(msg);
-
-        // restore prototype chain
-        const actualProto = new.target.prototype;
-        if (Object.setPrototypeOf) {
-            Object.setPrototypeOf(this, actualProto);
-        }
+        super(ErrorCode.ValidationFailed, msg ?? `Missing required parameter '${field}'`, {
+            context: { field },
+        });
     }
 }
-
 export const COLLECTION_FORMATS = {
     csv: ",",
     ssv: " ",

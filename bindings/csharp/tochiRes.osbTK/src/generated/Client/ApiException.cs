@@ -12,12 +12,14 @@
 
 using System;
 
+using TochiRes.Errors;
+
 namespace tochiRes.osbTK.Client
 {
     /// <summary>
     /// API Exception
     /// </summary>
-    public class ApiException : Exception
+    public class ApiException : TochiResException
     {
         /// <summary>
         /// Gets or sets the error code (HTTP status code)
@@ -40,14 +42,14 @@ namespace tochiRes.osbTK.Client
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiException"/> class.
         /// </summary>
-        public ApiException() { }
+        public ApiException() : base(ErrorCodes.ApiBadRequest, "API request failed") { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiException"/> class.
         /// </summary>
         /// <param name="errorCode">HTTP status code.</param>
         /// <param name="message">Error message.</param>
-        public ApiException(int errorCode, string message) : base(message)
+        public ApiException(int errorCode, string message) : base(ErrorCodes.ApiBadRequest, message)
         {
             this.ErrorCode = errorCode;
         }
@@ -59,7 +61,7 @@ namespace tochiRes.osbTK.Client
         /// <param name="message">Error message.</param>
         /// <param name="errorContent">Error content.</param>
         /// <param name="headers">HTTP Headers.</param>
-        public ApiException(int errorCode, string message, object errorContent = null, Multimap<string, string> headers = null) : base(message)
+        public ApiException(int errorCode, string message, object errorContent = null, Multimap<string, string> headers = null) : base(ErrorCodes.ApiBadRequest, message)
         {
             this.ErrorCode = errorCode;
             this.ErrorContent = errorContent;

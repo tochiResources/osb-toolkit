@@ -6,6 +6,7 @@
 // `lib/` and the one hand-written transport seam in `interceptor.ts`.
 export * from './client';
 export * from './core';
+export { FetchError, RequiredError, ResponseError } from './lib/runtime';
 export type { BridgeExec } from './interceptor';
 export {
     bridgeFetch,

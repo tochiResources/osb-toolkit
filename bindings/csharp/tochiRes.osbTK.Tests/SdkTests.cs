@@ -1,5 +1,7 @@
 using Newtonsoft.Json.Linq;
 
+using TochiRes.Errors;
+
 using tochiRes.osbTK.Client;
 using tochiRes.osbTK.Model;
 
@@ -117,8 +119,15 @@ public class SdkTests
     }
 
     [Fact]
-    public void SurfacesNativeErrorsAsSdkExceptions() =>
-        Assert.Throws<OsbTkException>(() => Entry.Audio.Fft("does-not-exist.wav"));
+    public void SurfacesNativeErrorsAsSdkExceptions()
+    {
+        osbTKException error = Assert.Throws<osbTKException>(() =>
+            Entry.Audio.Fft("does-not-exist.wav")
+        );
+        Assert.IsAssignableFrom<TochiResException>(error);
+        Assert.Equal(ErrorCodes.NativeCallFailed, error.Code);
+        Assert.Equal("native", error.Category);
+    }
 
     [Fact]
     public void ExposesTheStoryboardFacade()
@@ -284,7 +293,7 @@ public class SdkTests
 
     [Fact]
     public void SurfacesImageErrors() =>
-        Assert.Throws<OsbTkException>(() => Entry.Image.Info("does-not-exist.png"));
+        Assert.Throws<osbTKException>(() => Entry.Image.Info("does-not-exist.png"));
 
     [Fact]
     public void RendersShapes()
@@ -309,7 +318,7 @@ public class SdkTests
 
     [Fact]
     public void SurfacesMediaErrors() =>
-        Assert.Throws<OsbTkException>(() => Entry.Media.Info("does-not-exist.mp4"));
+        Assert.Throws<osbTKException>(() => Entry.Media.Info("does-not-exist.mp4"));
 
     [Fact]
     public void RunsAnEffectScript()

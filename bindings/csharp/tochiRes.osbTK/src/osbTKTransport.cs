@@ -19,11 +19,11 @@ namespace tochiRes.osbTK;
 /// network. The operation name is the last path segment, which is exactly the
 /// native <c>op</c>.
 /// </summary>
-internal sealed class OsbtkTransport : ISynchronousClient, IAsynchronousClient
+internal sealed class osbTKTransport : ISynchronousClient, IAsynchronousClient
 {
     private readonly NativeRuntime? _runtime;
 
-    internal OsbtkTransport(NativeRuntime? runtime = null)
+    internal osbTKTransport(NativeRuntime? runtime = null)
     {
         _runtime = runtime;
     }
@@ -135,7 +135,7 @@ internal sealed class OsbtkTransport : ISynchronousClient, IAsynchronousClient
         JToken token = JToken.Parse(responseJson);
         if (token is JObject error && error.TryGetValue("error", out JToken? message))
         {
-            throw new OsbTkException(message.Value<string>() ?? "unknown native error");
+            throw new osbTKException(message.Value<string>() ?? "unknown native error");
         }
 
         T data = token.Type == JTokenType.Null ? default! : token.ToObject<T>()!;
