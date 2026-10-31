@@ -645,6 +645,11 @@ impl Runtime {
         self.call(request)
     }
 
+    /// Runs a typed JSON request against this runtime.
+    pub fn exec<T: DeserializeOwned>(&mut self, request: Value) -> Result<T, Error> {
+        self.call(request)
+    }
+
     fn call<T: DeserializeOwned>(&mut self, request: Value) -> Result<T, Error> {
         parse(&osb_native::runtime_exec(
             &mut self.inner,

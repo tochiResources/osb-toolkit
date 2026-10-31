@@ -3,10 +3,11 @@
 #pragma once
 
 // Clean high-level C++ clients: one class per contract tag with `<X>Options`
-// inputs, mirroring the generated clean clients in the other SDKs. The classes
-// are thin wrappers over `osbtk_sdk.hpp`; the runtime classes are re-exported
-// because they are already handle-bound.
+// inputs, mirroring the generated clean clients in the other SDKs. The runtime
+// classes are bound to a live `Runtime`; the stateless classes wrap
+// `osbtk_sdk.hpp`.
 
+#include <optional>
 #include <string>
 #include <utility>
 #include <vector>
@@ -19,6 +20,10 @@ using Json = sdk::Json;
 using Library = osbtk::Library;
 
 namespace detail {
+
+inline std::string vec(sdk::Vector2 value) {
+    return "{\"x\":" + sdk::detail::number(value.x) + ",\"y\":" + sdk::detail::number(value.y) + "}";
+}
 
 inline Json call(const Library& library, const std::string& op, const std::string& body) {
     Json json = sdk::detail::parse_json(
@@ -57,6 +62,66 @@ struct ArcOptions {
 struct Bake3dOptions {
     /// The 3D scene as JSON.
     std::string input_json = "{}";
+};
+
+/// A sprite command. `start`/`end` are a scalar, a `Vector2`, or a `Color4` depending on `kind`.
+struct CommandOptions {
+    /// The command kind.
+    std::string kind = "";
+    /// The start time.
+    double start_time = 0.0;
+    /// The end time.
+    double end_time = 0.0;
+    /// The easing function.
+    std::string easing = "None";
+    /// The start value as JSON (scalar, point or color).
+    std::string start_json = "";
+    /// The end value as JSON (scalar, point or color).
+    std::string end_json = "";
+    /// The parameter kind for a `parameter` command.
+    std::string parameter = "";
+};
+
+/// Create an animation sprite.
+struct CreateAnimationOptions {
+    /// The texture path.
+    std::string path = "";
+    /// The number of frames.
+    int frames = 0;
+    /// Delay between frames, in milliseconds.
+    double frame_delay = 0.0;
+    /// How the animation loops.
+    sdk::OsbLoopType loop_type = sdk::OsbLoopType::LoopForever;
+    /// The sprite anchor origin.
+    sdk::OsbOrigin origin = sdk::OsbOrigin::Centre;
+    /// The initial position.
+    sdk::Vector2 position;
+    /// The target layer name (ignored when the layer handle is bound).
+    std::string layer = "";
+};
+
+/// Create a sound sample on a layer.
+struct CreateSampleOptions {
+    /// The sample path.
+    std::string path = "";
+    /// The sample time.
+    double time = 0.0;
+    /// The sample volume.
+    double volume = 100.0;
+    /// The target layer name (ignored when the layer handle is bound).
+    std::string layer = "";
+};
+
+/// Create a sprite.
+struct CreateSpriteOptions {
+    /// The texture path.
+    std::string path = "";
+    /// The sprite anchor origin.
+    sdk::OsbOrigin origin = sdk::OsbOrigin::Centre;
+    /// The initial position; omitted means the sprite default.
+    std::optional<sdk::Vector2> position;
+    /// The target layer name (ignored when the layer handle is bound).
+    std::string layer = "";
 };
 
 /// A curve hit-test request.
@@ -152,6 +217,18 @@ struct FftOptions {
     int magnitudes = 64;
 };
 
+/// An FFT request against the runtime's loaded audio.
+struct GetFftOptions {
+    /// The sample time.
+    double time = 0.0;
+    /// The number of frequency bins.
+    int magnitudes = 64;
+    /// A frequency cut-off.
+    double cutoff = 0.0;
+    /// The bin easing.
+    std::string easing = "None";
+};
+
 /// The anchor offset for an origin.
 struct GetOriginVectorOptions {
     /// The sprite anchor origin.
@@ -192,6 +269,12 @@ struct InScreenBoundsOptions {
     sdk::Vector2 origin = {};
 };
 
+/// Resolve (or create) a layer by name.
+struct LayerHandleOptions {
+    /// The layer name.
+    std::string name = "";
+};
+
 /// A line-segment intersection request.
 struct LineIntersectOptions {
     /// The first segment's start.
@@ -218,10 +301,36 @@ struct PathOptions {
     std::string path = "";
 };
 
+/// A deterministic random request.
+struct RandomOptions {
+    /// The exclusive upper bound.
+    double max = 0.0;
+    /// The inclusive lower bound.
+    double min = 0.0;
+};
+
 /// A shape-rendering request: a canvas, a background and a shape list.
 struct RenderShapesOptions {
     /// The render request as JSON.
     std::string request_json = "{}";
+};
+
+/// Record a depth index on a segment.
+struct SegmentAddIndexOptions {
+    /// The depth index.
+    double index = 0.0;
+};
+
+/// Move a segment to another osu! layer (`ChangePosition`).
+struct SegmentChangePositionOptions {
+    /// The destination osu! layer.
+    sdk::OsbLayer osb_layer = sdk::OsbLayer::Background;
+};
+
+/// Set a segment's reverse-depth flag.
+struct SegmentReverseDepthOptions {
+    /// Whether children are emitted in reverse order.
+    bool value = false;
 };
 
 /// A Douglas-Peucker simplification request.
@@ -232,10 +341,42 @@ struct SimplifyOptions {
     double tolerance = 0.0;
 };
 
+/// A sprite handle pair plus a sample time.
+struct SpriteTimeOptions {
+    /// The sample time in milliseconds.
+    double time = 0.0;
+};
+
+/// Start a loop group.
+struct StartLoopGroupOptions {
+    /// The loop start time.
+    double start_time = 0.0;
+    /// The number of iterations.
+    double count = 0.0;
+};
+
+/// Start a trigger group.
+struct StartTriggerGroupOptions {
+    /// The trigger name.
+    std::string name = "";
+    /// The trigger start time.
+    double start_time = 0.0;
+    /// The trigger end time.
+    double end_time = 0.0;
+    /// The trigger group index.
+    int group = 0;
+};
+
 /// A request carrying a block of text (an effect script, `.osu` or `.osb`).
 struct TextOptions {
     /// The text payload.
     std::string text = "";
+};
+
+/// A time query.
+struct TimeOptions {
+    /// The time.
+    double time = 0.0;
 };
 
 /// The clean non-runtime `Core` client: version, parsers, easing and math.
@@ -365,6 +506,15 @@ private:
 class Audio {
 public:
     explicit Audio(const Library& library) : library_(&library) {}
+    Audio(const Library& library, sdk::Runtime& runtime) : library_(&library), runtime_(&runtime) {}
+
+    /// Calls the Audio.audioDuration bridge operation.
+    double audio_duration() const {
+        if (runtime_ == nullptr) {
+            throw std::runtime_error("osbtk: Audio.audioDuration needs a runtime");
+        }
+        return runtime_->exec("Audio.audioDuration", "{}").at("audioDuration").number();
+    }
 
     /// An FFT request against a `.wav` file.
     Json fft(const FftOptions& options) const {
@@ -374,8 +524,21 @@ public:
             ",\"magnitudes\":" + std::to_string(options.magnitudes) + "}");
     }
 
+    /// An FFT request against the runtime's loaded audio.
+    Json get_fft(const GetFftOptions& options) const {
+        if (runtime_ == nullptr) {
+            throw std::runtime_error("osbtk: Audio.getFft needs a runtime");
+        }
+        std::string body = "{\"time\":" + sdk::detail::number(options.time)
+            + ",\"magnitudes\":" + std::to_string(options.magnitudes)
+            + ",\"cutoff\":" + sdk::detail::number(options.cutoff)
+            + ",\"easing\":" + sdk::detail::quote(options.easing) + "}";
+        return runtime_->exec("Audio.getFft", body);
+    }
+
 private:
     const Library* library_;
+    sdk::Runtime* runtime_ = nullptr;
 };
 
 /// The clean `Diagnostics` client.
@@ -516,11 +679,241 @@ private:
     sdk::Storyboarding3d::Helpers impl_;
 };
 
-/// The runtime classes are already high-level and handle-bound.
-using Runtime = sdk::Runtime;
-using Generator = sdk::Generator;
-using Layer = sdk::Layer;
-using Sprite = sdk::Sprite;
+/// The clean `Generator` client bound to a live runtime.
+class Generator {
+public:
+    explicit Generator(sdk::Runtime& runtime) : runtime_(&runtime) {}
+
+    /// Calls the Generator.beatmap bridge operation.
+    sdk::Beatmap beatmap() {
+        return sdk::parse_beatmap_json(runtime_->exec("Generator.beatmap", "{}"));
+    }
+
+    /// A time query.
+    Json control_point_at(const TimeOptions& options) {
+        return runtime_->exec("Generator.controlPointAt", "{\"time\":" + sdk::detail::number(options.time) + "}");
+    }
+
+    /// A request carrying a block of text (an effect script, `.osu` or `.osb`).
+    int import_osb(const TextOptions& options) {
+        return static_cast<int>(runtime_->exec("Generator.importOsb", "{\"text\":" + sdk::detail::quote(options.text) + "}").at("spriteCount").number());
+    }
+
+    /// Resolve (or create) a layer by name.
+    int layer_handle(const LayerHandleOptions& options) {
+        return static_cast<int>(runtime_->exec("Generator.layerHandle", "{\"name\":" + sdk::detail::quote(options.name) + "}").at("layer").number());
+    }
+
+    /// A request carrying a block of text (an effect script, `.osu` or `.osb`).
+    Json load_beatmap(const TextOptions& options) {
+        return runtime_->exec("Generator.loadBeatmap", "{\"text\":" + sdk::detail::quote(options.text) + "}");
+    }
+
+    /// A deterministic random request.
+    double random(const RandomOptions& options) {
+        return runtime_->exec("Generator.random", "{\"max\":" + sdk::detail::number(options.max) + ",\"min\":" + sdk::detail::number(options.min) + "}").at("value").number();
+    }
+
+    /// Calls the Generator.spriteCount bridge operation.
+    int sprite_count() {
+        return static_cast<int>(runtime_->exec("Generator.spriteCount", "{}").at("spriteCount").number());
+    }
+
+    /// Calls the Generator.storyboard bridge operation.
+    Json storyboard() {
+        return runtime_->exec("Generator.storyboard", "{}");
+    }
+
+    /// A time query.
+    Json timing_point_at(const TimeOptions& options) {
+        return runtime_->exec("Generator.timingPointAt", "{\"time\":" + sdk::detail::number(options.time) + "}");
+    }
+
+private:
+    sdk::Runtime* runtime_;
+};
+
+/// The clean `Sprite` client bound to a live runtime.
+class Sprite {
+public:
+    Sprite(sdk::Runtime& runtime, int layer, int sprite)
+        : runtime_(&runtime), layer_(layer), sprite_(sprite) {}
+
+    int layer() const { return layer_; }
+    int sprite() const { return sprite_; }
+
+    /// A sprite command. `start`/`end` are a scalar, a `Vector2`, or a `Color4` depending on `kind`.
+    void command(const CommandOptions& options) {
+        std::string body = "{\"kind\":" + sdk::detail::quote(options.kind)
+            + ",\"layer\":" + std::to_string(layer_)
+            + ",\"sprite\":" + std::to_string(sprite_)
+            + ",\"startTime\":" + sdk::detail::number(options.start_time)
+            + ",\"endTime\":" + sdk::detail::number(options.end_time)
+            + ",\"easing\":" + sdk::detail::quote(options.easing);
+        if (!options.start_json.empty()) body += ",\"start\":" + options.start_json;
+        if (!options.end_json.empty()) body += ",\"end\":" + options.end_json;
+        if (!options.parameter.empty()) body += ",\"parameter\":" + sdk::detail::quote(options.parameter);
+        body += "}";
+        runtime_->exec("Sprite.command", body);
+    }
+
+    /// A sprite handle pair.
+    void end_group() {
+        runtime_->exec("Sprite.endGroup", "{\"layer\":" + std::to_string(layer_) + ",\"sprite\":" + std::to_string(sprite_) + "}");
+    }
+
+    /// A sprite handle pair.
+    Json info() {
+        return runtime_->exec("Sprite.info", "{\"layer\":" + std::to_string(layer_) + ",\"sprite\":" + std::to_string(sprite_) + "}");
+    }
+
+    /// Start a loop group.
+    void start_loop_group(const StartLoopGroupOptions& options) {
+        runtime_->exec("Sprite.startLoopGroup", "{\"layer\":" + std::to_string(layer_) + ",\"sprite\":" + std::to_string(sprite_) + ",\"startTime\":" + sdk::detail::number(options.start_time) + ",\"count\":" + sdk::detail::number(options.count) + "}");
+    }
+
+    /// Start a trigger group.
+    void start_trigger_group(const StartTriggerGroupOptions& options) {
+        runtime_->exec("Sprite.startTriggerGroup", "{\"layer\":" + std::to_string(layer_) + ",\"sprite\":" + std::to_string(sprite_) + ",\"name\":" + sdk::detail::quote(options.name) + ",\"startTime\":" + sdk::detail::number(options.start_time) + ",\"endTime\":" + sdk::detail::number(options.end_time) + ",\"group\":" + std::to_string(options.group) + "}");
+    }
+
+    /// A sprite handle pair plus a sample time.
+    sdk::SpriteState state_at(const SpriteTimeOptions& options) {
+        return sdk::parse_state(runtime_->exec("Sprite.stateAt", "{\"layer\":" + std::to_string(layer_) + ",\"sprite\":" + std::to_string(sprite_) + ",\"time\":" + sdk::detail::number(options.time) + "}"));
+    }
+
+private:
+    sdk::Runtime* runtime_;
+    int layer_;
+    int sprite_;
+};
+
+/// The clean `Layer` client bound to a live runtime.
+class Layer {
+public:
+    Layer(sdk::Runtime& runtime, int handle) : runtime_(&runtime), handle_(handle) {}
+
+    /// Record a depth index on a segment.
+    void add_index(const SegmentAddIndexOptions& options) {
+        runtime_->exec("Layer.addIndex", "{\"layer\":" + std::to_string(handle_) + ",\"index\":" + sdk::detail::number(options.index) + "}");
+    }
+
+    /// Move a segment to another osu! layer (`ChangePosition`).
+    void change_position(const SegmentChangePositionOptions& options) {
+        runtime_->exec("Layer.changePosition", "{\"layer\":" + std::to_string(handle_) + ",\"osbLayer\":" + sdk::detail::quote(sdk::to_string(options.osb_layer)) + "}");
+    }
+
+    /// A segment handle request.
+    int clean() {
+        return static_cast<int>(runtime_->exec("Layer.clean", "{\"layer\":" + std::to_string(handle_) + "}").at("removed").number());
+    }
+
+    /// Create an animation sprite.
+    Sprite create_animation(const CreateAnimationOptions& options) {
+        std::string body = "{\"layerHandle\":" + std::to_string(handle_)
+            + ",\"path\":" + sdk::detail::quote(options.path)
+            + ",\"frames\":" + std::to_string(options.frames)
+            + ",\"frameDelay\":" + sdk::detail::number(options.frame_delay)
+            + ",\"loopType\":" + sdk::detail::quote(sdk::to_string(options.loop_type))
+            + ",\"origin\":" + sdk::detail::quote(sdk::to_string(options.origin))
+            + ",\"position\":" + detail::vec(options.position);
+        if (!options.layer.empty()) body += ",\"layer\":" + sdk::detail::quote(options.layer);
+        body += "}";
+        sdk::Json handle = runtime_->exec("Layer.createAnimation", body);
+        return Sprite(*runtime_, static_cast<int>(handle.at("layer").number()),
+                      static_cast<int>(handle.at("sprite").number()));
+    }
+
+    /// Create a sound sample on a layer.
+    void create_sample(const CreateSampleOptions& options) {
+        std::string body = "{\"layerHandle\":" + std::to_string(handle_)
+            + ",\"path\":" + sdk::detail::quote(options.path)
+            + ",\"time\":" + sdk::detail::number(options.time)
+            + ",\"volume\":" + sdk::detail::number(options.volume);
+        if (!options.layer.empty()) body += ",\"layer\":" + sdk::detail::quote(options.layer);
+        body += "}";
+        runtime_->exec("Layer.createSample", body);
+    }
+
+    /// A segment handle request.
+    Layer create_segment() {
+        sdk::Json handle = runtime_->exec("Layer.createSegment",
+            "{\"layer\":" + std::to_string(handle_) + "}");
+        return Layer(*runtime_, static_cast<int>(handle.at("layer").number()));
+    }
+
+    /// Create a sprite.
+    Sprite create_sprite(const CreateSpriteOptions& options) {
+        std::string body = "{\"layerHandle\":" + std::to_string(handle_)
+            + ",\"path\":" + sdk::detail::quote(options.path)
+            + ",\"origin\":" + sdk::detail::quote(sdk::to_string(options.origin));
+        if (options.position) body += ",\"position\":" + detail::vec(*options.position);
+        if (!options.layer.empty()) body += ",\"layer\":" + sdk::detail::quote(options.layer);
+        body += "}";
+        sdk::Json handle = runtime_->exec("Layer.createSprite", body);
+        return Sprite(*runtime_, static_cast<int>(handle.at("layer").number()),
+                      static_cast<int>(handle.at("sprite").number()));
+    }
+
+    /// A segment handle request.
+    int discard() {
+        return static_cast<int>(runtime_->exec("Layer.discard", "{\"layer\":" + std::to_string(handle_) + "}").at("layerCount").number());
+    }
+
+    /// A sprite handle pair.
+    bool discard_sprite(int sprite) {
+        return runtime_->exec("Layer.discardSprite", "{\"layer\":" + std::to_string(handle_) + ",\"sprite\":" + std::to_string(sprite) + "}").at("value").boolean();
+    }
+
+    /// A segment handle request.
+    Json indexes() {
+        return runtime_->exec("Layer.indexes", "{\"layer\":" + std::to_string(handle_) + "}");
+    }
+
+    /// A segment handle request.
+    void move_to_bottom() {
+        runtime_->exec("Layer.moveToBottom", "{\"layer\":" + std::to_string(handle_) + "}");
+    }
+
+    /// A segment handle request.
+    void move_to_top() {
+        runtime_->exec("Layer.moveToTop", "{\"layer\":" + std::to_string(handle_) + "}");
+    }
+
+    /// Set a segment's reverse-depth flag.
+    void reverse_depth(const SegmentReverseDepthOptions& options) {
+        runtime_->exec("Layer.reverseDepth", "{\"layer\":" + std::to_string(handle_) + ",\"value\":" + (options.value ? "true" : "false") + "}");
+    }
+
+private:
+    sdk::Runtime* runtime_;
+    int handle_;
+};
+
+/// A live storyboard runtime: the clean entry point for the handle-bound clients.
+class Runtime {
+public:
+    explicit Runtime(const Library& library, double width = 640.0, double height = 480.0)
+        : library_(&library), native_(library, width, height) {}
+
+    Generator generator() { return Generator(native_); }
+
+    Audio audio() { return Audio(*library_, native_); }
+
+    Layer layer(const std::string& name) {
+        int handle = static_cast<int>(native_.exec("Generator.layerHandle",
+            "{\"name\":" + sdk::detail::quote(name) + "}").at("layer").number());
+        return Layer(native_, handle);
+    }
+
+    Sprite sprite(int layer, int sprite) { return Sprite(native_, layer, sprite); }
+
+    sdk::Runtime& native() { return native_; }
+
+private:
+    const Library* library_;
+    sdk::Runtime native_;
+};
 
 /// The composed stateless clean client.
 class Client {

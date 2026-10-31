@@ -1,9 +1,9 @@
 //! The clean high-level Rust clients: one class per contract tag with
 //! `<X>Options` inputs, mirroring the generated clean clients in the other SDKs.
 //!
-//! The runtime classes stay the hand-written [`crate::Runtime`]/[`crate::Segment`]
-//! surface; these clients cover the stateless core and library operations over
-//! `crate::Client`.
+//! The stateless classes wrap `crate::Client`; [`Runtime`] owns a live
+//! [`crate::Runtime`] and exposes the handle-bound `Generator`, `Layer` and
+//! `Sprite` clients.
 
 use serde_json::{json, Value};
 
@@ -39,6 +39,70 @@ pub struct ArcOptions {
 pub struct Bake3dOptions {
     /// The 3D scene.
     pub input: models::Scene3dInput,
+}
+
+/// A sprite command. `start`/`end` are a scalar, a `Vector2`, or a `Color4` depending on `kind`.
+#[derive(Clone, Debug)]
+pub struct CommandOptions {
+    /// The command kind (`move`, `moveX`, `moveY`, `scale`, `scaleVec`, `rotate`, `fade`, `color`, `colorHsb`, `anchor`, `parameter`, `flipH`, `flipV`, `additive`).
+    pub kind: String,
+    /// The command start time in milliseconds.
+    pub start_time: f64,
+    /// The command end time in milliseconds.
+    pub end_time: f64,
+    /// The easing function.
+    pub easing: models::Easing,
+    /// The start value (scalar, point or color).
+    pub start: Option<serde_json::Value>,
+    /// The end value (scalar, point or color).
+    pub end: Option<serde_json::Value>,
+    /// The parameter kind for a `parameter` command.
+    pub parameter: Option<models::ParameterType>,
+}
+
+/// Create an animation sprite.
+#[derive(Clone, Debug)]
+pub struct CreateAnimationOptions {
+    /// The texture path (relative to the mapset).
+    pub path: String,
+    /// The number of frames.
+    pub frames: i32,
+    /// Delay between frames, in milliseconds.
+    pub frame_delay: f64,
+    /// How the animation loops.
+    pub loop_type: models::OsbLoopType,
+    /// The sprite anchor origin.
+    pub origin: models::OsbOrigin,
+    /// The initial position.
+    pub position: models::Vector2,
+    /// The target layer name (omitted when `layerHandle` is set).
+    pub layer: Option<String>,
+}
+
+/// Create a sound sample on a layer.
+#[derive(Clone, Debug)]
+pub struct CreateSampleOptions {
+    /// The sample path (relative to the mapset).
+    pub path: String,
+    /// The sample time in milliseconds.
+    pub time: f64,
+    /// The sample volume (`0..=100`).
+    pub volume: Option<f64>,
+    /// The target layer name (omitted when `layerHandle` is set).
+    pub layer: Option<String>,
+}
+
+/// Create a sprite.
+#[derive(Clone, Debug)]
+pub struct CreateSpriteOptions {
+    /// The texture path (relative to the mapset).
+    pub path: String,
+    /// The sprite anchor origin.
+    pub origin: models::OsbOrigin,
+    /// The initial position; omitted means the sprite's default.
+    pub position: Option<models::Vector2>,
+    /// The target layer name (omitted when `layerHandle` is set).
+    pub layer: Option<String>,
 }
 
 /// A curve hit-test request.
@@ -166,6 +230,19 @@ pub struct FftOptions {
     pub time: Option<f64>,
 }
 
+/// An FFT request against the runtime's loaded audio.
+#[derive(Clone, Debug)]
+pub struct GetFftOptions {
+    /// Sample time in milliseconds.
+    pub time: f64,
+    /// Number of frequency bins.
+    pub magnitudes: i32,
+    /// A frequency cut-off.
+    pub cutoff: Option<f64>,
+    /// The easing applied across the bins.
+    pub easing: Option<models::Easing>,
+}
+
 /// The anchor offset for an origin.
 #[derive(Clone, Debug)]
 pub struct GetOriginVectorOptions {
@@ -210,6 +287,13 @@ pub struct InScreenBoundsOptions {
     pub origin: models::Vector2,
 }
 
+/// Resolve (or create) a layer by name.
+#[derive(Clone, Debug)]
+pub struct LayerHandleOptions {
+    /// The layer name.
+    pub name: String,
+}
+
 /// A line-segment intersection request.
 #[derive(Clone, Debug)]
 pub struct LineIntersectOptions {
@@ -239,6 +323,15 @@ pub struct PathOptions {
     pub path: String,
 }
 
+/// A deterministic random request.
+#[derive(Clone, Debug)]
+pub struct RandomOptions {
+    /// The exclusive upper bound.
+    pub max: f64,
+    /// The inclusive lower bound.
+    pub min: f64,
+}
+
 /// A shape-rendering request: a canvas, a background and a shape list.
 #[derive(Clone, Debug)]
 pub struct RenderShapesOptions {
@@ -254,6 +347,27 @@ pub struct RenderShapesOptions {
     pub background: Option<models::RgbaColor>,
 }
 
+/// Record a depth index on a segment.
+#[derive(Clone, Debug)]
+pub struct SegmentAddIndexOptions {
+    /// The index to record.
+    pub index: f64,
+}
+
+/// Move a segment to another osu! layer (`ChangePosition`).
+#[derive(Clone, Debug)]
+pub struct SegmentChangePositionOptions {
+    /// The destination osu! layer.
+    pub osb_layer: models::OsbLayer,
+}
+
+/// Set a segment's reverse-depth flag.
+#[derive(Clone, Debug)]
+pub struct SegmentReverseDepthOptions {
+    /// Whether children are emitted in reverse order.
+    pub value: bool,
+}
+
 /// A Douglas-Peucker simplification request.
 #[derive(Clone, Debug)]
 pub struct SimplifyOptions {
@@ -263,6 +377,35 @@ pub struct SimplifyOptions {
     pub tolerance: f64,
 }
 
+/// A sprite handle pair plus a sample time.
+#[derive(Clone, Debug)]
+pub struct SpriteTimeOptions {
+    /// The sample time in milliseconds.
+    pub time: f64,
+}
+
+/// Start a loop group.
+#[derive(Clone, Debug)]
+pub struct StartLoopGroupOptions {
+    /// The loop start time in milliseconds.
+    pub start_time: f64,
+    /// The number of iterations.
+    pub count: f64,
+}
+
+/// Start a trigger group.
+#[derive(Clone, Debug)]
+pub struct StartTriggerGroupOptions {
+    /// The trigger name (matches a hit object).
+    pub name: String,
+    /// The trigger start time in milliseconds.
+    pub start_time: f64,
+    /// The trigger end time in milliseconds.
+    pub end_time: f64,
+    /// The trigger group index.
+    pub group: i32,
+}
+
 /// A request carrying a block of text (an effect script, `.osu` or `.osb`).
 #[derive(Clone, Debug)]
 pub struct TextOptions {
@@ -270,17 +413,11 @@ pub struct TextOptions {
     pub text: String,
 }
 
-/// The clean `Audio` client.
-pub struct Audio;
-
-impl Audio {
-    pub fn fft(&self, options: FftOptions) -> Result<models::FftResult, Error> {
-        crate::Client::fft(
-            &options.path,
-            options.time.unwrap_or(0.0),
-            options.magnitudes.unwrap_or(64).max(0) as usize,
-        )
-    }
+/// A time query.
+#[derive(Clone, Debug)]
+pub struct TimeOptions {
+    /// The time in milliseconds.
+    pub time: f64,
 }
 
 /// The clean `Core` client.
@@ -512,6 +649,366 @@ impl Storyboarding3d {
     }
 }
 
+/// The clean `Audio` client. `fft` is stateless; `get_fft` and
+/// `audio_duration` need a live runtime.
+pub struct Audio<'a> {
+    runtime: Option<&'a mut crate::Runtime>,
+}
+
+impl<'a> Audio<'a> {
+    pub fn audio_duration(&mut self) -> Result<f64, Error> {
+        let runtime = self
+            .runtime
+            .as_mut()
+            .ok_or_else(|| Error::Bridge("Audio.audioDuration needs a runtime".to_string()))?;
+        let result: models::AudioDurationResult = runtime.exec(json!({
+            "op": "Audio.audioDuration"
+        }))?;
+        Ok(result.audio_duration)
+    }
+
+    pub fn fft(&self, options: FftOptions) -> Result<models::FftResult, Error> {
+        crate::Client::fft(
+            &options.path,
+            options.time.unwrap_or(0.0),
+            options.magnitudes.unwrap_or(64).max(0) as usize,
+        )
+    }
+
+    pub fn get_fft(&mut self, options: GetFftOptions) -> Result<models::FftResult, Error> {
+        let runtime = self
+            .runtime
+            .as_mut()
+            .ok_or_else(|| Error::Bridge("Audio.getFft needs a runtime".to_string()))?;
+        let mut request = json!({
+            "op": "Audio.getFft",
+            "time": options.time,
+            "magnitudes": options.magnitudes,
+        });
+        if let Some(cutoff) = options.cutoff {
+            request["cutoff"] = json!(cutoff);
+        }
+        if let Some(easing) = options.easing {
+            request["easing"] = json!(easing);
+        }
+        runtime.exec(request)
+    }
+}
+
+/// The clean `Generator` client bound to a live runtime.
+pub struct Generator<'a> {
+    runtime: &'a mut crate::Runtime,
+}
+
+impl<'a> Generator<'a> {
+    pub fn beatmap(&mut self) -> Result<Option<models::Beatmap>, Error> {
+        self.runtime.exec(json!({ "op": "Generator.beatmap" }))
+    }
+
+    pub fn control_point_at(
+        &mut self,
+        options: TimeOptions,
+    ) -> Result<Option<models::ControlPoint>, Error> {
+        self.runtime
+            .exec(json!({ "op": "Generator.controlPointAt", "time": options.time }))
+    }
+
+    pub fn import_osb(&mut self, options: TextOptions) -> Result<i32, Error> {
+        let result: models::ImportOsbResult = self
+            .runtime
+            .exec(json!({ "op": "Generator.importOsb", "text": options.text }))?;
+        Ok(result.sprite_count)
+    }
+
+    pub fn layer_handle(&mut self, options: LayerHandleOptions) -> Result<i32, Error> {
+        let result: models::LayerHandle = self
+            .runtime
+            .exec(json!({ "op": "Generator.layerHandle", "name": options.name }))?;
+        Ok(result.layer)
+    }
+
+    pub fn load_beatmap(
+        &mut self,
+        options: TextOptions,
+    ) -> Result<models::LoadBeatmapResult, Error> {
+        self.runtime
+            .exec(json!({ "op": "Generator.loadBeatmap", "text": options.text }))
+    }
+
+    pub fn random(&mut self, options: RandomOptions) -> Result<f64, Error> {
+        let result: models::RandomResult = self
+            .runtime
+            .exec(json!({ "op": "Generator.random", "max": options.max, "min": options.min }))?;
+        Ok(result.value)
+    }
+
+    pub fn sprite_count(&mut self) -> Result<i32, Error> {
+        let result: models::SpriteCountResult = self
+            .runtime
+            .exec(json!({ "op": "Generator.spriteCount" }))?;
+        Ok(result.sprite_count)
+    }
+
+    pub fn storyboard(&mut self) -> Result<models::Storyboard, Error> {
+        self.runtime.exec(json!({ "op": "Generator.storyboard" }))
+    }
+
+    pub fn timing_point_at(&mut self, options: TimeOptions) -> Result<models::ControlPoint, Error> {
+        self.runtime
+            .exec(json!({ "op": "Generator.timingPointAt", "time": options.time }))
+    }
+}
+
+/// The clean `Layer` client bound to a live runtime.
+pub struct Layer<'a> {
+    runtime: &'a mut crate::Runtime,
+    handle: models::LayerHandle,
+}
+
+impl<'a> Layer<'a> {
+    /// The segment's handle.
+    pub fn handle(&self) -> models::LayerHandle {
+        self.handle.clone()
+    }
+
+    pub fn add_index(&mut self, options: SegmentAddIndexOptions) -> Result<(), Error> {
+        let _: models::OkResult = self.runtime.exec(
+            json!({ "op": "Layer.addIndex", "layer": self.handle.layer, "index": options.index }),
+        )?;
+        Ok(())
+    }
+
+    pub fn change_position(&mut self, options: SegmentChangePositionOptions) -> Result<(), Error> {
+        let _: models::OkResult = self.runtime.exec(json!({ "op": "Layer.changePosition", "layer": self.handle.layer, "osbLayer": options.osb_layer }))?;
+        Ok(())
+    }
+
+    pub fn clean(&mut self) -> Result<i32, Error> {
+        let result: models::SegmentCleanResult = self
+            .runtime
+            .exec(json!({ "op": "Layer.clean", "layer": self.handle.layer }))?;
+        Ok(result.removed)
+    }
+
+    pub fn create_animation(
+        &mut self,
+        options: CreateAnimationOptions,
+    ) -> Result<Sprite<'_>, Error> {
+        let handle: models::Handle = self.runtime.exec(json!({
+            "op": "Layer.createAnimation",
+            "layerHandle": self.handle.layer,
+            "path": options.path,
+            "frames": options.frames,
+            "frameDelay": options.frame_delay,
+            "loopType": options.loop_type,
+            "origin": options.origin,
+            "position": options.position,
+        }))?;
+        Ok(Sprite {
+            runtime: &mut *self.runtime,
+            handle,
+        })
+    }
+
+    pub fn create_sample(&mut self, options: CreateSampleOptions) -> Result<(), Error> {
+        let mut request = json!({
+            "op": "Layer.createSample",
+            "layerHandle": self.handle.layer,
+            "path": options.path,
+            "time": options.time,
+            "volume": options.volume.unwrap_or(100.0),
+        });
+        if let Some(layer) = options.layer {
+            request["layer"] = json!(layer);
+        }
+        let _: models::OkResult = self.runtime.exec(request)?;
+        Ok(())
+    }
+
+    pub fn create_segment(&mut self) -> Result<Layer<'_>, Error> {
+        let handle: models::LayerHandle = self
+            .runtime
+            .exec(json!({ "op": "Layer.createSegment", "layer": self.handle.layer }))?;
+        Ok(Layer {
+            runtime: &mut *self.runtime,
+            handle,
+        })
+    }
+
+    pub fn create_sprite(&mut self, options: CreateSpriteOptions) -> Result<Sprite<'_>, Error> {
+        let mut request = json!({
+            "op": "Layer.createSprite",
+            "layerHandle": self.handle.layer,
+            "path": options.path,
+            "origin": options.origin,
+        });
+        if let Some(position) = options.position {
+            request["position"] = json!(position);
+        }
+        if let Some(layer) = options.layer {
+            request["layer"] = json!(layer);
+        }
+        let handle: models::Handle = self.runtime.exec(request)?;
+        Ok(Sprite {
+            runtime: &mut *self.runtime,
+            handle,
+        })
+    }
+
+    pub fn discard(&mut self) -> Result<i32, Error> {
+        let result: models::SegmentDiscardResult = self
+            .runtime
+            .exec(json!({ "op": "Layer.discard", "layer": self.handle.layer }))?;
+        Ok(result.layer_count)
+    }
+
+    pub fn discard_sprite(&mut self, sprite: i32) -> Result<bool, Error> {
+        let result: models::BoolResult = self.runtime.exec(
+            json!({ "op": "Layer.discardSprite", "layer": self.handle.layer, "sprite": sprite }),
+        )?;
+        Ok(result.value)
+    }
+
+    pub fn indexes(&mut self) -> Result<models::SegmentIndexesResult, Error> {
+        self.runtime
+            .exec(json!({ "op": "Layer.indexes", "layer": self.handle.layer }))
+    }
+
+    pub fn move_to_bottom(&mut self) -> Result<(), Error> {
+        let _: models::OkResult = self
+            .runtime
+            .exec(json!({ "op": "Layer.moveToBottom", "layer": self.handle.layer }))?;
+        Ok(())
+    }
+
+    pub fn move_to_top(&mut self) -> Result<(), Error> {
+        let _: models::OkResult = self
+            .runtime
+            .exec(json!({ "op": "Layer.moveToTop", "layer": self.handle.layer }))?;
+        Ok(())
+    }
+
+    pub fn reverse_depth(&mut self, options: SegmentReverseDepthOptions) -> Result<(), Error> {
+        let _: models::OkResult = self.runtime.exec(json!({ "op": "Layer.reverseDepth", "layer": self.handle.layer, "value": options.value }))?;
+        Ok(())
+    }
+}
+
+/// The clean `Sprite` client bound to a live runtime.
+pub struct Sprite<'a> {
+    runtime: &'a mut crate::Runtime,
+    handle: models::Handle,
+}
+
+impl<'a> Sprite<'a> {
+    /// The sprite's layer handle.
+    pub fn layer(&self) -> i32 {
+        self.handle.layer
+    }
+
+    /// The sprite's index within its layer.
+    pub fn sprite(&self) -> i32 {
+        self.handle.sprite
+    }
+
+    pub fn command(&mut self, options: CommandOptions) -> Result<(), Error> {
+        let mut request = json!({
+            "op": "Sprite.command",
+            "kind": options.kind,
+            "layer": self.handle.layer,
+            "sprite": self.handle.sprite,
+            "startTime": options.start_time,
+            "endTime": options.end_time,
+            "easing": options.easing,
+        });
+        if let Some(start) = options.start {
+            request["start"] = start;
+        }
+        if let Some(end) = options.end {
+            request["end"] = end;
+        }
+        if let Some(parameter) = options.parameter {
+            request["parameter"] = json!(parameter);
+        }
+        let _: models::OkResult = self.runtime.exec(request)?;
+        Ok(())
+    }
+
+    pub fn end_group(&mut self) -> Result<(), Error> {
+        let _: models::OkResult = self.runtime.exec(json!({ "op": "Sprite.endGroup", "layer": self.handle.layer, "sprite": self.handle.sprite }))?;
+        Ok(())
+    }
+
+    pub fn info(&mut self) -> Result<models::SpriteInfo, Error> {
+        self.runtime.exec(json!({ "op": "Sprite.info", "layer": self.handle.layer, "sprite": self.handle.sprite }))
+    }
+
+    pub fn start_loop_group(&mut self, options: StartLoopGroupOptions) -> Result<(), Error> {
+        let _: models::OkResult = self.runtime.exec(json!({ "op": "Sprite.startLoopGroup", "layer": self.handle.layer, "sprite": self.handle.sprite, "startTime": options.start_time, "count": options.count }))?;
+        Ok(())
+    }
+
+    pub fn start_trigger_group(&mut self, options: StartTriggerGroupOptions) -> Result<(), Error> {
+        let _: models::OkResult = self.runtime.exec(json!({ "op": "Sprite.startTriggerGroup", "layer": self.handle.layer, "sprite": self.handle.sprite, "name": options.name, "startTime": options.start_time, "endTime": options.end_time, "group": options.group }))?;
+        Ok(())
+    }
+
+    pub fn state_at(&mut self, options: SpriteTimeOptions) -> Result<models::SpriteState, Error> {
+        self.runtime.exec(json!({ "op": "Sprite.stateAt", "layer": self.handle.layer, "sprite": self.handle.sprite, "time": options.time }))
+    }
+}
+
+/// A live storyboard runtime: the clean entry point for the handle-bound clients.
+pub struct Runtime {
+    inner: crate::Runtime,
+}
+
+impl Default for Runtime {
+    fn default() -> Self {
+        Self::new(640.0, 480.0)
+    }
+}
+
+impl Runtime {
+    /// Creates a runtime of the given storyboard resolution.
+    pub fn new(width: f64, height: f64) -> Self {
+        Runtime {
+            inner: crate::Runtime::new(width as f32, height as f32),
+        }
+    }
+
+    /// The clean generator client bound to this runtime.
+    pub fn generator(&mut self) -> Generator<'_> {
+        Generator {
+            runtime: &mut self.inner,
+        }
+    }
+
+    /// The clean audio client bound to this runtime.
+    pub fn audio(&mut self) -> Audio<'_> {
+        Audio {
+            runtime: Some(&mut self.inner),
+        }
+    }
+
+    /// Resolves (or creates) a layer by name and binds its handle.
+    pub fn layer(&mut self, name: &str) -> Result<Layer<'_>, Error> {
+        let handle = self.inner.layer_handle(name)?;
+        Ok(Layer {
+            runtime: &mut self.inner,
+            handle,
+        })
+    }
+
+    /// Binds an existing layer/sprite pair.
+    pub fn sprite(&mut self, layer: i32, sprite: i32) -> Sprite<'_> {
+        Sprite {
+            runtime: &mut self.inner,
+            handle: models::Handle { layer, sprite },
+        }
+    }
+}
+
 fn helper(op: &str, options: HelperOptions) -> Result<Value, Error> {
     let result: models::HelperResult = crate::client::call(json!({
         "op": op,
@@ -523,7 +1020,7 @@ fn helper(op: &str, options: HelperOptions) -> Result<Value, Error> {
 
 /// The composed stateless clean client, mirroring the other SDKs' entry points.
 pub struct Client {
-    pub audio: Audio,
+    pub audio: Audio<'static>,
     pub core: Core,
     pub diagnostics: Diagnostics,
     pub helpers: Helpers,
@@ -543,7 +1040,7 @@ impl Default for Client {
 impl Client {
     pub fn new() -> Self {
         Client {
-            audio: Audio,
+            audio: Audio { runtime: None },
             core: Core,
             diagnostics: Diagnostics,
             helpers: Helpers,

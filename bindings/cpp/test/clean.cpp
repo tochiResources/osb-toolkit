@@ -79,6 +79,42 @@ int main() {
         return fail("clean origin");
     }
 
+    osbtk::clean::Runtime runtime(lib);
+    osbtk::clean::Generator generator = runtime.generator();
+    if (generator.sprite_count() != 0) {
+        return fail("clean runtime initial sprite count");
+    }
+    osbtk::clean::Layer layer = runtime.layer("Foreground");
+    osbtk::clean::Sprite sprite =
+        layer.create_sprite({"sb/dot.png", osbtk::sdk::OsbOrigin::Centre});
+    sprite.command({"move", 0.0, 1000.0, "None", "{\"x\":0,\"y\":0}", "{\"x\":100,\"y\":0}", ""});
+    osbtk::sdk::SpriteState state = sprite.state_at({500.0});
+    if (std::abs(state.position.x - 50.0) > 0.1) {
+        return fail("clean runtime sprite position");
+    }
+    if (generator.sprite_count() != 1) {
+        return fail("clean runtime sprite count");
+    }
+
+    osbtk::clean::Sprite animation = layer.create_animation(
+        {"sb/anim.png", 2, 100.0, osbtk::sdk::OsbLoopType::LoopForever,
+         osbtk::sdk::OsbOrigin::Centre, {0.0, 0.0}, ""});
+    if (generator.sprite_count() != 2) {
+        return fail("clean runtime animation count");
+    }
+    if (!animation.info().is_object()) {
+        return fail("clean runtime sprite info");
+    }
+
+    osbtk::clean::Layer child = layer.create_segment();
+    child.create_sprite({"sb/child.png", osbtk::sdk::OsbOrigin::Centre});
+    if (generator.sprite_count() != 3) {
+        return fail("clean runtime segment count");
+    }
+    if (!layer.discard_sprite(animation.sprite())) {
+        return fail("clean runtime discard sprite");
+    }
+
     osbtk::sdk::Json baked = clean.storyboarding3d.bake3d(
         {"{\"nodes\":[{\"sprite\":\"sb/dot.png\"}],\"camera\":{\"position\":[{\"time\":0,\"value\":[0,0,5]}]}}"});
     if (baked.find("sprites") == nullptr || baked.at("sprites").array().size() != 1) {

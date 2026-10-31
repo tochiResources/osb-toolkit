@@ -30,5 +30,10 @@ foreach ($name in @("main", "sdk", "clean")) {
         c++ -std=c++17 -I "$PSScriptRoot" "$source" -o "$exe"
     }
     Push-Location $root
-    try { & $exe } finally { Pop-Location }
+    try {
+        & $exe
+        if ($LASTEXITCODE -ne 0) {
+            throw "C++ test '$name' failed with exit code $LASTEXITCODE"
+        }
+    } finally { Pop-Location }
 }

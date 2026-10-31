@@ -1398,22 +1398,10 @@ public:
     }
 
     /// The number of sprites on the storyboard.
-    int sprite_count() {
-        Json json = detail::parse_json(native_.exec("{\"op\":\"spriteCount\"}"));
-        if (const Json* error = json.find("error"); error != nullptr) {
-            throw std::runtime_error("osbtk: " + error->string());
-        }
-        return static_cast<int>(json.at("spriteCount").number());
-    }
+    int sprite_count() { return static_cast<int>(call("Generator.spriteCount", "{}").at("spriteCount").number()); }
 
     /// The built storyboard model (`storyboard`).
-    Json storyboard() {
-        Json json = detail::parse_json(native_.exec("{\"op\":\"storyboard\"}"));
-        if (const Json* error = json.find("error"); error != nullptr) {
-            throw std::runtime_error("osbtk: " + error->string());
-        }
-        return json;
-    }
+    Json storyboard() { return call("Generator.storyboard", "{}"); }
 
     /// Adds a sound sample to a layer (`CreateSample`).
     void create_sample(const std::string& layer, const std::string& path, double time, double volume) {
@@ -1442,7 +1430,16 @@ private:
     }
 
     Json call(const std::string& op, const std::string& body) {
-        Json json = detail::parse_json(native_.exec("{\"op\":\"" + op + "\"," + body.substr(1)));
+        std::string fields = body;
+        if (!fields.empty() && fields.front() == '{' && fields.back() == '}') {
+            fields = fields.substr(1, fields.size() - 2);
+        }
+        std::string request = "{\"op\":\"" + op + "\"";
+        if (!fields.empty()) {
+            request += "," + fields;
+        }
+        request += "}";
+        Json json = detail::parse_json(native_.exec(request));
         if (const Json* error = json.find("error"); error != nullptr) {
             throw std::runtime_error("osbtk: " + error->string());
         }
@@ -1456,7 +1453,7 @@ public:
     Sprite(Runtime& runtime, int layer, int sprite) : runtime_(&runtime), layer_(layer), sprite_(sprite) {}
 
     /// The sprite's initial state and metadata.
-    Json info() { return runtime_->exec("spriteInfo", handle_json()); }
+    Json info() { return runtime_->exec("Sprite.info", handle_json()); }
 
     /// `Move`.
     Sprite& move(double start_time, double end_time, Vector2 start, Vector2 end, const std::string& easing = "None") {
@@ -1599,7 +1596,7 @@ public:
                            + ",\"startTime\":" + detail::number(start_time) + ",\"endTime\":" + detail::number(end_time)
                            + ",\"easing\":" + detail::quote(easing) + ",\"start\":0,\"end\":1,\"parameter\":"
                            + detail::quote(parameter) + "}";
-        runtime_->exec("command", body);
+        runtime_->exec("Sprite.command", body);
         return *this;
     }
 
@@ -1652,14 +1649,14 @@ public:
 
     /// `StartLoopGroup`.
     Sprite& start_loop_group(double start_time, double count) {
-        runtime_->exec("startLoopGroup", "{\"layer\":" + std::to_string(layer_) + ",\"sprite\":" + std::to_string(sprite_)
+        runtime_->exec("Sprite.startLoopGroup", "{\"layer\":" + std::to_string(layer_) + ",\"sprite\":" + std::to_string(sprite_)
                                              + ",\"startTime\":" + detail::number(start_time) + ",\"count\":" + detail::number(count) + "}");
         return *this;
     }
 
     /// `EndGroup`.
     Sprite& end_group() {
-        runtime_->exec("endGroup", "{\"layer\":" + std::to_string(layer_) + ",\"sprite\":" + std::to_string(sprite_) + "}");
+        runtime_->exec("Sprite.endGroup", "{\"layer\":" + std::to_string(layer_) + ",\"sprite\":" + std::to_string(sprite_) + "}");
         return *this;
     }
 
@@ -1678,13 +1675,13 @@ private:
     }
 
     Json state_at(double time) {
-        return runtime_->exec("spriteStateAt", "{\"layer\":" + std::to_string(layer_) + ",\"sprite\":" + std::to_string(sprite_)
+        return runtime_->exec("Sprite.stateAt", "{\"layer\":" + std::to_string(layer_) + ",\"sprite\":" + std::to_string(sprite_)
                                                    + ",\"time\":" + detail::number(time) + "}");
     }
 
     Sprite& add(const std::string& kind, double start_time, double end_time, const std::string& easing,
                 const std::string& start, const std::string& end) {
-        runtime_->exec("command", "{\"kind\":" + detail::quote(kind) + ",\"layer\":" + std::to_string(layer_)
+        runtime_->exec("Sprite.command", "{\"kind\":" + detail::quote(kind) + ",\"layer\":" + std::to_string(layer_)
                                      + ",\"sprite\":" + std::to_string(sprite_) + ",\"startTime\":" + detail::number(start_time)
                                      + ",\"endTime\":" + detail::number(end_time) + ",\"easing\":" + detail::quote(easing)
                                      + ",\"start\":" + start + ",\"end\":" + end + "}");
@@ -1713,66 +1710,66 @@ public:
 
     /// `CreateSprite`.
     Sprite create_sprite(const std::string& path, OsbOrigin origin = OsbOrigin::Centre) {
-        Json handle = runtime_->exec("createSprite", "{\"layerHandle\":" + std::to_string(handle_) + ",\"path\":" + detail::quote(path)
+        Json handle = runtime_->exec("Layer.createSprite", "{\"layerHandle\":" + std::to_string(handle_) + ",\"path\":" + detail::quote(path)
                                                         + ",\"origin\":" + detail::quote(to_string(origin)) + "}");
         return Sprite(*runtime_, static_cast<int>(handle.at("layer").number()), static_cast<int>(handle.at("sprite").number()));
     }
 
     /// `CreateSample`.
     Layer& create_sample(const std::string& path, double time, double volume = 100.0) {
-        runtime_->exec("createSample", "{\"layerHandle\":" + std::to_string(handle_) + ",\"path\":" + detail::quote(path)
+        runtime_->exec("Layer.createSample", "{\"layerHandle\":" + std::to_string(handle_) + ",\"path\":" + detail::quote(path)
                                           + ",\"time\":" + detail::number(time) + ",\"volume\":" + detail::number(volume) + "}");
         return *this;
     }
 
     /// `CreateSegment`: a segment nested in this one.
     Layer create_segment() {
-        Json handle = runtime_->exec("createSegment", "{\"layer\":" + std::to_string(handle_) + "}");
+        Json handle = runtime_->exec("Layer.createSegment", "{\"layer\":" + std::to_string(handle_) + "}");
         return Layer(*runtime_, std::string(), static_cast<int>(handle.at("layer").number()));
     }
 
     /// `ReverseDepth`.
     Layer& set_reverse_depth(bool value) {
-        runtime_->exec("segmentReverseDepth", "{\"layer\":" + std::to_string(handle_) + ",\"value\":" + (value ? "true" : "false") + "}");
+        runtime_->exec("Layer.reverseDepth", "{\"layer\":" + std::to_string(handle_) + ",\"value\":" + (value ? "true" : "false") + "}");
         return *this;
     }
 
     /// `AddIndex`.
     Layer& add_index(double index) {
-        runtime_->exec("segmentAddIndex", "{\"layer\":" + std::to_string(handle_) + ",\"index\":" + detail::number(index) + "}");
+        runtime_->exec("Layer.addIndex", "{\"layer\":" + std::to_string(handle_) + ",\"index\":" + detail::number(index) + "}");
         return *this;
     }
 
     /// `Indexes`/`LowestIndex`/`HighestIndex`.
-    Json indexes() { return runtime_->exec("segmentIndexes", "{\"layer\":" + std::to_string(handle_) + "}"); }
+    Json indexes() { return runtime_->exec("Layer.indexes", "{\"layer\":" + std::to_string(handle_) + "}"); }
 
     /// `ChangePosition`.
     Layer& change_position(OsbLayer layer) {
-        runtime_->exec("segmentChangePosition", "{\"layer\":" + std::to_string(handle_) + ",\"osbLayer\":" + detail::quote(to_string(layer)) + "}");
+        runtime_->exec("Layer.changePosition", "{\"layer\":" + std::to_string(handle_) + ",\"osbLayer\":" + detail::quote(to_string(layer)) + "}");
         return *this;
     }
 
     /// `MoveToTop`.
     Layer& move_to_top() {
-        runtime_->exec("segmentMoveToTop", "{\"layer\":" + std::to_string(handle_) + "}");
+        runtime_->exec("Layer.moveToTop", "{\"layer\":" + std::to_string(handle_) + "}");
         return *this;
     }
 
     /// `MoveToBottom`.
     Layer& move_to_bottom() {
-        runtime_->exec("segmentMoveToBottom", "{\"layer\":" + std::to_string(handle_) + "}");
+        runtime_->exec("Layer.moveToBottom", "{\"layer\":" + std::to_string(handle_) + "}");
         return *this;
     }
 
     /// `Clean`.
-    Json clean() { return runtime_->exec("segmentClean", "{\"layer\":" + std::to_string(handle_) + "}"); }
+    Json clean() { return runtime_->exec("Layer.clean", "{\"layer\":" + std::to_string(handle_) + "}"); }
 
     /// `Discard`.
-    Json discard() { return runtime_->exec("segmentDiscard", "{\"layer\":" + std::to_string(handle_) + "}"); }
+    Json discard() { return runtime_->exec("Layer.discard", "{\"layer\":" + std::to_string(handle_) + "}"); }
 
     /// `DiscardSprite`.
     Layer& discard_sprite(const Sprite& sprite) {
-        runtime_->exec("segmentDiscardSprite", "{\"layer\":" + std::to_string(handle_) + ",\"sprite\":" + std::to_string(sprite.sprite()) + "}");
+        runtime_->exec("Layer.discardSprite", "{\"layer\":" + std::to_string(handle_) + ",\"sprite\":" + std::to_string(sprite.sprite()) + "}");
         return *this;
     }
 
@@ -1798,7 +1795,7 @@ public:
 
     /// `GetLayer`: a layer that creates sprites/animations/samples.
     Layer get_layer(const std::string& name) {
-        Json handle = runtime_.exec("layerHandle", "{\"name\":" + detail::quote(name) + "}");
+        Json handle = runtime_.exec("Generator.layerHandle", "{\"name\":" + detail::quote(name) + "}");
         return Layer(runtime_, name, static_cast<int>(handle.at("layer").number()));
     }
 
