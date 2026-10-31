@@ -1,7 +1,7 @@
 # osu! Storyboarding Toolkit
 
 > Still in early development phase.
-> - All crates in [crates/](./crates) except for `osb-cli`, `osb-parser-ae`, `osb-sdk`, `osb-server` are well tested and mostly ready.
+> - Most crates in [crates/](./crates) are well tested; `osb-parser-ae`, `osb-sdk` and `osb-wasm` are still early.
 > - The architecture can be seen in the mermaid files at [docs/architecture/](./docs/architecture).
 
 SDKs that provides useful tools for osu! storyboarding development in `C#`, `Java`, `JavaScript`/`TypeScript`, `Go`, `Rust`, `Python`, and `C++`.

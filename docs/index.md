@@ -4,7 +4,7 @@ layout: home
 hero:
     name: osbTK
     text: osu! storyboarding toolkit
-    tagline: A Rust-first engine and typed SDKs for converting effect scripts and building osu! storyboards.
+    tagline: A Rust-first engine and typed SDKs for building osu! storyboards.
     actions:
         - theme: brand
           text: Get started
@@ -21,5 +21,5 @@ features:
     - title: 2D and 3D scenes
       details: Layers, sprites, nodes, cameras, meshes, keyframes, timelines, loops and triggers.
     - title: Host plug-ins
-      details: The After Effects, Premiere Pro and DaVinci Resolve plug-ins consume this runtime from the osb-to-plugin repo.
+      details: The After Effects, Premiere Pro and DaVinci Resolve plug-ins consume this runtime.
 ---
