@@ -32,6 +32,10 @@ public static partial class osb
     public static Client.Runtime.Audio Audio { get; } =
         new(new AudioAPI(StatelessTransport, StatelessTransport, DefaultConfiguration));
 
+    /// <summary>The clean `Helpers` client; the <see cref="Helpers"/> facade stays available.</summary>
+    public static Client.Runtime.Helpers HelpersClient { get; } =
+        new(new HelpersAPI(StatelessTransport, StatelessTransport, DefaultConfiguration));
+
     /// <summary>The diagnostics library: storyboard and mapset analysis.</summary>
     public static Client.Libraries.Diagnostics Diagnostics { get; } =
         new(new DiagnosticsAPI(StatelessTransport, StatelessTransport, DefaultConfiguration));

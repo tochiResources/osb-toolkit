@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 
+using tochiRes.osbTK.Client;
 using tochiRes.osbTK.Model;
 
 using Xunit;
@@ -462,6 +463,21 @@ public class SdkTests
             100
         );
         Assert.Equal(42.0, anchor.Z, 6);
+    }
+
+    [Fact]
+    public void CleanHelpersAcceptStructuredInput()
+    {
+        var options = new HelperOptions
+        {
+            Name = "keyframe.scaleKeyframes",
+            Input = JObject.Parse(
+                """{"channel":{"keys":[{"time":0,"value":[1,2]},{"time":100,"value":[3,4]}]},"factor":2}"""
+            ),
+        };
+        JObject result = JObject.FromObject(Entry.HelpersClient.Call(options));
+        Assert.Equal(6.0, result["keys"]![1]!["value"]![0]!.Value<double>(), 6);
+        Assert.Equal(8.0, result["keys"]![1]!["value"]![1]!.Value<double>(), 6);
     }
 
     [Fact]

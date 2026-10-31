@@ -10,6 +10,7 @@ import java.util.Map;
 import com.google.gson.reflect.TypeToken;
 import moe.tochi.osbtk.client.CommandOptions;
 import moe.tochi.osbtk.client.CreateSpriteOptions;
+import moe.tochi.osbtk.client.HelperOptions;
 import moe.tochi.osbtk.client.SpriteTimeOptions;
 import moe.tochi.osbtk.client.runtime.Layer;
 import moe.tochi.osbtk.client.runtime.Sprite;
@@ -428,6 +429,39 @@ class OsbTkSdkTest {
         assertEquals(1, flattened.size());
         assertEquals(0.0, flattened.get(0).getStartTime(), 1e-9);
         assertEquals(200.0, flattened.get(0).getEndTime(), 1e-9);
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void cleanHelpersAcceptStructuredInput() throws Exception {
+        var scaled =
+                (Map<String, Object>)
+                        osb.HelpersClient.call(
+                                HelperOptions.builder()
+                                        .name("keyframe.scaleKeyframes")
+                                        .input(
+                                                Map.of(
+                                                        "channel",
+                                                        Map.of(
+                                                                "keys",
+                                                                List.of(
+                                                                        Map.of(
+                                                                                "time",
+                                                                                0.0,
+                                                                                "value",
+                                                                                List.of(1.0, 2.0)),
+                                                                        Map.of(
+                                                                                "time",
+                                                                                100.0,
+                                                                                "value",
+                                                                                List.of(3.0, 4.0)))),
+                                                        "factor",
+                                                        2.0))
+                                        .build());
+        var keys = (List<Map<String, Object>>) scaled.get("keys");
+        var values = (List<Double>) keys.get(1).get("value");
+        assertEquals(6.0, values.get(0), 1e-9);
+        assertEquals(8.0, values.get(1), 1e-9);
     }
 
     @Test

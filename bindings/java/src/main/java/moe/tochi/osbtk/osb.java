@@ -115,6 +115,10 @@ public final class osb {
             new moe.tochi.osbtk.client.core.Core(
                     new moe.tochi.osbtk.api.CoreAPI(statelessClient()));
 
+    /** The clean generated {@code Helpers} client; the hand-written {@link Helpers} facade stays available. */
+    public static final moe.tochi.osbtk.client.runtime.Helpers HelpersClient =
+            new moe.tochi.osbtk.client.runtime.Helpers(new HelpersAPI(statelessClient()));
+
     /**
      * The shared motion-graphics helpers: one {@code helper} op namespaced
      * by library ({@code keyframe.*}, {@code scene3d.*}, {@code command.*},
