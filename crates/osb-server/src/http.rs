@@ -23,7 +23,6 @@ use serde::Deserialize;
 
 use crate::auth::{Auth, AuthConfig, AuthError, Claims, LoginRequest};
 use crate::jobs::{JobQueue, JobRunner, JobSpec, QueueConfig, QueueError};
-use crate::package::InstallerConfig;
 use crate::ratelimit::{RateLimitConfig, RateLimiter};
 use crate::service::{ArtifactKind, BuildRequest, ConvertRequest, Service};
 
@@ -108,7 +107,6 @@ pub fn router(state: ServerState) -> Router {
         .route("/v1/auth/users/{id}", delete(delete_user))
         .route("/v1/convert", post(convert))
         .route("/v1/build", post(build))
-        .route("/v1/package", post(package))
         .route("/v1/jobs/{id}", get(job_status).delete(cancel_job))
         .route("/v1/jobs/{id}/cancel", post(cancel_job))
         .route("/v1/artifacts/{id}", get(artifact))
@@ -359,31 +357,6 @@ async fn build(
     }
 
     match state.queue.submit(JobSpec::Build(request)) {
-        Ok(id) => (
-            StatusCode::ACCEPTED,
-            Json(serde_json::json!({ "jobId": id, "status": "queued" })),
-        )
-            .into_response(),
-        Err(QueueError::Full) => {
-            let mut response = error_response(StatusCode::SERVICE_UNAVAILABLE, "job queue is full");
-            response
-                .headers_mut()
-                .insert(header::RETRY_AFTER, HeaderValue::from(1u64));
-            response
-        }
-    }
-}
-
-async fn package(
-    State(state): State<ServerState>,
-    headers: HeaderMap,
-    Json(request): Json<InstallerConfig>,
-) -> Response {
-    if let Err(response) = require_auth(&state, &headers) {
-        return *response;
-    }
-
-    match state.queue.submit(JobSpec::Package(Box::new(request))) {
         Ok(id) => (
             StatusCode::ACCEPTED,
             Json(serde_json::json!({ "jobId": id, "status": "queued" })),

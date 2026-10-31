@@ -9,8 +9,8 @@ use std::time::Duration;
 
 use clap::{Parser, Subcommand};
 use osb_server::{
-    AuthConfig, BuildRequest, ConvertRequest, InstallerConfig, QueueConfig, RateLimitConfig,
-    ServerConfig, Service, ServiceConfig,
+    AuthConfig, BuildRequest, ConvertRequest, QueueConfig, RateLimitConfig, ServerConfig, Service,
+    ServiceConfig,
 };
 
 #[derive(Parser)]
@@ -61,13 +61,6 @@ enum Command {
     /// Bakes a `{ worlds2d, worlds3d }` scene JSON into a storyboard JSON.
     Scene {
         input: PathBuf,
-        #[arg(short, long)]
-        out: Option<PathBuf>,
-    },
-    /// Assembles a plug-in installer (payload + manifest + NSIS script) from a config JSON.
-    Package {
-        config: PathBuf,
-        /// Where to write the installer (defaults to the artifact root).
         #[arg(short, long)]
         out: Option<PathBuf>,
     },
@@ -189,21 +182,6 @@ fn run(cli: Cli) -> Result<(), Box<dyn std::error::Error>> {
                 Some(path) => osb_core::io::write(&path, baked)?,
                 None => println!("{baked}"),
             }
-        }
-        Command::Package { config, out } => {
-            let service = Service::with_config(ServiceConfig::in_process());
-            let config: InstallerConfig =
-                serde_json::from_str(&osb_core::io::read_string(&config)?)?;
-            let installer = match out {
-                Some(root) => service.package_into(&config, &root)?,
-                None => service.package(&config)?,
-            };
-            eprintln!(
-                "packaged {} -> {} ({} file(s))",
-                installer.product,
-                installer.output_dir,
-                installer.files.len()
-            );
         }
         Command::Serve {
             port,

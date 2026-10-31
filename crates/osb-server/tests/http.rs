@@ -74,11 +74,6 @@ fn app(runner: Arc<dyn JobRunner>, config: ServerConfig) -> Router {
     router(ServerState::with_runner(service(), config, runner).expect("server state"))
 }
 
-/// An app whose queue runs jobs on the real service (for build/package jobs).
-fn real_app(config: ServerConfig) -> Router {
-    router(ServerState::new(service(), config).expect("server state"))
-}
-
 fn request(method: &str, uri: &str, body: Option<&str>, token: Option<&str>) -> Request<Body> {
     let mut builder = Request::builder().method(method).uri(uri);
     if body.is_some() {
@@ -369,50 +364,4 @@ async fn a_full_queue_returns_503_with_retry_after() {
     let (lock, condvar) = &*gate;
     *lock.lock().unwrap() = true;
     condvar.notify_all();
-}
-
-#[tokio::test]
-async fn a_package_job_produces_a_downloadable_installer() {
-    let dir = osb_core::io::temp_dir().join(format!("osbtk-http-pkg-{}", rand()));
-    osb_core::io::create_dir_all(&dir).unwrap();
-    let artifact = dir.join("Thing.aex");
-    osb_core::io::write(&artifact, b"binary").unwrap();
-
-    let body = serde_json::json!({
-        "product": { "name": "Thing" },
-        "components": [{
-            "name": "Thing",
-            "target": "after-effects",
-            "artifact": artifact.to_string_lossy(),
-        }],
-    })
-    .to_string();
-
-    let app = real_app(authed_config());
-    let (status, _, response) = send(&app, post("/v1/package", &body, Some("bootstrap"))).await;
-    assert_eq!(status, StatusCode::ACCEPTED);
-    let id = json(&response)["jobId"].as_str().unwrap().to_owned();
-
-    let mut record = serde_json::Value::Null;
-    for _ in 0..300 {
-        let (_, _, body) = send(&app, get(&format!("/v1/jobs/{id}"), Some("bootstrap"))).await;
-        record = json(&body);
-        if record["status"]["status"] == "succeeded" {
-            break;
-        }
-        tokio::time::sleep(Duration::from_millis(10)).await;
-    }
-    assert_eq!(record["status"]["status"], "succeeded");
-    assert_eq!(record["status"]["artifact"]["kind"], "bundle");
-
-    let (status, _, bytes) =
-        send(&app, get(&format!("/v1/artifacts/{id}"), Some("bootstrap"))).await;
-    assert_eq!(status, StatusCode::OK);
-    assert_eq!(
-        &bytes[0..2],
-        b"PK",
-        "the installer directory streams as a zip"
-    );
-
-    osb_core::io::remove_dir_all(&dir).ok();
 }

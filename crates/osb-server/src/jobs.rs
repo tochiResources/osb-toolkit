@@ -12,7 +12,6 @@ use std::time::{Duration, SystemTime, UNIX_EPOCH};
 use serde::{Deserialize, Serialize};
 use tokio::sync::mpsc;
 
-use crate::package::InstallerConfig;
 use crate::service::{Artifact, BuildRequest};
 
 /// A job identifier.
@@ -59,14 +58,12 @@ impl JobRecord {
 #[derive(Clone, Debug)]
 pub enum JobSpec {
     Build(BuildRequest),
-    Package(Box<InstallerConfig>),
 }
 
 impl JobSpec {
     pub fn kind(&self) -> &'static str {
         match self {
             JobSpec::Build(_) => "build",
-            JobSpec::Package(_) => "package",
         }
     }
 }

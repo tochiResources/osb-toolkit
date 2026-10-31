@@ -16,7 +16,9 @@ pub enum ServiceError {
     #[error("i/o error: {0}")]
     IO(#[from] std::io::Error),
 
-    #[error("converter CLI not found; set OSBTK_CONVERT_CLI or build packages/core")]
+    #[error(
+        "converter CLI not found; set OSBTK_CONVERT_CLI or build osb-to-plugin/packages/generate/core"
+    )]
     ConverterNotFound,
 
     #[error("converter CLI failed: {0}")]
@@ -24,9 +26,6 @@ pub enum ServiceError {
 
     #[error("build failed: {0}")]
     Build(String),
-
-    #[error("package failed: {0}")]
-    Package(String),
 
     #[error("cancelled")]
     Cancelled,
@@ -122,9 +121,6 @@ pub struct ServiceConfig {
     pub converter_cli: PathBuf,
     pub cargo: String,
     pub artifact_root: PathBuf,
-    /// An external installer CLI (`@tochii/installer-cli`); when set, packaging
-    /// shells out to it (the canonical installer). `None` uses the built-in one.
-    pub installer_cli: Option<PathBuf>,
 }
 
 impl ServiceConfig {
@@ -139,7 +135,6 @@ impl ServiceConfig {
             converter_cli,
             cargo: "cargo".into(),
             artifact_root: default_artifact_root(),
-            installer_cli: installer_cli_env(),
         })
     }
 
@@ -150,17 +145,8 @@ impl ServiceConfig {
             converter_cli: PathBuf::new(),
             cargo: "cargo".into(),
             artifact_root: default_artifact_root(),
-            installer_cli: installer_cli_env(),
         }
     }
-}
-
-/// The external installer CLI, from `OSBTK_INSTALLER_CLI` (kept opt-in so the
-/// built-in packager stays the deterministic default, e.g. in tests).
-fn installer_cli_env() -> Option<PathBuf> {
-    std::env::var_os("OSBTK_INSTALLER_CLI")
-        .map(PathBuf::from)
-        .filter(|path| !path.as_os_str().is_empty())
 }
 
 fn default_artifact_root() -> PathBuf {
@@ -344,9 +330,6 @@ impl crate::jobs::JobRunner for Service {
         match spec {
             crate::jobs::JobSpec::Build(request) => self
                 .build(&request, cancel)
-                .map_err(|error| error.to_string()),
-            crate::jobs::JobSpec::Package(config) => self
-                .package_artifact(&config)
                 .map_err(|error| error.to_string()),
         }
     }
@@ -624,35 +607,6 @@ mod tests {
             .expect("build");
         assert!(artifact.path.ends_with("Probe.aex"));
         assert!(Path::new(&artifact.path).is_file());
-        osb_core::io::remove_dir_all(&root).ok();
-    }
-
-    #[test]
-    fn packages_an_installer_artifact() {
-        let root = temp_dir("package-artifact").unwrap();
-        let artifact = root.join("Thing.aex");
-        osb_core::io::write(&artifact, b"binary").unwrap();
-
-        let installer = service()
-            .package_artifact(&crate::package::InstallerConfig {
-                product: crate::package::ProductInfo {
-                    name: "Thing".into(),
-                    ..Default::default()
-                },
-                components: vec![crate::package::Component {
-                    name: "Thing".into(),
-                    target: "after-effects".into(),
-                    artifact: artifact.to_string_lossy().into_owned(),
-                    destination: None,
-                }],
-                ..Default::default()
-            })
-            .expect("package");
-
-        assert_eq!(installer.kind, ArtifactKind::Bundle);
-        assert_eq!(installer.target, "installer");
-        assert_eq!(installer.name, "Thing");
-        assert!(Path::new(&installer.path).is_dir());
         osb_core::io::remove_dir_all(&root).ok();
     }
 }
