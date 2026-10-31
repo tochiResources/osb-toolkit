@@ -16,32 +16,32 @@ pub struct Client;
 impl Client {
     /// The native runtime version string.
     pub fn version() -> Result<String, Error> {
-        Ok(call::<VersionResult>(json!({ "op": "Common.version" }))?.version)
+        Ok(call::<VersionResult>(json!({ "op": "Core.version" }))?.version)
     }
 
     /// Parses a `.osu` beatmap into the typed model.
     pub fn parse_beatmap(text: &str) -> Result<Beatmap, Error> {
-        call(json!({ "op": "Parsing.parseOsu", "text": text }))
+        call(json!({ "op": "Core.parseOsu", "text": text }))
     }
 
     /// Parses a `.osb` storyboard into a summary.
     pub fn parse_osb(text: &str) -> Result<ParseOsbResult, Error> {
-        call(json!({ "op": "Parsing.parseOsb", "text": text }))
+        call(json!({ "op": "Core.parseOsb", "text": text }))
     }
 
     /// Applies an easing function to a normalized time in `0..1`.
     pub fn apply_easing(easing: Easing, t: f64) -> Result<f64, Error> {
-        Ok(call::<EasingResult>(
-            json!({ "op": "Animations.applyEasing", "easing": easing, "t": t }),
-        )?
-        .value)
+        Ok(
+            call::<EasingResult>(json!({ "op": "Core.applyEasing", "easing": easing, "t": t }))?
+                .value,
+        )
     }
 
     /// Evaluates a CSS-style cubic-bezier easing (`CustomEasing`)
     /// with control points `(x1, y1)`, `(x2, y2)` at a normalized time.
     pub fn apply_cubic_bezier(x1: f64, y1: f64, x2: f64, y2: f64, t: f64) -> Result<f64, Error> {
         Ok(call::<EasingResult>(
-            json!({ "op": "Animations.easingValue", "cubicBezier": [x1, y1, x2, y2], "t": t }),
+            json!({ "op": "Core.easingValue", "cubicBezier": [x1, y1, x2, y2], "t": t }),
         )?
         .value)
     }
@@ -52,7 +52,7 @@ impl Client {
         easing: Option<Easing>,
         cubic_bezier: Option<Vec<f64>>,
     ) -> Result<f64, Error> {
-        let mut request = json!({ "op": "Animations.easingValue", "t": t });
+        let mut request = json!({ "op": "Core.easingValue", "t": t });
         if let Some(easing) = easing {
             request["easing"] = json!(easing);
         }
@@ -74,18 +74,18 @@ impl Client {
 
     /// The arc length of a curve.
     pub fn curve_length(curve: CurveSpec) -> Result<f64, Error> {
-        Ok(call::<ScalarResult>(json!({ "op": "Curve.length", "curve": curve }))?.value)
+        Ok(call::<ScalarResult>(json!({ "op": "Core.length", "curve": curve }))?.value)
     }
 
     /// The axis-aligned bounding box of a curve.
     pub fn curve_bounding_box(curve: CurveSpec) -> Result<Box2, Error> {
-        call(json!({ "op": "Curve.boundingBox", "curve": curve }))
+        call(json!({ "op": "Core.boundingBox", "curve": curve }))
     }
 
     /// The point at `t`, parametrically or by arc length.
     pub fn curve_point(curve: CurveSpec, t: f64, by_arc_length: bool) -> Result<Vector2, Error> {
         call(json!({
-            "op": "Curve.point",
+            "op": "Core.point",
             "curve": curve,
             "t": t,
             "byArcLength": by_arc_length,
@@ -94,7 +94,7 @@ impl Client {
 
     /// The unit tangent at `t`.
     pub fn curve_tangent(curve: CurveSpec, t: f64) -> Result<Vector2, Error> {
-        call(json!({ "op": "Curve.tangent", "curve": curve, "t": t }))
+        call(json!({ "op": "Core.tangent", "curve": curve, "t": t }))
     }
 
     /// `count` points along the curve, parametrically or by arc length.
@@ -104,7 +104,7 @@ impl Client {
         by_arc_length: bool,
     ) -> Result<PointListResult, Error> {
         call(json!({
-            "op": "Curve.sample",
+            "op": "Core.sample",
             "curve": curve,
             "count": count,
             "byArcLength": by_arc_length,
@@ -113,30 +113,30 @@ impl Client {
 
     /// Simplifies a polyline with the Douglas-Peucker algorithm.
     pub fn simplify(points: Vec<Vector2>, tolerance: f64) -> Result<PointListResult, Error> {
-        call(json!({ "op": "Curve.simplify", "points": points, "tolerance": tolerance }))
+        call(json!({ "op": "Core.simplify", "points": points, "tolerance": tolerance }))
     }
 
     /// The unit normal at `t`.
     pub fn curve_normal(curve: CurveSpec, t: f64) -> Result<Vector2, Error> {
-        call(json!({ "op": "Curve.normal", "curve": curve, "t": t }))
+        call(json!({ "op": "Core.normal", "curve": curve, "t": t }))
     }
 
     /// The curvature at `t`.
     pub fn curve_curvature(curve: CurveSpec, t: f64) -> Result<f64, Error> {
-        Ok(call::<ScalarResult>(json!({ "op": "Curve.curvature", "curve": curve, "t": t }))?.value)
+        Ok(call::<ScalarResult>(json!({ "op": "Core.curvature", "curve": curve, "t": t }))?.value)
     }
 
     /// The distance from `point` to the curve.
     pub fn curve_distance_to(curve: CurveSpec, point: Vector2) -> Result<f64, Error> {
         Ok(call::<ScalarResult>(
-            json!({ "op": "Curve.distanceTo", "curve": curve, "point": point }),
+            json!({ "op": "Core.distanceTo", "curve": curve, "point": point }),
         )?
         .value)
     }
 
     /// The polyline offset along the curve's local normal.
     pub fn curve_offset(curve: CurveSpec, distance: f64) -> Result<PointListResult, Error> {
-        call(json!({ "op": "Curve.offset", "curve": curve, "distance": distance }))
+        call(json!({ "op": "Core.offset", "curve": curve, "distance": distance }))
     }
 
     /// Points along a circular arc.
@@ -148,7 +148,7 @@ impl Client {
         count: usize,
     ) -> Result<PointListResult, Error> {
         call(json!({
-            "op": "Curve.arc",
+            "op": "Core.arc",
             "center": center,
             "radius": radius,
             "startAngle": start_angle,
@@ -165,7 +165,7 @@ impl Client {
         count: usize,
     ) -> Result<PointListResult, Error> {
         call(json!({
-            "op": "Curve.ellipse",
+            "op": "Core.ellipse",
             "center": center,
             "radiusX": radius_x,
             "radiusY": radius_y,
@@ -180,7 +180,7 @@ impl Client {
         b1: Vector2,
         b2: Vector2,
     ) -> Result<OptionalPointResult, Error> {
-        call(json!({ "op": "Curve.lineIntersect", "a1": a1, "a2": a2, "b1": b1, "b2": b2 }))
+        call(json!({ "op": "Core.lineIntersect", "a1": a1, "a2": a2, "b1": b1, "b2": b2 }))
     }
 
     /// Diagnoses an `.osb` storyboard.
@@ -252,7 +252,7 @@ impl Client {
     /// `OsbSprite.GetOriginVector`.
     pub fn get_origin_vector(origin: OsbOrigin, width: f64, height: f64) -> Result<Vector2, Error> {
         call(
-            json!({ "op": "Origin.getOriginVector", "origin": origin, "width": width, "height": height }),
+            json!({ "op": "Core.getOriginVector", "origin": origin, "width": width, "height": height }),
         )
     }
 
@@ -264,7 +264,7 @@ impl Client {
         origin: Vector2,
     ) -> Result<bool, Error> {
         Ok(call::<BoolResult>(json!({
-            "op": "Origin.inScreenBounds", "position": position, "size": size,
+            "op": "Core.inScreenBounds", "position": position, "size": size,
             "rotation": rotation, "origin": origin
         }))?
         .value)

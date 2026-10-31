@@ -13,66 +13,6 @@
     "version": "0.1.0"
   },
   "paths": {
-    "/bridge/Animations.applyEasing": {
-      "post": {
-        "tags": [
-          "Core"
-        ],
-        "operationId": "Animations.applyEasing",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ApplyEasingRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The eased value",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EasingResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/bridge/Animations.easingValue": {
-      "post": {
-        "tags": [
-          "Core"
-        ],
-        "operationId": "Animations.easingValue",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EasingValueRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The eased value (named easing or cubic-bezier)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EasingResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/bridge/Audio.audioDuration": {
       "post": {
         "tags": [
@@ -153,19 +93,29 @@
         }
       }
     },
-    "/bridge/Common.version": {
+    "/bridge/Core.applyEasing": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Common.version",
+        "operationId": "Core.applyEasing",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyEasingRequest"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
-            "description": "The runtime version",
+            "description": "The eased value",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VersionResult"
+                  "$ref": "#/components/schemas/EasingResult"
                 }
               }
             }
@@ -173,12 +123,12 @@
         }
       }
     },
-    "/bridge/Curve.arc": {
+    "/bridge/Core.arc": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.arc",
+        "operationId": "Core.arc",
         "requestBody": {
           "content": {
             "application/json": {
@@ -203,12 +153,12 @@
         }
       }
     },
-    "/bridge/Curve.boundingBox": {
+    "/bridge/Core.boundingBox": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.boundingBox",
+        "operationId": "Core.boundingBox",
         "requestBody": {
           "content": {
             "application/json": {
@@ -233,12 +183,12 @@
         }
       }
     },
-    "/bridge/Curve.curvature": {
+    "/bridge/Core.curvature": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.curvature",
+        "operationId": "Core.curvature",
         "requestBody": {
           "content": {
             "application/json": {
@@ -263,12 +213,12 @@
         }
       }
     },
-    "/bridge/Curve.distanceTo": {
+    "/bridge/Core.distanceTo": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.distanceTo",
+        "operationId": "Core.distanceTo",
         "requestBody": {
           "content": {
             "application/json": {
@@ -293,12 +243,42 @@
         }
       }
     },
-    "/bridge/Curve.ellipse": {
+    "/bridge/Core.easingValue": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.ellipse",
+        "operationId": "Core.easingValue",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EasingValueRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The eased value (named easing or cubic-bezier)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EasingResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Core.ellipse": {
+      "post": {
+        "tags": [
+          "Core"
+        ],
+        "operationId": "Core.ellipse",
         "requestBody": {
           "content": {
             "application/json": {
@@ -323,12 +303,72 @@
         }
       }
     },
-    "/bridge/Curve.length": {
+    "/bridge/Core.getOriginVector": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.length",
+        "operationId": "Core.getOriginVector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOriginVectorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The anchor offset for the origin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vector2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Core.inScreenBounds": {
+      "post": {
+        "tags": [
+          "Core"
+        ],
+        "operationId": "Core.inScreenBounds",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InScreenBoundsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Whether the sprite's bounds intersect the screen",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoolResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Core.length": {
+      "post": {
+        "tags": [
+          "Core"
+        ],
+        "operationId": "Core.length",
         "requestBody": {
           "content": {
             "application/json": {
@@ -353,12 +393,12 @@
         }
       }
     },
-    "/bridge/Curve.lineIntersect": {
+    "/bridge/Core.lineIntersect": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.lineIntersect",
+        "operationId": "Core.lineIntersect",
         "requestBody": {
           "content": {
             "application/json": {
@@ -383,12 +423,12 @@
         }
       }
     },
-    "/bridge/Curve.normal": {
+    "/bridge/Core.normal": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.normal",
+        "operationId": "Core.normal",
         "requestBody": {
           "content": {
             "application/json": {
@@ -413,12 +453,12 @@
         }
       }
     },
-    "/bridge/Curve.offset": {
+    "/bridge/Core.offset": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.offset",
+        "operationId": "Core.offset",
         "requestBody": {
           "content": {
             "application/json": {
@@ -443,12 +483,72 @@
         }
       }
     },
-    "/bridge/Curve.point": {
+    "/bridge/Core.parseOsb": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.point",
+        "operationId": "Core.parseOsb",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The storyboard summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParseOsbResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Core.parseOsu": {
+      "post": {
+        "tags": [
+          "Core"
+        ],
+        "operationId": "Core.parseOsu",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The parsed beatmap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Beatmap"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Core.point": {
+      "post": {
+        "tags": [
+          "Core"
+        ],
+        "operationId": "Core.point",
         "requestBody": {
           "content": {
             "application/json": {
@@ -473,12 +573,12 @@
         }
       }
     },
-    "/bridge/Curve.sample": {
+    "/bridge/Core.sample": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.sample",
+        "operationId": "Core.sample",
         "requestBody": {
           "content": {
             "application/json": {
@@ -503,12 +603,12 @@
         }
       }
     },
-    "/bridge/Curve.simplify": {
+    "/bridge/Core.simplify": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.simplify",
+        "operationId": "Core.simplify",
         "requestBody": {
           "content": {
             "application/json": {
@@ -533,12 +633,12 @@
         }
       }
     },
-    "/bridge/Curve.tangent": {
+    "/bridge/Core.tangent": {
       "post": {
         "tags": [
           "Core"
         ],
-        "operationId": "Curve.tangent",
+        "operationId": "Core.tangent",
         "requestBody": {
           "content": {
             "application/json": {
@@ -556,6 +656,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Vector2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bridge/Core.version": {
+      "post": {
+        "tags": [
+          "Core"
+        ],
+        "operationId": "Core.version",
+        "responses": {
+          "200": {
+            "description": "The runtime version",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionResult"
                 }
               }
             }
@@ -946,126 +1066,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OptimizeResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/bridge/Origin.getOriginVector": {
-      "post": {
-        "tags": [
-          "Core"
-        ],
-        "operationId": "Origin.getOriginVector",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetOriginVectorRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The anchor offset for the origin",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Vector2"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/bridge/Origin.inScreenBounds": {
-      "post": {
-        "tags": [
-          "Core"
-        ],
-        "operationId": "Origin.inScreenBounds",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InScreenBoundsRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Whether the sprite's bounds intersect the screen",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BoolResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/bridge/Parsing.parseOsb": {
-      "post": {
-        "tags": [
-          "Core"
-        ],
-        "operationId": "Parsing.parseOsb",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TextRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The storyboard summary",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ParseOsbResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/bridge/Parsing.parseOsu": {
-      "post": {
-        "tags": [
-          "Core"
-        ],
-        "operationId": "Parsing.parseOsu",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TextRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The parsed beatmap",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Beatmap"
                 }
               }
             }

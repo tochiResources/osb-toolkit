@@ -290,7 +290,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Animations.applyEasing`;
+        let urlPath = `/bridge/Core.applyEasing`;
 
         return {
             path: urlPath,
@@ -335,7 +335,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.arc`;
+        let urlPath = `/bridge/Core.arc`;
 
         return {
             path: urlPath,
@@ -380,7 +380,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.boundingBox`;
+        let urlPath = `/bridge/Core.boundingBox`;
 
         return {
             path: urlPath,
@@ -425,7 +425,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.curvature`;
+        let urlPath = `/bridge/Core.curvature`;
 
         return {
             path: urlPath,
@@ -470,7 +470,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.distanceTo`;
+        let urlPath = `/bridge/Core.distanceTo`;
 
         return {
             path: urlPath,
@@ -515,7 +515,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Animations.easingValue`;
+        let urlPath = `/bridge/Core.easingValue`;
 
         return {
             path: urlPath,
@@ -560,7 +560,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.ellipse`;
+        let urlPath = `/bridge/Core.ellipse`;
 
         return {
             path: urlPath,
@@ -605,7 +605,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Origin.getOriginVector`;
+        let urlPath = `/bridge/Core.getOriginVector`;
 
         return {
             path: urlPath,
@@ -650,7 +650,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Origin.inScreenBounds`;
+        let urlPath = `/bridge/Core.inScreenBounds`;
 
         return {
             path: urlPath,
@@ -695,7 +695,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.length`;
+        let urlPath = `/bridge/Core.length`;
 
         return {
             path: urlPath,
@@ -740,7 +740,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.lineIntersect`;
+        let urlPath = `/bridge/Core.lineIntersect`;
 
         return {
             path: urlPath,
@@ -785,7 +785,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.normal`;
+        let urlPath = `/bridge/Core.normal`;
 
         return {
             path: urlPath,
@@ -830,7 +830,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.offset`;
+        let urlPath = `/bridge/Core.offset`;
 
         return {
             path: urlPath,
@@ -875,7 +875,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Parsing.parseOsb`;
+        let urlPath = `/bridge/Core.parseOsb`;
 
         return {
             path: urlPath,
@@ -920,7 +920,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Parsing.parseOsu`;
+        let urlPath = `/bridge/Core.parseOsu`;
 
         return {
             path: urlPath,
@@ -965,7 +965,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.point`;
+        let urlPath = `/bridge/Core.point`;
 
         return {
             path: urlPath,
@@ -1010,7 +1010,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.sample`;
+        let urlPath = `/bridge/Core.sample`;
 
         return {
             path: urlPath,
@@ -1055,7 +1055,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.simplify`;
+        let urlPath = `/bridge/Core.simplify`;
 
         return {
             path: urlPath,
@@ -1100,7 +1100,7 @@ export class CoreAPI extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
 
-        let urlPath = `/bridge/Curve.tangent`;
+        let urlPath = `/bridge/Core.tangent`;
 
         return {
             path: urlPath,
@@ -1136,7 +1136,7 @@ export class CoreAPI extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
 
-        let urlPath = `/bridge/Common.version`;
+        let urlPath = `/bridge/Core.version`;
 
         return {
             path: urlPath,

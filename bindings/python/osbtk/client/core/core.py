@@ -73,74 +73,6 @@ class Core:
         return self._api.apply_easing(ApplyEasingRequest(**to_kwargs(options))).value
 
     @overload
-    def easing_value(self, t: float) -> float:
-        """A named-or-custom easing evaluation request.
-
-        Args:
-            t: The normalized time in `0.0..=1.0`.
-
-        Returns:
-            The eased value (named easing or cubic-bezier)
-        """
-        ...
-
-    @overload
-    def easing_value(self, t: float, easing: Optional[Easing]) -> float:
-        """A named-or-custom easing evaluation request.
-
-        Args:
-            t: The normalized time in `0.0..=1.0`.
-            easing: A named easing (used when `cubicBezier` is absent).
-
-        Returns:
-            The eased value (named easing or cubic-bezier)
-        """
-        ...
-
-    @overload
-    def easing_value(self, t: float, easing: Optional[Easing], cubicBezier: Optional[List[float]]) -> float:
-        """A named-or-custom easing evaluation request.
-
-        Args:
-            t: The normalized time in `0.0..=1.0`.
-            easing: A named easing (used when `cubicBezier` is absent).
-            cubicBezier: A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`.
-
-        Returns:
-            The eased value (named easing or cubic-bezier)
-        """
-        ...
-
-    @overload
-    def easing_value(self, options: EasingValueOptions) -> float:
-        """A named-or-custom easing evaluation request.
-
-        Args:
-            options: A named-or-custom easing evaluation request.
-
-        Returns:
-            The eased value (named easing or cubic-bezier)
-        """
-        ...
-
-    def easing_value(self, *args: object, **kwargs: object) -> float:
-        """A named-or-custom easing evaluation request.
-
-        Returns:
-            The eased value (named easing or cubic-bezier)
-        """
-        options = args[0] if args and isinstance(args[0], EasingValueOptions) else EasingValueOptions(*args, **kwargs)
-        return self._api.easing_value(EasingValueRequest(**to_kwargs(options))).value
-
-    def version(self) -> str:
-        """Calls the Core.version bridge operation.
-
-        Returns:
-            The runtime version
-        """
-        return self._api.version().version
-
-    @overload
     def arc(self, center: Vector2, radius: float, startAngle: float, sweepAngle: float) -> PointListResult:
         """A circular-arc sampling request.
 
@@ -308,6 +240,66 @@ class Core:
         return self._api.distance_to(CurveDistanceRequest(**to_kwargs(options))).value
 
     @overload
+    def easing_value(self, t: float) -> float:
+        """A named-or-custom easing evaluation request.
+
+        Args:
+            t: The normalized time in `0.0..=1.0`.
+
+        Returns:
+            The eased value (named easing or cubic-bezier)
+        """
+        ...
+
+    @overload
+    def easing_value(self, t: float, easing: Optional[Easing]) -> float:
+        """A named-or-custom easing evaluation request.
+
+        Args:
+            t: The normalized time in `0.0..=1.0`.
+            easing: A named easing (used when `cubicBezier` is absent).
+
+        Returns:
+            The eased value (named easing or cubic-bezier)
+        """
+        ...
+
+    @overload
+    def easing_value(self, t: float, easing: Optional[Easing], cubicBezier: Optional[List[float]]) -> float:
+        """A named-or-custom easing evaluation request.
+
+        Args:
+            t: The normalized time in `0.0..=1.0`.
+            easing: A named easing (used when `cubicBezier` is absent).
+            cubicBezier: A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`.
+
+        Returns:
+            The eased value (named easing or cubic-bezier)
+        """
+        ...
+
+    @overload
+    def easing_value(self, options: EasingValueOptions) -> float:
+        """A named-or-custom easing evaluation request.
+
+        Args:
+            options: A named-or-custom easing evaluation request.
+
+        Returns:
+            The eased value (named easing or cubic-bezier)
+        """
+        ...
+
+    def easing_value(self, *args: object, **kwargs: object) -> float:
+        """A named-or-custom easing evaluation request.
+
+        Returns:
+            The eased value (named easing or cubic-bezier)
+        """
+        options = args[0] if args and isinstance(args[0], EasingValueOptions) else EasingValueOptions(*args, **kwargs)
+        return self._api.easing_value(EasingValueRequest(**to_kwargs(options))).value
+
+    @overload
     def ellipse(self, center: Vector2, radiusX: float, radiusY: float) -> PointListResult:
         """An ellipse sampling request.
 
@@ -356,6 +348,77 @@ class Core:
         """
         options = args[0] if args and isinstance(args[0], EllipseOptions) else EllipseOptions(*args, **kwargs)
         return self._api.ellipse(EllipseRequest(**to_kwargs(options)))
+
+    @overload
+    def get_origin_vector(self, origin: OsbOrigin, width: float, height: float) -> Vector2:
+        """The anchor offset for an origin.
+
+        Args:
+            origin: The sprite anchor origin.
+            width: The sprite width.
+            height: The sprite height.
+
+        Returns:
+            The anchor offset for the origin
+        """
+        ...
+
+    @overload
+    def get_origin_vector(self, options: GetOriginVectorOptions) -> Vector2:
+        """The anchor offset for an origin.
+
+        Args:
+            options: The anchor offset for an origin.
+
+        Returns:
+            The anchor offset for the origin
+        """
+        ...
+
+    def get_origin_vector(self, *args: object, **kwargs: object) -> Vector2:
+        """The anchor offset for an origin.
+
+        Returns:
+            The anchor offset for the origin
+        """
+        options = args[0] if args and isinstance(args[0], GetOriginVectorOptions) else GetOriginVectorOptions(*args, **kwargs)
+        return self._api.get_origin_vector(GetOriginVectorRequest(**to_kwargs(options)))
+
+    @overload
+    def in_screen_bounds(self, position: Vector2, size: Vector2, rotation: float, origin: Vector2) -> bool:
+        """Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+
+        Args:
+            position: The sprite centre position.
+            size: The sprite size.
+            rotation: The rotation in radians.
+            origin: The anchor offset (from `GetOriginVector`).
+
+        Returns:
+            Whether the sprite's bounds intersect the screen
+        """
+        ...
+
+    @overload
+    def in_screen_bounds(self, options: InScreenBoundsOptions) -> bool:
+        """Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+
+        Args:
+            options: Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+
+        Returns:
+            Whether the sprite's bounds intersect the screen
+        """
+        ...
+
+    def in_screen_bounds(self, *args: object, **kwargs: object) -> bool:
+        """Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+
+        Returns:
+            Whether the sprite's bounds intersect the screen
+        """
+        options = args[0] if args and isinstance(args[0], InScreenBoundsOptions) else InScreenBoundsOptions(*args, **kwargs)
+        return self._api.in_screen_bounds(InScreenBoundsRequest(**to_kwargs(options))).value
 
     @overload
     def length(self, curve: CurveSpec) -> float:
@@ -507,6 +570,72 @@ class Core:
         """
         options = args[0] if args and isinstance(args[0], CurveOffsetOptions) else CurveOffsetOptions(*args, **kwargs)
         return self._api.offset(CurveOffsetRequest(**to_kwargs(options)))
+
+    @overload
+    def parse_osb(self, text: str) -> ParseOsbResult:
+        """A request carrying a block of text (an effect script, `.osu` or `.osb`).
+
+        Args:
+            text: The text payload.
+
+        Returns:
+            The storyboard summary
+        """
+        ...
+
+    @overload
+    def parse_osb(self, options: TextOptions) -> ParseOsbResult:
+        """A request carrying a block of text (an effect script, `.osu` or `.osb`).
+
+        Args:
+            options: A request carrying a block of text (an effect script, `.osu` or `.osb`).
+
+        Returns:
+            The storyboard summary
+        """
+        ...
+
+    def parse_osb(self, *args: object, **kwargs: object) -> ParseOsbResult:
+        """A request carrying a block of text (an effect script, `.osu` or `.osb`).
+
+        Returns:
+            The storyboard summary
+        """
+        options = args[0] if args and isinstance(args[0], TextOptions) else TextOptions(*args, **kwargs)
+        return self._api.parse_osb(TextRequest(**to_kwargs(options)))
+
+    @overload
+    def parse_osu(self, text: str) -> Beatmap:
+        """A request carrying a block of text (an effect script, `.osu` or `.osb`).
+
+        Args:
+            text: The text payload.
+
+        Returns:
+            The parsed beatmap
+        """
+        ...
+
+    @overload
+    def parse_osu(self, options: TextOptions) -> Beatmap:
+        """A request carrying a block of text (an effect script, `.osu` or `.osb`).
+
+        Args:
+            options: A request carrying a block of text (an effect script, `.osu` or `.osb`).
+
+        Returns:
+            The parsed beatmap
+        """
+        ...
+
+    def parse_osu(self, *args: object, **kwargs: object) -> Beatmap:
+        """A request carrying a block of text (an effect script, `.osu` or `.osb`).
+
+        Returns:
+            The parsed beatmap
+        """
+        options = args[0] if args and isinstance(args[0], TextOptions) else TextOptions(*args, **kwargs)
+        return self._api.parse_osu(TextRequest(**to_kwargs(options)))
 
     @overload
     def point(self, curve: CurveSpec, t: float) -> Vector2:
@@ -686,139 +815,10 @@ class Core:
         options = args[0] if args and isinstance(args[0], CurvePointOptions) else CurvePointOptions(*args, **kwargs)
         return self._api.tangent(CurvePointRequest(**to_kwargs(options)))
 
-    @overload
-    def get_origin_vector(self, origin: OsbOrigin, width: float, height: float) -> Vector2:
-        """The anchor offset for an origin.
-
-        Args:
-            origin: The sprite anchor origin.
-            width: The sprite width.
-            height: The sprite height.
+    def version(self) -> str:
+        """Calls the Core.version bridge operation.
 
         Returns:
-            The anchor offset for the origin
+            The runtime version
         """
-        ...
-
-    @overload
-    def get_origin_vector(self, options: GetOriginVectorOptions) -> Vector2:
-        """The anchor offset for an origin.
-
-        Args:
-            options: The anchor offset for an origin.
-
-        Returns:
-            The anchor offset for the origin
-        """
-        ...
-
-    def get_origin_vector(self, *args: object, **kwargs: object) -> Vector2:
-        """The anchor offset for an origin.
-
-        Returns:
-            The anchor offset for the origin
-        """
-        options = args[0] if args and isinstance(args[0], GetOriginVectorOptions) else GetOriginVectorOptions(*args, **kwargs)
-        return self._api.get_origin_vector(GetOriginVectorRequest(**to_kwargs(options)))
-
-    @overload
-    def in_screen_bounds(self, position: Vector2, size: Vector2, rotation: float, origin: Vector2) -> bool:
-        """Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-
-        Args:
-            position: The sprite centre position.
-            size: The sprite size.
-            rotation: The rotation in radians.
-            origin: The anchor offset (from `GetOriginVector`).
-
-        Returns:
-            Whether the sprite's bounds intersect the screen
-        """
-        ...
-
-    @overload
-    def in_screen_bounds(self, options: InScreenBoundsOptions) -> bool:
-        """Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-
-        Args:
-            options: Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-
-        Returns:
-            Whether the sprite's bounds intersect the screen
-        """
-        ...
-
-    def in_screen_bounds(self, *args: object, **kwargs: object) -> bool:
-        """Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-
-        Returns:
-            Whether the sprite's bounds intersect the screen
-        """
-        options = args[0] if args and isinstance(args[0], InScreenBoundsOptions) else InScreenBoundsOptions(*args, **kwargs)
-        return self._api.in_screen_bounds(InScreenBoundsRequest(**to_kwargs(options))).value
-
-    @overload
-    def parse_osb(self, text: str) -> ParseOsbResult:
-        """A request carrying a block of text (an effect script, `.osu` or `.osb`).
-
-        Args:
-            text: The text payload.
-
-        Returns:
-            The storyboard summary
-        """
-        ...
-
-    @overload
-    def parse_osb(self, options: TextOptions) -> ParseOsbResult:
-        """A request carrying a block of text (an effect script, `.osu` or `.osb`).
-
-        Args:
-            options: A request carrying a block of text (an effect script, `.osu` or `.osb`).
-
-        Returns:
-            The storyboard summary
-        """
-        ...
-
-    def parse_osb(self, *args: object, **kwargs: object) -> ParseOsbResult:
-        """A request carrying a block of text (an effect script, `.osu` or `.osb`).
-
-        Returns:
-            The storyboard summary
-        """
-        options = args[0] if args and isinstance(args[0], TextOptions) else TextOptions(*args, **kwargs)
-        return self._api.parse_osb(TextRequest(**to_kwargs(options)))
-
-    @overload
-    def parse_osu(self, text: str) -> Beatmap:
-        """A request carrying a block of text (an effect script, `.osu` or `.osb`).
-
-        Args:
-            text: The text payload.
-
-        Returns:
-            The parsed beatmap
-        """
-        ...
-
-    @overload
-    def parse_osu(self, options: TextOptions) -> Beatmap:
-        """A request carrying a block of text (an effect script, `.osu` or `.osb`).
-
-        Args:
-            options: A request carrying a block of text (an effect script, `.osu` or `.osb`).
-
-        Returns:
-            The parsed beatmap
-        """
-        ...
-
-    def parse_osu(self, *args: object, **kwargs: object) -> Beatmap:
-        """A request carrying a block of text (an effect script, `.osu` or `.osb`).
-
-        Returns:
-            The parsed beatmap
-        """
-        options = args[0] if args and isinstance(args[0], TextOptions) else TextOptions(*args, **kwargs)
-        return self._api.parse_osu(TextRequest(**to_kwargs(options)))
+        return self._api.version().version

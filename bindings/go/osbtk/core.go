@@ -65,7 +65,7 @@ func (a *CoreAPIService) applyEasingExecute(r CoreAPIApplyEasingRequest) (*Easin
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Animations.applyEasing"
+	localVarPath := localBasePath + "/bridge/Core.applyEasing"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -173,7 +173,7 @@ func (a *CoreAPIService) arcExecute(r CoreAPIArcRequest) (*PointListResult, *htt
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.arc"
+	localVarPath := localBasePath + "/bridge/Core.arc"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -281,7 +281,7 @@ func (a *CoreAPIService) boundingBoxExecute(r CoreAPIBoundingBoxRequest) (*Box2,
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.boundingBox"
+	localVarPath := localBasePath + "/bridge/Core.boundingBox"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -389,7 +389,7 @@ func (a *CoreAPIService) curvatureExecute(r CoreAPICurvatureRequest) (*ScalarRes
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.curvature"
+	localVarPath := localBasePath + "/bridge/Core.curvature"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -497,7 +497,7 @@ func (a *CoreAPIService) distanceToExecute(r CoreAPIDistanceToRequest) (*ScalarR
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.distanceTo"
+	localVarPath := localBasePath + "/bridge/Core.distanceTo"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -605,7 +605,7 @@ func (a *CoreAPIService) easingValueExecute(r CoreAPIEasingValueRequest) (*Easin
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Animations.easingValue"
+	localVarPath := localBasePath + "/bridge/Core.easingValue"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -713,7 +713,7 @@ func (a *CoreAPIService) ellipseExecute(r CoreAPIEllipseRequest) (*PointListResu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.ellipse"
+	localVarPath := localBasePath + "/bridge/Core.ellipse"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -821,7 +821,7 @@ func (a *CoreAPIService) getOriginVectorExecute(r CoreAPIGetOriginVectorRequest)
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Origin.getOriginVector"
+	localVarPath := localBasePath + "/bridge/Core.getOriginVector"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -929,7 +929,7 @@ func (a *CoreAPIService) inScreenBoundsExecute(r CoreAPIInScreenBoundsRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Origin.inScreenBounds"
+	localVarPath := localBasePath + "/bridge/Core.inScreenBounds"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1037,7 +1037,7 @@ func (a *CoreAPIService) lengthExecute(r CoreAPILengthRequest) (*ScalarResult, *
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.length"
+	localVarPath := localBasePath + "/bridge/Core.length"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1145,7 +1145,7 @@ func (a *CoreAPIService) lineIntersectExecute(r CoreAPILineIntersectRequest) (*O
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.lineIntersect"
+	localVarPath := localBasePath + "/bridge/Core.lineIntersect"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1253,7 +1253,7 @@ func (a *CoreAPIService) normalExecute(r CoreAPINormalRequest) (*Vector2, *http.
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.normal"
+	localVarPath := localBasePath + "/bridge/Core.normal"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1361,7 +1361,7 @@ func (a *CoreAPIService) offsetExecute(r CoreAPIOffsetRequest) (*PointListResult
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.offset"
+	localVarPath := localBasePath + "/bridge/Core.offset"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1469,7 +1469,7 @@ func (a *CoreAPIService) parseOsbExecute(r CoreAPIParseOsbRequest) (*ParseOsbRes
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Parsing.parseOsb"
+	localVarPath := localBasePath + "/bridge/Core.parseOsb"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1577,7 +1577,7 @@ func (a *CoreAPIService) parseOsuExecute(r CoreAPIParseOsuRequest) (*Beatmap, *h
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Parsing.parseOsu"
+	localVarPath := localBasePath + "/bridge/Core.parseOsu"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1685,7 +1685,7 @@ func (a *CoreAPIService) pointExecute(r CoreAPIPointRequest) (*Vector2, *http.Re
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.point"
+	localVarPath := localBasePath + "/bridge/Core.point"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1793,7 +1793,7 @@ func (a *CoreAPIService) sampleExecute(r CoreAPISampleRequest) (*PointListResult
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.sample"
+	localVarPath := localBasePath + "/bridge/Core.sample"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1901,7 +1901,7 @@ func (a *CoreAPIService) simplifyExecute(r CoreAPISimplifyRequest) (*PointListRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.simplify"
+	localVarPath := localBasePath + "/bridge/Core.simplify"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2009,7 +2009,7 @@ func (a *CoreAPIService) tangentExecute(r CoreAPITangentRequest) (*Vector2, *htt
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Curve.tangent"
+	localVarPath := localBasePath + "/bridge/Core.tangent"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2111,7 +2111,7 @@ func (a *CoreAPIService) versionExecute(r CoreAPIVersionRequest) (*VersionResult
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/bridge/Common.version"
+	localVarPath := localBasePath + "/bridge/Core.version"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

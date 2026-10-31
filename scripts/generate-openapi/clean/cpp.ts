@@ -290,7 +290,7 @@ function cppBody(tag: string, op: Operation): string {
                 '    body += ",\\"easing\\":" + sdk::detail::quote(options.easing);',
                 '}',
                 'body += "}";',
-                'return detail::call(*library_, "Animations.easingValue", body).at("value").number();',
+                'return detail::call(*library_, "Core.easingValue", body).at("value").number();',
             ].join('\n');
         case 'Core.parseOsu':
             return 'return impl_.parse_beatmap(options.text);';

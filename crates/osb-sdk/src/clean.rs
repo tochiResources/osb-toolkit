@@ -291,14 +291,6 @@ impl Core {
         crate::Client::apply_easing(options.easing, options.t)
     }
 
-    pub fn easing_value(&self, options: EasingValueOptions) -> Result<f64, Error> {
-        crate::Client::easing_value(options.t, options.easing, options.cubic_bezier)
-    }
-
-    pub fn version(&self) -> Result<String, Error> {
-        crate::Client::version()
-    }
-
     pub fn arc(&self, options: ArcOptions) -> Result<models::PointListResult, Error> {
         crate::Client::curve_arc(
             options.center,
@@ -321,12 +313,32 @@ impl Core {
         crate::Client::curve_distance_to(options.curve, options.point)
     }
 
+    pub fn easing_value(&self, options: EasingValueOptions) -> Result<f64, Error> {
+        crate::Client::easing_value(options.t, options.easing, options.cubic_bezier)
+    }
+
     pub fn ellipse(&self, options: EllipseOptions) -> Result<models::PointListResult, Error> {
         crate::Client::curve_ellipse(
             options.center,
             options.radius_x,
             options.radius_y,
             options.count.unwrap_or(64).max(0) as usize,
+        )
+    }
+
+    pub fn get_origin_vector(
+        &self,
+        options: GetOriginVectorOptions,
+    ) -> Result<models::Vector2, Error> {
+        crate::Client::get_origin_vector(options.origin, options.width, options.height)
+    }
+
+    pub fn in_screen_bounds(&self, options: InScreenBoundsOptions) -> Result<bool, Error> {
+        crate::Client::in_screen_bounds(
+            options.position,
+            options.size,
+            options.rotation,
+            options.origin,
         )
     }
 
@@ -347,6 +359,14 @@ impl Core {
 
     pub fn offset(&self, options: CurveOffsetOptions) -> Result<models::PointListResult, Error> {
         crate::Client::curve_offset(options.curve, options.distance)
+    }
+
+    pub fn parse_osb(&self, options: TextOptions) -> Result<models::ParseOsbResult, Error> {
+        crate::Client::parse_osb(&options.text)
+    }
+
+    pub fn parse_osu(&self, options: TextOptions) -> Result<models::Beatmap, Error> {
+        crate::Client::parse_beatmap(&options.text)
     }
 
     pub fn point(&self, options: CurvePointOptions) -> Result<models::Vector2, Error> {
@@ -373,28 +393,8 @@ impl Core {
         crate::Client::curve_tangent(options.curve, options.t)
     }
 
-    pub fn get_origin_vector(
-        &self,
-        options: GetOriginVectorOptions,
-    ) -> Result<models::Vector2, Error> {
-        crate::Client::get_origin_vector(options.origin, options.width, options.height)
-    }
-
-    pub fn in_screen_bounds(&self, options: InScreenBoundsOptions) -> Result<bool, Error> {
-        crate::Client::in_screen_bounds(
-            options.position,
-            options.size,
-            options.rotation,
-            options.origin,
-        )
-    }
-
-    pub fn parse_osb(&self, options: TextOptions) -> Result<models::ParseOsbResult, Error> {
-        crate::Client::parse_osb(&options.text)
-    }
-
-    pub fn parse_osu(&self, options: TextOptions) -> Result<models::Beatmap, Error> {
-        crate::Client::parse_beatmap(&options.text)
+    pub fn version(&self) -> Result<String, Error> {
+        crate::Client::version()
     }
 }
 

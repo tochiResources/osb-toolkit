@@ -1072,7 +1072,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<EasingResult>("/bridge/Animations.applyEasing", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<EasingResult>("/bridge/Core.applyEasing", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -1133,7 +1133,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<EasingResult>("/bridge/Animations.applyEasing", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<EasingResult>("/bridge/Core.applyEasing", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1189,7 +1189,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<PointListResult>("/bridge/Curve.arc", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<PointListResult>("/bridge/Core.arc", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -1250,7 +1250,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<PointListResult>("/bridge/Curve.arc", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<PointListResult>("/bridge/Core.arc", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1306,7 +1306,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<Box2>("/bridge/Curve.boundingBox", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<Box2>("/bridge/Core.boundingBox", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -1367,7 +1367,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<Box2>("/bridge/Curve.boundingBox", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Box2>("/bridge/Core.boundingBox", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1423,7 +1423,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<ScalarResult>("/bridge/Curve.curvature", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<ScalarResult>("/bridge/Core.curvature", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -1484,7 +1484,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<ScalarResult>("/bridge/Curve.curvature", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<ScalarResult>("/bridge/Core.curvature", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1540,7 +1540,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<ScalarResult>("/bridge/Curve.distanceTo", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<ScalarResult>("/bridge/Core.distanceTo", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -1601,7 +1601,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<ScalarResult>("/bridge/Curve.distanceTo", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<ScalarResult>("/bridge/Core.distanceTo", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1657,7 +1657,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<EasingResult>("/bridge/Animations.easingValue", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<EasingResult>("/bridge/Core.easingValue", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -1718,7 +1718,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<EasingResult>("/bridge/Animations.easingValue", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<EasingResult>("/bridge/Core.easingValue", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1774,7 +1774,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<PointListResult>("/bridge/Curve.ellipse", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<PointListResult>("/bridge/Core.ellipse", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -1835,7 +1835,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<PointListResult>("/bridge/Curve.ellipse", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<PointListResult>("/bridge/Core.ellipse", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1891,7 +1891,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<Vector2>("/bridge/Origin.getOriginVector", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<Vector2>("/bridge/Core.getOriginVector", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -1952,7 +1952,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<Vector2>("/bridge/Origin.getOriginVector", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Vector2>("/bridge/Core.getOriginVector", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -2008,7 +2008,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<BoolResult>("/bridge/Origin.inScreenBounds", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<BoolResult>("/bridge/Core.inScreenBounds", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -2069,7 +2069,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<BoolResult>("/bridge/Origin.inScreenBounds", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<BoolResult>("/bridge/Core.inScreenBounds", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -2125,7 +2125,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<ScalarResult>("/bridge/Curve.length", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<ScalarResult>("/bridge/Core.length", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -2186,7 +2186,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<ScalarResult>("/bridge/Curve.length", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<ScalarResult>("/bridge/Core.length", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -2242,7 +2242,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<OptionalPointResult>("/bridge/Curve.lineIntersect", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<OptionalPointResult>("/bridge/Core.lineIntersect", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -2303,7 +2303,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<OptionalPointResult>("/bridge/Curve.lineIntersect", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<OptionalPointResult>("/bridge/Core.lineIntersect", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -2359,7 +2359,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<Vector2>("/bridge/Curve.normal", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<Vector2>("/bridge/Core.normal", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -2420,7 +2420,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<Vector2>("/bridge/Curve.normal", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Vector2>("/bridge/Core.normal", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -2476,7 +2476,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<PointListResult>("/bridge/Curve.offset", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<PointListResult>("/bridge/Core.offset", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -2537,7 +2537,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<PointListResult>("/bridge/Curve.offset", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<PointListResult>("/bridge/Core.offset", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -2593,7 +2593,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<ParseOsbResult>("/bridge/Parsing.parseOsb", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<ParseOsbResult>("/bridge/Core.parseOsb", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -2654,7 +2654,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<ParseOsbResult>("/bridge/Parsing.parseOsb", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<ParseOsbResult>("/bridge/Core.parseOsb", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -2710,7 +2710,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<Beatmap>("/bridge/Parsing.parseOsu", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<Beatmap>("/bridge/Core.parseOsu", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -2771,7 +2771,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<Beatmap>("/bridge/Parsing.parseOsu", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Beatmap>("/bridge/Core.parseOsu", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -2827,7 +2827,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<Vector2>("/bridge/Curve.point", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<Vector2>("/bridge/Core.point", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -2888,7 +2888,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<Vector2>("/bridge/Curve.point", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Vector2>("/bridge/Core.point", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -2944,7 +2944,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<PointListResult>("/bridge/Curve.sample", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<PointListResult>("/bridge/Core.sample", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -3005,7 +3005,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<PointListResult>("/bridge/Curve.sample", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<PointListResult>("/bridge/Core.sample", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -3061,7 +3061,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<PointListResult>("/bridge/Curve.simplify", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<PointListResult>("/bridge/Core.simplify", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -3122,7 +3122,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<PointListResult>("/bridge/Curve.simplify", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<PointListResult>("/bridge/Core.simplify", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -3178,7 +3178,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<Vector2>("/bridge/Curve.tangent", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<Vector2>("/bridge/Core.tangent", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -3239,7 +3239,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<Vector2>("/bridge/Curve.tangent", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Vector2>("/bridge/Core.tangent", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -3287,7 +3287,7 @@ namespace tochiRes.osbTK.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<VersionResult>("/bridge/Common.version", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<VersionResult>("/bridge/Core.version", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -3340,7 +3340,7 @@ namespace tochiRes.osbTK.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<VersionResult>("/bridge/Common.version", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<VersionResult>("/bridge/Core.version", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

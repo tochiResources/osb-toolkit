@@ -50,7 +50,7 @@ public class BindingTests
         string request = JsonSerializer.Serialize(
             new
             {
-                op = "Parsing.parseOsu",
+                op = "Core.parseOsu",
                 text = "osu file format v14\n\n[General]\nAudioFilename: song.mp3\nMode: 0\n"
                     + "[TimingPoints]\n0,500,4,2,1,100,1,0\n"
                     + "[HitObjects]\n256,192,1000,1,0\n",

@@ -37,40 +37,6 @@ func (c *Core) ApplyEasing(ctx context.Context, options clean.ApplyEasingOptions
 	return value.Value, resp, nil
 }
 
-// EasingValue: A named-or-custom easing evaluation request.
-//
-// ctx: The request context.
-// options: A named-or-custom easing evaluation request.
-//
-// returns: The eased value (named easing or cubic-bezier)
-func (c *Core) EasingValue(ctx context.Context, options clean.EasingValueOptions) (float64, *http.Response, error) {
-	body := osbtk.NewEasingValueRequest(options.T)
-	if options.CubicBezier != nil {
-		body.SetCubicBezier(options.CubicBezier)
-	}
-	if options.Easing != nil {
-		body.SetEasing(*options.Easing)
-	}
-	value, resp, err := c.api.EasingValue(ctx).EasingValueRequest(*body).Execute()
-	if err != nil {
-		return 0, resp, err
-	}
-	return value.Value, resp, nil
-}
-
-// Version: Calls the Core.version bridge operation.
-//
-// ctx: The request context.
-//
-// returns: The runtime version
-func (c *Core) Version(ctx context.Context) (string, *http.Response, error) {
-	value, resp, err := c.api.Version(ctx).Execute()
-	if err != nil {
-		return "", resp, err
-	}
-	return value.Version, resp, nil
-}
-
 // Arc: A circular-arc sampling request.
 //
 // ctx: The request context.
@@ -129,6 +95,27 @@ func (c *Core) DistanceTo(ctx context.Context, options clean.CurveDistanceOption
 	return value.Value, resp, nil
 }
 
+// EasingValue: A named-or-custom easing evaluation request.
+//
+// ctx: The request context.
+// options: A named-or-custom easing evaluation request.
+//
+// returns: The eased value (named easing or cubic-bezier)
+func (c *Core) EasingValue(ctx context.Context, options clean.EasingValueOptions) (float64, *http.Response, error) {
+	body := osbtk.NewEasingValueRequest(options.T)
+	if options.CubicBezier != nil {
+		body.SetCubicBezier(options.CubicBezier)
+	}
+	if options.Easing != nil {
+		body.SetEasing(*options.Easing)
+	}
+	value, resp, err := c.api.EasingValue(ctx).EasingValueRequest(*body).Execute()
+	if err != nil {
+		return 0, resp, err
+	}
+	return value.Value, resp, nil
+}
+
 // Ellipse: An ellipse sampling request.
 //
 // ctx: The request context.
@@ -141,6 +128,32 @@ func (c *Core) Ellipse(ctx context.Context, options clean.EllipseOptions) (*osbt
 		body.SetCount(*options.Count)
 	}
 	return c.api.Ellipse(ctx).EllipseRequest(*body).Execute()
+}
+
+// GetOriginVector: The anchor offset for an origin.
+//
+// ctx: The request context.
+// options: The anchor offset for an origin.
+//
+// returns: The anchor offset for the origin
+func (c *Core) GetOriginVector(ctx context.Context, options clean.GetOriginVectorOptions) (*osbtk.Vector2, *http.Response, error) {
+	body := osbtk.NewGetOriginVectorRequest(options.Height, options.Origin, options.Width)
+	return c.api.GetOriginVector(ctx).GetOriginVectorRequest(*body).Execute()
+}
+
+// InScreenBounds: Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+//
+// ctx: The request context.
+// options: Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+//
+// returns: Whether the sprite's bounds intersect the screen
+func (c *Core) InScreenBounds(ctx context.Context, options clean.InScreenBoundsOptions) (bool, *http.Response, error) {
+	body := osbtk.NewInScreenBoundsRequest(options.Origin, options.Position, options.Rotation, options.Size)
+	value, resp, err := c.api.InScreenBounds(ctx).InScreenBoundsRequest(*body).Execute()
+	if err != nil {
+		return false, resp, err
+	}
+	return value.Value, resp, nil
 }
 
 // Length: A curve query.
@@ -198,6 +211,28 @@ func (c *Core) Offset(ctx context.Context, options clean.CurveOffsetOptions) (*o
 	return c.api.Offset(ctx).CurveOffsetRequest(*body).Execute()
 }
 
+// ParseOsb: A request carrying a block of text (an effect script, `.osu` or `.osb`).
+//
+// ctx: The request context.
+// options: A request carrying a block of text (an effect script, `.osu` or `.osb`).
+//
+// returns: The storyboard summary
+func (c *Core) ParseOsb(ctx context.Context, options clean.TextOptions) (*osbtk.ParseOsbResult, *http.Response, error) {
+	body := osbtk.NewTextRequest(options.Text)
+	return c.api.ParseOsb(ctx).TextRequest(*body).Execute()
+}
+
+// ParseOsu: A request carrying a block of text (an effect script, `.osu` or `.osb`).
+//
+// ctx: The request context.
+// options: A request carrying a block of text (an effect script, `.osu` or `.osb`).
+//
+// returns: The parsed beatmap
+func (c *Core) ParseOsu(ctx context.Context, options clean.TextOptions) (*osbtk.Beatmap, *http.Response, error) {
+	body := osbtk.NewTextRequest(options.Text)
+	return c.api.ParseOsu(ctx).TextRequest(*body).Execute()
+}
+
 // Point: A curve query at a parametric or arc-length position.
 //
 // ctx: The request context.
@@ -251,50 +286,15 @@ func (c *Core) Tangent(ctx context.Context, options clean.CurvePointOptions) (*o
 	return c.api.Tangent(ctx).CurvePointRequest(*body).Execute()
 }
 
-// GetOriginVector: The anchor offset for an origin.
+// Version: Calls the Core.version bridge operation.
 //
 // ctx: The request context.
-// options: The anchor offset for an origin.
 //
-// returns: The anchor offset for the origin
-func (c *Core) GetOriginVector(ctx context.Context, options clean.GetOriginVectorOptions) (*osbtk.Vector2, *http.Response, error) {
-	body := osbtk.NewGetOriginVectorRequest(options.Height, options.Origin, options.Width)
-	return c.api.GetOriginVector(ctx).GetOriginVectorRequest(*body).Execute()
-}
-
-// InScreenBounds: Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-//
-// ctx: The request context.
-// options: Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-//
-// returns: Whether the sprite's bounds intersect the screen
-func (c *Core) InScreenBounds(ctx context.Context, options clean.InScreenBoundsOptions) (bool, *http.Response, error) {
-	body := osbtk.NewInScreenBoundsRequest(options.Origin, options.Position, options.Rotation, options.Size)
-	value, resp, err := c.api.InScreenBounds(ctx).InScreenBoundsRequest(*body).Execute()
+// returns: The runtime version
+func (c *Core) Version(ctx context.Context) (string, *http.Response, error) {
+	value, resp, err := c.api.Version(ctx).Execute()
 	if err != nil {
-		return false, resp, err
+		return "", resp, err
 	}
-	return value.Value, resp, nil
-}
-
-// ParseOsb: A request carrying a block of text (an effect script, `.osu` or `.osb`).
-//
-// ctx: The request context.
-// options: A request carrying a block of text (an effect script, `.osu` or `.osb`).
-//
-// returns: The storyboard summary
-func (c *Core) ParseOsb(ctx context.Context, options clean.TextOptions) (*osbtk.ParseOsbResult, *http.Response, error) {
-	body := osbtk.NewTextRequest(options.Text)
-	return c.api.ParseOsb(ctx).TextRequest(*body).Execute()
-}
-
-// ParseOsu: A request carrying a block of text (an effect script, `.osu` or `.osb`).
-//
-// ctx: The request context.
-// options: A request carrying a block of text (an effect script, `.osu` or `.osb`).
-//
-// returns: The parsed beatmap
-func (c *Core) ParseOsu(ctx context.Context, options clean.TextOptions) (*osbtk.Beatmap, *http.Response, error) {
-	body := osbtk.NewTextRequest(options.Text)
-	return c.api.ParseOsu(ctx).TextRequest(*body).Execute()
+	return value.Version, resp, nil
 }

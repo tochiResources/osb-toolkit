@@ -30,29 +30,29 @@ pub fn exec(request: &str) -> String {
         Err(error) => return error_json(&error.to_string()),
     };
     match value.get("op").and_then(Value::as_str).unwrap_or("") {
-        "Common.version" => to_json(&VersionResult {
+        "Core.version" => to_json(&VersionResult {
             version: env!("CARGO_PKG_VERSION").to_string(),
         }),
         "Storyboarding3d.bake3d" => bake(&value),
-        "Parsing.parseOsu" => parse_osu_op(&value),
-        "Parsing.parseOsb" => parse_osb_op(&value),
+        "Core.parseOsu" => parse_osu_op(&value),
+        "Core.parseOsb" => parse_osb_op(&value),
         "Audio.fft" => fft_op(&value),
-        "Animations.applyEasing" => crate::json::apply_easing(&value),
-        "Animations.easingValue" => easing_value(&value),
+        "Core.applyEasing" => crate::json::apply_easing(&value),
+        "Core.easingValue" => easing_value(&value),
         "math" => crate::math_ops::math_op(&value),
-        "Curve.length" => curve_length_op(&value),
-        "Curve.boundingBox" => curve_bounding_box_op(&value),
-        "Curve.point" => curve_point_op(&value),
-        "Curve.tangent" => curve_tangent_op(&value),
-        "Curve.sample" => curve_sample_op(&value),
-        "Curve.simplify" => simplify_op(&value),
-        "Curve.normal" => curve_normal_op(&value),
-        "Curve.curvature" => curve_curvature_op(&value),
-        "Curve.distanceTo" => curve_distance_to_op(&value),
-        "Curve.offset" => curve_offset_op(&value),
-        "Curve.arc" => curve_arc_op(&value),
-        "Curve.ellipse" => curve_ellipse_op(&value),
-        "Curve.lineIntersect" => line_intersect_op(&value),
+        "Core.length" => curve_length_op(&value),
+        "Core.boundingBox" => curve_bounding_box_op(&value),
+        "Core.point" => curve_point_op(&value),
+        "Core.tangent" => curve_tangent_op(&value),
+        "Core.sample" => curve_sample_op(&value),
+        "Core.simplify" => simplify_op(&value),
+        "Core.normal" => curve_normal_op(&value),
+        "Core.curvature" => curve_curvature_op(&value),
+        "Core.distanceTo" => curve_distance_to_op(&value),
+        "Core.offset" => curve_offset_op(&value),
+        "Core.arc" => curve_arc_op(&value),
+        "Core.ellipse" => curve_ellipse_op(&value),
+        "Core.lineIntersect" => line_intersect_op(&value),
         "Diagnostics.diagnoseOsb" => diagnose_osb_op(&value),
         "Diagnostics.diagnoseOsu" => diagnose_osu_op(&value),
         "Optimize.optimizeOsb" => optimize_osb_op(&value),
@@ -63,8 +63,8 @@ pub fn exec(request: &str) -> String {
         "Media.extractFrames" => extract_frames_op(&value),
         "Media.encodeVideo" => encode_video_op(&value),
         "Media.extractAudio" => extract_audio_op(&value),
-        "Origin.getOriginVector" => get_origin_vector_op(&value),
-        "Origin.inScreenBounds" => in_screen_bounds_op(&value),
+        "Core.getOriginVector" => get_origin_vector_op(&value),
+        "Core.inScreenBounds" => in_screen_bounds_op(&value),
         "Helpers.keyframes" => crate::helpers::storyboarding3d_helper(&value),
         "Helpers.commands" => crate::helpers::storyboard_helper(&value),
         "Helpers.call" => crate::helpers::helper(&value),
@@ -81,7 +81,7 @@ fn bake(value: &Value) -> String {
 
 fn parse_osu_op(value: &Value) -> String {
     let Some(text) = value.get("text").and_then(Value::as_str) else {
-        return error_json("Parsing.parseOsu requires `text`");
+        return error_json("Core.parseOsu requires `text`");
     };
     match parse_osu(text) {
         Ok(beatmap) => to_json(&Beatmap::from(&beatmap)),
@@ -91,7 +91,7 @@ fn parse_osu_op(value: &Value) -> String {
 
 fn parse_osb_op(value: &Value) -> String {
     let Some(text) = value.get("text").and_then(Value::as_str) else {
-        return error_json("Parsing.parseOsb requires `text`");
+        return error_json("Core.parseOsb requires `text`");
     };
     let mut storyboard = Storyboard::new();
     osb_runtime::storyboarding::import_osb(&mut storyboard, text);
@@ -482,14 +482,14 @@ mod tests {
 
     #[test]
     fn reports_the_version() {
-        let value: Value = serde_json::from_str(&exec(r#"{"op":"Common.version"}"#)).unwrap();
+        let value: Value = serde_json::from_str(&exec(r#"{"op":"Core.version"}"#)).unwrap();
         assert_eq!(value["version"], env!("CARGO_PKG_VERSION"));
     }
 
     #[test]
     fn parses_a_beatmap_summary() {
         let request = serde_json::json!({
-            "op": "Parsing.parseOsu",
+            "op": "Core.parseOsu",
             "text": "osu file format v14\n\n[General]\nAudioFilename: song.mp3\nMode: 0\n\
                      [TimingPoints]\n0,500,4,2,1,100,1,0\n\
                      [HitObjects]\n256,192,1000,1,0\n"
@@ -506,7 +506,7 @@ mod tests {
     #[test]
     fn parses_an_osb_summary() {
         let request = serde_json::json!({
-            "op": "Parsing.parseOsb",
+            "op": "Core.parseOsb",
             "text": "[Events]\nSprite,Foreground,Centre,\"sb/dot.png\",320,240\n"
         })
         .to_string();
@@ -523,7 +523,7 @@ mod tests {
     #[test]
     fn measures_a_curve() {
         let request = serde_json::json!({
-            "op": "Curve.length",
+            "op": "Core.length",
             "curve": { "kind": "Linear", "points": [{ "x": 0.0, "y": 0.0 }, { "x": 100.0, "y": 0.0 }] }
         })
         .to_string();
@@ -531,7 +531,7 @@ mod tests {
         assert_eq!(value["value"], 100.0);
 
         let request = serde_json::json!({
-            "op": "Curve.boundingBox",
+            "op": "Core.boundingBox",
             "curve": { "kind": "Quadratic", "points": [
                 { "x": 0.0, "y": 0.0 }, { "x": 50.0, "y": 100.0 }, { "x": 100.0, "y": 0.0 }
             ] }
@@ -550,18 +550,18 @@ mod tests {
         ] });
 
         let request =
-            serde_json::json!({ "op": "Curve.point", "curve": curve, "t": 0.5 }).to_string();
+            serde_json::json!({ "op": "Core.point", "curve": curve, "t": 0.5 }).to_string();
         let value: Value = serde_json::from_str(&exec(&request)).unwrap();
         assert_eq!(value["x"], 50.0);
         assert_eq!(value["y"], 0.0);
 
         let request =
-            serde_json::json!({ "op": "Curve.tangent", "curve": curve, "t": 0.5 }).to_string();
+            serde_json::json!({ "op": "Core.tangent", "curve": curve, "t": 0.5 }).to_string();
         let value: Value = serde_json::from_str(&exec(&request)).unwrap();
         assert!((value["x"].as_f64().unwrap() - 1.0).abs() < 1e-6);
 
         let request =
-            serde_json::json!({ "op": "Curve.sample", "curve": curve, "count": 3 }).to_string();
+            serde_json::json!({ "op": "Core.sample", "curve": curve, "count": 3 }).to_string();
         let value: Value = serde_json::from_str(&exec(&request)).unwrap();
         assert_eq!(value["points"].as_array().unwrap().len(), 3);
         assert_eq!(value["points"][2]["x"], 100.0);
@@ -570,7 +570,7 @@ mod tests {
     #[test]
     fn simplifies_a_polyline() {
         let request = serde_json::json!({
-            "op": "Curve.simplify",
+            "op": "Core.simplify",
             "points": [
                 { "x": 0.0, "y": 0.0 }, { "x": 1.0, "y": 0.05 },
                 { "x": 2.0, "y": 0.0 }, { "x": 3.0, "y": 0.0 }
@@ -590,18 +590,18 @@ mod tests {
         ] });
 
         let request =
-            serde_json::json!({ "op": "Curve.normal", "curve": curve, "t": 0.5 }).to_string();
+            serde_json::json!({ "op": "Core.normal", "curve": curve, "t": 0.5 }).to_string();
         let value: Value = serde_json::from_str(&exec(&request)).unwrap();
         assert!(value["x"].as_f64().unwrap().abs() < 1e-6);
         assert!((value["y"].as_f64().unwrap().abs() - 1.0).abs() < 1e-6);
 
         let request =
-            serde_json::json!({ "op": "Curve.curvature", "curve": curve, "t": 0.5 }).to_string();
+            serde_json::json!({ "op": "Core.curvature", "curve": curve, "t": 0.5 }).to_string();
         let value: Value = serde_json::from_str(&exec(&request)).unwrap();
         assert!(value["value"].as_f64().unwrap().abs() < 1e-6);
 
         let request = serde_json::json!({
-            "op": "Curve.distanceTo",
+            "op": "Core.distanceTo",
             "curve": curve,
             "point": { "x": 50.0, "y": 10.0 }
         })
@@ -609,8 +609,8 @@ mod tests {
         let value: Value = serde_json::from_str(&exec(&request)).unwrap();
         assert!((value["value"].as_f64().unwrap() - 10.0).abs() < 1e-6);
 
-        let request = serde_json::json!({ "op": "Curve.offset", "curve": curve, "distance": 5.0 })
-            .to_string();
+        let request =
+            serde_json::json!({ "op": "Core.offset", "curve": curve, "distance": 5.0 }).to_string();
         let value: Value = serde_json::from_str(&exec(&request)).unwrap();
         assert_eq!(value["points"].as_array().unwrap().len(), 2);
         assert!((value["points"][0]["y"].as_f64().unwrap().abs() - 5.0).abs() < 1e-6);

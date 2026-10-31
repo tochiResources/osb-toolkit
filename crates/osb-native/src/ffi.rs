@@ -139,7 +139,7 @@ mod tests {
 
     #[test]
     fn exec_round_trips_through_the_c_abi() {
-        let request = CString::new(r#"{"op":"Common.version"}"#).unwrap();
+        let request = CString::new(r#"{"op":"Core.version"}"#).unwrap();
         let value: serde_json::Value =
             serde_json::from_str(&unsafe { take(osbtk_exec(request.as_ptr())) }).unwrap();
         assert_eq!(value["version"], env!("CARGO_PKG_VERSION"));

@@ -10,7 +10,7 @@ var Animations = animationsLib{}
 
 // ApplyEasing applies a named easing function to a normalized time in `0..1`.
 func (animationsLib) ApplyEasing(easing Easing, t float64) (float64, error) {
-	result, err := decodeBridge[EasingResult](map[string]any{"op": "Animations.applyEasing", "easing": easing, "t": t})
+	result, err := decodeBridge[EasingResult](map[string]any{"op": "Core.applyEasing", "easing": easing, "t": t})
 	if err != nil {
 		return 0, err
 	}
@@ -21,7 +21,7 @@ func (animationsLib) ApplyEasing(easing Easing, t float64) (float64, error) {
 // `(x1, y1)`, `(x2, y2)` at a normalized time.
 func (animationsLib) ApplyCubicBezier(x1, y1, x2, y2, t float64) (float64, error) {
 	result, err := decodeBridge[EasingResult](map[string]any{
-		"op": "Animations.easingValue", "cubicBezier": []float64{x1, y1, x2, y2}, "t": t,
+		"op": "Core.easingValue", "cubicBezier": []float64{x1, y1, x2, y2}, "t": t,
 	})
 	if err != nil {
 		return 0, err

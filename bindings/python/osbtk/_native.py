@@ -83,12 +83,12 @@ def exec(request_json: str) -> dict[str, Any]:
 
 def parse_osu(text: str) -> dict[str, Any]:
     """Parses a `.osu` beatmap into a summary."""
-    return exec(json.dumps({"op": "Parsing.parseOsu", "text": text}))
+    return exec(json.dumps({"op": "Core.parseOsu", "text": text}))
 
 
 def parse_osb(text: str) -> dict[str, Any]:
     """Parses a `.osb` storyboard into a summary."""
-    return exec(json.dumps({"op": "Parsing.parseOsb", "text": text}))
+    return exec(json.dumps({"op": "Core.parseOsb", "text": text}))
 
 
 def fft(path: str, time: float = 0.0, magnitudes: int = 64) -> list[float]:

@@ -80,65 +80,6 @@ public final class Core {
     }
 
     /**
-     * A named-or-custom easing evaluation request.
-     *
-     * @param t The normalized time in `0.0..=1.0`.
-     *
-     * @return The eased value (named easing or cubic-bezier)
-     */
-    public double easingValue(Double t) throws ApiException {
-        return easingValue(EasingValueOptions.builder().t(t).build());
-    }
-
-    /**
-     * A named-or-custom easing evaluation request.
-     *
-     * @param t The normalized time in `0.0..=1.0`.
-     * @param easing A named easing (used when `cubicBezier` is absent).
-     *
-     * @return The eased value (named easing or cubic-bezier)
-     */
-    public double easingValue(Double t, Easing easing) throws ApiException {
-        return easingValue(EasingValueOptions.builder().t(t).easing(easing).build());
-    }
-
-    /**
-     * A named-or-custom easing evaluation request.
-     *
-     * @param t The normalized time in `0.0..=1.0`.
-     * @param easing A named easing (used when `cubicBezier` is absent).
-     * @param cubicBezier A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`.
-     *
-     * @return The eased value (named easing or cubic-bezier)
-     */
-    public double easingValue(Double t, Easing easing, List<Double> cubicBezier) throws ApiException {
-        return easingValue(EasingValueOptions.builder().t(t).easing(easing).cubicBezier(cubicBezier).build());
-    }
-
-    /**
-     * A named-or-custom easing evaluation request.
-     *
-     * @param options A named-or-custom easing evaluation request.
-     *
-     * @return The eased value (named easing or cubic-bezier)
-     */
-    public double easingValue(EasingValueOptions options) throws ApiException {
-        return api.easingValue(new EasingValueRequest()
-            .cubicBezier(options.cubicBezier)
-            .easing(options.easing)
-            .t(options.t)).getValue();
-    }
-
-    /**
-     * Calls the Core.version bridge operation.
-     *
-     * @return The runtime version
-     */
-    public String version() throws ApiException {
-        return api.version().getVersion();
-    }
-
-    /**
      * A circular-arc sampling request.
      *
      * @param center The arc centre.
@@ -271,6 +212,56 @@ public final class Core {
     }
 
     /**
+     * A named-or-custom easing evaluation request.
+     *
+     * @param t The normalized time in `0.0..=1.0`.
+     *
+     * @return The eased value (named easing or cubic-bezier)
+     */
+    public double easingValue(Double t) throws ApiException {
+        return easingValue(EasingValueOptions.builder().t(t).build());
+    }
+
+    /**
+     * A named-or-custom easing evaluation request.
+     *
+     * @param t The normalized time in `0.0..=1.0`.
+     * @param easing A named easing (used when `cubicBezier` is absent).
+     *
+     * @return The eased value (named easing or cubic-bezier)
+     */
+    public double easingValue(Double t, Easing easing) throws ApiException {
+        return easingValue(EasingValueOptions.builder().t(t).easing(easing).build());
+    }
+
+    /**
+     * A named-or-custom easing evaluation request.
+     *
+     * @param t The normalized time in `0.0..=1.0`.
+     * @param easing A named easing (used when `cubicBezier` is absent).
+     * @param cubicBezier A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`.
+     *
+     * @return The eased value (named easing or cubic-bezier)
+     */
+    public double easingValue(Double t, Easing easing, List<Double> cubicBezier) throws ApiException {
+        return easingValue(EasingValueOptions.builder().t(t).easing(easing).cubicBezier(cubicBezier).build());
+    }
+
+    /**
+     * A named-or-custom easing evaluation request.
+     *
+     * @param options A named-or-custom easing evaluation request.
+     *
+     * @return The eased value (named easing or cubic-bezier)
+     */
+    public double easingValue(EasingValueOptions options) throws ApiException {
+        return api.easingValue(new EasingValueRequest()
+            .cubicBezier(options.cubicBezier)
+            .easing(options.easing)
+            .t(options.t)).getValue();
+    }
+
+    /**
      * An ellipse sampling request.
      *
      * @param center The ellipse centre.
@@ -310,6 +301,62 @@ public final class Core {
             .count(options.count)
             .radiusX(options.radiusX)
             .radiusY(options.radiusY));
+    }
+
+    /**
+     * The anchor offset for an origin.
+     *
+     * @param origin The sprite anchor origin.
+     * @param width The sprite width.
+     * @param height The sprite height.
+     *
+     * @return The anchor offset for the origin
+     */
+    public Vector2 getOriginVector(OsbOrigin origin, Double width, Double height) throws ApiException {
+        return getOriginVector(GetOriginVectorOptions.builder().origin(origin).width(width).height(height).build());
+    }
+
+    /**
+     * The anchor offset for an origin.
+     *
+     * @param options The anchor offset for an origin.
+     *
+     * @return The anchor offset for the origin
+     */
+    public Vector2 getOriginVector(GetOriginVectorOptions options) throws ApiException {
+        return api.getOriginVector(new GetOriginVectorRequest()
+            .height(options.height)
+            .origin(options.origin)
+            .width(options.width));
+    }
+
+    /**
+     * Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+     *
+     * @param position The sprite centre position.
+     * @param size The sprite size.
+     * @param rotation The rotation in radians.
+     * @param origin The anchor offset (from `GetOriginVector`).
+     *
+     * @return Whether the sprite's bounds intersect the screen
+     */
+    public boolean inScreenBounds(Vector2 position, Vector2 size, Double rotation, Vector2 origin) throws ApiException {
+        return inScreenBounds(InScreenBoundsOptions.builder().position(position).size(size).rotation(rotation).origin(origin).build());
+    }
+
+    /**
+     * Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+     *
+     * @param options Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+     *
+     * @return Whether the sprite's bounds intersect the screen
+     */
+    public boolean inScreenBounds(InScreenBoundsOptions options) throws ApiException {
+        return api.inScreenBounds(new InScreenBoundsRequest()
+            .origin(options.origin)
+            .position(options.position)
+            .rotation(options.rotation)
+            .size(options.size)).getValue();
     }
 
     /**
@@ -426,6 +473,52 @@ public final class Core {
         return api.offset(new CurveOffsetRequest()
             .curve(options.curve)
             .distance(options.distance));
+    }
+
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param text The text payload.
+     *
+     * @return The storyboard summary
+     */
+    public ParseOsbResult parseOsb(String text) throws ApiException {
+        return parseOsb(TextOptions.builder().text(text).build());
+    }
+
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @return The storyboard summary
+     */
+    public ParseOsbResult parseOsb(TextOptions options) throws ApiException {
+        return api.parseOsb(new TextRequest()
+            .text(options.text));
+    }
+
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param text The text payload.
+     *
+     * @return The parsed beatmap
+     */
+    public Beatmap parseOsu(String text) throws ApiException {
+        return parseOsu(TextOptions.builder().text(text).build());
+    }
+
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @return The parsed beatmap
+     */
+    public Beatmap parseOsu(TextOptions options) throws ApiException {
+        return api.parseOsu(new TextRequest()
+            .text(options.text));
     }
 
     /**
@@ -571,104 +664,11 @@ public final class Core {
     }
 
     /**
-     * The anchor offset for an origin.
+     * Calls the Core.version bridge operation.
      *
-     * @param origin The sprite anchor origin.
-     * @param width The sprite width.
-     * @param height The sprite height.
-     *
-     * @return The anchor offset for the origin
+     * @return The runtime version
      */
-    public Vector2 getOriginVector(OsbOrigin origin, Double width, Double height) throws ApiException {
-        return getOriginVector(GetOriginVectorOptions.builder().origin(origin).width(width).height(height).build());
-    }
-
-    /**
-     * The anchor offset for an origin.
-     *
-     * @param options The anchor offset for an origin.
-     *
-     * @return The anchor offset for the origin
-     */
-    public Vector2 getOriginVector(GetOriginVectorOptions options) throws ApiException {
-        return api.getOriginVector(new GetOriginVectorRequest()
-            .height(options.height)
-            .origin(options.origin)
-            .width(options.width));
-    }
-
-    /**
-     * Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-     *
-     * @param position The sprite centre position.
-     * @param size The sprite size.
-     * @param rotation The rotation in radians.
-     * @param origin The anchor offset (from `GetOriginVector`).
-     *
-     * @return Whether the sprite's bounds intersect the screen
-     */
-    public boolean inScreenBounds(Vector2 position, Vector2 size, Double rotation, Vector2 origin) throws ApiException {
-        return inScreenBounds(InScreenBoundsOptions.builder().position(position).size(size).rotation(rotation).origin(origin).build());
-    }
-
-    /**
-     * Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-     *
-     * @param options Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-     *
-     * @return Whether the sprite's bounds intersect the screen
-     */
-    public boolean inScreenBounds(InScreenBoundsOptions options) throws ApiException {
-        return api.inScreenBounds(new InScreenBoundsRequest()
-            .origin(options.origin)
-            .position(options.position)
-            .rotation(options.rotation)
-            .size(options.size)).getValue();
-    }
-
-    /**
-     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
-     *
-     * @param text The text payload.
-     *
-     * @return The storyboard summary
-     */
-    public ParseOsbResult parseOsb(String text) throws ApiException {
-        return parseOsb(TextOptions.builder().text(text).build());
-    }
-
-    /**
-     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
-     *
-     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
-     *
-     * @return The storyboard summary
-     */
-    public ParseOsbResult parseOsb(TextOptions options) throws ApiException {
-        return api.parseOsb(new TextRequest()
-            .text(options.text));
-    }
-
-    /**
-     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
-     *
-     * @param text The text payload.
-     *
-     * @return The parsed beatmap
-     */
-    public Beatmap parseOsu(String text) throws ApiException {
-        return parseOsu(TextOptions.builder().text(text).build());
-    }
-
-    /**
-     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
-     *
-     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
-     *
-     * @return The parsed beatmap
-     */
-    public Beatmap parseOsu(TextOptions options) throws ApiException {
-        return api.parseOsu(new TextRequest()
-            .text(options.text));
+    public String version() throws ApiException {
+        return api.version().getVersion();
     }
 }

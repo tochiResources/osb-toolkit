@@ -77,7 +77,7 @@ pub fn runtime_exec(runtime: &mut OsbtkRuntime, request: &str) -> String {
         "Sprite.stateAt" => sprite_state_at(runtime, &value),
         "Sprite.info" => sprite_info(runtime, &value),
         "Generator.random" => random(runtime, &value),
-        "Animations.applyEasing" => apply_easing(&value),
+        "Core.applyEasing" => apply_easing(&value),
         "Generator.spriteCount" => to_json(&SpriteCountResult {
             sprite_count: runtime.storyboard.sprite_count(),
         }),
@@ -942,13 +942,13 @@ mod tests {
         let mut runtime = OsbtkRuntime::new(1.0, 1.0);
         let named = run(
             &mut runtime,
-            serde_json::json!({ "op": "Animations.applyEasing", "easing": "InQuad", "t": 0.5 }),
+            serde_json::json!({ "op": "Core.applyEasing", "easing": "InQuad", "t": 0.5 }),
         );
         assert!((named["value"].as_f64().unwrap() - 0.25).abs() < 1e-6);
 
         let numeric = run(
             &mut runtime,
-            serde_json::json!({ "op": "Animations.applyEasing", "id": 3, "t": 0.5 }),
+            serde_json::json!({ "op": "Core.applyEasing", "id": 3, "t": 0.5 }),
         );
         assert!((numeric["value"].as_f64().unwrap() - 0.25).abs() < 1e-6);
     }

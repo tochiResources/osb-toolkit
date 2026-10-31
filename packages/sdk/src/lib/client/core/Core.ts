@@ -45,57 +45,6 @@ export class Core {
     }
 
     /**
-     * A named-or-custom easing evaluation request.
-     *
-     * @param t The normalized time in `0.0..=1.0`.
-     *
-     * @returns The eased value (named easing or cubic-bezier)
-     */
-    async easingValue(t: number): Promise<number>;
-    /**
-     * A named-or-custom easing evaluation request.
-     *
-     * @param t The normalized time in `0.0..=1.0`.
-     * @param easing A named easing (used when `cubicBezier` is absent).
-     *
-     * @returns The eased value (named easing or cubic-bezier)
-     */
-    async easingValue(t: number, easing: Easing | null): Promise<number>;
-    /**
-     * A named-or-custom easing evaluation request.
-     *
-     * @param t The normalized time in `0.0..=1.0`.
-     * @param easing A named easing (used when `cubicBezier` is absent).
-     * @param cubicBezier A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`.
-     *
-     * @returns The eased value (named easing or cubic-bezier)
-     */
-    async easingValue(t: number, easing: Easing | null, cubicBezier: number[] | null): Promise<number>;
-    /**
-     * A named-or-custom easing evaluation request.
-     *
-     * @param options A named-or-custom easing evaluation request.
-     *
-     * @returns The eased value (named easing or cubic-bezier)
-     */
-    async easingValue(options: EasingValueOptions): Promise<number>;
-    async easingValue(optionsOrT?: EasingValueOptions | number, easing?: Easing | null, cubicBezier?: number[] | null): Promise<number> {
-        const options: EasingValueOptions = isEasingValueOptions(optionsOrT)
-            ? optionsOrT
-            : ({ t: optionsOrT, easing: easing, cubicBezier: cubicBezier } as EasingValueOptions);
-        return (await this.api.easingValue(options)).value;
-    }
-
-    /**
-     * Calls the Core.version bridge operation.
-     *
-     * @returns The runtime version
-     */
-    async version(): Promise<string> {
-        return (await this.api.version()).version;
-    }
-
-    /**
      * A circular-arc sampling request.
      *
      * @param center The arc centre.
@@ -215,6 +164,48 @@ export class Core {
     }
 
     /**
+     * A named-or-custom easing evaluation request.
+     *
+     * @param t The normalized time in `0.0..=1.0`.
+     *
+     * @returns The eased value (named easing or cubic-bezier)
+     */
+    async easingValue(t: number): Promise<number>;
+    /**
+     * A named-or-custom easing evaluation request.
+     *
+     * @param t The normalized time in `0.0..=1.0`.
+     * @param easing A named easing (used when `cubicBezier` is absent).
+     *
+     * @returns The eased value (named easing or cubic-bezier)
+     */
+    async easingValue(t: number, easing: Easing | null): Promise<number>;
+    /**
+     * A named-or-custom easing evaluation request.
+     *
+     * @param t The normalized time in `0.0..=1.0`.
+     * @param easing A named easing (used when `cubicBezier` is absent).
+     * @param cubicBezier A CSS-style cubic-bezier's control points `[x1, y1, x2, y2]`.
+     *
+     * @returns The eased value (named easing or cubic-bezier)
+     */
+    async easingValue(t: number, easing: Easing | null, cubicBezier: number[] | null): Promise<number>;
+    /**
+     * A named-or-custom easing evaluation request.
+     *
+     * @param options A named-or-custom easing evaluation request.
+     *
+     * @returns The eased value (named easing or cubic-bezier)
+     */
+    async easingValue(options: EasingValueOptions): Promise<number>;
+    async easingValue(optionsOrT?: EasingValueOptions | number, easing?: Easing | null, cubicBezier?: number[] | null): Promise<number> {
+        const options: EasingValueOptions = isEasingValueOptions(optionsOrT)
+            ? optionsOrT
+            : ({ t: optionsOrT, easing: easing, cubicBezier: cubicBezier } as EasingValueOptions);
+        return (await this.api.easingValue(options)).value;
+    }
+
+    /**
      * An ellipse sampling request.
      *
      * @param center The ellipse centre.
@@ -248,6 +239,57 @@ export class Core {
             ? optionsOrCenter
             : ({ center: optionsOrCenter, radiusX: radiusX, radiusY: radiusY, count: count } as EllipseOptions);
         return this.api.ellipse(options);
+    }
+
+    /**
+     * The anchor offset for an origin.
+     *
+     * @param origin The sprite anchor origin.
+     * @param width The sprite width.
+     * @param height The sprite height.
+     *
+     * @returns The anchor offset for the origin
+     */
+    async getOriginVector(origin: OsbOrigin, width: number, height: number): Promise<Vector2>;
+    /**
+     * The anchor offset for an origin.
+     *
+     * @param options The anchor offset for an origin.
+     *
+     * @returns The anchor offset for the origin
+     */
+    async getOriginVector(options: GetOriginVectorOptions): Promise<Vector2>;
+    async getOriginVector(optionsOrOrigin?: GetOriginVectorOptions | OsbOrigin, width?: number, height?: number): Promise<Vector2> {
+        const options: GetOriginVectorOptions = isGetOriginVectorOptions(optionsOrOrigin)
+            ? optionsOrOrigin
+            : ({ origin: optionsOrOrigin, width: width, height: height } as GetOriginVectorOptions);
+        return this.api.getOriginVector(options);
+    }
+
+    /**
+     * Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+     *
+     * @param position The sprite centre position.
+     * @param size The sprite size.
+     * @param rotation The rotation in radians.
+     * @param origin The anchor offset (from `GetOriginVector`).
+     *
+     * @returns Whether the sprite's bounds intersect the screen
+     */
+    async inScreenBounds(position: Vector2, size: Vector2, rotation: number, origin: Vector2): Promise<boolean>;
+    /**
+     * Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+     *
+     * @param options Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+     *
+     * @returns Whether the sprite's bounds intersect the screen
+     */
+    async inScreenBounds(options: InScreenBoundsOptions): Promise<boolean>;
+    async inScreenBounds(optionsOrPosition?: InScreenBoundsOptions | Vector2, size?: Vector2, rotation?: number, origin?: Vector2): Promise<boolean> {
+        const options: InScreenBoundsOptions = isInScreenBoundsOptions(optionsOrPosition)
+            ? optionsOrPosition
+            : ({ position: optionsOrPosition, size: size, rotation: rotation, origin: origin } as InScreenBoundsOptions);
+        return (await this.api.inScreenBounds(options)).value;
     }
 
     /**
@@ -355,6 +397,52 @@ export class Core {
             ? optionsOrCurve
             : ({ curve: optionsOrCurve, distance: distance } as CurveOffsetOptions);
         return this.api.offset(options);
+    }
+
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param text The text payload.
+     *
+     * @returns The storyboard summary
+     */
+    async parseOsb(text: string): Promise<ParseOsbResult>;
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @returns The storyboard summary
+     */
+    async parseOsb(options: TextOptions): Promise<ParseOsbResult>;
+    async parseOsb(optionsOrText?: TextOptions | string): Promise<ParseOsbResult> {
+        const options: TextOptions = isTextOptions(optionsOrText)
+            ? optionsOrText
+            : ({ text: optionsOrText } as TextOptions);
+        return this.api.parseOsb(options);
+    }
+
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param text The text payload.
+     *
+     * @returns The parsed beatmap
+     */
+    async parseOsu(text: string): Promise<Beatmap>;
+    /**
+     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
+     *
+     * @returns The parsed beatmap
+     */
+    async parseOsu(options: TextOptions): Promise<Beatmap>;
+    async parseOsu(optionsOrText?: TextOptions | string): Promise<Beatmap> {
+        const options: TextOptions = isTextOptions(optionsOrText)
+            ? optionsOrText
+            : ({ text: optionsOrText } as TextOptions);
+        return this.api.parseOsu(options);
     }
 
     /**
@@ -484,99 +572,11 @@ export class Core {
     }
 
     /**
-     * The anchor offset for an origin.
+     * Calls the Core.version bridge operation.
      *
-     * @param origin The sprite anchor origin.
-     * @param width The sprite width.
-     * @param height The sprite height.
-     *
-     * @returns The anchor offset for the origin
+     * @returns The runtime version
      */
-    async getOriginVector(origin: OsbOrigin, width: number, height: number): Promise<Vector2>;
-    /**
-     * The anchor offset for an origin.
-     *
-     * @param options The anchor offset for an origin.
-     *
-     * @returns The anchor offset for the origin
-     */
-    async getOriginVector(options: GetOriginVectorOptions): Promise<Vector2>;
-    async getOriginVector(optionsOrOrigin?: GetOriginVectorOptions | OsbOrigin, width?: number, height?: number): Promise<Vector2> {
-        const options: GetOriginVectorOptions = isGetOriginVectorOptions(optionsOrOrigin)
-            ? optionsOrOrigin
-            : ({ origin: optionsOrOrigin, width: width, height: height } as GetOriginVectorOptions);
-        return this.api.getOriginVector(options);
-    }
-
-    /**
-     * Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-     *
-     * @param position The sprite centre position.
-     * @param size The sprite size.
-     * @param rotation The rotation in radians.
-     * @param origin The anchor offset (from `GetOriginVector`).
-     *
-     * @returns Whether the sprite's bounds intersect the screen
-     */
-    async inScreenBounds(position: Vector2, size: Vector2, rotation: number, origin: Vector2): Promise<boolean>;
-    /**
-     * Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-     *
-     * @param options Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-     *
-     * @returns Whether the sprite's bounds intersect the screen
-     */
-    async inScreenBounds(options: InScreenBoundsOptions): Promise<boolean>;
-    async inScreenBounds(optionsOrPosition?: InScreenBoundsOptions | Vector2, size?: Vector2, rotation?: number, origin?: Vector2): Promise<boolean> {
-        const options: InScreenBoundsOptions = isInScreenBoundsOptions(optionsOrPosition)
-            ? optionsOrPosition
-            : ({ position: optionsOrPosition, size: size, rotation: rotation, origin: origin } as InScreenBoundsOptions);
-        return (await this.api.inScreenBounds(options)).value;
-    }
-
-    /**
-     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
-     *
-     * @param text The text payload.
-     *
-     * @returns The storyboard summary
-     */
-    async parseOsb(text: string): Promise<ParseOsbResult>;
-    /**
-     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
-     *
-     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
-     *
-     * @returns The storyboard summary
-     */
-    async parseOsb(options: TextOptions): Promise<ParseOsbResult>;
-    async parseOsb(optionsOrText?: TextOptions | string): Promise<ParseOsbResult> {
-        const options: TextOptions = isTextOptions(optionsOrText)
-            ? optionsOrText
-            : ({ text: optionsOrText } as TextOptions);
-        return this.api.parseOsb(options);
-    }
-
-    /**
-     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
-     *
-     * @param text The text payload.
-     *
-     * @returns The parsed beatmap
-     */
-    async parseOsu(text: string): Promise<Beatmap>;
-    /**
-     * A request carrying a block of text (an effect script, `.osu` or `.osb`).
-     *
-     * @param options A request carrying a block of text (an effect script, `.osu` or `.osb`).
-     *
-     * @returns The parsed beatmap
-     */
-    async parseOsu(options: TextOptions): Promise<Beatmap>;
-    async parseOsu(optionsOrText?: TextOptions | string): Promise<Beatmap> {
-        const options: TextOptions = isTextOptions(optionsOrText)
-            ? optionsOrText
-            : ({ text: optionsOrText } as TextOptions);
-        return this.api.parseOsu(options);
+    async version(): Promise<string> {
+        return (await this.api.version()).version;
     }
 }

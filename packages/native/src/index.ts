@@ -84,12 +84,12 @@ export function exec(request: Json): Json {
 
 /** Parses a `.osu` beatmap into a summary. */
 export function parseOsu(text: string): Json {
-    return exec({ op: 'Parsing.parseOsu', text });
+    return exec({ op: 'Core.parseOsu', text });
 }
 
 /** Parses a `.osb` storyboard into a summary. */
 export function parseOsb(text: string): Json {
-    return exec({ op: 'Parsing.parseOsb', text });
+    return exec({ op: 'Core.parseOsb', text });
 }
 
 /** FFT magnitudes for a WAV file at `time` (ms). */

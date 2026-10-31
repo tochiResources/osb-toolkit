@@ -125,7 +125,7 @@ public class CoreAPI {
         Object localVarPostBody = applyEasingRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Animations.applyEasing";
+        String localVarPath = "/bridge/Core.applyEasing";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -252,7 +252,7 @@ public class CoreAPI {
         Object localVarPostBody = arcRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.arc";
+        String localVarPath = "/bridge/Core.arc";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -379,7 +379,7 @@ public class CoreAPI {
         Object localVarPostBody = curveRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.boundingBox";
+        String localVarPath = "/bridge/Core.boundingBox";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -506,7 +506,7 @@ public class CoreAPI {
         Object localVarPostBody = curvePointRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.curvature";
+        String localVarPath = "/bridge/Core.curvature";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -633,7 +633,7 @@ public class CoreAPI {
         Object localVarPostBody = curveDistanceRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.distanceTo";
+        String localVarPath = "/bridge/Core.distanceTo";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -760,7 +760,7 @@ public class CoreAPI {
         Object localVarPostBody = easingValueRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Animations.easingValue";
+        String localVarPath = "/bridge/Core.easingValue";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -887,7 +887,7 @@ public class CoreAPI {
         Object localVarPostBody = ellipseRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.ellipse";
+        String localVarPath = "/bridge/Core.ellipse";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1014,7 +1014,7 @@ public class CoreAPI {
         Object localVarPostBody = getOriginVectorRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Origin.getOriginVector";
+        String localVarPath = "/bridge/Core.getOriginVector";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1141,7 +1141,7 @@ public class CoreAPI {
         Object localVarPostBody = inScreenBoundsRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Origin.inScreenBounds";
+        String localVarPath = "/bridge/Core.inScreenBounds";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1268,7 +1268,7 @@ public class CoreAPI {
         Object localVarPostBody = curveRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.length";
+        String localVarPath = "/bridge/Core.length";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1395,7 +1395,7 @@ public class CoreAPI {
         Object localVarPostBody = lineIntersectRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.lineIntersect";
+        String localVarPath = "/bridge/Core.lineIntersect";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1522,7 +1522,7 @@ public class CoreAPI {
         Object localVarPostBody = curvePointRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.normal";
+        String localVarPath = "/bridge/Core.normal";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1649,7 +1649,7 @@ public class CoreAPI {
         Object localVarPostBody = curveOffsetRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.offset";
+        String localVarPath = "/bridge/Core.offset";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1776,7 +1776,7 @@ public class CoreAPI {
         Object localVarPostBody = textRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Parsing.parseOsb";
+        String localVarPath = "/bridge/Core.parseOsb";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1903,7 +1903,7 @@ public class CoreAPI {
         Object localVarPostBody = textRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Parsing.parseOsu";
+        String localVarPath = "/bridge/Core.parseOsu";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -2030,7 +2030,7 @@ public class CoreAPI {
         Object localVarPostBody = curvePointRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.point";
+        String localVarPath = "/bridge/Core.point";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -2157,7 +2157,7 @@ public class CoreAPI {
         Object localVarPostBody = curveSampleRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.sample";
+        String localVarPath = "/bridge/Core.sample";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -2284,7 +2284,7 @@ public class CoreAPI {
         Object localVarPostBody = simplifyRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.simplify";
+        String localVarPath = "/bridge/Core.simplify";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -2411,7 +2411,7 @@ public class CoreAPI {
         Object localVarPostBody = curvePointRequest;
 
         // create path and map variables
-        String localVarPath = "/bridge/Curve.tangent";
+        String localVarPath = "/bridge/Core.tangent";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -2537,7 +2537,7 @@ public class CoreAPI {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/bridge/Common.version";
+        String localVarPath = "/bridge/Core.version";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();

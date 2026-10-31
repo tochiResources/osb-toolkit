@@ -244,6 +244,23 @@ mod tests {
     }
 
     #[test]
+    fn operation_ids_are_class_scoped() {
+        let value: serde_json::Value = serde_json::from_str(&openapi_json()).unwrap();
+        for (path, item) in value["paths"].as_object().unwrap() {
+            let op = &item["post"];
+            let operation_id = op["operationId"].as_str().unwrap();
+            let tag = op["tags"][0].as_str().unwrap();
+            let class = operation_id.split('.').next().unwrap();
+            assert_eq!(class, tag, "{operation_id} is not scoped to its tag");
+            assert_eq!(
+                path.rsplit('/').next().unwrap(),
+                operation_id,
+                "{operation_id} does not match its path"
+            );
+        }
+    }
+
+    #[test]
     fn doc_comments_become_descriptions() {
         let value: serde_json::Value = serde_json::from_str(&openapi_json()).unwrap();
         assert!(value["components"]["schemas"]["SpriteState"]["description"].is_string());

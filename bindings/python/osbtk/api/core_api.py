@@ -312,7 +312,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Animations.applyEasing',
+            resource_path='/bridge/Core.applyEasing',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -582,7 +582,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.arc',
+            resource_path='/bridge/Core.arc',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -852,7 +852,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.boundingBox',
+            resource_path='/bridge/Core.boundingBox',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1122,7 +1122,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.curvature',
+            resource_path='/bridge/Core.curvature',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1392,7 +1392,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.distanceTo',
+            resource_path='/bridge/Core.distanceTo',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1662,7 +1662,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Animations.easingValue',
+            resource_path='/bridge/Core.easingValue',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1932,7 +1932,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.ellipse',
+            resource_path='/bridge/Core.ellipse',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2202,7 +2202,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Origin.getOriginVector',
+            resource_path='/bridge/Core.getOriginVector',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2472,7 +2472,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Origin.inScreenBounds',
+            resource_path='/bridge/Core.inScreenBounds',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2742,7 +2742,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.length',
+            resource_path='/bridge/Core.length',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3012,7 +3012,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.lineIntersect',
+            resource_path='/bridge/Core.lineIntersect',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3282,7 +3282,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.normal',
+            resource_path='/bridge/Core.normal',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3552,7 +3552,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.offset',
+            resource_path='/bridge/Core.offset',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3822,7 +3822,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Parsing.parseOsb',
+            resource_path='/bridge/Core.parseOsb',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4092,7 +4092,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Parsing.parseOsu',
+            resource_path='/bridge/Core.parseOsu',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4362,7 +4362,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.point',
+            resource_path='/bridge/Core.point',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4632,7 +4632,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.sample',
+            resource_path='/bridge/Core.sample',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4902,7 +4902,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.simplify',
+            resource_path='/bridge/Core.simplify',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5172,7 +5172,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Curve.tangent',
+            resource_path='/bridge/Core.tangent',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5414,7 +5414,7 @@ class CoreAPI:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/bridge/Common.version',
+            resource_path='/bridge/Core.version',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

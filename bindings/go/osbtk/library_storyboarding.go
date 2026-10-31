@@ -110,25 +110,25 @@ var Storyboarding = storyboardingLib{}
 
 // ParseOsu parses a `.osu` beatmap into the typed model.
 func (storyboardingLib) ParseOsu(text string) (*Beatmap, error) {
-	return decodeBridge[*Beatmap](map[string]any{"op": "Parsing.parseOsu", "text": text})
+	return decodeBridge[*Beatmap](map[string]any{"op": "Core.parseOsu", "text": text})
 }
 
 // ParseOsb parses a `.osb` storyboard into a summary.
 func (storyboardingLib) ParseOsb(text string) (*ParseOsbResult, error) {
-	return decodeBridge[*ParseOsbResult](map[string]any{"op": "Parsing.parseOsb", "text": text})
+	return decodeBridge[*ParseOsbResult](map[string]any{"op": "Core.parseOsb", "text": text})
 }
 
 // GetOriginVector returns the anchor offset for an origin.
 func (storyboardingLib) GetOriginVector(origin OsbOrigin, width, height float64) (*Vector2, error) {
 	return decodeBridge[*Vector2](map[string]any{
-		"op": "Origin.getOriginVector", "origin": origin, "width": width, "height": height,
+		"op": "Core.getOriginVector", "origin": origin, "width": width, "height": height,
 	})
 }
 
 // InScreenBounds reports whether a rotated sprite's bounds intersect the screen.
 func (storyboardingLib) InScreenBounds(position, size Vector2, rotation float64, origin Vector2) (bool, error) {
 	result, err := decodeBridge[BoolResult](map[string]any{
-		"op": "Origin.inScreenBounds", "position": position, "size": size, "rotation": rotation, "origin": origin,
+		"op": "Core.inScreenBounds", "position": position, "size": size, "rotation": rotation, "origin": origin,
 	})
 	if err != nil {
 		return false, err

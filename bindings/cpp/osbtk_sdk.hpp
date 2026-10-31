@@ -430,17 +430,17 @@ public:
 
     /// Parses a `.osu` beatmap into the typed model.
     Beatmap parse_beatmap(const std::string& osu_text) const {
-        return parse_beatmap_json(call("Parsing.parseOsu", "{\"text\":" + detail::quote(osu_text) + "}"));
+        return parse_beatmap_json(call("Core.parseOsu", "{\"text\":" + detail::quote(osu_text) + "}"));
     }
 
     /// Parses a `.osb` storyboard into a summary.
     Json parse_osb(const std::string& osb_text) const {
-        return call("Parsing.parseOsb", "{\"text\":" + detail::quote(osb_text) + "}");
+        return call("Core.parseOsb", "{\"text\":" + detail::quote(osb_text) + "}");
     }
 
     /// `OsbSprite.GetOriginVector`.
     Vector2 get_origin_vector(OsbOrigin origin, double width, double height) const {
-        Json json = call("Origin.getOriginVector", "{\"origin\":" + detail::quote(to_string(origin))
+        Json json = call("Core.getOriginVector", "{\"origin\":" + detail::quote(to_string(origin))
                                                 + ",\"width\":" + detail::number(width)
                                                 + ",\"height\":" + detail::number(height) + "}");
         return parse_vec2(json);
@@ -448,7 +448,7 @@ public:
 
     /// `OsbSprite.InScreenBounds`.
     bool in_screen_bounds(Vector2 position, Vector2 size, double rotation, Vector2 origin) const {
-        Json json = call("Origin.inScreenBounds", "{\"position\":" + vec(position) + ",\"size\":" + vec(size)
+        Json json = call("Core.inScreenBounds", "{\"position\":" + vec(position) + ",\"size\":" + vec(size)
                                                + ",\"rotation\":" + detail::number(rotation)
                                                + ",\"origin\":" + vec(origin) + "}");
         return json.at("value").boolean();
@@ -1087,31 +1087,31 @@ public:
 
     /// The arc length of a curve.
     double length(const CurveSpec& curve) const {
-        return call("Curve.length", "{\"curve\":" + spec(curve) + "}").at("value").number();
+        return call("Core.length", "{\"curve\":" + spec(curve) + "}").at("value").number();
     }
 
     /// The axis-aligned bounding box of a curve.
     Box2 bounding_box(const CurveSpec& curve) const {
-        Json json = call("Curve.boundingBox", "{\"curve\":" + spec(curve) + "}");
+        Json json = call("Core.boundingBox", "{\"curve\":" + spec(curve) + "}");
         return Box2{parse_vec2(json.at("min")), parse_vec2(json.at("max"))};
     }
 
     /// The point at `t`, parametrically or by arc length.
     Vector2 point(const CurveSpec& curve, double t, bool by_arc_length = false) const {
-        Json json = call("Curve.point", "{\"curve\":" + spec(curve) + ",\"t\":" + detail::number(t)
+        Json json = call("Core.point", "{\"curve\":" + spec(curve) + ",\"t\":" + detail::number(t)
                                           + ",\"byArcLength\":" + (by_arc_length ? "true" : "false") + "}");
         return parse_vec2(json);
     }
 
     /// The unit tangent at `t`.
     Vector2 tangent(const CurveSpec& curve, double t) const {
-        Json json = call("Curve.tangent", "{\"curve\":" + spec(curve) + ",\"t\":" + detail::number(t) + "}");
+        Json json = call("Core.tangent", "{\"curve\":" + spec(curve) + ",\"t\":" + detail::number(t) + "}");
         return parse_vec2(json);
     }
 
     /// `count` points along the curve, parametrically or by arc length.
     PointList sample(const CurveSpec& curve, int count, bool by_arc_length = false) const {
-        Json json = call("Curve.sample", "{\"curve\":" + spec(curve) + ",\"count\":" + std::to_string(count)
+        Json json = call("Core.sample", "{\"curve\":" + spec(curve) + ",\"count\":" + std::to_string(count)
                                            + ",\"byArcLength\":" + (by_arc_length ? "true" : "false") + "}");
         return parse_points(json);
     }
@@ -1126,18 +1126,18 @@ public:
             body += vec(points[index]);
         }
         body += "],\"tolerance\":" + detail::number(tolerance) + "}";
-        return parse_points(call("Curve.simplify", body));
+        return parse_points(call("Core.simplify", body));
     }
 
     /// The unit normal at `t`.
     Vector2 normal(const CurveSpec& curve, double t) const {
-        Json json = call("Curve.normal", "{\"curve\":" + spec(curve) + ",\"t\":" + detail::number(t) + "}");
+        Json json = call("Core.normal", "{\"curve\":" + spec(curve) + ",\"t\":" + detail::number(t) + "}");
         return parse_vec2(json);
     }
 
     /// The curvature at `t`.
     double curvature(const CurveSpec& curve, double t) const {
-        return call("Curve.curvature", "{\"curve\":" + spec(curve) + ",\"t\":" + detail::number(t) + "}")
+        return call("Core.curvature", "{\"curve\":" + spec(curve) + ",\"t\":" + detail::number(t) + "}")
             .at("value")
             .number();
     }
@@ -1145,19 +1145,19 @@ public:
     /// The distance from `point` to the curve.
     double distance_to(const CurveSpec& curve, Vector2 point) const {
         Json json =
-            call("Curve.distanceTo", "{\"curve\":" + spec(curve) + ",\"point\":" + vec(point) + "}");
+            call("Core.distanceTo", "{\"curve\":" + spec(curve) + ",\"point\":" + vec(point) + "}");
         return json.at("value").number();
     }
 
     /// The polyline offset along the curve's local normal.
     PointList offset(const CurveSpec& curve, double distance) const {
-        Json json = call("Curve.offset", "{\"curve\":" + spec(curve) + ",\"distance\":" + detail::number(distance) + "}");
+        Json json = call("Core.offset", "{\"curve\":" + spec(curve) + ",\"distance\":" + detail::number(distance) + "}");
         return parse_points(json);
     }
 
     /// Points along a circular arc.
     PointList arc(Vector2 center, double radius, double start_angle, double sweep_angle, int count) const {
-        Json json = call("Curve.arc", "{\"center\":" + vec(center) + ",\"radius\":" + detail::number(radius)
+        Json json = call("Core.arc", "{\"center\":" + vec(center) + ",\"radius\":" + detail::number(radius)
                                          + ",\"startAngle\":" + detail::number(start_angle)
                                          + ",\"sweepAngle\":" + detail::number(sweep_angle)
                                          + ",\"count\":" + std::to_string(count) + "}");
@@ -1166,7 +1166,7 @@ public:
 
     /// Points around an ellipse.
     PointList ellipse(Vector2 center, double radius_x, double radius_y, int count) const {
-        Json json = call("Curve.ellipse", "{\"center\":" + vec(center) + ",\"radiusX\":" + detail::number(radius_x)
+        Json json = call("Core.ellipse", "{\"center\":" + vec(center) + ",\"radiusX\":" + detail::number(radius_x)
                                              + ",\"radiusY\":" + detail::number(radius_y)
                                              + ",\"count\":" + std::to_string(count) + "}");
         return parse_points(json);
@@ -1174,7 +1174,7 @@ public:
 
     /// The intersection of two line segments (a JSON object with a nullable `point`).
     Json line_intersect(Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2) const {
-        return call("Curve.lineIntersect", "{\"a1\":" + vec(a1) + ",\"a2\":" + vec(a2) + ",\"b1\":" + vec(b1)
+        return call("Core.lineIntersect", "{\"a1\":" + vec(a1) + ",\"a2\":" + vec(a2) + ",\"b1\":" + vec(b1)
                                          + ",\"b2\":" + vec(b2) + "}");
     }
 
@@ -1364,7 +1364,7 @@ public:
     std::string version() const { return library_->version(); }
 
     double apply_easing(const std::string& easing, double t) const {
-        Json json = call("Animations.applyEasing", "{\"easing\":" + detail::quote(easing) + ",\"t\":" + detail::number(t) + "}");
+        Json json = call("Core.applyEasing", "{\"easing\":" + detail::quote(easing) + ",\"t\":" + detail::number(t) + "}");
         return json.at("value").number();
     }
 };

@@ -248,28 +248,6 @@ public:
         return impl_.apply_easing(options.easing, options.t);
     }
 
-    /// A named-or-custom easing evaluation request.
-    double easing_value(const EasingValueOptions& options) const {
-        std::string body = "{\"t\":" + sdk::detail::number(options.t);
-        if (!options.cubic_bezier.empty()) {
-            body += ",\"cubicBezier\":[";
-            for (std::size_t index = 0; index < options.cubic_bezier.size(); ++index) {
-                if (index != 0) body += ",";
-                body += sdk::detail::number(options.cubic_bezier[index]);
-            }
-            body += "]";
-        } else {
-            body += ",\"easing\":" + sdk::detail::quote(options.easing);
-        }
-        body += "}";
-        return detail::call(*library_, "Animations.easingValue", body).at("value").number();
-    }
-
-    /// Calls the Core.version bridge operation.
-    std::string version() const {
-        return impl_.version();
-    }
-
     /// A circular-arc sampling request.
     sdk::PointList arc(const ArcOptions& options) const {
         return curve_.arc(options.center, options.radius, options.start_angle, options.sweep_angle, options.count);
@@ -290,9 +268,36 @@ public:
         return curve_.distance_to(options.curve, options.point);
     }
 
+    /// A named-or-custom easing evaluation request.
+    double easing_value(const EasingValueOptions& options) const {
+        std::string body = "{\"t\":" + sdk::detail::number(options.t);
+        if (!options.cubic_bezier.empty()) {
+            body += ",\"cubicBezier\":[";
+            for (std::size_t index = 0; index < options.cubic_bezier.size(); ++index) {
+                if (index != 0) body += ",";
+                body += sdk::detail::number(options.cubic_bezier[index]);
+            }
+            body += "]";
+        } else {
+            body += ",\"easing\":" + sdk::detail::quote(options.easing);
+        }
+        body += "}";
+        return detail::call(*library_, "Core.easingValue", body).at("value").number();
+    }
+
     /// An ellipse sampling request.
     sdk::PointList ellipse(const EllipseOptions& options) const {
         return curve_.ellipse(options.center, options.radius_x, options.radius_y, options.count);
+    }
+
+    /// The anchor offset for an origin.
+    sdk::Vector2 get_origin_vector(const GetOriginVectorOptions& options) const {
+        return impl_.get_origin_vector(options.origin, options.width, options.height);
+    }
+
+    /// Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
+    bool in_screen_bounds(const InScreenBoundsOptions& options) const {
+        return impl_.in_screen_bounds(options.position, options.size, options.rotation, options.origin);
     }
 
     /// A curve query.
@@ -315,6 +320,16 @@ public:
         return curve_.offset(options.curve, options.distance);
     }
 
+    /// A request carrying a block of text (an effect script, `.osu` or `.osb`).
+    Json parse_osb(const TextOptions& options) const {
+        return impl_.parse_osb(options.text);
+    }
+
+    /// A request carrying a block of text (an effect script, `.osu` or `.osb`).
+    sdk::Beatmap parse_osu(const TextOptions& options) const {
+        return impl_.parse_beatmap(options.text);
+    }
+
     /// A curve query at a parametric or arc-length position.
     sdk::Vector2 point(const CurvePointOptions& options) const {
         return curve_.point(options.curve, options.t, options.by_arc_length);
@@ -335,24 +350,9 @@ public:
         return curve_.tangent(options.curve, options.t);
     }
 
-    /// The anchor offset for an origin.
-    sdk::Vector2 get_origin_vector(const GetOriginVectorOptions& options) const {
-        return impl_.get_origin_vector(options.origin, options.width, options.height);
-    }
-
-    /// Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
-    bool in_screen_bounds(const InScreenBoundsOptions& options) const {
-        return impl_.in_screen_bounds(options.position, options.size, options.rotation, options.origin);
-    }
-
-    /// A request carrying a block of text (an effect script, `.osu` or `.osb`).
-    Json parse_osb(const TextOptions& options) const {
-        return impl_.parse_osb(options.text);
-    }
-
-    /// A request carrying a block of text (an effect script, `.osu` or `.osb`).
-    sdk::Beatmap parse_osu(const TextOptions& options) const {
-        return impl_.parse_beatmap(options.text);
+    /// Calls the Core.version bridge operation.
+    std::string version() const {
+        return impl_.version();
     }
 
 private:
