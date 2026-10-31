@@ -244,11 +244,6 @@ class GetOriginVectorOptions:
     height: float
 
 @dataclass
-class HandleOptions:
-    """A sprite handle pair."""
-
-
-@dataclass
 class HelperOptions:
     """A motion-graphics helper call: a helper `name` plus its input."""
     # The helper name, e.g. `flatten`, `orbit`, `selectCommands`.
@@ -344,11 +339,6 @@ class SegmentChangePositionOptions:
     """Move a segment to another osu! layer (`ChangePosition`)."""
     # The destination osu! layer.
     osbLayer: OsbLayer
-
-@dataclass
-class SegmentOptions:
-    """A segment handle request."""
-
 
 @dataclass
 class SegmentReverseDepthOptions:

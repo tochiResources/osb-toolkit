@@ -503,13 +503,6 @@ export function isGetOriginVectorOptions(value: unknown): value is GetOriginVect
 }
 
 /**
- * A sprite handle pair.
- */
-export interface HandleOptions {
-
-}
-
-/**
  * A motion-graphics helper call: a helper `name` plus its input.
  */
 export interface HelperOptions {
@@ -722,13 +715,6 @@ export interface SegmentChangePositionOptions {
 
 export function isSegmentChangePositionOptions(value: unknown): value is SegmentChangePositionOptions {
     return typeof value === 'object' && value !== null && 'osbLayer' in value;
-}
-
-/**
- * A segment handle request.
- */
-export interface SegmentOptions {
-
 }
 
 /**

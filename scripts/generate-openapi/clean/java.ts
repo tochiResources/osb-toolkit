@@ -77,6 +77,7 @@ function javaMethodDoc(
 
 function emitJavaOptions(dir: string, contract: Contract): void {
     for (const option of contract.options.values()) {
+        if (option.properties.length === 0) continue;
         const models = new Set<string>();
         for (const property of option.properties) {
             for (const ref of property.refs) models.add(ref);

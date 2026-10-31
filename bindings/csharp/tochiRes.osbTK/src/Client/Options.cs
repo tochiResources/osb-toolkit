@@ -488,14 +488,6 @@ public sealed class GetOriginVectorOptions
 }
 
 /// <summary>
-/// A sprite handle pair.
-/// </summary>
-public sealed class HandleOptions
-{
-
-}
-
-/// <summary>
 /// A motion-graphics helper call: a helper `name` plus its input.
 /// </summary>
 public sealed class HelperOptions
@@ -690,14 +682,6 @@ public sealed class SegmentChangePositionOptions
     /// The destination osu! layer.
     /// </summary>
     public OsbLayer OsbLayer { get; set; }
-}
-
-/// <summary>
-/// A segment handle request.
-/// </summary>
-public sealed class SegmentOptions
-{
-
 }
 
 /// <summary>

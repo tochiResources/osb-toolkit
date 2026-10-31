@@ -91,6 +91,7 @@ function goMethodDoc(
 
 function emitGoOptions(dir: string, contract: Contract): void {
     const structs = [...contract.options.values()]
+        .filter(option => option.properties.length > 0)
         .map(option => {
             const fields = option.properties
                 .map(property => {

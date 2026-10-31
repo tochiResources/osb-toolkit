@@ -96,6 +96,7 @@ function emitPythonOptions(dir: string, contract: Contract): void {
         }
     }
     const classes = [...contract.options.values()]
+        .filter(option => option.properties.length > 0)
         .map(option => {
             const properties = orderedProperties(option)
                 .map(property => {

@@ -231,10 +231,6 @@ type GetOriginVectorOptions struct {
 	Width float64
 }
 
-// A sprite handle pair.
-type HandleOptions struct {
-}
-
 // A motion-graphics helper call: a helper `name` plus its input.
 type HelperOptions struct {
 	// The helper's input (a keyframe channel, a command list, or its parameters).
@@ -330,10 +326,6 @@ type SegmentAddIndexOptions struct {
 type SegmentChangePositionOptions struct {
 	// The destination osu! layer.
 	OsbLayer osbtk.OsbLayer
-}
-
-// A segment handle request.
-type SegmentOptions struct {
 }
 
 // Set a segment's reverse-depth flag.

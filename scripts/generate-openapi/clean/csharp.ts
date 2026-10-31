@@ -94,6 +94,7 @@ function xmlMethodDoc(
 
 function emitCSharpOptions(dir: string, contract: Contract): void {
     const classes = [...contract.options.values()]
+        .filter(option => option.properties.length > 0)
         .map(option => {
             const properties = option.properties
                 .map(property => {

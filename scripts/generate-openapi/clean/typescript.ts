@@ -45,6 +45,7 @@ function emitTypeScriptOptions(dir: string, contract: Contract): void {
         .sort()
         .map(type => `import type { ${type} } from '../models/${type}';`);
     const interfaces = [...contract.options.values()]
+        .filter(option => option.properties.length > 0)
         .map(option => {
             const properties = option.properties
                 .map(property => {
