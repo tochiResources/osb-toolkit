@@ -31,13 +31,6 @@ export default {
             'always',
             [
                 // allowed commit scopes
-                'shared',
-                'core',
-                'after-effects',
-                'davinci-resolve',
-                'premiere-pro',
-                'client',
-                'web',
                 'docs',
                 'csharp',
                 'codegen',

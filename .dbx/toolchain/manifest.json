@@ -8,10 +8,8 @@
         ".vscode/settings.json",
         "commitlint.config.mjs",
         "package.json",
-        "packages/core/tsconfig.json",
         "packages/native/tsconfig.json",
         "packages/sdk/tsconfig.json",
-        "packages/shared/tsconfig.json",
         "tsconfig.json",
         "vite.config.ts"
     ]

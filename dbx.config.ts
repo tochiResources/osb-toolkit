@@ -17,21 +17,7 @@ export default defineConfig({
         },
         changelog: {
             branches: { main: 'dev', dev: 'dev' },
-            scopes: [
-                'shared',
-                'core',
-                'after-effects',
-                'davinci-resolve',
-                'premiere-pro',
-                'client',
-                'web',
-                'docs',
-                'csharp',
-                'codegen',
-                'ci',
-                'release',
-                'deps',
-            ],
+            scopes: ['docs', 'csharp', 'codegen', 'ci', 'release', 'deps'],
             workflows: {
                 changelog: true,
                 release: false,
