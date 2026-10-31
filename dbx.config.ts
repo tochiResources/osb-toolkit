@@ -101,8 +101,6 @@ export default defineConfig({
                     'packages/native/wasm/**',
                     '**/.vitepress/cache/**',
                     '**/.vitepress/dist/**',
-                    '**/src-tauri/target/**',
-                    '**/src-tauri/gen/**',
                     '*.json',
                     'docs/*/*.json',
                     '**/tsconfig*.json',
@@ -138,8 +136,6 @@ export default defineConfig({
                     'packages/native/wasm/**',
                     '**/.vitepress/cache/**',
                     '**/.vitepress/dist/**',
-                    '**/src-tauri/target/**',
-                    '**/src-tauri/gen/**',
                 ],
                 rules: {
                     'jsx-a11y/alt-text': 'off',

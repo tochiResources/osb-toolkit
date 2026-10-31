@@ -34,10 +34,6 @@ puppeteer-config.json
 *.ofx
 *.ofx.bundle/
 
-# Tauri
-apps/client/src-tauri/target/
-apps/client/src-tauri/gen/
-
 # vendor build tools
 # Adobe After Effects: https://developer.adobe.com/after-effects/
 # OpenFX: https://github.com/AcademySoftwareFoundation/openfx

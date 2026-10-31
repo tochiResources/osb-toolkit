@@ -11,7 +11,6 @@
         "url": "git+https://github.com/tochiResources/osb-toolkit.git"
     },
     "workspaces": [
-        "apps/*",
         "packages/*",
         "docs"
     ],
@@ -37,19 +36,12 @@
         "test:java": "tsx scripts/cargo.ts build -p osb-native --release && mvn -B -f bindings/java/pom.xml test",
         "test:wasm": "yarn workspace @tochii/osb-toolkit-native test",
         "test:bindings": "yarn clean:rust:if-large && yarn test:csharp && yarn test:sdk && yarn test:cpp && yarn test:python && yarn test:go && yarn test:java && yarn test:wasm",
-        "dev:web": "yarn workspace @tochii/osb-toolkit-web dev",
-        "dev:client": "yarn workspace @tochii/osb-toolkit-client tauri dev",
         "check": "dbx check",
         "diagrams": "tsx scripts/render-diagrams.ts",
         "dbx:sync": "dbx sync",
         "dbx:watch": "dbx watch",
         "commitlint": "commitlint",
         "prepare": "husky",
-        "w:ae": "yarn workspace @tochii/osb-toolkit-to-after-effects",
-        "w:davinci": "yarn workspace @tochii/osb-toolkit-to-davinci-resolve",
-        "w:ppro": "yarn workspace @tochii/osb-toolkit-to-premiere-pro",
-        "w:web": "yarn workspace @tochii/osb-toolkit-web",
-        "w:client": "yarn workspace @tochii/osb-toolkit-client",
         "w:docs": "yarn workspace @tochii/osb-toolkit-docs"
     },
     "packageManager": "yarn@4.17.1",
