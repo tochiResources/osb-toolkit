@@ -25,6 +25,16 @@ inline std::string vec(sdk::Vector2 value) {
     return "{\"x\":" + sdk::detail::number(value.x) + ",\"y\":" + sdk::detail::number(value.y) + "}";
 }
 
+template <typename T, typename Encode>
+inline std::string array_json(const std::vector<T>& values, Encode encode) {
+    std::string out = "[";
+    for (std::size_t index = 0; index < values.size(); ++index) {
+        if (index != 0) out += ",";
+        out += encode(values[index]);
+    }
+    return out + "]";
+}
+
 inline Json call(const Library& library, const std::string& op, const std::string& body) {
     Json json = sdk::detail::parse_json(
         library.exec("{\"op\":" + sdk::detail::quote(op) + "," + body.substr(1)));
@@ -35,6 +45,73 @@ inline Json call(const Library& library, const std::string& op, const std::strin
 }
 
 } // namespace detail
+
+/// A crop rectangle.
+struct ImageCrop {
+    /// The height.
+    int height = 0;
+    /// The width.
+    int width = 0;
+    /// The left edge.
+    int x = 0;
+    /// The top edge.
+    int y = 0;
+};
+
+/// Fine-grained image processing options (all optional; applied in order).
+struct ImageOptions {
+    /// Gaussian blur sigma.
+    std::optional<double> blur;
+    /// Brightness in `-1.0..=1.0`.
+    std::optional<double> brightness;
+    /// Contrast in `-1.0..=1.0`.
+    std::optional<double> contrast;
+    std::optional<ImageCrop> crop;
+    /// Mirror horizontally.
+    std::optional<bool> flip_horizontal;
+    /// Mirror vertically.
+    std::optional<bool> flip_vertical;
+    /// Convert to grayscale.
+    std::optional<bool> grayscale;
+    /// Invert the colours.
+    std::optional<bool> invert;
+    /// Resize to this height (the width is derived when omitted).
+    std::optional<int> resize_height;
+    /// Resize to this width (the height is derived when omitted).
+    std::optional<int> resize_width;
+    /// Rotate by degrees (rounded to a multiple of 90).
+    std::optional<double> rotate;
+};
+
+/// An 8-bit RGBA colour.
+struct RgbaColor {
+    /// Alpha channel.
+    int a = 0;
+    /// Blue channel.
+    int b = 0;
+    /// Green channel.
+    int g = 0;
+    /// Red channel.
+    int r = 0;
+};
+
+/// A shape to draw.
+struct Shape {
+    /// The centre (rect/rounded-rect/ellipse/circle).
+    sdk::Vector2 center = {};
+    /// The corner radius for a rounded rectangle.
+    std::optional<double> corner_radius;
+    std::optional<RgbaColor> fill;
+    /// The shape kind.
+    std::string kind = "";
+    /// Explicit points (line endpoints, polygon vertices).
+    std::optional<std::vector<sdk::Vector2>> points;
+    /// The size (width and height; a circle's diameter is `size.x`).
+    sdk::Vector2 size = {};
+    std::optional<RgbaColor> stroke;
+    /// The stroke width in pixels (default `1`).
+    std::optional<double> stroke_width;
+};
 
 /// An easing evaluation request.
 struct ApplyEasingOptions {
@@ -189,8 +266,16 @@ struct EllipseOptions {
 
 /// An image-sequence encoding request (frames -> video).
 struct EncodeVideoOptions {
-    /// The video-encoding request as JSON.
-    std::string request_json = "{}";
+    /// The input filename pattern (e.g. `frames/frame_%04d.png`).
+    std::string input_pattern = "";
+    /// The output video path.
+    std::string output = "";
+    /// The frame rate.
+    double fps = 0.0;
+    /// The video codec (default `libx264`).
+    std::optional<std::string> codec;
+    /// The constant-rate-factor quality (`0`-`51`; lower is better).
+    std::optional<int> crf;
 };
 
 /// An audio-extraction request (media -> audio file).
@@ -203,8 +288,20 @@ struct ExtractAudioOptions {
 
 /// A frame-extraction request (video -> image sequence).
 struct ExtractFramesOptions {
-    /// The frame-extraction request as JSON.
-    std::string request_json = "{}";
+    /// The input media path.
+    std::string input = "";
+    /// The directory to write frames into.
+    std::string output_dir = "";
+    /// The start time in seconds.
+    std::optional<double> start;
+    /// The sampling rate (frames per second); defaults to the source rate.
+    std::optional<double> fps;
+    /// The maximum number of frames to extract.
+    std::optional<int> count;
+    /// Scale frames to this width.
+    std::optional<int> width;
+    /// Scale frames to this height.
+    std::optional<int> height;
 };
 
 /// An FFT request against a `.wav` file.
@@ -249,12 +346,12 @@ struct HelperOptions {
 
 /// An image processing request: read `path`, apply `options`, write `output`.
 struct ImageProcessOptions {
-    /// The input image path.
+    /// The input file path.
     std::string path = "";
-    /// The output image path.
+    /// The output file path (its extension selects the format).
     std::string output = "";
-    /// The `ImageOptions` object as JSON.
-    std::string options_json = "{}";
+    /// The processing options.
+    ImageOptions options = {};
 };
 
 /// Whether a rotated sprite's bounding box intersects the widescreen storyboard area.
@@ -311,8 +408,16 @@ struct RandomOptions {
 
 /// A shape-rendering request: a canvas, a background and a shape list.
 struct RenderShapesOptions {
-    /// The render request as JSON.
-    std::string request_json = "{}";
+    /// The canvas width in pixels.
+    int width = 0;
+    /// The canvas height in pixels.
+    int height = 0;
+    /// The output file path (its extension selects the format).
+    std::string output = "";
+    /// The shapes to draw, in order.
+    std::vector<Shape> shapes = {};
+    /// The background colour (default transparent).
+    std::optional<RgbaColor> background;
 };
 
 /// Record a depth index on a segment.
@@ -378,6 +483,168 @@ struct TimeOptions {
     /// The time.
     double time = 0.0;
 };
+
+inline std::string json(const ImageCrop& value);
+inline std::string json(const ImageOptions& value);
+inline std::string json(const RgbaColor& value);
+inline std::string json(const Shape& value);
+inline std::string json(const std::vector<sdk::Vector2>& value);
+inline std::string json(const std::vector<Shape>& value);
+
+inline std::string json(const ImageCrop& value) {
+    std::string body = "{";
+    bool first = true;
+    const auto add = [&](const char* key, const std::string& encoded) {
+        if (!first) body += ",";
+        first = false;
+        body += "\"" + std::string(key) + "\":" + encoded;
+    };
+    add("height", std::to_string(value.height));
+    add("width", std::to_string(value.width));
+    add("x", std::to_string(value.x));
+    add("y", std::to_string(value.y));
+    body += "}";
+    return body;
+}
+
+inline std::string json(const ImageOptions& value) {
+    std::string body = "{";
+    bool first = true;
+    const auto add = [&](const char* key, const std::string& encoded) {
+        if (!first) body += ",";
+        first = false;
+        body += "\"" + std::string(key) + "\":" + encoded;
+    };
+    if (value.blur) add("blur", sdk::detail::number(*value.blur));
+    if (value.brightness) add("brightness", sdk::detail::number(*value.brightness));
+    if (value.contrast) add("contrast", sdk::detail::number(*value.contrast));
+    if (value.crop) add("crop", json(*value.crop));
+    if (value.flip_horizontal) add("flipHorizontal", (*value.flip_horizontal ? "true" : "false"));
+    if (value.flip_vertical) add("flipVertical", (*value.flip_vertical ? "true" : "false"));
+    if (value.grayscale) add("grayscale", (*value.grayscale ? "true" : "false"));
+    if (value.invert) add("invert", (*value.invert ? "true" : "false"));
+    if (value.resize_height) add("resizeHeight", std::to_string(*value.resize_height));
+    if (value.resize_width) add("resizeWidth", std::to_string(*value.resize_width));
+    if (value.rotate) add("rotate", sdk::detail::number(*value.rotate));
+    body += "}";
+    return body;
+}
+
+inline std::string json(const RgbaColor& value) {
+    std::string body = "{";
+    bool first = true;
+    const auto add = [&](const char* key, const std::string& encoded) {
+        if (!first) body += ",";
+        first = false;
+        body += "\"" + std::string(key) + "\":" + encoded;
+    };
+    add("a", std::to_string(value.a));
+    add("b", std::to_string(value.b));
+    add("g", std::to_string(value.g));
+    add("r", std::to_string(value.r));
+    body += "}";
+    return body;
+}
+
+inline std::string json(const Shape& value) {
+    std::string body = "{";
+    bool first = true;
+    const auto add = [&](const char* key, const std::string& encoded) {
+        if (!first) body += ",";
+        first = false;
+        body += "\"" + std::string(key) + "\":" + encoded;
+    };
+    add("center", detail::vec(value.center));
+    if (value.corner_radius) add("cornerRadius", sdk::detail::number(*value.corner_radius));
+    if (value.fill) add("fill", json(*value.fill));
+    add("kind", sdk::detail::quote(value.kind));
+    if (value.points) add("points", json(*value.points));
+    add("size", detail::vec(value.size));
+    if (value.stroke) add("stroke", json(*value.stroke));
+    if (value.stroke_width) add("strokeWidth", sdk::detail::number(*value.stroke_width));
+    body += "}";
+    return body;
+}
+
+inline std::string json(const std::vector<sdk::Vector2>& value) {
+    return detail::array_json(value, [](const sdk::Vector2& item) {
+        return detail::vec(item);
+    });
+}
+
+inline std::string json(const std::vector<Shape>& value) {
+    return detail::array_json(value, [](const Shape& item) {
+        return json(item);
+    });
+}
+
+inline std::string request_json(const EncodeVideoOptions& value) {
+    std::string body = "{";
+    bool first = true;
+    const auto add = [&](const char* key, const std::string& encoded) {
+        if (!first) body += ",";
+        first = false;
+        body += "\"" + std::string(key) + "\":" + encoded;
+    };
+    add("inputPattern", sdk::detail::quote(value.input_pattern));
+    add("output", sdk::detail::quote(value.output));
+    add("fps", sdk::detail::number(value.fps));
+    if (value.codec) add("codec", sdk::detail::quote(*value.codec));
+    if (value.crf) add("crf", std::to_string(*value.crf));
+    body += "}";
+    return body;
+}
+
+inline std::string request_json(const ExtractFramesOptions& value) {
+    std::string body = "{";
+    bool first = true;
+    const auto add = [&](const char* key, const std::string& encoded) {
+        if (!first) body += ",";
+        first = false;
+        body += "\"" + std::string(key) + "\":" + encoded;
+    };
+    add("input", sdk::detail::quote(value.input));
+    add("outputDir", sdk::detail::quote(value.output_dir));
+    if (value.start) add("start", sdk::detail::number(*value.start));
+    if (value.fps) add("fps", sdk::detail::number(*value.fps));
+    if (value.count) add("count", std::to_string(*value.count));
+    if (value.width) add("width", std::to_string(*value.width));
+    if (value.height) add("height", std::to_string(*value.height));
+    body += "}";
+    return body;
+}
+
+inline std::string request_json(const ImageProcessOptions& value) {
+    std::string body = "{";
+    bool first = true;
+    const auto add = [&](const char* key, const std::string& encoded) {
+        if (!first) body += ",";
+        first = false;
+        body += "\"" + std::string(key) + "\":" + encoded;
+    };
+    add("path", sdk::detail::quote(value.path));
+    add("output", sdk::detail::quote(value.output));
+    add("options", json(value.options));
+    body += "}";
+    return body;
+}
+
+inline std::string request_json(const RenderShapesOptions& value) {
+    std::string body = "{";
+    bool first = true;
+    const auto add = [&](const char* key, const std::string& encoded) {
+        if (!first) body += ",";
+        first = false;
+        body += "\"" + std::string(key) + "\":" + encoded;
+    };
+    add("width", std::to_string(value.width));
+    add("height", std::to_string(value.height));
+    add("output", sdk::detail::quote(value.output));
+    add("shapes", json(value.shapes));
+    if (value.background) add("background", json(*value.background));
+    body += "}";
+    return body;
+}
 
 /// The clean non-runtime `Core` client: version, parsers, easing and math.
 class Core {
@@ -586,7 +853,7 @@ public:
 
     /// An image processing request: read `path`, apply `options`, write `output`.
     Json process(const ImageProcessOptions& options) const {
-        return impl_.process(options.path, options.output, options.options_json);
+        return impl_.process(options.path, options.output, json(options.options));
     }
 
 private:
@@ -600,7 +867,7 @@ public:
 
     /// A shape-rendering request: a canvas, a background and a shape list.
     Json render_shapes(const RenderShapesOptions& options) const {
-        return impl_.render_shapes(options.request_json);
+        return impl_.render_shapes(request_json(options));
     }
 
 private:
@@ -614,7 +881,7 @@ public:
 
     /// An image-sequence encoding request (frames -> video).
     Json encode_video(const EncodeVideoOptions& options) const {
-        return impl_.encode_video(options.request_json);
+        return impl_.encode_video(request_json(options));
     }
 
     /// An audio-extraction request (media -> audio file).
@@ -624,7 +891,7 @@ public:
 
     /// A frame-extraction request (video -> image sequence).
     Json extract_frames(const ExtractFramesOptions& options) const {
-        return impl_.extract_frames(options.request_json);
+        return impl_.extract_frames(request_json(options));
     }
 
     /// A request carrying a single file path.

@@ -80,40 +80,6 @@ const fieldOverrides: Record<string, CppField[]> = {
             doc: 'The helper input as a JSON object.',
         },
     ],
-    ImageProcessRequest: [
-        { name: 'path', type: 'std::string', default: '""', doc: 'The input image path.' },
-        { name: 'output', type: 'std::string', default: '""', doc: 'The output image path.' },
-        {
-            name: 'options_json',
-            type: 'std::string',
-            default: '"{}"',
-            doc: 'The `ImageOptions` object as JSON.',
-        },
-    ],
-    RenderShapesRequest: [
-        {
-            name: 'request_json',
-            type: 'std::string',
-            default: '"{}"',
-            doc: 'The render request as JSON.',
-        },
-    ],
-    ExtractFramesRequest: [
-        {
-            name: 'request_json',
-            type: 'std::string',
-            default: '"{}"',
-            doc: 'The frame-extraction request as JSON.',
-        },
-    ],
-    EncodeVideoRequest: [
-        {
-            name: 'request_json',
-            type: 'std::string',
-            default: '"{}"',
-            doc: 'The video-encoding request as JSON.',
-        },
-    ],
     Bake3dRequest: [
         {
             name: 'input_json',
@@ -249,6 +215,235 @@ const fieldOverrides: Record<string, CppField[]> = {
     ],
 };
 
+/** Options whose complex fields are typed models instead of raw JSON strings. */
+const typedSources = new Set([
+    'ImageProcessRequest',
+    'RenderShapesRequest',
+    'ExtractFramesRequest',
+    'EncodeVideoRequest',
+]);
+
+/** The member order for the typed options, matching their call sites. */
+const typedOrder: Record<string, string[]> = {
+    ImageProcessRequest: ['path', 'output', 'options'],
+    RenderShapesRequest: ['width', 'height', 'output', 'shapes', 'background'],
+    ExtractFramesRequest: ['input', 'outputDir', 'start', 'fps', 'count', 'width', 'height'],
+    EncodeVideoRequest: ['inputPattern', 'output', 'fps', 'codec', 'crf'],
+};
+
+/** Models the hand-written C++ SDK already provides. */
+const sdkModels = new Set(['Vector2', 'Vector3', 'Vector4', 'Color4']);
+
+type TypedKind = 'string' | 'int' | 'double' | 'bool' | 'model' | 'vector' | 'raw';
+
+interface TypedType {
+    base: string;
+    kind: TypedKind;
+    model?: string;
+    item?: TypedType;
+}
+
+interface TypedField {
+    key: string;
+    name: string;
+    type: string;
+    optional: boolean;
+    value: TypedType;
+    doc?: string;
+}
+
+/** Maps a contract schema to the C++ type that carries it. */
+function typedType(schema: any, contract: Contract): TypedType {
+    const inner = schema?.oneOf?.find((part: any) => part.type !== 'null') ?? schema ?? {};
+    if (inner.$ref) {
+        const name = refName(inner)!;
+        if (sdkModels.has(name)) return { base: `sdk::${name}`, kind: 'model', model: name };
+        const target = contract.schemas[name];
+        if (target && target.type !== 'object') return { base: 'std::string', kind: 'string' };
+        return { base: name, kind: 'model', model: name };
+    }
+    const types = Array.isArray(inner.type)
+        ? inner.type.filter((type: string) => type !== 'null')
+        : [inner.type];
+    if (types.includes('array')) {
+        const item = typedType(inner.items ?? {}, contract);
+        return { base: `std::vector<${item.base}>`, kind: 'vector', item };
+    }
+    switch (types[0]) {
+        case 'integer':
+            return { base: 'int', kind: 'int' };
+        case 'number':
+            return { base: 'double', kind: 'double' };
+        case 'boolean':
+            return { base: 'bool', kind: 'bool' };
+        case 'string':
+            return { base: 'std::string', kind: 'string' };
+        default:
+            return { base: 'std::string', kind: 'raw' };
+    }
+}
+
+function isNullable(schema: any): boolean {
+    return Array.isArray(schema?.type) && schema.type.includes('null');
+}
+
+function typedFields(option: OptionModel, contract: Contract): TypedField[] {
+    const order = typedOrder[option.source] ?? option.properties.map(property => property.name);
+    const byName = new Map(option.properties.map(property => [property.name, property]));
+    return order.flatMap(key => {
+        const property = byName.get(key);
+        if (!property) return [];
+        const value = typedType(property.schema, contract);
+        const optional = isNullable(property.schema) || !property.required;
+        return [
+            {
+                key,
+                name: snake(key),
+                type: optional ? `std::optional<${value.base}>` : value.base,
+                optional,
+                value,
+                doc: property.description,
+            },
+        ];
+    });
+}
+
+function schemaFields(name: string, contract: Contract): TypedField[] {
+    const schema = contract.schemas[name] ?? {};
+    const required = new Set<string>(schema.required ?? []);
+    return Object.entries<any>(schema.properties ?? {}).map(([key, property]) => {
+        const value = typedType(property, contract);
+        const optional = isNullable(property) || !required.has(key);
+        return {
+            key,
+            name: snake(key),
+            type: optional ? `std::optional<${value.base}>` : value.base,
+            optional,
+            value,
+            doc: property.description,
+        };
+    });
+}
+
+function typedDefault(field: TypedField): string {
+    if (field.optional) return '';
+    switch (field.value.kind) {
+        case 'string':
+            return '""';
+        case 'int':
+            return '0';
+        case 'double':
+            return '0.0';
+        case 'bool':
+            return 'false';
+        case 'vector':
+        case 'model':
+            return '{}';
+        case 'raw':
+            return '"{}"';
+    }
+}
+
+function encodeValue(value: TypedType, expression: string): string {
+    switch (value.kind) {
+        case 'string':
+            return `sdk::detail::quote(${expression})`;
+        case 'int':
+            return `std::to_string(${expression})`;
+        case 'double':
+            return `sdk::detail::number(${expression})`;
+        case 'bool':
+            return `(${expression} ? "true" : "false")`;
+        case 'model':
+            return value.model === 'Vector2' ? `detail::vec(${expression})` : `json(${expression})`;
+        case 'vector':
+            return `json(${expression})`;
+        case 'raw':
+            return expression;
+    }
+}
+
+function emitSerializer(name: string, fields: TypedField[], fn = 'json'): string {
+    const lines = [
+        `inline std::string ${fn}(const ${name}& value) {`,
+        '    std::string body = "{";',
+        '    bool first = true;',
+        '    const auto add = [&](const char* key, const std::string& encoded) {',
+        '        if (!first) body += ",";',
+        '        first = false;',
+        '        body += "\\"" + std::string(key) + "\\":" + encoded;',
+        '    };',
+    ];
+    for (const field of fields) {
+        const expression = field.optional
+            ? encodeValue(field.value, `*value.${field.name}`)
+            : encodeValue(field.value, `value.${field.name}`);
+        if (field.optional) {
+            lines.push(`    if (value.${field.name}) add("${field.key}", ${expression});`);
+        } else {
+            lines.push(`    add("${field.key}", ${expression});`);
+        }
+    }
+    lines.push('    body += "}";', '    return body;', '}');
+    return lines.join('\n');
+}
+
+function emitVectorSerializer(item: TypedType): string {
+    return [
+        `inline std::string json(const std::vector<${item.base}>& value) {`,
+        `    return detail::array_json(value, [](const ${item.base}& item) {`,
+        `        return ${encodeValue(item, 'item')};`,
+        '    });',
+        '}',
+    ].join('\n');
+}
+
+function collectModels(contract: Contract, options: OptionModel[]): string[] {
+    const seen = new Set<string>();
+    const visiting = new Set<string>();
+    const order: string[] = [];
+    const visit = (schema: any): void => {
+        const inner = schema?.oneOf?.find((part: any) => part.type !== 'null') ?? schema;
+        if (!inner) return;
+        if (inner.$ref) {
+            const name = refName(inner)!;
+            if (sdkModels.has(name) || seen.has(name) || visiting.has(name)) return;
+            const target = contract.schemas[name];
+            if (!target || target.type !== 'object') return;
+            visiting.add(name);
+            for (const property of Object.values<any>(contract.schemas[name].properties ?? {})) {
+                visit(property);
+            }
+            visiting.delete(name);
+            seen.add(name);
+            order.push(name);
+            return;
+        }
+        if (Array.isArray(inner.type) ? inner.type.includes('array') : inner.type === 'array') {
+            visit(inner.items);
+        }
+    };
+    for (const option of options) {
+        for (const property of option.properties) visit(property.schema);
+    }
+    return order;
+}
+
+function emitModelStruct(name: string, contract: Contract): string {
+    const schema = contract.schemas[name] ?? {};
+    const fields = schemaFields(name, contract)
+        .map(field => {
+            const doc = field.doc ? `    /// ${oneLine(field.doc)}\n` : '';
+            const value = typedDefault(field) ? ` = ${typedDefault(field)}` : '';
+            return `${doc}    ${field.type} ${field.name}${value};`;
+        })
+        .join('\n');
+    const doc = schema.description
+        ? `/// ${oneLine(schema.description)}\n`
+        : `/// A \`${name}\` value.\n`;
+    return `${doc}struct ${name} {\n${fields}\n};`;
+}
+
 function oneLine(text: string): string {
     return text.replace(/\s+/g, ' ').trim();
 }
@@ -359,7 +554,15 @@ function cppFields(source: string, contract: Contract): CppField[] {
 }
 
 function emitOptions(option: OptionModel, contract: Contract): string {
-    const fields = cppFields(option.source, contract)
+    const fields = typedSources.has(option.source)
+        ? typedFields(option, contract).map(field => ({
+              name: field.name,
+              type: field.type,
+              default: typedDefault(field),
+              doc: field.doc,
+          }))
+        : cppFields(option.source, contract);
+    const text = fields
         .map(field => {
             const doc = field.doc ? `    /// ${oneLine(field.doc)}\n` : '';
             const value = field.default ? ` = ${field.default}` : '';
@@ -369,7 +572,7 @@ function emitOptions(option: OptionModel, contract: Contract): string {
     const doc = option.description
         ? `/// ${oneLine(option.description)}\n`
         : `/// A \`${option.name}\` request.\n`;
-    return `${doc}struct ${option.name} {\n${fields}\n};`;
+    return `${doc}struct ${option.name} {\n${text}\n};`;
 }
 
 function cppResultType(tag: string, op: Operation): string {
@@ -507,15 +710,15 @@ function cppBody(tag: string, op: Operation): string {
         case 'Image.info':
             return 'return impl_.info(options.path);';
         case 'Image.process':
-            return 'return impl_.process(options.path, options.output, options.options_json);';
+            return 'return impl_.process(options.path, options.output, json(options.options));';
         case 'Imagegen.renderShapes':
-            return 'return impl_.render_shapes(options.request_json);';
+            return 'return impl_.render_shapes(request_json(options));';
         case 'Media.info':
             return 'return impl_.info(options.path);';
         case 'Media.extractFrames':
-            return 'return impl_.extract_frames(options.request_json);';
+            return 'return impl_.extract_frames(request_json(options));';
         case 'Media.encodeVideo':
-            return 'return impl_.encode_video(options.request_json);';
+            return 'return impl_.encode_video(request_json(options));';
         case 'Media.extractAudio':
             return 'impl_.extract_audio(options.input, options.output);';
         case 'Optimize.optimizeOsb':
@@ -784,10 +987,35 @@ export function emitCppClean(): void {
         }
     }
 
-    const optionText = [...options.values()]
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .map(option => emitOptions(option, contract))
-        .join('\n\n');
+    const optionList = [...options.values()].sort((a, b) => a.name.localeCompare(b.name));
+    const typedOptions = optionList.filter(option => typedSources.has(option.source));
+    const modelNames = collectModels(contract, typedOptions);
+    const modelFields = new Map(modelNames.map(name => [name, schemaFields(name, contract)]));
+
+    const vectorItems = new Map<string, TypedType>();
+    for (const fields of [...modelFields.values(), ...typedOptions.map(option => typedFields(option, contract))]) {
+        for (const field of fields) {
+            if (field.value.kind === 'vector' && field.value.item) {
+                vectorItems.set(field.value.item.base, field.value.item);
+            }
+        }
+    }
+
+    const modelText = modelNames.map(name => emitModelStruct(name, contract)).join('\n\n');
+    const optionText = optionList.map(option => emitOptions(option, contract)).join('\n\n');
+    const serializerDecls = [
+        ...modelNames.map(name => `inline std::string json(const ${name}& value);`),
+        ...[...vectorItems.values()].map(
+            item => `inline std::string json(const std::vector<${item.base}>& value);`
+        ),
+    ].join('\n');
+    const serializerText = [
+        ...modelNames.map(name => emitSerializer(name, modelFields.get(name)!)),
+        ...[...vectorItems.values()].map(item => emitVectorSerializer(item)),
+        ...typedOptions.map(option =>
+            emitSerializer(option.name, typedFields(option, contract), 'request_json')
+        ),
+    ].join('\n\n');
 
     const classText = [
         ...cppCleanTags.map(tag => emitClass(tag, contract.operations.get(tag) ?? [], contract)),
@@ -830,6 +1058,16 @@ inline std::string vec(sdk::Vector2 value) {
     return "{\\"x\\":" + sdk::detail::number(value.x) + ",\\"y\\":" + sdk::detail::number(value.y) + "}";
 }
 
+template <typename T, typename Encode>
+inline std::string array_json(const std::vector<T>& values, Encode encode) {
+    std::string out = "[";
+    for (std::size_t index = 0; index < values.size(); ++index) {
+        if (index != 0) out += ",";
+        out += encode(values[index]);
+    }
+    return out + "]";
+}
+
 inline Json call(const Library& library, const std::string& op, const std::string& body) {
     Json json = sdk::detail::parse_json(
         library.exec("{\\"op\\":" + sdk::detail::quote(op) + "," + body.substr(1)));
@@ -841,7 +1079,13 @@ inline Json call(const Library& library, const std::string& op, const std::strin
 
 } // namespace detail
 
+${modelText}
+
 ${optionText}
+
+${serializerDecls}
+
+${serializerText}
 
 ${classText}
 

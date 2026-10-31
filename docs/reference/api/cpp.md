@@ -8,9 +8,11 @@
   `osbtk::clean::Client`.
 - `osbtk::clean::Runtime` owns an `sdk::Runtime` and exposes `generator()`,
   `audio()`, `layer(name)` and `sprite(layer, sprite)`.
-- Complex option fields use JSON strings (`start_json`, `end_json`,
-  `input_json`, `request_json`) while typed fields such as `position` are
-  `std::optional` where the contract makes them optional.
+- Complex request options are typed structs (`ImageOptions`, `Shape`,
+  `RgbaColor`, `ExtractFramesOptions`, ...). Only the contract's free-form
+  values stay JSON strings (command `start_json`/`end_json`, helper
+  `input_json` and the `bake3d` scene `input_json`).
+- Optional fields are `std::optional` where the contract makes them optional.
 
 ```cpp
 osbtk::Library library(path);

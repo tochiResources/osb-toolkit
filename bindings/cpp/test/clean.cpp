@@ -121,6 +121,34 @@ int main() {
         return fail("clean bake3d");
     }
 
+    osbtk::clean::RenderShapesOptions shapes;
+    shapes.width = 32;
+    shapes.height = 32;
+    shapes.output = (fs::temp_directory_path() / "osbtk_clean_shapes.png").string();
+    osbtk::clean::Shape rect;
+    rect.kind = "Rect";
+    rect.center = {16.0, 16.0};
+    rect.size = {16.0, 16.0};
+    osbtk::clean::RgbaColor fill;
+    fill.r = 255;
+    fill.a = 255;
+    rect.fill = fill;
+    shapes.shapes.push_back(rect);
+    osbtk::sdk::Json rendered = clean.image_gen.render_shapes(shapes);
+    if (rendered.at("width").number() != 32) {
+        return fail("clean render shapes");
+    }
+
+    osbtk::clean::ImageProcessOptions process;
+    process.path = shapes.output;
+    process.output = (fs::temp_directory_path() / "osbtk_clean_processed.png").string();
+    process.options.grayscale = true;
+    clean.image.process(process);
+    osbtk::sdk::Json processed = clean.image.info({process.output});
+    if (processed.at("format").string() != "PNG") {
+        return fail("clean image process");
+    }
+
     osbtk::sdk::Json report = clean.diagnostics.diagnose_osu(
         {"osu file format v14\n\n[General]\nAudioFilename: song.mp3\nMode: 0\n"});
     if (report.find("errorCount") == nullptr || report.at("errorCount").number() < 1) {
