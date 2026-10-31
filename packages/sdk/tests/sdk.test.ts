@@ -57,10 +57,7 @@ describe('@tochii/osb-sdk-js', () => {
     });
 
     it('applies easing', async () => {
-        expect(await Core.applyEasing({ easing: Easing.InQuad, t: 0.5 })).toBeCloseTo(
-            0.25,
-            6
-        );
+        expect(await Core.applyEasing({ easing: Easing.InQuad, t: 0.5 })).toBeCloseTo(0.25, 6);
         expect(
             await Core.easingValue({
                 cubicBezier: [0.42, 0.0, 0.58, 1.0],
@@ -178,9 +175,7 @@ describe('@tochii/osb-sdk-js', () => {
 
     it('unwraps clean single-field results', async () => {
         expect(typeof (await Core.version())).toBe('string');
-        expect(typeof (await Core.applyEasing({ easing: Easing.None, t: 0.5 }))).toBe(
-            'number'
-        );
+        expect(typeof (await Core.applyEasing({ easing: Easing.None, t: 0.5 }))).toBe('number');
         expect(
             typeof (await Core.inScreenBounds({
                 position: { x: 427, y: 240 },

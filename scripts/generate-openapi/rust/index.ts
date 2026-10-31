@@ -3,8 +3,8 @@ import { cpSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-import { root, runGenerator, targets } from '../shared';
 import { emitRustClean } from '../clean';
+import { root, runGenerator, targets } from '../shared';
 
 /** Generates the Rust SDK models (the client/runtime are hand-written). */
 export function generateRust(): void {

@@ -337,24 +337,16 @@ function rustFieldName(tag: string): string {
 function rustMethod(tag: string, op: Operation, option: OptionModel | undefined): string {
     const hasOptions = (option?.properties.length ?? 0) > 0;
     const args = hasOptions ? `, options: ${option!.name}` : '';
-    const doc = op.description
-        ? `    /// ${op.description.replace(/\s+/g, ' ').trim()}\n`
-        : '';
+    const doc = op.description ? `    /// ${op.description.replace(/\s+/g, ' ').trim()}\n` : '';
     return `${doc}    pub fn ${snake(op.name)}(&self${args}) -> Result<${rustResultType(
         tag,
         op
     )}, Error> {\n        ${rustBody(tag, op)}\n    }`;
 }
 
-function rustRuntimeMethod(
-    tag: string,
-    op: Operation,
-    option: OptionModel | undefined
-): string {
+function rustRuntimeMethod(tag: string, op: Operation, option: OptionModel | undefined): string {
     const hasOptions = (option?.properties.length ?? 0) > 0;
-    const doc = op.description
-        ? `    /// ${op.description.replace(/\s+/g, ' ').trim()}\n`
-        : '';
+    const doc = op.description ? `    /// ${op.description.replace(/\s+/g, ' ').trim()}\n` : '';
     const args =
         tag === 'Layer' && op.body === 'HandleRequest'
             ? ', sprite: i32'
@@ -376,7 +368,8 @@ function emitAudioClass(operations: Operation[], contract: Contract): string {
             const doc = op.description
                 ? `    /// ${op.description.replace(/\s+/g, ' ').trim()}\n`
                 : '';
-            const mutable = op.name === 'getFft' || op.name === 'audioDuration' ? '&mut self' : '&self';
+            const mutable =
+                op.name === 'getFft' || op.name === 'audioDuration' ? '&mut self' : '&self';
             return `${doc}    pub fn ${snake(op.name)}(${mutable}${args}) -> Result<${rustResultType(
                 'Audio',
                 op

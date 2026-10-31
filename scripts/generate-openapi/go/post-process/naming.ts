@@ -13,7 +13,9 @@ export function renameGoTransport(dir: string): void {
         if (!text.includes('APIClient')) continue;
         writeFileSync(
             path,
-            text.replace(/\bNewAPIClient\b/g, 'NewClientAPI').replace(/\bAPIClient\b/g, 'ClientAPI'),
+            text
+                .replace(/\bNewAPIClient\b/g, 'NewClientAPI')
+                .replace(/\bAPIClient\b/g, 'ClientAPI'),
             'utf8'
         );
     }

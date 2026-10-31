@@ -328,4 +328,3 @@ export function orderedProperties(option: OptionModel): OptionProperty[] {
         .sort((a, b) => Number(b.required) - Number(a.required) || a.name.localeCompare(b.name));
     return [...ordered, ...remaining].sort((a, b) => Number(b.required) - Number(a.required));
 }
-

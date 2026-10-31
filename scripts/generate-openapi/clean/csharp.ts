@@ -77,7 +77,12 @@ function xmlMethodDoc(
     hasReturn: boolean
 ): string {
     const escape = (text: string) =>
-        text.replace(/\s+/g, ' ').trim().replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+        text
+            .replace(/\s+/g, ' ')
+            .trim()
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;');
     const lines = [
         '    /// <summary>',
         `    /// ${escape(operationSummary(tag, op, option))}`,

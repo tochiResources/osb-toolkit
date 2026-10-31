@@ -1,11 +1,4 @@
-import {
-    existsSync,
-    mkdirSync,
-    readdirSync,
-    readFileSync,
-    rmSync,
-    writeFileSync,
-} from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { root } from '../shared';
@@ -65,13 +58,15 @@ function annotateModels(output: string, requests: Map<string, RequestUsage>): vo
             notes.push(`Clean SDKs unwrap this result to ${unwrappedResults[name]}.`);
         }
         if (notes.length > 0) {
-            writeFileSync(path, `${notes.map(note => `> ${note}`).join('\n')}\n\n${readFileSync(path, 'utf8')}`, 'utf8');
+            writeFileSync(
+                path,
+                `${notes.map(note => `> ${note}`).join('\n')}\n\n${readFileSync(path, 'utf8')}`,
+                'utf8'
+            );
         }
     }
 
-    const modelList = files
-        .map(file => `- [${file.replace(/\.md$/, '')}](./${file})`)
-        .sort();
+    const modelList = files.map(file => `- [${file.replace(/\.md$/, '')}](./${file})`).sort();
     const requestRows = [...requests.entries()]
         .sort(([a], [b]) => a.localeCompare(b))
         .map(([request, usage]) => {
@@ -271,7 +266,11 @@ export function emitCleanDocs(): void {
             }
         }
 
-        writeFileSync(join(output, section, `${tag}.md`), `${lines.join('\n').trimEnd()}\n`, 'utf8');
+        writeFileSync(
+            join(output, section, `${tag}.md`),
+            `${lines.join('\n').trimEnd()}\n`,
+            'utf8'
+        );
     }
 
     if (existsSync(join(output, 'models'))) annotateModels(output, requests);

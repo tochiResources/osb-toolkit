@@ -1,12 +1,14 @@
 # osu! Storyboarding Toolkit
 
 > Still in early development phase.
+>
 > - Most crates in [crates/](./crates) are well tested; `osb-parser-ae`, `osb-sdk` and `osb-wasm` are still early.
 > - The architecture can be seen in the mermaid files at [docs/architecture/](./docs/architecture).
 
 SDKs that provides useful tools for osu! storyboarding development in `C#`, `Java`, `JavaScript`/`TypeScript`, `Go`, `Rust`, `Python`, and `C++`.
 
 See the full docs at [osb-toolkit.tochi.moe/docs](https://osb-toolkit.tochi.moe/docs).
+
 > Docs not live yet.
 
 ## Projects using osbTK

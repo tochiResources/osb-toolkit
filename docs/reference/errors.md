@@ -7,11 +7,11 @@ structured context and an optional cause chain. The C# binding uses the matching
 
 ## TypeScript
 
-| Class           | Default code                                   | Category    |
-| --------------- | ---------------------------------------------- | ----------- |
-| `ResponseError` | derived from the response status (`Api*`)      | `api`       |
-| `FetchError`    | `TOCHIRES_API_UNAVAILABLE`                     | `api`       |
-| `RequiredError` | `TOCHIRES_VALIDATION_FAILED`                   | `validation` |
+| Class           | Default code                              | Category     |
+| --------------- | ----------------------------------------- | ------------ |
+| `ResponseError` | derived from the response status (`Api*`) | `api`        |
+| `FetchError`    | `TOCHIRES_API_UNAVAILABLE`                | `api`        |
+| `RequiredError` | `TOCHIRES_VALIDATION_FAILED`              | `validation` |
 
 `ResponseError` maps `400`, `401`, `403`, `404`, `408`, `409`, `422`, `429`,
 `503` and `504` to their specific codes and falls back to `ApiBadRequest` or
@@ -35,10 +35,10 @@ try {
 
 ## C#
 
-| Class          | Code                        | Category |
-| -------------- | --------------------------- | -------- |
-| `osbTKException` | `TOCHIRES_NATIVE_CALL_FAILED` | `native` |
-| `Client.ApiException` | `TOCHIRES_API_BAD_REQUEST` | `api`    |
+| Class                 | Code                          | Category |
+| --------------------- | ----------------------------- | -------- |
+| `osbTKException`      | `TOCHIRES_NATIVE_CALL_FAILED` | `native` |
+| `Client.ApiException` | `TOCHIRES_API_BAD_REQUEST`    | `api`    |
 
 Both derive from `TochiRes.Errors.TochiResException`, which exposes `Code`,
 `Category` and `Context`.

@@ -303,7 +303,9 @@ function emitGoClientkit(contract: Contract): void {
             ? ['\tcore "github.com/tochiResources/osb-toolkit/bindings/go/osbtk/client/core"']
             : []),
         ...(libraries.length > 0
-            ? ['\tlibraries "github.com/tochiResources/osb-toolkit/bindings/go/osbtk/client/libraries"']
+            ? [
+                  '\tlibraries "github.com/tochiResources/osb-toolkit/bindings/go/osbtk/client/libraries"',
+              ]
             : []),
         '\tclean "github.com/tochiResources/osb-toolkit/bindings/go/osbtk/client/options"',
         '\tcleanruntime "github.com/tochiResources/osb-toolkit/bindings/go/osbtk/client/runtime"',

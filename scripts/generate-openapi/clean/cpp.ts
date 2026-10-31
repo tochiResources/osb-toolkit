@@ -196,7 +196,9 @@ const fieldOverrides: Record<string, CppField[]> = {
         { name: 'max', type: 'double', default: '0.0', doc: 'The exclusive upper bound.' },
         { name: 'min', type: 'double', default: '0.0', doc: 'The inclusive lower bound.' },
     ],
-    LayerHandleRequest: [{ name: 'name', type: 'std::string', default: '""', doc: 'The layer name.' }],
+    LayerHandleRequest: [
+        { name: 'name', type: 'std::string', default: '""', doc: 'The layer name.' },
+    ],
     StartLoopGroupRequest: [
         { name: 'start_time', type: 'double', default: '0.0', doc: 'The loop start time.' },
         { name: 'count', type: 'double', default: '0.0', doc: 'The number of iterations.' },
@@ -503,7 +505,8 @@ function cppType(property: OptionProperty): string {
 }
 
 function cppDefault(property: OptionProperty, type: string): string | undefined {
-    const inner = property.schema?.oneOf?.find((part: any) => part.type !== 'null') ?? property.schema;
+    const inner =
+        property.schema?.oneOf?.find((part: any) => part.type !== 'null') ?? property.schema;
     if (type === 'std::string') {
         if (refName(inner) === 'Easing') return '"None"';
         if (property.name.endsWith('Json') || property.name.endsWith('_json')) return '"{}"';
@@ -925,7 +928,9 @@ function cppRuntimeMethod(tag: string, op: Operation, option: OptionModel | unde
 }
 
 function emitRuntimeClass(tag: string, operations: Operation[], contract: Contract): string {
-    const methods = operations.map(op => cppRuntimeMethod(tag, op, optionFor(contract, op))).join('\n\n');
+    const methods = operations
+        .map(op => cppRuntimeMethod(tag, op, optionFor(contract, op)))
+        .join('\n\n');
     const doc = `/// The clean \`${tag}\` client bound to a live runtime.\n`;
     let constructor: string;
     let members: string;
@@ -993,7 +998,10 @@ export function emitCppClean(): void {
     const modelFields = new Map(modelNames.map(name => [name, schemaFields(name, contract)]));
 
     const vectorItems = new Map<string, TypedType>();
-    for (const fields of [...modelFields.values(), ...typedOptions.map(option => typedFields(option, contract))]) {
+    for (const fields of [
+        ...modelFields.values(),
+        ...typedOptions.map(option => typedFields(option, contract)),
+    ]) {
         for (const field of fields) {
             if (field.value.kind === 'vector' && field.value.item) {
                 vectorItems.set(field.value.item.base, field.value.item);
