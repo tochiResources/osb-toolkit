@@ -559,17 +559,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@deltabox/toolchain@npm:^1.11.3":
-  version: 1.11.3
-  resolution: "@deltabox/toolchain@npm:1.11.3"
+"@deltabox/toolchain@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@deltabox/toolchain@npm:2.1.1"
   dependencies:
     "@clack/prompts": "npm:^1.8.1"
     commander: "npm:^14.0.0"
     glob: "npm:^13.0.6"
+    jsonc-parser: "npm:^3.3.1"
     lodash: "npm:^4.18.1"
     picocolors: "npm:^1.1.1"
     tsdown: "npm:^0.23.0"
     tsx: "npm:^4.23.13"
+    type-fest: "npm:^5.10.0"
     untyped: "npm:^2.0.0"
     zod: "npm:^4.3.0"
   peerDependencies:
@@ -579,7 +581,7 @@ __metadata:
       optional: true
   bin:
     dbx: dist/cli/index.js
-  checksum: 10c0/7479962978cdeec57d14fd13a6a6e178fddc58e8f6bdb7020c06990f21a1c061fdb26fcedd45efaf34ea079fb38617ae807b0cf0573027afa4f9a717037a6827
+  checksum: 10c0/1d1cf878d92a7f453a4c9abcaab3e1956fc5cc99154739d27bd98b8de5a3e972effeef2550de6b184c831d75ae4100e849fcf6b0d068201eca45b74d806d8bc9
   languageName: node
   linkType: hard
 
@@ -2402,7 +2404,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:^21.2.2"
     "@commitlint/config-conventional": "npm:^21.2.2"
-    "@deltabox/toolchain": "npm:^1.11.3"
+    "@deltabox/toolchain": "npm:^2.1.1"
     "@mermaid-js/mermaid-cli": "npm:^12.0.0"
     "@openapitools/openapi-generator-cli": "npm:^2.41.0"
     "@types/node": "catalog:"
@@ -5832,6 +5834,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jsonc-parser@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "jsonc-parser@npm:3.3.1"
+  checksum: 10c0/269c3ae0a0e4f907a914bf334306c384aabb9929bd8c99f909275ebd5c2d3bc70b9bcd119ad794f339dec9f24b6a4ee9cd5a8ab2e6435e730ad4075388fc2ab6
+  languageName: node
+  linkType: hard
+
 "jsonfile@npm:^6.0.1":
   version: 6.2.1
   resolution: "jsonfile@npm:6.2.1"
@@ -7437,6 +7446,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tagged-tag@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "tagged-tag@npm:1.0.0"
+  checksum: 10c0/91d25c9ffb86a91f20522cefb2cbec9b64caa1febe27ad0df52f08993ff60888022d771e868e6416cf2e72dab68449d2139e8709ba009b74c6c7ecd4000048d1
+  languageName: node
+  linkType: hard
+
 "tailwind-merge@npm:^3.4.0":
   version: 3.7.0
   resolution: "tailwind-merge@npm:3.7.0"
@@ -7629,6 +7645,15 @@ __metadata:
   version: 0.21.3
   resolution: "type-fest@npm:0.21.3"
   checksum: 10c0/902bd57bfa30d51d4779b641c2bc403cdf1371fb9c91d3c058b0133694fcfdb817aef07a47f40faf79039eecbaa39ee9d3c532deff244f3a19ce68cea71a61e8
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^5.10.0":
+  version: 5.10.0
+  resolution: "type-fest@npm:5.10.0"
+  dependencies:
+    tagged-tag: "npm:^1.0.0"
+  checksum: 10c0/313c5d0e37a3f1cc82e942f3228f897623c8b54a63a8a95532d0c2c21ab200793caa70bd8904a83fd713eb28d87ba32468b09b345ef6efa25cecb345b467226f
   languageName: node
   linkType: hard
 

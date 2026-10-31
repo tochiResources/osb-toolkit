@@ -38,10 +38,10 @@
         "test:bindings": "yarn clean:rust:if-large && yarn test:csharp && yarn test:sdk && yarn test:cpp && yarn test:python && yarn test:go && yarn test:java && yarn test:wasm",
         "check": "dbx check",
         "diagrams": "tsx scripts/render-diagrams.ts",
-        "dbx:sync": "dbx sync",
+        "dbx:sync": "dbx sync --recursive",
         "dbx:watch": "dbx watch",
         "commitlint": "commitlint",
-        "prepare": "husky",
+        "postinstall": "husky",
         "w:docs": "yarn workspace @tochii/osb-toolkit-docs"
     },
     "packageManager": "yarn@4.17.1",
@@ -51,7 +51,7 @@
     "devDependencies": {
         "@commitlint/cli": "^21.2.2",
         "@commitlint/config-conventional": "^21.2.2",
-        "@deltabox/toolchain": "^1.11.3",
+        "@deltabox/toolchain": "^2.1.1",
         "@mermaid-js/mermaid-cli": "^12.0.0",
         "@openapitools/openapi-generator-cli": "^2.41.0",
         "@types/node": "catalog:",
