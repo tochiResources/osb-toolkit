@@ -15,8 +15,6 @@ flowchart BT
     parser["osb-parser-ae"]:::lib
 
     native["osb-native<br/>C ABI + JSON bridge"]:::entry
-    server["osb-server"]:::surf
-    cli["osb-cli"]:::surf
     sdk["osb-sdk"]:::surf
     wasm["osb-wasm"]:::surf
 
@@ -37,12 +35,6 @@ flowchart BT
     imagegen --> native
     media --> native
 
-    native --> server
-    core --> server
-    runtime --> server
-    native --> cli
-    core --> cli
-    server --> cli
     native --> sdk
     core --> sdk
     native --> wasm

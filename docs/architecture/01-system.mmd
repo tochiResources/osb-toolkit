@@ -35,8 +35,6 @@ flowchart TB
     end
 
     subgraph surfaces["Surfaces"]
-        server["osb-server"]:::surf
-        cli["osb-cli"]:::surf
         rustsdk["osb-sdk (Rust)"]:::surf
         wasm["osb-wasm"]:::surf
     end
@@ -66,13 +64,9 @@ flowchart TB
     api --> native
     libs --> native
 
-    native --> server
-    native --> cli
     native --> rustsdk
     native --> wasm
     native --> bindings
     wasm --> nbind
     nbind --> ts
     nbind --> apps
-    cli --> plugins
-    server --> plugins
